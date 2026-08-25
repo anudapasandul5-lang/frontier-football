@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
 
-// GitHub Pages serves this at /frontier-football/. Set BASE_PATH=/ for a root
-// deploy (Vercel, Netlify, or a custom domain).
+// Root deploy (Vercel, Netlify, custom domain). Set BASE_PATH=/frontier-football/
+// if this ever moves to a GitHub Pages project site.
 export default defineConfig({
-  base: process.env.BASE_PATH ?? '/frontier-football/',
+  base: process.env.BASE_PATH ?? '/',
 })
