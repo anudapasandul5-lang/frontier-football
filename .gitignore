@@ -1,0 +1,22 @@
+# secrets
+.env
+.env.*
+!.env.example
+
+# deps + build
+node_modules/
+dist/
+.vite/
+
+# source media — huge, not part of the site build.
+# Lives on disk at "Data and references/" and is read during development only.
+Data and references/
+generated-images/
+
+# vendored skills
+.claude/
+
+# editor / OS
+.vscode/
+.DS_Store
+Thumbs.db
