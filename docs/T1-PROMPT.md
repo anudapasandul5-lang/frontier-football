@@ -39,8 +39,12 @@ DESIGN.md is a faithful description of a different brand. These four rules in it
 
 2. "No photography appears anywhere."
    → FOR US: photography is core. There are 100 real Instagram posts in
-   Data and references/instagram-media/. The gallery is a locked section, and the hero uses
-   type-as-photo-mask. Build a photo-tile primitive and a letterform-mask primitive.
+   Data and references/instagram-media/. The gallery is a locked section. The hero's own
+   mechanic (T3, per BUILD-PROMPT) is 3D generated objects nested between letterforms, NOT
+   photo-mask — that technique is borrowed from a different reference (QClay) and is a
+   candidate for the Gallery or "What is Frontier" section, not a stated fact about the hero.
+   Build a photo-tile primitive and a letterform-mask primitive regardless; where each one
+   ends up landing is a later-ticket decision.
 
 3. "The site reads as a printed collage, not a kinetic experience. Motion is restricted to
    the marquee and minimal hover transitions."
@@ -93,6 +97,10 @@ recommend and why. Body face: Space Grotesk unless you can argue for better.
 Leave "TODO: swap to Super Squad / Telegraf when licensed files land" at the definition site.
 
 Load fonts with a Google Fonts link, not a dependency. Preconnect, and use font-display: swap.
+
+Also ask me directly, in your sign-off message: can I supply the licensed Super Squad / Telegraf
+web font files? This is a standing question from BUILD-PROMPT that the fallback bake-off above
+does not answer on its own.
 
 ═══════════════════════════════════════════
 DELIVERABLES
@@ -157,7 +165,8 @@ DONE WHEN
 7. CONTEXT.md exists and defines every term above.
 8. Dependency count is still two.
 
-Then STOP. Show me the styleguide and your font recommendation, and wait for sign-off before T2.
+Then STOP. Show me the styleguide, your font recommendation, and ask whether licensed
+Super Squad / Telegraf files can be supplied. Wait for sign-off before T2.
 
 ═══════════════════════════════════════════
 NEVER

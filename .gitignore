@@ -20,3 +20,6 @@ generated-images/
 .vscode/
 .DS_Store
 Thumbs.db
+
+# vendored agent skills (see skills-lock.json to restore)
+.agents/
