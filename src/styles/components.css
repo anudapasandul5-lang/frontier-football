@@ -1,0 +1,210 @@
+/* Frontier Football — component primitives.
+   Each primitive is a class. No utility soup, no framework. */
+
+/* ---------- Sticker card ---------- */
+.card {
+  display: block;
+  padding: var(--card-padding);
+  border: var(--outline-width) solid var(--color-ink);
+  border-radius: var(--radius-card);
+  color: var(--color-ink);
+}
+
+.card--yellow {
+  background: var(--color-yellow);
+}
+
+.card--green {
+  background: var(--color-green);
+  color: var(--color-paper);
+  border-color: var(--color-paper);
+}
+
+.card--red {
+  background: var(--color-red);
+  color: var(--color-paper);
+  border-color: var(--color-paper);
+}
+
+.card--orange {
+  background: var(--color-orange);
+}
+
+/* ---------- Elevated feature card ---------- */
+/* "Elevated" means bigger radius, never a box-shadow. */
+.card--elevated {
+  padding: calc(var(--card-padding) * 1.5);
+  border-radius: var(--radius-card-elevated);
+}
+
+/* ---------- CTAs ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-8);
+  padding: var(--spacing-12) var(--spacing-24);
+  border-radius: var(--radius-pill);
+  border: var(--outline-width) solid var(--color-ink);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--text-body-lg);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.btn:hover,
+.btn.is-hover-demo {
+  transform: translateY(-2px);
+}
+
+.btn--primary {
+  background: var(--color-yellow);
+  color: var(--color-ink);
+}
+
+.btn--secondary {
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+/* ---------- Pill nav item / tag / badge ---------- */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--spacing-8) var(--spacing-16);
+  border-radius: var(--radius-pill);
+  border: var(--outline-width) solid var(--color-ink);
+  font-size: var(--text-caption);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+.pill--tag {
+  background: var(--color-red);
+  color: var(--color-paper);
+  border-color: var(--color-paper);
+}
+
+/* ---------- Display headline block ---------- */
+.display {
+  font-family: var(--font-display);
+  font-size: var(--text-display);
+  line-height: var(--leading-display);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.display--lg {
+  font-size: var(--text-display-lg);
+}
+
+/* ---------- Tagline subhead ---------- */
+.tagline {
+  font-family: var(--font-body);
+  font-size: var(--text-heading-sm);
+  line-height: var(--leading-heading);
+  font-weight: 500;
+}
+
+/* ---------- Marquee band ---------- */
+.marquee {
+  overflow: hidden;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  padding: var(--spacing-12) 0;
+  white-space: nowrap;
+}
+
+.marquee__track {
+  display: inline-block;
+  padding-left: 100%;
+  font-size: var(--text-body-lg);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  animation: marquee var(--duration-marquee) linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+/* ---------- Photo tile ---------- */
+.photo-tile {
+  overflow: hidden;
+  aspect-ratio: 1;
+  border: var(--outline-width) solid var(--color-ink);
+  border-radius: var(--radius-card);
+}
+
+.photo-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------- Letterform mask ---------- */
+/* Type filled with an image: background-clip:text with the text colour
+   made transparent so the image shows only inside the glyph shapes. */
+.letterform-mask {
+  font-family: var(--font-display);
+  font-size: var(--text-display);
+  line-height: var(--leading-display);
+  text-transform: uppercase;
+  background-image: var(--letterform-mask-image);
+  background-size: cover;
+  background-position: center;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ---------- Inverted section band ---------- */
+.band {
+  padding: var(--section-gap) var(--spacing-24);
+}
+
+.band--paper {
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+.band--lift {
+  background: var(--color-paper-lift);
+  color: var(--color-ink);
+}
+
+.band--inverted {
+  background: var(--color-green);
+  color: var(--color-paper);
+}
+
+/* ---------- Reveal on scroll ---------- */
+/* Applied only by src/reveal.js, never sitting in markup, so a script failure
+   leaves content visible rather than permanently blank. Unscoped because the
+   effect is identical in all three sections: the section-scoped copies this
+   replaced are exactly how the hero's and the story's versions drifted apart.
+   transform and opacity only, so nothing here triggers layout. */
+.is-pre {
+  opacity: 0;
+  transform: translateY(var(--reveal-shift, 24px));
+}
+
+.is-revealed {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 620ms var(--ease-out),
+    transform 620ms var(--ease-out);
+}

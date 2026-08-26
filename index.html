@@ -4,15 +4,163 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Frontier Football</title>
-    <meta name="description" content="Frontier Football — Colombo small-sided futsal and football culture. Built by football. Powered by community." />
+    <meta
+      name="description"
+      content="Frontier Football — small-sided football and the culture around it, in Colombo, Sri Lanka."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/src/styles/tokens.css" />
+    <link rel="stylesheet" href="/src/styles/base.css" />
+    <link rel="stylesheet" href="/src/styles/components.css" />
+    <link rel="stylesheet" href="/src/styles/hero.css" />
+    <link rel="stylesheet" href="/src/styles/story.css" />
+    <link rel="stylesheet" href="/src/styles/champions.css" />
   </head>
   <body>
-    <main class="holding">
-      <p class="holding__kicker">ESTD 2024 &middot; Colombo</p>
-      <h1 class="holding__title">Frontier<br />Football</h1>
-      <p class="holding__tagline">Built by football.<br />Powered by community.</p>
-      <p class="holding__status">Site in build.</p>
+    <header class="nav">
+      <a class="nav__brand" href="#top">
+        <img
+          class="nav__crest"
+          src="/crest.webp"
+          width="525"
+          height="640"
+          alt="Frontier Football"
+          fetchpriority="high"
+        />
+      </a>
+
+      <a
+        class="btn btn--primary nav__cta"
+        href="https://www.instagram.com/frontierfootballl/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Follow @frontierfootballl
+      </a>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <!-- Background clip. No src in the markup: hero.js attaches it only
+             on a wide viewport with motion allowed, so a phone on mobile
+             data gets the poster still and downloads no video. -->
+        <video
+          class="hero__bg"
+          data-src="/hero/bg.mp4"
+          poster="/hero/bg-poster.webp"
+          muted
+          loop
+          playsinline
+          preload="none"
+          aria-hidden="true"
+        ></video>
+        <!-- Cream wash. Without it, ink type sits on raw footage and both
+             the contrast and the palette go: the page would read as a dark
+             cinematic football site, which the brief names as fatal. -->
+        <div class="hero__wash" aria-hidden="true"></div>
+
+        <div class="hero__stage">
+          <!-- Explicit breaks: the three-line stack is the composition, so
+               it is set rather than left to the measure. -->
+          <h1 class="hero__headline">Built by the<br />futsal<br />community</h1>
+          <p class="hero__sub">Small-sided football and the culture around it, in Colombo.</p>
+          <a
+            class="btn btn--primary hero__cta"
+            href="https://www.instagram.com/frontierfootballl/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Follow @frontierfootballl
+          </a>
+        </div>
+      </section>
+
+      <!-- The story, in the brand guide's own words, plus three numbers that
+           each trace to something real in this repo. Deliberately not the
+           hero's centred poster: an asymmetric split on cream, then one
+           full-bleed green band. That band is the page's only inversion. -->
+      <section class="story" id="about">
+        <div class="story__split">
+          <div class="story__text">
+            <!-- Set in three lines rather than left to the measure: the turn
+                 in the sentence gets its own line. -->
+            <h2 class="story__headline" data-reveal>
+              Talent was<br />never missing.<br />The platform was.
+            </h2>
+            <div class="story__body" data-reveal>
+              <p>
+                Frontier started in Colombo in 2024 so small sided football here had somewhere to
+                happen.
+              </p>
+              <p>
+                Six seasons later it is the same idea. Local players, local turf, and a crowd that
+                shows up.
+              </p>
+            </div>
+          </div>
+
+          <!-- No figcaption: there is no real caption to write, and a
+               decorative one would be a tell. -->
+          <figure class="photo-tile story__photo" data-reveal>
+            <img
+              src="/story/pitch.webp"
+              width="800"
+              height="580"
+              alt="A Frontier match in play on a Colombo turf pitch."
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        </div>
+
+        <!-- 6 seasons: SZN 6 is named in HOUSE-RULES section 7, and the post
+             before it reads "Five seasons of...". 5 venues and 11 partners:
+             counted from the same section, not estimated. Nothing here is a
+             follower count, a match count, or a player count. -->
+        <div class="band band--inverted story__panel" data-reveal>
+          <ul class="story__stats">
+            <li class="story__stat" data-reveal>
+              <p class="story__stat-num">6</p>
+              <p class="story__stat-label">Seasons</p>
+            </li>
+            <li class="story__stat" data-reveal>
+              <p class="story__stat-num">5</p>
+              <p class="story__stat-label">Venues</p>
+            </li>
+            <li class="story__stat" data-reveal>
+              <p class="story__stat-num">11</p>
+              <p class="story__stat-label">Partners</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Every card in this section is built by src/champions.js from
+           content.js. No season data lives in this file, so swapping a season
+           is a content.js edit and nothing else.
+
+           The heading and the line under it stay in static markup on purpose:
+           if the bundle ever fails, this reads as a labelled empty section
+           rather than as a blank gap in the page. -->
+      <section class="champions" id="champions">
+        <div class="champions__head">
+          <h2 class="champions__headline" data-reveal>Champions &amp; honours</h2>
+          <p class="champions__lede" data-reveal>
+            We only name a champion when the result is confirmed.
+          </p>
+        </div>
+
+        <ul class="champions__grid" data-champions></ul>
+      </section>
     </main>
+
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

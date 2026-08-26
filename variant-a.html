@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Variant A — Sticker collage</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/styles/tokens.css" />
+    <link rel="stylesheet" href="/src/styles/base.css" />
+    <link rel="stylesheet" href="/src/styles/components.css" />
+    <style>
+      /* VARIANT A — sticker collage.
+         DESIGN.md's actual signature: every brand colour as a FILLED,
+         ink-outlined surface, scattered with intent. Photos live inside
+         sticker cards rather than being the decoration themselves. */
+      .v {
+        position: relative;
+        min-height: 100dvh;
+        overflow: hidden;
+        background: var(--color-paper);
+        padding: var(--spacing-32) var(--spacing-24);
+      }
+      .v__nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: var(--page-max-width);
+        margin: 0 auto var(--spacing-40);
+      }
+      .v__crest { height: 54px; width: auto; }
+      .v__stage {
+        position: relative;
+        max-width: 1080px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .v__display {
+        font-family: var(--font-display);
+        font-size: clamp(48px, 8.6vw, 132px);
+        line-height: 0.92;
+        letter-spacing: -0.035em;
+        text-transform: uppercase;
+        color: var(--color-ink);
+        margin: 0;
+        position: relative;
+        z-index: 2;
+      }
+      .v__sub {
+        position: relative;
+        z-index: 2;
+        margin: var(--spacing-24) auto 0;
+        max-width: 34ch;
+        font-size: var(--text-subheading);
+        font-weight: 500;
+      }
+      .v__cta { margin-top: var(--spacing-32); position: relative; z-index: 2;
+        padding: var(--spacing-16) var(--spacing-32); font-size: var(--text-subheading); }
+
+      /* Stickers: filled surfaces, ink outlines, rotated, overlapping. */
+      .st {
+        position: absolute;
+        z-index: 3;
+        border: var(--outline-width) solid var(--color-ink);
+        display: grid;
+        place-items: center;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        font-size: var(--text-caption);
+      }
+      .st--a { top: 4%; left: -1%; width: 150px; height: 56px; border-radius: var(--radius-pill);
+        background: var(--color-yellow); transform: rotate(-8deg); }
+      .st--b { top: 30%; left: -6%; width: 132px; height: 132px; border-radius: 50%;
+        background: var(--color-red); color: var(--color-paper); transform: rotate(6deg); }
+      .st--c { top: 2%; right: -4%; width: 190px; height: 150px; border-radius: var(--radius-card-elevated);
+        overflow: hidden; transform: rotate(7deg); padding: 0; }
+      .st--c img { width: 100%; height: 100%; object-fit: cover; }
+      .st--d { bottom: 6%; right: -2%; width: 168px; height: 168px; border-radius: var(--radius-card-elevated);
+        overflow: hidden; transform: rotate(-6deg); }
+      .st--d img { width: 100%; height: 100%; object-fit: cover; }
+      .st--e { bottom: 12%; left: 2%; width: 120px; height: 48px; border-radius: var(--radius-pill);
+        background: var(--color-orange); transform: rotate(9deg); }
+      .st--f { top: 56%; right: 8%; width: 96px; height: 96px; border-radius: var(--radius-card);
+        background: var(--color-green); color: var(--color-paper); transform: rotate(-12deg); }
+    </style>
+  </head>
+  <body>
+    <section class="v">
+      <div class="v__nav">
+        <img class="v__crest" src="/crest.webp" alt="Frontier Football" />
+        <a class="btn btn--primary" href="#">Follow @frontierfootballl</a>
+      </div>
+
+      <div class="v__stage">
+        <span class="st st--a">Estd 2024</span>
+        <span class="st st--b">Colombo</span>
+        <span class="st st--c"><img src="/hero/wide.webp" alt="" /></span>
+        <span class="st st--d"><img src="/hero/square.webp" alt="" /></span>
+        <span class="st st--e">SZN 6</span>
+        <span class="st st--f">4×4</span>
+
+        <h1 class="v__display">Built by the<br />futsal<br />community</h1>
+        <p class="v__sub">Small-sided football and the culture around it, in Colombo.</p>
+        <a class="btn btn--primary v__cta" href="#">Follow @frontierfootballl</a>
+      </div>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,229 @@
+/* Frontier Football — Champions & Honours.
+   A mixed-size sticker grid: one wide lead tile carrying the reigning champion,
+   then square cards flowing after it. A third layout family, deliberately not
+   the hero's centred poster and not T4's editorial split into a colour band.
+
+   The grid is flow, not a fixed bento. The owner will add seasons, so a shape
+   that is only correct at exactly five cards would break the one promise this
+   section makes.
+
+   Colours used here: paper, ink, and the four sticker fills via .card--*.
+   No literal hex anywhere in this file. */
+
+/* ============ SECTION SHELL ============ */
+.champions {
+  background: var(--color-paper);
+  padding: var(--spacing-80) 0;
+}
+
+.champions__head {
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-24) var(--spacing-40);
+}
+
+.champions__headline {
+  margin: 0;
+  font-family: var(--font-display);
+  /* Capped below the story headline's clamp, which is itself capped below the
+     hero's, so the page keeps one order of loudness top to bottom. */
+  font-size: clamp(30px, 4.4vw, 68px);
+  /* 0.92, not the token's 0.8: HOUSE-RULES section 3 measured Anton's uppercase
+     ink at 0.88em, so at 0.8 the lines physically collide. */
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+/* This line is what makes a missing champion read as an honest gap rather than
+   an unfinished build. Without it the empty card has to defend itself. */
+.champions__lede {
+  margin-top: var(--spacing-16);
+  max-width: 42ch;
+  font-size: var(--text-subheading);
+  line-height: 1.35;
+  color: var(--color-ink);
+}
+
+/* ============ GRID ============ */
+.champions__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-16);
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-24);
+}
+
+@media (min-width: 620px) {
+  .champions__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .champions__cell--lead {
+    grid-column: span 2;
+  }
+}
+
+@media (min-width: 1000px) {
+  .champions__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* The cell is the reveal element and the card inside it is the hover element.
+   They are separate on purpose: both animate transform, and sharing one element
+   would put .is-revealed and the hover lift in a transition-shorthand fight
+   that the later stylesheet wins. Flex here so the card fills the row height
+   when a neighbour is taller. */
+.champions__cell {
+  display: flex;
+}
+
+.champions__card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  width: 100%;
+  padding: var(--spacing-24);
+  border-radius: var(--radius-card-elevated);
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.champions__card:hover {
+  transform: translateY(-4px);
+}
+
+/* ============ CHAMPIONS PHOTO ============ */
+/* Inset inside the card's padding rather than bleeding to its edge, so the
+   sticker fill stays a visible frame around the picture. Inner radius is the
+   card's 40px minus its 24px padding: concentric, not two unrelated curves.
+
+   These are cropped out of the Instagram champions posts, with the poster
+   wording and sponsor bars trimmed off. That is deliberate: those graphics
+   carry their own display type and their own orange/blue and lime palettes,
+   which would both duplicate the card's own label and ship colours outside the
+   six. Real photography carries its own colours and is exempt; third-party
+   graphic design is not. */
+/* A fixed height, not a fixed ratio. On a ratio the lead tile's photo is as wide
+   as two columns and therefore half a screen tall, which drags every card in its
+   row to the same height and turns the photoless card into a large empty block.
+   A height instead makes the lead's picture a wide strip and keeps all five
+   cards within reach of each other. */
+.champions__photo {
+  width: 100%;
+  height: clamp(150px, 16vw, 230px);
+  object-fit: cover;
+  /* Not centred. A team photo cropped to a strip loses its faces first, because
+     heads sit in the top third of every one of these. */
+  object-position: center 22%;
+  margin-bottom: var(--spacing-16);
+  border: var(--outline-width) solid currentColor;
+  border-radius: calc(var(--radius-card-elevated) - var(--card-padding));
+}
+
+/* A card with no photo is not a card with a hole in it. Its type steps up to
+   fill the space the picture would have taken, so the row reads as two
+   deliberate treatments rather than as one that failed to load. */
+.champions__card--textonly {
+  justify-content: center;
+}
+
+.champions__card--textonly .champions__title {
+  font-size: clamp(30px, 3.6vw, 52px);
+}
+
+/* ============ CARD TYPE ============ */
+.champions__label {
+  font-size: var(--text-caption);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.champions__title {
+  font-family: var(--font-display);
+  font-size: var(--text-heading-sm);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.champions__team {
+  font-size: var(--text-subheading);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+/* An unrecorded champion is stated, not hidden. Set lighter than a real name so
+   the eye reads it as a note rather than as a team called "Not recorded yet".
+   0.85 and not lower: ink at 0.75 over the orange fill measures 3.95:1, which
+   passes AA only while this line is large text. It is 18px on a phone, where
+   that exemption does not apply. 0.85 measures 4.59:1 and passes at any size. */
+.champions__team--absent {
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+/* 0.9 for the same reason, checked at caption size against the orange fill:
+   0.8 measures 4.26:1 there, just under the 4.5:1 small-text floor. */
+.champions__note {
+  font-size: var(--text-caption);
+  opacity: 0.9;
+}
+
+/* The lead tile earns its width with type, not with a different treatment. */
+.champions__cell--lead .champions__title {
+  font-size: clamp(30px, 3.6vw, 52px);
+}
+
+.champions__cell--lead .champions__team {
+  font-size: var(--text-heading-sm);
+}
+
+/* ============ SECONDARY HONOURS ============ */
+/* Absent honours are not in the markup at all, so this list appears only once
+   content.js has real names in it. */
+.champions__honours {
+  display: grid;
+  gap: var(--spacing-4);
+  margin-top: var(--spacing-12);
+  padding-top: var(--spacing-12);
+  border-top: var(--outline-width-1) solid currentColor;
+}
+
+.champions__honour {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-8);
+  align-items: baseline;
+}
+
+/* No opacity here. Size, case and tracking already separate this from the name
+   beside it, and fading caption-scale ink over the orange fill drops under the
+   4.5:1 small-text floor. */
+.champions__honour-label {
+  font-size: var(--text-caption);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.champions__honour-name {
+  font-size: var(--text-body-lg);
+  font-weight: 700;
+}
+
+@media (max-width: 599px) {
+  .champions {
+    padding: var(--spacing-48) 0;
+  }
+
+  .champions__head {
+    padding: 0 var(--spacing-16) var(--spacing-32);
+  }
+
+  .champions__grid {
+    padding: 0 var(--spacing-16);
+  }
+}

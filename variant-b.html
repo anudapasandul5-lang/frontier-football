@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Variant B — Split editorial</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/styles/tokens.css" />
+    <link rel="stylesheet" href="/src/styles/base.css" />
+    <link rel="stylesheet" href="/src/styles/components.css" />
+    <style>
+      /* VARIANT B — split editorial.
+         Calm and confident. Type owns the left, one strong photo owns the
+         right in a big sticker frame. Colour arrives as small filled
+         accents rather than as scattered decoration. */
+      .v { min-height: 100dvh; background: var(--color-paper); padding: var(--spacing-32) var(--spacing-24); }
+      .v__nav {
+        display: flex; align-items: center; justify-content: space-between;
+        max-width: var(--page-max-width); margin: 0 auto var(--spacing-60);
+      }
+      .v__crest { height: 54px; width: auto; }
+      .v__grid {
+        display: grid; grid-template-columns: 1.15fr 0.85fr;
+        gap: var(--spacing-48); align-items: center;
+        max-width: var(--page-max-width); margin: 0 auto;
+      }
+      .v__display {
+        margin: 0;
+        font-family: var(--font-display);
+        font-size: clamp(56px, 8.5vw, 150px);
+        line-height: 0.92;
+        letter-spacing: -0.035em;
+        text-transform: uppercase;
+        color: var(--color-ink);
+      }
+      .v__eyebrow { margin-bottom: var(--spacing-24); }
+      .v__sub {
+        margin: var(--spacing-24) 0 0;
+        max-width: 40ch;
+        font-size: var(--text-subheading);
+        font-weight: 500;
+        line-height: 1.3;
+      }
+      .v__actions { display: flex; gap: var(--spacing-12); margin-top: var(--spacing-32); flex-wrap: wrap; }
+      .v__cta { padding: var(--spacing-16) var(--spacing-32); font-size: var(--text-subheading); }
+
+      .v__media { position: relative; }
+      .v__photo {
+        width: 100%; aspect-ratio: 3/4; object-fit: cover;
+        border: var(--outline-width) solid var(--color-ink);
+        border-radius: var(--radius-card-elevated);
+      }
+      /* One filled accent overlapping the frame — the sticker move, used once. */
+      .v__badge {
+        position: absolute; left: -22px; bottom: 40px;
+        background: var(--color-yellow);
+        border: var(--outline-width) solid var(--color-ink);
+        border-radius: var(--radius-pill);
+        padding: var(--spacing-12) var(--spacing-20);
+        font-family: var(--font-display); font-size: var(--text-heading-sm);
+        text-transform: uppercase; line-height: 1; transform: rotate(-5deg);
+      }
+      @media (max-width: 899px) {
+        .v__grid { grid-template-columns: 1fr; gap: var(--spacing-32); }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="v">
+      <div class="v__nav">
+        <img class="v__crest" src="/crest.webp" alt="Frontier Football" />
+        <a class="btn btn--primary" href="#">Follow @frontierfootballl</a>
+      </div>
+
+      <div class="v__grid">
+        <div>
+          <p class="pill v__eyebrow">Colombo, Sri Lanka · Estd 2024</p>
+          <h1 class="v__display">Built by the futsal community</h1>
+          <p class="v__sub">Small-sided football and the culture around it. Six seasons, one growing community.</p>
+          <div class="v__actions">
+            <a class="btn btn--primary v__cta" href="#">Follow @frontierfootballl</a>
+          </div>
+        </div>
+
+        <div class="v__media">
+          <img class="v__photo" src="/hero/portrait.webp" alt="Frontier Football match in Colombo" />
+          <span class="v__badge">SZN 6</span>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

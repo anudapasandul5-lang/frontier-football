@@ -1,0 +1,79 @@
+/* Frontier Football — resets and document defaults. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body,
+h1,
+h2,
+h3,
+p,
+figure {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+img,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+body {
+  min-height: 100dvh;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: var(--text-body-lg);
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Focus-visible must read clearly against cream — a thin browser default
+   outline disappears here. Bands inverted onto green swap to a paper ring
+   so focus never sits ink-on-dark. */
+:focus-visible {
+  outline: var(--outline-width-2) solid var(--color-ink);
+  outline-offset: 3px;
+  border-radius: inherit;
+}
+
+.band--inverted :focus-visible {
+  outline-color: var(--color-paper);
+}
+
+/* Motion is opt-in everywhere below the hero. Reduced motion means still,
+   not merely faster: animations and transitions are removed outright. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

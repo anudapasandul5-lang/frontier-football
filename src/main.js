@@ -1,1 +1,3 @@
-import './style.css'
+import "./hero.js";
+import "./story.js";
+import "./champions.js";

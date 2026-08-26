@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Frontier Football — Styleguide</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Bebas+Neue&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/src/styles/tokens.css" />
+    <link rel="stylesheet" href="/src/styles/base.css" />
+    <link rel="stylesheet" href="/src/styles/components.css" />
+    <link rel="stylesheet" href="/styleguide.css" />
+  </head>
+  <body>
+    <main class="sg">
+      <header class="sg-section">
+        <p class="pill">Frontier Football — design system</p>
+        <h1 class="display" style="font-size: var(--text-heading)">Styleguide</h1>
+        <p class="tagline">Every token, every primitive, sign-off doc for T1.</p>
+      </header>
+
+      <!-- ============ PALETTE ============ -->
+      <section class="sg-section">
+        <h2 class="sg-heading">Palette — six colours, nothing outside it</h2>
+        <div class="sg-swatch-row">
+          <div class="sg-swatch" style="background: var(--color-paper); color: var(--color-ink)">
+            <strong>paper</strong><code>--color-paper</code><code>#FFF8DB</code>
+          </div>
+          <div class="sg-swatch" style="background: var(--color-ink); color: var(--color-paper)">
+            <strong>ink</strong><code>--color-ink</code><code>#0C2037</code>
+          </div>
+          <div class="sg-swatch" style="background: var(--color-yellow); color: var(--color-ink)">
+            <strong>yellow</strong><code>--color-yellow</code><code>#FABA2A</code>
+          </div>
+          <div class="sg-swatch" style="background: var(--color-green); color: var(--color-paper)">
+            <strong>green</strong><code>--color-green</code><code>#305552</code>
+          </div>
+          <div class="sg-swatch" style="background: var(--color-red); color: var(--color-paper)">
+            <strong>red</strong><code>--color-red</code><code>#87292D</code>
+          </div>
+          <div class="sg-swatch" style="background: var(--color-orange); color: var(--color-ink)">
+            <strong>orange</strong><code>--color-orange</code><code>#E97404</code>
+          </div>
+        </div>
+        <p class="sg-note">
+          Section-band "lift" is a derived tint, not a 7th brand colour:
+          <code>--color-paper-lift = color-mix(in srgb, var(--color-paper) 45%, #ffffff)</code>.
+        </p>
+      </section>
+
+      <!-- ============ TYPE SCALE ============ -->
+      <section class="sg-section">
+        <h2 class="sg-heading">Type scale — fluid, 320px floor to 1440px ceiling</h2>
+        <div class="sg-type-row">
+          <span class="sg-type-label">caption · --text-caption · 11–12px</span>
+          <p style="font-size: var(--text-caption)">FRONTIER FOOTBALL</p>
+        </div>
+        <div class="sg-type-row">
+          <span class="sg-type-label">body-lg · --text-body-lg · 14–15px</span>
+          <p style="font-size: var(--text-body-lg)">Built by football. Powered by community.</p>
+        </div>
+        <div class="sg-type-row">
+          <span class="sg-type-label">subheading · --text-subheading · 18–24px</span>
+          <p style="font-size: var(--text-subheading)">Built by football.</p>
+        </div>
+        <div class="sg-type-row">
+          <span class="sg-type-label">heading-sm · --text-heading-sm · 22–30px</span>
+          <p style="font-size: var(--text-heading-sm)">Frontier Football</p>
+        </div>
+        <div class="sg-type-row">
+          <span class="sg-type-label">heading · --text-heading · 34–64px</span>
+          <p style="font-size: var(--text-heading)">Frontier</p>
+        </div>
+        <div class="sg-type-row">
+          <span class="sg-type-label">display · --text-display · 56–200px</span>
+          <p class="display">Frontier</p>
+        </div>
+        <div class="sg-type-row">
+          <span class="sg-type-label">display-lg · --text-display-lg · 88–640px</span>
+          <p class="display display--lg">SZN</p>
+        </div>
+      </section>
+
+      <!-- ============ DISPLAY FONT CANDIDATES ============ -->
+      <section class="sg-section">
+        <h2 class="sg-heading">Display font candidates</h2>
+        <p class="sg-note">Same word, same size, three free Google-Fonts candidates for the giant condensed caps.</p>
+        <div class="sg-font-row">
+          <p style="font-family: 'Anton', sans-serif; font-size: var(--text-heading); line-height: var(--leading-display)">
+            FRONTIER
+          </p>
+          <span class="sg-type-label">Anton — recommended</span>
+        </div>
+        <div class="sg-font-row">
+          <p style="font-family: 'Archivo Black', sans-serif; font-size: var(--text-heading); line-height: var(--leading-display)">
+            FRONTIER
+          </p>
+          <span class="sg-type-label">Archivo Black</span>
+        </div>
+        <div class="sg-font-row">
+          <p style="font-family: 'Bebas Neue', sans-serif; font-size: var(--text-heading); line-height: var(--leading-display)">
+            FRONTIER
+          </p>
+          <span class="sg-type-label">Bebas Neue</span>
+        </div>
+        <p class="sg-note">
+          <strong>Recommendation: Anton.</strong> It is the only one of the three that is both
+          genuinely condensed AND a true black/heavy weight at once — Archivo Black is bold but
+          full-width, not condensed; Bebas Neue is condensed but a light single weight that thins
+          out at crushed 0.8 line-height. Anton holds up as a solid sticker-like mass at
+          200–640px, closest to the brand guide's Super Squad and to the Lazarev reference's
+          giant black caps. Body face: Space Grotesk, per brief, no argument for swapping it.
+        </p>
+      </section>
+
+      <!-- ============ OUTLINE WEIGHTS ============ -->
+      <section class="sg-section">
+        <h2 class="sg-heading">Outline weight — chosen by eye</h2>
+        <div class="sg-outline-row">
+          <div class="card card--yellow" style="border-width: 1px">1px</div>
+          <div class="card card--yellow" style="border-width: 1.5px">1.5px</div>
+          <div class="card card--yellow" style="border-width: 2px">2px — current default</div>
+        </div>
+      </section>
+
+      <!-- ============ CARDS ============ -->
+      <section class="sg-section">
+        <h2 class="sg-heading">Sticker cards — rainbow, 20px radius</h2>
+        <div class="sg-card-row">
+          <div class="card card--yellow">Yellow<br /><code>--color-yellow</code></div>
+          <div class="card card--green">Green<br /><code>--color-green</code></div>
+          <div class="card card--red">Red<br /><code>--color-red</code></div>
+          <div class="card card--orange">Orange<br /><code>--color-orange</code></div>
+        </div>
+        <h2 class="sg-heading">Elevated feature card — 40px radius</h2>
+        <div class="card card--yellow card--elevated" style="max-width: 24rem">
+          Elevated card. Bigger radius, same outline system, no shadow.
+        </div>
+      </section>
+
+      <!-- ============ CTAs ============ -->
+      <section class="sg-section">
+        <h2 class="sg-heading">CTAs — default, hover, focus</h2>
+        <div class="sg-cta-row">
+          <a href="#" class="btn btn--primary">Primary</a>
+          <a href="#" class="btn btn--primary is-hover-demo">Primary — hover</a>
+          <a href="#" class="btn btn--primary" style="outline: var(--outline-width-2) solid var(--color-ink); outline-offset: 3px">Primary — focus</a>
+        </div>
+        <div class="sg-cta-row">
+          <a href="#" class="btn btn--secondary">Secondary</a>
+          <a href="#" class="btn btn--secondary is-hover-demo">Secondary — hover</a>
+          <a href="#" class="btn btn--secondary" style="outline: var(--outline-width-2) solid var(--color-ink); outline-offset: 3px">Secondary — focus</a>
+        </div>
+        <p class="sg-note">Real hover/focus fire on the two plain buttons above too — tab to them or move a mouse over them.</p>
+      </section>
+
+      <!-- ============ PILLS ============ -->
+      <section class="sg-section">
+        <h2 class="sg-heading">Pill nav item / tag badge</h2>
+        <div class="sg-cta-row">
+          <span class="pill">Nav item</span>
+          <span class="pill pill--tag">Live</span>
+        </div>
+      </section>
+
+      <!-- ============ MARQUEE ============ -->
+      <section class="sg-section">
+        <h2 class="sg-heading">Marquee band</h2>
+        <div class="marquee">
+          <span class="marquee__track">Built by football. Powered by community. &nbsp; · &nbsp; Follow @frontierfootballl &nbsp; · &nbsp; </span>
+        </div>
+      </section>
+
+      <!-- ============ PHOTO TILE + LETTERFORM MASK ============ -->
+      <section class="sg-section">
+        <h2 class="sg-heading">Photo tile</h2>
+        <div class="photo-tile" style="max-width: 16rem">
+          <img src="/styleguide/letterform-mask-sample.jpg" alt="Frontier Football match, real Instagram photo" />
+        </div>
+
+        <h2 class="sg-heading">Letterform mask</h2>
+        <p class="letterform-mask" style="--letterform-mask-image: url('/styleguide/letterform-mask-sample.jpg')">
+          SZN
+        </p>
+        <p class="sg-note">
+          Type filled with a real photo from instagram-media via background-clip:text.
+          Not asserted as the hero mechanic — T3's hero is 3D objects nested between
+          letterforms per BUILD-PROMPT; this primitive is a candidate for Gallery or
+          "What is Frontier" instead.
+        </p>
+      </section>
+
+      <!-- ============ SECTION BAND ROTATION ============ -->
+      <section class="sg-section">
+        <h2 class="sg-heading">Section-band rotation</h2>
+      </section>
+    </main>
+
+    <div class="band band--paper">
+      <p class="tagline">Band 1 — paper. The default canvas.</p>
+    </div>
+    <div class="band band--lift">
+      <p class="tagline">Band 2 — lift. A lightened tint of paper, for a bright interlude.</p>
+    </div>
+    <div class="band band--inverted">
+      <p class="tagline">Band 3 — inverted. Green ground, paper text. The scroll rhythm's dark beat.</p>
+      <a href="#" class="btn btn--primary" style="margin-top: var(--spacing-16)">Primary CTA on green</a>
+    </div>
+  </body>
+</html>

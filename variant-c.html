@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Variant C — Colour-block poster</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/styles/tokens.css" />
+    <link rel="stylesheet" href="/src/styles/base.css" />
+    <link rel="stylesheet" href="/src/styles/components.css" />
+    <style>
+      /* VARIANT C — colour-block poster.
+         Takes the design law literally: every brand colour as a FILLED
+         surface, never a timid accent. Green owns the hero as a full
+         panel, yellow is the single action, the photo sits inside the
+         block rather than floating on cream. */
+      .v { min-height: 100dvh; background: var(--color-paper); padding: var(--spacing-24); display: flex; flex-direction: column; gap: var(--spacing-16); }
+      .v__nav {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 0 var(--spacing-8);
+      }
+      .v__crest { height: 52px; width: auto; }
+
+      .v__panel {
+        flex: 1;
+        position: relative;
+        overflow: hidden;
+        background: var(--color-green);
+        border: var(--outline-width) solid var(--color-ink);
+        border-radius: var(--radius-card-elevated);
+        padding: clamp(24px, 4vw, 56px);
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: var(--spacing-32);
+        align-items: center;
+        color: var(--color-paper);
+      }
+      .v__display {
+        margin: 0;
+        font-family: var(--font-display);
+        font-size: clamp(54px, 8vw, 140px);
+        line-height: 0.92;
+        letter-spacing: -0.035em;
+        text-transform: uppercase;
+      }
+      .v__display em { font-style: normal; color: var(--color-yellow); }
+      .v__sub { margin: var(--spacing-24) 0 0; max-width: 38ch; font-size: var(--text-subheading); font-weight: 500; }
+      .v__cta { margin-top: var(--spacing-32); padding: var(--spacing-16) var(--spacing-32); font-size: var(--text-subheading); }
+
+      .v__photo {
+        width: 100%; aspect-ratio: 3/4; object-fit: cover;
+        border: var(--outline-width) solid var(--color-paper);
+        border-radius: var(--radius-card);
+      }
+
+      .v__strip { display: flex; gap: var(--spacing-12); }
+      .v__chip {
+        flex: 1;
+        border: var(--outline-width) solid var(--color-ink);
+        border-radius: var(--radius-card);
+        padding: var(--spacing-16) var(--spacing-20);
+        font-weight: 700;
+        display: flex; justify-content: space-between; align-items: baseline; gap: var(--spacing-8);
+      }
+      .v__chip span { font-family: var(--font-display); text-transform: uppercase; font-size: var(--text-heading-sm); line-height: 1; }
+      .v__chip--y { background: var(--color-yellow); }
+      .v__chip--r { background: var(--color-red); color: var(--color-paper); }
+      .v__chip--o { background: var(--color-orange); }
+      @media (max-width: 899px) {
+        .v__panel { grid-template-columns: 1fr; }
+        .v__photo { display: none; }
+        .v__strip { flex-direction: column; }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="v">
+      <div class="v__nav">
+        <img class="v__crest" src="/crest.webp" alt="Frontier Football" />
+        <a class="btn btn--primary" href="#">Follow @frontierfootballl</a>
+      </div>
+
+      <div class="v__panel">
+        <div>
+          <h1 class="v__display">Built by the <em>futsal</em> community</h1>
+          <p class="v__sub">Small-sided football and the culture around it, in Colombo.</p>
+          <a class="btn btn--primary v__cta" href="#">Follow @frontierfootballl</a>
+        </div>
+        <img class="v__photo" src="/hero/portrait.webp" alt="Frontier Football match in Colombo" />
+      </div>
+
+      <div class="v__strip">
+        <div class="v__chip v__chip--y">SZN 3 <span>Ramadan FC</span></div>
+        <div class="v__chip v__chip--r">SZN 4 <span>Pantera FC</span></div>
+        <div class="v__chip v__chip--o">SZN 6 <span>Spain</span></div>
+      </div>
+    </section>
+  </body>
+</html>
