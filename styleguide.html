@@ -172,8 +172,20 @@
       <!-- ============ MARQUEE ============ -->
       <section class="sg-section">
         <h2 class="sg-heading">Marquee band</h2>
+        <!-- Eight runs: the track shifts by half its width, so half must out-span
+             the widest viewport or a gap of bare background scrolls through.
+             Only the first is readable; the rest are aria-hidden. -->
         <div class="marquee">
-          <span class="marquee__track">Built by football. Powered by community. &nbsp; · &nbsp; Follow @frontierfootballl &nbsp; · &nbsp; </span>
+          <div class="marquee__track">
+            <span class="marquee__run">Built by football. Powered by community.</span>
+            <span class="marquee__run" aria-hidden="true">Built by football. Powered by community.</span>
+            <span class="marquee__run" aria-hidden="true">Built by football. Powered by community.</span>
+            <span class="marquee__run" aria-hidden="true">Built by football. Powered by community.</span>
+            <span class="marquee__run" aria-hidden="true">Built by football. Powered by community.</span>
+            <span class="marquee__run" aria-hidden="true">Built by football. Powered by community.</span>
+            <span class="marquee__run" aria-hidden="true">Built by football. Powered by community.</span>
+            <span class="marquee__run" aria-hidden="true">Built by football. Powered by community.</span>
+          </div>
         </div>
       </section>
 

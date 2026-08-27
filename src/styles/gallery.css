@@ -1,0 +1,246 @@
+/* Frontier Football - the gallery.
+   A full-bleed horizontal contact strip: one constant tile height, every tile as
+   wide as its own picture is at that height. A fifth layout family, deliberately
+   not the hero's centred poster, not T4's editorial split or its colour band, and
+   not T5's mixed-size sticker grid.
+
+   It is not a marquee. Nothing animates on its own; the strip moves only when a
+   person moves it, and the site's one marquee is still unspent.
+
+   The media is the content here, so the chrome is quieter than anywhere else on
+   the page: no display headline, no colour fills, no labels stamped on pictures.
+   Just ink outlines on cream.
+
+   Colours used: paper and ink only. No literal hex anywhere in this file. */
+
+/* ============ SECTION SHELL ============ */
+.gallery {
+  --gallery-tile-height: clamp(260px, 30vw, 440px);
+
+  background: var(--color-paper);
+  padding: var(--spacing-80) 0;
+}
+
+/* The one line of chrome. Body scale on purpose: HOUSE-RULES section 1 makes the
+   hero the loudest thing on the page, and a gallery headline here would argue
+   with it for no gain. */
+.gallery__lede {
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-24) var(--spacing-32);
+  font-size: var(--text-subheading);
+  color: var(--color-ink);
+}
+
+/* ============ THE STRIP ============ */
+/* Full bleed WITHOUT 100vw and without negative margins. 100vw counts the
+   vertical scrollbar and clientWidth does not, so a 100vw track reports
+   scrollWidth > clientWidth and puts a horizontal scrollbar on the document at
+   every desktop width. The section is already full width, so 100% is both
+   simpler and correct.
+
+   The overflow lives here and only here: the document never scrolls sideways. */
+.gallery__track {
+  display: flex;
+  gap: var(--spacing-16);
+  overflow-x: auto;
+  overflow-y: hidden;
+  /* Proximity, not mandatory: mandatory fights a trackpad flick that means to
+     travel several tiles. */
+  scroll-snap-type: x proximity;
+  /* Matches the tile padding below, so a snapped tile lands on the same line the
+     lede starts on rather than hard against the viewport edge. */
+  scroll-padding-inline-start: var(--spacing-24);
+  padding: var(--spacing-4) var(--spacing-24);
+  /* Room for the hover lift, which would otherwise be clipped by overflow. */
+  padding-bottom: var(--spacing-16);
+}
+
+/* The reveal element is the track, so the tile is free to carry its own
+   transition for the hover lift. .is-pre / .is-revealed live unscoped in
+   components.css at .block__element specificity, and an element that both
+   reveals and hovers loses its opacity easing to whichever stylesheet lands
+   later. Same separation as .champions__cell and .champions__card. */
+.gallery__tile {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  /* One height for every tile; width follows the picture's own shape. Rhythm
+     comes from the real mix of portrait and landscape frames rather than from a
+     cycle keyed to array position, so reordering content.js is safe and nothing
+     is cropped to fit a slot it was never shot for.
+
+     The ratio is set per tile by src/gallery.js from content.js. The 3/2 default
+     here is the same fallback slot gallery-data.js uses when the owner swaps a
+     picture and leaves no dimensions behind.
+
+     The cap is what keeps the strip discoverable. The whole affordance is the
+     next tile showing at the right edge, and the widest picture in the set is
+     1.77:1, which at phone width would fill the screen exactly and leave nothing
+     peeking. 78% means a tile can never take the full viewport, so there is
+     always something after it to see. It only ever bites on a phone: at 1440 the
+     widest tile is 759px against a 1168px cap. */
+  height: var(--gallery-tile-height);
+  aspect-ratio: var(--gallery-ratio, 3 / 2);
+  max-width: 78vw;
+}
+
+.gallery__frame {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  background: none;
+  border: var(--outline-width) solid var(--color-ink);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.gallery__frame:hover {
+  transform: translateY(-4px);
+}
+
+/* width auto with the intrinsic width/height attributes present means the
+   browser knows the tile's shape before the file arrives, so the strip does not
+   reflow as pictures load. */
+/* Fills the tile the ratio already sized, so a tile the cap has narrowed crops
+   from the centre instead of clipping from one edge. */
+.gallery__frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ============ CLIP MARK ============ */
+/* A control affordance, not a label: a tile that hides the fact it is a video
+   lies to the person clicking it. Drawn in CSS rather than as an icon file, and
+   deliberately not a pill with the word "video" in it, which would be the banned
+   text overlay on a photograph. */
+.gallery__play {
+  position: absolute;
+  left: var(--spacing-12);
+  bottom: var(--spacing-12);
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-pill);
+  background: var(--color-paper);
+  border: var(--outline-width) solid var(--color-ink);
+}
+
+.gallery__play::before {
+  content: "";
+  width: 0;
+  height: 0;
+  margin-left: 3px;
+  border-left: 12px solid var(--color-ink);
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+}
+
+/* ============ LIGHTBOX ============ */
+/* Cream, not black. HOUSE-RULES section 1 names "dark cinematic football site"
+   as a failure state, and a black lightbox is the one place on a cream poster
+   where that failure quietly gets back in. */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: var(--spacing-24);
+  border: 0;
+  background: color-mix(in srgb, var(--color-paper) 92%, transparent);
+  color: var(--color-ink);
+  overflow: hidden;
+}
+
+/* The dialog already covers the viewport, so the user-agent backdrop would only
+   show as a dark rim during the open transition. */
+.lightbox::backdrop {
+  background: transparent;
+}
+
+.lightbox:not([open]) {
+  display: none;
+}
+
+/* Announced, never drawn. */
+.lightbox__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Clicks that land here rather than on the media close the dialog, which is the
+   click-outside behaviour. The frame inside stops them. */
+.lightbox__frame {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  pointer-events: none;
+}
+
+.lightbox__frame img,
+.lightbox__frame video {
+  pointer-events: auto;
+  max-width: min(100%, 1100px);
+  /* Leaves room for the controls at the foot of the viewport. */
+  max-height: calc(100% - var(--spacing-80));
+  width: auto;
+  height: auto;
+  border: var(--outline-width) solid var(--color-ink);
+  border-radius: var(--radius-card-elevated);
+  background: var(--color-paper);
+}
+
+.lightbox__controls {
+  position: absolute;
+  left: 50%;
+  bottom: var(--spacing-24);
+  transform: translateX(-50%);
+  display: flex;
+  gap: var(--spacing-12);
+}
+
+.lightbox__close {
+  position: absolute;
+  top: var(--spacing-24);
+  right: var(--spacing-24);
+}
+
+@media (max-width: 599px) {
+  .gallery {
+    padding: var(--spacing-48) 0;
+  }
+
+  .gallery__lede {
+    padding: 0 var(--spacing-16) var(--spacing-24);
+  }
+
+  .gallery__track {
+    padding-inline: var(--spacing-16);
+    scroll-padding-inline-start: var(--spacing-16);
+  }
+
+  .lightbox {
+    padding: var(--spacing-16);
+  }
+
+  .lightbox__close {
+    top: var(--spacing-16);
+    right: var(--spacing-16);
+  }
+}

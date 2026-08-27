@@ -56,6 +56,47 @@ watch-along: Frontier organises it and it has a champion.
 A community event where people gather to watch football together (e.g. a World Cup match) —
 a social/content event Frontier hosts, not a match Frontier organizes or officiates.
 
+**Tournament**
+Umbrella for a season of the 4x4 Series or a competition. Added when the gallery
+needed both as one list. It is a genuine umbrella and not a synonym for either:
+`competition` is already defined above as "a Frontier tournament that is NOT a
+season", so this word was already doing that job informally. Code: `tournaments()`
+in `src/content-data.js`. No data key of its own, since it is a view over
+`seasons` and `competitions`, in that order.
+
+**Gallery**
+The gallery is a **page** (`gallery.html`), reached from the nav on every page. It
+holds one card per tournament and per watch-along, each linking out to that
+thing's full photo folder on Google Drive. User-facing copy: "Gallery".
+
+The scrolling row of pictures near the bottom of the home page is a **gallery
+preview**, not "the gallery". It carries no visible name and exists to show what
+Frontier looks like without making anyone click. Its code still uses the shorter
+`gallery` prefix (`src/gallery.js`, `.gallery__*`, `src/styles/gallery.css`) while
+the page uses `gallery-page` (`src/gallery-page.js`, `.gallery-page__*`). If a
+later ticket touches either, keep that split: the page is the gallery, the row is
+the preview.
+
+**Drive folder**
+A link to a Google Drive folder holding every photo from one tournament or
+watch-along. Data key: `driveFolder`, a field on each season, competition and
+watch-along rather than a collection of its own. The site never hosts a full
+archive: hundreds of files per tournament would have to be resized and committed
+by hand, and Drive's own image links are not dependable enough to lay out inside
+the page. So the gallery links out rather than embedding, and the owner adds a
+tournament's photos by pasting one link. `TODO` until pasted, and a card with no
+link says "Photos are on the way." rather than being hidden, because every
+tournament is expected to get one.
+
+**Watch-along** (data key added)
+Defined above as a social event Frontier hosts rather than a match it runs. It now
+has a data key: `watchAlongs`, a sibling collection to `seasons` and
+`competitions`. It carries `name`, `note`, `photo`, `photoAlt` and `driveFolder`,
+and deliberately has **no** `champion` or `runnerUp`: nobody wins a watch-along,
+and that absence is the whole reason it is a third collection instead of another
+competition. The gallery renders tournaments and watch-alongs as two groups that
+are never merged.
+
 **Partner vs Sponsor**
 `sponsor` is a paying brand relationship. `partner` is broader — a venue, media outlet, or
 collaborator that may or may not involve payment. Keep them as separate fields/lists if both
@@ -63,7 +104,38 @@ exist in content.js; do not use the words interchangeably in copy.
 
 **Links hub**
 The section aggregating every outbound link (Instagram, TikTok, Sofascore, WhatsApp) in
-priority order — Instagram first and largest, per BUILD-PROMPT.
+priority order — Instagram first and largest, per BUILD-PROMPT. Data key: `links`, a list
+of `{ name, handle, url }` at the root of content.js, in priority order. Order lives in the
+file rather than in code so the owner can reorder without a developer. A link whose `url` is
+TODO is **absent** from the markup, never present and disabled: a control that announces a
+TikTok and then refuses to open it is worse than no control. Code: `outboundLinks()` in
+`src/content-data.js`.
+
+The hub gives its statement slab to the **first renderable link** rather than to Instagram
+by name, so a handle blanked while somebody re-checks it degrades to the next link instead
+of leaving a headless section. `handle` is stored rather than parsed out of the url: a
+WhatsApp invite and a Sofascore page have no handle in them at all. A link with no handle
+falls back to its name.
+
+Home page only. The footer repeats on both pages; the hub does not.
+
+**Partner list**
+Data key: `partners`, a list of `{ name, logo, url }` at the root of content.js, in the
+order the names were recorded. Deliberately not sorted: alphabetising, or floating the ones
+with logos, would imply a ranking nobody set. An entry with no `name` is dropped, since a
+row's content is its name. An entry with no `url` is **kept** and drawn as plain text, which
+is what makes it different from a link: a partner is a name Frontier wants to credit whether
+or not anyone has checked its address. Code: `partners()` in `src/content-data.js`.
+
+Names are printed **verbatim** as they appear in HOUSE-RULES section 7 — `@main.sportsbar`,
+and `Sofascore` / `ThePapare` without an `@` because they were recorded as company names
+rather than handles. Tidying `drinkhypebam` into "Hype Bam" would be inventing a brand name
+nobody supplied. No category label goes under a name.
+
+**Marquee**
+The site's one moving strip, spent in T7 on the brand tagline. See HOUSE-RULES section 5.
+Not a data key: its copy is in the markup, because it is brand copy rather than content the
+owner edits.
 
 **Reigning**
 Describes the champion of the most recent *completed* season — i.e. the most recent season

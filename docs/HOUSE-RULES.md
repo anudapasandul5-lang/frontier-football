@@ -37,6 +37,15 @@ Card rows cycle yellow → green → red → orange as filled surfaces.
 **Yellow is reserved for the primary action.** Do not dilute it by using it
 for decoration; that is why the follow CTA is unmissable.
 
+**Ink is also the footer fill, and that is NOT a second inversion.** T4's green
+band is the only inversion in the page's *section rhythm*. The footer sits
+outside `<main>`, repeats on every page and carries no section content, exactly
+as the nav does: it is chrome, and BUILD-PROMPT's palette table says "footer
+fill" in as many words. The gallery page settles the argument, having no green
+band at all. What this rule still forbids is a *stack* of dark surfaces: T7 kept
+the links hub ink-outlined on paper rather than ink-filled, because the marquee
+and footer beneath it are both ink and three in a row turns a cream page dark.
+
 Real photography carries its own colours and is exempt.
 
 ## 3. Typography — and the leading trap
@@ -84,6 +93,17 @@ maximised short laptop (1900x780) will push your CTA below the fold.
 The hero is the only showpiece. Everything below it is calm:
 reveal-on-scroll (transform + opacity, IntersectionObserver), hover lift on
 cards, and at most **one** marquee across the whole site.
+
+**The marquee is SPENT as of T7.** It carries the brand tagline as a seam between
+the links hub and the footer, on `index.html` only. Two identical `.marquee__run`
+spans inside one `.marquee__track` translated to -50%, the second one
+`aria-hidden="true"` so a screen reader does not read the strip twice. It is on
+the home page rather than inside the footer precisely because the footer repeats
+on both pages and that would render the site's one marquee twice.
+`styleguide.html` also draws it: that is the design-system page, not a site page.
+Whatever a marquee carries must also sit still somewhere, since moving text
+cannot be read by anyone who needs time. The tagline's still copy is the partners
+section's lede. **Do not add a second marquee.**
 
 Hard rules:
 - Animate `transform` and `opacity` only. Nothing that triggers layout.
@@ -162,6 +182,52 @@ Manifest captions are **hard-truncated at exactly 120 characters**, mid-word.
 Several champion names sit just past the cut, SZN 5's included. A truncated
 caption is not a source: it tells you a post exists, not what it says.
 
+**FINDING from T6's triage of all 100 posts — do not re-derive.** Of 100 source
+posts, only 19 are usable as gallery photography. The rest fail for four reasons,
+and three of them are invisible at thumbnail size:
+
+- **Designed posters and announcement graphics: about half the feed.** Watch
+  parties, fixture cards, "CHAMPIONS", "4x4 SERIES", "TURF WARS", giveaways,
+  partner announcements. Already covered above; the point here is the proportion.
+- **A second ThePapare watermark exists.** `024-DZT-KzxDM9K.jpg` carries the same
+  "©Ashan Senevirathne / thepapare.com" mark as `025`, printed across a player in
+  an orange kit. Both are unusable for the same reason: cropping it off is
+  stripping a photographer's copyright notice. That is now **two** known files,
+  not one. Clear either with ThePapare before reaching for it.
+- **Reel covers carry the reel's own burned-in subtitle.** `006`, `009`, `035`,
+  `051`, `059`, `068`, `075`, `078`, `079`, `083`, `084` and others print a line
+  of caption across the middle of the frame. It cannot be cropped without cutting
+  the subject, and it is not croppable at all when it sits mid-frame. Reject.
+- **Many good photographs carry a burned-in Frontier or 4x4 badge in a corner.**
+  `029` (a goalkeeper diving, the single best action frame in the set), `057`,
+  `061` and `088`. **The badges are much taller than they look at thumbnail
+  size:** trimming 100px off a 720px-tall frame does not clear them, and two
+  rounds of guessing at crop depths cost T6 an hour for nothing. If a future
+  ticket wants these, measure the badge in the full-size file first. T6 dropped
+  all four rather than keep cropping, because every miss ships a logo nobody
+  meant to publish.
+
+**The triage method, which is worth reusing.** Do not open 100 files one at a
+time. Build 5x5 contact sheets with ffmpeg and read four images instead:
+
+```
+# 1. normalise FIRST. ffmpeg's tile filter silently keeps only the last frame
+#    when inputs differ in size, and these posts do. This is the whole trick.
+ffmpeg -i NNN.jpg -vf "scale=320:320:force_original_aspect_ratio=increase,crop=320:320" norm/NNN.jpg
+# 2. tile 25 at a time from their own directory. -start_number does NOT work
+#    here: it produced four byte-identical sheets.
+ffmpeg -i batch/%03d.jpg -vf "tile=5x5" -frames:v 1 sheet.jpg
+```
+Row-major order maps a tile's position back to its index, so no `drawtext`
+labelling is needed. Then re-render the shortlist at 500px+ **padded, not
+cropped**, so corner watermarks stay in frame, and confirm there. Three of T6's
+calls changed between the 320px pass and the 500px pass.
+
+**Files used by the T6 gallery** are listed with their sources in `content.js`.
+Clips deviate from the 16:9 rule above on purpose: the strip sizes every tile
+from its own media, so a vertical clip stays vertical rather than being cropped
+to a shape the strip does not need.
+
 ## 7. Content — never invent
 
 Known and usable:
@@ -180,11 +246,30 @@ Known and usable:
   nutrimax.iso, Sofascore, shirtshack.lk, drinkhypebam, ThePapare,
   absystudios, zone360.lk, athlete360_sl.
 
+**These eleven are PARTNERS, never "sponsors", and T7 settled the wording for
+good.** A sponsor paid; a partner may or may not have (CONTEXT.md). Nobody has
+recorded which of the eleven paid, so the site uses the one word it can stand
+behind, for all of them. The T4 band already ships the stat "11 Partners" and the
+T7 section must never contradict it. Two are known not to be plain sponsors
+anyway. Do not sort them into two lists by guessing, and do not print a category
+under a name.
+
+**Their urls are deliberately unrecorded, and this is not laziness.** An Instagram
+address can be derived from a handle, but the list above is the only surviving
+source: the 120-character caption manifest is no longer on disk, so there is
+nothing to check a spelling against. A mistyped handle does not 404, it resolves
+to *a stranger's account* sitting under Frontier's name beside the word Partners.
+Three of the eleven (`address.lk`, `shirtshack.lk`, `zone360.lk`) carry Sri
+Lanka's TLD and may be websites rather than handles at all. Every `url` in
+`content.js` stays `TODO` until a person opens it and confirms the business. The
+rows render as plain text until then and link themselves the moment one is
+pasted in.
+
 **`content.js` at the repo root is the hand-edited content file, not
 `content.json`.** JSON cannot carry a plain-English comment above each field,
 which is the entire point for a non-technical editor. Every unknown is the
 literal string `"TODO"`, optionally with a note after it (`"TODO: ask the
-lads"`); `src/champions-data.js` treats both as absent. The owner has said they
+lads"`); `src/content-data.js` treats both as absent. The owner has said they
 will supply every champion, runner-up, Golden Boot and Golden Glove later, so
 fields exist as TODO placeholders ready to be overwritten and their rows render
 themselves once filled.

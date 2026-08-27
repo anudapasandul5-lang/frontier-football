@@ -1,0 +1,117 @@
+/* Frontier Football — Partners.
+   A ruled index: one row per partner, a hairline between rows, two columns from
+   768px up. A sixth layout family, deliberately not the hero's centred poster,
+   not T4's editorial split or its colour band, not T5's mixed-size sticker grid,
+   not T6's full-bleed scroll strip, and not the gallery page's tabbed card grid.
+
+   Why not a card grid or a logo wall. There are no logo files: every partner
+   mark in the source media is baked into somebody else's Instagram poster and is
+   not ours to crop out. A wall of eleven text cards is a three-column card row
+   wearing a disguise, and a card whose only content is a name is a rule with
+   wasted padding.
+
+   Why two columns. Eleven rows stacked in one column with a hairline under each
+   is a spec sheet, and a spec sheet is the laziest long-list layout there is.
+   Two columns halve the apparent run and turn it back into an index. CSS
+   `columns` rather than a grid, so it rebalances itself at any count: the owner
+   adding a twelfth partner must not need a developer.
+
+   Colours used: paper and ink only. No literal hex anywhere in this file. */
+
+/* ============ SECTION SHELL ============ */
+.partners {
+  background: var(--color-paper);
+  padding: var(--spacing-80) 0;
+}
+
+.partners__head {
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-24) var(--spacing-40);
+}
+
+.partners__headline {
+  margin: 0;
+  font-family: var(--font-display);
+  /* Capped below the champions headline, which is capped below the story's,
+     which is capped below the hero's. One order of loudness, top to bottom. */
+  font-size: clamp(28px, 4vw, 60px);
+  /* HOUSE-RULES section 3: Anton collides with itself at the token's 0.8.
+     0.92 still reads crushed and does not overlap when this wraps on a phone. */
+  line-height: 0.92;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+}
+
+/* The brand tagline, and the reason it sits here rather than only in the
+   marquee below: moving text cannot be read by someone who needs time, so the
+   one line the marquee carries has to exist somewhere still on the same page.
+   This is that somewhere. */
+.partners__lede {
+  margin: var(--spacing-16) 0 0;
+  font-size: var(--text-subheading);
+  line-height: var(--leading-heading);
+  color: var(--color-ink);
+}
+
+/* ============ THE INDEX ============ */
+.partners__list {
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-24);
+  list-style: none;
+}
+
+@media (min-width: 768px) {
+  .partners__list {
+    columns: 2;
+    column-gap: var(--spacing-80);
+  }
+}
+
+.partners__row {
+  /* One rule per row, never a top border as well. Doubling them turns an index
+     into a table and boxes every name in for no gain. */
+  border-block-end: var(--outline-width-1) solid var(--color-ink);
+  padding: var(--spacing-16) 0;
+  /* A column break through the middle of a row would split a name from its
+     rule. */
+  break-inside: avoid;
+}
+
+.partners__name {
+  display: block;
+  font-size: var(--text-subheading);
+  font-weight: 500;
+  color: var(--color-ink);
+  /* Handles are one long unbroken word. Without this, @frontierfootballl-length
+     names push the column wider than the page at 320px. */
+  overflow-wrap: anywhere;
+}
+
+/* The upgrade path. When a logo file lands in public/partners/ and is named in
+   content.js, it replaces the name inside this same row: the rule, the padding
+   and the column flow are untouched, so it is a content edit and not a layout
+   one. Height is capped rather than width so eleven marks of different
+   proportions still sit on one optical line. */
+.partners__logo {
+  display: block;
+  max-width: 100%;
+  height: clamp(24px, 3vw, 34px);
+  width: auto;
+  object-fit: contain;
+}
+
+/* Every url is TODO today, so no row is a link yet. The treatment exists so the
+   first pasted address does not arrive as an unstyled blue underline. */
+.partners__link {
+  display: block;
+  color: var(--color-ink);
+  text-decoration: none;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.partners__link:hover {
+  transform: translateX(var(--spacing-8));
+}

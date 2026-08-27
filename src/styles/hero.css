@@ -33,6 +33,28 @@
   transform: translate(var(--cta-magnet-x, 0px), var(--cta-magnet-y, 0px));
 }
 
+/* The nav was brand on the left and one CTA on the right until the photos page
+   existed. Both pages now carry a second item, so the right-hand side is a
+   group: "Photos" on the home page, "Home" on the photos page. */
+.nav__end {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--spacing-16);
+}
+
+.nav__link {
+  font-weight: 700;
+  font-size: var(--text-body-lg);
+  color: var(--color-ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.nav__link:hover {
+  text-decoration: underline;
+}
+
 /* ============ HERO ============ */
 .hero {
   position: relative;
@@ -124,6 +146,14 @@
   .nav__cta {
     font-size: var(--text-caption);
     padding: var(--spacing-8) var(--spacing-16);
+  }
+
+  .nav__end {
+    gap: var(--spacing-12);
+  }
+
+  .nav__link {
+    font-size: var(--text-caption);
   }
 
   .hero {

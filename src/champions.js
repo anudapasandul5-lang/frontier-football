@@ -1,5 +1,5 @@
 import content from "../content.js";
-import { parseContent } from "./champions-data.js";
+import { parseContent } from "./content-data.js";
 import { wireReveal } from "./reveal.js";
 
 /* Renders the Champions & Honours grid from content.js. No season data lives in

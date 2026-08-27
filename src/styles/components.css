@@ -120,14 +120,33 @@
   white-space: nowrap;
 }
 
+/* Two identical runs inside one track, shifted by half the track's width, so the
+   loop is seamless instead of scrolling in from an empty right edge. The second
+   run carries aria-hidden in markup: it exists to fill the gap, and a screen
+   reader that reads the strip twice is reading a rendering trick aloud.
+
+   Changed in T7 from a single padding-left:100% span, which could not carry a
+   duplicate at all. Class names are unchanged and styleguide.html moved with it.
+
+   base.css kills animation globally under prefers-reduced-motion, which leaves
+   this at translateX(0) with the first run in place. Stopped, not slower. */
 .marquee__track {
-  display: inline-block;
-  padding-left: 100%;
+  display: flex;
+  width: max-content;
+  animation: marquee var(--duration-marquee) linear infinite;
+}
+
+.marquee__run {
+  /* The gap between phrases, and it is load-bearing arithmetic, not spacing
+     taste. The track shifts by half its width, so half has to out-span the
+     widest viewport this site is checked at (1900) or bare ink scrolls through
+     between phrases. Eight runs at this padding put half the track at ~1912px.
+     Narrow this and runs have to be added to compensate. */
+  padding-right: var(--spacing-128);
   font-size: var(--text-body-lg);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.03em;
-  animation: marquee var(--duration-marquee) linear infinite;
 }
 
 @keyframes marquee {
@@ -135,7 +154,7 @@
     transform: translateX(0);
   }
   to {
-    transform: translateX(-100%);
+    transform: translateX(-50%);
   }
 }
 

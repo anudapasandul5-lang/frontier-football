@@ -1,0 +1,131 @@
+/* Frontier Football — the site footer.
+   The last thing on both pages. Ink fill, paper type, full width.
+
+   WHY AN INK FILL IS NOT A SECOND INVERTED BAND. HOUSE-RULES calls T4's green
+   band the page's only inversion, and that rule is about the scroll rhythm
+   INSIDE a page: alternating dark sections is what makes a cream site read as a
+   dark one. A footer is not in that rhythm. It repeats on every page, it carries
+   no section content, and it sits outside <main> exactly as the nav sits above
+   it. It is chrome, and BUILD-PROMPT's palette table assigns ink as the footer
+   fill in as many words. The gallery page settles it: that page has no green
+   band at all, so an ink footer there is not a second anything.
+
+   NOTHING IS MUTED. HOUSE-RULES section 3 records that opacity on a filled
+   surface is a contrast change and has to be computed rather than eyeballed.
+   Sidestepped entirely here: every line is full-strength paper on ink, and size
+   and weight do the separating instead. Computed, not judged: #FFF8DB on #0C2037
+   is 15.42:1, which clears AAA at every size. For reference if a later ticket
+   ever wants a muted line here, paper at 0.85 is still 11.44:1.
+
+   Colours used: paper and ink only, both through their tokens. The two hex
+   values above are the contrast working, not a declaration. */
+
+.site-foot {
+  /* Full bleed WITHOUT 100vw, the same finding gallery.css records: 100vw counts
+     the vertical scrollbar and clientWidth does not, so a 100vw footer reports
+     scrollWidth > clientWidth and puts a horizontal scrollbar on the document at
+     every desktop width. The element is already full width, so 100% is both
+     simpler and correct. */
+  width: 100%;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  padding: var(--spacing-60) 0;
+}
+
+.site-foot__inner {
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-24);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-24);
+}
+
+/* An ending, not a sixth section: one column at every width, left aligned,
+   nothing competing for the eye. The crest is the only mark.
+
+   align-self is load-bearing, not tidying. .site-foot__inner is a column flex
+   container, so its default align-items:stretch pulls the crest to the full
+   width of the footer and `width:auto` then resolves to that stretched width.
+   The mark rendered as a 1377px smear until this line existed. */
+.site-foot__crest {
+  display: block;
+  align-self: start;
+  width: auto;
+  height: clamp(48px, 6vw, 64px);
+}
+
+.site-foot__line {
+  margin: 0;
+  max-width: 34ch;
+  font-size: var(--text-subheading);
+  line-height: var(--leading-heading);
+}
+
+.site-foot__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-24);
+}
+
+.site-foot__link {
+  color: var(--color-paper);
+  font-size: var(--text-body-lg);
+  font-weight: 700;
+  text-decoration: none;
+  /* Underlined on hover rather than moved: the footer is the one place on the
+     page where nothing should lift. */
+  text-underline-offset: 4px;
+}
+
+.site-foot__link:hover {
+  text-decoration: underline;
+}
+
+/* No year. A hardcoded one is wrong within months on a site nobody redeploys
+   weekly, and the notice means the same without it. No domain either: the
+   domain is still TODO, and a footer that prints a site it does not have yet is
+   worse than one that prints none. */
+.site-foot__meta {
+  margin: 0;
+  font-size: var(--text-caption);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+/* From 768px the band is wide enough that a single left column leaves two thirds
+   of it as bare ink, which reads as unfinished rather than as an ending. The
+   four children split into two columns by grid placement rather than by wrapping
+   them in extra divs, so the markup duplicated across both pages stays as short
+   as possible. Still one column on a phone. */
+@media (min-width: 768px) {
+  .site-foot__inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    column-gap: var(--spacing-48);
+    row-gap: var(--spacing-24);
+    align-items: start;
+  }
+
+  .site-foot__crest {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .site-foot__line {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .site-foot__nav {
+    grid-column: 2;
+    grid-row: 1;
+    justify-content: flex-end;
+  }
+
+  .site-foot__meta {
+    grid-column: 2;
+    grid-row: 2;
+    text-align: right;
+  }
+}

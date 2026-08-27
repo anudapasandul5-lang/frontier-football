@@ -22,6 +22,10 @@
     <link rel="stylesheet" href="/src/styles/hero.css" />
     <link rel="stylesheet" href="/src/styles/story.css" />
     <link rel="stylesheet" href="/src/styles/champions.css" />
+    <link rel="stylesheet" href="/src/styles/gallery.css" />
+    <link rel="stylesheet" href="/src/styles/partners.css" />
+    <link rel="stylesheet" href="/src/styles/hub.css" />
+    <link rel="stylesheet" href="/src/styles/footer.css" />
   </head>
   <body>
     <header class="nav">
@@ -36,14 +40,17 @@
         />
       </a>
 
-      <a
-        class="btn btn--primary nav__cta"
-        href="https://www.instagram.com/frontierfootballl/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Follow @frontierfootballl
-      </a>
+      <div class="nav__end">
+        <a class="nav__link" href="/gallery.html">Gallery</a>
+        <a
+          class="btn btn--primary nav__cta"
+          href="https://www.instagram.com/frontierfootballl/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Follow @frontierfootballl
+        </a>
+      </div>
     </header>
 
     <main id="top">
@@ -159,7 +166,192 @@
 
         <ul class="champions__grid" data-champions></ul>
       </section>
+      <!-- The gallery. Every tile is built by src/gallery.js from content.js, so
+           swapping a picture is a content.js edit and nothing else.
+
+           A horizontally scrolling contact strip, deliberately none of the four
+           layout families already spent above it: not the hero's centred poster,
+           not T4's editorial split or its colour band, and not T5's mixed-size
+           sticker grid. It is the only thing on the page that runs edge to edge
+           past the container every other section respects.
+
+           It is NOT a marquee. Nothing here moves on its own; it moves only when
+           a person moves it. The site's one marquee was spent in T7, on the
+           tagline seam further down this page.
+
+           The line below stays in static markup for the same reason the champions
+           heading does: if the bundle ever fails this reads as a labelled empty
+           section rather than as a blank gap in the page. -->
+      <section class="gallery" id="gallery">
+        <p class="gallery__lede" data-reveal>Nights on the turf.</p>
+
+        <!-- The track is the reveal element, never the individual tiles.
+             src/reveal.js observes against the viewport with zero horizontal
+             insets, so a tile scrolled off to the right of this scroller would
+             never intersect and would sit at opacity 0 permanently. -->
+        <ul class="gallery__track" data-gallery data-reveal></ul>
+      </section>
+
+      <!-- Partners. Every row is built by src/partners.js from content.js, so
+           adding one is a content edit and nothing else.
+
+           PARTNERS, NOT SPONSORS. A sponsor paid and a partner may or may not
+           have (CONTEXT.md). Nobody recorded which of the eleven paid, so the
+           page uses the word it can stand behind. The T4 band above already
+           ships the stat "11 Partners", and this section must not contradict it.
+
+           A ruled index, deliberately none of the five layout families spent
+           above it, and deliberately not a three-column card row.
+
+           The heading and the line under it stay in static markup for the same
+           reason the champions heading does: if the bundle ever fails, this
+           reads as a labelled empty section rather than a blank gap.
+
+           The lede is the brand tagline, and it sits here rather than only in
+           the marquee below because moving text cannot be read by anyone who
+           needs time. Whatever the marquee says has to be somewhere still. -->
+      <section class="partners" id="partners">
+        <div class="partners__head">
+          <h2 class="partners__headline" data-reveal>Partners</h2>
+          <p class="partners__lede" data-reveal>Built by football. Powered by community.</p>
+        </div>
+
+        <!-- The list is the reveal element, never the eleven rows: a ripple down
+             eleven hairlines is noise on a section this quiet. -->
+        <ul class="partners__list" data-partners data-reveal></ul>
+      </section>
+
+      <!-- The links hub, built by src/hub.js from content.js.
+
+           Three of its four links have no address yet, so the first renderable
+           one becomes the section itself and the rest append as pills when their
+           addresses arrive. Nothing is drawn greyed out: a control that announces
+           a TikTok and then refuses to open it is worse than no control.
+
+           The heading is plain and stays true whichever links exist. "Follow on
+           Instagram" in static markup would be a lie the day that handle is
+           blanked while somebody re-checks it. -->
+      <section class="hub" id="links">
+        <div class="hub__inner">
+          <h2 class="hub__headline" data-reveal>Find Frontier</h2>
+          <div data-hub data-reveal></div>
+        </div>
+      </section>
+
+      <!-- THE SITE'S ONE MARQUEE. There is not a second one anywhere, and this
+           is the whole motion allowance below the hero besides reveals and hover.
+
+           It carries the brand tagline rather than the partner names: names
+           scrolling past are unreadable and unclickable, which is a poor way to
+           credit eleven partners, and it would force a second still copy of the
+           same eleven names on one page.
+
+           Home page only. The footer below repeats on both pages; if the marquee
+           lived inside it there would be two of these on the site.
+
+           The second run is aria-hidden. It exists to close the loop's gap, and
+           a screen reader reading the strip twice is reading a rendering trick
+           aloud. -->
+      <div class="marquee">
+        <!-- EIGHT runs, not two, and the count is arithmetic rather than taste.
+             The track translates by half its width, so half of it has to be at
+             least as wide as the widest viewport or empty cream scrolls through
+             the ink. One run is about 490px, and 1900 / 490 rounds up to four,
+             so four per half. Only the first is readable; the other seven are
+             aria-hidden, or a screen reader reads the tagline eight times. -->
+        <div class="marquee__track">
+          <span class="marquee__run">Built by football. Powered by community.</span>
+          <span class="marquee__run" aria-hidden="true">Built by football. Powered by community.</span>
+          <span class="marquee__run" aria-hidden="true">Built by football. Powered by community.</span>
+          <span class="marquee__run" aria-hidden="true">Built by football. Powered by community.</span>
+          <span class="marquee__run" aria-hidden="true">Built by football. Powered by community.</span>
+          <span class="marquee__run" aria-hidden="true">Built by football. Powered by community.</span>
+          <span class="marquee__run" aria-hidden="true">Built by football. Powered by community.</span>
+          <span class="marquee__run" aria-hidden="true">Built by football. Powered by community.</span>
+        </div>
+      </div>
     </main>
+
+    <!-- The footer, hand-written here and again in gallery.html.
+
+         WHY IT IS INK. BUILD-PROMPT's palette table assigns ink as the footer
+         fill, and HOUSE-RULES' "one inversion" rule governs the scroll rhythm
+         inside a page, not the chrome around it. This sits outside <main>,
+         repeats on every page and carries no section content, exactly as the nav
+         above it does. The gallery page settles the argument: it has no green
+         band at all, so an ink footer there is not a second anything.
+
+         No domain: it is still TODO and a footer that prints a site Frontier
+         does not have yet is worse than one that prints none. No year either.
+
+         ponytail: two hand-copied footers will drift, the same way the nav in
+         both pages already can. A shared partial costs a build step this project
+         does not have, so the ceiling is named rather than engineered around. -->
+    <footer class="site-foot">
+      <div class="site-foot__inner">
+        <img
+          class="site-foot__crest"
+          src="/crest.webp"
+          width="525"
+          height="640"
+          alt="Frontier Football"
+          loading="lazy"
+          decoding="async"
+        />
+        <p class="site-foot__line">
+          Small-sided football and the culture around it, in Colombo.
+        </p>
+        <nav class="site-foot__nav" aria-label="Footer">
+          <a class="site-foot__link" href="/">Home</a>
+          <a class="site-foot__link" href="/gallery.html">Gallery</a>
+          <a
+            class="site-foot__link"
+            href="https://www.instagram.com/frontierfootballl/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Frontier Football on Instagram (opens in a new tab)"
+          >
+            Instagram
+          </a>
+        </nav>
+        <p class="site-foot__meta">&copy; Frontier Football</p>
+      </div>
+    </footer>
+    <!-- The lightbox. A native <dialog>, so the focus trap, Escape-to-close, the
+         inertness of the page behind it and an untabbable closed state all come
+         from the platform rather than from hand-rolled JS.
+
+         role and aria-modal are implied by showModal() and set here anyway, so
+         the contract is readable in the markup.
+
+         It holds no <video> element. src/hero.js queries
+         document.querySelectorAll("video[data-src]") across the whole document at
+         import time, and a video sitting in this markup is the one element that
+         query could reach. src/gallery.js builds it on demand instead. -->
+    <dialog
+      class="lightbox"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="lightbox-title"
+      data-lightbox
+    >
+      <h2 class="lightbox__sr" id="lightbox-title">Gallery</h2>
+      <!-- Position, announced rather than printed. A keyboard user arrowing
+           through needs to know when they have wrapped; nobody needs to read
+           "3 / 15" stamped on the picture. -->
+      <p class="lightbox__sr" aria-live="polite" data-lightbox-status></p>
+
+      <div class="lightbox__frame" data-lightbox-frame></div>
+
+      <div class="lightbox__controls">
+        <button class="btn btn--secondary" type="button" data-lightbox-step="-1">Previous</button>
+        <button class="btn btn--secondary" type="button" data-lightbox-step="1">Next</button>
+      </div>
+      <button class="btn btn--secondary lightbox__close" type="button" data-lightbox-close>
+        Close
+      </button>
+    </dialog>
+
 
     <script type="module" src="/src/main.js"></script>
   </body>

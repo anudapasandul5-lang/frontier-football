@@ -1,0 +1,112 @@
+/* Frontier Football — the links hub.
+   One outlined slab carrying the first renderable link at display scale, with
+   any further links as pills beneath it. A seventh layout family: a single large
+   object rather than a list, a grid or a strip, so it does not repeat the
+   partner index directly above it or the footer directly below.
+
+   PAPER, NOT INK. The marquee and the footer under this section are both ink
+   fills. A third dark surface here would turn the bottom quarter of a cream page
+   dark, which is a bigger break than any one section is worth. Outlined on paper
+   keeps the site's language (a filled, ink-outlined surface) without the stack.
+
+   PAPER, NOT YELLOW EITHER. HOUSE-RULES section 2 reserves yellow for the primary
+   action, and the nav and hero already spend it on this exact destination. A
+   third yellow control with one intent is the duplicate-CTA failure. Same
+   destination, unmissable size, lower weight.
+
+   Colours used: paper and ink only. No literal hex anywhere in this file. */
+
+/* ============ SECTION SHELL ============ */
+.hub {
+  background: var(--color-paper);
+  padding: var(--spacing-80) 0;
+}
+
+.hub__inner {
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-24);
+}
+
+/* Plain and true whichever links exist. A static "Follow on Instagram" heading
+   would be a lie the day the handle is blanked while it is re-checked, and the
+   heading has to stay in markup so a failed bundle reads as a labelled section
+   rather than a gap. */
+.hub__headline {
+  margin: 0 0 var(--spacing-32);
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 60px);
+  /* HOUSE-RULES section 3: Anton collides with itself at the token's 0.8. */
+  line-height: 0.92;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+}
+
+/* ============ THE SLAB ============ */
+.hub__slab {
+  display: block;
+  padding: var(--spacing-40) var(--spacing-32);
+  border: var(--outline-width) solid var(--color-ink);
+  /* The elevated radius, since this is the largest single object on the page
+     below the hero. Matches the site's 20 / 40 / pill system. */
+  border-radius: var(--radius-card-elevated);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  text-decoration: none;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.hub__slab:hover {
+  transform: translateY(-2px);
+}
+
+.hub__label {
+  display: block;
+  margin-bottom: var(--spacing-12);
+  font-size: var(--text-caption);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+/* The handle IS the section. Lowercase rather than the site's usual display
+   caps: a handle is something people type, and typing it is the point.
+
+   Sized with the same clamp shape tokens.css uses (min at 320px, max at 1440px,
+   linear between) rather than a raw vw, because a raw vw that is large enough to
+   fill this slab on a desktop overflows it on a phone: "@frontierfootballl" is
+   eighteen unbroken characters and cannot wrap usefully. 150px at 1440 sets it
+   about as wide as the slab, which is the point of the slab. overflow-wrap is
+   the belt to that braces: no width can push it out of the page, whatever handle
+   is pasted in later. */
+.hub__statement {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(24px, calc(24px + 126 * (100vw - 320px) / 1120), 150px);
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
+}
+
+/* ============ THE REST, WHEN THEY ARRIVE ============ */
+/* Empty today: TikTok, Sofascore and WhatsApp are all TODO in content.js and are
+   absent rather than drawn greyed out. Pasting any address in fills this row
+   with no code change. */
+.hub__more {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-12);
+  margin: var(--spacing-24) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hub__pill {
+  text-decoration: none;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.hub__pill:hover {
+  transform: translateY(-2px);
+}

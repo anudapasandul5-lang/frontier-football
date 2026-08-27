@@ -1,0 +1,255 @@
+/* Frontier Football - the photos page.
+   One card per tournament, each a door to that tournament's full photo folder on
+   Google Drive.
+
+   Photo-led rather than sticker-filled: the champions grid on the home page is
+   colour with a picture inset, this is a picture with the colour saved for the
+   button. That keeps the two from reading as the same grid twice, and it puts
+   the page's only yellow on its only action, which is what HOUSE-RULES section 2
+   asks for.
+
+   Colours used: paper, ink, and the sticker fills via .card--* on covers that
+   have no photograph yet. No literal hex anywhere in this file. */
+
+.gallery-page {
+  background: var(--color-paper);
+  padding: var(--spacing-48) 0 var(--spacing-80);
+}
+
+.gallery-page__head {
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-24) var(--spacing-48);
+}
+
+/* Display scale, unlike every headline on the home page. There is no hero here
+   competing for the top of the page, so this headline is the top of the page. */
+.gallery-page__headline {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(48px, 9vw, 140px);
+  /* 0.92, not the token's 0.8: HOUSE-RULES section 3 measured Anton's uppercase
+     ink at 0.88em, so at 0.8 the lines collide. One line here, but the value
+     stays correct if the word ever changes. */
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.gallery-page__lede {
+  margin-top: var(--spacing-16);
+  max-width: 46ch;
+  font-size: var(--text-subheading);
+  line-height: 1.35;
+  color: var(--color-ink);
+}
+
+/* ============ GROUPS ============ */
+/* Two of them, never merged: football Frontier ran, and football Frontier
+   watched. The heading is what makes the split legible, so it is set well above
+   the card titles and well below the page headline. */
+.gallery-page__group + .gallery-page__group {
+  margin-top: var(--spacing-80);
+}
+
+.gallery-page__group-title {
+  max-width: var(--page-max-width);
+  margin: 0 auto var(--spacing-24);
+  padding: 0 var(--spacing-24);
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3.4vw, 44px);
+  /* 0.92, not the token 0.8: HOUSE-RULES section 3 measured Anton uppercase ink
+     at 0.88em, so 0.8 collides. */
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+/* ============ TABS ============ */
+/* Two filled surfaces, not an underline. HOUSE-RULES section 1 is explicit that
+   colour arrives as filled, ink-outlined surfaces and never as a timid accent,
+   and a 4px rule under the selected tab is exactly the accent it rules out.
+
+   Selected is ink filled with paper type. Unselected is the same shape hollow.
+   The difference is a whole surface rather than a shade, so it survives being
+   looked at quickly, on a phone, in sunlight. */
+.gallery-page__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-12);
+  max-width: var(--page-max-width);
+  margin: 0 auto var(--spacing-32);
+  padding: 0 var(--spacing-24);
+}
+
+.gallery-page__tab {
+  display: inline-flex;
+  align-items: center;
+  /* 44px is the touch-target floor. A tab is the one control on this page that
+     everybody has to hit before they can see anything. */
+  min-height: 44px;
+  padding: var(--spacing-8) var(--spacing-24);
+  border: var(--outline-width) solid var(--color-ink);
+  border-radius: var(--radius-pill);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.4vw, 30px);
+  /* Anton's uppercase ink measures 0.88em, so the token's 0.8 collides. One line
+     here, but the value stays right if a label ever wraps. */
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.gallery-page__tab:hover {
+  transform: translateY(-2px);
+}
+
+.gallery-page__tab[aria-selected="true"] {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+/* The panel is focusable so that tabbing off the bar lands in the group. It
+   should not therefore draw a focus ring when clicked into, only when reached by
+   keyboard, which is what :focus-visible already means. */
+.gallery-page__panel:focus {
+  outline: none;
+}
+
+.gallery-page__panel:focus-visible {
+  outline: var(--outline-width-2) solid var(--color-ink);
+  outline-offset: 4px;
+  border-radius: var(--radius-card);
+}
+
+/* ============ GRID ============ */
+/* Same breakpoints as the champions grid, so the two pages agree about when a
+   layout turns. Flow rather than a fixed bento: the owner adds seasons, and a
+   shape that is only correct at exactly eight cards breaks the first time they
+   do. */
+.gallery-page__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-24);
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-24);
+}
+
+@media (min-width: 620px) {
+  .gallery-page__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1000px) {
+  .gallery-page__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* The cell reveals and the card lifts. Kept apart because both animate transform
+   and .is-pre / .is-revealed live unscoped in components.css at the same
+   specificity as any .block__element rule, so one element carrying both loses
+   its opacity easing to whichever stylesheet lands later. */
+.gallery-page__cell {
+  display: flex;
+}
+
+.gallery-page__card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-12);
+  width: 100%;
+  padding: var(--spacing-24);
+  background: var(--color-paper);
+  border: var(--outline-width) solid var(--color-ink);
+  border-radius: var(--radius-card-elevated);
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.gallery-page__card:hover {
+  transform: translateY(-4px);
+}
+
+/* Inner radius is the card's 40px minus its 24px padding, so the picture's curve
+   is concentric with the card's rather than being a second unrelated one. */
+.gallery-page__cover {
+  width: 100%;
+  height: clamp(160px, 18vw, 220px);
+  object-fit: cover;
+  /* Faces sit in the top third of every one of these team photos, so a strip
+     cropped from the centre loses them first. */
+  object-position: center 22%;
+  border: var(--outline-width) solid var(--color-ink);
+  border-radius: calc(var(--radius-card-elevated) - var(--card-padding));
+}
+
+/* A tournament whose champions photo has not been supplied yet. Filled rather
+   than blank: an empty slot on a cream page reads as a failed image, and colour
+   is what the rest of the site puts on a surface with no picture. */
+.gallery-page__cover--empty {
+  padding: 0;
+}
+
+.gallery-page__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-heading-sm);
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.gallery-page__note {
+  font-size: var(--text-caption);
+  color: var(--color-ink);
+  opacity: 0.9;
+}
+
+/* Pushed to the foot of the card so every button in a row sits on one line,
+   whatever the title above it did. */
+.gallery-page__action {
+  margin-top: auto;
+}
+
+/* Said plainly. The card still shows because every tournament is expected to get
+   a folder, and hiding them would leave a page that fills in silently. */
+.gallery-page__pending {
+  margin-top: auto;
+  padding-top: var(--spacing-4);
+  font-size: var(--text-body-lg);
+  font-weight: 700;
+  color: var(--color-ink);
+  /* 0.9 and no lower: this is small text on cream, where the 4.5:1 floor applies
+     with no large-text exemption. */
+  opacity: 0.9;
+}
+
+@media (max-width: 599px) {
+  .gallery-page {
+    padding: var(--spacing-32) 0 var(--spacing-48);
+  }
+
+  .gallery-page__head {
+    padding: 0 var(--spacing-16) var(--spacing-32);
+  }
+
+  .gallery-page__grid,
+  .gallery-page__group-title,
+  .gallery-page__tabs {
+    padding: 0 var(--spacing-16);
+  }
+
+  .gallery-page__group + .gallery-page__group {
+    margin-top: var(--spacing-48);
+  }
+
+}
