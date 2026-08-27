@@ -1,0 +1,437 @@
+/* Frontier Football - the partner page.
+   An unlisted URL the owner sends to a brand. Not linked from anywhere, and
+   noindexed, so a WhatsApp message is its only distribution channel.
+
+   FOUR SURFACES, FOUR LAYOUT FAMILIES, and none of them repeats one of the eight
+   already spent on the site: not the hero's centred poster, not T4's editorial
+   split or its colour band, not T5's mixed-size sticker grid, not T6's
+   full-bleed scroll strip, not the gallery page's tabbed card grid, and not the
+   partner index's ruled two-column list.
+
+     1. A flush-left masthead. Deliberately NOT centred: the hero owns that
+        composition and a second centred poster would read as the same page.
+     2. The record, on one vertical spine. Two labelled runs, tournaments first.
+     3. The eleven partners as large running text.
+     4. A reply slab.
+
+   THE SPINE IS COMPOSED FOR THE REAL FILL RATE. Nine entries: five carry a
+   photograph and four are a title and nothing else. Five full rows carry the
+   page and the four bare ones sit on the rail as compact markers. Nine
+   identical full-height rows around four empty titles is what makes a real
+   record look thin, which is the exact failure this page cannot afford.
+
+   YELLOW APPEARS ONCE, on the reply action. HOUSE-RULES section 2 reserves it
+   for the primary action, and on this page the primary action is the whole
+   point. Every other control here is paper on ink outline, including the Drive
+   buttons on the record.
+
+   Colours used: paper and ink only. No literal hex anywhere in this file. */
+
+/* ============ 1. MASTHEAD ============ */
+.mast {
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  /* The nav sits above this, so the top space is the nav's gap plus a breath,
+     not a hero's worth of padding. */
+  padding: var(--spacing-60) var(--spacing-24) var(--spacing-80);
+}
+
+.mast__headline {
+  margin: 0;
+  font-family: var(--font-display);
+  /* Below the hero's scale, above every section heading on the site. This page
+     has no hero, so the masthead IS the top of the page, the same way the
+     gallery page's headline is. */
+  font-size: clamp(40px, 9vw, 132px);
+  /* HOUSE-RULES section 3: Anton collides with itself at the token's 0.8. */
+  line-height: 0.92;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+}
+
+.mast__lede {
+  margin: var(--spacing-20) 0 0;
+  max-width: 46ch;
+  font-size: var(--text-subheading);
+  line-height: var(--leading-heading);
+  color: var(--color-ink);
+  text-wrap: pretty;
+}
+
+/* ============ 2. THE RECORD ============ */
+.record {
+  background: var(--color-paper);
+  padding: 0 0 var(--spacing-80);
+}
+
+.record__inner {
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-24);
+}
+
+.record__run + .record__run {
+  margin-top: var(--spacing-60);
+}
+
+.record__run-title {
+  margin: 0 0 var(--spacing-32);
+  font-family: var(--font-display);
+  /* Capped below the masthead. One order of loudness, top to bottom. */
+  font-size: clamp(24px, 3.2vw, 44px);
+  line-height: 0.92;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+  text-wrap: balance;
+}
+
+/* The spine itself. A single rule down the left edge with every node hung off
+   it, which is what makes eight tournaments and one watch-along read as one
+   continuous record rather than two lists that happen to be stacked.
+
+   Capped narrower than the page, and that is a measure rather than taste. A
+   record entry is a short title, at most a champion, and a picture. Stretched
+   across a full 1440 the text sits marooned half a screen from its own
+   photograph and the page reads as a sparse table instead of a record. The
+   run's heading stays at full width, so the left edge is unchanged. */
+.record__nodes {
+  max-width: 1000px;
+  margin: 0;
+  padding: 0 0 0 var(--spacing-32);
+  border-inline-start: var(--outline-width) solid var(--color-ink);
+  list-style: none;
+}
+
+.record__node {
+  position: relative;
+  padding-block: var(--spacing-40);
+}
+
+.record__node:first-child {
+  padding-block-start: 0;
+}
+
+/* The marker sitting on the rail. Filled ink for an entry that carries a
+   photograph, hollow for a compact cluster, so the spine shows the shape of the
+   record at a glance without a legend. Squares rather than dots: a coloured
+   status dot is decoration, an ink square is the same filled, outlined surface
+   the whole site is built out of. */
+.record__node::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: calc(-1 * var(--spacing-32) - 7px);
+  inset-block-start: var(--spacing-40);
+  width: 14px;
+  height: 14px;
+  border: var(--outline-width) solid var(--color-ink);
+  border-radius: 4px;
+  background: var(--color-ink);
+}
+
+.record__node:first-child::before {
+  inset-block-start: 0;
+}
+
+.record__node--cluster::before {
+  background: var(--color-paper);
+}
+
+/* ---------- An entry that carries a photograph ---------- */
+/* Exactly two children, text and picture, so the grid is one row and the
+   picture's height comes from its own aspect ratio. An earlier version spanned
+   the picture across two rows: a grid item spanning stretched rows has a
+   definite height, which makes the browser ignore aspect-ratio entirely, and
+   the landscape crop rendered as a portrait letterbox with the champion
+   stranded in the dead space beside it. */
+.record__entry {
+  display: grid;
+  gap: var(--spacing-20);
+}
+
+@media (min-width: 768px) {
+  .record__entry {
+    /* Text leads, picture answers. minmax(0, 1fr) rather than 1fr so a long
+       unbroken title cannot push the picture off the grid. */
+    grid-template-columns: minmax(0, 1fr) clamp(240px, 30vw, 420px);
+    gap: var(--spacing-40);
+    align-items: center;
+  }
+}
+
+.record__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3.4vw, 48px);
+  line-height: 0.92;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+  /* The owner names competitions themselves. A long unbroken one has to break
+     rather than push the picture off the grid. */
+  overflow-wrap: break-word;
+  text-wrap: balance;
+}
+
+.record__facts {
+  display: flex;
+  flex-wrap: wrap;
+  /* flex-end, not baseline. The champion is a two-line block (label over name)
+     and the meta is a single line, so a shared baseline puts the meta level
+     with the small label instead of with the name. */
+  align-items: flex-end;
+  gap: var(--spacing-8) var(--spacing-24);
+  margin: var(--spacing-16) 0 0;
+}
+
+/* Only ever drawn when a champion is actually recorded. Three of the nine have
+   one; the other six say nothing rather than saying "not recorded yet", because
+   a brand reading a list of blanks reads unfinished, not honest. */
+.record__champion {
+  /* min-width:0 so a long team name wraps inside the flex row instead of
+     pushing the row wider than the column. */
+  min-width: 0;
+  margin: 0;
+  font-size: var(--text-heading-sm);
+  font-weight: 700;
+  line-height: var(--leading-heading);
+  color: var(--color-ink);
+  overflow-wrap: break-word;
+}
+
+.record__label {
+  display: block;
+  font-size: var(--text-caption);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+/* Sized up from body scale on purpose. Six of the nine entries have no champion
+   recorded, so for those this line is the only thing under the title, and at
+   15px against a 48px Anton title it reads as a caption on an empty row. */
+.record__meta {
+  margin: 0;
+  font-size: var(--text-subheading);
+  line-height: var(--leading-heading);
+  color: var(--color-ink);
+}
+
+/* height:auto is load-bearing, not tidy-up. The img carries width and height
+   attributes so the row reserves its space before the file lands, and the
+   height attribute is a presentational hint the browser applies as a real
+   height. aspect-ratio never sets height, so without this the picture stays a
+   literal 450px tall and the ratio is silently ignored. */
+.record__cover {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border: var(--outline-width) solid var(--color-ink);
+  border-radius: var(--radius-card);
+}
+
+/* Every driveFolder is TODO today, so no record entry carries this yet. Paper
+   and not yellow: yellow on this page belongs to the reply action and nothing
+   else. */
+.record__drive {
+  margin-top: var(--spacing-16);
+}
+
+/* ---------- A run of entries with nothing but a title ---------- */
+.record__cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-12);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Set in Anton and sized to be read, not in the site's caption-scale .pill.
+   These are tournaments Frontier ran that nobody has written a champion or
+   found a photograph for yet, and drawn as small grey tags they read as
+   metadata about the page rather than as part of the record. Big enough to
+   belong on the spine, small enough that they cannot be mistaken for an entry
+   that has something to show. */
+.record__chip {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--spacing-8) var(--spacing-20);
+  border: var(--outline-width) solid var(--color-ink);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-display);
+  font-size: clamp(16px, 1.8vw, 24px);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+}
+
+/* ============ 3. THE PARTNERS ============ */
+.roll {
+  background: var(--color-paper);
+  padding: var(--spacing-80) 0;
+  /* A hairline seam rather than a second dark band. The footer below this page
+     is already an ink fill and T7 settled that a stack of dark surfaces turns a
+     cream page dark. */
+  border-block-start: var(--outline-width-1) solid var(--color-ink);
+}
+
+.roll__inner {
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-24);
+}
+
+.roll__title {
+  margin: 0 0 var(--spacing-32);
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3.2vw, 44px);
+  line-height: 0.92;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+  text-wrap: balance;
+}
+
+/* Running text, not another ruled list: the partner index on the home page is
+   already a two-column ruled index and repeating it here would make the two
+   pages look like the same page. Eleven names set large and flowing read as one
+   credit block, which is what they are.
+
+   NOT uppercased. Nine of the eleven are Instagram handles, and a handle is
+   something people type. The links hub sets its handle lowercase for the same
+   reason. */
+.roll__list {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-display);
+  font-size: clamp(22px, 4.4vw, 58px);
+  line-height: 1.06;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+  list-style: none;
+}
+
+.roll__item {
+  display: inline;
+}
+
+/* break-word, NOT anywhere. `anywhere` lets the browser break inside a name to
+   improve the line fit even when the name would fit whole on the next line, and
+   it did: "@nutrimax.iso" came out as "@nutrim / ax.iso" at 1440. break-word
+   only breaks a word that cannot fit on a line of its own, which is the case
+   this rule is actually here for: a long handle at this size on a 320px phone. */
+.roll__name {
+  overflow-wrap: break-word;
+}
+
+.roll__link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.roll__link:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+/* aria-hidden in the markup, so a screen reader reads eleven names and not
+   eleven names and ten slashes. The spaces around the slash come from the
+   markup and are what let a line break between names instead of inside one. */
+.roll__sep {
+  padding: 0 var(--spacing-4);
+}
+
+/* The upgrade path, matching the partner index: a logo file named in content.js
+   replaces the name inside this same run, and nothing around it moves. */
+.roll__logo {
+  display: inline-block;
+  vertical-align: middle;
+  max-width: 100%;
+  height: clamp(24px, 3.4vw, 44px);
+  width: auto;
+  object-fit: contain;
+}
+
+/* ============ 4. THE REPLY ============ */
+.reply {
+  background: var(--color-paper);
+  padding: 0 0 var(--spacing-80);
+}
+
+.reply__inner {
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-24);
+}
+
+/* The padding steps down on a phone, and that is a fitting constraint rather
+   than taste: the action label names its channel ("Message us on Instagram",
+   "Message us on WhatsApp" once a number is pasted in), and at 320px the desktop
+   padding leaves too little room for it. A pill button wrapped onto two lines
+   reads as broken, so the space comes out of the slab instead. */
+.reply__slab {
+  padding: var(--spacing-32) var(--spacing-20);
+  border: var(--outline-width) solid var(--color-ink);
+  /* The elevated radius: this is the largest single object on the page. */
+  border-radius: var(--radius-card-elevated);
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+@media (min-width: 480px) {
+  .reply__slab {
+    padding: var(--spacing-40) var(--spacing-32);
+  }
+}
+
+.reply__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 60px);
+  line-height: 0.92;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.reply__line {
+  margin: var(--spacing-16) 0 var(--spacing-32);
+  max-width: 46ch;
+  font-size: var(--text-subheading);
+  line-height: var(--leading-heading);
+  text-wrap: pretty;
+}
+
+.reply__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-20);
+}
+
+/* Same reason as the slab padding above: the label names its channel, and the
+   button's default 24px sides do not leave room for it at 320px. Scoped to this
+   section so the shared .btn primitive is untouched. */
+@media (max-width: 479px) {
+  .reply__actions .btn {
+    padding-inline: var(--spacing-16);
+  }
+}
+
+/* Plain text beside the button, never a second button. wa.me opened on a
+   desktop browser with no WhatsApp Web session lands on a download page, so the
+   address has to be readable without pressing anything first. */
+.reply__email {
+  margin: 0;
+  font-size: var(--text-body-lg);
+  font-weight: 700;
+}
+
+.reply__email a {
+  color: var(--color-ink);
+}

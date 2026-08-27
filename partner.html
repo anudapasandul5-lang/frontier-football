@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Frontier Football - the record</title>
+    <meta
+      name="description"
+      content="What Frontier Football has run: every season of the 4x4 Series, the competitions beside it, and the nights we watched together."
+    />
+
+    <!-- UNLISTED. Nothing on the site links here. This is a URL the owner sends
+         to a brand, so it is kept out of search results rather than sitting one
+         query away from anybody. TO MAKE IT PUBLIC: delete this one line and add
+         a link to it from the nav or the footer. Nothing else needs changing. -->
+    <meta name="robots" content="noindex" />
+
+    <!-- LINK PREVIEW. This page is unlisted and noindexed, which means a
+         WhatsApp message is its only way of reaching anyone, and WhatsApp builds
+         its preview card out of exactly these four tags. Without them a brand
+         receives a naked URL and has to decide whether to trust it.
+
+         TODO, and it matters: og:image should be an ABSOLUTE https address, not
+         the root-relative one below. The domain is still unrecorded
+         (docs/HOUSE-RULES.md section 7), so this is the honest placeholder until
+         it is. The day the domain is confirmed, change this one value to
+         https://<the domain>/champions/szn-6.webp and the picture starts drawing
+         in the chat. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Frontier Football" />
+    <meta
+      property="og:description"
+      content="Six seasons of the 4x4 Series and the competitions beside it. Small-sided football in Colombo."
+    />
+    <meta property="og:image" content="/champions/szn-6.webp" />
+    <meta property="og:image:alt" content="Frontier Football champions with the trophy." />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/src/styles/tokens.css" />
+    <link rel="stylesheet" href="/src/styles/base.css" />
+    <link rel="stylesheet" href="/src/styles/components.css" />
+    <!-- hero.css carries .nav, which is why it is linked on a page with no hero.
+         Same as gallery.html. -->
+    <link rel="stylesheet" href="/src/styles/hero.css" />
+    <link rel="stylesheet" href="/src/styles/partner.css" />
+    <link rel="stylesheet" href="/src/styles/footer.css" />
+  </head>
+  <body>
+    <!-- The nav, with the one swap this page makes: the CTA is the contact
+         action rather than the follow, and Instagram drops to a plain link. On
+         a page whose whole job is a reply, spending the yellow on a follow
+         would be spending it on the wrong thing.
+
+         The href and the label below are the values contactRoutes() resolves to
+         today. partner.js overwrites both from content.js, so pasting a WhatsApp
+         number in moves this button with the slab. They sit in the markup so a
+         failed bundle still leaves a working button rather than a dead one. -->
+    <header class="nav">
+      <a class="nav__brand" href="/">
+        <img
+          class="nav__crest"
+          src="/crest.webp"
+          width="525"
+          height="640"
+          alt="Frontier Football"
+          fetchpriority="high"
+        />
+      </a>
+
+      <div class="nav__end">
+        <a
+          class="nav__link"
+          href="https://www.instagram.com/frontierfootballl/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Instagram
+        </a>
+        <a
+          class="btn btn--primary nav__cta"
+          data-contact-cta
+          href="https://www.instagram.com/frontierfootballl/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Message us on Instagram
+        </a>
+      </div>
+    </header>
+
+    <main id="top" class="partner-page">
+      <!-- 1. Masthead. Flush-left, not a centred poster: the home page's hero
+              owns that composition and a second one would read as the same
+              page twice. -->
+      <section class="mast">
+        <!-- The space before the break is deliberate. A <br> contributes nothing
+             to the accessible name, so without it a screen reader announces
+             this heading as "What wehave run". The browser trims the trailing
+             space at the line break, so nothing moves on screen. -->
+        <h1 class="mast__headline">What we <br />have run</h1>
+        <p class="mast__lede">
+          Small-sided football in Colombo, and everything Frontier has put on so far.
+        </p>
+      </section>
+
+      <!-- 2. The record. One spine, two labelled runs, tournaments first: a
+              tournament is football Frontier ran and a watch-along is football
+              Frontier watched, and CONTEXT.md has never let the two merge.
+              Built by src/partner.js from content.js, so a season the owner
+              adds appears here on its own. -->
+      <section class="record">
+        <div class="record__inner" data-record></div>
+      </section>
+
+      <!-- 3. The eleven partners, as running text rather than a second ruled
+              index. PARTNER, never SPONSOR: a sponsor paid, a partner may or
+              may not have, and nobody recorded which of the eleven did. -->
+      <section class="roll">
+        <div class="roll__inner">
+          <h2 class="roll__title">Partners</h2>
+          <ul class="roll__list" data-partner-roll data-reveal></ul>
+        </div>
+      </section>
+
+      <!-- 4. The reply. One action, and the only yellow on the page. -->
+      <section class="reply" id="reply">
+        <div class="reply__inner">
+          <div class="reply__slab" data-reveal>
+            <h2 class="reply__title">Get in touch</h2>
+            <p class="reply__line">One message reaches the people who run it.</p>
+            <div data-reply></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- The same footer as the other two pages, hand-copied, minus a link to
+         this page: it is unlisted, and a footer link would list it.
+
+         ponytail: hand-copied, so it can drift from index.html and gallery.html.
+         Named rather than engineered around, since a shared partial costs a
+         build step this project does not have. -->
+    <footer class="site-foot">
+      <div class="site-foot__inner">
+        <img
+          class="site-foot__crest"
+          src="/crest.webp"
+          width="525"
+          height="640"
+          alt="Frontier Football"
+          loading="lazy"
+          decoding="async"
+        />
+        <p class="site-foot__line">
+          Small-sided football and the culture around it, in Colombo.
+        </p>
+        <nav class="site-foot__nav" aria-label="Footer">
+          <a class="site-foot__link" href="/">Home</a>
+          <a class="site-foot__link" href="/gallery.html">Gallery</a>
+          <a
+            class="site-foot__link"
+            href="https://www.instagram.com/frontierfootballl/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Frontier Football on Instagram (opens in a new tab)"
+          >
+            Instagram
+          </a>
+        </nav>
+        <p class="site-foot__meta">&copy; Frontier Football</p>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/partner.js"></script>
+  </body>
+</html>
