@@ -65,6 +65,12 @@ export default {
       // What the picture shows, read aloud to anyone using a screen reader.
       // Leave as "TODO" and a plain description is written for you.
       photoAlt: "The SZN 6 champions lined up on the pitch beside the trophy.",
+      // When it ran. Write it however you say it out loud: "Dec 2025",
+      // "December 2025", "Ramadan 2026". It shows up on the partner page next
+      // to this season and nowhere else. Leave it as "TODO" and that line is
+      // simply left out. Do not guess a month. A wrong date on the page a brand
+      // is reading is worse than no date at all.
+      date: "TODO",
       // Link to this season's full photo folder on Google Drive. Paste the
       // folder's share link here and a card for SZN 6 appears on the photos
       // page with a working button. Leave it as "TODO" and the card still shows,
@@ -84,6 +90,8 @@ export default {
       // own, then point this line at it.
       photo: "TODO",
       photoAlt: "TODO",
+      // When it ran. Leave as "TODO" and the line is left out. Never guess.
+      date: "TODO",
       // Link to this season's full photo folder on Google Drive. Paste the
       // folder's share link here and a card for SZN 5 appears on the photos
       // page with a working button. Leave it as "TODO" and the card still shows,
@@ -99,6 +107,8 @@ export default {
       goldenGlove: "TODO",
       photo: "/champions/szn-4.webp",
       photoAlt: "The SZN 4 champions holding the trophy together after the final.",
+      // When it ran. Leave as "TODO" and the line is left out. Never guess.
+      date: "TODO",
       // Link to this season's full photo folder on Google Drive. Paste the
       // folder's share link here and a card for SZN 4 appears on the photos
       // page with a working button. Leave it as "TODO" and the card still shows,
@@ -114,6 +124,8 @@ export default {
       goldenGlove: "TODO",
       photo: "/champions/szn-3.webp",
       photoAlt: "The SZN 3 champions wearing their medals, with the trophy.",
+      // When it ran. Leave as "TODO" and the line is left out. Never guess.
+      date: "TODO",
       // Link to this season's full photo folder on Google Drive. Paste the
       // folder's share link here and a card for SZN 3 appears on the photos
       // page with a working button. Leave it as "TODO" and the card still shows,
@@ -133,6 +145,8 @@ export default {
       goldenGlove: "TODO",
       photo: "TODO",
       photoAlt: "TODO",
+      // When it ran. Leave as "TODO" and the line is left out. Never guess.
+      date: "TODO",
       // Link to this season's full photo folder on Google Drive. Paste the
       // folder's share link here and a card for SZN 2 appears on the photos
       // page with a working button. Leave it as "TODO" and the card still shows,
@@ -148,6 +162,8 @@ export default {
       goldenGlove: "TODO",
       photo: "TODO",
       photoAlt: "TODO",
+      // When it ran. Leave as "TODO" and the line is left out. Never guess.
+      date: "TODO",
       // Link to this season's full photo folder on Google Drive. Paste the
       // folder's share link here and a card for SZN 1 appears on the photos
       // page with a working button. Leave it as "TODO" and the card still shows,
@@ -174,6 +190,8 @@ export default {
       // Picture of the winning team.
       photo: "/champions/turf-wars.webp",
       photoAlt: "The Turf Wars champions with their hands on the trophy.",
+      // When it ran. Leave as "TODO" and the line is left out. Never guess.
+      date: "TODO",
       // Link to the full photo folder for Turf Wars on Google Drive.
       // Paste the folder's share link here. Leave it as "TODO" and the card
       // still shows, saying the photos are on the way.
@@ -192,6 +210,8 @@ export default {
       // picture was found. The description below says so honestly.
       photo: "/champions/division-0.webp",
       photoAlt: "Players on a sofa at the Division 0 console tournament, controller in hand.",
+      // When it ran. Leave as "TODO" and the line is left out. Never guess.
+      date: "TODO",
       // Link to the full photo folder for Division 0 on Google Drive.
       // Paste the folder's share link here. Leave it as "TODO" and the card
       // still shows, saying the photos are on the way.
@@ -225,6 +245,8 @@ export default {
       // and write its name here, the same way the champion photos work.
       photo: "TODO",
       photoAlt: "TODO",
+      // When it ran. Leave as "TODO" and the line is left out. Never guess.
+      date: "TODO",
       // The Google Drive folder holding every photo from the watch-alongs.
       driveFolder: "TODO",
     },
@@ -424,4 +446,37 @@ export default {
     // The WhatsApp community invite link, if one exists.
     { name: "WhatsApp", url: "TODO" },
   ],
+
+  // ==========================================================================
+  // CONTACT - how someone replies to the partner page.
+  //
+  // The partner page (partner.html) is not linked from anywhere on the site. It
+  // is a page you send to a brand yourself. Its whole job is to show them what
+  // Frontier has run and then give them one way to answer, and this is that one
+  // way.
+  //
+  // RIGHT NOW ALL THREE ARE TODO, so the page falls back to "Message us on
+  // Instagram". That works, but a brand's marketing person is usually on a
+  // laptop and would rather type an email or tap a WhatsApp link. Filling
+  // either one in below is a real upgrade to the page.
+  //
+  // WHATSAPP. Write the number with its country code, however you like:
+  // "+94 77 123 4567" and "94771234567" both work. The spaces, the plus sign
+  // and any dashes are removed for you.
+  //
+  // WHATSAPP MESSAGE. Optional. Whatever you put here is typed into the chat
+  // for them, so they only have to press send. Something like
+  // "Hi Frontier, I saw the partner page." Leave it as TODO and the chat just
+  // opens empty.
+  //
+  // EMAIL. Shown next to the WhatsApp button, not instead of it. If somebody
+  // opens the WhatsApp link on a desktop browser that is not signed in to
+  // WhatsApp Web, they land on a download page, and the email address sitting
+  // right there is what saves that. Worth filling in even if you add WhatsApp.
+  // ==========================================================================
+  contact: {
+    whatsapp: "TODO",
+    whatsappMessage: "TODO",
+    email: "TODO",
+  },
 };

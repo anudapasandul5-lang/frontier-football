@@ -1,11 +1,14 @@
 import { describe, it, expect } from "vitest";
 import {
+  contactRoutes,
   galleryGroups,
   outboundLinks,
   parseContent,
   partners,
+  record,
   tournaments,
   watchAlongs,
+  whatsappHref,
 } from "./content-data.js";
 
 describe("parseContent", () => {
@@ -35,6 +38,7 @@ describe("parseContent", () => {
       note: "A note",
       photo: "/champions/szn-4.webp",
       photoAlt: "A description",
+      date: null,
       driveFolder: null,
     });
   });
@@ -107,6 +111,7 @@ describe("parseContent", () => {
       runnerUp: null,
       photo: "/champions/turf-wars.webp",
       photoAlt: null,
+      date: null,
       driveFolder: null,
     });
   });
@@ -444,5 +449,153 @@ describe("outboundLinks handles", () => {
     );
 
     expect(link.handle).toBeNull();
+  });
+});
+
+/* ============ T8: the partner page ============ */
+
+describe("whatsappHref", () => {
+  it("strips the spaces, plus sign and dashes a written number carries", () => {
+    // A phone number is written down as "+94 77 123-4567". wa.me wants digits.
+    expect(whatsappHref("+94 77 123-4567")).toBe("https://wa.me/94771234567");
+  });
+
+  it("omits the text parameter entirely when there is no message", () => {
+    // Not "?text=", not "?text=undefined". An empty parameter opens WhatsApp
+    // with a blank draft that looks like the link half-worked.
+    expect(whatsappHref("94771234567", null)).toBe("https://wa.me/94771234567");
+    expect(whatsappHref("94771234567", "")).toBe("https://wa.me/94771234567");
+  });
+
+  it("url-encodes the pre-filled message", () => {
+    expect(whatsappHref("+94 77 123 4567", "Hi Frontier, about a partnership")).toBe(
+      "https://wa.me/94771234567?text=Hi%20Frontier%2C%20about%20a%20partnership",
+    );
+  });
+});
+
+describe("contactRoutes", () => {
+  const withContact = (contact) => parseContent({ contact, links: [] });
+
+  it("puts WhatsApp first and keeps email beside it", () => {
+    // wa.me on a desktop browser with no WhatsApp Web session lands on a
+    // download page, so email is co-present rather than a fallback rung.
+    const routes = contactRoutes(withContact({
+      whatsapp: "+94 77 123 4567",
+      whatsappMessage: "TODO",
+      email: "hello@example.test",
+    }));
+
+    expect(routes.primary.kind).toBe("whatsapp");
+    expect(routes.primary.href).toBe("https://wa.me/94771234567");
+    expect(routes.secondary.kind).toBe("email");
+    expect(routes.secondary.href).toBe("mailto:hello@example.test");
+  });
+
+  it("promotes email to primary when there is no WhatsApp number, with no secondary", () => {
+    const routes = contactRoutes(withContact({ whatsapp: "TODO", email: "hello@example.test" }));
+
+    expect(routes.primary.kind).toBe("email");
+    expect(routes.primary.href).toBe("mailto:hello@example.test");
+    expect(routes.secondary).toBeNull();
+  });
+
+  it("falls through to the Instagram DM when neither is recorded", () => {
+    // This is the path the site takes today: every contact field is TODO.
+    const routes = contactRoutes(
+      parseContent({
+        contact: { whatsapp: "TODO", email: "TODO" },
+        links: [{ name: "Instagram", url: "https://example.test/ig" }],
+      }),
+    );
+
+    expect(routes.primary.kind).toBe("instagram");
+    expect(routes.primary.href).toBe("https://example.test/ig");
+    expect(routes.secondary).toBeNull();
+  });
+
+  it("never returns a null primary, even with nothing recorded anywhere", () => {
+    // The contact slab exists to give a brand one way to reply. A slab with no
+    // action is the one outcome this page cannot ship.
+    expect(contactRoutes(parseContent({})).primary).not.toBeNull();
+    expect(contactRoutes(parseContent({})).primary.href).toMatch(/^https:\/\//);
+  });
+});
+
+describe("record", () => {
+  it("returns the two groups labelled and never merged", () => {
+    const groups = record(
+      parseContent({
+        seasons: [{ season: 6, photo: "/champions/szn-6.webp" }],
+        watchAlongs: [{ name: "World Cup" }],
+      }),
+    );
+
+    expect(groups.map((group) => group.id)).toEqual(["tournaments", "watch-alongs"]);
+    expect(groups.map((group) => group.label)).toEqual(["Tournaments", "Watch-alongs"]);
+  });
+
+  it("drops a group with nothing in it rather than drawing an empty heading", () => {
+    const groups = record(parseContent({ seasons: [{ season: 1 }] }));
+
+    expect(groups.map((group) => group.id)).toEqual(["tournaments"]);
+  });
+
+  it("flags every entry for whether it carries a photograph", () => {
+    const [tournaments] = record(
+      parseContent({
+        seasons: [{ season: 6, photo: "/champions/szn-6.webp" }, { season: 5, photo: "TODO" }],
+      }),
+    );
+
+    expect(tournaments.entries.map((entry) => entry.hasPhoto)).toEqual([true, false]);
+  });
+
+  it("collapses a run of photo-less entries into one compact node", () => {
+    // Five of the nine have a picture and carry the page. Drawing four full rows
+    // around four bare titles is what makes a short record look thin.
+    const [tournaments] = record(
+      parseContent({
+        seasons: [
+          { season: 6, photo: "/champions/szn-6.webp" },
+          { season: 5 },
+          { season: 4, photo: "/champions/szn-4.webp" },
+          { season: 2 },
+          { season: 1 },
+        ],
+      }),
+    );
+
+    expect(tournaments.nodes.map((node) => node.kind)).toEqual([
+      "entry",
+      "cluster",
+      "entry",
+      "cluster",
+    ]);
+    expect(tournaments.nodes[3].entries.map((entry) => entry.title)).toEqual(["SZN 2", "SZN 1"]);
+  });
+
+  it("never reorders a group to do it, so the seasons still read newest first", () => {
+    const [tournaments] = record(
+      parseContent({
+        seasons: [
+          { season: 6, photo: "/champions/szn-6.webp" },
+          { season: 5 },
+          { season: 4, photo: "/champions/szn-4.webp" },
+        ],
+      }),
+    );
+
+    expect(tournaments.entries.map((entry) => entry.title)).toEqual(["SZN 6", "SZN 5", "SZN 4"]);
+  });
+
+  it("carries a date only when one is recorded", () => {
+    const [tournaments] = record(
+      parseContent({
+        seasons: [{ season: 6, date: "Dec 2025" }, { season: 5, date: "TODO" }],
+      }),
+    );
+
+    expect(tournaments.entries.map((entry) => entry.date)).toEqual(["Dec 2025", null]);
   });
 });

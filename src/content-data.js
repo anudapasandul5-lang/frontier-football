@@ -30,6 +30,7 @@ function parseSeason(raw) {
     // broken-image icon inside the card.
     photo: recorded(raw.photo),
     photoAlt: recorded(raw.photoAlt),
+    date: recorded(raw.date),
     // A link out to this season's full photo folder on Google Drive. The site
     // never hosts the whole archive: hundreds of files would have to be resized
     // and committed by hand, and the owner can drop a folder into Drive without
@@ -47,6 +48,7 @@ function parseCompetition(raw) {
     runnerUp: recorded(raw.runnerUp),
     photo: recorded(raw.photo),
     photoAlt: recorded(raw.photoAlt),
+    date: recorded(raw.date),
     driveFolder: recorded(raw.driveFolder),
   };
 }
@@ -61,7 +63,21 @@ function parseWatchAlong(raw) {
     note: recorded(raw.note),
     photo: recorded(raw.photo),
     photoAlt: recorded(raw.photoAlt),
+    date: recorded(raw.date),
     driveFolder: recorded(raw.driveFolder),
+  };
+}
+
+/* How a brand replies. Every field is TODO in content.js today, which is the
+   whole reason contactRoutes() below is a priority list rather than one link:
+   the page has to hand somebody an action whether or not a number has been
+   written down yet. */
+function parseContact(raw) {
+  const source = raw ?? {};
+  return {
+    whatsapp: recorded(source.whatsapp),
+    whatsappMessage: recorded(source.whatsappMessage),
+    email: recorded(source.email),
   };
 }
 
@@ -91,6 +107,7 @@ export function parseContent(raw) {
     // outboundLinks() below do the selecting.
     partners: (source.partners ?? []).map(parsePartner),
     links: (source.links ?? []).map(parseLink),
+    contact: parseContact(source.contact),
   };
 }
 
@@ -192,4 +209,104 @@ export function partners(data) {
    the next link instead of leaving the section headless. */
 export function outboundLinks(data) {
   return data.links.filter((link) => link.name && link.url);
+}
+
+/* ============ THE PARTNER PAGE ============ */
+
+/* A click-to-chat address. wa.me takes digits and nothing else, and a phone
+   number is written down as "+94 77 123-4567", so the separators come out here
+   rather than being something a non-technical editor has to remember.
+
+   The message parameter is omitted entirely when there is none. "?text=" with
+   nothing after it opens WhatsApp on a blank draft, which reads as a link that
+   half-worked. */
+export function whatsappHref(number, message) {
+  const digits = String(number ?? "").replace(/[\s+-]/g, "");
+  const base = `https://wa.me/${digits}`;
+  return message ? `${base}?text=${encodeURIComponent(message)}` : base;
+}
+
+/* Instagram is verified live (HOUSE-RULES section 7) and is already hardcoded in
+   every page's nav, so it is the floor under the guarantee below. Only reached if
+   content.js's links list is emptied, which would take the hub down with it. */
+const INSTAGRAM_FALLBACK = { name: "Instagram", url: "https://www.instagram.com/frontierfootballl/" };
+
+/* One way to reply, and a second one beside it when the first is WhatsApp.
+   PRIMARY IS NEVER NULL. The partner page exists to be sent to a brand, and a
+   contact slab with no action is the one outcome it cannot ship.
+
+   WhatsApp first because it is how business is done here. Email SECOND AND
+   CO-PRESENT rather than a fallback rung: wa.me opened in a desktop browser with
+   no WhatsApp Web session lands on a download page, so somebody reading this at
+   a desk needs the address visible without having to fail first. */
+export function contactRoutes(data) {
+  const { whatsapp, whatsappMessage, email } = data.contact;
+
+  const emailRoute = email
+    ? { kind: "email", label: "Email us", address: email, href: `mailto:${email}` }
+    : null;
+
+  if (whatsapp) {
+    return {
+      primary: {
+        kind: "whatsapp",
+        label: "Message us on WhatsApp",
+        href: whatsappHref(whatsapp, whatsappMessage),
+      },
+      secondary: emailRoute,
+    };
+  }
+
+  if (emailRoute) return { primary: emailRoute, secondary: null };
+
+  const instagram =
+    data.links.find((link) => link.name === "Instagram" && link.url) ?? INSTAGRAM_FALLBACK;
+  return {
+    primary: { kind: "instagram", label: "Message us on Instagram", href: instagram.url },
+    secondary: null,
+  };
+}
+
+/* Everything Frontier has run, then everything Frontier watched, as two labelled
+   runs on one spine. Never merged, for the reason CONTEXT.md has given since the
+   domain model was written: one is football Frontier ran and the other is
+   football Frontier watched.
+
+   Every entry is flagged for whether it carries a photograph, because the page
+   is composed around the real fill rate rather than around nine identical rows.
+   Five of the nine have a picture and carry the page; the other four are a title
+   and nothing else. A run of those collapses into ONE compact node: four
+   full-height rows built around four bare titles is exactly what makes a real
+   record look thin.
+
+   The order inside a group is never touched to do it. Partitioning into
+   "has a photo" and "does not" would sort SZN 5 out of the middle of the
+   seasons, and the seasons read newest first. */
+export function record(data) {
+  return [
+    { id: "tournaments", label: "Tournaments", entries: tournaments(data) },
+    { id: "watch-alongs", label: "Watch-alongs", entries: watchAlongs(data) },
+  ]
+    .filter((group) => group.entries.length > 0)
+    .map((group) => {
+      const entries = group.entries.map((entry) => ({
+        ...entry,
+        hasPhoto: Boolean(entry.photo),
+      }));
+      return { ...group, entries, nodes: collapseBareRuns(entries) };
+    });
+}
+
+function collapseBareRuns(entries) {
+  const nodes = [];
+  for (const entry of entries) {
+    if (entry.hasPhoto) {
+      nodes.push({ kind: "entry", entry });
+      continue;
+    }
+    const last = nodes.at(-1);
+    if (last?.kind === "cluster") last.entries.push(entry);
+    else nodes.push({ kind: "cluster", entries: [entry] });
+  }
+  return nodes;
 }
