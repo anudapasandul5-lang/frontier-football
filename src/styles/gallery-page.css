@@ -1,25 +1,32 @@
 /* Frontier Football - the photos page.
-   One card per tournament, each a door to that tournament's full photo folder on
-   Google Drive.
+   Two card grids behind two tabs, Albums and Watch Parties, each card linking
+   out to its Google Drive folder rather than hosting the full archive here -
+   see docs/HOUSE-RULES.md and CONTEXT.md for why. Tabbed rather than stacked,
+   so Watch Parties sits next to Albums rather than scrolled past at the foot
+   of the page.
 
-   Photo-led rather than sticker-filled: the champions grid on the home page is
-   colour with a picture inset, this is a picture with the colour saved for the
-   button. That keeps the two from reading as the same grid twice, and it puts
-   the page's only yellow on its only action, which is what HOUSE-RULES section 2
-   asks for.
-
-   Colours used: paper, ink, and the sticker fills via .card--* on covers that
-   have no photograph yet. No literal hex anywhere in this file. */
+   Card fill reuses components.css's sticker system (.card--yellow/orange/
+   red/green), the same four colours champions.css cycles through, so a
+   season card here and a season card on the home page read as one system. */
 
 .gallery-page {
   background: var(--color-paper);
   padding: var(--spacing-48) 0 var(--spacing-80);
 }
 
+/* ============ HEAD ============ */
+/* One column until the page has room for two: the eyebrow and headline own
+   the left, the lede sits against the right edge the way the reference board
+   draws it. Below 900px there is not enough width for a lede beside a display
+   headline without wrapping into a ladder of half-lines. */
 .gallery-page__head {
   max-width: var(--page-max-width);
   margin: 0 auto;
-  padding: 0 var(--spacing-24) var(--spacing-48);
+  padding: 0 var(--page-gutter) var(--spacing-48);
+}
+
+.gallery-page__eyebrow {
+  margin: 0 0 var(--spacing-16);
 }
 
 /* Display scale, unlike every headline on the home page. There is no hero here
@@ -45,192 +52,168 @@
   color: var(--color-ink);
 }
 
-/* ============ GROUPS ============ */
-/* Two of them, never merged: football Frontier ran, and football Frontier
-   watched. The heading is what makes the split legible, so it is set well above
-   the card titles and well below the page headline. */
-.gallery-page__group + .gallery-page__group {
-  margin-top: var(--spacing-80);
-}
+@media (min-width: 900px) {
+  .gallery-page__head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--spacing-40);
+  }
 
-.gallery-page__group-title {
-  max-width: var(--page-max-width);
-  margin: 0 auto var(--spacing-24);
-  padding: 0 var(--spacing-24);
-  font-family: var(--font-display);
-  font-size: clamp(26px, 3.4vw, 44px);
-  /* 0.92, not the token 0.8: HOUSE-RULES section 3 measured Anton uppercase ink
-     at 0.88em, so 0.8 collides. */
-  line-height: 0.92;
-  letter-spacing: -0.02em;
-  text-transform: uppercase;
-  color: var(--color-ink);
+  .gallery-page__lede {
+    margin-top: 0;
+    text-align: right;
+  }
 }
 
 /* ============ TABS ============ */
-/* Two filled surfaces, not an underline. HOUSE-RULES section 1 is explicit that
-   colour arrives as filled, ink-outlined surfaces and never as a timid accent,
-   and a 4px rule under the selected tab is exactly the accent it rules out.
-
-   Selected is ink filled with paper type. Unselected is the same shape hollow.
-   The difference is a whole surface rather than a shade, so it survives being
-   looked at quickly, on a phone, in sunlight. */
+/* Albums and Watch Parties behind two tabs, not stacked. Same ARIA tabs
+   pattern the coverflow's own filter pills use - roving tabindex, arrow keys
+   move and wrap, Home/End jump to the ends. src/gallery-page.js skips the bar
+   entirely when only one group has anything in it: a tab bar with one tab is
+   a label pretending to be a control. */
 .gallery-page__tabs {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--spacing-12);
+  gap: var(--spacing-8);
   max-width: var(--page-max-width);
   margin: 0 auto var(--spacing-32);
-  padding: 0 var(--spacing-24);
+  padding: 0 var(--page-gutter);
 }
 
 .gallery-page__tab {
   display: inline-flex;
   align-items: center;
-  /* 44px is the touch-target floor. A tab is the one control on this page that
-     everybody has to hit before they can see anything. */
   min-height: 44px;
   padding: var(--spacing-8) var(--spacing-24);
-  border: var(--outline-width) solid var(--color-ink);
   border-radius: var(--radius-pill);
+  border: var(--outline-width) solid var(--color-ink);
   background: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-display);
-  font-size: clamp(20px, 2.4vw, 30px);
-  /* Anton's uppercase ink measures 0.88em, so the token's 0.8 collides. One line
-     here, but the value stays right if a label ever wraps. */
-  line-height: 0.92;
+  font-size: var(--text-heading-sm);
+  line-height: 1;
   letter-spacing: -0.01em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: transform var(--duration-fast) var(--ease-out);
+  transition:
+    transform var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
 }
 
 .gallery-page__tab:hover {
   transform: translateY(-2px);
 }
 
+/* Ink filled with paper type, the same "whole surface, not a shade" rule the
+   coverflow's own pills use - readable on a phone in sunlight. */
 .gallery-page__tab[aria-selected="true"] {
   background: var(--color-ink);
   color: var(--color-paper);
 }
 
-/* The panel is focusable so that tabbing off the bar lands in the group. It
-   should not therefore draw a focus ring when clicked into, only when reached by
-   keyboard, which is what :focus-visible already means. */
-.gallery-page__panel:focus {
+/* A panel not currently selected carries [hidden], the platform's own
+   built-in "not shown, not in the tab order, not read by a screen reader"
+   rather than a class this stylesheet would have to keep matching it. */
+.gallery-page__panel {
   outline: none;
 }
 
-.gallery-page__panel:focus-visible {
-  outline: var(--outline-width-2) solid var(--color-ink);
-  outline-offset: 4px;
-  border-radius: var(--radius-card);
-}
-
-/* ============ GRID ============ */
-/* Same breakpoints as the champions grid, so the two pages agree about when a
-   layout turns. Flow rather than a fixed bento: the owner adds seasons, and a
-   shape that is only correct at exactly eight cards breaks the first time they
-   do. */
-.gallery-page__grid {
+/* ============ ALBUM GRID ============ */
+/* Flow, not a fixed bento: the owner adds a season every few months, so a grid
+   only correct at today's card count would break the one promise this page
+   makes. Same shape as champions.css's grid, without a lead tile - nothing on
+   this page is "the reigning one" the way champions.js's newest season is. */
+.album-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--spacing-24);
+  gap: var(--spacing-16);
   max-width: var(--page-max-width);
   margin: 0 auto;
-  padding: 0 var(--spacing-24);
+  padding: 0 var(--page-gutter);
 }
 
 @media (min-width: 620px) {
-  .gallery-page__grid {
+  .album-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (min-width: 1000px) {
-  .gallery-page__grid {
+  .album-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-/* The cell reveals and the card lifts. Kept apart because both animate transform
-   and .is-pre / .is-revealed live unscoped in components.css at the same
-   specificity as any .block__element rule, so one element carrying both loses
-   its opacity easing to whichever stylesheet lands later. */
-.gallery-page__cell {
+.album-grid__cell {
   display: flex;
 }
 
-.gallery-page__card {
+.album-card {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--spacing-12);
+  gap: var(--spacing-4);
   width: 100%;
   padding: var(--spacing-24);
-  background: var(--color-paper);
-  border: var(--outline-width) solid var(--color-ink);
   border-radius: var(--radius-card-elevated);
   transition: transform var(--duration-base) var(--ease-out);
 }
 
-.gallery-page__card:hover {
+.album-card:hover {
   transform: translateY(-4px);
 }
 
-/* Inner radius is the card's 40px minus its 24px padding, so the picture's curve
-   is concentric with the card's rather than being a second unrelated one. */
-.gallery-page__cover {
+.album-card__photo {
   width: 100%;
-  height: clamp(160px, 18vw, 220px);
+  height: clamp(150px, 16vw, 230px);
   object-fit: cover;
-  /* Faces sit in the top third of every one of these team photos, so a strip
-     cropped from the centre loses them first. */
   object-position: center 22%;
-  border: var(--outline-width) solid var(--color-ink);
+  margin-bottom: var(--spacing-16);
+  border: var(--outline-width) solid currentColor;
   border-radius: calc(var(--radius-card-elevated) - var(--card-padding));
 }
 
-/* A tournament whose champions photo has not been supplied yet. Filled rather
-   than blank: an empty slot on a cream page reads as a failed image, and colour
-   is what the rest of the site puts on a surface with no picture. */
-.gallery-page__cover--empty {
-  padding: 0;
+/* A card with no photo steps its title up to fill the space the picture would
+   have taken, so it reads as a deliberate treatment rather than a failed load. */
+.album-card--textonly .album-card__title {
+  font-size: clamp(26px, 3vw, 40px);
 }
 
-.gallery-page__title {
-  margin: 0;
+.album-card__title {
   font-family: var(--font-display);
   font-size: var(--text-heading-sm);
   line-height: 1;
   text-transform: uppercase;
-  color: var(--color-ink);
 }
 
-.gallery-page__note {
-  font-size: var(--text-caption);
-  color: var(--color-ink);
-  opacity: 0.9;
-}
-
-/* Pushed to the foot of the card so every button in a row sits on one line,
-   whatever the title above it did. */
-.gallery-page__action {
-  margin-top: auto;
-}
-
-/* Said plainly. The card still shows because every tournament is expected to get
-   a folder, and hiding them would leave a page that fills in silently. */
-.gallery-page__pending {
-  margin-top: auto;
-  padding-top: var(--spacing-4);
-  font-size: var(--text-body-lg);
+.album-card__champion {
+  font-size: var(--text-subheading);
   font-weight: 700;
-  color: var(--color-ink);
-  /* 0.9 and no lower: this is small text on cream, where the 4.5:1 floor applies
-     with no large-text exemption. */
+  line-height: 1.15;
+}
+
+/* Same 0.85 floor champions.css uses: measured against the orange fill at
+   this weight, 0.85 is the lowest opacity that still clears 4.5:1. */
+.album-card__champion--absent {
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+.album-card__note {
+  font-size: var(--text-caption);
   opacity: 0.9;
+}
+
+.album-card__pending {
+  font-size: var(--text-caption);
+  opacity: 0.9;
+  font-style: italic;
+}
+
+.album-card__link {
+  margin-top: var(--spacing-12);
 }
 
 @media (max-width: 599px) {
@@ -242,14 +225,8 @@
     padding: 0 var(--spacing-16) var(--spacing-32);
   }
 
-  .gallery-page__grid,
-  .gallery-page__group-title,
-  .gallery-page__tabs {
+  .gallery-page__tabs,
+  .album-grid {
     padding: 0 var(--spacing-16);
   }
-
-  .gallery-page__group + .gallery-page__group {
-    margin-top: var(--spacing-48);
-  }
-
 }

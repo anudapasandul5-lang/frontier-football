@@ -72,6 +72,11 @@
 
   /* ============ LAYOUT ============ */
   --page-max-width: 1440px;
+  /* Side gutter for every section shell. Was a flat 24px, which on a 1440
+     laptop left display headlines sitting 24px off the glass — the page read
+     as cramped rather than composed. Fluid: 16px at 320 (unchanged on a
+     phone), ~52px at 1440, capped at 56px. */
+  --page-gutter: clamp(16px, 3.6vw, 56px);
   --section-gap: 48px;
   --card-padding: 24px;
 

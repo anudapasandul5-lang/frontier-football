@@ -1,5 +1,15 @@
 import { describe, it, expect } from "vitest";
-import { CLOSED, closeLightbox, galleryItems, openLightbox, stepIndex } from "./gallery-data.js";
+import {
+  CLOSED,
+  closeLightbox,
+  countLabel,
+  filterItems,
+  galleryItems,
+  galleryTags,
+  openLightbox,
+  splitByMedia,
+  stepIndex,
+} from "./gallery-data.js";
 
 describe("stepIndex", () => {
   it("wraps forward off the end", () => {
@@ -25,6 +35,20 @@ describe("stepIndex", () => {
     // A modulo by zero is NaN, which would land as index NaN and render nothing.
     expect(stepIndex(0, 1, 0)).toBe(0);
     expect(stepIndex(0, -1, 0)).toBe(0);
+  });
+});
+
+describe("countLabel", () => {
+  it("is 1-indexed for a sighted or screen-reader deck position", () => {
+    expect(countLabel(0, 15)).toBe("1 / 15");
+  });
+
+  it("reads the last item correctly, not off by one", () => {
+    expect(countLabel(14, 15)).toBe("15 / 15");
+  });
+
+  it("blanks rather than printing 1 / 0 when a filter matches nothing", () => {
+    expect(countLabel(0, 0)).toBe("");
   });
 });
 
@@ -64,6 +88,7 @@ describe("galleryItems", () => {
     expect(item).toEqual({
       src: "/gallery/01.webp",
       alt: "A tackle.",
+      tag: null,
       isClip: false,
       poster: null,
       width: 1080,
@@ -122,5 +147,115 @@ describe("galleryItems", () => {
     expect(galleryItems({ seasons: [] })).toEqual([]);
     expect(galleryItems({})).toEqual([]);
     expect(galleryItems(undefined)).toEqual([]);
+  });
+
+  it("keeps an entry's tag, for the coverflow's filter pills", () => {
+    const [item] = galleryItems({
+      gallery: [{ src: "/gallery/01.webp", tag: "On the pitch" }],
+    });
+
+    expect(item.tag).toBe("On the pitch");
+  });
+
+  it("treats a TODO tag as no tag, same as any other unrecorded field", () => {
+    const [item] = galleryItems({
+      gallery: [{ src: "/gallery/01.webp", tag: "TODO" }],
+    });
+
+    expect(item.tag).toBeNull();
+  });
+
+  it("defaults to no tag when the field is absent", () => {
+    const [item] = galleryItems({ gallery: [{ src: "/gallery/01.webp" }] });
+
+    expect(item.tag).toBeNull();
+  });
+});
+
+describe("galleryTags", () => {
+  it("lists distinct tags in the order they first appear", () => {
+    const items = galleryItems({
+      gallery: [
+        { src: "/gallery/01.webp", tag: "On the pitch" },
+        { src: "/gallery/02.webp", tag: "Watch-alongs" },
+        { src: "/gallery/03.webp", tag: "On the pitch" },
+      ],
+    });
+
+    expect(galleryTags(items)).toEqual(["On the pitch", "Watch-alongs"]);
+  });
+
+  it("returns an empty list when nothing is tagged, so no pill row renders", () => {
+    const items = galleryItems({ gallery: [{ src: "/gallery/01.webp" }] });
+
+    expect(galleryTags(items)).toEqual([]);
+  });
+
+  it("skips untagged entries mixed in with tagged ones", () => {
+    const items = galleryItems({
+      gallery: [
+        { src: "/gallery/01.webp", tag: "On the pitch" },
+        { src: "/gallery/02.webp" },
+      ],
+    });
+
+    expect(galleryTags(items)).toEqual(["On the pitch"]);
+  });
+});
+
+describe("filterItems", () => {
+  const items = galleryItems({
+    gallery: [
+      { src: "/gallery/01.webp", tag: "On the pitch" },
+      { src: "/gallery/02.webp", tag: "Watch-alongs" },
+      { src: "/gallery/03.webp", tag: "On the pitch" },
+    ],
+  });
+
+  it("returns every item when the tag is null", () => {
+    expect(filterItems(items, null)).toEqual(items);
+  });
+
+  it("keeps only items carrying the given tag", () => {
+    expect(filterItems(items, "On the pitch").map((item) => item.src)).toEqual([
+      "/gallery/01.webp",
+      "/gallery/03.webp",
+    ]);
+  });
+
+  it("returns an empty list for a tag nothing carries", () => {
+    expect(filterItems(items, "Nope")).toEqual([]);
+  });
+});
+
+describe("splitByMedia", () => {
+  it("separates photographs from clips, each keeping content.js's order", () => {
+    const items = galleryItems({
+      gallery: [
+        { src: "/gallery/01.webp" },
+        { src: "/gallery/02.mp4", poster: "/gallery/02.webp" },
+        { src: "/gallery/03.webp" },
+        { src: "/gallery/04.mp4", poster: "/gallery/04.webp" },
+      ],
+    });
+
+    const { photos, clips } = splitByMedia(items);
+
+    expect(photos.map((item) => item.src)).toEqual(["/gallery/01.webp", "/gallery/03.webp"]);
+    expect(clips.map((item) => item.src)).toEqual(["/gallery/02.mp4", "/gallery/04.mp4"]);
+  });
+
+  it("returns an empty clips list when nothing is a clip", () => {
+    const items = galleryItems({ gallery: [{ src: "/gallery/01.webp" }] });
+
+    expect(splitByMedia(items)).toEqual({ photos: items, clips: [] });
+  });
+
+  it("returns an empty photos list when everything is a clip", () => {
+    const items = galleryItems({
+      gallery: [{ src: "/gallery/01.mp4", poster: "/gallery/01.webp" }],
+    });
+
+    expect(splitByMedia(items)).toEqual({ photos: [], clips: items });
   });
 });

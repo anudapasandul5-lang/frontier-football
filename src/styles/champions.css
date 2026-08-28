@@ -11,15 +11,26 @@
    No literal hex anywhere in this file. */
 
 /* ============ SECTION SHELL ============ */
+/* Lift, not paper. --color-paper-lift exists to break runs of consecutive paper
+   grounds; the page alternates paper / lift / paper / lift from the hero down,
+   and this is one of the two lifts (the other is .story).
+
+   Safe here specifically because every card in this grid is a full-colour
+   .card--* fill (champions.js) with a currentColor photo border - there is no
+   paper-filled chrome in this section to clash with a lighter paper underneath
+   it, unlike .gallery and .hub, both of which are full of .pill /
+   .btn--secondary / .hub__slab surfaces that hardcode
+   background: var(--color-paper). That is why those two sections stay on paper
+   and the lift goes to their neighbours instead. */
 .champions {
-  background: var(--color-paper);
+  background: var(--color-paper-lift);
   padding: var(--spacing-80) 0;
 }
 
 .champions__head {
   max-width: var(--page-max-width);
   margin: 0 auto;
-  padding: 0 var(--spacing-24) var(--spacing-40);
+  padding: 0 var(--page-gutter) var(--spacing-40);
 }
 
 .champions__headline {
@@ -53,7 +64,7 @@
   gap: var(--spacing-16);
   max-width: var(--page-max-width);
   margin: 0 auto;
-  padding: 0 var(--spacing-24);
+  padding: 0 var(--page-gutter);
 }
 
 @media (min-width: 620px) {

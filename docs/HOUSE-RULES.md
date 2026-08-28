@@ -37,12 +37,18 @@ Card rows cycle yellow → green → red → orange as filled surfaces.
 **Yellow is reserved for the primary action.** Do not dilute it by using it
 for decoration; that is why the follow CTA is unmissable.
 
-**Ink is also the footer fill, and that is NOT a second inversion.** T4's green
-band is the only inversion in the page's *section rhythm*. The footer sits
+**T4's green stats band is gone, deliberately, as of 2026-08-28.** T8 removed it
+and the owner confirmed the removal when a later session restored it. The home
+page now carries *no* inversion in its section rhythm at all — it runs paper and
+paper-lift from the hero to the marquee. Do not "restore" the band, and do not
+add a replacement inversion on the grounds that the page needs one. Anything
+that used to lean on it is stale: see section 7 on the "11 Partners" stat.
+
+**Ink is also the footer fill, and that is NOT an inversion.** The footer sits
 outside `<main>`, repeats on every page and carries no section content, exactly
 as the nav does: it is chrome, and BUILD-PROMPT's palette table says "footer
-fill" in as many words. The gallery page settles the argument, having no green
-band at all. What this rule still forbids is a *stack* of dark surfaces: T7 kept
+fill" in as many words. What this rule still forbids is a *stack* of dark
+surfaces: T7 kept
 the links hub ink-outlined on paper rather than ink-filled, because the marquee
 and footer beneath it are both ink and three in a row turns a cream page dark.
 
@@ -233,6 +239,10 @@ to a shape the strip does not need.
 Known and usable:
 - Instagram **@frontierfootballl** — verified live. The brand guide's
   `@frontierfutsall` is the dead pre-rebrand handle. Never use it.
+- TikTok **@frontierfootball** — `https://www.tiktok.com/@frontierfootball`,
+  supplied by the owner 2026-08-28. **It ends in one `l`, not three.** The two
+  handles genuinely differ; neither is a typo of the other, so do not
+  "correct" either to match. Lives in `content.js` and in both footers.
 - SZN 3 champion: Ramadan FC · SZN 4: Pantera FC · SZN 6: Spain
   (SZN 6 was a "World Cup Edition", teams named after countries)
 - **Division 0** — a FIFA/FC26 tournament played on PS5, not on a pitch. A
@@ -249,8 +259,10 @@ Known and usable:
 **These eleven are PARTNERS, never "sponsors", and T7 settled the wording for
 good.** A sponsor paid; a partner may or may not have (CONTEXT.md). Nobody has
 recorded which of the eleven paid, so the site uses the one word it can stand
-behind, for all of them. The T4 band already ships the stat "11 Partners" and the
-T7 section must never contradict it. Two are known not to be plain sponsors
+behind, for all of them. The count of eleven used to be printed twice — the T4
+band carried the stat "11 Partners" — but that band was removed in T8, so this
+section is now the only place the number appears and there is nothing left to
+contradict. Two are known not to be plain sponsors
 anyway. Do not sort them into two lists by guessing, and do not print a category
 under a name.
 
@@ -280,8 +292,8 @@ season, which is the one thing the content file promises.
 
 Still TODO — render cleanly around these, never fill them in:
 SZN 5 champion · every Golden Boot · every Golden Glove · every runner-up ·
-Turf Wars champion and runner-up · TikTok handle · the domain · WhatsApp
-community link.
+Turf Wars champion and runner-up · the domain · WhatsApp community link.
+(The TikTok handle came in on 2026-08-28 and is no longer TODO.)
 
 ## 8. Workflow per ticket
 

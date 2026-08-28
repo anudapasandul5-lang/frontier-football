@@ -13,7 +13,7 @@
   gap: var(--spacing-16);
   max-width: var(--page-max-width);
   margin: 0 auto;
-  padding: var(--spacing-16) var(--spacing-24);
+  padding: var(--spacing-16) var(--page-gutter);
 }
 
 .nav__brand {
@@ -30,7 +30,6 @@
 
 .nav__cta {
   flex: none;
-  transform: translate(var(--cta-magnet-x, 0px), var(--cta-magnet-y, 0px));
 }
 
 /* The nav was brand on the left and one CTA on the right until the photos page
@@ -44,6 +43,14 @@
 }
 
 .nav__link {
+  /* A bare inline anchor is only as tall as its line box: about 21px here and
+     17px at caption size below 600px, against WCAG 2.5.8's 24px floor. Given
+     the 44px treatment .gallery__pill already takes, for the same reason - it
+     is a control everybody has to be able to tap. Not folded into .pill or
+     .btn, because .pill also draws static badges that must not grow. */
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   font-weight: 700;
   font-size: var(--text-body-lg);
   color: var(--color-ink);
@@ -63,7 +70,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 82vh;
+  /* dvh, not vh: on iOS Safari vh is the *largest* viewport, so the hero
+     overshot by the URL-bar height on first paint and the page jumped as the
+     bar collapsed. */
+  min-height: 82dvh;
   background: var(--color-paper);
   padding: var(--spacing-40) var(--spacing-24) var(--spacing-60);
 }
@@ -87,6 +97,18 @@
    the video for legibility. */
 .hero__wash {
   background: color-mix(in srgb, var(--color-paper) 86%, transparent);
+}
+
+/* The pause counterpart to the marquee's, per the same WCAG 2.2.2 reasoning.
+   [hidden] until src/hero.js decides a video actually plays: on a phone or
+   under reduced motion there is nothing here to pause, and this element never
+   loses its hidden attribute. .hero already establishes the stacking context
+   (isolate) that .hero__bg and .hero__wash sit inside at z-index -1, so no
+   z-index is needed here to clear them. */
+.hero__pause {
+  position: absolute;
+  right: var(--spacing-24);
+  bottom: var(--spacing-24);
 }
 
 .hero__stage {
@@ -132,10 +154,24 @@
   color: var(--color-ink);
 }
 
+/* The magnet's offsets, written by src/hero.js on pointermove. Declared here
+   (rather than only inline) so the resting state - pointer not yet moved,
+   or a coarse pointer that never wires the listener at all - is a plain 0,0
+   and needs no script to be correct. */
 .hero__cta {
   margin-top: var(--spacing-32);
   padding: var(--spacing-16) var(--spacing-32);
   font-size: var(--text-subheading);
+  transform: translate(var(--cta-magnet-x, 0px), var(--cta-magnet-y, 0px));
+}
+
+/* Specificity 0,2,0, tying .btn:hover from components.css. hero.css loads
+   after components.css, so this wins the tie and the lift and the magnet
+   compose instead of the lift silently overwriting the magnet every frame -
+   the exact trap HOUSE-RULES section 5 already documents for .is-revealed
+   against a component's own transition shorthand. */
+.hero__cta:hover {
+  transform: translate(var(--cta-magnet-x, 0px), calc(var(--cta-magnet-y, 0px) - 2px));
 }
 
 @media (max-width: 599px) {
@@ -144,6 +180,10 @@
   }
 
   .nav__cta {
+    /* About 35px at this padding and font size. That clears WCAG 2.5.8's 24px
+       floor, so this line is the project's own 44px bar rather than a
+       conformance fix. Above 600px the base padding already clears it. */
+    min-height: 44px;
     font-size: var(--text-caption);
     padding: var(--spacing-8) var(--spacing-16);
   }

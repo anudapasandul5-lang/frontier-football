@@ -1,7 +1,11 @@
 /* Reads the hand-edited content file into the shapes the site's sections render:
-   the champions grid, the gallery page's groups, the partner index and the links
-   hub. Named for the file it parses rather than for any one section, after being
-   called champions-data.js through T6.
+   the champions grid, the partner index and the links hub. Named for the file it
+   parses rather than for any one section, after being called champions-data.js
+   through T6. The gallery (both the home page coverflow and the gallery page
+   mosaic) reads content.js through src/gallery-data.js instead, since a gallery
+   item's own shape - src, alt, tag, clip poster - never needed the TODO-guard
+   parsing this file exists for beyond what gallery-data.js's parseItem already
+   does on its own.
 
    Pure: no DOM, no imports, so it can be tested in the node environment without
    pulling in jsdom as a third dependency. */
@@ -92,50 +96,6 @@ export function parseContent(raw) {
     partners: (source.partners ?? []).map(parsePartner),
     links: (source.links ?? []).map(parseLink),
   };
-}
-
-/* Seasons and competitions as one list. CONTEXT.md keeps them as separate
-   collections because a competition is not a season of the 4x4 Series, but the
-   photos page is a door per tournament and does not care which kind it is.
-
-   The order is seasons then competitions, matching the champions grid, whose
-   colour cycle is keyed to index and is therefore not merely cosmetic.
-
-   ponytail: src/champions.js still builds its own titles the same way. Converging
-   the two is a refactor of a signed-off section and belongs in its own change
-   with its own browser verification, not smuggled into a feature ticket. If the
-   title format ever moves, both places have to move together until then. */
-export function tournaments(data) {
-  return [
-    ...data.seasons.map((season) => ({ ...season, title: `SZN ${season.season}` })),
-    ...data.competitions.map((competition) => ({ ...competition, title: competition.name })),
-  ];
-}
-
-/* Watch-alongs, titled the same way a competition is. Kept apart from
-   tournaments() rather than appended to it: the gallery shows the two as
-   separate groups because one is football Frontier ran and the other is football
-   Frontier watched, and the domain model has always said so. */
-export function watchAlongs(data) {
-  return data.watchAlongs.map((watchAlong) => ({ ...watchAlong, title: watchAlong.name }));
-}
-
-/* The gallery page as a set of switchable groups, one tab each.
-
-   A group with nothing in it is filtered out here rather than in the renderer,
-   because an empty group is not a rendering problem, it is a group that does not
-   exist: a tab leading to an empty panel is worse than no tab. The renderer then
-   only has to decide between "one group, no tab bar needed" and "more than one,
-   draw the tabs".
-
-   The ids are fixed strings rather than derived from the labels at render time.
-   aria-controls and aria-labelledby point at them from both directions, and a
-   label that gets reworded must not silently break that link. */
-export function galleryGroups(data) {
-  return [
-    { id: "tournaments", label: "Tournaments", entries: tournaments(data) },
-    { id: "watch-alongs", label: "Watch-alongs", entries: watchAlongs(data) },
-  ].filter((group) => group.entries.length > 0);
 }
 
 /* A brand or a place that has appeared alongside Frontier. CONTEXT.md keeps

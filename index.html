@@ -6,8 +6,33 @@
     <title>Frontier Football</title>
     <meta
       name="description"
-      content="Frontier Football — small-sided football and the culture around it, in Colombo, Sri Lanka."
+      content="Frontier Football: small-sided football and the culture around it, in Colombo, Sri Lanka."
     />
+
+    <!-- Tab icon and link preview. Both were missing, so every shared link
+         rendered as an untitled grey box and the tab showed a browser default.
+         PNG and JPG rather than the .webp originals they were made from:
+         Safari still refuses a webp favicon, and webp link previews are
+         unreliable in WhatsApp, which is how this site actually gets passed
+         around. public/favicon.png is crest.webp padded (not cropped) onto
+         paper; public/og.jpg is the hero poster cropped to 1200x630.
+
+         No og:url, and og:image is root-relative: the domain is still TODO and
+         HOUSE-RULES section 7 forbids printing one the site does not have.
+         ponytail: scrapers officially want an absolute og:image URL. Relative
+         resolves against the document in current practice. Make it absolute
+         the day the domain lands.
+
+         ponytail: this whole block is hand-copied into gallery.html, the same
+         drift risk the footer and the lightbox shell below already carry. Edit
+         both or neither. -->
+    <link rel="icon" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Frontier Football" />
+    <meta property="og:description" content="Small-sided football and the culture around it, in Colombo." />
+    <meta property="og:image" content="/og.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -23,6 +48,7 @@
     <link rel="stylesheet" href="/src/styles/story.css" />
     <link rel="stylesheet" href="/src/styles/champions.css" />
     <link rel="stylesheet" href="/src/styles/gallery.css" />
+    <link rel="stylesheet" href="/src/styles/lightbox.css" />
     <link rel="stylesheet" href="/src/styles/partners.css" />
     <link rel="stylesheet" href="/src/styles/hub.css" />
     <link rel="stylesheet" href="/src/styles/footer.css" />
@@ -43,7 +69,7 @@
       <div class="nav__end">
         <a class="nav__link" href="/gallery.html">Gallery</a>
         <a
-          class="btn btn--primary nav__cta"
+          class="btn btn--secondary nav__cta"
           href="https://www.instagram.com/frontierfootballl/"
           target="_blank"
           rel="noopener noreferrer"
@@ -72,6 +98,20 @@
              the contrast and the palette go: the page would read as a dark
              cinematic football site, which the brief names as fatal. -->
         <div class="hero__wash" aria-hidden="true"></div>
+
+        <!-- WCAG 2.2.2 companion to the marquee control above. Present at every
+             width even though src/hero.js only ever attaches a src on a wide
+             viewport with motion allowed - hidden by the same script the
+             moment it determines there is no video to pause, so a phone never
+             sees a button for a clip it never downloaded. -->
+        <button
+          class="pause-btn hero__pause"
+          type="button"
+          data-hero-pause
+          aria-pressed="false"
+          aria-label="Pause the background video"
+          hidden
+        ></button>
 
         <div class="hero__stage">
           <!-- Explicit breaks: the three-line stack is the composition, so
@@ -126,32 +166,96 @@
             />
           </figure>
         </div>
+      </section>
 
-        <!-- 6 seasons: SZN 6 is named in HOUSE-RULES section 7, and the post
-             before it reads "Five seasons of...". 5 venues and 11 partners:
-             counted from the same section, not estimated. Nothing here is a
-             follower count, a match count, or a player count. -->
-        <div class="band band--inverted story__panel" data-reveal>
-          <ul class="story__stats">
-            <li class="story__stat" data-reveal>
-              <p class="story__stat-num">6</p>
-              <p class="story__stat-label">Seasons</p>
-            </li>
-            <li class="story__stat" data-reveal>
-              <p class="story__stat-num">5</p>
-              <p class="story__stat-label">Venues</p>
-            </li>
-            <li class="story__stat" data-reveal>
-              <p class="story__stat-num">11</p>
-              <p class="story__stat-label">Partners</p>
-            </li>
-          </ul>
+      <!-- The gallery. Every card is built by src/gallery.js from content.js, so
+           swapping a picture is a content.js edit and nothing else.
+
+           IT SITS ABOVE CHAMPIONS, not below it. The photographs are the thing a
+           visitor came for and the thing that reads without any reading, so they
+           get the first section after the story. Champions is a record and it
+           keeps better lower down the page. Nothing about either section depends
+           on the other's position: both build themselves from content.js and
+           both carry their own heading in static markup.
+
+           A centred coverflow, deliberately none of the layout families already
+           spent above it: not the hero's centred poster and not the story's
+           editorial split. Filter pills split the deck by content.js's `tag`
+           field; a second, full deck lives on gallery.html for anyone who wants
+           every photograph rather than a browse.
+
+           It is NOT a marquee. Nothing here moves on its own; it moves only when
+           a person clicks a card, an arrow, or a pill. The site's one marquee
+           was spent in T7, on the tagline seam further down this page.
+
+           The head stays in static markup so that if the bundle ever fails this
+           reads as a labelled empty section rather than as a blank gap in the
+           page. -->
+      <section class="gallery" id="gallery">
+        <div class="gallery__head">
+          <p class="eyebrow gallery__eyebrow" data-reveal>Gallery</p>
+          <h2 class="gallery__headline" data-reveal>Nights on the turf</h2>
+          <p class="gallery__lede" data-reveal>
+            Snapshots from the pitch, the sidelines, and the nights in between.
+          </p>
+        </div>
+
+        <div class="gallery__bar" data-reveal>
+          <!-- Two independent facets, populated by src/gallery.js: a tag from
+               content.js's `tag` field, and a media type derived from each
+               entry's own extension. An untagged content.js renders no tag
+               pills at all rather than a filter row with nothing to filter,
+               and a content.js with no clips in it does the same for the media
+               row - there is no "Clips" pill to choose if nothing would show
+               under it. -->
+          <div class="gallery__filter-groups">
+            <div class="gallery__filters" data-gallery-filters></div>
+            <div class="gallery__filters" data-gallery-media></div>
+          </div>
+          <a class="btn btn--secondary gallery__all" href="/gallery.html">View all photos →</a>
+        </div>
+
+        <!-- The stage is the reveal element, never the individual cards: only a
+             handful are ever on screen at once, scaled and partly transparent
+             by design, which is exactly the shape a fractional intersection
+             threshold trips on. -->
+        <div class="gallery__stage" data-gallery-stage data-reveal>
+          <ul class="gallery__cards" data-gallery-cards></ul>
+          <!-- Hidden by default rather than absent: src/gallery.js clears
+               `hidden` only when a filter combination it has actually computed
+               matches nothing. Showing this by default would misreport a
+               bundle that failed to run at all as "found zero", which is a
+               different and worse failure to claim. -->
+          <p class="gallery__empty" data-gallery-empty hidden>Nothing in this combination yet.</p>
+          <div class="gallery__nav">
+            <button
+              class="gallery__arrow gallery__arrow--prev"
+              type="button"
+              data-gallery-prev
+              aria-label="Previous photo"
+            ></button>
+            <!-- Deck position: 15 items, at most five ever on stage, and the
+                 count existed only inside the lightbox's sr-only status
+                 before this. aria-live rather than aria-hidden: one element
+                 serves both a sighted reader and a screen-reader user, the
+                 same pairing src/lightbox.js already uses for the identical
+                 information, so the site keeps one answer to one question. -->
+            <p class="gallery__count" data-gallery-count aria-live="polite"></p>
+            <button
+              class="gallery__arrow gallery__arrow--next"
+              type="button"
+              data-gallery-next
+              aria-label="Next photo"
+            ></button>
+          </div>
         </div>
       </section>
 
       <!-- Every card in this section is built by src/champions.js from
            content.js. No season data lives in this file, so swapping a season
            is a content.js edit and nothing else.
+
+           It sits below the gallery: see the note above that section for why.
 
            The heading and the line under it stay in static markup on purpose:
            if the bundle ever fails, this reads as a labelled empty section
@@ -166,39 +270,13 @@
 
         <ul class="champions__grid" data-champions></ul>
       </section>
-      <!-- The gallery. Every tile is built by src/gallery.js from content.js, so
-           swapping a picture is a content.js edit and nothing else.
-
-           A horizontally scrolling contact strip, deliberately none of the four
-           layout families already spent above it: not the hero's centred poster,
-           not T4's editorial split or its colour band, and not T5's mixed-size
-           sticker grid. It is the only thing on the page that runs edge to edge
-           past the container every other section respects.
-
-           It is NOT a marquee. Nothing here moves on its own; it moves only when
-           a person moves it. The site's one marquee was spent in T7, on the
-           tagline seam further down this page.
-
-           The line below stays in static markup for the same reason the champions
-           heading does: if the bundle ever fails this reads as a labelled empty
-           section rather than as a blank gap in the page. -->
-      <section class="gallery" id="gallery">
-        <p class="gallery__lede" data-reveal>Nights on the turf.</p>
-
-        <!-- The track is the reveal element, never the individual tiles.
-             src/reveal.js observes against the viewport with zero horizontal
-             insets, so a tile scrolled off to the right of this scroller would
-             never intersect and would sit at opacity 0 permanently. -->
-        <ul class="gallery__track" data-gallery data-reveal></ul>
-      </section>
 
       <!-- Partners. Every row is built by src/partners.js from content.js, so
            adding one is a content edit and nothing else.
 
            PARTNERS, NOT SPONSORS. A sponsor paid and a partner may or may not
            have (CONTEXT.md). Nobody recorded which of the eleven paid, so the
-           page uses the word it can stand behind. The T4 band above already
-           ships the stat "11 Partners", and this section must not contradict it.
+           page uses the word it can stand behind.
 
            A ruled index, deliberately none of the five layout families spent
            above it, and deliberately not a three-column card row.
@@ -269,6 +347,24 @@
           <span class="marquee__run" aria-hidden="true">Built by football. Powered by community.</span>
           <span class="marquee__run" aria-hidden="true">Built by football. Powered by community.</span>
         </div>
+
+        <!-- WCAG 2.2.2, Level A: moving text that starts on its own and runs
+             past five seconds needs a way to stop it. prefers-reduced-motion
+             covers people who already set that preference system-wide; it is
+             not the mechanism the criterion asks for, and it does nothing for
+             someone who simply cannot read a line that is sliding away.
+
+             aria-pressed rather than two swapped labels: "pause" is a state
+             this control is in, not a place it takes you. src/marquee.js
+             flips it and rewrites the label to match. Hidden by CSS under
+             reduced motion, where the strip is already stopped. -->
+        <button
+          class="pause-btn marquee__pause"
+          type="button"
+          data-marquee-pause
+          aria-pressed="false"
+          aria-label="Pause the scrolling tagline"
+        ></button>
       </div>
     </main>
 
@@ -312,6 +408,17 @@
             aria-label="Frontier Football on Instagram (opens in a new tab)"
           >
             Instagram
+          </a>
+          <!-- ONE l, unlike Instagram's three. Both handles are real and
+               neither is a typo of the other. -->
+          <a
+            class="site-foot__link"
+            href="https://www.tiktok.com/@frontierfootball"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Frontier Football on TikTok (opens in a new tab)"
+          >
+            TikTok
           </a>
         </nav>
         <p class="site-foot__meta">&copy; Frontier Football</p>

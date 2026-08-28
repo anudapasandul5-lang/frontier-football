@@ -1,15 +1,31 @@
 /* Frontier Football — the "what is Frontier" story section.
-   An asymmetric editorial split on cream, then one full-bleed green band
-   carrying three display-scale numerals. Deliberately a different layout
+   An asymmetric editorial split on cream. Deliberately a different layout
    family from the hero's centred poster, so the page does not read as one
    idea repeated.
 
-   Colours used here: paper, ink, green. Yellow stays reserved for the
-   primary CTA. No literal hex anywhere in this file. */
+   The green stats band that used to close this section was removed in T8 and
+   is not coming back — do not "restore" it on the grounds that the page has no
+   inversion. HOUSE-RULES section 7 still credits it with shipping the stat
+   "11 Partners"; that reference is stale, and the partners section now stands
+   on its own.
+
+   Colours used here: paper and ink. Yellow stays reserved for the primary CTA.
+   No literal hex anywhere in this file. */
 
 /* ============ SECTION SHELL ============ */
+/* Lift, not paper. Moving the gallery above champions put the hero, this
+   section and the gallery on three consecutive paper grounds, which is the run
+   --color-paper-lift exists to break (see champions.css). The lift moved here
+   from partners, so the page now alternates paper / lift / paper / lift the
+   whole way down instead of running flat and then stepping twice.
+
+   Safe here for the same reason it is safe under champions: nothing inside this
+   section carries a paper fill of its own. It is a headline, two paragraphs and
+   a .photo-tile, and the tile is an outline around a photograph with no
+   background at all, so there is no paper-filled chrome to sit oddly on a
+   lighter ground. */
 .story {
-  background: var(--color-paper);
+  background: var(--color-paper-lift);
   padding-top: var(--spacing-80);
 }
 
@@ -19,7 +35,7 @@
   gap: var(--spacing-40);
   max-width: var(--page-max-width);
   margin: 0 auto;
-  padding: 0 var(--spacing-24) var(--spacing-80);
+  padding: 0 var(--page-gutter) var(--spacing-80);
 }
 
 @media (min-width: 900px) {
@@ -72,82 +88,12 @@
   }
 }
 
-/* ============ GREEN PANEL ============ */
-/* Full bleed. The only element on the page that touches both edges, which is
-   what makes it read as a rhythm change rather than another card. It is used
-   exactly once on the page; a second inverted band would be noise. */
-.story__panel {
-  padding-top: var(--spacing-80);
-  padding-bottom: var(--spacing-80);
-}
-
-.story__stats {
-  display: grid;
-  gap: var(--spacing-40);
-  max-width: var(--page-max-width);
-  margin: 0 auto;
-}
-
-@media (min-width: 900px) {
-  .story__stats {
-    /* Not three equal columns. A stat dashboard is exactly what these are
-       not: they are three display-type moments. */
-    grid-template-columns: 1.15fr 1fr 1fr;
-    gap: var(--spacing-24);
-    align-items: start;
-  }
-
-  /* Vertical stagger. Three numerals on a shared baseline read as a table;
-     stepped, they read as three separate beats. */
-  .story__stat:nth-child(2) {
-    margin-top: var(--spacing-32);
-  }
-
-  .story__stat:nth-child(3) {
-    margin-top: var(--spacing-60);
-  }
-}
-
-/* Not the --text-display token, which tops out at 200px. At 200px against a
-   caption-sized label the pair reads as one huge numeral with a stray word
-   under it, and the band grows tall enough to stop being a beat and start
-   being a section. 148px is still five times the champions cards' heading. */
-.story__stat-num {
-  font-family: var(--font-display);
-  font-size: clamp(64px, 9vw, 148px);
-  line-height: 0.85;
-  letter-spacing: -0.03em;
-}
-
-.story__stat-label {
-  margin-top: var(--spacing-12);
-  font-size: var(--text-body-lg);
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-/* ============ REVEAL ON SCROLL ============ */
-/* The reveal itself lives in components.css and is applied by src/reveal.js.
-   Only the stagger is the story's own. */
-.story__stat.is-revealed:nth-child(2) {
-  transition-delay: 90ms;
-}
-
-.story__stat.is-revealed:nth-child(3) {
-  transition-delay: 180ms;
-}
-
 @media (max-width: 599px) {
   .story {
     padding-top: var(--spacing-48);
   }
 
   .story__split {
-    padding: 0 var(--spacing-16) var(--spacing-48);
-  }
-
-  .story__panel {
-    padding: var(--spacing-48) var(--spacing-16);
+    padding: 0 var(--page-gutter) var(--spacing-48);
   }
 }

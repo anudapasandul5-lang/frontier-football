@@ -19,6 +19,12 @@
    Colours used: paper and ink only. No literal hex anywhere in this file. */
 
 /* ============ SECTION SHELL ============ */
+/* Paper. This carried the lift until the gallery moved above champions, which
+   put champions directly above this section and would have stacked two lifts in
+   a row. The lift moved up to .story, where it breaks the run of paper grounds
+   the reorder created; see the comment there. Either ground is safe here, since
+   this section is text and hairlines only with no paper-filled component to
+   clash. */
 .partners {
   background: var(--color-paper);
   padding: var(--spacing-80) 0;
@@ -27,7 +33,7 @@
 .partners__head {
   max-width: var(--page-max-width);
   margin: 0 auto;
-  padding: 0 var(--spacing-24) var(--spacing-40);
+  padding: 0 var(--page-gutter) var(--spacing-40);
 }
 
 .partners__headline {
@@ -59,7 +65,7 @@
 .partners__list {
   max-width: var(--page-max-width);
   margin: 0 auto;
-  padding: 0 var(--spacing-24);
+  padding: 0 var(--page-gutter);
   list-style: none;
 }
 

@@ -167,6 +167,26 @@
           <span class="pill">Nav item</span>
           <span class="pill pill--tag">Live</span>
         </div>
+        <!-- A label, not a control - no border, no fill, nothing tappable.
+             Shown beside .pill on purpose: from a distance the two can look
+             alike, and the difference is the entire reason .eyebrow exists
+             rather than reusing .pill for section eyebrows. -->
+        <p class="sg-note" style="margin-top: var(--spacing-16)">Eyebrow — a label, not a pill</p>
+        <p class="eyebrow">Gallery</p>
+      </section>
+
+      <!-- ============ PAUSE CONTROL ============ -->
+      <section class="sg-section">
+        <h2 class="sg-heading">Pause control</h2>
+        <p class="sg-note">
+          WCAG 2.2.2: the marquee below and the hero's looping video both carry
+          one of these. Both states shown statically here - [aria-pressed] alone
+          drives the drawn mark, no script needed on this page.
+        </p>
+        <div class="sg-cta-row">
+          <button class="pause-btn" type="button" aria-pressed="false" aria-label="Pause"></button>
+          <button class="pause-btn" type="button" aria-pressed="true" aria-label="Play"></button>
+        </div>
       </section>
 
       <!-- ============ MARQUEE ============ -->

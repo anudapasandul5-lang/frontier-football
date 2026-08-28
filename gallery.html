@@ -6,8 +6,33 @@
     <title>Gallery - Frontier Football</title>
     <meta
       name="description"
-      content="Every Frontier Football tournament, with the full set of photos from each one."
+      content="Every photograph and clip Frontier Football has shared, in one gallery."
     />
+
+    <!-- Tab icon and link preview. Both were missing, so every shared link
+         rendered as an untitled grey box and the tab showed a browser default.
+         PNG and JPG rather than the .webp originals they were made from:
+         Safari still refuses a webp favicon, and webp link previews are
+         unreliable in WhatsApp, which is how this site actually gets passed
+         around. public/favicon.png is crest.webp padded (not cropped) onto
+         paper; public/og.jpg is the hero poster cropped to 1200x630.
+
+         No og:url, and og:image is root-relative: the domain is still TODO and
+         HOUSE-RULES section 7 forbids printing one the site does not have.
+         ponytail: scrapers officially want an absolute og:image URL. Relative
+         resolves against the document in current practice. Make it absolute
+         the day the domain lands.
+
+         ponytail: this whole block is hand-copied into gallery.html, the same
+         drift risk the footer and the lightbox shell below already carry. Edit
+         both or neither. -->
+    <link rel="icon" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Gallery - Frontier Football" />
+    <meta property="og:description" content="Every photograph and clip Frontier has shared, pulled into one gallery." />
+    <meta property="og:image" content="/og.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -42,7 +67,7 @@
       <div class="nav__end">
         <a class="nav__link" href="/">Home</a>
         <a
-          class="btn btn--primary nav__cta"
+          class="btn btn--secondary nav__cta"
           href="https://www.instagram.com/frontierfootballl/"
           target="_blank"
           rel="noopener noreferrer"
@@ -58,18 +83,19 @@
            every section below it stays quieter. -->
       <section class="gallery-page">
         <div class="gallery-page__head">
-          <h1 class="gallery-page__headline">Gallery</h1>
+          <div>
+            <p class="eyebrow gallery-page__eyebrow">Our stories</p>
+            <h1 class="gallery-page__headline">Gallery</h1>
+          </div>
           <p class="gallery-page__lede">
-            Every tournament Frontier has run, and every night we watched together. Each one opens
-            its full set of photos.
+            Every photograph and clip Frontier has shared, pulled into one gallery.
           </p>
         </div>
 
-        <!-- Built by src/gallery-page.js from content.js, in two groups that are
-             never merged: a tournament is football Frontier ran and has a
-             champion, a watch-along is football Frontier watched. Every season
-             and competition already lives in content.js, so a new season appears
-             here on its own rather than needing a second list that can drift. -->
+        <!-- Built by src/gallery-page.js from content.js's seasons,
+             competitions and watch-alongs - Albums and Watch Parties behind
+             two tabs, each card linking out to its own Google Drive folder.
+             See docs/HOUSE-RULES.md and CONTEXT.md. -->
         <div data-gallery-page></div>
       </section>
     </main>
@@ -108,6 +134,17 @@
             aria-label="Frontier Football on Instagram (opens in a new tab)"
           >
             Instagram
+          </a>
+          <!-- ONE l, unlike Instagram's three. Both handles are real and
+               neither is a typo of the other. -->
+          <a
+            class="site-foot__link"
+            href="https://www.tiktok.com/@frontierfootball"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Frontier Football on TikTok (opens in a new tab)"
+          >
+            TikTok
           </a>
         </nav>
         <p class="site-foot__meta">&copy; Frontier Football</p>

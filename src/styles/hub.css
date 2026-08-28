@@ -1,8 +1,10 @@
 /* Frontier Football — the links hub.
-   One outlined slab carrying the first renderable link at display scale, with
-   any further links as pills beneath it. A seventh layout family: a single large
+   One outlined slab holding a ruled stack of handles at display scale, with any
+   handle-less links as pills beneath it. A seventh layout family: a single large
    object rather than a list, a grid or a strip, so it does not repeat the
-   partner index directly above it or the footer directly below.
+   partner index directly above it or the footer directly below. The rule between
+   rows is the partner index's own device at a much larger size, which is reuse
+   rather than a new idea.
 
    PAPER, NOT INK. The marquee and the footer under this section are both ink
    fills. A third dark surface here would turn the bottom quarter of a cream page
@@ -25,7 +27,7 @@
 .hub__inner {
   max-width: var(--page-max-width);
   margin: 0 auto;
-  padding: 0 var(--spacing-24);
+  padding: 0 var(--page-gutter);
 }
 
 /* Plain and true whichever links exist. A static "Follow on Instagram" heading
@@ -44,55 +46,136 @@
 }
 
 /* ============ THE SLAB ============ */
+/* The outline and the radius belong to the slab; the rows inside it are ruled,
+   not boxed. Boxing each row would make this a card list, which is the layout
+   family the champions grid already spent. */
 .hub__slab {
-  display: block;
-  padding: var(--spacing-40) var(--spacing-32);
+  margin: 0;
+  padding: 0;
   border: var(--outline-width) solid var(--color-ink);
   /* The elevated radius, since this is the largest single object on the page
      below the hero. Matches the site's 20 / 40 / pill system. */
   border-radius: var(--radius-card-elevated);
   background: var(--color-paper);
   color: var(--color-ink);
+  list-style: none;
+  /* The rows run to the slab's edges, so without this the first row's hover
+     tint would square off the rounded corners. */
+  overflow: hidden;
+}
+
+/* ============ ONE HANDLE PER ROW ============ */
+/* Padding is on the row rather than the slab so the rule between two rows runs
+   the full width of the object instead of stopping short in a gutter. */
+/* Handle left, platform right, sharing one baseline. The label used to sit above
+   the handle, which was fine while the slab held a single centred statement and
+   there was nothing to the right of it. With the handle set at display scale and
+   the slab running the full container, the longest handle still leaves about
+   400px of empty slab to its right, and a second row leaves more. Putting the
+   platform at the far end spends that space on structure instead of leaving it
+   as a void, and gives the row two anchored edges the way the partner index
+   does. */
+.hub__row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  column-gap: var(--spacing-24);
+  padding: var(--spacing-32);
+  color: var(--color-ink);
   text-decoration: none;
-  transition: transform var(--duration-fast) var(--ease-out);
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
 }
 
-.hub__slab:hover {
-  transform: translateY(-2px);
+/* One rule between rows, never above the first or below the last: the slab's
+   own outline already closes both ends. Same reasoning as partners__row. */
+.hub__slab li + li .hub__row {
+  border-block-start: var(--outline-width-1) solid var(--color-ink);
 }
 
+/* A lift would drag one row out of the slab it is ruled into, so the row tints
+   and nudges instead. Yellow is reserved for the primary action (HOUSE-RULES
+   section 2), so the tint is a lift of paper, the same derivative the section
+   bands use. */
+.hub__row:hover {
+  background: var(--color-paper-lift);
+  transform: translateX(var(--spacing-8));
+}
+
+/* Placed rather than ordered: the label stays first in the DOM so a screen
+   reader announces the platform before the handle, and moves to the right of the
+   row visually. */
 .hub__label {
+  /* Block, not the inline default. The phone fallback below drops the grid, and
+     an inline label there sits on the same line as the handle and collides with
+     it. */
   display: block;
-  margin-bottom: var(--spacing-12);
+  grid-row: 1;
+  grid-column: 2;
+  justify-self: end;
   font-size: var(--text-caption);
   font-weight: 700;
-  letter-spacing: 0.03em;
+  /* Positive tracking, since this is the one place on the page running caps at
+     caption size and it needs to read as a label rather than a cramped word. */
+  letter-spacing: 0.16em;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 /* The handle IS the section. Lowercase rather than the site's usual display
    caps: a handle is something people type, and typing it is the point.
 
    Sized with the same clamp shape tokens.css uses (min at 320px, max at 1440px,
-   linear between) rather than a raw vw, because a raw vw that is large enough to
-   fill this slab on a desktop overflows it on a phone: "@frontierfootballl" is
-   eighteen unbroken characters and cannot wrap usefully. 150px at 1440 sets it
-   about as wide as the slab, which is the point of the slab. overflow-wrap is
-   the belt to that braces: no width can push it out of the page, whatever handle
-   is pasted in later. */
+   linear between) rather than a raw vw, because a raw vw large enough to fill
+   this slab on a desktop overflows it on a phone: "@frontierfootballl" is
+   eighteen unbroken characters and cannot wrap usefully. overflow-wrap is the
+   belt to that braces: no width can push it out of the page, whatever handle is
+   pasted in later.
+
+   132px at 1440, not the 150px this carried while it was a single centred
+   statement. At 150px the eighteen characters ran to within a few pixels of the
+   slab's inner edge, which read as type that did not fit rather than type that
+   fills; the label column now takes the difference. */
 .hub__statement {
-  display: block;
+  grid-row: 1;
+  grid-column: 1;
   font-family: var(--font-display);
-  font-size: clamp(24px, calc(24px + 126 * (100vw - 320px) / 1120), 150px);
+  font-size: clamp(24px, calc(24px + 108 * (100vw - 320px) / 1120), 132px);
   line-height: 0.92;
   letter-spacing: -0.01em;
   overflow-wrap: anywhere;
 }
 
+/* Rows after the first step down. content.js's order is a priority order and
+   Instagram is first in it deliberately, so the hierarchy that ordering asks
+   for has to be visible: every handle is legible, one of them is the ask. */
+.hub__slab li + li .hub__statement {
+  font-size: clamp(20px, calc(20px + 60 * (100vw - 320px) / 1120), 80px);
+}
+
+/* On a phone the label has nowhere to sit beside a handle that already uses the
+   full measure, so the row goes back to a stack. */
+@media (max-width: 599px) {
+  .hub__row {
+    display: block;
+    padding: var(--spacing-24) var(--spacing-20);
+  }
+
+  /* justify-self has to be unset by hand. Chrome applies block-level box
+     alignment, so the value set for the grid keeps shrink-wrapping the label and
+     pinning it to the right edge even after the grid is gone. */
+  .hub__label {
+    justify-self: start;
+    margin-bottom: var(--spacing-8);
+  }
+}
+
 /* ============ THE REST, WHEN THEY ARRIVE ============ */
-/* Empty today: TikTok, Sofascore and WhatsApp are all TODO in content.js and are
-   absent rather than drawn greyed out. Pasting any address in fills this row
-   with no code change. */
+/* Empty today: Sofascore and WhatsApp are both TODO in content.js and are absent
+   rather than drawn greyed out. Pasting either address in fills this row with no
+   code change, as a pill rather than a slab row, because neither has a handle to
+   set at display scale. */
 .hub__more {
   display: flex;
   flex-wrap: wrap;

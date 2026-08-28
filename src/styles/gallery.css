@@ -1,89 +1,179 @@
 /* Frontier Football - the gallery.
-   A full-bleed horizontal contact strip: one constant tile height, every tile as
-   wide as its own picture is at that height. A fifth layout family, deliberately
-   not the hero's centred poster, not T4's editorial split or its colour band, and
-   not T5's mixed-size sticker grid.
+   A centred coverflow: one active photo at full size, its neighbours peeking
+   scaled and dimmed to either side, filter pills above it. Its own layout
+   family, deliberately not the hero's centred poster and not the story's
+   editorial split, the two sections that now sit above it. It also has to stay
+   distinct from the champions sticker grid directly BELOW it, which is why the
+   two were never going to read as one long run of pictures whichever order they
+   sit in.
 
-   It is not a marquee. Nothing animates on its own; the strip moves only when a
-   person moves it, and the site's one marquee is still unspent.
+   Nothing moves on its own; the deck advances only when a person clicks a
+   peeking card, the arrows, or a filter pill. The site's one marquee is still
+   unspent, on the tagline seam.
 
-   The media is the content here, so the chrome is quieter than anywhere else on
-   the page: no display headline, no colour fills, no labels stamped on pictures.
-   Just ink outlines on cream.
+   Hybrid aesthetic per the reference boards: the photographs themselves lose
+   their ink outline and take the plain card radius, but every piece of chrome
+   around them - the eyebrow, the filter pills, the arrows, the clip mark -
+   keeps the ink outline the rest of the site uses.
 
-   Colours used: paper and ink only. No literal hex anywhere in this file. */
+   Colours used: paper, ink, and the pill--tag red already spent by the nav and
+   the hub. No literal hex anywhere in this file. */
 
 /* ============ SECTION SHELL ============ */
 .gallery {
-  --gallery-tile-height: clamp(260px, 30vw, 440px);
-
   background: var(--color-paper);
   padding: var(--spacing-80) 0;
 }
 
-/* The one line of chrome. Body scale on purpose: HOUSE-RULES section 1 makes the
-   hero the loudest thing on the page, and a gallery headline here would argue
-   with it for no gain. */
-.gallery__lede {
+.gallery__head {
   max-width: var(--page-max-width);
   margin: 0 auto;
-  padding: 0 var(--spacing-24) var(--spacing-32);
+  padding: 0 var(--page-gutter);
+}
+
+.gallery__eyebrow {
+  margin: 0 0 var(--spacing-16);
+}
+
+.gallery__headline {
+  margin: 0;
+  font-family: var(--font-display);
+  /* Same tier as .champions__headline directly above it: two sibling sections
+     at the same loudness, both capped below the hero's per HOUSE-RULES
+     section 1. */
+  font-size: clamp(30px, 4.4vw, 68px);
+  /* 0.92, not the token's 0.8: HOUSE-RULES section 3 measured Anton's uppercase
+     ink at 0.88em, so at 0.8 the lines physically collide. */
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.gallery__lede {
+  margin: var(--spacing-16) 0 0;
+  max-width: 46ch;
   font-size: var(--text-subheading);
   color: var(--color-ink);
 }
 
-/* ============ THE STRIP ============ */
-/* Full bleed WITHOUT 100vw and without negative margins. 100vw counts the
-   vertical scrollbar and clientWidth does not, so a 100vw track reports
-   scrollWidth > clientWidth and puts a horizontal scrollbar on the document at
-   every desktop width. The section is already full width, so 100% is both
-   simpler and correct.
-
-   The overflow lives here and only here: the document never scrolls sideways. */
-.gallery__track {
+/* ============ FILTER BAR ============ */
+/* Pills and the escape hatch to the full archive share a row, so choosing a
+   filter and leaving for the full page read as two doors out of the same
+   room rather than unrelated controls. */
+.gallery__bar {
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
   gap: var(--spacing-16);
-  overflow-x: auto;
-  overflow-y: hidden;
-  /* Proximity, not mandatory: mandatory fights a trackpad flick that means to
-     travel several tiles. */
-  scroll-snap-type: x proximity;
-  /* Matches the tile padding below, so a snapped tile lands on the same line the
-     lede starts on rather than hard against the viewport edge. */
-  scroll-padding-inline-start: var(--spacing-24);
-  padding: var(--spacing-4) var(--spacing-24);
-  /* Room for the hover lift, which would otherwise be clipped by overflow. */
-  padding-bottom: var(--spacing-16);
+  max-width: var(--page-max-width);
+  margin: var(--spacing-32) auto 0;
+  padding: 0 var(--page-gutter);
 }
 
-/* The reveal element is the track, so the tile is free to carry its own
-   transition for the hover lift. .is-pre / .is-revealed live unscoped in
-   components.css at .block__element specificity, and an element that both
-   reveals and hovers loses its opacity easing to whichever stylesheet lands
-   later. Same separation as .champions__cell and .champions__card. */
-.gallery__tile {
+/* Two rows, not one: a tag and a media type are different questions, and a
+   single flat pill list would make "Clips" and "Watch-alongs" compete for the
+   same slot even though a watch-along clip is a sensible thing to want. Kept
+   visually light (no caption on either row) since the pill labels already say
+   what they filter by. */
+.gallery__filter-groups {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+
+.gallery__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-8);
+}
+
+/* Layered onto the shared .pill primitive rather than edited into it: .pill
+   also renders static badges elsewhere (the nav mock in the styleguide, hub
+   links), and those must not grow the 44px floor this control needs because
+   it is the one thing on this section everybody has to be able to tap. */
+.gallery__pill {
+  min-height: 44px;
+  cursor: pointer;
+  transition:
+    transform var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+
+.gallery__pill:hover {
+  transform: translateY(-2px);
+}
+
+/* Ink filled with paper type, the same "whole surface, not a shade" rule the
+   old tab bar used and the deleted .gallery-page__tab proved readable on a
+   phone in sunlight. */
+.gallery__pill[aria-pressed="true"] {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.gallery__all {
   flex: 0 0 auto;
-  scroll-snap-align: start;
-  /* One height for every tile; width follows the picture's own shape. Rhythm
-     comes from the real mix of portrait and landscape frames rather than from a
-     cycle keyed to array position, so reordering content.js is safe and nothing
-     is cropped to fit a slot it was never shot for.
-
-     The ratio is set per tile by src/gallery.js from content.js. The 3/2 default
-     here is the same fallback slot gallery-data.js uses when the owner swaps a
-     picture and leaves no dimensions behind.
-
-     The cap is what keeps the strip discoverable. The whole affordance is the
-     next tile showing at the right edge, and the widest picture in the set is
-     1.77:1, which at phone width would fill the screen exactly and leave nothing
-     peeking. 78% means a tile can never take the full viewport, so there is
-     always something after it to see. It only ever bites on a phone: at 1440 the
-     widest tile is 759px against a 1168px cap. */
-  height: var(--gallery-tile-height);
-  aspect-ratio: var(--gallery-ratio, 3 / 2);
-  max-width: 78vw;
 }
 
+/* ============ THE STAGE ============ */
+.gallery__stage {
+  --gallery-card-height: clamp(240px, 32vw, 420px);
+
+  position: relative;
+  max-width: var(--page-max-width);
+  margin: var(--spacing-40) auto 0;
+  padding: 0 var(--page-gutter);
+}
+
+/* overflow: hidden is load-bearing, not decorative: without it the peeking
+   cards' translateX pushes them past the stage's own box and the document
+   picks up a horizontal scrollbar at any width narrow enough for the peek to
+   exceed the container - the same class of bug HOUSE-RULES already flags
+   against a bare 100vw track. Clipping at this edge is also the correct
+   visual: it is what makes a peeking card read as "cut off by the frame"
+   rather than "floating loose over the page". */
+.gallery__cards {
+  position: relative;
+  height: var(--gallery-card-height);
+  overflow: hidden;
+}
+
+/* top/left: 50% sets the anchor point; the centring translate(-50%, -50%)
+   itself is written by src/gallery.js alongside the offset and scale on every
+   layout() call, because an inline style.transform replaces the whole
+   property rather than layering onto a CSS rule of the same name. Nothing
+   here declares a resting transform for that reason - there would be nothing
+   left of it the first time JS ran. */
+.gallery__tile {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* One height for every card; width follows the picture's own shape, same
+     mechanism the old strip used and the mosaic on the gallery page reuses:
+     --gallery-ratio is set per card by src/gallery.js from content.js, so nine
+     of Frontier's fifteen photographs (the 0.56 phone-portrait shots) are never
+     cropped to a card built for a landscape frame.
+
+     The cap is what stops a 1.77:1 landscape card overrunning a phone
+     viewport. Capping width while both height and aspect-ratio are set makes
+     the browser recompute height to keep the ratio (the "transferred size"
+     behaviour), which is the same trick the old .gallery__tile relied on. */
+  height: var(--gallery-card-height);
+  aspect-ratio: var(--gallery-ratio, 3 / 2);
+  max-width: min(80vw, 460px);
+  cursor: pointer;
+  transition:
+    transform var(--duration-base) var(--ease-out),
+    opacity var(--duration-base) var(--ease-out),
+    filter var(--duration-base) var(--ease-out);
+}
+
+/* No ink outline on the photograph itself: the hybrid call from the reference
+   boards. Radius only, so the picture reads as floating on the page rather
+   than boxed like every other surface on the site. */
 .gallery__frame {
   position: relative;
   display: block;
@@ -91,22 +181,11 @@
   height: 100%;
   padding: 0;
   background: none;
-  border: var(--outline-width) solid var(--color-ink);
+  border: 0;
   border-radius: var(--radius-card);
   overflow: hidden;
-  cursor: pointer;
-  transition: transform var(--duration-base) var(--ease-out);
 }
 
-.gallery__frame:hover {
-  transform: translateY(-4px);
-}
-
-/* width auto with the intrinsic width/height attributes present means the
-   browser knows the tile's shape before the file arrives, so the strip does not
-   reflow as pictures load. */
-/* Fills the tile the ratio already sized, so a tile the cap has narrowed crops
-   from the centre instead of clipping from one edge. */
 .gallery__frame img {
   display: block;
   width: 100%;
@@ -114,111 +193,94 @@
   object-fit: cover;
 }
 
-/* ============ CLIP MARK ============ */
-/* A control affordance, not a label: a tile that hides the fact it is a video
-   lies to the person clicking it. Drawn in CSS rather than as an icon file, and
-   deliberately not a pill with the word "video" in it, which would be the banned
-   text overlay on a photograph. */
-.gallery__play {
-  position: absolute;
-  left: var(--spacing-12);
-  bottom: var(--spacing-12);
+/* Stands in for .gallery__cards when a filter combination matches nothing.
+   display is set only on the un-hidden state - :not([hidden]) rather than a
+   bare rule - because a bare display value here would be an author style, and
+   author styles outrank the UA stylesheet's [hidden] { display: none },
+   silently showing this even while JS still has it hidden. */
+.gallery__empty:not([hidden]) {
+  display: grid;
+  place-items: center;
+  height: var(--gallery-card-height);
+}
+
+.gallery__empty {
+  margin: 0;
+  text-align: center;
+  font-size: var(--text-subheading);
+  color: var(--color-ink);
+  opacity: 0.7;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery__tile {
+    transition: none;
+  }
+}
+
+/* ============ PREV / NEXT ============ */
+.gallery__nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-12);
+  margin-top: var(--spacing-24);
+}
+
+/* Fixed-ish width via tabular figures, so the row does not jitter width as the
+   count moves between "9 / 15" and "10 / 15". */
+.gallery__count {
+  min-width: 4.5ch;
+  font-size: var(--text-caption);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  color: var(--color-ink);
+}
+
+.gallery__arrow {
   display: grid;
   place-items: center;
   width: 44px;
   height: 44px;
-  border-radius: var(--radius-pill);
-  background: var(--color-paper);
-  border: var(--outline-width) solid var(--color-ink);
-}
-
-.gallery__play::before {
-  content: "";
-  width: 0;
-  height: 0;
-  margin-left: 3px;
-  border-left: 12px solid var(--color-ink);
-  border-top: 8px solid transparent;
-  border-bottom: 8px solid transparent;
-}
-
-/* ============ LIGHTBOX ============ */
-/* Cream, not black. HOUSE-RULES section 1 names "dark cinematic football site"
-   as a failure state, and a black lightbox is the one place on a cream poster
-   where that failure quietly gets back in. */
-.lightbox {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  max-width: none;
-  max-height: none;
-  margin: 0;
-  padding: var(--spacing-24);
-  border: 0;
-  background: color-mix(in srgb, var(--color-paper) 92%, transparent);
-  color: var(--color-ink);
-  overflow: hidden;
-}
-
-/* The dialog already covers the viewport, so the user-agent backdrop would only
-   show as a dark rim during the open transition. */
-.lightbox::backdrop {
-  background: transparent;
-}
-
-.lightbox:not([open]) {
-  display: none;
-}
-
-/* Announced, never drawn. */
-.lightbox__sr {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
   padding: 0;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-  border: 0;
-}
-
-/* Clicks that land here rather than on the media close the dialog, which is the
-   click-outside behaviour. The frame inside stops them. */
-.lightbox__frame {
-  display: grid;
-  place-items: center;
-  height: 100%;
-  pointer-events: none;
-}
-
-.lightbox__frame img,
-.lightbox__frame video {
-  pointer-events: auto;
-  max-width: min(100%, 1100px);
-  /* Leaves room for the controls at the foot of the viewport. */
-  max-height: calc(100% - var(--spacing-80));
-  width: auto;
-  height: auto;
+  border-radius: var(--radius-pill);
   border: var(--outline-width) solid var(--color-ink);
-  border-radius: var(--radius-card-elevated);
   background: var(--color-paper);
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-out);
 }
 
-.lightbox__controls {
-  position: absolute;
-  left: 50%;
-  bottom: var(--spacing-24);
-  transform: translateX(-50%);
-  display: flex;
-  gap: var(--spacing-12);
+.gallery__arrow:hover {
+  transform: translateY(-2px);
 }
 
-.lightbox__close {
-  position: absolute;
-  top: var(--spacing-24);
-  right: var(--spacing-24);
+.gallery__arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.gallery__arrow:disabled:hover {
+  transform: none;
+}
+
+/* A rotated corner, the same drawn-not-imported mark the clip badge uses
+   rather than a font glyph. */
+.gallery__arrow::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-top: var(--outline-width-2) solid var(--color-ink);
+  border-right: var(--outline-width-2) solid var(--color-ink);
+}
+
+.gallery__arrow--prev::before {
+  transform: rotate(-135deg) translate(1px, -1px);
+}
+
+.gallery__arrow--next::before {
+  transform: rotate(45deg) translate(-1px, 1px);
 }
 
 @media (max-width: 599px) {
@@ -226,21 +288,20 @@
     padding: var(--spacing-48) 0;
   }
 
-  .gallery__lede {
-    padding: 0 var(--spacing-16) var(--spacing-24);
+  .gallery__head {
+    padding: 0 var(--spacing-16);
   }
 
-  .gallery__track {
-    padding-inline: var(--spacing-16);
-    scroll-padding-inline-start: var(--spacing-16);
+  .gallery__bar,
+  .gallery__stage {
+    padding: 0 var(--spacing-16);
   }
 
-  .lightbox {
-    padding: var(--spacing-16);
+  .gallery__bar {
+    margin-top: var(--spacing-24);
   }
 
-  .lightbox__close {
-    top: var(--spacing-16);
-    right: var(--spacing-16);
+  .gallery__stage {
+    margin-top: var(--spacing-32);
   }
 }

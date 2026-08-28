@@ -264,12 +264,14 @@ export default {
     {
       src: "/gallery/01.webp",
       alt: "A player slides in to challenge for the ball on a fenced turf pitch.",
+      tag: "On the pitch",
       width: 1080,
       height: 782,
     },
     {
       src: "/gallery/02.webp",
       alt: "A player in a training bib sits at the side of the pitch, watching the game.",
+      tag: "Off the pitch",
       width: 675,
       height: 1200,
     },
@@ -278,42 +280,49 @@ export default {
       src: "/gallery/03.mp4",
       poster: "/gallery/03.webp",
       alt: "A player rests a boot on the ball beside a training cone under floodlights.",
+      tag: "On the pitch",
       width: 1200,
       height: 678,
     },
     {
       src: "/gallery/04.webp",
       alt: "A crowd watching a match together on a screen indoors.",
+      tag: "Watch-alongs",
       width: 675,
       height: 1200,
     },
     {
       src: "/gallery/05.webp",
       alt: "A packed room of people watching a match on a big screen.",
+      tag: "Watch-alongs",
       width: 1080,
       height: 721,
     },
     {
       src: "/gallery/06.webp",
       alt: "A player with both hands on their head during a game, lit from behind.",
+      tag: "On the pitch",
       width: 675,
       height: 1200,
     },
     {
       src: "/gallery/07.webp",
       alt: "A player in a 4x4 Series shirt, photographed close up.",
+      tag: "On the pitch",
       width: 675,
       height: 1200,
     },
     {
       src: "/gallery/08.webp",
       alt: "Players on a floodlit pitch at night, seen from the far end.",
+      tag: "On the pitch",
       width: 1080,
       height: 720,
     },
     {
       src: "/gallery/09.webp",
       alt: "Two people hold up a football shirt beside a pitch.",
+      tag: "Off the pitch",
       width: 640,
       height: 1136,
     },
@@ -321,36 +330,42 @@ export default {
       src: "/gallery/10.mp4",
       poster: "/gallery/10.webp",
       alt: "Two players compete for the ball during a game.",
+      tag: "On the pitch",
       width: 675,
       height: 1200,
     },
     {
       src: "/gallery/11.webp",
       alt: "Two spectators watching the game closely from the sideline.",
+      tag: "Off the pitch",
       width: 675,
       height: 1200,
     },
     {
       src: "/gallery/12.webp",
       alt: "A player strikes a ball on a paved promenade lined with palm trees.",
+      tag: "Off the pitch",
       width: 675,
       height: 1200,
     },
     {
       src: "/gallery/13.webp",
       alt: "A person in a Sri Lanka jacket, photographed in low light.",
+      tag: "Off the pitch",
       width: 720,
       height: 406,
     },
     {
       src: "/gallery/14.webp",
       alt: "Players celebrating together after a game, one lifted on another's back.",
+      tag: "On the pitch",
       width: 675,
       height: 1200,
     },
     {
       src: "/gallery/15.webp",
       alt: "A host speaks into a microphone beside a player at a pitch-side stand.",
+      tag: "Off the pitch",
       width: 675,
       height: 1200,
     },
@@ -415,9 +430,16 @@ export default {
       handle: "@frontierfootballl",
       url: "https://www.instagram.com/frontierfootballl/",
     },
-    // Frontier's TikTok. Nobody has given us the address yet. Add the @name
-    // as the handle when you add the link.
-    { name: "TikTok", handle: "TODO", url: "TODO" },
+    // Frontier's TikTok, supplied by the owner on 2026-08-28.
+    // NOTE THE SPELLING: TikTok is @frontierfootball with ONE l at the end.
+    // Instagram above is @frontierfootballl with THREE. They are genuinely
+    // different handles and neither is a typo of the other - do not "correct"
+    // one to match the other.
+    {
+      name: "TikTok",
+      handle: "@frontierfootball",
+      url: "https://www.tiktok.com/@frontierfootball",
+    },
     // The Sofascore page carrying Frontier's results. Named in a post, but the
     // address itself was never written down.
     { name: "Sofascore", url: "TODO" },

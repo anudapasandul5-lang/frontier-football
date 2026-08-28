@@ -24,6 +24,15 @@ export function stepIndex(current, delta, length) {
   return (((current + delta) % length) + length) % length;
 }
 
+/* 1-indexed for a human reading it, sighted or by ear - "1 / 15", never
+   "0 / 15". Blank rather than "1 / 0" when a filter combination legitimately
+   matches nothing: printing a position inside a deck that holds nothing is a
+   worse lie than showing no position at all. */
+export function countLabel(active, total) {
+  if (total === 0) return "";
+  return `${active + 1} / ${total}`;
+}
+
 export function openLightbox(state, index, opener) {
   return { isOpen: true, index, opener };
 }
@@ -61,9 +70,43 @@ function parseItem(raw) {
   // no poster has nothing to draw and is dropped rather than shown as a hole.
   if (isClip && !poster) return null;
 
-  return { src, alt: recorded(entry.alt), isClip, poster, ...dimensions(entry.width, entry.height) };
+  return {
+    src,
+    alt: recorded(entry.alt),
+    // Optional. Powers the coverflow's filter pills; an entry with no tag still
+    // renders, it just never matches a filter other than "all".
+    tag: recorded(entry.tag),
+    isClip,
+    poster,
+    ...dimensions(entry.width, entry.height),
+  };
 }
 
 export function galleryItems(raw) {
   return ((raw ?? {}).gallery ?? []).map(parseItem).filter(Boolean);
+}
+
+/* Distinct tags, in the order they first appear in content.js — not sorted,
+   for the same reason the partners list isn't: file order is the only order
+   nobody has to agree on. Empty when nothing carries a tag, which is what lets
+   the coverflow skip rendering a pill row rather than draw one dead control. */
+export function galleryTags(items) {
+  return [...new Set(items.map((item) => item.tag).filter(Boolean))];
+}
+
+/* null means "every item" — the coverflow's default, unfiltered state. */
+export function filterItems(items, tag) {
+  if (tag == null) return items;
+  return items.filter((item) => item.tag === tag);
+}
+
+/* Photos and clips as two separate lists, in the order content.js already
+   lists them. Used by the gallery page to draw two stacked mosaics, and by the
+   coverflow's own media filter — a plain boolean check either place could
+   inline, but the split is common to both and worth naming once. */
+export function splitByMedia(items) {
+  return {
+    photos: items.filter((item) => !item.isClip),
+    clips: items.filter((item) => item.isClip),
+  };
 }

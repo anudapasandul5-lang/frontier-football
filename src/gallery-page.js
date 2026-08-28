@@ -1,125 +1,104 @@
 import content from "../content.js";
-import { galleryGroups, parseContent } from "./content-data.js";
+import { parseContent } from "./content-data.js";
 import { stepIndex } from "./gallery-data.js";
 import { wireReveal } from "./reveal.js";
 
-/* The gallery page: one card per thing Frontier has photographed, each a door to
-   that thing's full photo folder on Google Drive.
+/* The gallery page: two card grids behind two tabs, Albums and Watch Parties,
+   each card linking out to the Google Drive folder for that season or night -
+   the site never hosts the full archive itself (docs/HOUSE-RULES.md). Albums
+   covers everything with a champion: every SZN of the 4x4 Series plus Turf
+   Wars and Division 0, which are competitions but not seasons (CONTEXT.md).
+   Watch Parties covers nights Frontier watched football rather than ran it,
+   so they never sit under the same "Champion" heading a tournament card uses.
 
-   The site deliberately does not host the whole archive. Hundreds of files would
-   have to be resized and committed by hand for every tournament, and the owner
-   can drop a folder into Drive without a developer. Drive's own image links are
-   not dependable enough to lay out inside the page, so the honest shape is a
-   link out: the page stays Frontier and Drive stays the stockroom.
+   Same ARIA tabs pattern the coverflow's own filter pills and this page's
+   groups have always used: roving tabindex, arrow keys move and wrap, Home
+   and End jump to the ends. */
 
-   Two groups behind two tabs, never one list. A tournament is football Frontier
-   ran and it has a champion; a watch-along is football Frontier watched.
-   CONTEXT.md has drawn that line since the domain model was written. */
+const CARD_COLOURS = ["card--yellow", "card--orange", "card--red", "card--green"];
 
-/* Yellow is not in this cycle. HOUSE-RULES section 2 reserves it for the primary
-   action, which on this page is the button on every card that has a folder. */
-const EMPTY_COVER_COLOURS = ["card--green", "card--red", "card--orange"];
-
-function cover(entry, plate) {
-  if (entry.photo) {
-    const img = document.createElement("img");
-    img.className = "gallery-page__cover";
-    img.src = entry.photo;
-    img.alt = entry.photoAlt ?? `${entry.title}.`;
-    img.loading = "lazy";
-    img.decoding = "async";
-    img.width = 800;
-    img.height = 450;
-    return img;
-  }
-
-  // No photograph supplied for this one yet. A filled sticker block rather than
-  // a grey placeholder: an empty slot on a cream page reads as an image that
-  // failed, and colour is what the rest of the site puts on a surface with no
-  // picture. Counted across the whole page rather than per group, so two plates
-  // never land on the same colour side by side.
-  const block = document.createElement("div");
-  block.className = `gallery-page__cover gallery-page__cover--empty card ${
-    EMPTY_COVER_COLOURS[plate.drawn++ % EMPTY_COVER_COLOURS.length]
-  }`;
-  block.setAttribute("aria-hidden", "true");
-  return block;
+function albumLine(className, text) {
+  const el = document.createElement("p");
+  el.className = className;
+  // textContent, never innerHTML: content.js names are hand-written and must
+  // never need escaping by hand.
+  el.textContent = text;
+  return el;
 }
 
-function action(entry) {
+function albumPhoto(entry) {
+  if (!entry.photo) return null;
+  const img = document.createElement("img");
+  img.className = "album-card__photo";
+  img.src = entry.photo;
+  img.alt = entry.photoAlt ?? `${entry.title}.`;
+  img.loading = "lazy";
+  img.decoding = "async";
+  img.width = 800;
+  img.height = 450;
+  return img;
+}
+
+/* `champion` is only present on a season or a competition. A watch party has
+   no such field at all, so `"champion" in entry` is false for it rather than
+   the card having to guess from a null it can't tell apart from "unrecorded". */
+function albumCard(entry, index) {
+  const li = document.createElement("li");
+  li.className = "album-grid__cell";
+  li.dataset.reveal = "";
+
+  const card = document.createElement("div");
+  card.className = `card ${CARD_COLOURS[index % CARD_COLOURS.length]} album-card`;
+  if (!entry.photo) card.classList.add("album-card--textonly");
+
+  const photo = albumPhoto(entry);
+  if (photo) card.append(photo);
+
+  card.append(albumLine("album-card__title", entry.title));
+
+  if ("champion" in entry) {
+    card.append(albumLine("album-card__champion", entry.champion ?? "Not recorded yet"));
+    if (!entry.champion) card.lastElementChild.classList.add("album-card__champion--absent");
+  }
+
+  if (entry.note) card.append(albumLine("album-card__note", entry.note));
+
   if (entry.driveFolder) {
     const link = document.createElement("a");
-    link.className = "btn btn--primary gallery-page__action";
+    link.className = "btn btn--secondary album-card__link";
     link.href = entry.driveFolder;
-    // Google Drive is a different site, so it opens in its own tab and cannot
-    // reach back into this one.
     link.target = "_blank";
     link.rel = "noopener noreferrer";
-    link.textContent = "See all photos";
-    // Every card's visible label is identical, so the accessible name has to say
-    // which one this is.
-    link.setAttribute("aria-label", `See all photos from ${entry.title}`);
-    return link;
+    link.textContent = "View photos";
+    card.append(link);
+  } else {
+    // Still shows, saying the photos are on the way, rather than a dead link
+    // or a card that vanishes the moment a folder goes missing.
+    card.append(albumLine("album-card__pending", "Photos are on the way."));
   }
 
-  const pending = document.createElement("p");
-  pending.className = "gallery-page__pending";
-  pending.textContent = "Photos are on the way.";
-  return pending;
+  li.append(card);
+  return li;
 }
 
-function card(entry, plate) {
-  const cell = document.createElement("li");
-  cell.className = "gallery-page__cell";
-  cell.dataset.reveal = "";
-
-  const inner = document.createElement("article");
-  inner.className = "gallery-page__card";
-
-  const title = document.createElement("h3");
-  title.className = "gallery-page__title";
-  title.textContent = entry.title;
-
-  inner.append(cover(entry, plate), title);
-  if (entry.note) {
-    const note = document.createElement("p");
-    note.className = "gallery-page__note";
-    note.textContent = entry.note;
-    inner.append(note);
-  }
-  inner.append(action(entry));
-
-  cell.append(inner);
-  return cell;
+function albumGrid(entries) {
+  const ul = document.createElement("ul");
+  ul.className = "album-grid";
+  ul.append(...entries.map(albumCard));
+  return ul;
 }
 
-function grid(entries, plate) {
-  const list = document.createElement("ul");
-  list.className = "gallery-page__grid";
-  list.append(...entries.map((entry) => card(entry, plate)));
-  return list;
-}
-
-/* One group and no tab bar. A tab bar with a single tab is not a control, it is
-   a label pretending to be one, so the group gets a plain heading instead. */
-function singleGroup(group, plate) {
-  const heading = document.createElement("h2");
-  heading.className = "gallery-page__group-title";
-  heading.textContent = group.label;
-  heading.dataset.reveal = "";
-
-  const wrap = document.createElement("div");
-  wrap.className = "gallery-page__group";
-  wrap.append(heading, grid(group.entries, plate));
-  return [wrap];
+/* One group, no tab bar. A tab bar with a single tab is a label pretending to
+   be a control. */
+function singleGroup(group) {
+  return [group.build()];
 }
 
 /* The ARIA tabs pattern, built to the roles rather than merely styled to look
-   like tabs. A tab that only answers a click is broken for anyone not using a
-   mouse, so: roving tabindex (the tab bar is one stop in the tab order), arrows
-   move between tabs and wrap, Home and End jump to the ends, and each panel is
-   labelled by the tab that opens it. */
-function tabbedGroups(groups, plate) {
+   like tabs: roving tabindex (the tab bar is one stop in the tab order),
+   arrows move between tabs and wrap, Home and End jump to the ends, and each
+   panel is labelled by the tab that opens it. */
+function tabbedGroups(groups) {
   const tablist = document.createElement("div");
   tablist.className = "gallery-page__tabs";
   tablist.setAttribute("role", "tablist");
@@ -129,24 +108,24 @@ function tabbedGroups(groups, plate) {
   const tabs = [];
   const panels = [];
 
-  for (const group of groups) {
+  for (const g of groups) {
     const tab = document.createElement("button");
     tab.className = "gallery-page__tab";
     tab.type = "button";
-    tab.id = `gallery-tab-${group.id}`;
-    tab.textContent = group.label;
+    tab.id = `gallery-tab-${g.id}`;
+    tab.textContent = g.label;
     tab.setAttribute("role", "tab");
-    tab.setAttribute("aria-controls", `gallery-panel-${group.id}`);
+    tab.setAttribute("aria-controls", `gallery-panel-${g.id}`);
 
     const panel = document.createElement("div");
     panel.className = "gallery-page__panel";
-    panel.id = `gallery-panel-${group.id}`;
+    panel.id = `gallery-panel-${g.id}`;
     panel.setAttribute("role", "tabpanel");
     panel.setAttribute("aria-labelledby", tab.id);
-    // Focusable, so tabbing off the tab bar lands inside the group rather than
+    // Focusable, so tabbing off the tab bar lands inside the grid rather than
     // skipping past every card in it.
     panel.tabIndex = 0;
-    panel.append(grid(group.entries, plate));
+    panel.append(g.build());
 
     tabs.push(tab);
     panels.push(panel);
@@ -160,9 +139,9 @@ function tabbedGroups(groups, plate) {
     tabs.forEach((tab, i) => {
       const isSelected = i === index;
       tab.setAttribute("aria-selected", String(isSelected));
-      // Roving tabindex: one stop for the whole bar. Without it a keyboard user
-      // tabs through every tab before reaching a card, which is the thing the
-      // arrow keys exist to avoid.
+      // Roving tabindex: one stop for the whole bar. Without it a keyboard
+      // user tabs through every tab before reaching a card, which is the
+      // thing the arrow keys exist to avoid.
       tab.tabIndex = isSelected ? 0 : -1;
       panels[i].hidden = !isSelected;
     });
@@ -176,8 +155,8 @@ function tabbedGroups(groups, plate) {
   tablist.addEventListener("keydown", (event) => {
     const moves = { ArrowRight: 1, ArrowLeft: -1 };
     if (event.key in moves) {
-      // Wrapping at both ends, the same rule and the same helper the lightbox
-      // uses for its arrow keys.
+      // Wrapping at both ends, the same helper the coverflow and the
+      // lightbox use for their own arrow keys.
       select(stepIndex(selected, moves[event.key], tabs.length), { focus: true });
     } else if (event.key === "Home") {
       select(0, { focus: true });
@@ -194,28 +173,66 @@ function tabbedGroups(groups, plate) {
   return [tablist, ...panels];
 }
 
-export function renderGalleryPage(mount, data) {
-  // One counter for the whole page, so the colour plates keep cycling across the
-  // group boundary instead of each group starting on the same colour.
-  const plate = { drawn: 0 };
-  const groups = galleryGroups(data);
+export function renderGalleryPage(mount) {
+  const data = parseContent(content);
 
+  const albumEntries = [
+    ...data.seasons.map((season) => ({
+      title: `SZN ${season.season}`,
+      champion: season.champion,
+      note: season.note,
+      photo: season.photo,
+      photoAlt: season.photoAlt,
+      driveFolder: season.driveFolder,
+    })),
+    // Turf Wars and Division 0 are not seasons of the 4x4 Series, so they are
+    // appended after the seasons rather than sorted among them - same rule
+    // champions.js follows for the same two collections.
+    ...data.competitions.map((competition) => ({
+      title: competition.name,
+      champion: competition.champion,
+      note: competition.note,
+      photo: competition.photo,
+      photoAlt: competition.photoAlt,
+      driveFolder: competition.driveFolder,
+    })),
+  ];
+
+  const watchPartyEntries = data.watchAlongs.map((watchAlong) => ({
+    title: watchAlong.name,
+    note: watchAlong.note,
+    photo: watchAlong.photo,
+    photoAlt: watchAlong.photoAlt,
+    driveFolder: watchAlong.driveFolder,
+  }));
+
+  const groups = [];
+  if (albumEntries.length > 0) {
+    groups.push({ id: "albums", label: "Albums", build: () => albumGrid(albumEntries) });
+  }
+  if (watchPartyEntries.length > 0) {
+    groups.push({
+      id: "watch-parties",
+      label: "Watch Parties",
+      build: () => albumGrid(watchPartyEntries),
+    });
+  }
+
+  // No groups means no page content. The head stays static markup so a
+  // failed bundle still reads as a labelled page rather than a blank gap,
+  // but a mount that successfully rendered nothing is removed outright.
   if (groups.length === 0) {
     mount.replaceChildren();
     return;
   }
 
-  mount.replaceChildren(
-    ...(groups.length === 1 ? singleGroup(groups[0], plate) : tabbedGroups(groups, plate)),
-  );
+  mount.replaceChildren(...(groups.length === 1 ? singleGroup(groups[0]) : tabbedGroups(groups)));
+  // A card in a hidden panel has a zero-height rect, which reveal.js reads as
+  // already scrolled past and reveals at once. That is what we want here:
+  // switching tabs must never expose a panel of invisible cards.
+  wireReveal(mount.querySelectorAll("[data-reveal]"));
 }
 
 const section = document.querySelector(".gallery-page");
 const mount = section?.querySelector("[data-gallery-page]");
-if (mount) {
-  renderGalleryPage(mount, parseContent(content));
-  // A card in a hidden panel has a zero-height rect, which reveal.js reads as
-  // already scrolled past and reveals at once. That is what we want here:
-  // switching tabs must never expose a panel of invisible cards.
-  wireReveal(section.querySelectorAll("[data-reveal]"));
-}
+if (mount) renderGalleryPage(mount);

@@ -1,42 +1,50 @@
 import content from "../content.js";
-import { CLOSED, closeLightbox, galleryItems, openLightbox, stepIndex } from "./gallery-data.js";
+import { countLabel, filterItems, galleryItems, galleryTags, stepIndex } from "./gallery-data.js";
+import { initLightbox } from "./lightbox.js";
 import { wireReveal } from "./reveal.js";
 
-/* Renders the contact strip from content.js and drives the lightbox. All of the
-   index maths and the open/close transition live in src/gallery-data.js, where
-   they are tested in the node environment; this file is only the DOM. */
+/* Renders the home page's coverflow: one active photo at full size, its
+   neighbours peeking to either side, filter pills above it. Opens the shared
+   lightbox (src/lightbox.js) on the active card.
 
-const reduceMotion = () => globalThis.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+   Only the active card sits in the tab order (tabIndex 0); the peeking cards
+   are real buttons a mouse or touch can jump to directly, but tabIndex -1
+   keeps them out of the keyboard flow. A keyboard user reaches the same
+   destinations through the Previous/Next buttons and the Left/Right keys,
+   which is the same vocabulary the lightbox already uses for exactly the same
+   move. That is a deliberate simplification against a "focus a peeking card
+   and it recentres itself" pattern: coverflow-style auto-recentring-on-focus
+   is a known trap for screen readers (focus lands somewhere, then silently
+   jumps), and nothing here is actually unreachable without it. */
+
+const SCALE_STEP = 0.12;
+const MAX_VISIBLE_OFFSET = 2;
 
 function thumbnail(item) {
   const img = document.createElement("img");
-  // A clip shows its poster. No <video> element goes into the strip at all, so a
+  // A clip shows its poster. No <video> element goes into the deck at all, so a
   // phone cannot download an .mp4 it did not ask for: there is nothing in the
   // document capable of requesting one until the lightbox builds it.
   img.src = item.isClip ? item.poster : item.src;
   img.alt = "";
   img.loading = "lazy";
   img.decoding = "async";
-  // Intrinsic size, so the tile knows its shape before the file arrives and the
-  // strip does not reflow as pictures load.
   img.width = item.width;
   img.height = item.height;
   return img;
 }
 
-function tile(item, index, onOpen) {
+function card(item, index, onActivate) {
   const cell = document.createElement("li");
   cell.className = "gallery__tile";
-  // The tile takes its shape from the picture rather than from its position in
-  // the list, so the owner reordering content.js cannot change what gets cropped.
+  // The card takes its shape from the picture rather than from a slot, so
+  // reordering content.js cannot change what gets cropped. Same mechanism the
+  // old strip used and the mosaic on the gallery page reuses.
   cell.style.setProperty("--gallery-ratio", `${item.width} / ${item.height}`);
 
   const button = document.createElement("button");
   button.className = "gallery__frame";
   button.type = "button";
-  // The picture's alt sits on the button rather than on the img: the img is
-  // decorative inside a control, and a screen reader should hear one thing here,
-  // not the description twice.
   const description = item.alt ?? (item.isClip ? "A Frontier clip." : "A Frontier photograph.");
   button.setAttribute("aria-label", item.isClip ? `Play clip. ${description}` : description);
   button.append(thumbnail(item));
@@ -48,122 +56,205 @@ function tile(item, index, onOpen) {
     button.append(mark);
   }
 
-  button.addEventListener("click", () => onOpen(index, button));
+  button.addEventListener("click", () => onActivate(index));
   cell.append(button);
   return cell;
 }
 
-function media(item) {
-  if (!item.isClip) {
-    const img = document.createElement("img");
-    img.src = item.src;
-    img.alt = item.alt ?? "A Frontier photograph.";
-    return img;
-  }
-
-  const video = document.createElement("video");
-  // Built here and never left in index.html: src/hero.js queries
-  // document.querySelectorAll("video[data-src]") across the whole document at
-  // import time, and a video sitting in the markup is the one element that query
-  // could reach. No data-src is used here either, for the same reason.
-  video.src = item.src;
-  video.poster = item.poster;
-  video.controls = true;
-  video.loop = true;
-  video.playsInline = true;
-  video.setAttribute("aria-label", item.alt ?? "A Frontier clip.");
-  if (!reduceMotion()) {
-    video.muted = true;
-    // Reduced motion means still, not merely quieter: the poster holds and the
-    // controls are there for anyone who wants it to move. Otherwise autoplay,
-    // with the same swallow the hero uses so a refused autoplay cannot surface
-    // as an unhandled rejection.
-    video.play().catch(() => {});
-  }
-  return video;
+function pill(label, tag, isPressed, onSelect) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "pill gallery__pill";
+  button.textContent = label;
+  button.setAttribute("aria-pressed", String(isPressed));
+  button.addEventListener("click", () => onSelect(tag));
+  return button;
 }
 
 export function initGallery(section, dialog) {
-  const mount = section.querySelector("[data-gallery]");
-  const frame = dialog.querySelector("[data-lightbox-frame]");
-  const status = dialog.querySelector("[data-lightbox-status]");
+  const filtersMount = section.querySelector("[data-gallery-filters]");
+  const mediaMount = section.querySelector("[data-gallery-media]");
+  const stage = section.querySelector("[data-gallery-stage]");
+  const cardsMount = section.querySelector("[data-gallery-cards]");
+  const emptyMessage = section.querySelector("[data-gallery-empty]");
+  const prevButton = section.querySelector("[data-gallery-prev]");
+  const nextButton = section.querySelector("[data-gallery-next]");
+  const countLabelEl = section.querySelector("[data-gallery-count]");
+
   const items = galleryItems(content);
 
-  // No items means no section. The lede is static markup so a failed bundle
-  // still reads as a labelled section, but a strip that successfully rendered
-  // nothing is just an empty band and is removed outright.
+  // No items means no section. The head stays static markup so a failed
+  // bundle still reads as a labelled section, but a stage that successfully
+  // rendered nothing is just an empty band and is removed outright.
   if (items.length === 0) {
     section.remove();
     return;
   }
 
-  let state = CLOSED;
+  const tags = galleryTags(items);
+  const hasClips = items.some((item) => item.isClip);
+  const lightbox = initLightbox(dialog);
 
-  function show(index) {
-    const item = items[index];
-    frame.replaceChildren(media(item));
-    // Position is announced, never printed. A keyboard user arrowing through
-    // needs to know when they have wrapped; nobody needs "3 / 15" stamped on
-    // the picture.
-    status.textContent = `${index + 1} of ${items.length}. ${item.alt ?? ""}`.trim();
+  // Two independent facets, not one combined list: a tag and a media type
+  // answer different questions ("what is this of" vs "is it moving"), and
+  // combining them into a single-select row would mean "Clips" and "Watch-
+  // alongs" fight over the same slot even though a watch-along clip is a
+  // perfectly sensible photograph to want. Each row keeps its own All.
+  let activeTag = null;
+  let activeMedia = null; // null | "photo" | "clip"
+  let filtered = items;
+  let active = 0;
+
+  function applyFilters() {
+    filtered = filterItems(items, activeTag).filter(
+      (item) => activeMedia === null || item.isClip === (activeMedia === "clip"),
+    );
+    active = 0;
   }
 
-  function open(index, opener) {
-    state = openLightbox(state, index, opener);
-    show(index);
-    dialog.showModal();
+  function layout() {
+    const stageWidth = stage.clientWidth;
+    // A percentage of the stage, not a fixed pixel step: the cards themselves
+    // are variable width (their own aspect ratio, never cropped to a shared
+    // slot), so there is no single card width to base spacing on. A step tied
+    // to the stage instead gives consistent peeking regardless of which mix of
+    // portrait and landscape frames the filter happens to be showing.
+    const step = Math.min(Math.max(stageWidth * 0.24, 90), 220);
+    const cells = cardsMount.children;
+
+    for (let i = 0; i < cells.length; i += 1) {
+      const cell = cells[i];
+      const offset = i - active;
+      const distance = Math.abs(offset);
+      const isCentre = distance === 0;
+      const hidden = distance > MAX_VISIBLE_OFFSET;
+
+      cell.hidden = hidden;
+      if (hidden) continue;
+
+      const scale = 1 - distance * SCALE_STEP;
+      cell.style.transform = `translate(-50%, -50%) translateX(${offset * step}px) scale(${scale})`;
+      cell.style.zIndex = String(10 - distance);
+      cell.style.opacity = isCentre ? "1" : "0.55";
+      cell.style.filter = isCentre ? "none" : "blur(2px)";
+      cell.setAttribute("aria-hidden", isCentre ? "false" : "true");
+
+      const button = cell.querySelector(".gallery__frame");
+      button.tabIndex = isCentre ? 0 : -1;
+    }
+
+    countLabelEl.textContent = countLabel(active, filtered.length);
+  }
+
+  function setActive(index) {
+    active = stepIndex(index, 0, filtered.length);
+    layout();
   }
 
   function step(delta) {
-    if (!state.isOpen) return;
-    state = { ...state, index: stepIndex(state.index, delta, items.length) };
-    show(state.index);
+    setActive(stepIndex(active, delta, filtered.length));
   }
 
-  function close() {
-    const previous = state;
-    state = closeLightbox(state);
-    // replaceChildren before anything else: it drops the <video>, which stops
-    // playback and releases the file rather than leaving it buffering behind a
-    // closed dialog.
-    frame.replaceChildren();
-    status.textContent = "";
-    if (dialog.open) dialog.close();
-    // Explicit, rather than trusting the browser's own showModal restoration.
-    // Plain focus(), not preventScroll: a tile that scrolled out of the strip
-    // should come back into view rather than take focus somewhere invisible.
-    previous.opener?.focus();
+  function activate(index) {
+    if (index === active) {
+      lightbox.open(filtered, active, cardsMount.children[active].querySelector(".gallery__frame"));
+      return;
+    }
+    setActive(index);
   }
 
-  mount.replaceChildren(...items.map((item, index) => tile(item, index, open)));
+  function renderCards() {
+    // A combination (say Clips + Watch-alongs) can legitimately match nothing
+    // today - the two clips that exist are both tagged On the pitch. Told
+    // plainly via the native hidden attribute on both elements rather than
+    // left as a stage with peeking cards and no centre - the same "say it,
+    // don't fake it" rule the champions grid and the Drive links already
+    // follow. hidden rather than a CSS class: a class that also sets display
+    // on .gallery__empty would silently outrank the attribute (author styles
+    // beat the UA stylesheet's [hidden] rule), so the attribute stays the only
+    // thing controlling either element's visibility.
+    const isEmpty = filtered.length === 0;
+    cardsMount.hidden = isEmpty;
+    emptyMessage.hidden = !isEmpty;
+    prevButton.disabled = isEmpty;
+    nextButton.disabled = isEmpty;
+    // layout() also writes this, but only when isEmpty is false below - a
+    // combination that matches nothing never reaches it, so it is cleared
+    // here on the same branch as the other empty-state attributes.
+    if (isEmpty) countLabelEl.textContent = "";
 
-  // Escape fires cancel, then the dialog closes itself. Listening to close
-  // rather than to keydown catches every route out: Escape, the button, and a
-  // backdrop click all arrive here exactly once.
-  dialog.addEventListener("close", close);
-  dialog.querySelector("[data-lightbox-close]").addEventListener("click", () => dialog.close());
-  for (const button of dialog.querySelectorAll("[data-lightbox-step]")) {
-    button.addEventListener("click", () => step(Number(button.dataset.lightboxStep)));
+    cardsMount.replaceChildren(...filtered.map((item, index) => card(item, index, activate)));
+    if (!isEmpty) layout();
   }
 
-  dialog.addEventListener("keydown", (event) => {
+  function renderTagPills() {
+    if (tags.length === 0) {
+      filtersMount.remove();
+      return;
+    }
+    filtersMount.replaceChildren(
+      pill("All", null, activeTag === null, setTag),
+      ...tags.map((tag) => pill(tag, tag, activeTag === tag, setTag)),
+    );
+  }
+
+  function renderMediaPills() {
+    if (!hasClips) {
+      mediaMount.remove();
+      return;
+    }
+    // Two pills, not three: unlike the tag row, media has only two real values,
+    // so a third "All" pill next to the tag row's own "All" would read as two
+    // unlabelled duplicates stacked on top of each other. Neither pressed IS
+    // "all media" here, and clicking the pressed one again clears it - a toggle
+    // fits a binary facet better than forcing symmetry with the tag row.
+    mediaMount.replaceChildren(
+      pill("Photos", "photo", activeMedia === "photo", toggleMedia),
+      pill("Clips", "clip", activeMedia === "clip", toggleMedia),
+    );
+  }
+
+  function setTag(tag) {
+    activeTag = tag;
+    applyFilters();
+    renderTagPills();
+    renderCards();
+  }
+
+  function setMedia(media) {
+    activeMedia = media;
+    applyFilters();
+    renderMediaPills();
+    renderCards();
+  }
+
+  function toggleMedia(media) {
+    setMedia(activeMedia === media ? null : media);
+  }
+
+  prevButton.addEventListener("click", () => step(-1));
+  nextButton.addEventListener("click", () => step(1));
+
+  stage.addEventListener("keydown", (event) => {
     if (event.key === "ArrowRight") step(1);
     else if (event.key === "ArrowLeft") step(-1);
     else return;
-    // Otherwise the arrow also scrolls whatever is behind the dialog.
+    // Otherwise the arrow also scrolls the page underneath the stage.
     event.preventDefault();
   });
 
-  // A click that lands on the dialog itself rather than on the media or a
-  // control is a click outside the picture.
-  dialog.addEventListener("click", (event) => {
-    if (event.target === dialog) dialog.close();
-  });
+  // Cheap to recompute on every resize: layout() only touches the cards
+  // currently on stage, at most five of them.
+  window.addEventListener("resize", layout);
 
-  // The track and the lede, never the tiles. src/reveal.js observes against the
-  // viewport with zero horizontal insets on its rootMargin, so a tile scrolled
-  // off to the right of this scroller would never intersect and would sit at
-  // opacity 0 for good.
+  renderTagPills();
+  renderMediaPills();
+  renderCards();
+
+  // The head and the bar, never the individual cards: src/reveal.js observes
+  // against the viewport, and a card scaled near zero or translated off to the
+  // side would be exactly the kind of element that trips a fractional
+  // threshold. The stage itself is the reveal element for the deck.
   wireReveal(section.querySelectorAll("[data-reveal]"));
 }
 
