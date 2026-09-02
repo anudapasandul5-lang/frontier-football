@@ -131,8 +131,10 @@ export default {
       runnerUp: "TODO",
       goldenBoot: "TODO",
       goldenGlove: "TODO",
-      photo: "TODO",
-      photoAlt: "TODO",
+      // A match-action frame from the SZN 2 Drive folder - not a champions
+      // photo (the winner is still unknown), just proof there was a season.
+      photo: "/champions/szn-2.webp",
+      photoAlt: "A SZN 2 player lines up a shot as an opponent closes in.",
       // Link to this season's full photo folder on Google Drive. Paste the
       // folder's share link here and a card for SZN 2 appears on the photos
       // page with a working button. Leave it as "TODO" and the card still shows,
@@ -146,8 +148,11 @@ export default {
       runnerUp: "TODO",
       goldenBoot: "TODO",
       goldenGlove: "TODO",
-      photo: "TODO",
-      photoAlt: "TODO",
+      // A match-action frame from the SZN 1 Drive folder, badge-cropped per
+      // docs/HOUSE-RULES.md section 6 (17% off the bottom clears the Frontier
+      // crest and the REIGNITE wordmark).
+      photo: "/champions/szn-1.webp",
+      photoAlt: "SZN 1 players challenge for the ball in the cage under floodlights.",
       // Link to this season's full photo folder on Google Drive. Paste the
       // folder's share link here and a card for SZN 1 appears on the photos
       // page with a working button. Leave it as "TODO" and the card still shows,
@@ -223,30 +228,30 @@ export default {
       note: "TODO",
       // A picture from the night. Put the file in the public/champions/ folder
       // and write its name here, the same way the champion photos work.
-      photo: "TODO",
-      photoAlt: "TODO",
+      photo: "/champions/wa-final-esp-arg.webp",
+      photoAlt: "A fan raises an arm as the room watches the match on the big screen.",
       // The Google Drive folder holding the photos from this night.
       driveFolder: "https://drive.google.com/drive/folders/1hOfEz1uHcPT0fx8Ca4Dv86bhcj7WMMsU",
     },
     {
       name: "Semi-final: England vs Argentina",
       note: "TODO",
-      photo: "TODO",
-      photoAlt: "TODO",
+      photo: "/champions/wa-semi-eng-arg.webp",
+      photoAlt: "A packed watch-along crowd reacts to the match on screen.",
       driveFolder: "https://drive.google.com/drive/folders/1MFdyJn1AwLtSq_Flkg8PB_EqFX1a15CV",
     },
     {
       name: "Semi-final: Spain vs France",
       note: "TODO",
-      photo: "TODO",
-      photoAlt: "TODO",
+      photo: "/champions/wa-semi-esp-fra.webp",
+      photoAlt: "Two fans celebrate with their arms up at the watch-along.",
       driveFolder: "https://drive.google.com/drive/folders/15y_x5dnOdsGQvmjPm0JaIqeLpoGWB5BM",
     },
     {
       name: "Norway vs England",
       note: "TODO",
-      photo: "TODO",
-      photoAlt: "TODO",
+      photo: "/champions/wa-norway-england.webp",
+      photoAlt: "A fan cheers with both arms raised, phone in hand, mid-match.",
       driveFolder: "https://drive.google.com/drive/folders/1CZXXR7ZNFmPaOFudf8wDXNlPFlaKnxlh",
     },
     {
@@ -254,8 +259,8 @@ export default {
       // a night in front of a screen, so it belongs in this group.
       name: "UCL Final Night",
       note: "TODO",
-      photo: "TODO",
-      photoAlt: "TODO",
+      photo: "/champions/wa-ucl-final-night.webp",
+      photoAlt: "Fans in red shirts cheer with their arms raised at the watch-along.",
       driveFolder: "https://drive.google.com/drive/folders/1LI43OOBwg14x5l5h-E3OTw5f2z-kGyXe",
     },
   ],
@@ -505,21 +510,31 @@ export default {
   // write its name in the `logo` line, like "/partners/whoever.webp". The
   // picture replaces the text and nothing else on the page moves.
   //
+  // THE LOGOS BELOW were traced from each brand's own website, Facebook page or
+  // Instagram profile picture, then flattened to one flat cream colour so the
+  // whole strip reads as one set on the dark band. Every mark is the brand's
+  // own; nothing was invented. Replace any file in `public/partners/` with a
+  // cleaner one from the brand and it drops straight in.
+  //
+  // STILL TEXT: @iodexsrilanka and @zone360.lk. No usable logo file exists
+  // online for either (IODEX's site only carries its parent company's mark),
+  // so both show as their name until someone supplies a real file.
+  //
   // TO ADD A PARTNER: copy a { ... } line and change the name.
   // TO REMOVE ONE: delete its line.
   // ==========================================================================
   partners: [
-    { name: "@main.sportsbar", logo: "TODO", url: "TODO" },
-    { name: "@address.lk", logo: "TODO", url: "TODO" },
+    { name: "@main.sportsbar", logo: "/partners/main-sports-bar.png", url: "TODO" },
+    { name: "@address.lk", logo: "/partners/address.png", url: "TODO" },
     { name: "@iodexsrilanka", logo: "TODO", url: "TODO" },
-    { name: "@nutrimax.iso", logo: "TODO", url: "TODO" },
-    { name: "Sofascore", logo: "TODO", url: "TODO" },
-    { name: "@shirtshack.lk", logo: "TODO", url: "TODO" },
-    { name: "@drinkhypebam", logo: "TODO", url: "TODO" },
-    { name: "ThePapare", logo: "TODO", url: "TODO" },
-    { name: "@absystudios", logo: "TODO", url: "TODO" },
+    { name: "@nutrimax.iso", logo: "/partners/nutrimax.png", url: "TODO" },
+    { name: "Sofascore", logo: "/partners/sofascore.svg", url: "TODO" },
+    { name: "@shirtshack.lk", logo: "/partners/shirt-shack.png", url: "TODO" },
+    { name: "@drinkhypebam", logo: "/partners/hype-bam.svg", url: "TODO" },
+    { name: "ThePapare", logo: "/partners/thepapare.png", url: "TODO" },
+    { name: "@absystudios", logo: "/partners/absy-studios.png", url: "TODO" },
     { name: "@zone360.lk", logo: "TODO", url: "TODO" },
-    { name: "@athlete360_sl", logo: "TODO", url: "TODO" },
+    { name: "@athlete360_sl", logo: "/partners/athlete-360.png", url: "TODO" },
   ],
 
   // ==========================================================================

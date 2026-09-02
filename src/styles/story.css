@@ -57,7 +57,9 @@
      well under the hero's clamp(48px, 8.6vw, 132px) so the hero stays the
      loudest thing on the page. */
   line-height: 0.92;
-  letter-spacing: -0.03em;
+  /* Anton is condensed already; negative tracking on top of it ran the
+     glyphs into each other at display size. Neutral, same as the hero. */
+  letter-spacing: 0;
   text-transform: uppercase;
   color: var(--color-ink);
 }
@@ -76,8 +78,8 @@
    and reusing it here would be the same idea twice. Real photography carries
    its own colours and is exempt from the six (HOUSE-RULES section 2). */
 .story__photo {
-  aspect-ratio: 4 / 3;
-  border-radius: var(--radius-card-elevated);
+  aspect-ratio: 8 / 5;
+  border: none;
 }
 
 @media (min-width: 900px) {

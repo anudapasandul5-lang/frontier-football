@@ -16,6 +16,18 @@
   padding: var(--spacing-16) var(--page-gutter);
 }
 
+/* Home page only. The nav lifts out of flow and floats over the hero so the
+   video runs full-bleed to the top of the screen behind it. gallery.html keeps
+   the plain in-flow .nav - it has no hero, so an overlay there would land on
+   the page headline. left/right rather than a width keeps the max-width +
+   auto-margin centring from the base rule. The hero's cream wash sits behind
+   this (the wash covers the whole hero, which now starts at y=0), so the ink
+   nav items keep the same contrast the headline does. */
+.nav--overlay {
+  position: absolute;
+  inset: 0 0 auto;
+}
+
 .nav__brand {
   display: flex;
   flex: none;
@@ -70,12 +82,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* dvh, not vh: on iOS Safari vh is the *largest* viewport, so the hero
-     overshot by the URL-bar height on first paint and the page jumped as the
-     bar collapsed. */
-  min-height: 82dvh;
+  /* Full screen. svh, not vh or dvh: vh is iOS Safari's *largest* viewport so
+     the hero overshot by the URL-bar height and the page jumped as the bar
+     collapsed; dvh fixes the overshoot but re-centres the content every frame
+     while the bar animates. svh is the *smallest* viewport - the hero is a full
+     screen with the bar shown and a hair of the next section peeks once it
+     hides, no jump either way. Was 82dvh (a deliberate 18% of the next section
+     on show); the owner wants the video edge to edge. */
+  min-height: 100svh;
   background: var(--color-paper);
-  padding: var(--spacing-40) var(--spacing-24) var(--spacing-60);
+  /* Top pad clears the overlaid nav (~86px) so the centred stage never rides
+     under it on a short or landscape screen. */
+  padding: var(--spacing-80) var(--spacing-24) var(--spacing-60);
 }
 
 .hero__bg,
@@ -91,12 +109,15 @@
   object-fit: cover;
 }
 
-/* The wash is what keeps this on-brand. At 0.86 the footage reads as
-   texture and movement behind the type while ink-on-cream contrast stays
-   essentially intact; drop it much lower and the headline starts fighting
-   the video for legibility. */
+/* The wash is what keeps this on-brand: the footage reads as texture and
+   movement behind the type while the palette stays Frontier's. At 0.86 the
+   video was barely there, so the owner pulled it to 0.60 - the footage is now
+   legible as footage. Checked against the darkest frames of the hero loop at
+   1440px: the Anton headline holds everywhere, the subhead holds because it
+   sits over the lighter wall band. Do not drop below ~0.55 without a local
+   scrim behind the text - past that the dark-ink type starts losing frames. */
 .hero__wash {
-  background: color-mix(in srgb, var(--color-paper) 86%, transparent);
+  background: color-mix(in srgb, var(--color-paper) 60%, transparent);
 }
 
 /* The pause counterpart to the marquee's, per the same WCAG 2.2.2 reasoning.
@@ -140,7 +161,9 @@
      0.75-0.80" was written for Super Squad, which has smaller ink for the
      same em. This still reads crushed against a normal 1.2. */
   line-height: 0.92;
-  letter-spacing: -0.035em;
+  /* Anton is already condensed; at 132px the -0.035em crush ran the glyphs
+     into each other. Neutral tracking keeps the block tight without collision. */
+  letter-spacing: 0;
   text-transform: uppercase;
   color: var(--color-ink);
 }
@@ -160,8 +183,9 @@
    and needs no script to be correct. */
 .hero__cta {
   margin-top: var(--spacing-32);
-  padding: var(--spacing-16) var(--spacing-32);
-  font-size: var(--text-subheading);
+  /* Size comes from .btn - the oversized hero variant dwarfed the subhead.
+     min-height holds WCAG 2.5.8's tap target once the padding shrinks. */
+  min-height: 44px;
   transform: translate(var(--cta-magnet-x, 0px), var(--cta-magnet-y, 0px));
 }
 
@@ -177,6 +201,14 @@
 @media (max-width: 599px) {
   .nav {
     padding: var(--spacing-12) var(--spacing-16);
+  }
+
+  /* A phone gets the poster still, not the video, so there is nothing to
+     reveal behind the nav - it goes back in flow and the hero keeps its own
+     short mobile height below it. */
+  .nav--overlay {
+    position: relative;
+    inset: auto;
   }
 
   .nav__cta {
@@ -199,10 +231,5 @@
   .hero {
     min-height: 0;
     padding: var(--spacing-32) var(--spacing-16) var(--spacing-40);
-  }
-
-  .hero__cta {
-    padding: var(--spacing-12) var(--spacing-24);
-    font-size: var(--text-body-lg);
   }
 }

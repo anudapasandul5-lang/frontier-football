@@ -39,7 +39,9 @@
      ink at 0.88em, so at 0.8 the lines collide. One line here, but the value
      stays correct if the word ever changes. */
   line-height: 0.92;
-  letter-spacing: -0.03em;
+  /* Anton is condensed already; negative tracking on top of it ran the
+     glyphs into each other at display size. Neutral, same as the hero. */
+  letter-spacing: 0;
   text-transform: uppercase;
   color: var(--color-ink);
 }

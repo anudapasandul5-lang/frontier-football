@@ -37,12 +37,17 @@ function thumbnail(item) {
 function card(item, index, onActivate) {
   const cell = document.createElement("li");
   cell.className = "gallery__tile";
-  // Every card is one fixed 16:9 landscape slot (see gallery.css); object-fit:
-  // cover crops each photo into it. The home deck reads as a uniform row of
-  // frames rather than a ragged run of per-photo shapes. The gallery-page
-  // mosaic still keeps each picture's own ratio - the home deck is the
-  // deliberate exception. item.width/height still feed the <img> size attrs in
-  // thumbnail() so the row does not jump while images load.
+  // Photographs get one fixed 16:9 slot (see gallery.css) and object-fit: cover
+  // crops each into it, so the ALL/tag views read as a uniform row of frames.
+  // Clips are the exception: a phone-shot upright clip keeps its own shape
+  // rather than being letterboxed to 16:9 - it fits the deck's height and takes
+  // whatever width its ratio needs. --gallery-ratio drives that; it is only set
+  // for clips. item.width/height also feed the <img> size attrs in thumbnail()
+  // so the row does not jump while images load.
+  if (item.isClip) {
+    cell.classList.add("gallery__tile--clip");
+    cell.style.setProperty("--gallery-ratio", `${item.width} / ${item.height}`);
+  }
 
   const button = document.createElement("button");
   button.className = "gallery__frame";
@@ -106,16 +111,16 @@ export function initGallery(section, dialog) {
   let filtered = items; // replaced by applyFilters() below, before first paint
   let active = 0;
 
-  // The deck is landscape-only everywhere except Clips. Cards are a fixed 16:9
-  // slot that object-fit crops into, so an upright frame does not break the
-  // row's geometry - it loses most of itself to the crop instead, which is why
-  // every photograph in content.js is wide to begin with. Clips are the one
-  // thing allowed to be upright: the source footage is phone-shot, a cropped
-  // poster is acceptable when the play button says there is more behind it,
-  // and the lightbox shows the whole frame anyway. So clips live behind their
-  // own pill and nowhere else - Clips ignores the tag row (four clips in
-  // total; intersecting them with a tag mostly yields nothing), and every
-  // other view drops them.
+  // The deck is landscape-only everywhere except Clips. Photographs share one
+  // fixed 16:9 slot and are cropped into it, so an upright photograph would
+  // lose most of itself - which is why every photograph in content.js is wide
+  // to begin with. Clips keep their own ratio instead (see card()), so an
+  // upright clip is not cropped, it is just narrow. That is the whole reason
+  // they are quarantined: a run of tall narrow cards among 16:9 ones is a
+  // different row, not a ragged one. So clips live behind their own pill and
+  // nowhere else - Clips ignores the tag row (four clips in total;
+  // intersecting them with a tag mostly yields nothing), and every other view
+  // drops them.
   function applyFilters() {
     filtered =
       activeMedia === "clip"
@@ -125,21 +130,37 @@ export function initGallery(section, dialog) {
   }
 
   function layout() {
-    const stageWidth = stage.clientWidth;
-    // A percentage of the stage, not a fixed pixel step: the cards themselves
-    // are variable width (their own aspect ratio, never cropped to a shared
-    // slot), so there is no single card width to base spacing on. A step tied
-    // to the stage instead gives consistent peeking regardless of which mix of
-    // portrait and landscape frames the filter happens to be showing.
-    const step = Math.min(Math.max(stageWidth * 0.24, 90), 220);
     const cells = cardsMount.children;
+    const count = cells.length;
+    if (count === 0) return;
 
-    for (let i = 0; i < cells.length; i += 1) {
+    // The deck wraps: the card "before" the first is the last one. So there is
+    // always a neighbour peeking on both sides and the row never bottoms out
+    // into empty paper at an end - which is what it did at card 1 and card N,
+    // the whole deck shoved to one side with a bare gutter on the other. The
+    // arrows and Left/Right already stepped in a loop (stepIndex wraps); this
+    // just makes the picture match. A card can only sit at +v and -v at once
+    // when count <= 2v+1, so the visible reach is clamped for the short Clips
+    // deck (4 items -> one neighbour a side).
+    const visible = Math.min(MAX_VISIBLE_OFFSET, Math.floor((count - 1) / 2));
+
+    // Step is measured off the ACTIVE card's own width, not the stage, so the
+    // sliver of the next card showing past its edge is the same whether the
+    // centre is a wide 16:9 photo or a narrow upright clip. Photos are all one
+    // width now, so there is a real card width to read.
+    const stageWidth = stage.clientWidth;
+    const activeWidth = cells[active].offsetWidth || stageWidth * 0.6;
+    const step = activeWidth / 2 + Math.min(stageWidth * 0.05, 48);
+
+    for (let i = 0; i < count; i += 1) {
       const cell = cells[i];
-      const offset = i - active;
+      let offset = i - active;
+      if (offset > count / 2) offset -= count;
+      else if (offset < -count / 2) offset += count;
+
       const distance = Math.abs(offset);
       const isCentre = distance === 0;
-      const hidden = distance > MAX_VISIBLE_OFFSET;
+      const hidden = distance > visible;
 
       cell.hidden = hidden;
       if (hidden) continue;

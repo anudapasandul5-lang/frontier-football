@@ -16,8 +16,11 @@ pastel Scandinavian one. Both of those are named failure states.
 - Display type is giant, centred, crushed, ink-coloured.
 - Colour arrives as **filled, ink-outlined surfaces** — sticker cards, pills,
   panels — never as a timid 4px accent.
-- Photography and video sit **behind a heavy cream wash**, so footage reads
-  as texture and movement while the palette stays Frontier's.
+- Photography and video sit **behind a cream wash**, so footage reads
+  as texture and movement while the palette stays Frontier's. The hero wash is
+  `color-mix(... --color-paper 60%, transparent)` (was 86%, pulled down
+  2026-09-02 - the video was invisible); floor is ~55% before dark-ink type
+  starts losing frames without a local scrim.
 - Rounding is generous: 20px cards, 40px elevated cards, fully pill buttons.
 
 The hero is the reference for tone. Match its confidence and its restraint.
@@ -178,6 +181,25 @@ palette; it does not exempt somebody else's graphic design. Files used in T5:
 | SZN 4 | `048-DYRL-IkCihf.jpg` | `crop=1080:570:0:600` |
 | SZN 3 | `077-DW8Omc2Cj6p.jpg` | `crop=1040:530:20:585` |
 | Turf Wars | `092-DNyEf-8VLpC.jpg` | `crop=480:330:295:545` |
+
+**Gallery-page album thumbnails (2026-09-02), sourced from Google Drive, not Instagram.**
+Unlike the champions-poster crops above, these are ordinary match/venue frames — no poster
+to strip, just the same bottom-corner badge band as the home gallery. Bottom-crop fraction
+applied before resizing to 1280px wide:
+
+| Card | Source folder frame | Bottom crop |
+|---|---|---|
+| SZN 1 | `_DSC4661.png` | 17% (small crest + REIGNITE, matches the table above) |
+| SZN 2 | `DSC_1622.jpg` | none — no badge on this folder's frames |
+| Final: Spain vs Argentina | `DSC_8573.jpg` | none |
+| Semi-final: England vs Argentina | `DSC_7643.jpg` | none |
+| Semi-final: Spain vs France | `DSC_7436.jpg` | none |
+| Norway vs England | `DSC_2912.jpg` | none |
+| UCL Final Night | `DSC_4069.jpg` | 24% (large crest + MAIN, matches the table above) |
+
+SZN 5 stays text-only: `driveFolder` is `TODO` (no folder to pull a frame from) and its only
+champions-post photo carries ThePapare's watermark (section above). Nothing to crop until one
+of those changes.
 
 **SZN 5's champions post is not ours.** `025-DZsCdd6is2X.jpg` carries a
 "©Ashan Senevirath… www.thepapare.com" watermark across the team. Cropping it

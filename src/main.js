@@ -4,4 +4,3 @@ import "./champions.js";
 import "./gallery.js";
 import "./partners.js";
 import "./hub.js";
-import "./marquee.js";

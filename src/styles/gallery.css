@@ -175,6 +175,18 @@
     filter var(--duration-base) var(--ease-out);
 }
 
+/* Clips keep their own shape instead of the photos' 16:9. The deck height is
+   fixed, so a clip fits that height and takes whatever width its ratio needs -
+   an upright phone clip becomes a tall, narrow card and stays upright. No
+   max-width here, so the explicit height + aspect-ratio pair is not squashed
+   the way a width cap squashed the old photo tile. --gallery-ratio is set per
+   clip by src/gallery.js. */
+.gallery__tile--clip {
+  width: auto;
+  height: calc(var(--gallery-card-width) * 9 / 16);
+  aspect-ratio: var(--gallery-ratio, 16 / 9);
+}
+
 /* No ink outline on the photograph itself: the hybrid call from the reference
    boards. Radius only, so the picture reads as floating on the page rather
    than boxed like every other surface on the site. */
@@ -231,16 +243,19 @@
   margin-top: var(--spacing-24);
 }
 
-/* Fixed-ish width via tabular figures, so the row does not jitter width as the
-   count moves between "9 / 15" and "10 / 15". */
+/* Announced, never printed - the same call the lightbox's own position text
+   already makes (src/lightbox.js). Position still reaches a screen reader via
+   aria-live on this element; sighted users get only the two arrows. */
 .gallery__count {
-  min-width: 4.5ch;
-  font-size: var(--text-caption);
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  font-variant-numeric: tabular-nums;
-  text-align: center;
-  color: var(--color-ink);
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }
 
 .gallery__arrow {
