@@ -45,7 +45,9 @@
   /* 0.92, not the token's 0.8: HOUSE-RULES section 3 measured Anton's uppercase
      ink at 0.88em, so at 0.8 the lines physically collide. */
   line-height: 0.92;
-  letter-spacing: -0.03em;
+  /* Anton is condensed already; negative tracking on top of it ran the
+     glyphs into each other at display size. Neutral, same as the hero. */
+  letter-spacing: 0;
   text-transform: uppercase;
   color: var(--color-ink);
 }
@@ -120,7 +122,11 @@
 
 /* ============ THE STAGE ============ */
 .gallery__stage {
-  --gallery-card-height: clamp(240px, 32vw, 420px);
+  /* One 16:9 landscape slot for every card. Width drives it; height follows
+     from the aspect-ratio, so a wide card cannot be squared off by a width cap
+     the way the old fixed-height + max-width pair squashed every frame toward
+     1:1 on a wide screen. */
+  --gallery-card-width: clamp(300px, 78vw, 620px);
 
   position: relative;
   max-width: var(--page-max-width);
@@ -137,7 +143,7 @@
    rather than "floating loose over the page". */
 .gallery__cards {
   position: relative;
-  height: var(--gallery-card-height);
+  height: calc(var(--gallery-card-width) * 9 / 16);
   overflow: hidden;
 }
 
@@ -151,19 +157,17 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  /* One height for every card; width follows the picture's own shape, same
-     mechanism the old strip used and the mosaic on the gallery page reuses:
-     --gallery-ratio is set per card by src/gallery.js from content.js, so nine
-     of Frontier's fifteen photographs (the 0.56 phone-portrait shots) are never
-     cropped to a card built for a landscape frame.
+  /* One fixed 16:9 slot for every card. Width is the only size set; the
+     browser derives height from aspect-ratio, so the card always holds its
+     landscape shape and object-fit: cover on the img crops each photo to it.
 
-     The cap is what stops a 1.77:1 landscape card overrunning a phone
-     viewport. Capping width while both height and aspect-ratio are set makes
-     the browser recompute height to keep the ratio (the "transferred size"
-     behaviour), which is the same trick the old .gallery__tile relied on. */
-  height: var(--gallery-card-height);
-  aspect-ratio: var(--gallery-ratio, 3 / 2);
-  max-width: min(80vw, 460px);
+     The earlier version set height AND aspect-ratio AND max-width together and
+     assumed the width cap would "transfer" back to the height. It does not
+     when height is an explicit length - Chrome just clamps the width and
+     leaves the height, so every card rendered ~1.1:1 (near square) on a wide
+     screen. Driving width-only avoids that class of bug entirely. */
+  width: var(--gallery-card-width);
+  aspect-ratio: 16 / 9;
   cursor: pointer;
   transition:
     transform var(--duration-base) var(--ease-out),
@@ -201,7 +205,7 @@
 .gallery__empty:not([hidden]) {
   display: grid;
   place-items: center;
-  height: var(--gallery-card-height);
+  height: calc(var(--gallery-card-width) * 9 / 16);
 }
 
 .gallery__empty {

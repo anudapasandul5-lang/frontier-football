@@ -69,7 +69,7 @@ export default {
       // folder's share link here and a card for SZN 6 appears on the photos
       // page with a working button. Leave it as "TODO" and the card still shows,
       // saying the photos are on the way.
-      driveFolder: "TODO",
+      driveFolder: "https://drive.google.com/drive/folders/1CstLyLWgy79Yqp0d-NQ3Rnux1-MAbxeR",
     },
     {
       season: 5,
@@ -103,7 +103,7 @@ export default {
       // folder's share link here and a card for SZN 4 appears on the photos
       // page with a working button. Leave it as "TODO" and the card still shows,
       // saying the photos are on the way.
-      driveFolder: "TODO",
+      driveFolder: "https://drive.google.com/drive/folders/1aqiStgYq6IRnL-Ev2GdEDWDu4HgzrpZu",
     },
     {
       season: 3,
@@ -118,7 +118,7 @@ export default {
       // folder's share link here and a card for SZN 3 appears on the photos
       // page with a working button. Leave it as "TODO" and the card still shows,
       // saying the photos are on the way.
-      driveFolder: "TODO",
+      driveFolder: "https://drive.google.com/drive/folders/1n3WeRh87N8bBVia1gQJ5pafeCrXkc9Bn",
     },
 
     // SZN 1 and SZN 2. Nothing about these two has been confirmed yet, so
@@ -137,7 +137,7 @@ export default {
       // folder's share link here and a card for SZN 2 appears on the photos
       // page with a working button. Leave it as "TODO" and the card still shows,
       // saying the photos are on the way.
-      driveFolder: "TODO",
+      driveFolder: "https://drive.google.com/drive/folders/1G5VcXwTNeIMI_K7eSrRf0ndZalg_8S66",
     },
     {
       season: 1,
@@ -152,7 +152,7 @@ export default {
       // folder's share link here and a card for SZN 1 appears on the photos
       // page with a working button. Leave it as "TODO" and the card still shows,
       // saying the photos are on the way.
-      driveFolder: "TODO",
+      driveFolder: "https://drive.google.com/drive/folders/18fxPlbuFWK1KWtKPedgNnm3DbIxw4VKW",
     },
   ],
 
@@ -195,7 +195,7 @@ export default {
       // Link to the full photo folder for Division 0 on Google Drive.
       // Paste the folder's share link here. Leave it as "TODO" and the card
       // still shows, saying the photos are on the way.
-      driveFolder: "TODO",
+      driveFolder: "https://drive.google.com/drive/folders/1fkDf7Igl7RtVIKxxxeuGikZqo6Eg7se1",
     },
   ],
 
@@ -218,15 +218,45 @@ export default {
   watchAlongs: [
     {
       // The name shown on the card. This is the one line that must be filled in.
-      name: "World Cup",
+      name: "Final: Spain vs Argentina",
       // A short line under the name. The month, or which matches it covered.
       note: "TODO",
       // A picture from the night. Put the file in the public/champions/ folder
       // and write its name here, the same way the champion photos work.
       photo: "TODO",
       photoAlt: "TODO",
-      // The Google Drive folder holding every photo from the watch-alongs.
-      driveFolder: "TODO",
+      // The Google Drive folder holding the photos from this night.
+      driveFolder: "https://drive.google.com/drive/folders/1hOfEz1uHcPT0fx8Ca4Dv86bhcj7WMMsU",
+    },
+    {
+      name: "Semi-final: England vs Argentina",
+      note: "TODO",
+      photo: "TODO",
+      photoAlt: "TODO",
+      driveFolder: "https://drive.google.com/drive/folders/1MFdyJn1AwLtSq_Flkg8PB_EqFX1a15CV",
+    },
+    {
+      name: "Semi-final: Spain vs France",
+      note: "TODO",
+      photo: "TODO",
+      photoAlt: "TODO",
+      driveFolder: "https://drive.google.com/drive/folders/15y_x5dnOdsGQvmjPm0JaIqeLpoGWB5BM",
+    },
+    {
+      name: "Norway vs England",
+      note: "TODO",
+      photo: "TODO",
+      photoAlt: "TODO",
+      driveFolder: "https://drive.google.com/drive/folders/1CZXXR7ZNFmPaOFudf8wDXNlPFlaKnxlh",
+    },
+    {
+      // Not part of the same run of matches as the four above, but it is still
+      // a night in front of a screen, so it belongs in this group.
+      name: "UCL Final Night",
+      note: "TODO",
+      photo: "TODO",
+      photoAlt: "TODO",
+      driveFolder: "https://drive.google.com/drive/folders/1LI43OOBwg14x5l5h-E3OTw5f2z-kGyXe",
     },
   ],
 
@@ -251,123 +281,203 @@ export default {
   //           pictures load. If you swap a picture and do not know its size,
   //           delete both lines: the site holds a normal wide slot instead.
   //
+  // EVERY PHOTOGRAPH HERE IS LANDSCAPE, ON PURPOSE
+  //   The row sizes each card to the picture's own shape, so one upright
+  //   picture in a row of wide ones makes the whole strip taller and leaves
+  //   the wide ones looking shrunken beside it. Clips are the exception: the
+  //   footage is phone-shot and mostly upright, so clips live behind the CLIPS
+  //   button and appear nowhere else. If you add a photograph, add a wide one.
+  //
   // WHERE THESE CAME FROM
-  //   Every one is a real photograph or a real clip from Frontier's Instagram.
-  //   Posters and announcement graphics were deliberately left out: they carry
-  //   their own lettering and their own colours, which fight the site's. Four
-  //   otherwise good photographs were dropped because a Frontier badge is
-  //   burned into the corner of the picture. Two more were dropped because
-  //   ThePapare's photographer's copyright notice is printed across them, and
-  //   that is not ours to crop off. See docs/HOUSE-RULES.md.
+  //   The photographs were picked out of Frontier's own Google Drive, from the
+  //   season and watch-along folders the gallery page already links to. The two
+  //   clips are from Frontier's Instagram, which is where the whole row used to
+  //   come from. Posters and announcement graphics are still deliberately left
+  //   out: they carry their own lettering and their own colours, which fight
+  //   the site's. Two Instagram photographs remain unusable because ThePapare's
+  //   photographer's copyright notice is printed across them, and that is not
+  //   ours to crop off.
+  //
+  //   Most Drive photographs carry a burned-in Frontier, 4x4, HYPE, REIGNITE or
+  //   MAIN mark in the bottom corners. Those marks were measured and cropped
+  //   off before the files were saved, so nothing here ships a logo nobody
+  //   meant to publish. Two otherwise good frames were dropped instead of
+  //   cropped, because the badge sat too far up the picture to cut without
+  //   cutting the subject too. See docs/HOUSE-RULES.md.
   // ==========================================================================
   gallery: [
+    // ---- On the pitch ----
     {
-      src: "/gallery/01.webp",
-      alt: "A player slides in to challenge for the ball on a fenced turf pitch.",
+      src: "/gallery/p01.webp",
+      alt: "A player slides in to win the ball as an attacker shields it on the turf.",
       tag: "On the pitch",
-      width: 1080,
-      height: 782,
+      width: 1280,
+      height: 921,
     },
     {
-      src: "/gallery/02.webp",
-      alt: "A player in a training bib sits at the side of the pitch, watching the game.",
-      tag: "Off the pitch",
-      width: 675,
-      height: 1200,
+      src: "/gallery/p02.webp",
+      alt: "Two players stretch for a loose ball in front of an open goal.",
+      tag: "On the pitch",
+      width: 1280,
+      height: 708,
     },
+    {
+      src: "/gallery/p03.webp",
+      alt: "A player strikes the ball under floodlights with palm trees behind the cage.",
+      tag: "On the pitch",
+      width: 1280,
+      height: 708,
+    },
+    {
+      src: "/gallery/p04.webp",
+      alt: "Two players go one on one over the ball in the middle of the pitch.",
+      tag: "On the pitch",
+      width: 1280,
+      height: 666,
+    },
+    {
+      src: "/gallery/p05.webp",
+      alt: "A player shoots while spectators watch from the sideline tents.",
+      tag: "On the pitch",
+      width: 1280,
+      height: 649,
+    },
+    {
+      src: "/gallery/p06.webp",
+      alt: "A player shapes to shoot during a daytime match.",
+      tag: "On the pitch",
+      width: 1280,
+      height: 853,
+    },
+    {
+      src: "/gallery/p07.webp",
+      alt: "Players crowd the ball in a tight midfield battle.",
+      tag: "On the pitch",
+      width: 1280,
+      height: 649,
+    },
+    {
+      src: "/gallery/p08.webp",
+      alt: "Two players sprint shoulder to shoulder chasing the ball.",
+      tag: "On the pitch",
+      width: 1280,
+      height: 658,
+    },
+
+    // ---- Off the pitch ----
+    {
+      src: "/gallery/p09.webp",
+      alt: "A team lines up for a portrait on the pitch at dusk.",
+      tag: "Off the pitch",
+      width: 1280,
+      height: 708,
+    },
+    {
+      src: "/gallery/p10.webp",
+      alt: "Two players embrace after the final whistle.",
+      tag: "Off the pitch",
+      width: 1280,
+      height: 649,
+    },
+    {
+      src: "/gallery/p11.webp",
+      alt: "A winning side lifts the trophy in front of a Frontier banner.",
+      tag: "Off the pitch",
+      width: 1280,
+      height: 658,
+    },
+    {
+      src: "/gallery/p12.webp",
+      alt: "Two teams line up with medals and the cup after the final.",
+      tag: "Off the pitch",
+      width: 1280,
+      height: 658,
+    },
+    {
+      src: "/gallery/p13.webp",
+      alt: "Players crowd around the screens at the FIFA tournament.",
+      tag: "Off the pitch",
+      width: 1280,
+      height: 853,
+    },
+
+    // ---- Watch-alongs ----
+    {
+      src: "/gallery/p14.webp",
+      alt: "Fans throw their arms up as the match turns on the big screen.",
+      tag: "Watch-alongs",
+      width: 1280,
+      height: 649,
+    },
+    {
+      src: "/gallery/p15.webp",
+      alt: "A room full of football shirts celebrating a goal together.",
+      tag: "Watch-alongs",
+      width: 1280,
+      height: 649,
+    },
+    {
+      src: "/gallery/p16.webp",
+      alt: "A packed venue watching the match on the screens.",
+      tag: "Watch-alongs",
+      width: 1280,
+      height: 649,
+    },
+    {
+      src: "/gallery/p17.webp",
+      alt: "Fans leap out of their seats in front of the projector screen.",
+      tag: "Watch-alongs",
+      width: 1280,
+      height: 854,
+    },
+    {
+      src: "/gallery/p18.webp",
+      alt: "A full house watching the match under the green glow of the bar.",
+      tag: "Watch-alongs",
+      width: 1280,
+      height: 854,
+    },
+    {
+      src: "/gallery/p19.webp",
+      alt: "Fans in football shirts raise their arms at the line-up reveal.",
+      tag: "Watch-alongs",
+      width: 1280,
+      height: 854,
+    },
+
+    // ---- Clips. Only the CLIPS filter shows these. ----
     {
       // A clip. `poster` is the still that shows until someone opens it.
-      src: "/gallery/03.mp4",
-      poster: "/gallery/03.webp",
+      src: "/gallery/v01.mp4",
+      poster: "/gallery/v01.webp",
       alt: "A player rests a boot on the ball beside a training cone under floodlights.",
       tag: "On the pitch",
       width: 1200,
       height: 678,
     },
     {
-      src: "/gallery/04.webp",
-      alt: "A crowd watching a match together on a screen indoors.",
-      tag: "Watch-alongs",
-      width: 675,
-      height: 1200,
-    },
-    {
-      src: "/gallery/05.webp",
-      alt: "A packed room of people watching a match on a big screen.",
-      tag: "Watch-alongs",
-      width: 1080,
-      height: 721,
-    },
-    {
-      src: "/gallery/06.webp",
-      alt: "A player with both hands on their head during a game, lit from behind.",
-      tag: "On the pitch",
-      width: 675,
-      height: 1200,
-    },
-    {
-      src: "/gallery/07.webp",
-      alt: "A player in a 4x4 Series shirt, photographed close up.",
-      tag: "On the pitch",
-      width: 675,
-      height: 1200,
-    },
-    {
-      src: "/gallery/08.webp",
-      alt: "Players on a floodlit pitch at night, seen from the far end.",
-      tag: "On the pitch",
-      width: 1080,
-      height: 720,
-    },
-    {
-      src: "/gallery/09.webp",
-      alt: "Two people hold up a football shirt beside a pitch.",
-      tag: "Off the pitch",
-      width: 640,
-      height: 1136,
-    },
-    {
-      src: "/gallery/10.mp4",
-      poster: "/gallery/10.webp",
+      src: "/gallery/v02.mp4",
+      poster: "/gallery/v02.webp",
       alt: "Two players compete for the ball during a game.",
       tag: "On the pitch",
       width: 675,
       height: 1200,
     },
     {
-      src: "/gallery/11.webp",
-      alt: "Two spectators watching the game closely from the sideline.",
-      tag: "Off the pitch",
-      width: 675,
-      height: 1200,
+      src: "/gallery/v03.mp4",
+      poster: "/gallery/v03.webp",
+      alt: "Someone walks through a watch-along venue while the match plays on the big screen.",
+      tag: "Watch-alongs",
+      width: 540,
+      height: 960,
     },
     {
-      src: "/gallery/12.webp",
-      alt: "A player strikes a ball on a paved promenade lined with palm trees.",
-      tag: "Off the pitch",
-      width: 675,
-      height: 1200,
-    },
-    {
-      src: "/gallery/13.webp",
-      alt: "A person in a Sri Lanka jacket, photographed in low light.",
-      tag: "Off the pitch",
-      width: 720,
-      height: 406,
-    },
-    {
-      src: "/gallery/14.webp",
-      alt: "Players celebrating together after a game, one lifted on another's back.",
-      tag: "On the pitch",
-      width: 675,
-      height: 1200,
-    },
-    {
-      src: "/gallery/15.webp",
-      alt: "A host speaks into a microphone beside a player at a pitch-side stand.",
-      tag: "Off the pitch",
-      width: 675,
-      height: 1200,
+      src: "/gallery/v04.mp4",
+      poster: "/gallery/v04.webp",
+      alt: "Supporters in football shirts watching the match from armchairs, one grinning.",
+      tag: "Watch-alongs",
+      width: 540,
+      height: 960,
     },
   ],
 

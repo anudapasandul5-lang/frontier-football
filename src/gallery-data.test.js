@@ -10,6 +10,7 @@ import {
   splitByMedia,
   stepIndex,
 } from "./gallery-data.js";
+import content from "../content.js";
 
 describe("stepIndex", () => {
   it("wraps forward off the end", () => {
@@ -257,5 +258,18 @@ describe("splitByMedia", () => {
     });
 
     expect(splitByMedia(items)).toEqual({ photos: [], clips: items });
+  });
+});
+
+// The home deck shows landscape photographs only; clips are the one place an
+// upright frame is allowed, and they sit behind their own pill. A portrait
+// photograph slipping into content.js is the regression this guards.
+describe("content.js gallery shape", () => {
+  it("has no portrait photographs", () => {
+    const upright = galleryItems(content)
+      .filter((item) => !item.isClip)
+      .filter((item) => item.width / item.height <= 1.15);
+
+    expect(upright.map((item) => item.src)).toEqual([]);
   });
 });

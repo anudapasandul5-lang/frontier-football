@@ -37,10 +37,12 @@ function thumbnail(item) {
 function card(item, index, onActivate) {
   const cell = document.createElement("li");
   cell.className = "gallery__tile";
-  // The card takes its shape from the picture rather than from a slot, so
-  // reordering content.js cannot change what gets cropped. Same mechanism the
-  // old strip used and the mosaic on the gallery page reuses.
-  cell.style.setProperty("--gallery-ratio", `${item.width} / ${item.height}`);
+  // Every card is one fixed 16:9 landscape slot (see gallery.css); object-fit:
+  // cover crops each photo into it. The home deck reads as a uniform row of
+  // frames rather than a ragged run of per-photo shapes. The gallery-page
+  // mosaic still keeps each picture's own ratio - the home deck is the
+  // deliberate exception. item.width/height still feed the <img> size attrs in
+  // thumbnail() so the row does not jump while images load.
 
   const button = document.createElement("button");
   button.className = "gallery__frame";
@@ -95,20 +97,30 @@ export function initGallery(section, dialog) {
   const hasClips = items.some((item) => item.isClip);
   const lightbox = initLightbox(dialog);
 
-  // Two independent facets, not one combined list: a tag and a media type
-  // answer different questions ("what is this of" vs "is it moving"), and
-  // combining them into a single-select row would mean "Clips" and "Watch-
-  // alongs" fight over the same slot even though a watch-along clip is a
-  // perfectly sensible photograph to want. Each row keeps its own All.
+  // Two rows, not one combined list: a tag and a media type answer different
+  // questions ("what is this of" vs "is it moving"), so folding them into a
+  // single-select row would make "Clips" and "Watch-alongs" fight over the
+  // same slot. They are not fully independent though - see applyFilters().
   let activeTag = null;
   let activeMedia = null; // null | "photo" | "clip"
-  let filtered = items;
+  let filtered = items; // replaced by applyFilters() below, before first paint
   let active = 0;
 
+  // The deck is landscape-only everywhere except Clips. Cards are a fixed 16:9
+  // slot that object-fit crops into, so an upright frame does not break the
+  // row's geometry - it loses most of itself to the crop instead, which is why
+  // every photograph in content.js is wide to begin with. Clips are the one
+  // thing allowed to be upright: the source footage is phone-shot, a cropped
+  // poster is acceptable when the play button says there is more behind it,
+  // and the lightbox shows the whole frame anyway. So clips live behind their
+  // own pill and nowhere else - Clips ignores the tag row (four clips in
+  // total; intersecting them with a tag mostly yields nothing), and every
+  // other view drops them.
   function applyFilters() {
-    filtered = filterItems(items, activeTag).filter(
-      (item) => activeMedia === null || item.isClip === (activeMedia === "clip"),
-    );
+    filtered =
+      activeMedia === "clip"
+        ? items.filter((item) => item.isClip)
+        : filterItems(items, activeTag).filter((item) => !item.isClip);
     active = 0;
   }
 
@@ -164,9 +176,10 @@ export function initGallery(section, dialog) {
   }
 
   function renderCards() {
-    // A combination (say Clips + Watch-alongs) can legitimately match nothing
-    // today - the two clips that exist are both tagged On the pitch. Told
-    // plainly via the native hidden attribute on both elements rather than
+    // Nothing on screen today reaches this, because Clips ignores the tag row
+    // and every tag has landscape photographs under it. It stays because a tag
+    // whose only entries were clips would empty the stage, and an empty stage
+    // has to say so. Told plainly via the native hidden attribute rather than
     // left as a stage with peeking cards and no centre - the same "say it,
     // don't fake it" rule the champions grid and the Drive links already
     // follow. hidden rather than a CSS class: a class that also sets display
@@ -216,8 +229,13 @@ export function initGallery(section, dialog) {
 
   function setTag(tag) {
     activeTag = tag;
+    // Clips ignores the tag row, so leaving Clips pressed here would show a
+    // pressed tag that changed nothing on screen. Picking a tag means "show me
+    // this subject", which is a request to leave the clips view.
+    if (activeMedia === "clip") activeMedia = null;
     applyFilters();
     renderTagPills();
+    renderMediaPills();
     renderCards();
   }
 
@@ -247,6 +265,8 @@ export function initGallery(section, dialog) {
   // currently on stage, at most five of them.
   window.addEventListener("resize", layout);
 
+  // Even the untouched view is a filtered one now: the default drops clips.
+  applyFilters();
   renderTagPills();
   renderMediaPills();
   renderCards();

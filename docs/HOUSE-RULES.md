@@ -213,6 +213,37 @@ and three of them are invisible at thumbnail size:
   all four rather than keep cropping, because every miss ships a logo nobody
   meant to publish.
 
+**The badge depths are now measured — do not guess again.** The gallery photos
+were re-sourced from Frontier's Google Drive on 2026-09-02, and most Drive
+frames carry a mark in the *bottom* corners: a Frontier crest bottom-right, and
+one of `4x4 SERIES` / `HYPE` / `REIGNITE` / `MAIN` bottom-left. Measured as a
+percentage of frame height, from the bottom edge up:
+
+| Mark | Reaches up to | Safe bottom crop |
+|---|---|---|
+| REIGNITE wordmark | ~9% | 12% |
+| Frontier crest, small (SZN 1, SZN 3 sets) | ~14% | 17% |
+| `4x4 SERIES` wordmark | ~17% | 20% |
+| Frontier crest, large + HYPE / MAIN (SZN 4, watch-alongs) | ~21% | 24% |
+| Frontier crest, oversized (occasional) | ~29% | reject |
+
+T6's warning holds: the crest really is that tall. Crop the **whole bottom
+band**, not a corner — both marks sit at the same height, so one horizontal cut
+clears both and keeps the frame rectangular. A 24% cut turns a 3:2 frame into
+roughly 2:1; the home deck then centre-crops that to a fixed 16:9 card
+(`object-fit: cover`, see `src/styles/gallery.css`) and the gallery-page mosaic
+keeps the frame's own ratio, so either way the extra width is spent, not shown
+squashed. When the badge reaches past ~25%, drop the photograph: the subject is
+always in the bottom third of an action frame, and cutting that deep is just
+publishing a worse picture. The measuring trick is a contact sheet of only the
+bottom 34% of each frame with 5% gridlines drawn on it — four images per sheet,
+read the number straight off the line.
+
+**Verify after cropping, not before.** Google Drive's `imageMediaMetadata`
+width/height does not always match how the file actually renders — of 213
+frames checked, 5 came back "landscape" in the metadata and portrait in the
+pixels. Trust the decoded image, never the API's numbers.
+
 **The triage method, which is worth reusing.** Do not open 100 files one at a
 time. Build 5x5 contact sheets with ffmpeg and read four images instead:
 
