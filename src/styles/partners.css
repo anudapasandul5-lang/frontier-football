@@ -109,25 +109,54 @@
   flex: none;
 }
 
+/* ============ LOGO CHIP ============ */
+/* A cream tile under every logo. The marks are in their own brand colours, and
+   brand colours do not negotiate with a #0C2037 band: ThePapare is red on
+   white, Sofascore near-black, Athlete 360 and Nutrimax dark on white. Every
+   one of them would be a smudge sitting straight on the ink.
+
+   The chip is the same paper-and-ink surface the pills and cards use, so this
+   is the site's own vocabulary rather than a device invented for one strip. */
+.partners__chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Padding-block is smaller than padding-inline on purpose: the marks are
+     height-capped, so vertical space is already spoken for, while a wide
+     wordmark like ThePapare needs the horizontal room to not look wedged in. */
+  padding: var(--spacing-8) var(--spacing-16);
+  min-width: 84px;
+  border-radius: var(--radius-card);
+  background: var(--color-paper);
+}
+
 /* Height-capped, never width-capped, so eleven marks of different proportions
    sit on one optical line. Sofascore is a long wordmark and would otherwise run
-   twice the width of the rest — it alone gets a width ceiling. */
+   twice the width of the rest - it alone gets a width ceiling. */
 .partners__logo {
-  height: clamp(26px, 3.4vw, 40px);
+  /* Taller than the old cream strip's cap, because the marks are no longer all
+     wordmarks. Four of them are square lockups (Hype Bam, address.lk, Absy,
+     Main Sports Bar) and a square held to a wordmark's height is a 34px tile
+     with a monogram and a strapline inside it - unreadable. Height and
+     max-width together let a square go tall while a long wordmark like
+     ThePapare stays capped by its width instead. */
+  height: clamp(30px, 3.6vw, 46px);
   width: auto;
   /* Sofascore is a long horizontal wordmark; height-matched it runs half again
      as wide as any other mark. This ceiling pulls it back level with them. */
-  max-width: clamp(120px, 15vw, 172px);
+  max-width: clamp(110px, 14vw, 150px);
   object-fit: contain;
-  /* The files are already flat paper; the dip to 0.85 pulls the whole strip
-     back a step so it reads as a quiet credit, not a row of buttons. */
-  opacity: 0.85;
+  /* No opacity dip any more. The old strip faded every mark to 0.85 to stop a
+     row of flat cream shapes reading as buttons; a colour logo on a cream chip
+     is already a quiet credit, and fading it would only make the three
+     dark-ground tiles look washed out against the chip they sit on. */
 }
 
 /* The two partners with no logo file (see content.js) ride the band as their
-   handle in the display face. Sized a step BELOW the logo cap-height, not to
-   match it: Anton is far heavier than any of the marks, so an equal size reads
-   as louder. Smaller + the same opacity lands it at the same optical weight. */
+   handle in the display face, with no chip: a cream rectangle drawn around
+   cream type is a box around nothing. Sized a step BELOW the logo cap-height,
+   not to match it - Anton is far heavier than any of the marks, so an equal
+   size reads as louder. */
 .partners__wordmark {
   font-family: var(--font-display);
   font-size: clamp(17px, 2vw, 23px);

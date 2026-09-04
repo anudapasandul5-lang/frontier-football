@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { outboundLinks, parseContent, partners } from "./content-data.js";
+import { journey, outboundLinks, parseContent, partners, people } from "./content-data.js";
 
 describe("parseContent", () => {
   it("keeps every field of a fully recorded season", () => {
@@ -28,6 +28,8 @@ describe("parseContent", () => {
       note: "A note",
       photo: "/champions/szn-4.webp",
       photoAlt: "A description",
+      date: null,
+      venue: null,
       driveFolder: null,
     });
   });
@@ -100,6 +102,8 @@ describe("parseContent", () => {
       runnerUp: null,
       photo: "/champions/turf-wars.webp",
       photoAlt: null,
+      date: null,
+      venue: null,
       driveFolder: null,
     });
   });
@@ -288,5 +292,94 @@ describe("outboundLinks handles", () => {
     );
 
     expect(link.handle).toBeNull();
+  });
+});
+
+describe("journey", () => {
+  it("puts Turf Wars first, then the seasons oldest first, then the other competitions", () => {
+    // The About page tells the story forward. content.js lists seasons newest
+    // first because that is the order the champions grid wants, so the ordering
+    // lives here rather than in the file the owner edits.
+    const stops = journey(
+      parseContent({
+        seasons: [{ season: 3 }, { season: 2 }, { season: 1 }],
+        competitions: [{ name: "Turf Wars" }, { name: "Division 0" }],
+      }),
+    );
+
+    expect(stops.map((stop) => stop.name)).toEqual([
+      "Turf Wars",
+      "SZN 1",
+      "SZN 2",
+      "SZN 3",
+      "Division 0",
+    ]);
+  });
+
+  it("survives a season being added, and a whole collection being deleted", () => {
+    // HOUSE-RULES section 7: any layout driven by content.js must survive a
+    // changing item count. Deleting every list from the file must not throw.
+    expect(journey(parseContent({}))).toEqual([]);
+    expect(journey(parseContent({ seasons: [{ season: 7 }] })).map((s) => s.name)).toEqual(["SZN 7"]);
+  });
+
+  it("leaves an unrecorded date and venue absent instead of printing TODO", () => {
+    const [stop] = journey(
+      parseContent({ seasons: [{ season: 1, date: "TODO: ask the lads", venue: "TODO" }] }),
+    );
+
+    expect(stop.date).toBeNull();
+    expect(stop.venue).toBeNull();
+  });
+
+  it("carries a recorded date, venue and champion straight through", () => {
+    const [stop] = journey(
+      parseContent({
+        competitions: [
+          { name: "Turf Wars", date: "Aug 2024", venue: "One Galle Face", champion: "TODO" },
+        ],
+      }),
+    );
+
+    expect(stop).toMatchObject({
+      name: "Turf Wars",
+      date: "Aug 2024",
+      venue: "One Galle Face",
+      champion: null,
+    });
+  });
+});
+
+describe("people", () => {
+  it("returns nothing while the list is empty, so the section can hide itself", () => {
+    // The list ships empty on purpose. Nobody has agreed to be named yet, and
+    // an empty section is better than a placeholder for a real person.
+    expect(people(parseContent({}))).toEqual([]);
+    expect(people(parseContent({ people: [] }))).toEqual([]);
+  });
+
+  it("drops a nameless entry, the same rule partners() uses", () => {
+    const list = people(
+      parseContent({ people: [{ name: "TODO", role: "Founder" }, { name: "A Real Name" }] }),
+    );
+
+    expect(list.map((person) => person.name)).toEqual(["A Real Name"]);
+  });
+});
+
+describe("watchAlongsAfter", () => {
+  it("carries the season the watch parties ran alongside", () => {
+    // The owner said on 2026-09-03 that the watch parties happened in the
+    // middle of SZN 4, 5 and 6, so the branch leaves the timeline there rather
+    // than hanging off the end of it.
+    expect(parseContent({ watchAlongsAfter: 5 }).watchAlongsAfter).toBe(5);
+  });
+
+  it("is absent when unrecorded, so the branch falls back to the end", () => {
+    expect(parseContent({}).watchAlongsAfter).toBeNull();
+    expect(parseContent({ watchAlongsAfter: "TODO" }).watchAlongsAfter).toBeNull();
+    // A season that does not exist is not an anchor either - the renderer has
+    // nothing to attach to and must not throw looking for it.
+    expect(parseContent({ watchAlongsAfter: 0 }).watchAlongsAfter).toBeNull();
   });
 });

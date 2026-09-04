@@ -17,6 +17,13 @@ import { wireReveal } from "./reveal.js";
    strip that used to sit below the section is gone, its line already stated
    still in .partners__lede above.
 
+   FULL COLOUR, ON CHIPS. The marks were flattened to one cream colour when
+   they were first sourced; they are their real brand artwork now, each on a
+   cream chip so the band does not decide which brands are legible. Three of
+   them (Absy Studios, Main Sports Bar, address.lk) are drawn white-on-dark and
+   keep their own dark ground inside the chip - knocking it out would leave
+   white artwork invisible on cream.
+
    TEXT WHERE THERE IS NO LOGO. @iodexsrilanka and @zone360.lk have no usable
    logo file online, so they ride the same band as their name set in the
    display face. The moment a file lands in public/partners/ and is named in
@@ -24,6 +31,16 @@ import { wireReveal } from "./reveal.js";
 
 function mark(partner) {
   if (partner.logo) {
+    // The logo rides a cream chip rather than the ink band directly. The marks
+    // are in their own brand colours now, and a partner does not get to choose
+    // a colour that happens to read on #0C2037: ThePapare is red on white,
+    // Sofascore is near-black, Athlete 360 is blue. All three vanish on ink.
+    // A paper chip gives every one of them the light ground its artwork was
+    // drawn for, and paper-surface-with-ink-outline is the site's own
+    // vocabulary rather than an import.
+    const chip = document.createElement("span");
+    chip.className = "partners__chip";
+
     const logo = document.createElement("img");
     logo.className = "partners__logo";
     logo.src = partner.logo;
@@ -33,9 +50,13 @@ function mark(partner) {
     logo.alt = partner.name;
     logo.loading = "lazy";
     logo.decoding = "async";
-    return logo;
+    chip.append(logo);
+    return chip;
   }
 
+  // No chip for the two partners with no file. A cream chip around a cream
+  // wordmark would be a rectangle drawn around nothing; the name sits on the
+  // ink the way it always did.
   const name = document.createElement("span");
   name.className = "partners__wordmark";
   name.textContent = partner.name;

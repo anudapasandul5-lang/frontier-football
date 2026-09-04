@@ -60,9 +60,11 @@ a social/content event Frontier hosts, not a match Frontier organizes or officia
 Umbrella for a season of the 4x4 Series or a competition. Added when the gallery
 needed both as one list. It is a genuine umbrella and not a synonym for either:
 `competition` is already defined above as "a Frontier tournament that is NOT a
-season", so this word was already doing that job informally. Code: `tournaments()`
-in `src/content-data.js`. No data key of its own, since it is a view over
-`seasons` and `competitions`, in that order.
+season", so this word was already doing that job informally. No data key of its own, since it is a view over `seasons` and `competitions`, in
+that order. **There is no `tournaments()` function** - this line used to claim
+one lived in `src/content-data.js` and it never did; `src/gallery-page.js`
+assembles the list inline from `parseContent()`'s output. Corrected 2026-09-03
+after the stale claim was copied into a plan as fact.
 
 **Gallery**
 The gallery is a **page** (`gallery.html`), reached from the nav on every page. It
@@ -169,3 +171,35 @@ both SZN 1 and 2", 2026-03-17). And the SZN 6 champions post is captioned
 "…@ramadanfc.official c…" even though section 7 of HOUSE-RULES records SZN 6's champion as
 Spain — both can be true, since SZN 6 was a country-named edition, but nobody has said so.
 Owner confirmation turns either into a one-word edit.
+
+**Journey**
+The About page's forward-running sequence of stops: the first competition, then
+every season oldest-first, then any remaining competition. Code: `journey()` in
+`src/content-data.js`. No data key of its own - it is a view over `competitions`
+and `seasons`, reversing the newest-first order the champions grid wants. Turf
+Wars opens it because Turf Wars is where Frontier started (owner, 2026-09-03).
+Once every stop has a real `date`, sorting by date replaces the file-order rule.
+
+**Person**
+Someone who runs Frontier. Data key: `people`, a list of
+`{ name, role, photo, photoAlt }` at the root of content.js, **shipped empty**.
+An entry with no `name` is dropped, the same rule competitions and watch-alongs
+use. With the list empty the About page's people section is absent entirely
+rather than present-and-empty: nobody has agreed to be named, and a card
+standing in for a real person is worse than no section. Code: `people()` in
+`src/content-data.js`.
+
+**Spine**
+The generated SVG curve threading the About page's journey stops. Decorative and
+`aria-hidden`: it carries nothing the stops do not already say in text. Not
+content, not a data key. Its `d` comes from `spinePath()` in
+`src/content-data.js`, which is pure arithmetic so it can be tested without a
+DOM. See HOUSE-RULES section 5 for the two ways it degrades and why the base
+state is fully drawn.
+
+**Date and venue**
+When a season, competition or watch-along ran, and where. Data keys: `date` and
+`venue` on every such entry. Both are TODO across the whole file today. They are
+free text ("Aug 2024", "One Galle Face") rather than parsed, because nothing
+sorts or filters on them yet and a date the owner types by hand should not have
+to satisfy a format.

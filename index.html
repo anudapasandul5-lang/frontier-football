@@ -67,6 +67,7 @@
       </a>
 
       <div class="nav__end">
+        <a class="nav__link" href="/about.html">About</a>
         <a class="nav__link" href="/gallery.html">Gallery</a>
         <a
           class="btn btn--secondary nav__cta"
@@ -74,7 +75,7 @@
           target="_blank"
           rel="noopener noreferrer"
         >
-          Follow @frontierfootballl
+          Follow <span class="nav__cta-handle">@frontierfootballl</span>
         </a>
       </div>
     </header>
@@ -149,6 +150,12 @@
               <p>
                 Six seasons later it is the same idea. Local players, local turf, and a crowd that
                 shows up.
+              </p>
+              <!-- The whole run, stop by stop, lives on its own page. This
+                   section stays the short answer; the About page is the long
+                   one. -->
+              <p class="story__more">
+                <a class="story__link" href="/about.html">Read our story</a>
               </p>
             </div>
           </div>
@@ -229,7 +236,7 @@
           <p class="gallery__empty" data-gallery-empty hidden>Nothing in this combination yet.</p>
           <div class="gallery__nav">
             <button
-              class="gallery__arrow gallery__arrow--prev"
+              class="arrow arrow--prev gallery__arrow"
               type="button"
               data-gallery-prev
               aria-label="Previous photo"
@@ -242,7 +249,7 @@
                  information, so the site keeps one answer to one question. -->
             <p class="gallery__count" data-gallery-count aria-live="polite"></p>
             <button
-              class="gallery__arrow gallery__arrow--next"
+              class="arrow arrow--next gallery__arrow"
               type="button"
               data-gallery-next
               aria-label="Next photo"
@@ -268,7 +275,19 @@
           </p>
         </div>
 
-        <ul class="champions__grid" data-champions></ul>
+        <!-- A horizontal rail, not a grid: eight seasons stacked three-wide
+             ran the section past 1800px on a laptop and made the page feel
+             like an archive. The cards are unchanged; only how they are
+             arranged is. Native CSS scroll-snap does the scrolling, so a
+             thumb swipe works with no JavaScript at all and the arrows and
+             dots below are an addition to it rather than the only way in.
+
+             data-reveal sits on the rail, not on each card. Cards scrolled
+             out to the right are clipped by the rail'''s own overflow, so a
+             per-card observer would never see them intersect the viewport
+             and they would sit at opacity 0 forever - the exact failure
+             src/reveal.js already documents for the vertical case. -->
+        <ul class="champions__rail" data-champions data-reveal tabindex="0"></ul>
       </section>
 
       <!-- Partners. Every row is built by src/partners.js from content.js, so
@@ -368,6 +387,7 @@
         </p>
         <nav class="site-foot__nav" aria-label="Footer">
           <a class="site-foot__link" href="/">Home</a>
+          <a class="site-foot__link" href="/about.html">About</a>
           <a class="site-foot__link" href="/gallery.html">Gallery</a>
           <a
             class="site-foot__link"
@@ -410,6 +430,7 @@
       aria-modal="true"
       aria-labelledby="lightbox-title"
       data-lightbox
+      data-lenis-prevent
     >
       <h2 class="lightbox__sr" id="lightbox-title">Gallery</h2>
       <!-- Position, announced rather than printed. A keyboard user arrowing

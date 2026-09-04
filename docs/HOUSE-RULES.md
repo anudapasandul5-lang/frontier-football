@@ -85,7 +85,14 @@ maximised short laptop (1900x780) will push your CTA below the fold.
 
 - Plain HTML + CSS + JS on Vite. No framework, no Tailwind, no component
   library, no animation library.
-- **Exactly two dependencies: `vite` and `vitest`. Ask before adding any.**
+- **Four dependencies now: `vite`, `vitest`, `lenis`, `gsap`. Ask before adding
+  any more.** This rule said "exactly two" until 2026-09-03 and was already
+  stale when it was read - `lenis` had gone in with the smooth-scroll work. The
+  owner approved `gsap` explicitly for the About page's pinned timeline after
+  being shown the cost. Both approvals are on the record; a fifth is not.
+  **`gsap` is imported by `src/about.js` only.** Do not import it from
+  `src/smooth-scroll.js` or any shared module: `index.html` and `gallery.html`
+  must not pay 47KB gzipped for a section they do not have.
 - `src/styles/tokens.css`, `base.css`, `components.css` are the signed-off
   design system from T1. Reuse their primitives (`.card`, `.card--yellow`,
   `.btn--primary`, `.pill`, `.band`, `.marquee`). Do not reinvent them and
@@ -121,6 +128,70 @@ Hard rules:
 - `prefers-reduced-motion` must produce a genuinely static result, not a
   faster one. `base.css` already kills animation and transition globally
   under that query; anything JS-driven must check `matchMedia` itself.
+
+**The About page's timeline spine is a sanctioned exception to "transform and
+opacity only", and it is the only one.** `src/styles/about.css` animates
+`stroke-dashoffset` on `animation-timeline: view()` so the curve draws itself as
+you scroll. It repaints and does not trigger layout, and there is no
+transform-only way to draw a line along its own length. Two things about it are
+load-bearing and must not be "tidied":
+
+- The base `stroke-dashoffset` is **0** (fully drawn). The undrawn start state
+  lives inside `@supports (animation-timeline: scroll())` **and**
+  `@media (prefers-reduced-motion: no-preference)`. Declare the undrawn length as
+  the base and the spine is **invisible** both for reduced-motion readers (this
+  file's own `base.css` sets `animation: none !important`, which strips the
+  animation and leaves the declared offset) and on any browser without
+  scroll-driven animation. Verified in-browser 2026-09-03: under reduced motion
+  the computed offset is `0px` and `animation-name` is `none`.
+- The path's `d` is **generated** in `src/about.js` from the rendered node
+  positions and regenerated on a `ResizeObserver`, per section 7's changing-count
+  rule. Nodes are pushed 40px left/right of centre by CSS `transform` at 900px
+  and up: without that every node shares an x, and a curve through collinear
+  points renders as a plain vertical rule. `getBoundingClientRect` reports the
+  transformed box, which is why the offset can live in CSS.
+
+**The About page's record is a plain vertical list, and it got there the long
+way. Do not rebuild what was already tried:**
+
+1. Alternating cards on a generated SVG curve. The owner's verdict was "basic",
+   and it was: alternating cards on a centre line is the timeline every site
+   builds, a hairline curve loses against saturated sticker cards, and half of
+   every row was empty cream.
+2. A pinned horizontal pan (GSAP ScrollTrigger, `pin: true`). Built, working,
+   and rejected the same day - the owner wanted it vertical.
+3. The **editorial record** that ships: one row per entry, three columns (the
+   season numeral, the photograph, what is known), a hairline between rows and
+   no connecting line at all. The SVG spine and every line of code that measured
+   it are gone, `spinePath()` with them.
+
+**No card fills in that section.** The four sticker colours cycle on the
+champions grid and the gallery page; running them under full-bleed photography
+as well put two loud systems on top of each other. The record is paper, ink and
+the photographs' own colour, which section 2 exempts.
+
+**GSAP's remaining job is the row stagger and the photo parallax**, both behind
+`gsap.matchMedia("(prefers-reduced-motion: no-preference)")`. Under that setting
+nothing is created at all - not a slower entrance, none. `gsap.matchMedia` over a
+hand-rolled check because it reverts what it created when the query stops
+matching. Verified 2026-09-03: with reduced motion on, every column is opacity 1
+with `transform: none`.
+
+**Lenis and ScrollTrigger must be introduced.** `src/about.js` does
+`lenis.on("scroll", ScrollTrigger.update)`. GSAP's docs prefer handing the rAF
+loop to `gsap.ticker`; that is deliberately not done, because it would mean
+`smooth-scroll.js` importing GSAP and charging `index.html` and `gallery.html`
+47KB for a section they do not have.
+
+**Two measurement traps were paid for in that section, both worth keeping:**
+
+- `getBoundingClientRect` reports the TRANSFORMED box. Anything measured on a
+  page where transforms animate (`.is-pre` translates by `--reveal-shift`, GSAP
+  slides and parallaxes) reads a moving number, and there is no "settled" moment
+  to read it at instead. Use `offsetLeft`/`offsetTop` when you want layout.
+- **`aspect-ratio` is inert on an `<img>` that carries a `height` attribute
+  unless CSS also sets `height: auto`.** Landscape watch-party photographs
+  rendered as tall portrait crops with the subject cut out.
 
 **There is exactly ONE reveal observer: `src/reveal.js`.** Do not write a
 second. It takes an iterable of elements rather than a root, so a section with
@@ -343,6 +414,29 @@ Any grid driven by that file must survive a changing item count. A layout that
 is exactly full at today's number of cards breaks the moment the owner adds a
 season, which is the one thing the content file promises.
 
+**Every season, competition and watch-along now carries `date` and `venue`.**
+They were added for the About page's timeline. Anything unrecorded prints one
+line shorter rather than being guessed at.
+
+**The venue mapping is settled (owner, 2026-09-03) and is not a guess.** Every
+season of the 4x4 Series was played at **Athlete 360**, Turf Wars at **Club
+Fusion**, Division 0 at **Pixels N Pints**. The owner wrote the last one as
+"pixels and pints"; the spelling above is the one this section already recorded
+and the one that ships. The five watch-alongs still have no venue - One Galle
+Face and Havelock City Mall are named above but nobody has said which night was
+where, so do not assign them.
+
+**Every `date` is still TODO, and Turf Wars' is a correction, not an omission.**
+Its old `note: "Aug 2025"` was removed as wrong: the owner confirmed on
+2026-09-03 that Frontier started in 2024 and that Turf Wars is where it started,
+so August 2025 cannot be right. Still owed: that month, plus one for each of
+SZN 1-6 and Division 0.
+
+**`content.js` also carries a `people` list, and it ships empty on purpose.** The
+About page's people section renders nothing at all - no heading, no placeholder
+cards - until a name is typed in. Nobody has agreed to be named; do not fill it
+in from a guess about who runs Frontier.
+
 Still TODO — render cleanly around these, never fill them in:
 SZN 5 champion · every Golden Boot · every Golden Glove · every runner-up ·
 Turf Wars champion and runner-up · the domain · WhatsApp community link.
@@ -351,6 +445,9 @@ Turf Wars champion and runner-up · the domain · WhatsApp community link.
 ## 8. Workflow per ticket
 
 - **Load the `design-taste-frontend` skill FIRST and design the UI with it.**
+  (The About page, 2026-09-03, was built with `high-end-visual-design` instead
+  at the owner's explicit instruction. That was a one-off override, not a change
+  to this rule.)
   It is not a review step and not a visual pass at the end — it drives the
   build. Before writing any markup or CSS: state its one-line Design Read,
   set its three dials (VARIANCE / MOTION / DENSITY) with reasons from the

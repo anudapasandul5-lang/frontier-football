@@ -258,50 +258,6 @@
   border: 0;
 }
 
-.gallery__arrow {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  padding: 0;
-  border-radius: var(--radius-pill);
-  border: var(--outline-width) solid var(--color-ink);
-  background: var(--color-paper);
-  cursor: pointer;
-  transition: transform var(--duration-fast) var(--ease-out);
-}
-
-.gallery__arrow:hover {
-  transform: translateY(-2px);
-}
-
-.gallery__arrow:disabled {
-  opacity: 0.35;
-  cursor: default;
-}
-
-.gallery__arrow:disabled:hover {
-  transform: none;
-}
-
-/* A rotated corner, the same drawn-not-imported mark the clip badge uses
-   rather than a font glyph. */
-.gallery__arrow::before {
-  content: "";
-  width: 9px;
-  height: 9px;
-  border-top: var(--outline-width-2) solid var(--color-ink);
-  border-right: var(--outline-width-2) solid var(--color-ink);
-}
-
-.gallery__arrow--prev::before {
-  transform: rotate(-135deg) translate(1px, -1px);
-}
-
-.gallery__arrow--next::before {
-  transform: rotate(45deg) translate(-1px, 1px);
-}
-
 @media (max-width: 599px) {
   .gallery {
     padding: var(--spacing-48) 0;

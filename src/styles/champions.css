@@ -1,11 +1,12 @@
 /* Frontier Football — Champions & Honours.
-   A mixed-size sticker grid: one wide lead tile carrying the reigning champion,
-   then square cards flowing after it. A third layout family, deliberately not
-   the hero's centred poster and not T4's editorial split into a colour band.
+   A scroll-snapped rail of sticker cards, reigning champion first. A third
+   layout family, deliberately not the hero's centred poster and not the
+   gallery's coverflow directly below it - these are records to page through,
+   not photographs to browse.
 
-   The grid is flow, not a fixed bento. The owner will add seasons, so a shape
-   that is only correct at exactly five cards would break the one promise this
-   section makes.
+   It was a three-column grid until eight seasons made the section 1800px tall
+   on a laptop. One row costs one card's height whatever the season count is,
+   which is the only shape that survives the owner adding a season.
 
    Colours used here: paper, ink, and the four sticker fills via .card--*.
    No literal hex anywhere in this file. */
@@ -59,39 +60,118 @@
   color: var(--color-ink);
 }
 
-/* ============ GRID ============ */
-.champions__grid {
+/* ============ NAV ============ */
+/* Above the rail, not below it. The arrows belong with the heading they
+   qualify, and a control row under a horizontally scrolling deck reads as page
+   furniture rather than as the deck's own steering. */
+.champions__nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--spacing-12);
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding: 0 var(--page-gutter) var(--spacing-20);
+}
+
+.champions__dots {
+  display: flex;
+  gap: var(--spacing-4);
+  margin: 0 0 0 var(--spacing-4);
+  padding: 0;
+  list-style: none;
+}
+
+/* The button is 28x40 and the dot inside it is 10px. Sizing the button to the
+   dot would ship a 10px touch target in a row of eight, directly under a deck
+   a thumb is already dragging. */
+.champions__dot {
   display: grid;
-  grid-template-columns: 1fr;
+  place-items: center;
+  width: 28px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.champions__dot::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-pill);
+  border: var(--outline-width-1-5) solid var(--color-ink);
+  /* transform and background only - a dot animating its width would reflow the
+     seven beside it on every scroll frame. */
+  transition:
+    background var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.champions__dot[aria-current="true"]::before {
+  background: var(--color-ink);
+  transform: scale(1.3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .champions__dot::before {
+    transition: none;
+  }
+}
+
+/* ============ RAIL ============ */
+/* One row, scroll-snapped. The card width is a clamp rather than a column
+   count because the deck grows: the owner adds a season and the rail gets one
+   card longer, where the grid re-flowed every row beneath it.
+
+   78vw at the small end is deliberate - it leaves the next card visibly
+   peeking past the right edge on a phone, which is the only thing that tells a
+   thumb there is more to the right. A full-width card reads as the whole
+   section. */
+.champions__rail {
+  --champions-card-width: clamp(258px, 78vw, 330px);
+  display: flex;
   gap: var(--spacing-16);
   max-width: var(--page-max-width);
   margin: 0 auto;
-  padding: 0 var(--page-gutter);
+  /* overflow-x: auto computes overflow-y to auto as well, so the block padding
+     is not decoration: without it the cards' 4px hover lift and their focus
+     rings are clipped by the scroll container. */
+  padding: var(--spacing-8) var(--page-gutter) var(--spacing-24);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  /* Must match the rail's own inline padding. scrollIntoView({inline: "start"})
+     honours scroll-padding, which is what lets champions.js step the deck
+     without measuring anything itself. */
+  scroll-padding-inline-start: var(--page-gutter);
+  scrollbar-width: none;
 }
 
-@media (min-width: 620px) {
-  .champions__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .champions__cell--lead {
-    grid-column: span 2;
-  }
+.champions__rail::-webkit-scrollbar {
+  display: none;
 }
 
-@media (min-width: 1000px) {
-  .champions__grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
+/* The rail is focusable (tabindex in index.html) so a keyboard drives it with
+   Left/Right the way the arrows do. That needs a visible ring. */
+.champions__rail:focus-visible {
+  outline: var(--outline-width) solid var(--color-ink);
+  outline-offset: 4px;
+  border-radius: var(--radius-card);
 }
 
-/* The cell is the reveal element and the card inside it is the hover element.
-   They are separate on purpose: both animate transform, and sharing one element
-   would put .is-revealed and the hover lift in a transition-shorthand fight
-   that the later stylesheet wins. Flex here so the card fills the row height
-   when a neighbour is taller. */
+/* The cell carries the snap point and the card inside it carries the hover.
+   They stay separate for the same reason they always were: both animate
+   transform, and sharing one element puts the two in a transition-shorthand
+   fight the later stylesheet wins.
+
+   flex: 0 0 <width> - no growing and no shrinking. A shrinking card lets eight
+   of them squeeze to fit the rail, and then there is nothing to scroll. */
 .champions__cell {
   display: flex;
+  flex: 0 0 var(--champions-card-width);
+  scroll-snap-align: start;
 }
 
 .champions__card {
@@ -108,6 +188,16 @@
   transform: translateY(-4px);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .champions__card {
+    transition: none;
+  }
+
+  .champions__card:hover {
+    transform: none;
+  }
+}
+
 /* ============ CHAMPIONS PHOTO ============ */
 /* Inset inside the card's padding rather than bleeding to its edge, so the
    sticker fill stays a visible frame around the picture. Inner radius is the
@@ -119,17 +209,23 @@
    which would both duplicate the card's own label and ship colours outside the
    six. Real photography carries its own colours and is exempt; third-party
    graphic design is not. */
-/* A fixed height, not a fixed ratio. On a ratio the lead tile's photo is as wide
-   as two columns and therefore half a screen tall, which drags every card in its
-   row to the same height and turns the photoless card into a large empty block.
-   A height instead makes the lead's picture a wide strip and keeps all five
-   cards within reach of each other. */
+/* A ratio, not a fixed height. The old fixed height existed only because the
+   lead tile spanned two grid columns and a ratio made its picture half a
+   screen tall. Every card is one fixed width in the rail, so that reason is
+   gone and 16:9 matches the source crops exactly. */
 .champions__photo {
   width: 100%;
-  height: clamp(150px, 16vw, 230px);
+  /* height: auto is load-bearing, not tidy-up. champions.js sets width="800"
+     height="450" on the img so the card reserves its space before the picture
+     arrives; that height attribute is a presentational hint, and with no CSS
+     height to beat it the box stayed 450px tall and aspect-ratio did nothing
+     - both axes were already definite. The old rule hid this by setting a
+     fixed height of its own. */
+  height: auto;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
-  /* Not centred. A team photo cropped to a strip loses its faces first, because
-     heads sit in the top third of every one of these. */
+  /* Not centred. A team photo cropped to this slot loses its faces first,
+     because heads sit in the top third of every one of these. */
   object-position: center 22%;
   margin-bottom: var(--spacing-16);
   border: var(--outline-width) solid currentColor;
@@ -143,8 +239,11 @@
   justify-content: center;
 }
 
+/* Sized to the rail's card, not to a two-column grid tile. The old clamp
+   topped out at 52px, which broke "Division 0" onto two lines inside a 330px
+   card. */
 .champions__card--textonly .champions__title {
-  font-size: clamp(30px, 3.6vw, 52px);
+  font-size: clamp(26px, 6vw, 34px);
 }
 
 /* ============ CARD TYPE ============ */
@@ -183,15 +282,6 @@
 .champions__note {
   font-size: var(--text-caption);
   opacity: 0.9;
-}
-
-/* The lead tile earns its width with type, not with a different treatment. */
-.champions__cell--lead .champions__title {
-  font-size: clamp(30px, 3.6vw, 52px);
-}
-
-.champions__cell--lead .champions__team {
-  font-size: var(--text-heading-sm);
 }
 
 /* ============ SECONDARY HONOURS ============ */
@@ -236,7 +326,7 @@
     padding: 0 var(--spacing-16) var(--spacing-32);
   }
 
-  .champions__grid {
-    padding: 0 var(--spacing-16);
+  .champions__nav {
+    padding-bottom: var(--spacing-16);
   }
 }

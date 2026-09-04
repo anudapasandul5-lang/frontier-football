@@ -74,6 +74,17 @@
   text-decoration: underline;
 }
 
+/* Three items plus the CTA is what the About page brought, and at 320px the
+   handle alone is wider than the remaining room - .nav__end is flex:none and
+   .nav__link is nowrap, so the row cannot shrink its way out of an overflow.
+   The handle is dropped rather than a link, because "Follow" still says what
+   the button does while a missing page cannot be navigated to at all. */
+@media (max-width: 479px) {
+  .nav__cta-handle {
+    display: none;
+  }
+}
+
 /* ============ HERO ============ */
 .hero {
   position: relative;

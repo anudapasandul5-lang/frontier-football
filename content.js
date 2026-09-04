@@ -65,6 +65,17 @@ export default {
       // What the picture shows, read aloud to anyone using a screen reader.
       // Leave as "TODO" and a plain description is written for you.
       photoAlt: "The SZN 6 champions lined up on the pitch beside the trophy.",
+      // WHEN it ran and WHERE.
+      //
+      // Every date is still blank. Leave one as "TODO" and the About page's
+      // timeline simply prints that line shorter - it never guesses a month.
+      //
+      // The venues came from the owner on 2026-09-03: every season of the 4x4
+      // Series was played at Athlete 360, Turf Wars was at Club Fusion, and
+      // Division 0 was at Pixels N Pints. The watch parties are still blank -
+      // nobody has said which venue hosted which night.
+      date: "TODO",
+      venue: "Athlete 360",
       // Link to this season's full photo folder on Google Drive. Paste the
       // folder's share link here and a card for SZN 6 appears on the photos
       // page with a working button. Leave it as "TODO" and the card still shows,
@@ -84,6 +95,8 @@ export default {
       // own, then point this line at it.
       photo: "TODO",
       photoAlt: "TODO",
+      date: "TODO",
+      venue: "Athlete 360",
       // Link to this season's full photo folder on Google Drive. Paste the
       // folder's share link here and a card for SZN 5 appears on the photos
       // page with a working button. Leave it as "TODO" and the card still shows,
@@ -99,6 +112,8 @@ export default {
       goldenGlove: "TODO",
       photo: "/champions/szn-4.webp",
       photoAlt: "The SZN 4 champions holding the trophy together after the final.",
+      date: "TODO",
+      venue: "Athlete 360",
       // Link to this season's full photo folder on Google Drive. Paste the
       // folder's share link here and a card for SZN 4 appears on the photos
       // page with a working button. Leave it as "TODO" and the card still shows,
@@ -114,6 +129,8 @@ export default {
       goldenGlove: "TODO",
       photo: "/champions/szn-3.webp",
       photoAlt: "The SZN 3 champions wearing their medals, with the trophy.",
+      date: "TODO",
+      venue: "Athlete 360",
       // Link to this season's full photo folder on Google Drive. Paste the
       // folder's share link here and a card for SZN 3 appears on the photos
       // page with a working button. Leave it as "TODO" and the card still shows,
@@ -135,6 +152,8 @@ export default {
       // photo (the winner is still unknown), just proof there was a season.
       photo: "/champions/szn-2.webp",
       photoAlt: "A SZN 2 player lines up a shot as an opponent closes in.",
+      date: "TODO",
+      venue: "Athlete 360",
       // Link to this season's full photo folder on Google Drive. Paste the
       // folder's share link here and a card for SZN 2 appears on the photos
       // page with a working button. Leave it as "TODO" and the card still shows,
@@ -153,6 +172,8 @@ export default {
       // crest and the REIGNITE wordmark).
       photo: "/champions/szn-1.webp",
       photoAlt: "SZN 1 players challenge for the ball in the cage under floodlights.",
+      date: "TODO",
+      venue: "Athlete 360",
       // Link to this season's full photo folder on Google Drive. Paste the
       // folder's share link here and a card for SZN 1 appears on the photos
       // page with a working button. Leave it as "TODO" and the card still shows,
@@ -171,7 +192,12 @@ export default {
       name: "Turf Wars",
       // A short line under the champion. Use it for when it ran, or for what
       // kind of competition it is.
-      note: "Aug 2025",
+      //
+      // THIS USED TO SAY "Aug 2025" AND THAT WAS WRONG. Turf Wars is where
+      // Frontier started and Frontier started in 2024, so August 2025 cannot be
+      // right. Nobody has said what the real month was, so it is blank until
+      // somebody does. Write it in the `date` line below, not here.
+      note: "TODO",
       // The team that won it.
       champion: "TODO",
       // The team that finished second.
@@ -179,6 +205,8 @@ export default {
       // Picture of the winning team.
       photo: "/champions/turf-wars.webp",
       photoAlt: "The Turf Wars champions with their hands on the trophy.",
+      date: "TODO",
+      venue: "Club Fusion",
       // Link to the full photo folder for Turf Wars on Google Drive.
       // Paste the folder's share link here. Leave it as "TODO" and the card
       // still shows, saying the photos are on the way.
@@ -197,6 +225,8 @@ export default {
       // picture was found. The description below says so honestly.
       photo: "/champions/division-0.webp",
       photoAlt: "Players on a sofa at the Division 0 console tournament, controller in hand.",
+      date: "TODO",
+      venue: "Pixels N Pints",
       // Link to the full photo folder for Division 0 on Google Drive.
       // Paste the folder's share link here. Leave it as "TODO" and the card
       // still shows, saying the photos are on the way.
@@ -220,6 +250,16 @@ export default {
   // you kept a folder per match, make one block per match instead and name them
   // whatever you called them.
   // ==========================================================================
+  // WHERE THE WATCH PARTIES SIT ON THE ABOUT PAGE'S TIMELINE.
+  //
+  // The watch parties did not happen after the seasons, they happened in the
+  // middle of SZN 4, 5 and 6 (owner, 3 September 2026). Write the season number
+  // they ran alongside here and the timeline grows a branch at that point.
+  //
+  // Put "TODO" instead and the branch simply hangs off the end of the run,
+  // which is what it did before anybody said when they happened.
+  watchAlongsAfter: 5,
+
   watchAlongs: [
     {
       // The name shown on the card. This is the one line that must be filled in.
@@ -230,6 +270,8 @@ export default {
       // and write its name here, the same way the champion photos work.
       photo: "/champions/wa-final-esp-arg.webp",
       photoAlt: "A fan raises an arm as the room watches the match on the big screen.",
+      date: "TODO",
+      venue: "TODO",
       // The Google Drive folder holding the photos from this night.
       driveFolder: "https://drive.google.com/drive/folders/1hOfEz1uHcPT0fx8Ca4Dv86bhcj7WMMsU",
     },
@@ -238,6 +280,8 @@ export default {
       note: "TODO",
       photo: "/champions/wa-semi-eng-arg.webp",
       photoAlt: "A packed watch-along crowd reacts to the match on screen.",
+      date: "TODO",
+      venue: "TODO",
       driveFolder: "https://drive.google.com/drive/folders/1MFdyJn1AwLtSq_Flkg8PB_EqFX1a15CV",
     },
     {
@@ -245,6 +289,8 @@ export default {
       note: "TODO",
       photo: "/champions/wa-semi-esp-fra.webp",
       photoAlt: "Two fans celebrate with their arms up at the watch-along.",
+      date: "TODO",
+      venue: "TODO",
       driveFolder: "https://drive.google.com/drive/folders/15y_x5dnOdsGQvmjPm0JaIqeLpoGWB5BM",
     },
     {
@@ -252,6 +298,8 @@ export default {
       note: "TODO",
       photo: "/champions/wa-norway-england.webp",
       photoAlt: "A fan cheers with both arms raised, phone in hand, mid-match.",
+      date: "TODO",
+      venue: "TODO",
       driveFolder: "https://drive.google.com/drive/folders/1CZXXR7ZNFmPaOFudf8wDXNlPFlaKnxlh",
     },
     {
@@ -261,6 +309,8 @@ export default {
       note: "TODO",
       photo: "/champions/wa-ucl-final-night.webp",
       photoAlt: "Fans in red shirts cheer with their arms raised at the watch-along.",
+      date: "TODO",
+      venue: "TODO",
       driveFolder: "https://drive.google.com/drive/folders/1LI43OOBwg14x5l5h-E3OTw5f2z-kGyXe",
     },
   ],
@@ -530,7 +580,7 @@ export default {
     { name: "@nutrimax.iso", logo: "/partners/nutrimax.png", url: "TODO" },
     { name: "Sofascore", logo: "/partners/sofascore.svg", url: "TODO" },
     { name: "@shirtshack.lk", logo: "/partners/shirt-shack.png", url: "TODO" },
-    { name: "@drinkhypebam", logo: "/partners/hype-bam.svg", url: "TODO" },
+    { name: "@drinkhypebam", logo: "/partners/hype-bam.png", url: "TODO" },
     { name: "ThePapare", logo: "/partners/thepapare.png", url: "TODO" },
     { name: "@absystudios", logo: "/partners/absy-studios.png", url: "TODO" },
     { name: "@zone360.lk", logo: "TODO", url: "TODO" },
@@ -547,6 +597,32 @@ export default {
   // not appear on the site. Paste a real link in and that one shows up on its
   // own, in the order it sits in this list. Nothing else needs changing.
   // ==========================================================================
+  // ==========================================================================
+  // THE PEOPLE who run Frontier.
+  //
+  // THIS LIST IS EMPTY ON PURPOSE. Nobody has been named yet, and a card with a
+  // made-up name on it is worse than no section at all. While the list is empty
+  // the whole "who we are" part of the About page is simply not there - no
+  // heading, no blank cards, nothing.
+  //
+  // TO ADD SOMEONE: delete the // in front of the four lines below and fill
+  // them in. Copy the block again for each extra person.
+  //
+  //   name      what they are called. A person with no name is skipped.
+  //   role      what they do at Frontier. Leave "TODO" and just the name shows.
+  //   photo     a picture of them. Put the file in `public/people/` and write
+  //             its name here, like "/people/whoever.webp". Leave it as "TODO"
+  //             and the card is text only - nothing breaks.
+  //   photoAlt  what the picture shows, read aloud to anyone using a screen
+  //             reader. Leave as "TODO" and a plain description is written.
+  //
+  // ASK FIRST. Do not put somebody's name and face on the site before they have
+  // said yes to it.
+  // ==========================================================================
+  people: [
+    // { name: "TODO", role: "TODO", photo: "TODO", photoAlt: "TODO" },
+  ],
+
   links: [
     // The main one. Verified live. The 'handle' is what gets printed big on
     // the page, so it is written the way people actually type it.

@@ -5,10 +5,16 @@ import { resolve } from 'node:path'
 // if this ever moves to a GitHub Pages project site.
 export default defineConfig({
   base: process.env.BASE_PATH ?? '/',
+  server: {
+    // Lets the cloudflared quick-tunnel (random *.trycloudflare.com host
+    // each run) through Vite's dev-server host check.
+    allowedHosts: ['.trycloudflare.com'],
+  },
   build: {
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
+        about: resolve(__dirname, 'about.html'),
         gallery: resolve(__dirname, 'gallery.html'),
         styleguide: resolve(__dirname, 'styleguide.html'),
       },
