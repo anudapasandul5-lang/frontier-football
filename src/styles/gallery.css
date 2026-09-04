@@ -45,7 +45,9 @@
   /* 0.92, not the token's 0.8: HOUSE-RULES section 3 measured Anton's uppercase
      ink at 0.88em, so at 0.8 the lines physically collide. */
   line-height: 0.92;
-  letter-spacing: -0.03em;
+  /* Anton is condensed already; negative tracking on top of it ran the
+     glyphs into each other at display size. Neutral, same as the hero. */
+  letter-spacing: 0;
   text-transform: uppercase;
   color: var(--color-ink);
 }
@@ -120,7 +122,11 @@
 
 /* ============ THE STAGE ============ */
 .gallery__stage {
-  --gallery-card-height: clamp(240px, 32vw, 420px);
+  /* One 16:9 landscape slot for every card. Width drives it; height follows
+     from the aspect-ratio, so a wide card cannot be squared off by a width cap
+     the way the old fixed-height + max-width pair squashed every frame toward
+     1:1 on a wide screen. */
+  --gallery-card-width: clamp(300px, 78vw, 620px);
 
   position: relative;
   max-width: var(--page-max-width);
@@ -137,7 +143,7 @@
    rather than "floating loose over the page". */
 .gallery__cards {
   position: relative;
-  height: var(--gallery-card-height);
+  height: calc(var(--gallery-card-width) * 9 / 16);
   overflow: hidden;
 }
 
@@ -151,24 +157,34 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  /* One height for every card; width follows the picture's own shape, same
-     mechanism the old strip used and the mosaic on the gallery page reuses:
-     --gallery-ratio is set per card by src/gallery.js from content.js, so nine
-     of Frontier's fifteen photographs (the 0.56 phone-portrait shots) are never
-     cropped to a card built for a landscape frame.
+  /* One fixed 16:9 slot for every card. Width is the only size set; the
+     browser derives height from aspect-ratio, so the card always holds its
+     landscape shape and object-fit: cover on the img crops each photo to it.
 
-     The cap is what stops a 1.77:1 landscape card overrunning a phone
-     viewport. Capping width while both height and aspect-ratio are set makes
-     the browser recompute height to keep the ratio (the "transferred size"
-     behaviour), which is the same trick the old .gallery__tile relied on. */
-  height: var(--gallery-card-height);
-  aspect-ratio: var(--gallery-ratio, 3 / 2);
-  max-width: min(80vw, 460px);
+     The earlier version set height AND aspect-ratio AND max-width together and
+     assumed the width cap would "transfer" back to the height. It does not
+     when height is an explicit length - Chrome just clamps the width and
+     leaves the height, so every card rendered ~1.1:1 (near square) on a wide
+     screen. Driving width-only avoids that class of bug entirely. */
+  width: var(--gallery-card-width);
+  aspect-ratio: 16 / 9;
   cursor: pointer;
   transition:
     transform var(--duration-base) var(--ease-out),
     opacity var(--duration-base) var(--ease-out),
     filter var(--duration-base) var(--ease-out);
+}
+
+/* Clips keep their own shape instead of the photos' 16:9. The deck height is
+   fixed, so a clip fits that height and takes whatever width its ratio needs -
+   an upright phone clip becomes a tall, narrow card and stays upright. No
+   max-width here, so the explicit height + aspect-ratio pair is not squashed
+   the way a width cap squashed the old photo tile. --gallery-ratio is set per
+   clip by src/gallery.js. */
+.gallery__tile--clip {
+  width: auto;
+  height: calc(var(--gallery-card-width) * 9 / 16);
+  aspect-ratio: var(--gallery-ratio, 16 / 9);
 }
 
 /* No ink outline on the photograph itself: the hybrid call from the reference
@@ -201,7 +217,7 @@
 .gallery__empty:not([hidden]) {
   display: grid;
   place-items: center;
-  height: var(--gallery-card-height);
+  height: calc(var(--gallery-card-width) * 9 / 16);
 }
 
 .gallery__empty {
@@ -227,60 +243,19 @@
   margin-top: var(--spacing-24);
 }
 
-/* Fixed-ish width via tabular figures, so the row does not jitter width as the
-   count moves between "9 / 15" and "10 / 15". */
+/* Announced, never printed - the same call the lightbox's own position text
+   already makes (src/lightbox.js). Position still reaches a screen reader via
+   aria-live on this element; sighted users get only the two arrows. */
 .gallery__count {
-  min-width: 4.5ch;
-  font-size: var(--text-caption);
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  font-variant-numeric: tabular-nums;
-  text-align: center;
-  color: var(--color-ink);
-}
-
-.gallery__arrow {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
   padding: 0;
-  border-radius: var(--radius-pill);
-  border: var(--outline-width) solid var(--color-ink);
-  background: var(--color-paper);
-  cursor: pointer;
-  transition: transform var(--duration-fast) var(--ease-out);
-}
-
-.gallery__arrow:hover {
-  transform: translateY(-2px);
-}
-
-.gallery__arrow:disabled {
-  opacity: 0.35;
-  cursor: default;
-}
-
-.gallery__arrow:disabled:hover {
-  transform: none;
-}
-
-/* A rotated corner, the same drawn-not-imported mark the clip badge uses
-   rather than a font glyph. */
-.gallery__arrow::before {
-  content: "";
-  width: 9px;
-  height: 9px;
-  border-top: var(--outline-width-2) solid var(--color-ink);
-  border-right: var(--outline-width-2) solid var(--color-ink);
-}
-
-.gallery__arrow--prev::before {
-  transform: rotate(-135deg) translate(1px, -1px);
-}
-
-.gallery__arrow--next::before {
-  transform: rotate(45deg) translate(-1px, 1px);
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }
 
 @media (max-width: 599px) {

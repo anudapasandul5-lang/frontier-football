@@ -1,33 +1,27 @@
 /* Frontier Football — Partners.
-   A ruled index: one row per partner, a hairline between rows, two columns from
-   768px up. A sixth layout family, deliberately not the hero's centred poster,
-   not T4's editorial split or its colour band, not T5's mixed-size sticker grid,
-   not T6's full-bleed scroll strip, and not the gallery page's tabbed card grid.
+   A scrolling logo band. Through T7 this was a ruled two-column index of names;
+   it read fine but a wall of eleven names is not a credit anyone looks at, and
+   the section was a sixth straight block of paper. The band carries the logos
+   (src/partners.js builds it from content.js) and puts one strip of ink back
+   into the run below the hero.
 
-   Why not a card grid or a logo wall. There are no logo files: every partner
-   mark in the source media is baked into somebody else's Instagram poster and is
-   not ours to crop out. A wall of eleven text cards is a three-column card row
-   wearing a disguise, and a card whose only content is a name is a rule with
-   wasted padding.
+   THIS IS THE SITE'S ONE MARQUEE. The standalone tagline strip that used to sit
+   under the links hub is gone: its line is still stated, still, in
+   .partners__lede, so the moving band now shows what it is actually good for.
+   The .marquee / .marquee__track rules in components.css carry the band shell
+   and the base loop; this file overrides the loop for three sets, adds the
+   hover/focus pause, and styles the section head and the logo set. There is no
+   visible pause button - see the section comment in index.html for why.
 
-   Why two columns. Eleven rows stacked in one column with a hairline under each
-   is a spec sheet, and a spec sheet is the laziest long-list layout there is.
-   Two columns halve the apparent run and turn it back into an index. CSS
-   `columns` rather than a grid, so it rebalances itself at any count: the owner
-   adding a twelfth partner must not need a developer.
-
-   Colours used: paper and ink only. No literal hex anywhere in this file. */
+   Colours used: paper and ink only. Every logo file in public/partners/ is
+   flattened to flat paper so the whole strip reads as one set on the ink. */
 
 /* ============ SECTION SHELL ============ */
-/* Paper. This carried the lift until the gallery moved above champions, which
-   put champions directly above this section and would have stacked two lifts in
-   a row. The lift moved up to .story, where it breaks the run of paper grounds
-   the reorder created; see the comment there. Either ground is safe here, since
-   this section is text and hairlines only with no paper-filled component to
-   clash. */
 .partners {
   background: var(--color-paper);
-  padding: var(--spacing-80) 0;
+  /* Top padding only. The band is full-bleed ink and closes the section, so a
+     bottom pad would just be cream between it and the hub's own top pad. */
+  padding: var(--spacing-80) 0 0;
 }
 
 .partners__head {
@@ -39,8 +33,8 @@
 .partners__headline {
   margin: 0;
   font-family: var(--font-display);
-  /* Capped below the champions headline, which is capped below the story's,
-     which is capped below the hero's. One order of loudness, top to bottom. */
+  /* Capped below champions, which is capped below the story, which is capped
+     below the hero. One order of loudness, top to bottom. */
   font-size: clamp(28px, 4vw, 60px);
   /* HOUSE-RULES section 3: Anton collides with itself at the token's 0.8.
      0.92 still reads crushed and does not overlap when this wraps on a phone. */
@@ -50,10 +44,9 @@
   color: var(--color-ink);
 }
 
-/* The brand tagline, and the reason it sits here rather than only in the
-   marquee below: moving text cannot be read by someone who needs time, so the
-   one line the marquee carries has to exist somewhere still on the same page.
-   This is that somewhere. */
+/* The brand tagline. It sits here as still text, not only in the band, because
+   moving text cannot be read by someone who needs time — whatever the band
+   carries has to exist somewhere still on the same page, and this is it. */
 .partners__lede {
   margin: var(--spacing-16) 0 0;
   font-size: var(--text-subheading);
@@ -61,63 +54,116 @@
   color: var(--color-ink);
 }
 
-/* ============ THE INDEX ============ */
-.partners__list {
-  max-width: var(--page-max-width);
-  margin: 0 auto;
-  padding: 0 var(--page-gutter);
-  list-style: none;
+/* ============ THE BAND ============ */
+/* .marquee in components.css gives the ink ground, the clip and the flex
+   centring. Overridden here: the strip is taller than the tagline band because
+   a logo needs more vertical room than a line of caps, and the pad matches. */
+.partners__strip {
+  min-height: clamp(100px, 13vw, 148px);
+  padding-block: var(--spacing-28);
 }
 
-@media (min-width: 768px) {
-  .partners__list {
-    columns: 2;
-    column-gap: var(--spacing-80);
+/* The loop. components.css animates .marquee__track by -50% for a two-run
+   track; this one carries THREE identical sets (src/partners.js) and shifts by
+   a third, so two sets always cover the viewport and the third is off-screen
+   waiting. One set out-spanning half the widest viewport is enough, which
+   eleven marks clear on any width — the -50% version needed one run wider than
+   the whole viewport and stranded empty ink on wide screens. */
+.partners__strip .marquee__track {
+  animation-name: partners-marquee;
+}
+
+/* The only stop mechanism left after the visible pause button was dropped:
+   the band holds still while a pointer is over it or it has focus within. Not
+   a full WCAG 2.2.2 substitute (a touch-only visitor gets nothing), which is a
+   documented owner decision - see the section comment in index.html. */
+.partners__strip:hover .marquee__track,
+.partners__strip:focus-within .marquee__track {
+  animation-play-state: paused;
+}
+
+@keyframes partners-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% / 3));
   }
 }
 
-.partners__row {
-  /* One rule per row, never a top border as well. Doubling them turns an index
-     into a table and boxes every name in for no gain. */
-  border-block-end: var(--outline-width-1) solid var(--color-ink);
-  padding: var(--spacing-16) 0;
-  /* A column break through the middle of a row would split a name from its
-     rule. */
-  break-inside: avoid;
+.partners__set {
+  display: flex;
+  flex: none;
+  align-items: center;
+  /* The space between marks, and the trailing copy of it (padding-inline-end)
+     is the seam between one set and the next — without it two logos would
+     touch across the loop point. */
+  gap: clamp(2.75rem, 6vw, 5rem);
+  padding-inline-end: clamp(2.75rem, 6vw, 5rem);
+  margin: 0;
 }
 
-.partners__name {
-  display: block;
-  font-size: var(--text-subheading);
-  font-weight: 500;
-  color: var(--color-ink);
-  /* Handles are one long unbroken word. Without this, @frontierfootballl-length
-     names push the column wider than the page at 320px. */
-  overflow-wrap: anywhere;
+.partners__item {
+  display: flex;
+  align-items: center;
+  flex: none;
 }
 
-/* The upgrade path. When a logo file lands in public/partners/ and is named in
-   content.js, it replaces the name inside this same row: the rule, the padding
-   and the column flow are untouched, so it is a content edit and not a layout
-   one. Height is capped rather than width so eleven marks of different
-   proportions still sit on one optical line. */
+/* ============ LOGO CHIP ============ */
+/* A cream tile under every logo. The marks are in their own brand colours, and
+   brand colours do not negotiate with a #0C2037 band: ThePapare is red on
+   white, Sofascore near-black, Athlete 360 and Nutrimax dark on white. Every
+   one of them would be a smudge sitting straight on the ink.
+
+   The chip is the same paper-and-ink surface the pills and cards use, so this
+   is the site's own vocabulary rather than a device invented for one strip. */
+.partners__chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Padding-block is smaller than padding-inline on purpose: the marks are
+     height-capped, so vertical space is already spoken for, while a wide
+     wordmark like ThePapare needs the horizontal room to not look wedged in. */
+  padding: var(--spacing-8) var(--spacing-16);
+  min-width: 84px;
+  border-radius: var(--radius-card);
+  background: var(--color-paper);
+}
+
+/* Height-capped, never width-capped, so eleven marks of different proportions
+   sit on one optical line. Sofascore is a long wordmark and would otherwise run
+   twice the width of the rest - it alone gets a width ceiling. */
 .partners__logo {
-  display: block;
-  max-width: 100%;
-  height: clamp(24px, 3vw, 34px);
+  /* Taller than the old cream strip's cap, because the marks are no longer all
+     wordmarks. Four of them are square lockups (Hype Bam, address.lk, Absy,
+     Main Sports Bar) and a square held to a wordmark's height is a 34px tile
+     with a monogram and a strapline inside it - unreadable. Height and
+     max-width together let a square go tall while a long wordmark like
+     ThePapare stays capped by its width instead. */
+  height: clamp(30px, 3.6vw, 46px);
   width: auto;
+  /* Sofascore is a long horizontal wordmark; height-matched it runs half again
+     as wide as any other mark. This ceiling pulls it back level with them. */
+  max-width: clamp(110px, 14vw, 150px);
   object-fit: contain;
+  /* No opacity dip any more. The old strip faded every mark to 0.85 to stop a
+     row of flat cream shapes reading as buttons; a colour logo on a cream chip
+     is already a quiet credit, and fading it would only make the three
+     dark-ground tiles look washed out against the chip they sit on. */
 }
 
-/* Every url is TODO today, so no row is a link yet. The treatment exists so the
-   first pasted address does not arrive as an unstyled blue underline. */
-.partners__link {
-  display: block;
-  color: var(--color-ink);
-  text-decoration: none;
-  transition: transform var(--duration-fast) var(--ease-out);
-}
-
-.partners__link:hover {
-  transform: translateX(var(--spacing-8));
+/* The two partners with no logo file (see content.js) ride the band as their
+   handle in the display face, with no chip: a cream rectangle drawn around
+   cream type is a box around nothing. Sized a step BELOW the logo cap-height,
+   not to match it - Anton is far heavier than any of the marks, so an equal
+   size reads as louder. */
+.partners__wordmark {
+  font-family: var(--font-display);
+  font-size: clamp(17px, 2vw, 23px);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--color-paper);
+  opacity: 0.85;
+  white-space: nowrap;
 }

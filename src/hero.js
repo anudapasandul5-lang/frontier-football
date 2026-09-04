@@ -3,12 +3,10 @@ import { wireReveal } from "./reveal.js";
 
 const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-/* Video is opt-in, never automatic: it loads only when motion is allowed
-   AND the viewport is wide enough to be worth ~475KB. A phone on Sri
-   Lankan mobile data keeps the poster still and downloads no video, which
-   is the constraint the build prompt sets. */
+/* Video is opt-in, never automatic: it loads only when motion is allowed.
+   No viewport gate - plays on phones too, by request. */
 function wireVideo() {
-  if (reduceMotion || !matchMedia("(min-width: 600px)").matches) return;
+  if (reduceMotion) return;
 
   for (const video of document.querySelectorAll("video[data-src]")) {
     video.src = video.dataset.src;

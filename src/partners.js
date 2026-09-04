@@ -2,79 +2,104 @@ import content from "../content.js";
 import { parseContent, partners } from "./content-data.js";
 import { wireReveal } from "./reveal.js";
 
-/* The partner index: one row per brand or place that has appeared alongside
-   Frontier, built from content.js so adding one is a content edit.
+/* The partner strip: one scrolling band of every brand or place that has
+   appeared alongside Frontier, built from content.js so adding one is a
+   content edit.
 
    PARTNER, never SPONSOR. A sponsor paid; a partner may or may not have
    (CONTEXT.md). Nobody recorded which of the eleven paid, so the page says
    partner about all of them and claims nothing about money.
 
-   A ruled index rather than a card grid or a logo wall. The five layout families
-   above it are spent, a three-column card row is both a cliche and a repeat of
-   the champions grid, and there are no logo files to build a logo wall out of.
-   Two columns from 768px up: eleven rows in one column is a spec sheet, and a
-   hairline under every row of a long single list is the laziest layout there is.
+   A MOVING LOGO BAND, not the ruled index it replaced. The index was fine as
+   text but a wall of eleven names is not a credit anyone reads; the logos
+   carry the recognition, and one ink band breaks the long run of paper this
+   section sits in. This IS the site's one marquee now: the standalone tagline
+   strip that used to sit below the section is gone, its line already stated
+   still in .partners__lede above.
 
-   TEXT FIRST, LOGO LATER. Each row draws its name today and swaps that name for
-   an <img> the day a file lands in public/partners/ and is named in content.js.
-   The row, the rule under it and the grid do not change, so the upgrade is a
-   content edit and not a layout one. */
+   FULL COLOUR, ON CHIPS. The marks were flattened to one cream colour when
+   they were first sourced; they are their real brand artwork now, each on a
+   cream chip so the band does not decide which brands are legible. Three of
+   them (Absy Studios, Main Sports Bar, address.lk) are drawn white-on-dark and
+   keep their own dark ground inside the chip - knocking it out would leave
+   white artwork invisible on cream.
+
+   TEXT WHERE THERE IS NO LOGO. @iodexsrilanka and @zone360.lk have no usable
+   logo file online, so they ride the same band as their name set in the
+   display face. The moment a file lands in public/partners/ and is named in
+   content.js the name swaps for the picture and nothing else moves. */
 
 function mark(partner) {
   if (partner.logo) {
+    // The logo rides a cream chip rather than the ink band directly. The marks
+    // are in their own brand colours now, and a partner does not get to choose
+    // a colour that happens to read on #0C2037: ThePapare is red on white,
+    // Sofascore is near-black, Athlete 360 is blue. All three vanish on ink.
+    // A paper chip gives every one of them the light ground its artwork was
+    // drawn for, and paper-surface-with-ink-outline is the site's own
+    // vocabulary rather than an import.
+    const chip = document.createElement("span");
+    chip.className = "partners__chip";
+
     const logo = document.createElement("img");
     logo.className = "partners__logo";
     logo.src = partner.logo;
-    // The name is the alt text because the name is what the logo says. A partner
-    // with a logo file must still be readable to anyone who cannot see it.
+    // The name is the alt text because the name is what the logo says. A
+    // partner with a logo file must still be readable to anyone who cannot
+    // see it.
     logo.alt = partner.name;
     logo.loading = "lazy";
     logo.decoding = "async";
-    return logo;
+    chip.append(logo);
+    return chip;
   }
 
+  // No chip for the two partners with no file. A cream chip around a cream
+  // wordmark would be a rectangle drawn around nothing; the name sits on the
+  // ink the way it always did.
   const name = document.createElement("span");
-  name.className = "partners__name";
+  name.className = "partners__wordmark";
   name.textContent = partner.name;
   return name;
 }
 
-/* No category line under the name. "Sofascore, scores" or "Iodex, recovery"
-   tells a visitor nothing they cannot work out and turns a credit into a
-   sales sheet. The name is the whole row. */
-function row(partner) {
-  const item = document.createElement("li");
-  item.className = "partners__row";
-
-  // Every url is TODO today, so this is the branch that runs: a plain name, no
-  // link. Nobody has checked the addresses, and a wrong Instagram address is not
-  // a dead link, it is a stranger's account sitting under Frontier's name.
-  if (!partner.url) {
-    item.append(mark(partner));
-    return item;
-  }
-
-  const link = document.createElement("a");
-  link.className = "partners__link";
-  link.href = partner.url;
-  link.target = "_blank";
-  link.rel = "noopener noreferrer";
-  link.setAttribute("aria-label", `${partner.name} (opens in a new tab)`);
-  link.append(mark(partner));
-  item.append(link);
-  return item;
+function item(partner) {
+  const li = document.createElement("li");
+  li.className = "partners__item";
+  li.append(mark(partner));
+  return li;
 }
 
-export function renderPartners(mount, data) {
-  mount.replaceChildren(...partners(data).map(row));
+/* One <ul> holding every partner mark in content order. */
+function set(list, { hidden = false } = {}) {
+  const ul = document.createElement("ul");
+  ul.className = "partners__set";
+  if (hidden) ul.setAttribute("aria-hidden", "true");
+  ul.append(...list.map(item));
+  return ul;
+}
+
+export function renderPartners(track, data) {
+  const list = partners(data);
+  // THREE identical sets, and the count is arithmetic not taste. The partners
+  // keyframe (partners.css) shifts the track by a third of its width, so at any
+  // moment two of the three sets cover the viewport while the third is off the
+  // left waiting to reappear. One set only has to out-span half the widest
+  // viewport, which eleven marks clear easily - so no empty ink ever sweeps
+  // through, on any screen width. Only the first set is read; the other two are
+  // aria-hidden, a rendering trick and not content to hear twice.
+  track.replaceChildren(
+    set(list),
+    set(list, { hidden: true }),
+    set(list, { hidden: true }),
+  );
 }
 
 const section = document.querySelector(".partners");
-const mount = section?.querySelector("[data-partners]");
-if (mount) {
-  renderPartners(mount, parseContent(content));
-  // The list reveals as one element, not eleven. A ripple down eleven hairlines
-  // is noise on a section this quiet, and each observed element is another
-  // chance for something to strand at opacity 0.
+const track = section?.querySelector("[data-partners]");
+if (track) {
+  renderPartners(track, parseContent(content));
+  // The band reveals as one element. The loop and the hover/focus pause are
+  // pure CSS (partners.css, components.css); this file only fills the track.
   wireReveal(section.querySelectorAll("[data-reveal]"));
 }

@@ -2,14 +2,15 @@
    One outlined slab holding a ruled stack of handles at display scale, with any
    handle-less links as pills beneath it. A seventh layout family: a single large
    object rather than a list, a grid or a strip, so it does not repeat the
-   partner index directly above it or the footer directly below. The rule between
-   rows is the partner index's own device at a much larger size, which is reuse
-   rather than a new idea.
+   partner logo strip directly above it or the footer directly below. The rule
+   between rows is a hairline at display scale, the site's plainest divider used
+   large rather than a new idea.
 
-   PAPER, NOT INK. The marquee and the footer under this section are both ink
-   fills. A third dark surface here would turn the bottom quarter of a cream page
-   dark, which is a bigger break than any one section is worth. Outlined on paper
-   keeps the site's language (a filled, ink-outlined surface) without the stack.
+   PAPER, NOT INK. The logo marquee above this section and the footer below it
+   are both ink fills. A third dark surface here would turn the bottom quarter of
+   a cream page dark, which is a bigger break than any one section is worth.
+   Outlined on paper keeps the site's language (a filled, ink-outlined surface)
+   without the stack.
 
    PAPER, NOT YELLOW EITHER. HOUSE-RULES section 2 reserves yellow for the primary
    action, and the nav and hero already spend it on this exact destination. A
@@ -89,7 +90,7 @@
 }
 
 /* One rule between rows, never above the first or below the last: the slab's
-   own outline already closes both ends. Same reasoning as partners__row. */
+   own outline already closes both ends. */
 .hub__slab li + li .hub__row {
   border-block-start: var(--outline-width-1) solid var(--color-ink);
 }
@@ -133,25 +134,19 @@
    belt to that braces: no width can push it out of the page, whatever handle is
    pasted in later.
 
-   132px at 1440, not the 150px this carried while it was a single centred
-   statement. At 150px the eighteen characters ran to within a few pixels of the
-   slab's inner edge, which read as type that did not fit rather than type that
-   fills; the label column now takes the difference. */
+   64px at 1440. Both rows share one size: at 132px the eighteen characters ran
+   the width of the slab and read as shouting rather than as a handle, and the
+   step-down that used to shrink every row after the first made the two handles
+   look like different kinds of thing. Ordering alone carries the priority
+   Instagram-first is asking for. */
 .hub__statement {
   grid-row: 1;
   grid-column: 1;
   font-family: var(--font-display);
-  font-size: clamp(24px, calc(24px + 108 * (100vw - 320px) / 1120), 132px);
+  font-size: clamp(20px, calc(20px + 44 * (100vw - 320px) / 1120), 64px);
   line-height: 0.92;
   letter-spacing: -0.01em;
   overflow-wrap: anywhere;
-}
-
-/* Rows after the first step down. content.js's order is a priority order and
-   Instagram is first in it deliberately, so the hierarchy that ordering asks
-   for has to be visible: every handle is legible, one of them is the ask. */
-.hub__slab li + li .hub__statement {
-  font-size: clamp(20px, calc(20px + 60 * (100vw - 320px) / 1120), 80px);
 }
 
 /* On a phone the label has nowhere to sit beside a handle that already uses the

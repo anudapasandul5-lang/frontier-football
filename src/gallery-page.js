@@ -1,6 +1,7 @@
 import content from "../content.js";
 import { parseContent } from "./content-data.js";
 import { stepIndex } from "./gallery-data.js";
+import { initSmoothScroll } from "./smooth-scroll.js";
 import { wireReveal } from "./reveal.js";
 
 /* The gallery page: two card grids behind two tabs, Albums and Watch Parties.
@@ -251,6 +252,8 @@ export function renderGalleryPage(mount) {
   // switching tabs must never expose a panel of invisible cards.
   wireReveal(mount.querySelectorAll("[data-reveal]"));
 }
+
+initSmoothScroll();
 
 const section = document.querySelector(".gallery-page");
 const mount = section?.querySelector("[data-gallery-page]");

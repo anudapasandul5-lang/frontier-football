@@ -54,7 +54,7 @@
     <link rel="stylesheet" href="/src/styles/footer.css" />
   </head>
   <body>
-    <header class="nav">
+    <header class="nav nav--overlay">
       <a class="nav__brand" href="#top">
         <img
           class="nav__crest"
@@ -67,6 +67,7 @@
       </a>
 
       <div class="nav__end">
+        <a class="nav__link" href="/about.html">About</a>
         <a class="nav__link" href="/gallery.html">Gallery</a>
         <a
           class="btn btn--secondary nav__cta"
@@ -74,7 +75,7 @@
           target="_blank"
           rel="noopener noreferrer"
         >
-          Follow @frontierfootballl
+          Follow <span class="nav__cta-handle">@frontierfootballl</span>
         </a>
       </div>
     </header>
@@ -150,6 +151,12 @@
                 Six seasons later it is the same idea. Local players, local turf, and a crowd that
                 shows up.
               </p>
+              <!-- The whole run, stop by stop, lives on its own page. This
+                   section stays the short answer; the About page is the long
+                   one. -->
+              <p class="story__more">
+                <a class="story__link" href="/about.html">Read our story</a>
+              </p>
             </div>
           </div>
 
@@ -157,10 +164,10 @@
                decorative one would be a tell. -->
           <figure class="photo-tile story__photo" data-reveal>
             <img
-              src="/story/pitch.webp"
-              width="800"
-              height="580"
-              alt="A Frontier match in play on a Colombo turf pitch."
+              src="/story/night.webp"
+              width="900"
+              height="675"
+              alt="Frontier players on a floodlit Colombo turf at night, waiting for the ball to come back into play."
               loading="lazy"
               decoding="async"
             />
@@ -212,7 +219,7 @@
             <div class="gallery__filters" data-gallery-filters></div>
             <div class="gallery__filters" data-gallery-media></div>
           </div>
-          <a class="btn btn--secondary gallery__all" href="/gallery.html">View all photos →</a>
+          <a class="btn btn--secondary gallery__all" href="/gallery.html">Go to gallery →</a>
         </div>
 
         <!-- The stage is the reveal element, never the individual cards: only a
@@ -229,7 +236,7 @@
           <p class="gallery__empty" data-gallery-empty hidden>Nothing in this combination yet.</p>
           <div class="gallery__nav">
             <button
-              class="gallery__arrow gallery__arrow--prev"
+              class="arrow arrow--prev gallery__arrow"
               type="button"
               data-gallery-prev
               aria-label="Previous photo"
@@ -242,7 +249,7 @@
                  information, so the site keeps one answer to one question. -->
             <p class="gallery__count" data-gallery-count aria-live="polite"></p>
             <button
-              class="gallery__arrow gallery__arrow--next"
+              class="arrow arrow--next gallery__arrow"
               type="button"
               data-gallery-next
               aria-label="Next photo"
@@ -268,7 +275,19 @@
           </p>
         </div>
 
-        <ul class="champions__grid" data-champions></ul>
+        <!-- A horizontal rail, not a grid: eight seasons stacked three-wide
+             ran the section past 1800px on a laptop and made the page feel
+             like an archive. The cards are unchanged; only how they are
+             arranged is. Native CSS scroll-snap does the scrolling, so a
+             thumb swipe works with no JavaScript at all and the arrows and
+             dots below are an addition to it rather than the only way in.
+
+             data-reveal sits on the rail, not on each card. Cards scrolled
+             out to the right are clipped by the rail'''s own overflow, so a
+             per-card observer would never see them intersect the viewport
+             and they would sit at opacity 0 forever - the exact failure
+             src/reveal.js already documents for the vertical case. -->
+        <ul class="champions__rail" data-champions data-reveal tabindex="0"></ul>
       </section>
 
       <!-- Partners. Every row is built by src/partners.js from content.js, so
@@ -294,9 +313,29 @@
           <p class="partners__lede" data-reveal>Built by football. Powered by community.</p>
         </div>
 
-        <!-- The list is the reveal element, never the eleven rows: a ripple down
-             eleven hairlines is noise on a section this quiet. -->
-        <ul class="partners__list" data-partners data-reveal></ul>
+        <!-- THE SITE'S ONE MARQUEE. There is no second one anywhere, and this is
+             the whole motion allowance below the hero besides reveals and hover.
+             It used to sit below the links hub carrying the tagline; that line is
+             still stated, still, in .partners__lede above, so the band now does
+             the job it is actually good at - showing the partner logos move past.
+
+             src/partners.js fills the track with THREE identical logo sets; the
+             partners keyframe shifts it by a third for a seamless loop. The band
+             is the reveal element, never the individual marks: a ripple down
+             eleven logos is noise on a section this quiet.
+
+             NO VISIBLE PAUSE CONTROL, by the owner's call. base.css stops the
+             band outright under prefers-reduced-motion, and partners.css also
+             pauses it while a pointer is over it or it holds focus. The gap that
+             leaves is a sighted visitor who needs it still but never set that
+             system preference - the eleven names all sit in alt text, so a
+             screen reader is unaffected either way.
+
+             If the bundle fails this is an empty ink band under a labelled
+             heading, not a blank gap - the head stays in static markup. -->
+        <div class="marquee partners__strip" data-reveal>
+          <div class="marquee__track" data-partners></div>
+        </div>
       </section>
 
       <!-- The links hub, built by src/hub.js from content.js.
@@ -315,57 +354,6 @@
           <div data-hub data-reveal></div>
         </div>
       </section>
-
-      <!-- THE SITE'S ONE MARQUEE. There is not a second one anywhere, and this
-           is the whole motion allowance below the hero besides reveals and hover.
-
-           It carries the brand tagline rather than the partner names: names
-           scrolling past are unreadable and unclickable, which is a poor way to
-           credit eleven partners, and it would force a second still copy of the
-           same eleven names on one page.
-
-           Home page only. The footer below repeats on both pages; if the marquee
-           lived inside it there would be two of these on the site.
-
-           The second run is aria-hidden. It exists to close the loop's gap, and
-           a screen reader reading the strip twice is reading a rendering trick
-           aloud. -->
-      <div class="marquee">
-        <!-- EIGHT runs, not two, and the count is arithmetic rather than taste.
-             The track translates by half its width, so half of it has to be at
-             least as wide as the widest viewport or empty cream scrolls through
-             the ink. One run is about 490px, and 1900 / 490 rounds up to four,
-             so four per half. Only the first is readable; the other seven are
-             aria-hidden, or a screen reader reads the tagline eight times. -->
-        <div class="marquee__track">
-          <span class="marquee__run">Built by football. Powered by community.</span>
-          <span class="marquee__run" aria-hidden="true">Built by football. Powered by community.</span>
-          <span class="marquee__run" aria-hidden="true">Built by football. Powered by community.</span>
-          <span class="marquee__run" aria-hidden="true">Built by football. Powered by community.</span>
-          <span class="marquee__run" aria-hidden="true">Built by football. Powered by community.</span>
-          <span class="marquee__run" aria-hidden="true">Built by football. Powered by community.</span>
-          <span class="marquee__run" aria-hidden="true">Built by football. Powered by community.</span>
-          <span class="marquee__run" aria-hidden="true">Built by football. Powered by community.</span>
-        </div>
-
-        <!-- WCAG 2.2.2, Level A: moving text that starts on its own and runs
-             past five seconds needs a way to stop it. prefers-reduced-motion
-             covers people who already set that preference system-wide; it is
-             not the mechanism the criterion asks for, and it does nothing for
-             someone who simply cannot read a line that is sliding away.
-
-             aria-pressed rather than two swapped labels: "pause" is a state
-             this control is in, not a place it takes you. src/marquee.js
-             flips it and rewrites the label to match. Hidden by CSS under
-             reduced motion, where the strip is already stopped. -->
-        <button
-          class="pause-btn marquee__pause"
-          type="button"
-          data-marquee-pause
-          aria-pressed="false"
-          aria-label="Pause the scrolling tagline"
-        ></button>
-      </div>
     </main>
 
     <!-- The footer, hand-written here and again in gallery.html.
@@ -399,6 +387,7 @@
         </p>
         <nav class="site-foot__nav" aria-label="Footer">
           <a class="site-foot__link" href="/">Home</a>
+          <a class="site-foot__link" href="/about.html">About</a>
           <a class="site-foot__link" href="/gallery.html">Gallery</a>
           <a
             class="site-foot__link"
@@ -441,6 +430,7 @@
       aria-modal="true"
       aria-labelledby="lightbox-title"
       data-lightbox
+      data-lenis-prevent
     >
       <h2 class="lightbox__sr" id="lightbox-title">Gallery</h2>
       <!-- Position, announced rather than printed. A keyboard user arrowing

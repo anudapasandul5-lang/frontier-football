@@ -1,5 +1,6 @@
 /* Frontier Football — the "what is Frontier" story section.
-   An asymmetric editorial split on cream. Deliberately a different layout
+   An asymmetric editorial split on cream: text column wider, photo narrower,
+   both top-aligned (no vertical offset). Deliberately a different layout
    family from the hero's centred poster, so the page does not read as one
    idea repeated.
 
@@ -57,7 +58,9 @@
      well under the hero's clamp(48px, 8.6vw, 132px) so the hero stays the
      loudest thing on the page. */
   line-height: 0.92;
-  letter-spacing: -0.03em;
+  /* Anton is condensed already; negative tracking on top of it ran the
+     glyphs into each other at display size. Neutral, same as the hero. */
+  letter-spacing: 0;
   text-transform: uppercase;
   color: var(--color-ink);
 }
@@ -76,16 +79,8 @@
    and reusing it here would be the same idea twice. Real photography carries
    its own colours and is exempt from the six (HOUSE-RULES section 2). */
 .story__photo {
-  aspect-ratio: 4 / 3;
-  border-radius: var(--radius-card-elevated);
-}
-
-@media (min-width: 900px) {
-  .story__photo {
-    /* This offset IS the asymmetry: it drops the photo below the headline so
-       the two columns never share a top edge. Collapses to 0 below 900px. */
-    margin-top: var(--spacing-60);
-  }
+  aspect-ratio: 8 / 5;
+  border: none;
 }
 
 @media (max-width: 599px) {
@@ -96,4 +91,22 @@
   .story__split {
     padding: 0 var(--page-gutter) var(--spacing-48);
   }
+}
+
+/* ============ THE WAY THROUGH TO THE ABOUT PAGE ============ */
+/* Underlined by default rather than on hover: it is the only link in a block of
+   running text, and an unmarked one there reads as a bolder word. */
+.story__more {
+  margin-top: var(--spacing-24);
+}
+
+.story__link {
+  display: inline-flex;
+  align-items: center;
+  /* WCAG 2.5.8's 24px floor for a pointer target, the same treatment .nav__link
+     takes for the same reason. */
+  min-height: 44px;
+  font-weight: 700;
+  color: var(--color-ink);
+  text-underline-offset: 0.2em;
 }

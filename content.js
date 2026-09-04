@@ -69,11 +69,22 @@ export default {
       // What the picture shows, read aloud to anyone using a screen reader.
       // Leave as "TODO" and a plain description is written for you.
       photoAlt: "The SZN 6 champions lined up on the pitch beside the trophy.",
+      // WHEN it ran and WHERE.
+      //
+      // Every date is still blank. Leave one as "TODO" and the About page's
+      // timeline simply prints that line shorter - it never guesses a month.
+      //
+      // The venues came from the owner on 2026-09-03: every season of the 4x4
+      // Series was played at Athlete 360, Turf Wars was at Club Fusion, and
+      // Division 0 was at Pixels N Pints. The watch parties are still blank -
+      // nobody has said which venue hosted which night.
+      date: "TODO",
+      venue: "Athlete 360",
       // Link to this season's full photo folder on Google Drive. Paste the
       // folder's share link here and a card for SZN 6 appears on the photos
       // page with a working button. Leave it as "TODO" and the card still shows,
       // saying the photos are on the way.
-      driveFolder: "TODO",
+      driveFolder: "https://drive.google.com/drive/folders/1CstLyLWgy79Yqp0d-NQ3Rnux1-MAbxeR",
     },
     {
       season: 5,
@@ -92,6 +103,8 @@ export default {
       // own, then point this line at it.
       photo: "TODO",
       photoAlt: "TODO",
+      date: "TODO",
+      venue: "Athlete 360",
       // Link to this season's full photo folder on Google Drive. Paste the
       // folder's share link here and a card for SZN 5 appears on the photos
       // page with a working button. Leave it as "TODO" and the card still shows,
@@ -111,11 +124,13 @@ export default {
       goldenGlove: "TODO",
       photo: "/champions/szn-4.webp",
       photoAlt: "The SZN 4 champions holding the trophy together after the final.",
+      date: "TODO",
+      venue: "Athlete 360",
       // Link to this season's full photo folder on Google Drive. Paste the
       // folder's share link here and a card for SZN 4 appears on the photos
       // page with a working button. Leave it as "TODO" and the card still shows,
       // saying the photos are on the way.
-      driveFolder: "TODO",
+      driveFolder: "https://drive.google.com/drive/folders/1aqiStgYq6IRnL-Ev2GdEDWDu4HgzrpZu",
     },
     {
       season: 3,
@@ -130,11 +145,13 @@ export default {
       goldenGlove: "TODO",
       photo: "/champions/szn-3.webp",
       photoAlt: "The SZN 3 champions wearing their medals, with the trophy.",
+      date: "TODO",
+      venue: "Athlete 360",
       // Link to this season's full photo folder on Google Drive. Paste the
       // folder's share link here and a card for SZN 3 appears on the photos
       // page with a working button. Leave it as "TODO" and the card still shows,
       // saying the photos are on the way.
-      driveFolder: "TODO",
+      driveFolder: "https://drive.google.com/drive/folders/1n3WeRh87N8bBVia1gQJ5pafeCrXkc9Bn",
     },
 
     // SZN 1 and SZN 2. Nothing about these two has been confirmed yet, so
@@ -151,13 +168,17 @@ export default {
       runnerUp: "TODO",
       goldenBoot: "TODO",
       goldenGlove: "TODO",
-      photo: "TODO",
-      photoAlt: "TODO",
+      // A match-action frame from the SZN 2 Drive folder - not a champions
+      // photo (the winner is still unknown), just proof there was a season.
+      photo: "/champions/szn-2.webp",
+      photoAlt: "A SZN 2 player lines up a shot as an opponent closes in.",
+      date: "TODO",
+      venue: "Athlete 360",
       // Link to this season's full photo folder on Google Drive. Paste the
       // folder's share link here and a card for SZN 2 appears on the photos
       // page with a working button. Leave it as "TODO" and the card still shows,
       // saying the photos are on the way.
-      driveFolder: "TODO",
+      driveFolder: "https://drive.google.com/drive/folders/1G5VcXwTNeIMI_K7eSrRf0ndZalg_8S66",
     },
     {
       season: 1,
@@ -170,13 +191,18 @@ export default {
       runnerUp: "TODO",
       goldenBoot: "TODO",
       goldenGlove: "TODO",
-      photo: "TODO",
-      photoAlt: "TODO",
+      // A match-action frame from the SZN 1 Drive folder, badge-cropped per
+      // docs/HOUSE-RULES.md section 6 (17% off the bottom clears the Frontier
+      // crest and the REIGNITE wordmark).
+      photo: "/champions/szn-1.webp",
+      photoAlt: "SZN 1 players challenge for the ball in the cage under floodlights.",
+      date: "TODO",
+      venue: "Athlete 360",
       // Link to this season's full photo folder on Google Drive. Paste the
       // folder's share link here and a card for SZN 1 appears on the photos
       // page with a working button. Leave it as "TODO" and the card still shows,
       // saying the photos are on the way.
-      driveFolder: "TODO",
+      driveFolder: "https://drive.google.com/drive/folders/18fxPlbuFWK1KWtKPedgNnm3DbIxw4VKW",
     },
   ],
 
@@ -194,7 +220,12 @@ export default {
       albumId: "TODO",
       // A short line under the champion. Use it for when it ran, or for what
       // kind of competition it is.
-      note: "Aug 2025",
+      //
+      // THIS USED TO SAY "Aug 2025" AND THAT WAS WRONG. Turf Wars is where
+      // Frontier started and Frontier started in 2024, so August 2025 cannot be
+      // right. Nobody has said what the real month was, so it is blank until
+      // somebody does. Write it in the `date` line below, not here.
+      note: "TODO",
       // The team that won it.
       champion: "TODO",
       // The team that finished second.
@@ -202,6 +233,8 @@ export default {
       // Picture of the winning team.
       photo: "/champions/turf-wars.webp",
       photoAlt: "The Turf Wars champions with their hands on the trophy.",
+      date: "TODO",
+      venue: "Club Fusion",
       // Link to the full photo folder for Turf Wars on Google Drive.
       // Paste the folder's share link here. Leave it as "TODO" and the card
       // still shows, saying the photos are on the way.
@@ -224,10 +257,12 @@ export default {
       // picture was found. The description below says so honestly.
       photo: "/champions/division-0.webp",
       photoAlt: "Players on a sofa at the Division 0 console tournament, controller in hand.",
+      date: "TODO",
+      venue: "Pixels N Pints",
       // Link to the full photo folder for Division 0 on Google Drive.
       // Paste the folder's share link here. Leave it as "TODO" and the card
       // still shows, saying the photos are on the way.
-      driveFolder: "TODO",
+      driveFolder: "https://drive.google.com/drive/folders/1fkDf7Igl7RtVIKxxxeuGikZqo6Eg7se1",
     },
   ],
 
@@ -247,10 +282,20 @@ export default {
   // you kept a folder per match, make one block per match instead and name them
   // whatever you called them.
   // ==========================================================================
+  // WHERE THE WATCH PARTIES SIT ON THE ABOUT PAGE'S TIMELINE.
+  //
+  // The watch parties did not happen after the seasons, they happened in the
+  // middle of SZN 4, 5 and 6 (owner, 3 September 2026). Write the season number
+  // they ran alongside here and the timeline grows a branch at that point.
+  //
+  // Put "TODO" instead and the branch simply hangs off the end of the run,
+  // which is what it did before anybody said when they happened.
+  watchAlongsAfter: 5,
+
   watchAlongs: [
     {
       // The name shown on the card. This is the one line that must be filled in.
-      name: "World Cup",
+      name: "Final: Spain vs Argentina",
       // Which album on this site the "View photos" button opens. It matches a
       // file in public/albums/, written by `npm run albums:sync`. Leave it as
       // "TODO" and the card still shows, saying the photos are on the way.
@@ -259,10 +304,50 @@ export default {
       note: "TODO",
       // A picture from the night. Put the file in the public/champions/ folder
       // and write its name here, the same way the champion photos work.
-      photo: "TODO",
-      photoAlt: "TODO",
-      // The Google Drive folder holding every photo from the watch-alongs.
-      driveFolder: "TODO",
+      photo: "/champions/wa-final-esp-arg.webp",
+      photoAlt: "A fan raises an arm as the room watches the match on the big screen.",
+      date: "TODO",
+      venue: "TODO",
+      // The Google Drive folder holding the photos from this night.
+      driveFolder: "https://drive.google.com/drive/folders/1hOfEz1uHcPT0fx8Ca4Dv86bhcj7WMMsU",
+    },
+    {
+      name: "Semi-final: England vs Argentina",
+      note: "TODO",
+      photo: "/champions/wa-semi-eng-arg.webp",
+      photoAlt: "A packed watch-along crowd reacts to the match on screen.",
+      date: "TODO",
+      venue: "TODO",
+      driveFolder: "https://drive.google.com/drive/folders/1MFdyJn1AwLtSq_Flkg8PB_EqFX1a15CV",
+    },
+    {
+      name: "Semi-final: Spain vs France",
+      note: "TODO",
+      photo: "/champions/wa-semi-esp-fra.webp",
+      photoAlt: "Two fans celebrate with their arms up at the watch-along.",
+      date: "TODO",
+      venue: "TODO",
+      driveFolder: "https://drive.google.com/drive/folders/15y_x5dnOdsGQvmjPm0JaIqeLpoGWB5BM",
+    },
+    {
+      name: "Norway vs England",
+      note: "TODO",
+      photo: "/champions/wa-norway-england.webp",
+      photoAlt: "A fan cheers with both arms raised, phone in hand, mid-match.",
+      date: "TODO",
+      venue: "TODO",
+      driveFolder: "https://drive.google.com/drive/folders/1CZXXR7ZNFmPaOFudf8wDXNlPFlaKnxlh",
+    },
+    {
+      // Not part of the same run of matches as the four above, but it is still
+      // a night in front of a screen, so it belongs in this group.
+      name: "UCL Final Night",
+      note: "TODO",
+      photo: "/champions/wa-ucl-final-night.webp",
+      photoAlt: "Fans in red shirts cheer with their arms raised at the watch-along.",
+      date: "TODO",
+      venue: "TODO",
+      driveFolder: "https://drive.google.com/drive/folders/1LI43OOBwg14x5l5h-E3OTw5f2z-kGyXe",
     },
   ],
 
@@ -287,123 +372,203 @@ export default {
   //           pictures load. If you swap a picture and do not know its size,
   //           delete both lines: the site holds a normal wide slot instead.
   //
+  // EVERY PHOTOGRAPH HERE IS LANDSCAPE, ON PURPOSE
+  //   The row sizes each card to the picture's own shape, so one upright
+  //   picture in a row of wide ones makes the whole strip taller and leaves
+  //   the wide ones looking shrunken beside it. Clips are the exception: the
+  //   footage is phone-shot and mostly upright, so clips live behind the CLIPS
+  //   button and appear nowhere else. If you add a photograph, add a wide one.
+  //
   // WHERE THESE CAME FROM
-  //   Every one is a real photograph or a real clip from Frontier's Instagram.
-  //   Posters and announcement graphics were deliberately left out: they carry
-  //   their own lettering and their own colours, which fight the site's. Four
-  //   otherwise good photographs were dropped because a Frontier badge is
-  //   burned into the corner of the picture. Two more were dropped because
-  //   ThePapare's photographer's copyright notice is printed across them, and
-  //   that is not ours to crop off. See docs/HOUSE-RULES.md.
+  //   The photographs were picked out of Frontier's own Google Drive, from the
+  //   season and watch-along folders the gallery page already links to. The two
+  //   clips are from Frontier's Instagram, which is where the whole row used to
+  //   come from. Posters and announcement graphics are still deliberately left
+  //   out: they carry their own lettering and their own colours, which fight
+  //   the site's. Two Instagram photographs remain unusable because ThePapare's
+  //   photographer's copyright notice is printed across them, and that is not
+  //   ours to crop off.
+  //
+  //   Most Drive photographs carry a burned-in Frontier, 4x4, HYPE, REIGNITE or
+  //   MAIN mark in the bottom corners. Those marks were measured and cropped
+  //   off before the files were saved, so nothing here ships a logo nobody
+  //   meant to publish. Two otherwise good frames were dropped instead of
+  //   cropped, because the badge sat too far up the picture to cut without
+  //   cutting the subject too. See docs/HOUSE-RULES.md.
   // ==========================================================================
   gallery: [
+    // ---- On the pitch ----
     {
-      src: "/gallery/01.webp",
-      alt: "A player slides in to challenge for the ball on a fenced turf pitch.",
+      src: "/gallery/p01.webp",
+      alt: "A player slides in to win the ball as an attacker shields it on the turf.",
       tag: "On the pitch",
-      width: 1080,
-      height: 782,
+      width: 1280,
+      height: 921,
     },
     {
-      src: "/gallery/02.webp",
-      alt: "A player in a training bib sits at the side of the pitch, watching the game.",
-      tag: "Off the pitch",
-      width: 675,
-      height: 1200,
+      src: "/gallery/p02.webp",
+      alt: "Two players stretch for a loose ball in front of an open goal.",
+      tag: "On the pitch",
+      width: 1280,
+      height: 708,
     },
+    {
+      src: "/gallery/p03.webp",
+      alt: "A player strikes the ball under floodlights with palm trees behind the cage.",
+      tag: "On the pitch",
+      width: 1280,
+      height: 708,
+    },
+    {
+      src: "/gallery/p04.webp",
+      alt: "Two players go one on one over the ball in the middle of the pitch.",
+      tag: "On the pitch",
+      width: 1280,
+      height: 666,
+    },
+    {
+      src: "/gallery/p05.webp",
+      alt: "A player shoots while spectators watch from the sideline tents.",
+      tag: "On the pitch",
+      width: 1280,
+      height: 649,
+    },
+    {
+      src: "/gallery/p06.webp",
+      alt: "A player shapes to shoot during a daytime match.",
+      tag: "On the pitch",
+      width: 1280,
+      height: 853,
+    },
+    {
+      src: "/gallery/p07.webp",
+      alt: "Players crowd the ball in a tight midfield battle.",
+      tag: "On the pitch",
+      width: 1280,
+      height: 649,
+    },
+    {
+      src: "/gallery/p08.webp",
+      alt: "Two players sprint shoulder to shoulder chasing the ball.",
+      tag: "On the pitch",
+      width: 1280,
+      height: 658,
+    },
+
+    // ---- Off the pitch ----
+    {
+      src: "/gallery/p09.webp",
+      alt: "A team lines up for a portrait on the pitch at dusk.",
+      tag: "Off the pitch",
+      width: 1280,
+      height: 708,
+    },
+    {
+      src: "/gallery/p10.webp",
+      alt: "Two players embrace after the final whistle.",
+      tag: "Off the pitch",
+      width: 1280,
+      height: 649,
+    },
+    {
+      src: "/gallery/p11.webp",
+      alt: "A winning side lifts the trophy in front of a Frontier banner.",
+      tag: "Off the pitch",
+      width: 1280,
+      height: 658,
+    },
+    {
+      src: "/gallery/p12.webp",
+      alt: "Two teams line up with medals and the cup after the final.",
+      tag: "Off the pitch",
+      width: 1280,
+      height: 658,
+    },
+    {
+      src: "/gallery/p13.webp",
+      alt: "Players crowd around the screens at the FIFA tournament.",
+      tag: "Off the pitch",
+      width: 1280,
+      height: 853,
+    },
+
+    // ---- Watch-alongs ----
+    {
+      src: "/gallery/p14.webp",
+      alt: "Fans throw their arms up as the match turns on the big screen.",
+      tag: "Watch-alongs",
+      width: 1280,
+      height: 649,
+    },
+    {
+      src: "/gallery/p15.webp",
+      alt: "A room full of football shirts celebrating a goal together.",
+      tag: "Watch-alongs",
+      width: 1280,
+      height: 649,
+    },
+    {
+      src: "/gallery/p16.webp",
+      alt: "A packed venue watching the match on the screens.",
+      tag: "Watch-alongs",
+      width: 1280,
+      height: 649,
+    },
+    {
+      src: "/gallery/p17.webp",
+      alt: "Fans leap out of their seats in front of the projector screen.",
+      tag: "Watch-alongs",
+      width: 1280,
+      height: 854,
+    },
+    {
+      src: "/gallery/p18.webp",
+      alt: "A full house watching the match under the green glow of the bar.",
+      tag: "Watch-alongs",
+      width: 1280,
+      height: 854,
+    },
+    {
+      src: "/gallery/p19.webp",
+      alt: "Fans in football shirts raise their arms at the line-up reveal.",
+      tag: "Watch-alongs",
+      width: 1280,
+      height: 854,
+    },
+
+    // ---- Clips. Only the CLIPS filter shows these. ----
     {
       // A clip. `poster` is the still that shows until someone opens it.
-      src: "/gallery/03.mp4",
-      poster: "/gallery/03.webp",
+      src: "/gallery/v01.mp4",
+      poster: "/gallery/v01.webp",
       alt: "A player rests a boot on the ball beside a training cone under floodlights.",
       tag: "On the pitch",
       width: 1200,
       height: 678,
     },
     {
-      src: "/gallery/04.webp",
-      alt: "A crowd watching a match together on a screen indoors.",
-      tag: "Watch-alongs",
-      width: 675,
-      height: 1200,
-    },
-    {
-      src: "/gallery/05.webp",
-      alt: "A packed room of people watching a match on a big screen.",
-      tag: "Watch-alongs",
-      width: 1080,
-      height: 721,
-    },
-    {
-      src: "/gallery/06.webp",
-      alt: "A player with both hands on their head during a game, lit from behind.",
-      tag: "On the pitch",
-      width: 675,
-      height: 1200,
-    },
-    {
-      src: "/gallery/07.webp",
-      alt: "A player in a 4x4 Series shirt, photographed close up.",
-      tag: "On the pitch",
-      width: 675,
-      height: 1200,
-    },
-    {
-      src: "/gallery/08.webp",
-      alt: "Players on a floodlit pitch at night, seen from the far end.",
-      tag: "On the pitch",
-      width: 1080,
-      height: 720,
-    },
-    {
-      src: "/gallery/09.webp",
-      alt: "Two people hold up a football shirt beside a pitch.",
-      tag: "Off the pitch",
-      width: 640,
-      height: 1136,
-    },
-    {
-      src: "/gallery/10.mp4",
-      poster: "/gallery/10.webp",
+      src: "/gallery/v02.mp4",
+      poster: "/gallery/v02.webp",
       alt: "Two players compete for the ball during a game.",
       tag: "On the pitch",
       width: 675,
       height: 1200,
     },
     {
-      src: "/gallery/11.webp",
-      alt: "Two spectators watching the game closely from the sideline.",
-      tag: "Off the pitch",
-      width: 675,
-      height: 1200,
+      src: "/gallery/v03.mp4",
+      poster: "/gallery/v03.webp",
+      alt: "Someone walks through a watch-along venue while the match plays on the big screen.",
+      tag: "Watch-alongs",
+      width: 540,
+      height: 960,
     },
     {
-      src: "/gallery/12.webp",
-      alt: "A player strikes a ball on a paved promenade lined with palm trees.",
-      tag: "Off the pitch",
-      width: 675,
-      height: 1200,
-    },
-    {
-      src: "/gallery/13.webp",
-      alt: "A person in a Sri Lanka jacket, photographed in low light.",
-      tag: "Off the pitch",
-      width: 720,
-      height: 406,
-    },
-    {
-      src: "/gallery/14.webp",
-      alt: "Players celebrating together after a game, one lifted on another's back.",
-      tag: "On the pitch",
-      width: 675,
-      height: 1200,
-    },
-    {
-      src: "/gallery/15.webp",
-      alt: "A host speaks into a microphone beside a player at a pitch-side stand.",
-      tag: "Off the pitch",
-      width: 675,
-      height: 1200,
+      src: "/gallery/v04.mp4",
+      poster: "/gallery/v04.webp",
+      alt: "Supporters in football shirts watching the match from armchairs, one grinning.",
+      tag: "Watch-alongs",
+      width: 540,
+      height: 960,
     },
   ],
 
@@ -431,21 +596,31 @@ export default {
   // write its name in the `logo` line, like "/partners/whoever.webp". The
   // picture replaces the text and nothing else on the page moves.
   //
+  // THE LOGOS BELOW were traced from each brand's own website, Facebook page or
+  // Instagram profile picture, then flattened to one flat cream colour so the
+  // whole strip reads as one set on the dark band. Every mark is the brand's
+  // own; nothing was invented. Replace any file in `public/partners/` with a
+  // cleaner one from the brand and it drops straight in.
+  //
+  // STILL TEXT: @iodexsrilanka and @zone360.lk. No usable logo file exists
+  // online for either (IODEX's site only carries its parent company's mark),
+  // so both show as their name until someone supplies a real file.
+  //
   // TO ADD A PARTNER: copy a { ... } line and change the name.
   // TO REMOVE ONE: delete its line.
   // ==========================================================================
   partners: [
-    { name: "@main.sportsbar", logo: "TODO", url: "TODO" },
-    { name: "@address.lk", logo: "TODO", url: "TODO" },
+    { name: "@main.sportsbar", logo: "/partners/main-sports-bar.png", url: "TODO" },
+    { name: "@address.lk", logo: "/partners/address.png", url: "TODO" },
     { name: "@iodexsrilanka", logo: "TODO", url: "TODO" },
-    { name: "@nutrimax.iso", logo: "TODO", url: "TODO" },
-    { name: "Sofascore", logo: "TODO", url: "TODO" },
-    { name: "@shirtshack.lk", logo: "TODO", url: "TODO" },
-    { name: "@drinkhypebam", logo: "TODO", url: "TODO" },
-    { name: "ThePapare", logo: "TODO", url: "TODO" },
-    { name: "@absystudios", logo: "TODO", url: "TODO" },
+    { name: "@nutrimax.iso", logo: "/partners/nutrimax.png", url: "TODO" },
+    { name: "Sofascore", logo: "/partners/sofascore.svg", url: "TODO" },
+    { name: "@shirtshack.lk", logo: "/partners/shirt-shack.png", url: "TODO" },
+    { name: "@drinkhypebam", logo: "/partners/hype-bam.png", url: "TODO" },
+    { name: "ThePapare", logo: "/partners/thepapare.png", url: "TODO" },
+    { name: "@absystudios", logo: "/partners/absy-studios.png", url: "TODO" },
     { name: "@zone360.lk", logo: "TODO", url: "TODO" },
-    { name: "@athlete360_sl", logo: "TODO", url: "TODO" },
+    { name: "@athlete360_sl", logo: "/partners/athlete-360.png", url: "TODO" },
   ],
 
   // ==========================================================================
@@ -458,6 +633,32 @@ export default {
   // not appear on the site. Paste a real link in and that one shows up on its
   // own, in the order it sits in this list. Nothing else needs changing.
   // ==========================================================================
+  // ==========================================================================
+  // THE PEOPLE who run Frontier.
+  //
+  // THIS LIST IS EMPTY ON PURPOSE. Nobody has been named yet, and a card with a
+  // made-up name on it is worse than no section at all. While the list is empty
+  // the whole "who we are" part of the About page is simply not there - no
+  // heading, no blank cards, nothing.
+  //
+  // TO ADD SOMEONE: delete the // in front of the four lines below and fill
+  // them in. Copy the block again for each extra person.
+  //
+  //   name      what they are called. A person with no name is skipped.
+  //   role      what they do at Frontier. Leave "TODO" and just the name shows.
+  //   photo     a picture of them. Put the file in `public/people/` and write
+  //             its name here, like "/people/whoever.webp". Leave it as "TODO"
+  //             and the card is text only - nothing breaks.
+  //   photoAlt  what the picture shows, read aloud to anyone using a screen
+  //             reader. Leave as "TODO" and a plain description is written.
+  //
+  // ASK FIRST. Do not put somebody's name and face on the site before they have
+  // said yes to it.
+  // ==========================================================================
+  people: [
+    // { name: "TODO", role: "TODO", photo: "TODO", photoAlt: "TODO" },
+  ],
+
   links: [
     // The main one. Verified live. The 'handle' is what gets printed big on
     // the page, so it is written the way people actually type it.

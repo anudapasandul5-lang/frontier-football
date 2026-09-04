@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About - Frontier Football</title>
+    <meta
+      name="description"
+      content="How Frontier Football went from one night of Turf Wars to six seasons of the 4x4 Series, in Colombo."
+    />
+
+    <!-- ponytail: this head block, the nav and the footer are hand-copied from
+         index.html and gallery.html. Three copies now instead of two, and the
+         same drift risk both of those already name. A shared partial costs a
+         build step this project does not have. Edit all three or none. -->
+    <link rel="icon" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="About - Frontier Football" />
+    <meta property="og:description" content="From one night of Turf Wars to six seasons of the 4x4 Series." />
+    <meta property="og:image" content="/og.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/src/styles/tokens.css" />
+    <link rel="stylesheet" href="/src/styles/base.css" />
+    <link rel="stylesheet" href="/src/styles/components.css" />
+    <link rel="stylesheet" href="/src/styles/hero.css" />
+    <link rel="stylesheet" href="/src/styles/about.css" />
+    <link rel="stylesheet" href="/src/styles/footer.css" />
+  </head>
+  <body>
+    <!-- The same nav as the other two pages, offering the two you are not on.
+         hero.css carries .nav, which is why it is linked on a page with no hero. -->
+    <header class="nav">
+      <a class="nav__brand" href="/">
+        <img
+          class="nav__crest"
+          src="/crest.webp"
+          width="525"
+          height="640"
+          alt="Frontier Football"
+          fetchpriority="high"
+        />
+      </a>
+
+      <div class="nav__end">
+        <a class="nav__link" href="/">Home</a>
+        <a class="nav__link" href="/gallery.html">Gallery</a>
+        <a
+          class="btn btn--secondary nav__cta"
+          href="https://www.instagram.com/frontierfootballl/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Follow <span class="nav__cta-handle">@frontierfootballl</span>
+        </a>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- MASTHEAD. Photographs overlap the type rather than sitting beside it:
+           the page has no hero, so this stack is the thing that has to hold the
+           top of the screen on its own. The tiles are rotated a degree or two
+           and un-rotated below 768px, where an overlap would land on the words
+           and on each other's tap targets. -->
+      <section class="mast">
+        <div class="mast__inner">
+          <p class="eyebrow mast__eyebrow">Since Turf Wars</p>
+          <h1 class="mast__headline">About<br />us</h1>
+          <p class="mast__lede">
+            Frontier started in Colombo in 2024 so small sided football here had somewhere to
+            happen. It began with one night on turf and it is six seasons deep now.
+          </p>
+
+          <!-- Stand-in photographs, pulled from the sets already in public/. A
+               later ticket sources frames from Drive that appear nowhere else on
+               the site and swaps the three paths below. Decorative here: every
+               one of them is captioned properly on the gallery page, so they are
+               hidden from a screen reader rather than described twice. -->
+          <div class="mast__tiles" aria-hidden="true">
+            <figure class="frame mast__tile mast__tile--a">
+              <div class="frame__core">
+                <img src="/gallery/p11.webp" width="1280" height="658" alt="" decoding="async" />
+              </div>
+            </figure>
+            <figure class="frame mast__tile mast__tile--b">
+              <div class="frame__core">
+                <img src="/gallery/p06.webp" width="1280" height="853" alt="" loading="lazy" decoding="async" />
+              </div>
+            </figure>
+            <figure class="frame mast__tile mast__tile--c">
+              <div class="frame__core">
+                <img src="/gallery/p14.webp" width="1280" height="649" alt="" loading="lazy" decoding="async" />
+              </div>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- THE JOURNEY. Every stop is built by src/about.js from content.js, so
+           adding a season is a content.js edit and the spine redraws itself
+           around it. See docs/HOUSE-RULES.md and CONTEXT.md. -->
+      <section class="journey">
+        <div class="journey__head">
+          <h2 class="journey__headline">The run so far</h2>
+          <p class="journey__lede">
+            Turf Wars first, then the 4x4 Series, with the watch parties running alongside it.
+            Where a champion, a month or a venue is missing, nobody has written it down yet.
+          </p>
+        </div>
+
+        <!-- The record. Every row is built by src/about.js from content.js, so
+             adding a season is a content.js edit and nothing else. There is no
+             connecting line: this is an archive, and a hairline between rows
+             says "next entry" without a decorative rail to maintain.
+             See docs/HOUSE-RULES.md and CONTEXT.md. -->
+        <ol class="record" data-journey></ol>
+      </section>
+
+      <!-- THE PEOPLE. Renders nothing at all while content.js's `people` list is
+           empty, which is how it ships: no heading, no placeholder cards, no
+           stand-in for somebody who has not agreed to be named. -->
+      <div data-people></div>
+    </main>
+
+    <footer class="site-foot">
+      <div class="site-foot__inner">
+        <img
+          class="site-foot__crest"
+          src="/crest.webp"
+          width="525"
+          height="640"
+          alt="Frontier Football"
+          loading="lazy"
+          decoding="async"
+        />
+        <p class="site-foot__line">
+          Small-sided football and the culture around it, in Colombo.
+        </p>
+        <nav class="site-foot__nav" aria-label="Footer">
+          <a class="site-foot__link" href="/">Home</a>
+          <a class="site-foot__link" href="/about.html">About</a>
+          <a class="site-foot__link" href="/gallery.html">Gallery</a>
+          <a
+            class="site-foot__link"
+            href="https://www.instagram.com/frontierfootballl/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Frontier Football on Instagram (opens in a new tab)"
+          >
+            Instagram
+          </a>
+          <!-- ONE l, unlike Instagram's three. Both handles are real and
+               neither is a typo of the other. -->
+          <a
+            class="site-foot__link"
+            href="https://www.tiktok.com/@frontierfootball"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Frontier Football on TikTok (opens in a new tab)"
+          >
+            TikTok
+          </a>
+        </nav>
+        <p class="site-foot__meta">&copy; Frontier Football</p>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/about.js"></script>
+  </body>
+</html>
