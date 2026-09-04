@@ -71,7 +71,7 @@
   gap: var(--spacing-12);
   max-width: var(--page-max-width);
   margin: 0 auto;
-  padding: 0 var(--page-gutter) var(--spacing-20);
+  padding: var(--spacing-20) var(--page-gutter) 0;
 }
 
 .champions__dots {
@@ -327,6 +327,6 @@
   }
 
   .champions__nav {
-    padding-bottom: var(--spacing-16);
+    padding-top: var(--spacing-16);
   }
 }

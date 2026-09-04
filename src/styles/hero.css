@@ -125,18 +125,6 @@
   background: color-mix(in srgb, var(--color-paper) 60%, transparent);
 }
 
-/* The pause counterpart to the marquee's, per the same WCAG 2.2.2 reasoning.
-   [hidden] until src/hero.js decides a video actually plays: on a phone or
-   under reduced motion there is nothing here to pause, and this element never
-   loses its hidden attribute. .hero already establishes the stacking context
-   (isolate) that .hero__bg and .hero__wash sit inside at z-index -1, so no
-   z-index is needed here to clear them. */
-.hero__pause {
-  position: absolute;
-  right: var(--spacing-24);
-  bottom: var(--spacing-24);
-}
-
 .hero__stage {
   position: relative;
   max-width: 1080px;
@@ -226,14 +214,6 @@
     padding: var(--spacing-12) var(--spacing-16);
   }
 
-  /* A phone gets the poster still, not the video, so there is nothing to
-     reveal behind the nav - it goes back in flow and the hero keeps its own
-     short mobile height below it. */
-  .nav--overlay {
-    position: relative;
-    inset: auto;
-  }
-
   .nav__end {
     gap: var(--spacing-12);
   }
@@ -242,8 +222,14 @@
     font-size: var(--text-caption);
   }
 
+  /* Full-bleed on a phone too, by the owner's call: the video plays at every
+     width, so the nav stays overlaid and the hero keeps the desktop 100svh
+     from the base rule. Only the gutters and the bottom shrink - the top pad
+     stays at the base 80px because it is what clears the overlaid nav, and the
+     nav is only ~20px shorter here than it is above 600px. There is no
+     --spacing-64 token; reaching for one made the whole shorthand invalid at
+     computed-value time, which zeroed the padding rather than failing loudly. */
   .hero {
-    min-height: 0;
-    padding: var(--spacing-32) var(--spacing-16) var(--spacing-40);
+    padding: var(--spacing-80) var(--spacing-16) var(--spacing-40);
   }
 }

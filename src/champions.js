@@ -285,9 +285,10 @@ export function renderChampions(mount, data) {
   }
 
   mount.replaceChildren(...cards.map(card));
-  // Nav after the cards, because it observes them. Inserted before the rail in
-  // the document so the controls sit under the heading they belong to.
-  mount.before(buildRailNav(mount, cards.map((entry) => entry.title)));
+  // Nav after the cards, because it observes them. Inserted after the rail in
+  // the document so the controls sit under the deck they drive, matching the
+  // gallery's arrows on the section above.
+  mount.after(buildRailNav(mount, cards.map((entry) => entry.title)));
 }
 
 const section = document.querySelector(".champions");
