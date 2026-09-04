@@ -1,0 +1,35 @@
+{
+  "generatedAt": "2026-09-03",
+  "albums": [
+    {
+      "id": "szn-1",
+      "folderId": "18fxPlbuFWK1KWtKPedgNnm3DbIxw4VKW",
+      "count": 502
+    },
+    {
+      "id": "szn-2",
+      "folderId": "1G5VcXwTNeIMI_K7eSrRf0ndZalg_8S66",
+      "count": 1038
+    },
+    {
+      "id": "szn-3",
+      "folderId": "1n3WeRh87N8bBVia1gQJ5pafeCrXkc9Bn",
+      "count": 463
+    },
+    {
+      "id": "szn-4",
+      "folderId": "1aqiStgYq6IRnL-Ev2GdEDWDu4HgzrpZu",
+      "count": 869
+    },
+    {
+      "id": "szn-6",
+      "folderId": "1CstLyLWgy79Yqp0d-NQ3Rnux1-MAbxeR",
+      "count": 204
+    },
+    {
+      "id": "division-0",
+      "folderId": "1fkDf7Igl7RtVIKxxxeuGikZqo6Eg7se1",
+      "count": 64
+    }
+  ]
+}

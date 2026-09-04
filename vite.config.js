@@ -10,6 +10,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         gallery: resolve(__dirname, 'gallery.html'),
+        album: resolve(__dirname, 'album.html'),
         styleguide: resolve(__dirname, 'styleguide.html'),
       },
     },

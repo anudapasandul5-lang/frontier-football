@@ -3,11 +3,14 @@ import { parseContent } from "./content-data.js";
 import { stepIndex } from "./gallery-data.js";
 import { wireReveal } from "./reveal.js";
 
-/* The gallery page: two card grids behind two tabs, Albums and Watch Parties,
-   each card linking out to the Google Drive folder for that season or night -
-   the site never hosts the full archive itself (docs/HOUSE-RULES.md). Albums
-   covers everything with a champion: every SZN of the 4x4 Series plus Turf
-   Wars and Division 0, which are competitions but not seasons (CONTEXT.md).
+/* The gallery page: two card grids behind two tabs, Albums and Watch Parties.
+   A card with an album opens it on this site at /album.html?album=<id>; the
+   photographs are served from Google Drive rather than committed here, and a
+   card links straight out to a Drive folder only if it has no album of its own
+   (docs/HOUSE-RULES.md).
+
+   Albums covers everything with a champion: every SZN of the 4x4 Series plus
+   Turf Wars and Division 0, which are competitions but not seasons (CONTEXT.md).
    Watch Parties covers nights Frontier watched football rather than ran it,
    so they never sit under the same "Champion" heading a tournament card uses.
 
@@ -63,7 +66,20 @@ function albumCard(entry, index) {
 
   if (entry.note) card.append(albumLine("album-card__note", entry.note));
 
-  if (entry.driveFolder) {
+  // An album on this site first: the photographs are shown here rather than
+  // handed off to Drive. driveFolder is kept as the secondary way out for
+  // anyone who wants the original, full-resolution files, which the site never
+  // serves.
+  if (entry.albumId) {
+    const link = document.createElement("a");
+    link.className = "btn btn--secondary album-card__link";
+    // Encoded even though every id in content.js is a plain slug: this value
+    // goes into a URL, and the day one is not a slug is the day it silently
+    // stops being one parameter.
+    link.href = `/album.html?album=${encodeURIComponent(entry.albumId)}`;
+    link.textContent = "View photos";
+    card.append(link);
+  } else if (entry.driveFolder) {
     const link = document.createElement("a");
     link.className = "btn btn--secondary album-card__link";
     link.href = entry.driveFolder;
@@ -184,6 +200,7 @@ export function renderGalleryPage(mount) {
       photo: season.photo,
       photoAlt: season.photoAlt,
       driveFolder: season.driveFolder,
+      albumId: season.albumId,
     })),
     // Turf Wars and Division 0 are not seasons of the 4x4 Series, so they are
     // appended after the seasons rather than sorted among them - same rule
@@ -195,6 +212,7 @@ export function renderGalleryPage(mount) {
       photo: competition.photo,
       photoAlt: competition.photoAlt,
       driveFolder: competition.driveFolder,
+      albumId: competition.albumId,
     })),
   ];
 
@@ -204,6 +222,7 @@ export function renderGalleryPage(mount) {
     photo: watchAlong.photo,
     photoAlt: watchAlong.photoAlt,
     driveFolder: watchAlong.driveFolder,
+    albumId: watchAlong.albumId,
   }));
 
   const groups = [];

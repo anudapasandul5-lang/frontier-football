@@ -19,6 +19,13 @@ const reduceMotion = () => globalThis.matchMedia?.("(prefers-reduced-motion: red
 function media(item) {
   if (!item.isClip) {
     const img = document.createElement("img");
+    // Before src, so the policy is in force for the request src triggers.
+    // Google Drive refuses a thumbnail whose request carries another site's
+    // Referer, and the album page (src/album-page.js) opens Drive-hosted
+    // photographs in here. Harmless for the home page's own local files, which
+    // is why it is set for every image rather than behind a flag: one rule
+    // nobody has to remember to pass.
+    img.referrerPolicy = "no-referrer";
     img.src = item.src;
     img.alt = item.alt ?? "A Frontier photograph.";
     return img;

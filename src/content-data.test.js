@@ -29,6 +29,7 @@ describe("parseContent", () => {
       photo: "/champions/szn-4.webp",
       photoAlt: "A description",
       driveFolder: null,
+      albumId: null,
     });
   });
 
@@ -101,6 +102,7 @@ describe("parseContent", () => {
       photo: "/champions/turf-wars.webp",
       photoAlt: null,
       driveFolder: null,
+      albumId: null,
     });
   });
 

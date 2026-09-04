@@ -48,6 +48,10 @@ export default {
     {
       // The season number. Shows on the card as "SZN 6". Just the number.
       season: 6,
+      // Which album on this site the "View photos" button opens. It matches a
+      // file in public/albums/, written by `npm run albums:sync`. Leave it as
+      // "TODO" and the card still shows, saying the photos are on the way.
+      albumId: "szn-6",
       // The team that won. This is the main thing on the card. If it is TODO,
       // the card says "Not recorded yet" instead.
       champion: "Spain",
@@ -73,6 +77,10 @@ export default {
     },
     {
       season: 5,
+      // Which album on this site the "View photos" button opens. It matches a
+      // file in public/albums/, written by `npm run albums:sync`. Leave it as
+      // "TODO" and the card still shows, saying the photos are on the way.
+      albumId: "TODO",
       champion: "TODO",
       note: "TODO",
       runnerUp: "TODO",
@@ -92,6 +100,10 @@ export default {
     },
     {
       season: 4,
+      // Which album on this site the "View photos" button opens. It matches a
+      // file in public/albums/, written by `npm run albums:sync`. Leave it as
+      // "TODO" and the card still shows, saying the photos are on the way.
+      albumId: "szn-4",
       champion: "Pantera FC",
       note: "TODO",
       runnerUp: "TODO",
@@ -107,6 +119,10 @@ export default {
     },
     {
       season: 3,
+      // Which album on this site the "View photos" button opens. It matches a
+      // file in public/albums/, written by `npm run albums:sync`. Leave it as
+      // "TODO" and the card still shows, saying the photos are on the way.
+      albumId: "szn-3",
       champion: "Ramadan FC",
       note: "TODO",
       runnerUp: "TODO",
@@ -126,6 +142,10 @@ export default {
     // a guess. Fill the names in as they come.
     {
       season: 2,
+      // Which album on this site the "View photos" button opens. It matches a
+      // file in public/albums/, written by `npm run albums:sync`. Leave it as
+      // "TODO" and the card still shows, saying the photos are on the way.
+      albumId: "szn-2",
       champion: "TODO",
       note: "TODO",
       runnerUp: "TODO",
@@ -141,6 +161,10 @@ export default {
     },
     {
       season: 1,
+      // Which album on this site the "View photos" button opens. It matches a
+      // file in public/albums/, written by `npm run albums:sync`. Leave it as
+      // "TODO" and the card still shows, saying the photos are on the way.
+      albumId: "szn-1",
       champion: "TODO",
       note: "TODO",
       runnerUp: "TODO",
@@ -164,6 +188,10 @@ export default {
       // The name shown on the card. A competition with no name is skipped, so
       // this is the one line that must be filled in.
       name: "Turf Wars",
+      // Which album on this site the "View photos" button opens. It matches a
+      // file in public/albums/, written by `npm run albums:sync`. Leave it as
+      // "TODO" and the card still shows, saying the photos are on the way.
+      albumId: "TODO",
       // A short line under the champion. Use it for when it ran, or for what
       // kind of competition it is.
       note: "Aug 2025",
@@ -181,6 +209,10 @@ export default {
     },
     {
       name: "Division 0",
+      // Which album on this site the "View photos" button opens. It matches a
+      // file in public/albums/, written by `npm run albums:sync`. Leave it as
+      // "TODO" and the card still shows, saying the photos are on the way.
+      albumId: "division-0",
       // "PS5 FC26 Tournament" is how it is described in the Instagram post
       // announcing it. Add the month here too once you confirm it: the recap
       // post went up on 28 July 2026, so it looks like July, but that is a
@@ -219,6 +251,10 @@ export default {
     {
       // The name shown on the card. This is the one line that must be filled in.
       name: "World Cup",
+      // Which album on this site the "View photos" button opens. It matches a
+      // file in public/albums/, written by `npm run albums:sync`. Leave it as
+      // "TODO" and the card still shows, saying the photos are on the way.
+      albumId: "TODO",
       // A short line under the name. The month, or which matches it covered.
       note: "TODO",
       // A picture from the night. Put the file in the public/champions/ folder

@@ -39,6 +39,11 @@ function parseSeason(raw) {
     // and committed by hand, and the owner can drop a folder into Drive without
     // a developer. Runs through the same TODO guard as everything else, so a card
     // can never link nowhere.
+    // The album on this site that this card's "View photos" button opens —
+    // the key of a file in public/albums/, written by `npm run albums:sync`.
+    // driveFolder stays as well: it is the escape hatch to the original,
+    // full-resolution files, which the site never serves.
+    albumId: recorded(raw.albumId),
     driveFolder: recorded(raw.driveFolder),
   };
 }
@@ -51,6 +56,11 @@ function parseCompetition(raw) {
     runnerUp: recorded(raw.runnerUp),
     photo: recorded(raw.photo),
     photoAlt: recorded(raw.photoAlt),
+    // The album on this site that this card's "View photos" button opens —
+    // the key of a file in public/albums/, written by `npm run albums:sync`.
+    // driveFolder stays as well: it is the escape hatch to the original,
+    // full-resolution files, which the site never serves.
+    albumId: recorded(raw.albumId),
     driveFolder: recorded(raw.driveFolder),
   };
 }
@@ -65,6 +75,11 @@ function parseWatchAlong(raw) {
     note: recorded(raw.note),
     photo: recorded(raw.photo),
     photoAlt: recorded(raw.photoAlt),
+    // The album on this site that this card's "View photos" button opens —
+    // the key of a file in public/albums/, written by `npm run albums:sync`.
+    // driveFolder stays as well: it is the escape hatch to the original,
+    // full-resolution files, which the site never serves.
+    albumId: recorded(raw.albumId),
     driveFolder: recorded(raw.driveFolder),
   };
 }
