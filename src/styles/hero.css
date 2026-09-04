@@ -40,13 +40,11 @@
   height: clamp(40px, 5vw, 54px);
 }
 
-.nav__cta {
-  flex: none;
-}
-
 /* The nav was brand on the left and one CTA on the right until the photos page
-   existed. Both pages now carry a second item, so the right-hand side is a
-   group: "Photos" on the home page, "Home" on the photos page. */
+   existed. Every page now carries a group of plain links there instead: the
+   Follow pill was removed from all five navs on 2026-09-04 (the owner's call)
+   and its .nav__cta rules went with it. Follow lives in the home hero and in
+   every footer. */
 .nav__end {
   display: flex;
   flex: none;
@@ -74,16 +72,12 @@
   text-decoration: underline;
 }
 
-/* Three items plus the CTA is what the About page brought, and at 320px the
-   handle alone is wider than the remaining room - .nav__end is flex:none and
-   .nav__link is nowrap, so the row cannot shrink its way out of an overflow.
-   The handle is dropped rather than a link, because "Follow" still says what
-   the button does while a missing page cannot be navigated to at all. */
-@media (max-width: 479px) {
-  .nav__cta-handle {
-    display: none;
-  }
-}
+/* The 479px rule that hid the Follow handle went with the pill itself. What it
+   was protecting still matters: .nav__end is flex:none and .nav__link is
+   nowrap, so the row cannot shrink its way out of an overflow - it can only
+   push the page wider. Three plain links fit at 320px where the pill's handle
+   did not, which is why nothing replaced it. Re-check the 320px width before
+   adding a fourth. */
 
 /* ============ HERO ============ */
 .hero {
@@ -192,8 +186,26 @@
    (rather than only inline) so the resting state - pointer not yet moved,
    or a coarse pointer that never wires the listener at all - is a plain 0,0
    and needs no script to be correct. */
-.hero__cta {
+/* Two actions on one row, centred with the rest of the stage. Wraps rather than
+   shrinks on a narrow phone: a button that has been squeezed to fit is a button
+   nobody presses. The margin lives here now rather than on .hero__cta, so the
+   pair moves as one block. */
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--spacing-16);
   margin-top: var(--spacing-32);
+}
+
+/* Same size and same 44px tap target as the primary beside it. The weight
+   difference is the fill, not the footprint - a smaller secondary would read as
+   the action we would rather you did not take. */
+.hero__action {
+  min-height: 44px;
+}
+
+.hero__cta {
   /* Size comes from .btn - the oversized hero variant dwarfed the subhead.
      min-height holds WCAG 2.5.8's tap target once the padding shrinks. */
   min-height: 44px;
@@ -220,15 +232,6 @@
   .nav--overlay {
     position: relative;
     inset: auto;
-  }
-
-  .nav__cta {
-    /* About 35px at this padding and font size. That clears WCAG 2.5.8's 24px
-       floor, so this line is the project's own 44px bar rather than a
-       conformance fix. Above 600px the base padding already clears it. */
-    min-height: 44px;
-    font-size: var(--text-caption);
-    padding: var(--spacing-8) var(--spacing-16);
   }
 
   .nav__end {

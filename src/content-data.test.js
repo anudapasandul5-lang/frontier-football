@@ -1,5 +1,13 @@
 import { describe, it, expect } from "vitest";
-import { journey, outboundLinks, parseContent, partners, people } from "./content-data.js";
+import {
+  contactRoutes,
+  journey,
+  outboundLinks,
+  parseContent,
+  partners,
+  people,
+  whatsappHref,
+} from "./content-data.js";
 
 describe("parseContent", () => {
   it("keeps every field of a fully recorded season", () => {
@@ -383,5 +391,192 @@ describe("watchAlongsAfter", () => {
     // A season that does not exist is not an anchor either - the renderer has
     // nothing to attach to and must not throw looking for it.
     expect(parseContent({ watchAlongsAfter: 0 }).watchAlongsAfter).toBeNull();
+  });
+});
+
+describe("whatsappHref", () => {
+  it("strips everything that is not a digit out of the number", () => {
+    // The owner types a number the way a human writes one. wa.me wants digits
+    // only, and a link built with a plus sign or a space in it silently opens a
+    // chat with nobody.
+    expect(whatsappHref("+94 71 234 5678", null)).toBe("https://wa.me/94712345678");
+    expect(whatsappHref("(+94) 71-234-5678", null)).toBe("https://wa.me/94712345678");
+  });
+
+  it("appends the pre-filled message, encoded", () => {
+    expect(whatsappHref("+94712345678", "Hi Frontier, I'd like to partner.")).toBe(
+      "https://wa.me/94712345678?text=Hi%20Frontier%2C%20I'd%20like%20to%20partner.",
+    );
+  });
+
+  it("omits the text parameter when there is no message", () => {
+    // An empty ?text= is not the same as no ?text=: it is a link that says the
+    // message was meant to be there and got lost.
+    expect(whatsappHref("+94712345678", null)).toBe("https://wa.me/94712345678");
+    expect(whatsappHref("+94712345678", "TODO")).toBe("https://wa.me/94712345678");
+  });
+
+  it("returns nothing when there is no number to link to", () => {
+    expect(whatsappHref("TODO", "Hi")).toBeNull();
+    expect(whatsappHref(null, "Hi")).toBeNull();
+    // Punctuation with no digits in it is not a phone number.
+    expect(whatsappHref("+ - ()", "Hi")).toBeNull();
+  });
+});
+
+describe("contactRoutes", () => {
+  const instagram = { name: "Instagram", handle: "@frontierfootballl", url: "https://example.test/ig" };
+  const tiktok = { name: "TikTok", handle: "@frontierfootball", url: "https://example.test/tt" };
+
+  it("gives each audience its own WhatsApp link when the number is recorded", () => {
+    // Two buttons, one number, two different pre-filled messages: the owner can
+    // tell which audience messaged before they type a word.
+    const routes = contactRoutes(
+      parseContent({
+        contact: {
+          whatsapp: "+94 71 234 5678",
+          partnerMessage: "Partner please",
+          playerMessage: "Player please",
+          email: "hi@example.test",
+        },
+        links: [instagram, tiktok],
+      }),
+    );
+
+    expect(routes.primary).toEqual({
+      kind: "whatsapp",
+      audience: "partner",
+      href: "https://wa.me/94712345678?text=Partner%20please",
+    });
+    expect(routes.secondary).toEqual({
+      kind: "whatsapp",
+      audience: "player",
+      href: "https://wa.me/94712345678?text=Player%20please",
+    });
+    expect(routes.email).toBe("mailto:hi@example.test");
+  });
+
+  it("falls back to email as the single action when there is no number", () => {
+    // Not two identical mailto buttons labelled differently. One action, because
+    // there is only one thing to do.
+    const routes = contactRoutes(
+      parseContent({
+        contact: { whatsapp: "TODO", email: "hi@example.test" },
+        links: [instagram],
+      }),
+    );
+
+    expect(routes.primary).toEqual({ kind: "email", audience: null, href: "mailto:hi@example.test" });
+    expect(routes.secondary).toBeNull();
+    expect(routes.email).toBe("mailto:hi@example.test");
+  });
+
+  it("falls back to the first outbound link when neither is recorded", () => {
+    // The state the page ships in until the owner pastes a number in. A DM is a
+    // real way to reach Frontier, so the page still works - it does not draw a
+    // dead button or a placeholder number.
+    const routes = contactRoutes(
+      parseContent({ contact: {}, links: [instagram, tiktok] }),
+    );
+
+    expect(routes.primary).toEqual({
+      kind: "link",
+      audience: null,
+      href: "https://example.test/ig",
+      name: "Instagram",
+    });
+    expect(routes.secondary).toBeNull();
+    expect(routes.email).toBeNull();
+  });
+
+  it("does not print the same destination twice", () => {
+    // Whatever became the primary action is dropped from the channels row
+    // beneath it. Instagram as the headline button and Instagram again in the
+    // row under it reads like a bug.
+    const routes = contactRoutes(parseContent({ contact: {}, links: [instagram, tiktok] }));
+
+    expect(routes.channels.map((link) => link.name)).toEqual(["TikTok"]);
+  });
+
+  it("keeps every channel when the primary action is not one of them", () => {
+    const routes = contactRoutes(
+      parseContent({ contact: { whatsapp: "+94712345678" }, links: [instagram, tiktok] }),
+    );
+
+    expect(routes.channels.map((link) => link.name)).toEqual(["Instagram", "TikTok"]);
+  });
+
+  it("has no action at all when nothing anywhere is recorded", () => {
+    // Degenerate, and it must not throw: the owner can blank every field in
+    // content.js. The renderer leaves the slab off rather than drawing an empty
+    // one. HOUSE-RULES section 7 - the layout survives a changing item count.
+    const routes = contactRoutes(parseContent({}));
+
+    expect(routes.primary).toBeNull();
+    expect(routes.secondary).toBeNull();
+    expect(routes.email).toBeNull();
+    expect(routes.channels).toEqual([]);
+  });
+
+  it("falls through to email when the number has no digits in it", () => {
+    // "TBA", "ask on Instagram", anything the owner types that is not "TODO"
+    // and not a number. Branching on the raw field instead of the built link
+    // ships two buttons reading href="null" and skips the email entirely.
+    const routes = contactRoutes(
+      parseContent({ contact: { whatsapp: "TBA", email: "hi@example.test" }, links: [instagram] }),
+    );
+
+    expect(routes.primary).toEqual({ kind: "email", audience: null, href: "mailto:hi@example.test" });
+    expect(routes.secondary).toBeNull();
+  });
+
+  it("does not draw two buttons that go to the same place", () => {
+    // Both messages unrecorded is the state content.js ships in. Without a
+    // distinct pre-filled message the two hrefs are identical, and two labels
+    // over one link is a lie about what pressing them does.
+    const routes = contactRoutes(
+      parseContent({ contact: { whatsapp: "+94712345678" }, links: [instagram] }),
+    );
+
+    expect(routes.primary.href).toBe("https://wa.me/94712345678");
+    expect(routes.secondary).toBeNull();
+  });
+
+  it("keeps both buttons when only one message is recorded", () => {
+    // Still two different links, so still two honest buttons.
+    const routes = contactRoutes(
+      parseContent({
+        contact: { whatsapp: "+94712345678", partnerMessage: "Partner please" },
+      }),
+    );
+
+    expect(routes.primary.href).toBe("https://wa.me/94712345678?text=Partner%20please");
+    expect(routes.secondary.href).toBe("https://wa.me/94712345678");
+  });
+
+  it("leaves a TODO message out of an otherwise good WhatsApp link", () => {
+    const routes = contactRoutes(
+      parseContent({ contact: { whatsapp: "+94712345678", partnerMessage: "TODO" } }),
+    );
+
+    expect(routes.primary.href).toBe("https://wa.me/94712345678");
+  });
+});
+
+describe("partnerOffer", () => {
+  it("drops the unrecorded ones and keeps the owner's own words", () => {
+    // Every claim on the contact page about what a partner gets is the owner's,
+    // typed into content.js. Nothing here is phrased by the code, and a half
+    // finished line is absent rather than printed. HOUSE-RULES section 9.
+    const { contact } = parseContent({
+      contact: { partnerOffer: ["Named on tournament posters", "TODO: ask", ""] },
+    });
+
+    expect(contact.partnerOffer).toEqual(["Named on tournament posters"]);
+  });
+
+  it("survives the list being deleted entirely", () => {
+    expect(parseContent({}).contact.partnerOffer).toEqual([]);
+    expect(parseContent({ contact: {} }).contact.partnerOffer).toEqual([]);
   });
 });

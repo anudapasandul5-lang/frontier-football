@@ -16,6 +16,7 @@ export default defineConfig({
         main: resolve(__dirname, 'index.html'),
         about: resolve(__dirname, 'about.html'),
         gallery: resolve(__dirname, 'gallery.html'),
+        contact: resolve(__dirname, 'contact.html'),
         album: resolve(__dirname, 'album.html'),
         styleguide: resolve(__dirname, 'styleguide.html'),
       },

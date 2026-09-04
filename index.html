@@ -69,14 +69,7 @@
       <div class="nav__end">
         <a class="nav__link" href="/about.html">About</a>
         <a class="nav__link" href="/gallery.html">Gallery</a>
-        <a
-          class="btn btn--secondary nav__cta"
-          href="https://www.instagram.com/frontierfootballl/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Follow <span class="nav__cta-handle">@frontierfootballl</span>
-        </a>
+        <a class="nav__link" href="/contact.html">Contact</a>
       </div>
     </header>
 
@@ -119,14 +112,29 @@
                it is set rather than left to the measure. -->
           <h1 class="hero__headline">Built by the<br />futsal<br />community</h1>
           <p class="hero__sub">Small-sided football and the culture around it, in Colombo.</p>
-          <a
-            class="btn btn--primary hero__cta"
-            href="https://www.instagram.com/frontierfootballl/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Follow @frontierfootballl
-          </a>
+          <!-- Two actions, one of them primary. BUILD-PROMPT makes the follow
+               THE action above the fold and HOUSE-RULES section 2 reserves
+               yellow for it, so Contact sits beside it at the same size and the
+               same tap target, ink-outlined rather than filled. Two yellow
+               buttons side by side is the duplicate-CTA failure src/hub.js
+               already names.
+
+               Wrapped in one element on purpose: .hero__stage staggers its
+               entrance by nth-child, and a fourth direct child would reveal
+               with no delay, out of step with the three above it. -->
+          <div class="hero__actions">
+            <a
+              class="btn btn--primary hero__cta"
+              href="https://www.instagram.com/frontierfootballl/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Follow @frontierfootballl
+            </a>
+            <a class="btn btn--secondary hero__action" href="/contact.html">
+              Contact us
+            </a>
+          </div>
         </div>
       </section>
 
@@ -389,6 +397,7 @@
           <a class="site-foot__link" href="/">Home</a>
           <a class="site-foot__link" href="/about.html">About</a>
           <a class="site-foot__link" href="/gallery.html">Gallery</a>
+          <a class="site-foot__link" href="/contact.html">Contact</a>
           <a
             class="site-foot__link"
             href="https://www.instagram.com/frontierfootballl/"

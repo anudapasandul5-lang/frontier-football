@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact - Frontier Football</title>
+    <meta
+      name="description"
+      content="Talk to Frontier Football about partnering, or about playing the next season, in Colombo."
+    />
+
+    <!-- ponytail: this head block, the nav and the footer are hand-copied from
+         index.html, about.html and gallery.html. Four copies now, and the same
+         drift risk all three already name. A shared partial costs a build step
+         this project does not have. Edit all four or none.
+
+         The link-preview tags are NOT optional on this page. It is the page a
+         URL gets sent to a brand from, and WhatsApp - which is how this site
+         actually gets passed around - builds its preview card from these. og:image
+         stays root-relative until the domain lands: HOUSE-RULES section 7 forbids
+         printing a domain the site does not have. -->
+    <link rel="icon" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Contact - Frontier Football" />
+    <meta
+      property="og:description"
+      content="Partner with Frontier, or come and play the next season."
+    />
+    <meta property="og:image" content="/og.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/src/styles/tokens.css" />
+    <link rel="stylesheet" href="/src/styles/base.css" />
+    <link rel="stylesheet" href="/src/styles/components.css" />
+    <!-- hero.css carries .nav, which is why it is linked on a page with no hero.
+         Same reason gallery.html links it. -->
+    <link rel="stylesheet" href="/src/styles/hero.css" />
+    <link rel="stylesheet" href="/src/styles/contact.css" />
+    <link rel="stylesheet" href="/src/styles/footer.css" />
+  </head>
+  <body>
+    <!-- The nav is untouched, deliberately. Following @frontierfootballl is still
+         THE one action of this site (BUILD-PROMPT), and swapping the CTA here for
+         a contact button would point it at the page the visitor is already on.
+         Contact is reachable from the footer of every page instead. -->
+    <header class="nav">
+      <a class="nav__brand" href="/">
+        <img
+          class="nav__crest"
+          src="/crest.webp"
+          width="525"
+          height="640"
+          alt="Frontier Football"
+          fetchpriority="high"
+        />
+      </a>
+
+      <div class="nav__end">
+        <a class="nav__link" href="/">Home</a>
+        <a class="nav__link" href="/about.html">About</a>
+        <a class="nav__link" href="/gallery.html">Gallery</a>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- MASTHEAD. No hero on this page, so this is the top of the screen and
+           is set at display scale, flush left. about.html's masthead is the
+           reference for the shape; this one carries no photographs, because the
+           thing that has to hold the eye here is the action underneath it. -->
+      <section class="contact-mast">
+        <div class="contact-mast__inner">
+          <p class="eyebrow">Say hello</p>
+          <h1 class="contact-mast__headline">Get in<br />touch</h1>
+          <p class="contact-mast__lede">
+            Two reasons people write to us: to put a brand alongside Frontier, or to get on
+            the pitch next season. Either one, the fastest way is a message.
+          </p>
+        </div>
+      </section>
+
+      <!-- THE ROUTES. Built by src/contact.js from content.js's `contact` block,
+           so the number and the address are one edit away and nothing here is
+           hard-coded into the markup. With both still TODO the section falls back
+           to the Instagram link rather than drawing a dead button.
+
+           The heading below is for screen readers only (contact.css clips it):
+           on screen the buttons say what this section is more plainly than a
+           second headline over them would. It is NOT a visual fallback - if the
+           bundle fails to load, this section is a gap, and the masthead's lede
+           is what still tells a visitor they are on the right page. -->
+      <section class="contact-routes" aria-labelledby="contact-routes-heading">
+        <div class="contact-routes__inner">
+          <h2 class="contact-routes__heading" id="contact-routes-heading">Message us</h2>
+          <div data-contact-routes></div>
+        </div>
+      </section>
+
+      <!-- WHAT A PARTNER GETS. Every line is the owner's own, typed into
+           content.js and confirmed on 2026-09-04. Nothing is phrased here, and
+           the section removes itself if the list is emptied. -->
+      <section class="contact-offer" aria-labelledby="contact-offer-heading">
+        <div class="contact-offer__inner">
+          <h2 class="contact-offer__heading" id="contact-offer-heading">
+            What a partner gets
+          </h2>
+          <div data-contact-offer></div>
+        </div>
+      </section>
+    </main>
+
+    <!-- The same footer as every other page, hand-copied. See the note in the
+         head about the four copies. -->
+    <footer class="site-foot">
+      <div class="site-foot__inner">
+        <img
+          class="site-foot__crest"
+          src="/crest.webp"
+          width="525"
+          height="640"
+          alt="Frontier Football"
+          loading="lazy"
+          decoding="async"
+        />
+        <p class="site-foot__line">
+          Small-sided football and the culture around it, in Colombo.
+        </p>
+        <nav class="site-foot__nav" aria-label="Footer">
+          <a class="site-foot__link" href="/">Home</a>
+          <a class="site-foot__link" href="/about.html">About</a>
+          <a class="site-foot__link" href="/gallery.html">Gallery</a>
+          <a class="site-foot__link" href="/contact.html" aria-current="page">Contact</a>
+          <a
+            class="site-foot__link"
+            href="https://www.instagram.com/frontierfootballl/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Frontier Football on Instagram (opens in a new tab)"
+          >
+            Instagram
+          </a>
+          <!-- ONE l, unlike Instagram's three. Both handles are real and
+               neither is a typo of the other. -->
+          <a
+            class="site-foot__link"
+            href="https://www.tiktok.com/@frontierfootball"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Frontier Football on TikTok (opens in a new tab)"
+          >
+            TikTok
+          </a>
+        </nav>
+        <p class="site-foot__meta">&copy; Frontier Football</p>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/contact.js"></script>
+  </body>
+</html>

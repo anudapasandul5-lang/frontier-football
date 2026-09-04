@@ -1,0 +1,224 @@
+/* Frontier Football — the contact page.
+
+   Three stacked shells on paper: a flush-left masthead, one filled green slab
+   carrying the actions, and a ruled list of what a partner gets. No hero, so
+   the masthead is the top of the screen and is set at display scale.
+
+   The slab is the page's only filled surface and its primary button is the
+   page's only yellow (HOUSE-RULES section 2). The section under it is paper and
+   the footer below that is ink, so nothing here stacks two dark surfaces. */
+
+/* ============ MASTHEAD ============ */
+.contact-mast {
+  padding: var(--spacing-60) 0 var(--spacing-48);
+}
+
+.contact-mast__inner {
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding: 0 var(--page-gutter);
+}
+
+.contact-mast__headline {
+  margin: var(--spacing-20) 0 0;
+  font-family: var(--font-display);
+  /* Capped by viewport HEIGHT as well as width, and this is not belt and braces:
+     measured at 1900x780 (a maximised short laptop, the window HOUSE-RULES
+     section 3 says to check) the width-only clamp put this headline at 220px,
+     two lines of it at 405px, and pushed the primary button to y=858 - 78px
+     below the fold on the one page whose whole job is that button. 22vh keeps
+     both lines and the CTA on screen there and changes nothing on a tall
+     window, where the width clamp is still the smaller of the two. */
+  font-size: min(clamp(64px, 17vw, 220px), 20vh);
+  /* 0.92, not the token's 0.8: HOUSE-RULES section 3 measured Anton's uppercase
+     ink at 0.88em, and a two-line block at 0.8 physically collides. This
+     headline is two lines at every width. */
+  line-height: 0.92;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.contact-mast__lede {
+  max-width: 46ch;
+  margin: var(--spacing-32) 0 0;
+  font-size: var(--text-subheading);
+  line-height: 1.45;
+  color: var(--color-ink);
+}
+
+/* ============ THE ROUTES ============ */
+.contact-routes {
+  padding: 0 0 var(--spacing-60);
+}
+
+.contact-routes__inner,
+.contact-offer__inner {
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding: 0 var(--page-gutter);
+}
+
+/* The slab is the labelled thing. Its heading is read by a screen reader and
+   named by aria-labelledby, but on screen the buttons say what this is more
+   plainly than a second heading over them would. */
+.contact-routes__heading {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.contact-slab {
+  padding: var(--spacing-32) var(--spacing-24);
+  border-radius: var(--radius-card-elevated);
+}
+
+.contact-slab__routes {
+  display: grid;
+  gap: var(--spacing-24);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Side by side from 600px. Below that they stack, and the primary stays first:
+   the player route is a second action, never a hidden one. */
+@media (min-width: 600px) {
+  .contact-slab__routes {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* One route, one column. Set by src/contact.js. */
+  .contact-slab__routes--single {
+    grid-template-columns: 1fr;
+    max-width: 34rem;
+  }
+}
+
+.contact-route {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+}
+
+/* Both buttons are the same size. The weight difference is the fill, not the
+   footprint - a smaller secondary would read as the route we would rather you
+   did not take. */
+.contact-route__btn {
+  width: 100%;
+  padding: var(--spacing-20) var(--spacing-24);
+  font-size: var(--text-subheading);
+  text-align: center;
+}
+
+.contact-route__hint {
+  margin: 0;
+  font-size: var(--text-body-lg);
+  line-height: 1.45;
+  color: var(--color-paper);
+  /* 0.9 and not lower. HOUSE-RULES section 3: opacity on a filled card is a
+     contrast change, not a styling choice, and this line is 14px on a phone. */
+  opacity: 0.9;
+}
+
+/* ---- The address, and the other places we are ---- */
+.contact-email,
+.contact-channels {
+  margin: var(--spacing-32) 0 0;
+  font-size: var(--text-body-lg);
+  line-height: 1.5;
+  color: var(--color-paper);
+}
+
+.contact-channels {
+  margin-top: var(--spacing-12);
+}
+
+.contact-email__label,
+.contact-channels__label {
+  opacity: 0.9;
+}
+
+.contact-email__link,
+.contact-channels__link {
+  color: var(--color-paper);
+  font-weight: 700;
+  /* Underlined rather than coloured: there is no sixth colour that reads as a
+     link on green, and an unmarked bold word on a filled card is not obviously
+     pressable. */
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.contact-channels__link + .contact-channels__link {
+  margin-left: var(--spacing-8);
+}
+
+/* ============ WHAT A PARTNER GETS ============ */
+.contact-offer {
+  padding: 0 0 var(--spacing-80);
+}
+
+.contact-offer__heading {
+  margin: 0 0 var(--spacing-24);
+  font-family: var(--font-display);
+  font-size: var(--text-heading-sm);
+  line-height: var(--leading-heading);
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.contact-offer__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-width: 64ch;
+  border-top: var(--outline-width-1) solid var(--color-ink);
+}
+
+/* A ruled index, the same device the partners section uses. Deliberately not
+   .pill: components.css says a pill's outline and fill read as a clickable
+   chip, and none of these four lines is a control. */
+.contact-offer__item {
+  padding: var(--spacing-16) 0;
+  border-bottom: var(--outline-width-1) solid var(--color-ink);
+  font-size: var(--text-subheading);
+  line-height: 1.35;
+  color: var(--color-ink);
+}
+
+@media (min-width: 768px) {
+  .contact-mast {
+    padding: var(--spacing-80) 0 var(--spacing-60);
+  }
+
+  .contact-slab {
+    padding: var(--spacing-48);
+  }
+}
+
+@media (max-width: 599px) {
+  .contact-mast {
+    padding: var(--spacing-40) 0 var(--spacing-32);
+  }
+}
+
+/* A short window, wide or not: a maximised 1900x780 laptop, or any laptop with
+   a browser's chrome eating the bottom of a 900px screen. The masthead gives
+   back its vertical air so the button this page exists for stays above the
+   fold. Measured, not guessed - at 1900x780 the primary CTA sits at y=793
+   without this block and at y=685 with it, against a 780px fold. */
+@media (min-width: 900px) and (max-height: 860px) {
+  .contact-mast {
+    padding: var(--spacing-40) 0 var(--spacing-32);
+  }
+
+  .contact-mast__lede {
+    margin-top: var(--spacing-20);
+  }
+}

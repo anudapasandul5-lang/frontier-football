@@ -120,6 +120,10 @@ export function parseContent(raw) {
     partners: (source.partners ?? []).map(parsePartner),
     links: (source.links ?? []).map(parseLink),
     people: (source.people ?? []).map(parsePerson),
+    // How to reach Frontier. Always an object, even when content.js has no
+    // `contact` key at all, so contactRoutes() never has to guard for its own
+    // absence before guarding every field inside it.
+    contact: parseContact(source.contact),
     // Which season the watch parties ran alongside. A positive whole number or
     // nothing: anything else (the literal "TODO", a stray string, 0) means
     // unrecorded, and the renderer hangs the branch off the end of the run
@@ -168,6 +172,117 @@ function parsePerson(raw) {
     role: recorded(raw.role),
     photo: recorded(raw.photo),
     photoAlt: recorded(raw.photoAlt),
+  };
+}
+
+/* The ways to reach Frontier. Same TODO guard as every other field: the site
+   ships with the number and the address unrecorded and must still work, so this
+   file cannot assume any of them exist.
+
+   Two messages rather than one because the contact page asks two different
+   audiences - a brand and a player - and the pre-filled message is the only way
+   to tell which one is typing before they type. */
+function parseContact(raw) {
+  const source = raw ?? {};
+  return {
+    whatsapp: recorded(source.whatsapp),
+    partnerMessage: recorded(source.partnerMessage),
+    playerMessage: recorded(source.playerMessage),
+    email: recorded(source.email),
+    // What a partner has actually had from Frontier, confirmed by the owner on
+    // 2026-09-04. A list rather than a sentence so the page survives the owner
+    // adding a fifth or deleting the lot (HOUSE-RULES section 7), and so nothing
+    // here is phrased by this file - every claim is the owner's own.
+    partnerOffer: (source.partnerOffer ?? []).map(recorded).filter(Boolean),
+  };
+}
+
+/* A wa.me click-to-chat link, or nothing.
+
+   wa.me wants digits only. The owner types a number the way a human writes one
+   ("+94 71 234 5678"), and a link built with the spaces or the plus sign still
+   in it does not error - it opens a chat with nobody, which is the failure this
+   strip exists to prevent. Punctuation with no digits behind it is not a number
+   and returns null rather than "https://wa.me/".
+
+   The message is optional and encoded. An empty ?text= is deliberately not the
+   same as no ?text=: it reads as a message that was meant to be there and got
+   lost on the way. */
+export function whatsappHref(number, message) {
+  const digits = (recorded(number) ?? "").replace(/\D/g, "");
+  if (!digits) return null;
+  const text = recorded(message);
+  return `https://wa.me/${digits}${text ? `?text=${encodeURIComponent(text)}` : ""}`;
+}
+
+/* What the contact page can actually offer, in the order it prefers to offer it.
+
+   Priority is WhatsApp, then email, then whatever outbound link is first
+   (Instagram today). WhatsApp wins because that is how this brand is already
+   contacted; email is co-present rather than a fallback rung, because wa.me in a
+   desktop browser with no WhatsApp Web session lands the visitor on a download
+   page, and a brand reading this on a laptop is the whole point of the page.
+
+   `secondary` exists ONLY for the WhatsApp case, where one number carries two
+   audiences with two different pre-filled messages. Email cannot do that: two
+   identical mailto buttons under two different labels is a lie about what
+   pressing them does, so email falls back to a single action.
+
+   `primary` can be null, and the renderer must handle it. The plan for this page
+   said it never could, on the grounds that Instagram is always there - but every
+   field in content.js is the owner's to blank, and a function that assumes one
+   of them survives is the kind of assumption HOUSE-RULES section 7 keeps
+   catching. With nothing recorded the slab is left off the page entirely. */
+export function contactRoutes(data) {
+  const { whatsapp, partnerMessage, playerMessage, email } = data.contact;
+  const emailHref = email ? `mailto:${email}` : null;
+  const channels = outboundLinks(data);
+
+  // Branch on the BUILT link, never on the raw field. whatsappHref() returns
+  // null for a recorded value with no digits in it - "TBA", "ask on Instagram",
+  // anything the owner types that is not "TODO" and not a number - and a truthy
+  // check on `whatsapp` would ship two buttons reading href="null", navigating
+  // to /null, with the email fallback below never reached.
+  const partnerHref = whatsappHref(whatsapp, partnerMessage);
+  const playerHref = whatsappHref(whatsapp, playerMessage);
+
+  if (partnerHref) {
+    return {
+      primary: { kind: "whatsapp", audience: "partner", href: partnerHref },
+      // Two audiences are worth two buttons only while the two buttons DO
+      // something different. With both messages unrecorded - the state the file
+      // ships in - the hrefs are byte-identical, and "I want to partner" beside
+      // "I want to play" pointing at one bare link is the same lie about what
+      // pressing them does that the email branch below collapses to avoid.
+      secondary:
+        playerHref && playerHref !== partnerHref
+          ? { kind: "whatsapp", audience: "player", href: playerHref }
+          : null,
+      email: emailHref,
+      channels,
+    };
+  }
+
+  if (emailHref) {
+    return {
+      primary: { kind: "email", audience: null, href: emailHref },
+      secondary: null,
+      email: emailHref,
+      channels,
+    };
+  }
+
+  const [fallback] = channels;
+  return {
+    primary: fallback
+      ? { kind: "link", audience: null, href: fallback.url, name: fallback.name }
+      : null,
+    secondary: null,
+    email: null,
+    // Whatever became the headline action is dropped from the row beneath it.
+    // Instagram as the big button and Instagram again in the list under it reads
+    // as a bug rather than as two routes.
+    channels: fallback ? channels.slice(1) : channels,
   };
 }
 

@@ -81,7 +81,9 @@
   grid-template-columns: 1fr auto;
   align-items: baseline;
   column-gap: var(--spacing-24);
-  padding: var(--spacing-32);
+  /* Down from a flat 32px with the type. The row was mostly air around a
+     handle that no longer needs that much room. */
+  padding: var(--spacing-20) var(--spacing-24);
   color: var(--color-ink);
   text-decoration: none;
   transition:
@@ -143,7 +145,11 @@
   grid-row: 1;
   grid-column: 1;
   font-family: var(--font-display);
-  font-size: clamp(20px, calc(20px + 44 * (100vw - 320px) / 1120), 64px);
+  /* Was clamp(20px ... 64px), which at desktop width put a handle at 64px -
+     bigger than the section's own headline and reading as two enormous buttons
+     rather than as an index of where Frontier lives. Halved on the owner's call
+     2026-09-04: 18px on a phone, 34px at 1440. */
+  font-size: clamp(18px, calc(18px + 16 * (100vw - 320px) / 1120), 34px);
   line-height: 0.92;
   letter-spacing: -0.01em;
   overflow-wrap: anywhere;

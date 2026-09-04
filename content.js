@@ -683,4 +683,55 @@ export default {
     // The WhatsApp community invite link, if one exists.
     { name: "WhatsApp", url: "TODO" },
   ],
+
+  // ==========================================================================
+  // CONTACT - what the contact page (/contact.html) offers.
+  //
+  //   whatsapp  the number people message, WITH the country code. Type it
+  //             however you like - "+94 71 234 5678", "+94712345678",
+  //             "(+94) 71-234-5678" all work, the spaces and dashes are
+  //             stripped for you. This is the one field the page most wants.
+  //   email     the address people can write to instead. It matters more than
+  //             it looks: a WhatsApp link opened on a laptop that is not signed
+  //             in to WhatsApp Web just shows a download page, and a brand
+  //             reading the site on a laptop is exactly who this page is for.
+  //   partnerMessage / playerMessage
+  //             what gets typed into WhatsApp for the person before they send
+  //             it. Two of them because the page has two buttons - one for a
+  //             brand, one for someone wanting to play - so you can tell which
+  //             one they pressed from the message that arrives.
+  //
+  // Leave whatsapp and email as "TODO" and the page still works: it falls back
+  // to the Instagram link above and shows no dead buttons. Fill them in and the
+  // buttons appear. Nothing else needs changing.
+  // ==========================================================================
+  contact: {
+    // Supplied by the owner on 2026-09-04 as 0763431469, the way it is dialled
+    // inside Sri Lanka. Written here in international form because wa.me needs
+    // the country code: without it the link does not error, it opens a chat
+    // with nobody. Leading 0 dropped, +94 added, which is the same number.
+    whatsapp: "+94 76 343 1469",
+    // Supplied by the owner on 2026-09-04. NOTE: futsal, not football - this is
+    // the pre-rebrand address and it is genuinely the live account (Frontier's
+    // Google Drive is on it). Do not "correct" it to frontierfootball@gmail.com,
+    // which is not an inbox anyone reads.
+    email: "frontierfutsal@gmail.com",
+    partnerMessage: "Hi Frontier, I'd like to talk about partnering.",
+    playerMessage: "Hi Frontier, I'd like to join the next season.",
+
+    // What a partner has actually had from Frontier. Confirmed by the owner on
+    // 2026-09-04. Only put things here that have really happened - this is the
+    // part of the page a brand reads to decide whether to reply.
+    //
+    // "Co-presented", not "named after": Division 0 was announced as a PS5 FC26
+    // World Cup Edition WITH @seixed and @address.lk. No competition has ever
+    // carried a partner's name, and saying otherwise would be a claim nobody
+    // can stand behind (docs/HOUSE-RULES.md sections 7 and 9).
+    partnerOffer: [
+      "Named on tournament posters and graphics",
+      "On the ground at the venue on match nights",
+      "Named in the posts and reels from the night",
+      "Competitions co-presented, like Division 0 with @seixed and @address.lk",
+    ],
+  },
 };
