@@ -200,6 +200,16 @@ export function outboundLinks(data) {
   return data.links.filter((link) => link.name && link.url);
 }
 
+/* A season's name, in one place.
+
+   "4 x 4 Series SZN 6" is display copy; `season` is the number (CONTEXT.md).
+   Four renderers print it - the champions rail, the About record, the gallery
+   album cards and the album page's own title - and they must agree, so the
+   wording lives here rather than in a template literal per file. */
+export function seasonName(season) {
+  return `4 x 4 Series SZN ${season}`;
+}
+
 /* The About page's timeline, told forwards.
 
    content.js lists seasons NEWEST first, because that is the order the champions
@@ -218,10 +228,9 @@ export function journey(data) {
   const [opener, ...rest] = data.competitions;
   const seasons = [...data.seasons]
     .sort((a, b) => a.season - b.season)
-    // "SZN 6" is display copy; `season` is the number (CONTEXT.md). The stop
-    // carries a `name` like every other stop so the renderer never branches on
-    // which collection something came from.
-    .map((season) => ({ ...season, name: `SZN ${season.season}` }));
+    // The stop carries a `name` like every other stop so the renderer never
+    // branches on which collection something came from.
+    .map((season) => ({ ...season, name: seasonName(season.season) }));
 
   return [...(opener ? [opener] : []), ...seasons, ...rest];
 }

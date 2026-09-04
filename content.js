@@ -68,7 +68,7 @@ export default {
       photo: "/champions/szn-6.webp",
       // What the picture shows, read aloud to anyone using a screen reader.
       // Leave as "TODO" and a plain description is written for you.
-      photoAlt: "The SZN 6 champions lined up on the pitch beside the trophy.",
+      photoAlt: "The 4 x 4 Series SZN 6 champions lined up on the pitch beside the trophy.",
       // WHEN it ran and WHERE.
       //
       // Every date is still blank. Leave one as "TODO" and the About page's
@@ -123,7 +123,7 @@ export default {
       goldenBoot: "TODO",
       goldenGlove: "TODO",
       photo: "/champions/szn-4.webp",
-      photoAlt: "The SZN 4 champions holding the trophy together after the final.",
+      photoAlt: "The 4 x 4 Series SZN 4 champions holding the trophy together after the final.",
       date: "TODO",
       venue: "Athlete 360",
       // Link to this season's full photo folder on Google Drive. Paste the
@@ -144,7 +144,7 @@ export default {
       goldenBoot: "TODO",
       goldenGlove: "TODO",
       photo: "/champions/szn-3.webp",
-      photoAlt: "The SZN 3 champions wearing their medals, with the trophy.",
+      photoAlt: "The 4 x 4 Series SZN 3 champions wearing their medals, with the trophy.",
       date: "TODO",
       venue: "Athlete 360",
       // Link to this season's full photo folder on Google Drive. Paste the
@@ -171,7 +171,7 @@ export default {
       // A match-action frame from the SZN 2 Drive folder - not a champions
       // photo (the winner is still unknown), just proof there was a season.
       photo: "/champions/szn-2.webp",
-      photoAlt: "A SZN 2 player lines up a shot as an opponent closes in.",
+      photoAlt: "A 4 x 4 Series SZN 2 player lines up a shot as an opponent closes in.",
       date: "TODO",
       venue: "Athlete 360",
       // Link to this season's full photo folder on Google Drive. Paste the
@@ -195,7 +195,7 @@ export default {
       // docs/HOUSE-RULES.md section 6 (17% off the bottom clears the Frontier
       // crest and the REIGNITE wordmark).
       photo: "/champions/szn-1.webp",
-      photoAlt: "SZN 1 players challenge for the ball in the cage under floodlights.",
+      photoAlt: "4 x 4 Series SZN 1 players challenge for the ball in the cage under floodlights.",
       date: "TODO",
       venue: "Athlete 360",
       // Link to this season's full photo folder on Google Drive. Paste the

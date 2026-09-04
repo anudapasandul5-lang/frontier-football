@@ -6,6 +6,8 @@
    src/gallery.js and src/gallery-data.js already use. The DOM lives in
    src/album-page.js. */
 
+import { seasonName } from "./content-data.js";
+
 /* Drive stores the photographs, the site presents them (docs/HOUSE-RULES.md).
    Nothing in public/albums/ is a photograph; it is a list of Drive file ids and
    the shape of each frame. Both sizes were probed against real files and both
@@ -104,7 +106,7 @@ export function lightboxItems(items, title) {
 export function albumTitle(data, id) {
   if (!id) return null;
   const season = ((data ?? {}).seasons ?? []).find((s) => s.albumId === id);
-  if (season) return `SZN ${season.season}`;
+  if (season) return seasonName(season.season);
   const other = [...((data ?? {}).competitions ?? []), ...((data ?? {}).watchAlongs ?? [])].find(
     (e) => e.albumId === id,
   );

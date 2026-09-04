@@ -32,7 +32,7 @@ function line(className, text) {
   return el;
 }
 
-/* The left column. A season prints "SZN" small over a large numeral; anything
+/* The left column. A season prints "4 x 4 Series SZN" small over a large numeral; anything
    that is not a season of the 4x4 Series has a name rather than a number, so it
    takes the slot as words. Turf Wars and Division 0 are the two today. */
 function rowIdent(stop) {
@@ -40,7 +40,7 @@ function rowIdent(stop) {
   ident.className = "record__ident";
 
   if (typeof stop.season === "number") {
-    ident.append(line("record__kicker", "SZN"));
+    ident.append(line("record__kicker", "4 x 4 Series SZN"));
     const num = document.createElement("p");
     num.className = "record__num";
     num.textContent = String(stop.season);

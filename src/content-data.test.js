@@ -311,9 +311,9 @@ describe("journey", () => {
 
     expect(stops.map((stop) => stop.name)).toEqual([
       "Turf Wars",
-      "SZN 1",
-      "SZN 2",
-      "SZN 3",
+      "4 x 4 Series SZN 1",
+      "4 x 4 Series SZN 2",
+      "4 x 4 Series SZN 3",
       "Division 0",
     ]);
   });
@@ -322,7 +322,7 @@ describe("journey", () => {
     // HOUSE-RULES section 7: any layout driven by content.js must survive a
     // changing item count. Deleting every list from the file must not throw.
     expect(journey(parseContent({}))).toEqual([]);
-    expect(journey(parseContent({ seasons: [{ season: 7 }] })).map((s) => s.name)).toEqual(["SZN 7"]);
+    expect(journey(parseContent({ seasons: [{ season: 7 }] })).map((s) => s.name)).toEqual(["4 x 4 Series SZN 7"]);
   });
 
   it("leaves an unrecorded date and venue absent instead of printing TODO", () => {

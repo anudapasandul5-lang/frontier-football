@@ -1,5 +1,5 @@
 import content from "../content.js";
-import { parseContent } from "./content-data.js";
+import { parseContent, seasonName } from "./content-data.js";
 import { wireReveal } from "./reveal.js";
 
 /* Renders the Champions & Honours grid from content.js. No season data lives in
@@ -70,7 +70,7 @@ function photo(src, alt, title) {
   return img;
 }
 
-/* One card shape for both a season and Turf Wars. The title slot carries "SZN 6"
+/* One card shape for both a season and Turf Wars. The title slot carries a name
    or "Turf Wars", and the note slot carries a season's note or Turf Wars' date. */
 function card({ title, champion, note, honours, photoSrc, photoAlt }, index) {
   const cell = document.createElement("li");
@@ -257,7 +257,7 @@ export function buildRailNav(rail, titles) {
 
 export function renderChampions(mount, data) {
   const cards = data.seasons.map((season) => ({
-    title: `SZN ${season.season}`,
+    title: seasonName(season.season),
     champion: season.champion,
     note: season.note,
     photoSrc: season.photo,

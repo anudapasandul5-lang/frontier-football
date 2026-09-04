@@ -1,5 +1,5 @@
 import content from "../content.js";
-import { parseContent } from "./content-data.js";
+import { parseContent, seasonName } from "./content-data.js";
 import { stepIndex } from "./gallery-data.js";
 import { initSmoothScroll } from "./smooth-scroll.js";
 import { wireReveal } from "./reveal.js";
@@ -195,7 +195,7 @@ export function renderGalleryPage(mount) {
 
   const albumEntries = [
     ...data.seasons.map((season) => ({
-      title: `SZN ${season.season}`,
+      title: seasonName(season.season),
       champion: season.champion,
       note: season.note,
       photo: season.photo,

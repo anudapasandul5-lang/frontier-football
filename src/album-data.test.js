@@ -124,7 +124,7 @@ describe("albumTitle", () => {
   };
 
   it("titles a season by its number", () => {
-    expect(albumTitle(data, "szn-4")).toBe("SZN 4");
+    expect(albumTitle(data, "szn-4")).toBe("4 x 4 Series SZN 4");
   });
 
   it("titles a competition by its name", () => {

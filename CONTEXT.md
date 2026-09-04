@@ -6,9 +6,12 @@ synonyms in a later ticket.
 ## Terms
 
 **Season / SZN**
-A season is one edition of the 4x4 Series. "SZN" is the user-facing shorthand that appears
-in captions and graphics (e.g. "SZN 5"). Data key: `season` (a number or id like `"szn-5"`) —
-never store the literal string `"SZN"` as a key, only as display copy.
+A season is one edition of the 4x4 Series. The official user-facing name is
+**"4 x 4 Series SZN 5"** — spaced `4 x 4`, then `Series`, then `SZN` and the number. Older
+captions and graphics say only "SZN 5"; on the site the full form is what prints. It is
+built in one place, `seasonName()` in src/content-data.js — never re-typed per renderer.
+Data key: `season` (a number or id like `"szn-5"`) — never store the display string as a
+key.
 
 **4x4 Series**
 Frontier's core recurring competition format (4-a-side). This is what a "season" is a season
@@ -170,7 +173,7 @@ whose `champion` field is filled in, never a season still marked TODO.
 
 ## User-facing copy vs data keys
 
-Use "SZN", "Golden Boot", "Golden Glove", "Turf Wars", "Division 0", "reigning" freely as
+Use "4 x 4 Series SZN", "Golden Boot", "Golden Glove", "Turf Wars", "Division 0", "reigning" freely as
 display copy. Their data keys are the plain English forms above (`season`, `goldenBoot`,
 `goldenGlove`, `competitions`) — the copy word and the key are deliberately not always
 spelled the same. Turf Wars and Division 0 have no keys of their own: they are entries in
