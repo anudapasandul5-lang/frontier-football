@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Collaborate - Frontier Football</title>
+    <meta
+      name="description"
+      content="Put a brand alongside Frontier Football: the reach, what a partner gets, and who is already here."
+    />
+
+    <!-- ponytail: this head block, the nav and the footer are hand-copied from
+         index.html and the four other pages. Six copies now, and the same drift
+         risk all of them already name. A shared partial costs a build step this
+         project does not have. Edit all six or none.
+
+         The link-preview tags are NOT optional on this page. This is the page a
+         URL gets sent to a brand from - the hero's yellow button points here -
+         and WhatsApp, which is how this site actually gets passed around, builds
+         its preview card from these. og:image stays root-relative until the
+         domain lands: HOUSE-RULES section 7 forbids printing a domain the site
+         does not have. -->
+    <link rel="icon" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Collaborate - Frontier Football" />
+    <meta
+      property="og:description"
+      content="The reach, what a partner gets, and who is already here."
+    />
+    <meta property="og:image" content="/og.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/src/styles/tokens.css" />
+    <link rel="stylesheet" href="/src/styles/base.css" />
+    <link rel="stylesheet" href="/src/styles/components.css" />
+    <!-- hero.css carries .nav, which is why it is linked on a page with no hero.
+         Same reason gallery.html and contact.html link it. -->
+    <link rel="stylesheet" href="/src/styles/hero.css" />
+    <link rel="stylesheet" href="/src/styles/page.css" />
+    <link rel="stylesheet" href="/src/styles/collaborate.css" />
+    <!-- The partner band is the home page's, markup and styles unchanged. -->
+    <link rel="stylesheet" href="/src/styles/partners.css" />
+    <link rel="stylesheet" href="/src/styles/footer.css" />
+  </head>
+  <body>
+    <header class="nav">
+      <a class="nav__brand" href="/">
+        <img
+          class="nav__crest"
+          src="/crest.webp"
+          width="525"
+          height="640"
+          alt="Frontier Football"
+          fetchpriority="high"
+        />
+      </a>
+
+      <div class="nav__end">
+        <a class="nav__link" href="/">Home</a>
+        <a class="nav__link" href="/events.html">Events</a>
+        <a class="nav__link" href="/about.html">About</a>
+        <a class="nav__link" href="/gallery.html">Gallery</a>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- THE INTRO: type on the left, the action on the right.
+
+           ONE ELEMENT AROUND TWO SECTIONS, and it exists only to be a grid
+           container. Below 1100px it is inert and the two stack exactly as they
+           did. Above it, the masthead takes the left column and the green slab
+           the right - because a flush-left page on a 1440px screen leaves half
+           the masthead as empty cream, and on the one page a brand decides on,
+           the thing worth putting in that space is the button.
+
+           They stay two <section>s rather than becoming one. They are two
+           landmarks with two headings, and folding the action into the masthead
+           would leave a screen reader with a masthead that also happens to
+           contain the page's only control. -->
+      <div class="collab-intro">
+        <!-- MASTHEAD. No hero on this page, so this is the top of the screen and
+             is set at display scale, flush left. Same shell as contact.html and
+             events.html - page.css draws all three. -->
+        <section class="page-mast">
+          <div class="page-mast__inner">
+            <p class="eyebrow">For brands</p>
+            <h1 class="page-mast__headline">Collaborate<br />with us</h1>
+            <p class="page-mast__lede">
+              Frontier runs small-sided football in Colombo and the culture that comes with
+              it. Here is who sees it, what a partner gets, and who is already standing
+              alongside us.
+            </p>
+          </div>
+        </section>
+
+        <!-- THE ACTION. It moved up here from the bottom of the page by the
+             owner's call on 2026-09-07 - beside the masthead above 1100px, under
+             it below that. It was the last section: the case first, the button
+             after it. A brand that has already decided - which
+             is most of the people this page is sent to, because it is sent to
+             them by Frontier - had to scroll past three sections to act. The
+             trade is real and was made knowingly: a cold reader now meets the ask
+             before the numbers that justify it. The numbers are the very next
+             thing they see.
+
+             NO SECOND BUTTON AT THE BOTTOM. Yellow is one action per page
+             (HOUSE-RULES section 2), and a duplicate CTA is the failure
+             src/hub.js already names.
+
+             One button, and it is the partner one: src/collaborate.js narrows
+             contactRoutes to the partner audience, so the WhatsApp message that
+             arrives says which page it came from before anyone reads it. The
+             player route is the whole of /contact.html and /events.html.
+
+             The heading below is for screen readers only (page.css clips it): on
+             screen the button says what this section is more plainly than a second
+             headline over it would. -->
+        <section class="contact-routes" aria-labelledby="collab-routes-heading">
+          <div class="contact-routes__inner">
+            <h2 class="contact-routes__heading" id="collab-routes-heading">Talk to us</h2>
+            <div data-contact-routes></div>
+          </div>
+        </section>
+      </div>
+
+      <!-- THE NUMBERS. Built by src/collaborate.js from content.js's
+           `collaborate.reach` block. Every figure is the owner's, with the date
+           they measured it printed underneath: a follower count with no date on
+           it is a claim that ages silently, and this is the one thing on the site
+           a brand can check in ten seconds.
+
+           The band removes itself when nothing is measurable, which is the state
+           it ships in. An inverted slab holding a heading over nothing is worse
+           than no band. -->
+      <section class="reach" aria-labelledby="reach-heading">
+        <div class="reach__inner">
+          <h2 class="reach__heading" id="reach-heading">Who sees it</h2>
+          <div data-reach></div>
+        </div>
+      </section>
+
+      <!-- WHAT A PARTNER GETS. Every line is the owner's own, typed into
+           content.js and confirmed on 2026-09-04. Nothing is phrased here, and
+           the section removes itself if the list is emptied. This block used to
+           live on /contact.html; it moved here with the rest of the brand
+           conversation and is not printed twice. -->
+      <section class="offer" aria-labelledby="offer-heading">
+        <div class="offer__inner">
+          <h2 class="offer__heading" id="offer-heading">What a partner gets</h2>
+          <div data-offer></div>
+        </div>
+      </section>
+
+      <!-- WHO IS ALREADY HERE. The home page's partner band, markup and styles
+           unchanged, filled by the same src/partners.js: it finds its own
+           .partners section, so this page adds no partner code of its own.
+
+           PARTNER, never SPONSOR. A sponsor paid; a partner may or may not have,
+           and nobody recorded which of them did (CONTEXT.md). -->
+      <section class="partners" id="partners">
+        <div class="partners__head">
+          <h2 class="partners__headline" data-reveal>Already here</h2>
+          <p class="partners__lede" data-reveal>
+            Brands and venues that have stood alongside Frontier.
+          </p>
+        </div>
+
+        <div class="marquee partners__strip" data-reveal>
+          <div class="marquee__track" data-partners></div>
+        </div>
+      </section>
+    </main>
+
+    <!-- The same footer as every other page, hand-copied. See the note in the
+         head about the six copies. -->
+    <footer class="site-foot">
+      <div class="site-foot__inner">
+        <img
+          class="site-foot__crest"
+          src="/crest.webp"
+          width="525"
+          height="640"
+          alt="Frontier Football"
+          loading="lazy"
+          decoding="async"
+        />
+        <p class="site-foot__line">
+          Small-sided football and the culture around it, in Colombo.
+        </p>
+        <nav class="site-foot__nav" aria-label="Footer">
+          <a class="site-foot__link" href="/">Home</a>
+          <a class="site-foot__link" href="/collaborate.html" aria-current="page">Collaborate</a>
+          <a class="site-foot__link" href="/events.html">Events</a>
+          <a class="site-foot__link" href="/about.html">About</a>
+          <a class="site-foot__link" href="/gallery.html">Gallery</a>
+          <a class="site-foot__link" href="/contact.html">Contact</a>
+          <a
+            class="site-foot__link"
+            href="https://www.instagram.com/frontierfootballl/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Frontier Football on Instagram (opens in a new tab)"
+          >
+            Instagram
+          </a>
+          <!-- ONE l, unlike Instagram's three. Both handles are real and
+               neither is a typo of the other. -->
+          <a
+            class="site-foot__link"
+            href="https://www.tiktok.com/@frontierfootball"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Frontier Football on TikTok (opens in a new tab)"
+          >
+            TikTok
+          </a>
+        </nav>
+        <p class="site-foot__meta">&copy; Frontier Football</p>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/collaborate.js"></script>
+    <script type="module" src="/src/partners.js"></script>
+  </body>
+</html>

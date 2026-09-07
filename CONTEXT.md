@@ -112,6 +112,35 @@ whole trade:
   Photographs added to Drive afterwards are invisible until it is re-run, and
   photographs deleted from Drive become blank tiles. Nothing detects either.
 
+**Collaborate page**
+The brand-facing page (`collaborate.html`), and where the home page's hero spends
+its one yellow button since 2026-09-07. Three things in order: the reach figures
+(`collaborate.reach` in content.js), what a partner gets (`collaborate.offer`),
+and the partner logo band lifted from the home page. `offer` used to be
+`contact.partnerOffer` - it moved here with the rest of the brand conversation
+and is not printed on two pages. User-facing copy: "Collaborate".
+
+**Events page**
+The player-facing page (`events.html`), and the hero's second button. Two
+sections: the **sessions**, the nights that come round every week, and the
+**events**, one-offs with a date on them. Both are root-level lists in content.js
+and both sections remove themselves when their list has nothing renderable in it.
+
+**Session**
+One weekly night. Data key: `sessions`, a list of
+`{ day, name, time, venue, format, price, note }`. `day` is what names the card;
+everything else prints only when recorded. A block carrying nothing but its day
+is dropped, because "Thursday" alone tells a player nothing. Code: `sessions()`
+in `src/content-data.js`. Not to be confused with a **season**, which is a
+competition (see above).
+
+**Event**
+One dated one-off. Data key: `events`, a list of
+`{ name, date, venue, note, url }`, and it ships empty. **Nothing filters by
+date**: `date` is free text the owner writes the way they say it out loud, so a
+finished event stays on the page until its block is deleted. Code:
+`upcomingEvents()` in `src/content-data.js`.
+
 **Drive folder**
 A link to the Google Drive folder itself. Data key: `driveFolder`, kept beside
 `albumId` as the secondary way to the original, full-resolution files, which the
@@ -147,7 +176,7 @@ of leaving a headless section. `handle` is stored rather than parsed out of the 
 WhatsApp invite and a Sofascore page have no handle in them at all. A link with no handle
 falls back to its name.
 
-Home page only. The footer repeats on both pages; the hub does not.
+Home page only. The footer repeats on all seven pages; the hub does not.
 
 **Partner list**
 Data key: `partners`, a list of `{ name, logo, url }` at the root of content.js, in the

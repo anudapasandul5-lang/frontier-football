@@ -1,226 +1,26 @@
 import content from "../content.js";
-import { contactRoutes, parseContent } from "./content-data.js";
+import { parseContent } from "./content-data.js";
+import { renderContactRoutes } from "./contact-routes.js";
 import { initSmoothScroll } from "./smooth-scroll.js";
-import { wireReveal } from "./reveal.js";
 
-/* The contact page: two audiences, one number, no form.
+/* The contact page: one audience, one number, no form.
 
-   NO FORM, AND THAT IS THE DESIGN. HOUSE-RULES section 9 forbids a backend, a
-   CMS and anything that posts, so a form here would mean a fifth dependency and
-   a spam story to go with it. What a visitor actually wants is to reach a human
-   on the app they already have open, which a wa.me link does in one press and a
-   form does in five fields and a hope.
+   IT USED TO ASK TWO. The brand half moved to /collaborate.html, which is where
+   the hero's yellow button now points and where the reach figures a brand
+   decides on actually live. What is left here is the player: someone who wants a
+   spot next season, arriving from the footer or from a shared link.
 
-   TWO BUTTONS, ONE NUMBER. A brand and a player want different conversations,
-   and the pre-filled message is the only way to know which arrived before
-   reading it. Same number, two `?text=` values.
+   ONE BUTTON, THEREFORE. contactRoutes is narrowed to the player audience, so
+   the WhatsApp message that arrives says which page it came from before anyone
+   reads it, and there is no "I want to partner" button here pointing at a
+   conversation the collaborate page is better set up to have.
 
-   THE YELLOW IS SPENT ON THE PARTNER BUTTON. Yellow is reserved for the primary
-   action (HOUSE-RULES section 2) and this page gets exactly one. The player
-   route sits beside it at the same size, ink-outlined: lower weight, not lower
-   priority, and never hidden behind the other.
-
-   EMAIL IS CO-PRESENT, NOT A FALLBACK RUNG. wa.me in a desktop browser with no
-   WhatsApp Web session lands on a download page. A brand reading this on a
-   laptop is exactly who the page is for, so the address is on screen next to
-   the buttons rather than behind them. */
-
-const ROUTE_COPY = {
-  partner: {
-    label: "I want to partner",
-    hint: "Brands, venues and anyone bringing something to the night.",
-  },
-  player: {
-    label: "I want to play",
-    hint: "Teams and players after a spot in the next season.",
-  },
-};
-
-function routeButton(route, { primary }) {
-  const anchor = document.createElement("a");
-  anchor.className = `btn ${primary ? "btn--primary" : "btn--secondary"} contact-route__btn`;
-  anchor.href = route.href;
-
-  // A wa.me link opens WhatsApp, an outbound profile opens a site: both leave
-  // this page and both say so. A mailto does not - it hands off to a mail
-  // client, and target="_blank" on one leaves an empty tab behind.
-  if (route.kind !== "email") {
-    anchor.target = "_blank";
-    anchor.rel = "noopener noreferrer";
-  }
-
-  const copy = ROUTE_COPY[route.audience];
-  if (copy) {
-    anchor.textContent = copy.label;
-    anchor.setAttribute("aria-label", `${copy.label} (opens WhatsApp in a new tab)`);
-    return { anchor, hint: copy.hint };
-  }
-
-  // No audience means there is one route for everybody: either the email
-  // address, or whatever outbound link content.js has. Neither can carry two
-  // different pre-filled messages, so labelling one of them "I want to partner"
-  // would be a lie about what pressing it does.
-  if (route.kind === "email") {
-    anchor.textContent = "Email us";
-    return { anchor, hint: "The fastest way we have until a number is listed." };
-  }
-
-  anchor.textContent = `Message us on ${route.name}`;
-  anchor.setAttribute(
-    "aria-label",
-    `Message Frontier Football on ${route.name} (opens in a new tab)`,
-  );
-  return { anchor, hint: "A DM reaches us the same day, most days." };
-}
-
-function routeCell(route, { primary }) {
-  const cell = document.createElement("li");
-  cell.className = "contact-route";
-  cell.dataset.reveal = "";
-
-  const { anchor, hint } = routeButton(route, { primary });
-  cell.append(anchor);
-
-  const note = document.createElement("p");
-  note.className = "contact-route__hint";
-  note.textContent = hint;
-  cell.append(note);
-
-  return cell;
-}
-
-/* The address, written out. A mailto rather than plain text, because on the
-   desktop where wa.me fails this is the thing that has to work - but the address
-   itself is the link text, so it stays readable and copyable on a machine where
-   pressing a mailto does nothing at all. */
-function emailRow(href) {
-  const p = document.createElement("p");
-  p.className = "contact-email";
-  p.dataset.reveal = "";
-
-  const label = document.createElement("span");
-  label.className = "contact-email__label";
-  label.textContent = "Or email";
-  p.append(label, " ");
-
-  const anchor = document.createElement("a");
-  anchor.className = "contact-email__link";
-  anchor.href = href;
-  // "mailto:".length
-  anchor.textContent = href.slice(7);
-  p.append(anchor);
-
-  return p;
-}
-
-/* Everywhere else Frontier is reachable, minus whatever became the button
-   above: contactRoutes() has already dropped it. Plain text and links, not a
-   second set of buttons - the page has one action and this row is not it. */
-function channelRow(channels) {
-  const p = document.createElement("p");
-  p.className = "contact-channels";
-  p.dataset.reveal = "";
-
-  const label = document.createElement("span");
-  label.className = "contact-channels__label";
-  label.textContent = "Also on";
-  p.append(label, " ");
-
-  channels.forEach((link, index) => {
-    if (index > 0) p.append(" ");
-    const anchor = document.createElement("a");
-    anchor.className = "contact-channels__link";
-    anchor.href = link.url;
-    anchor.target = "_blank";
-    anchor.rel = "noopener noreferrer";
-    // The handle is what people type, so it is what gets printed. A link with
-    // no handle (a Sofascore page, a WhatsApp invite) falls back to its name,
-    // the same rule the home page's links hub follows.
-    anchor.textContent = link.handle ?? link.name;
-    anchor.setAttribute(
-      "aria-label",
-      `Frontier Football on ${link.name} (opens in a new tab)`,
-    );
-    p.append(anchor);
-  });
-
-  return p;
-}
-
-export function renderContactRoutes(mount, data) {
-  const routes = contactRoutes(data);
-
-  // Nothing recorded anywhere: no number, no address, and every outbound link
-  // blanked. The section removes itself rather than drawing an empty slab with
-  // a heading over it. HOUSE-RULES section 7 - the layout survives whatever the
-  // owner does to content.js.
-  if (!routes.primary) {
-    mount.closest(".contact-routes")?.remove();
-    return;
-  }
-
-  const slab = document.createElement("div");
-  slab.className = "card card--green contact-slab";
-
-  const list = document.createElement("ul");
-  list.className = "contact-slab__routes";
-  list.append(routeCell(routes.primary, { primary: true }));
-  if (routes.secondary) {
-    list.append(routeCell(routes.secondary, { primary: false }));
-  } else {
-    // One route means one column. Without this the two-column grid leaves the
-    // right half of the slab empty and the single button reads as the first of
-    // a pair whose other half failed to load - which is exactly the state the
-    // page is in before the owner pastes a number in.
-    list.classList.add("contact-slab__routes--single");
-  }
-  slab.append(list);
-
-  // Not when email IS the button: the address would then be printed twice, once
-  // as the thing to press and once underneath it.
-  if (routes.email && routes.primary.kind !== "email") slab.append(emailRow(routes.email));
-  if (routes.channels.length > 0) slab.append(channelRow(routes.channels));
-
-  mount.replaceChildren(slab);
-  wireReveal(mount.querySelectorAll("[data-reveal]"));
-}
-
-export function renderPartnerOffer(mount, data) {
-  const lines = data.contact.partnerOffer;
-
-  // An empty list takes the heading with it. A "What a partner gets" heading
-  // over nothing is worse than no section.
-  if (lines.length === 0) {
-    mount.closest(".contact-offer")?.remove();
-    return;
-  }
-
-  const ul = document.createElement("ul");
-  ul.className = "contact-offer__list";
-  ul.append(
-    ...lines.map((line) => {
-      // NOT .pill. components.css says in as many words that a pill's outline
-      // and fill read as a clickable chip, which is why .eyebrow exists as a
-      // label instead. These four lines are statements, not controls: a ruled
-      // row, the same device the partners index uses.
-      const li = document.createElement("li");
-      li.className = "contact-offer__item";
-      li.dataset.reveal = "";
-      // textContent, never innerHTML: content.js is hand-written and must never
-      // need escaping by hand.
-      li.textContent = line;
-      return li;
-    }),
-  );
-
-  mount.replaceChildren(ul);
-  wireReveal(mount.querySelectorAll("[data-reveal]"));
-}
+   Everything this page draws is src/contact-routes.js, shared with the
+   collaborate and events pages. This file only picks the audience and mounts. */
 
 initSmoothScroll();
 
-const data = parseContent(content);
 const routesMount = document.querySelector("[data-contact-routes]");
-if (routesMount) renderContactRoutes(routesMount, data);
-const offerMount = document.querySelector("[data-contact-offer]");
-if (offerMount) renderPartnerOffer(offerMount, data);
+if (routesMount) {
+  renderContactRoutes(routesMount, parseContent(content), { only: "player" });
+}

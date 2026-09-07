@@ -67,9 +67,10 @@
       </a>
 
       <div class="nav__end">
+        <a class="nav__link" href="/events.html">Events</a>
+        <a class="nav__link" href="/collaborate.html">Collaborate</a>
         <a class="nav__link" href="/about.html">About</a>
         <a class="nav__link" href="/gallery.html">Gallery</a>
-        <a class="nav__link" href="/contact.html">Contact</a>
       </div>
     </header>
 
@@ -99,27 +100,33 @@
                it is set rather than left to the measure. -->
           <h1 class="hero__headline">Built by the<br />futsal<br />community</h1>
           <p class="hero__sub">Small-sided football and the culture around it, in Colombo.</p>
-          <!-- Two actions, one of them primary. BUILD-PROMPT makes the follow
-               THE action above the fold and HOUSE-RULES section 2 reserves
-               yellow for it, so Contact sits beside it at the same size and the
-               same tap target, ink-outlined rather than filled. Two yellow
-               buttons side by side is the duplicate-CTA failure src/hub.js
-               already names.
+          <!-- Two actions, one of them primary. THE FOLLOW USED TO BE THE
+               PRIMARY ONE, and BUILD-PROMPT still calls it THE action above the
+               fold; the owner replaced both buttons on 2026-09-07 because the
+               site's two real audiences each wanted a page rather than a
+               profile. Instagram is still one press away, in the footer of
+               every page and in the "Also on" row of every action slab.
+
+               COLLABORATE TAKES THE YELLOW. HOUSE-RULES section 2 reserves it
+               for one action, and the brand conversation is the one worth
+               spending it on - a player already knows how to find a game.
+               Events sits beside it at the same size and the same tap target,
+               ink-outlined rather than filled. Two yellow buttons side by side
+               is the duplicate-CTA failure src/hub.js already names.
+
+               Both are plain internal links, so neither carries target="_blank":
+               they open pages on this site, and a new tab per button leaves a
+               visitor with three of them.
 
                Wrapped in one element on purpose: .hero__stage staggers its
                entrance by nth-child, and a fourth direct child would reveal
                with no delay, out of step with the three above it. -->
           <div class="hero__actions">
-            <a
-              class="btn btn--primary hero__cta"
-              href="https://www.instagram.com/frontierfootballl/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Follow @frontierfootballl
+            <a class="btn btn--primary hero__cta" href="/collaborate.html">
+              Collaborate
             </a>
-            <a class="btn btn--secondary hero__action" href="/contact.html">
-              Contact us
+            <a class="btn btn--secondary hero__action" href="/events.html">
+              Events
             </a>
           </div>
         </div>
@@ -382,6 +389,8 @@
         </p>
         <nav class="site-foot__nav" aria-label="Footer">
           <a class="site-foot__link" href="/">Home</a>
+          <a class="site-foot__link" href="/collaborate.html">Collaborate</a>
+          <a class="site-foot__link" href="/events.html">Events</a>
           <a class="site-foot__link" href="/about.html">About</a>
           <a class="site-foot__link" href="/gallery.html">Gallery</a>
           <a class="site-foot__link" href="/contact.html">Contact</a>

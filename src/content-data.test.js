@@ -1,6 +1,9 @@
 import { describe, it, expect } from "vitest";
 import {
   contactRoutes,
+  reach,
+  sessions,
+  upcomingEvents,
   journey,
   outboundLinks,
   parseContent,
@@ -563,20 +566,183 @@ describe("contactRoutes", () => {
   });
 });
 
-describe("partnerOffer", () => {
+describe("collaborate.offer", () => {
   it("drops the unrecorded ones and keeps the owner's own words", () => {
-    // Every claim on the contact page about what a partner gets is the owner's,
-    // typed into content.js. Nothing here is phrased by the code, and a half
-    // finished line is absent rather than printed. HOUSE-RULES section 9.
-    const { contact } = parseContent({
-      contact: { partnerOffer: ["Named on tournament posters", "TODO: ask", ""] },
+    // Every claim on the collaborate page about what a partner gets is the
+    // owner's, typed into content.js. Nothing here is phrased by the code, and a
+    // half finished line is absent rather than printed. HOUSE-RULES section 9.
+    const { collaborate } = parseContent({
+      collaborate: { offer: ["Named on tournament posters", "TODO: ask", ""] },
     });
 
-    expect(contact.partnerOffer).toEqual(["Named on tournament posters"]);
+    expect(collaborate.offer).toEqual(["Named on tournament posters"]);
   });
 
   it("survives the list being deleted entirely", () => {
-    expect(parseContent({}).contact.partnerOffer).toEqual([]);
-    expect(parseContent({ contact: {} }).contact.partnerOffer).toEqual([]);
+    expect(parseContent({}).collaborate.offer).toEqual([]);
+    expect(parseContent({ collaborate: {} }).collaborate.offer).toEqual([]);
+  });
+});
+
+describe("reach", () => {
+  it("keeps a row only when it has both a figure and a label", () => {
+    // A figure with no label is a number nobody can read; a label with no figure
+    // is a promise of one. Either half missing and the row is left out rather
+    // than drawn with a gap in it.
+    const rows = reach(
+      parseContent({
+        collaborate: {
+          reach: [
+            { figure: "4.2K", label: "Instagram followers", asOf: "Sep 2026" },
+            { figure: "TODO", label: "Average views per reel" },
+            { figure: "300", label: "TODO" },
+          ],
+        },
+      }),
+    );
+
+    expect(rows).toEqual([
+      { figure: "4.2K", label: "Instagram followers", asOf: "Sep 2026" },
+    ]);
+  });
+
+  it("keeps a row whose date is unrecorded", () => {
+    // asOf is the optional third line, not a third requirement.
+    const [row] = reach(
+      parseContent({ collaborate: { reach: [{ figure: "4.2K", label: "Followers" }] } }),
+    );
+
+    expect(row.asOf).toBeNull();
+  });
+
+  it("survives content.js having no collaborate block at all", () => {
+    expect(reach(parseContent({}))).toEqual([]);
+  });
+});
+
+describe("sessions", () => {
+  it("drops a night that is nothing but a day name", () => {
+    // "Thursday" with every other field still TODO tells a player nothing they
+    // did not already know, and a card carrying one word reads as a page that
+    // failed to load rather than as a night that is on.
+    const kept = sessions(
+      parseContent({
+        sessions: [
+          { day: "Thursday", time: "8pm", venue: "TODO" },
+          { day: "Sunday", name: "TODO", time: "TODO", venue: "TODO" },
+        ],
+      }),
+    );
+
+    expect(kept).toHaveLength(1);
+    expect(kept[0].day).toBe("Thursday");
+  });
+
+  it("keeps a night carrying any single detail", () => {
+    // Time, venue, format, price, name or note - one is enough.
+    for (const field of ["name", "time", "venue", "format", "price", "note"]) {
+      const kept = sessions(
+        parseContent({ sessions: [{ day: "Sunday", [field]: "Something" }] }),
+      );
+      expect(kept, field).toHaveLength(1);
+    }
+  });
+
+  it("drops a night with no day, however much else it carries", () => {
+    // The day is what names the card. Without it there is no heading to draw.
+    expect(
+      sessions(
+        parseContent({ sessions: [{ day: "TODO", time: "8pm", venue: "Athlete 360" }] }),
+      ),
+    ).toEqual([]);
+  });
+
+  it("keeps content.js's order rather than a weekday one", () => {
+    const kept = sessions(
+      parseContent({
+        sessions: [
+          { day: "Sunday", time: "6pm" },
+          { day: "Thursday", time: "8pm" },
+        ],
+      }),
+    );
+
+    expect(kept.map((session) => session.day)).toEqual(["Sunday", "Thursday"]);
+  });
+
+  it("survives content.js having no sessions list at all", () => {
+    expect(sessions(parseContent({}))).toEqual([]);
+  });
+});
+
+describe("upcomingEvents", () => {
+  it("drops an event with no name", () => {
+    // A row's title is its name, the same rule competitions and watch-alongs
+    // already follow.
+    const kept = upcomingEvents(
+      parseContent({
+        events: [
+          { name: "SZN 7", date: "Sat 20 Sep", venue: "Athlete 360" },
+          { name: "TODO", date: "Sat 27 Sep" },
+        ],
+      }),
+    );
+
+    expect(kept.map((event) => event.name)).toEqual(["SZN 7"]);
+  });
+
+  it("keeps an event whose url is unrecorded", () => {
+    // A row with no link is plain text, not an absent row: the date and the
+    // venue are the point, and the post may not exist yet.
+    const [event] = upcomingEvents(parseContent({ events: [{ name: "SZN 7", url: "TODO" }] }));
+
+    expect(event.url).toBeNull();
+  });
+
+  it("survives content.js having no events list at all", () => {
+    expect(upcomingEvents(parseContent({}))).toEqual([]);
+  });
+});
+
+describe("contactRoutes narrowed to one audience", () => {
+  const number = { whatsapp: "+94712345678", partnerMessage: "P", playerMessage: "L" };
+
+  it("gives the collaborate page the partner route and no second button", () => {
+    const routes = contactRoutes(parseContent({ contact: number }), { only: "partner" });
+
+    expect(routes.primary.audience).toBe("partner");
+    expect(routes.primary.href).toBe("https://wa.me/94712345678?text=P");
+    expect(routes.secondary).toBeNull();
+  });
+
+  it("gives the contact page the player route as its primary", () => {
+    // Without the narrowing the partner route wins this branch, which would put
+    // "I want to partner" on the page whose partner half just moved away.
+    const routes = contactRoutes(parseContent({ contact: number }), { only: "player" });
+
+    expect(routes.primary.audience).toBe("player");
+    expect(routes.primary.href).toBe("https://wa.me/94712345678?text=L");
+    expect(routes.secondary).toBeNull();
+  });
+
+  it("still falls through to email when there is no number", () => {
+    // The narrowing must not turn a missing number into a missing section: the
+    // fallback chain is the whole reason contactRoutes exists.
+    const routes = contactRoutes(parseContent({ contact: { email: "hi@example.test" } }), {
+      only: "partner",
+    });
+
+    expect(routes.primary).toEqual({
+      kind: "email",
+      audience: null,
+      href: "mailto:hi@example.test",
+    });
+  });
+
+  it("is unchanged when no audience is named", () => {
+    const routes = contactRoutes(parseContent({ contact: number }));
+
+    expect(routes.primary.audience).toBe("partner");
+    expect(routes.secondary.audience).toBe("player");
   });
 });

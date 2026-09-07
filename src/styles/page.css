@@ -1,25 +1,28 @@
-/* Frontier Football — the contact page.
+/* Frontier Football — the flat pages: contact, collaborate, events.
 
-   Three stacked shells on paper: a flush-left masthead, one filled green slab
-   carrying the actions, and a ruled list of what a partner gets. No hero, so
-   the masthead is the top of the screen and is set at display scale.
+   Was contact.css until the partner half of the contact page became its own
+   page. All three are the same shape - a flush-left masthead, one filled green
+   slab carrying the actions, and ruled lists under it - so they are one
+   stylesheet rather than three copies of the same masthead. The bits only one
+   page needs live in collaborate.css and events.css beside this.
 
-   The slab is the page's only filled surface and its primary button is the
+   No hero on any of them, so the masthead is the top of the screen and is set
+   at display scale. The slab is the page's only filled surface and its primary button is the
    page's only yellow (HOUSE-RULES section 2). The section under it is paper and
    the footer below that is ink, so nothing here stacks two dark surfaces. */
 
 /* ============ MASTHEAD ============ */
-.contact-mast {
+.page-mast {
   padding: var(--spacing-60) 0 var(--spacing-48);
 }
 
-.contact-mast__inner {
+.page-mast__inner {
   max-width: var(--page-max-width);
   margin: 0 auto;
   padding: 0 var(--page-gutter);
 }
 
-.contact-mast__headline {
+.page-mast__headline {
   margin: var(--spacing-20) 0 0;
   font-family: var(--font-display);
   /* Capped by viewport HEIGHT as well as width, and this is not belt and braces:
@@ -39,7 +42,7 @@
   color: var(--color-ink);
 }
 
-.contact-mast__lede {
+.page-mast__lede {
   max-width: 46ch;
   margin: var(--spacing-32) 0 0;
   font-size: var(--text-subheading);
@@ -53,7 +56,7 @@
 }
 
 .contact-routes__inner,
-.contact-offer__inner {
+.offer__inner {
   max-width: var(--page-max-width);
   margin: 0 auto;
   padding: 0 var(--page-gutter);
@@ -78,6 +81,19 @@
   border-radius: var(--radius-card-elevated);
 }
 
+/* THE CARD SHRINKS, not just the button inside it. The width cap used to sit on
+   the button grid, which left a one-button slab as a 1440px field of green with
+   its action in the top-left corner and nothing anywhere else in it. On the
+   pages that ask one audience - all three of them now - that is every render,
+   not an edge case. Capping the card instead keeps the slab a slab.
+
+   Flush left rather than centred: the masthead above it and the ruled lists
+   around it are all flush left, and a centred card in that column reads as a
+   different page's component. */
+.contact-slab--single {
+  max-width: 40rem;
+}
+
 .contact-slab__routes {
   display: grid;
   gap: var(--spacing-24);
@@ -93,10 +109,9 @@
     grid-template-columns: 1fr 1fr;
   }
 
-  /* One route, one column. Set by src/contact.js. */
+  /* One route, one column. Set by src/contact-routes.js. */
   .contact-slab__routes--single {
     grid-template-columns: 1fr;
-    max-width: 34rem;
   }
 }
 
@@ -114,6 +129,22 @@
   padding: var(--spacing-20) var(--spacing-24);
   font-size: var(--text-subheading);
   text-align: center;
+}
+
+/* A LONE BUTTON HUGS ITS LABEL. width: 100% exists so two buttons side by side
+   match each other; with one route there is nothing to match, and a full-width
+   bar with its label centred left the only centred thing on the card sitting
+   over three flush-left lines. Nothing was misaligned by a pixel - the label
+   simply had a different left edge from every line under it, which is what the
+   eye reads as crooked.
+
+   Above 600px only. On a phone the card is barely wider than the label anyway,
+   and a full-width primary is the right target there. */
+@media (min-width: 600px) {
+  .contact-slab__routes--single .contact-route__btn {
+    width: auto;
+    align-self: flex-start;
+  }
 }
 
 .contact-route__hint {
@@ -159,12 +190,19 @@
   margin-left: var(--spacing-8);
 }
 
-/* ============ WHAT A PARTNER GETS ============ */
-.contact-offer {
-  padding: 0 0 var(--spacing-80);
+/* ============ A RULED LIST ============ */
+/* "What a partner gets" on the collaborate page. Generic on purpose: the shape
+   is a heading over ruled rows and nothing about it is partner-specific. */
+/* Padded top AND bottom. It had no top padding while it was the last section
+   of the contact page, sitting under a routes block that carried its own bottom
+   padding. On the collaborate page it follows the inverted reach band directly,
+   and with nothing above it the heading printed flush against the band's edge -
+   a section shell cannot rely on what happens to precede it. */
+.offer {
+  padding: var(--spacing-60) 0 var(--spacing-80);
 }
 
-.contact-offer__heading {
+.offer__heading {
   margin: 0 0 var(--spacing-24);
   font-family: var(--font-display);
   font-size: var(--text-heading-sm);
@@ -173,7 +211,7 @@
   color: var(--color-ink);
 }
 
-.contact-offer__list {
+.offer__list {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -184,7 +222,7 @@
 /* A ruled index, the same device the partners section uses. Deliberately not
    .pill: components.css says a pill's outline and fill read as a clickable
    chip, and none of these four lines is a control. */
-.contact-offer__item {
+.offer__item {
   padding: var(--spacing-16) 0;
   border-bottom: var(--outline-width-1) solid var(--color-ink);
   font-size: var(--text-subheading);
@@ -193,7 +231,7 @@
 }
 
 @media (min-width: 768px) {
-  .contact-mast {
+  .page-mast {
     padding: var(--spacing-80) 0 var(--spacing-60);
   }
 
@@ -203,7 +241,7 @@
 }
 
 @media (max-width: 599px) {
-  .contact-mast {
+  .page-mast {
     padding: var(--spacing-40) 0 var(--spacing-32);
   }
 }
@@ -214,11 +252,11 @@
    fold. Measured, not guessed - at 1900x780 the primary CTA sits at y=793
    without this block and at y=685 with it, against a 780px fold. */
 @media (min-width: 900px) and (max-height: 860px) {
-  .contact-mast {
+  .page-mast {
     padding: var(--spacing-40) 0 var(--spacing-32);
   }
 
-  .contact-mast__lede {
+  .page-mast__lede {
     margin-top: var(--spacing-20);
   }
 }

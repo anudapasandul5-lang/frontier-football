@@ -74,21 +74,89 @@
   padding: 0 var(--page-gutter);
 }
 
-/* Two rows, not one: a tag and a media type are different questions, and a
-   single flat pill list would make "Clips" and "Watch-alongs" compete for the
-   same slot even though a watch-along clip is a sensible thing to want. Kept
-   visually light (no caption on either row) since the pill labels already say
-   what they filter by. */
+/* ONE SWIPEABLE ROW, the same device the champions deck uses. It was two
+   wrapping rows until 2026-09-07, and on a phone the six pills wrapped to five
+   of them - the filter bar was taller than the photograph underneath it, on a
+   section whose whole job is the photograph. The owner's call, and the right
+   one: /gallery.html exists and filtering properly is what it is for.
+
+   The two groups still read as two questions. They share a line now but the
+   space between them is wider than the space inside either, which is the only
+   signal that job needs - a tag and a media type are different questions, and a
+   flat list would make "Clips" and "Watch-alongs" compete for one slot even
+   though a watch-along clip is a sensible thing to want.
+
+   min-width: 0 is load-bearing. A flex item's default min-width is auto, so
+   without it this rail refuses to be narrower than its pills and pushes "Go to
+   gallery" off the bar instead of scrolling. */
 .gallery__filter-groups {
   display: flex;
-  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: var(--spacing-24);
+  flex: 1 1 auto;
+  min-width: 0;
+  /* overflow-x: auto computes overflow-y to auto as well, so the block padding
+     is not decoration: without it the pills' 2px hover lift and their focus
+     rings are clipped by the scroll container. Same trap champions.css names. */
+  padding-block: var(--spacing-4);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  /* proximity, not mandatory. These are 44px pills, not full-width cards: a
+     mandatory snap fights a thumb that meant to nudge the row two pills along. */
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+}
+
+.gallery__filter-groups::-webkit-scrollbar {
+  display: none;
+}
+
+/* Drag-to-scroll, wired in src/gallery.js. The cursor is the only thing that
+   says a click-drag will do anything here, since the row carries no arrows.
+   Fine pointers only - a grab cursor on a touch screen is a cursor nobody
+   sees, and the handler is not wired there either. */
+@media (pointer: fine) {
+  .gallery__filter-groups {
+    cursor: grab;
+  }
+
+  .gallery__filter-groups.is-dragging {
+    cursor: grabbing;
+    /* Off while a hand is on it. Proximity snap during a drag pulls the row
+       back against the pointer every frame, which reads as the rail fighting
+       you. It comes back on release, which is when a snap is wanted. */
+    scroll-snap-type: none;
+    /* Otherwise the drag selects the pill labels it passes over and leaves the
+       row highlighted blue behind the cursor. */
+    user-select: none;
+  }
+}
+
+/* No tabindex on the rail, unlike the champions one. Every pill in here is a
+   real <button>, so Tab already walks them and the browser scrolls an offscreen
+   one into view on focus for free.
+
+   flex: none, and this is the group that actually needed it. A flex item
+   shrinks by default, so on a phone the rail squeezed this wrapper narrower
+   than its own pills - and because the pills inside refuse to shrink, they
+   overflowed it and printed on top of the next group: "WATCH-ALO" with
+   "CLIPS" sitting over the rest of the word. Pinning the pills alone was not
+   enough; the box holding them has to keep its intrinsic width too, and the
+   scroll container's min-width: 0 is what lets the row be narrower than both. */
+.gallery__filters {
+  display: flex;
+  flex: none;
+  flex-wrap: nowrap;
   gap: var(--spacing-8);
 }
 
-.gallery__filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-8);
+/* flex: none - no growing and no shrinking. A shrinking pill lets all six
+   squeeze onto one screen, and then there is nothing to swipe and the labels
+   are two characters wide. */
+.gallery__filters > .gallery__pill {
+  flex: none;
+  scroll-snap-align: start;
 }
 
 /* Layered onto the shared .pill primitive rather than edited into it: .pill

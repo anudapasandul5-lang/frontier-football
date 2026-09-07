@@ -68,6 +68,84 @@ function card(item, index, onActivate) {
   return cell;
 }
 
+/* Mouse drag along the filter rail.
+
+   A native overflow row scrolls with a thumb, a trackpad two-finger swipe and
+   shift+wheel, but a click-drag does nothing at all. That is the browser, not
+   this code, and it is why the champions rail carries arrow buttons instead.
+   This row gets no arrows - it sits in a bar that already holds "Go to
+   gallery", and two more controls would cost more width than the rail saves -
+   so the drag is wired here by hand.
+
+   FINE POINTERS ONLY. pointermove fires on touch too, and writing scrollLeft
+   underneath the browser's own momentum scroll produces a rail that jitters
+   and never settles. A thumb already drags this row natively; there is nothing
+   to add there and something to break.
+
+   A DRAG MUST NOT PRESS A PILL. Past a few pixels of movement the click that
+   follows is swallowed in the capture phase, so dragging across "Clips" does
+   not select clips. Under the threshold nothing is swallowed and an ordinary
+   click still filters. */
+function wireDragScroll(rail) {
+  if (!rail || !matchMedia("(pointer: fine)").matches) return;
+
+  // 4px, not 0. A mouse moves a pixel or two between press and release on
+  // almost every real click, and a zero threshold would eat all of them.
+  const THRESHOLD = 4;
+  let startX = 0;
+  let startLeft = 0;
+  let down = false;
+  let dragged = false;
+
+  rail.addEventListener("pointerdown", (event) => {
+    // Left button only: right opens a menu, middle is paste on some platforms.
+    if (event.button !== 0) return;
+    down = true;
+    dragged = false;
+    startX = event.clientX;
+    startLeft = rail.scrollLeft;
+  });
+
+  rail.addEventListener("pointermove", (event) => {
+    if (!down) return;
+    const dx = event.clientX - startX;
+    if (!dragged) {
+      if (Math.abs(dx) < THRESHOLD) return;
+      dragged = true;
+      rail.classList.add("is-dragging");
+      // Captured AFTER the threshold, never on pointerdown. Capturing early
+      // retargets the pointerup as well, and a plain click on a pill would
+      // then never reach the pill.
+      rail.setPointerCapture(event.pointerId);
+    }
+    rail.scrollLeft = startLeft - dx;
+  });
+
+  function endDrag(event) {
+    if (!down) return;
+    down = false;
+    rail.classList.remove("is-dragging");
+    if (rail.hasPointerCapture(event.pointerId)) rail.releasePointerCapture(event.pointerId);
+  }
+
+  rail.addEventListener("pointerup", endDrag);
+  rail.addEventListener("pointercancel", endDrag);
+
+  // Capture phase, so this runs before the pill's own click listener rather
+  // than after it has already changed the filter. `dragged` is not cleared
+  // here on purpose - a drag that ends off the rail fires no click at all, and
+  // the next pointerdown clears it.
+  rail.addEventListener(
+    "click",
+    (event) => {
+      if (!dragged) return;
+      event.preventDefault();
+      event.stopPropagation();
+    },
+    true,
+  );
+}
+
 function pill(label, tag, isPressed, onSelect) {
   const button = document.createElement("button");
   button.type = "button";
@@ -102,12 +180,16 @@ export function initGallery(section, dialog) {
   const hasClips = items.some((item) => item.isClip);
   const lightbox = initLightbox(dialog);
 
-  // Two rows, not one combined list: a tag and a media type answer different
+  // Two GROUPS, not one combined list: a tag and a media type answer different
   // questions ("what is this of" vs "is it moving"), so folding them into a
   // single-select row would make "Clips" and "Watch-alongs" fight over the
   // same slot. They are not fully independent though - see applyFilters().
+  // They share one line since 2026-09-07 (gallery.css) but remain two mounts
+  // and two selections; the wider gap between them is what says so.
   let activeTag = null;
-  let activeMedia = null; // null | "photo" | "clip"
+  // null | "clip". There is no "photo" value any more: applyFilters() drops
+  // clips unless clips are explicitly asked for, so null already IS photos.
+  let activeMedia = null;
   let filtered = items; // replaced by applyFilters() below, before first paint
   let active = 0;
 
@@ -237,13 +319,16 @@ export function initGallery(section, dialog) {
       mediaMount.remove();
       return;
     }
-    // Two pills, not three: unlike the tag row, media has only two real values,
-    // so a third "All" pill next to the tag row's own "All" would read as two
-    // unlabelled duplicates stacked on top of each other. Neither pressed IS
-    // "all media" here, and clicking the pressed one again clears it - a toggle
-    // fits a binary facet better than forcing symmetry with the tag row.
+    // ONE PILL. There were two - "Photos" beside "Clips" - and "Photos" was a
+    // control that did nothing: applyFilters() drops clips unless clips are
+    // asked for, so the unpressed state already showed exactly what pressing
+    // Photos showed. Removed by the owner on 2026-09-07; nothing about what the
+    // section displays changed, only the row got shorter.
+    //
+    // No "All" pill to replace it either. Unpressed IS all photos, the tag row
+    // next door already owns an "All", and a second one would read as an
+    // unlabelled duplicate of it.
     mediaMount.replaceChildren(
-      pill("Photos", "photo", activeMedia === "photo", toggleMedia),
       pill("Clips", "clip", activeMedia === "clip", toggleMedia),
     );
   }
@@ -281,6 +366,8 @@ export function initGallery(section, dialog) {
     // Otherwise the arrow also scrolls the page underneath the stage.
     event.preventDefault();
   });
+
+  wireDragScroll(section.querySelector(".gallery__filter-groups"));
 
   // Cheap to recompute on every resize: layout() only touches the cards
   // currently on stage, at most five of them.

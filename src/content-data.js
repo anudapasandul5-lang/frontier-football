@@ -124,6 +124,15 @@ export function parseContent(raw) {
     // `contact` key at all, so contactRoutes() never has to guard for its own
     // absence before guarding every field inside it.
     contact: parseContact(source.contact),
+    // The collaborate page's own content. Always an object, like `contact`
+    // above, so a content.js with no `collaborate` key at all still parses.
+    collaborate: parseCollaborate(source.collaborate),
+    // The weekly nights and the dated one-offs behind the events page. Parsed
+    // but NOT filtered here, the same rule partners and links follow: what
+    // counts as a renderable session is a decision worth testing on its own,
+    // and sessions() and upcomingEvents() below make it.
+    sessions: (source.sessions ?? []).map(parseSession),
+    events: (source.events ?? []).map(parseEvent),
     // Which season the watch parties ran alongside. A positive whole number or
     // nothing: anything else (the literal "TODO", a stray string, 0) means
     // unrecorded, and the renderer hangs the branch off the end of the run
@@ -189,11 +198,75 @@ function parseContact(raw) {
     partnerMessage: recorded(source.partnerMessage),
     playerMessage: recorded(source.playerMessage),
     email: recorded(source.email),
-    // What a partner has actually had from Frontier, confirmed by the owner on
-    // 2026-09-04. A list rather than a sentence so the page survives the owner
-    // adding a fifth or deleting the lot (HOUSE-RULES section 7), and so nothing
-    // here is phrased by this file - every claim is the owner's own.
-    partnerOffer: (source.partnerOffer ?? []).map(recorded).filter(Boolean),
+  };
+}
+
+/* What the collaborate page shows a brand: the numbers, and what a partner has
+   really had.
+
+   `offer` USED TO BE `contact.partnerOffer`. It moved here when the partner half
+   of the contact page became its own page - the contact page now asks one
+   question ("do you want to play?") and the brand conversation happens at
+   /collaborate.html next to the reach figures a brand actually decides on. One
+   list, one page, nothing printed twice.
+
+   A reach row needs BOTH halves. A figure with no label is a number nobody can
+   read and a label with no figure is a promise of one, so a half-recorded row is
+   dropped rather than rendered with a gap. `asOf` is optional and prints beneath
+   the figure when it is there: a follower count with no date on it is a claim
+   that ages silently, and every one of these numbers is a claim a brand can
+   check in ten seconds (HOUSE-RULES section 7). */
+function parseReach(raw) {
+  return {
+    figure: recorded(raw.figure),
+    label: recorded(raw.label),
+    asOf: recorded(raw.asOf),
+  };
+}
+
+function parseCollaborate(raw) {
+  const source = raw ?? {};
+  return {
+    reach: (source.reach ?? []).map(parseReach),
+    // A list rather than a sentence so the page survives the owner adding a
+    // fifth or deleting the lot (HOUSE-RULES section 7), and so nothing here is
+    // phrased by this file - every claim is the owner's own.
+    offer: (source.offer ?? []).map(recorded).filter(Boolean),
+  };
+}
+
+/* A night that comes round every week. Thursday and Sunday today.
+
+   `day` is the only field that identifies the block; everything else is a
+   detail that may not be recorded yet. Same TODO guard as everywhere else, so a
+   session whose venue is still unknown prints one line shorter. */
+function parseSession(raw) {
+  return {
+    day: recorded(raw.day),
+    name: recorded(raw.name),
+    time: recorded(raw.time),
+    venue: recorded(raw.venue),
+    format: recorded(raw.format),
+    price: recorded(raw.price),
+    note: recorded(raw.note),
+  };
+}
+
+/* A one-off with a date on it.
+
+   NOTHING HERE FILTERS BY DATE, and that is deliberate rather than missing.
+   `date` is free text the owner writes the way they say it out loud ("Sat 20
+   Sep"), so there is no date to compare against today - parsing one would mean
+   guessing a format and silently hiding a real event when the guess is wrong. A
+   finished event is removed by deleting its block, which content.js says in as
+   many words above the list. */
+function parseEvent(raw) {
+  return {
+    name: recorded(raw.name),
+    date: recorded(raw.date),
+    venue: recorded(raw.venue),
+    note: recorded(raw.note),
+    url: recorded(raw.url),
   };
 }
 
@@ -233,7 +306,7 @@ export function whatsappHref(number, message) {
    field in content.js is the owner's to blank, and a function that assumes one
    of them survives is the kind of assumption HOUSE-RULES section 7 keeps
    catching. With nothing recorded the slab is left off the page entirely. */
-export function contactRoutes(data) {
+export function contactRoutes(data, { only } = {}) {
   const { whatsapp, partnerMessage, playerMessage, email } = data.contact;
   const emailHref = email ? `mailto:${email}` : null;
   const channels = outboundLinks(data);
@@ -243,19 +316,33 @@ export function contactRoutes(data) {
   // anything the owner types that is not "TODO" and not a number - and a truthy
   // check on `whatsapp` would ship two buttons reading href="null", navigating
   // to /null, with the email fallback below never reached.
-  const partnerHref = whatsappHref(whatsapp, partnerMessage);
-  const playerHref = whatsappHref(whatsapp, playerMessage);
+  // `only` narrows this to one audience, and the narrowing happens HERE rather
+  // than in the renderer so the fallback chain below still runs. A page that
+  // asks for the partner route on a content.js with no number does not get an
+  // empty section - it falls through to email, then to Instagram, exactly as
+  // the unnarrowed page does.
+  const partnerHref = only === "player" ? null : whatsappHref(whatsapp, partnerMessage);
+  const playerHref = only === "partner" ? null : whatsappHref(whatsapp, playerMessage);
 
-  if (partnerHref) {
+  // Partner leads when both are on the table: that is the order the undivided
+  // contact page shipped in. With `only` set, one of the two is already null and
+  // this simply picks the survivor.
+  const lead =
+    (partnerHref && { kind: "whatsapp", audience: "partner", href: partnerHref }) ||
+    (playerHref && { kind: "whatsapp", audience: "player", href: playerHref }) ||
+    null;
+
+  if (lead) {
     return {
-      primary: { kind: "whatsapp", audience: "partner", href: partnerHref },
+      primary: lead,
       // Two audiences are worth two buttons only while the two buttons DO
       // something different. With both messages unrecorded - the state the file
       // ships in - the hrefs are byte-identical, and "I want to partner" beside
       // "I want to play" pointing at one bare link is the same lie about what
       // pressing them does that the email branch below collapses to avoid.
+      // A narrowed page never gets a second button at all.
       secondary:
-        playerHref && playerHref !== partnerHref
+        lead.audience === "partner" && playerHref && playerHref !== partnerHref
           ? { kind: "whatsapp", audience: "player", href: playerHref }
           : null,
       email: emailHref,
@@ -313,6 +400,47 @@ export function partners(data) {
    the next link instead of leaving the section headless. */
 export function outboundLinks(data) {
   return data.links.filter((link) => link.name && link.url);
+}
+
+/* The reach figures the collaborate page can actually print.
+
+   Both halves or nothing: see parseReach above. Not sorted - content.js's order
+   is the owner's running order and a "biggest number first" rule would quietly
+   rearrange the page every time a figure was updated. */
+export function reach(data) {
+  return data.collaborate.reach.filter((row) => row.figure && row.label);
+}
+
+/* The weekly nights worth drawing.
+
+   A DAY ON ITS OWN IS NOT A SESSION. "Thursday" with every other field still
+   TODO tells a player nothing they did not already know, and a card carrying one
+   word reads as a page that failed to load rather than as a night that is on.
+   One real detail - a time, a venue, a format, a price, a note - and the card
+   appears. This is the same judgement partners() and outboundLinks() make: what
+   counts as renderable is a decision, and it lives here where it can be tested.
+
+   Not sorted into week order either. content.js lists Thursday before Sunday
+   because that is the week Frontier runs; re-sorting by a weekday table would
+   hard-code a week that starts on Monday into a file about Colombo futsal. */
+export function sessions(data) {
+  return data.sessions.filter(
+    (session) =>
+      session.day &&
+      (session.name ||
+        session.time ||
+        session.venue ||
+        session.format ||
+        session.price ||
+        session.note),
+  );
+}
+
+/* The dated one-offs worth drawing. A row's title is its name, so an unnamed
+   event has nothing to render and is dropped rather than drawn headless - the
+   same rule competitions and watch-alongs already follow. */
+export function upcomingEvents(data) {
+  return data.events.filter((event) => event.name);
 }
 
 /* A season's name, in one place.

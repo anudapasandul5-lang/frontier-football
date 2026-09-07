@@ -718,6 +718,50 @@ export default {
     email: "frontierfutsal@gmail.com",
     partnerMessage: "Hi Frontier, I'd like to talk about partnering.",
     playerMessage: "Hi Frontier, I'd like to join the next season.",
+  },
+
+  // ==========================================================================
+  // COLLABORATE - what the collaborate page (/collaborate.html) shows a brand.
+  //
+  // This is the page the hero's yellow button sends people to, so it is the
+  // page a brand decides on. Two lists:
+  //
+  //   reach   the numbers. How many people actually see Frontier. Each one is
+  //           a `figure` (the number, written however you want it to appear -
+  //           "12.4K", "1,200", "45,000") and a `label` saying what it counts.
+  //           `asOf` is the date you measured it.
+  //   offer   what a partner has really had from Frontier.
+  //
+  // BOTH LISTS SURVIVE BEING EMPTY. A reach row with either half still "TODO"
+  // is left out. Empty the whole list and the numbers band is not on the page
+  // at all - no heading, no zeroes, no blank boxes.
+  //
+  // NEVER GUESS A NUMBER. A follower count a brand can check in ten seconds is
+  // the fastest way to lose one. Open Instagram, read the number, type the
+  // number, and put today's date in `asOf`.
+  // ==========================================================================
+  collaborate: {
+    reach: [
+      // Fill these in from the real accounts. Delete a row you cannot measure.
+  // ##########################################################################
+  // ## PLACEHOLDER DATA - NOT REAL. DO NOT PUSH THIS LIVE.                  ##
+  // ##                                                                      ##
+  // ## Every value marked `PLACEHOLDER` below was invented on 2026-09-07 so ##
+  // ## the pages could be looked at with something in them. None of it was  ##
+  // ## measured, confirmed or supplied by anyone at Frontier.               ##
+  // ##                                                                      ##
+  // ## A follower count is the one claim on this site a brand can check in  ##
+  // ## ten seconds, and a session time is what a player turns up on. Both   ##
+  // ## are worse wrong than missing (docs/HOUSE-RULES.md section 7).        ##
+  // ##                                                                      ##
+  // ## Replace every one of them with a real value, or set it back to       ##
+  // ## "TODO" - the site draws nothing at all for a TODO and that is the    ##
+  // ## safe state.                                                          ##
+  // ##########################################################################
+      { figure: "4.2K", label: "Instagram followers", asOf: "PLACEHOLDER" },
+      { figure: "18K", label: "Average views per reel", asOf: "PLACEHOLDER" },
+      { figure: "240", label: "Players through a season", asOf: "PLACEHOLDER" },
+    ],
 
     // What a partner has actually had from Frontier. Confirmed by the owner on
     // 2026-09-04. Only put things here that have really happened - this is the
@@ -727,11 +771,123 @@ export default {
     // World Cup Edition WITH @seixed and @address.lk. No competition has ever
     // carried a partner's name, and saying otherwise would be a claim nobody
     // can stand behind (docs/HOUSE-RULES.md sections 7 and 9).
-    partnerOffer: [
+    offer: [
       "Named on tournament posters and graphics",
       "On the ground at the venue on match nights",
       "Named in the posts and reels from the night",
       "Competitions co-presented, like Division 0 with @seixed and @address.lk",
     ],
   },
+
+  // ==========================================================================
+  // SESSIONS - the nights that come round every week.
+  //
+  // This is the top half of the events page (/events.html). One block per
+  // night. Every field except `day` can stay "TODO" and that line is simply
+  // left out.
+  //
+  //   day     which night it is - "Thursday", "Sunday". A block with no day is
+  //           skipped entirely.
+  //   name    what the night is called, if it has a name of its own.
+  //   time    when it starts and ends, written however you say it out loud -
+  //           "8pm - 10pm", "20:00 till late".
+  //   venue   where it is played.
+  //   format  what it actually is - "4 v 4, rolling subs", "open run".
+  //   price   what it costs a player. Write "Free" if it is free. Leave "TODO"
+  //           and the line is left out, which is NOT the same as free.
+  //   note    anything else a player needs to know before turning up.
+  //
+  // A BLOCK WITH ONLY A DAY IN IT IS NOT SHOWN. "Thursday" on its own tells a
+  // player nothing, so a night needs at least one real detail before it goes
+  // on the page. Fill in one field and it appears.
+  // ==========================================================================
+  sessions: [
+  // ##########################################################################
+  // ## PLACEHOLDER DATA - NOT REAL. DO NOT PUSH THIS LIVE.                  ##
+  // ##                                                                      ##
+  // ## Every value marked `PLACEHOLDER` below was invented on 2026-09-07 so ##
+  // ## the pages could be looked at with something in them. None of it was  ##
+  // ## measured, confirmed or supplied by anyone at Frontier.               ##
+  // ##                                                                      ##
+  // ## A follower count is the one claim on this site a brand can check in  ##
+  // ## ten seconds, and a session time is what a player turns up on. Both   ##
+  // ## are worse wrong than missing (docs/HOUSE-RULES.md section 7).        ##
+  // ##                                                                      ##
+  // ## Replace every one of them with a real value, or set it back to       ##
+  // ## "TODO" - the site draws nothing at all for a TODO and that is the    ##
+  // ## safe state.                                                          ##
+  // ##########################################################################
+    {
+      day: "Thursday",
+      name: "PLACEHOLDER - Thursday Night Frontier",
+      time: "PLACEHOLDER - 8pm - 10pm",
+      venue: "PLACEHOLDER - Athlete 360",
+      format: "PLACEHOLDER - 4 v 4, rolling subs",
+      price: "PLACEHOLDER - LKR 1,000 a head",
+      note: "PLACEHOLDER - turn up on your own and we put you in a team.",
+    },
+    {
+      day: "Sunday",
+      name: "PLACEHOLDER - Sunday Sessions",
+      time: "PLACEHOLDER - 5pm - 7pm",
+      venue: "PLACEHOLDER - Athlete 360",
+      format: "PLACEHOLDER - open run, mixed ability",
+      price: "PLACEHOLDER - LKR 1,000 a head",
+      note: "PLACEHOLDER - message us by Saturday so we know the numbers.",
+    },
+  ],
+
+  // ==========================================================================
+  // EVENTS - the one-off nights that have a date on them.
+  //
+  // The bottom half of the events page. Seasons, tournaments, watch-alongs -
+  // anything with a date that has not happened yet.
+  //
+  //   name    what it is called. An event with no name is skipped.
+  //   date    when it is, written however you want it to read - "Sat 20 Sep",
+  //           "20 September 2026". Nothing works it out for you, so write the
+  //           year if the year matters.
+  //   venue   where it is.
+  //   note    one line about it.
+  //   url     a link to the post or the sign-up, if there is one. Leave "TODO"
+  //           and the row is plain text rather than a link to nowhere.
+  //
+  // THIS LIST SHIPS EMPTY. With nothing in it the "What's coming up" section is
+  // not on the page at all, and the weekly nights above carry it on their own.
+  //
+  // TAKE PAST EVENTS OUT. Nothing removes them for you - an event with a date
+  // that has been and gone stays on the page until you delete its block.
+  // ==========================================================================
+  events: [
+  // ##########################################################################
+  // ## PLACEHOLDER DATA - NOT REAL. DO NOT PUSH THIS LIVE.                  ##
+  // ##                                                                      ##
+  // ## Every value marked `PLACEHOLDER` below was invented on 2026-09-07 so ##
+  // ## the pages could be looked at with something in them. None of it was  ##
+  // ## measured, confirmed or supplied by anyone at Frontier.               ##
+  // ##                                                                      ##
+  // ## A follower count is the one claim on this site a brand can check in  ##
+  // ## ten seconds, and a session time is what a player turns up on. Both   ##
+  // ## are worse wrong than missing (docs/HOUSE-RULES.md section 7).        ##
+  // ##                                                                      ##
+  // ## Replace every one of them with a real value, or set it back to       ##
+  // ## "TODO" - the site draws nothing at all for a TODO and that is the    ##
+  // ## safe state.                                                          ##
+  // ##########################################################################
+    {
+      name: "PLACEHOLDER - 4 x 4 Series SZN 7",
+      date: "PLACEHOLDER - Sat 20 Sep 2026",
+      venue: "PLACEHOLDER - Athlete 360",
+      note: "PLACEHOLDER - team entries open now.",
+      url: "TODO",
+    },
+    {
+      name: "PLACEHOLDER - Division 0, second edition",
+      date: "PLACEHOLDER - Fri 3 Oct 2026",
+      venue: "PLACEHOLDER - Pixels N Pints",
+      note: "PLACEHOLDER - FC26 on PS5, 32 players.",
+      url: "TODO",
+    },
+    // { name: "TODO", date: "TODO", venue: "TODO", note: "TODO", url: "TODO" },
+  ],
 };
