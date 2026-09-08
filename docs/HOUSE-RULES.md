@@ -366,7 +366,10 @@ Known and usable:
 - TikTok **@frontierfootball** — `https://www.tiktok.com/@frontierfootball`,
   supplied by the owner 2026-08-28. **It ends in one `l`, not three.** The two
   handles genuinely differ; neither is a typo of the other, so do not
-  "correct" either to match. Lives in `content.js` and in both footers.
+  "correct" either to match. Lives in `content.js`. Owner's call on
+  2026-09-08: dropped from every page footer and from the "Also on" row on
+  contact/collaborate/events - it now shows only as an icon tile in the home
+  page's "Find Frontier" hub (`src/hub.js`).
 - SZN 3 champion: Ramadan FC · SZN 4: Pantera FC · SZN 6: Spain
   (SZN 6 was a "World Cup Edition", teams named after countries)
 - **Division 0** — a FIFA/FC26 tournament played on PS5, not on a pitch. A

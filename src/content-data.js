@@ -162,12 +162,17 @@ function parsePartner(raw) {
 /* `handle` is what the hub prints big, so it is stored rather than pulled out of
    the url: parsing "@frontierfootballl" back out of an Instagram address works
    until the day a link is a WhatsApp invite or a Sofascore page, which have no
-   handle in them at all. A link with no handle falls back to its name. */
+   handle in them at all. A link with no handle falls back to its name.
+
+   `placeholder` lets the hub draw a greyed, unclickable tile for a platform
+   before its URL exists - normally a link with no url is absent entirely. Only
+   the owner opts a link into this, per link, in content.js. */
 function parseLink(raw) {
   return {
     name: recorded(raw.name),
     handle: recorded(raw.handle),
     url: recorded(raw.url),
+    placeholder: raw.placeholder === true,
   };
 }
 

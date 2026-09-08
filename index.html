@@ -54,6 +54,10 @@
     <link rel="stylesheet" href="/src/styles/footer.css" />
   </head>
   <body>
+    <!-- nav--overlay: home only. The nav floats over the hero video with no
+         fill until the hero is scrolled past, then src/hero.js adds .is-scrolled
+         and it becomes the same cream bar every other page carries from the
+         start. Other pages have no hero for it to sit over. -->
     <header class="nav nav--overlay">
       <a class="nav__brand" href="#top">
         <img
@@ -340,12 +344,12 @@
         </div>
       </section>
 
-      <!-- The links hub, built by src/hub.js from content.js.
-
-           Three of its four links have no address yet, so the first renderable
-           one becomes the section itself and the rest append as pills when their
-           addresses arrive. Nothing is drawn greyed out: a control that announces
-           a TikTok and then refuses to open it is worse than no control.
+      <!-- The links hub, built by src/hub.js from content.js: one outlined
+           icon tile per link that has a url. A link with none is absent
+           outright - a tile that opens nothing is worse than no tile - EXCEPT
+           a link content.js opts in with `placeholder: true` (Facebook and
+           LinkedIn today), which draws a greyed, unclickable tile ahead of its
+           address so the owner can see it in place. See src/hub.js.
 
            The heading is plain and stays true whichever links exist. "Follow on
            Instagram" in static markup would be a lie the day that handle is
@@ -394,26 +398,6 @@
           <a class="site-foot__link" href="/about.html">About</a>
           <a class="site-foot__link" href="/gallery.html">Gallery</a>
           <a class="site-foot__link" href="/contact.html">Contact</a>
-          <a
-            class="site-foot__link"
-            href="https://www.instagram.com/frontierfootballl/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Frontier Football on Instagram (opens in a new tab)"
-          >
-            Instagram
-          </a>
-          <!-- ONE l, unlike Instagram's three. Both handles are real and
-               neither is a typo of the other. -->
-          <a
-            class="site-foot__link"
-            href="https://www.tiktok.com/@frontierfootball"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Frontier Football on TikTok (opens in a new tab)"
-          >
-            TikTok
-          </a>
         </nav>
         <p class="site-foot__meta">&copy; Frontier Football</p>
       </div>

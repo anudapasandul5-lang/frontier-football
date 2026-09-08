@@ -149,7 +149,7 @@ describe("outboundLinks", () => {
     );
 
     expect(links).toEqual([
-      { name: "Instagram", handle: null, url: "https://example.test/ig" },
+      { name: "Instagram", handle: null, url: "https://example.test/ig", placeholder: false },
     ]);
   });
 
@@ -305,6 +305,29 @@ describe("outboundLinks handles", () => {
     );
 
     expect(link.handle).toBeNull();
+  });
+});
+
+describe("link placeholder flag", () => {
+  it("carries placeholder:true only when content.js opts the link in", () => {
+    // The hub uses this to draw a greyed, unclickable tile for a platform whose
+    // URL does not exist yet. Every other link is placeholder:false and stays
+    // absent until its url is recorded.
+    const { links } = parseContent({
+      links: [
+        { name: "Instagram", url: "https://example.test/ig" },
+        { name: "Facebook", url: "TODO", placeholder: true },
+        { name: "Sofascore", url: "TODO" },
+      ],
+    });
+
+    expect(links.map((link) => link.placeholder)).toEqual([false, true, false]);
+  });
+
+  it("treats any non-true placeholder value as false", () => {
+    const { links } = parseContent({ links: [{ name: "Facebook", url: "TODO", placeholder: "yes" }] });
+
+    expect(links[0].placeholder).toBe(false);
   });
 });
 

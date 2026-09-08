@@ -235,7 +235,11 @@
 /* The numeral is the loudest thing in the row and it is doing the navigating:
    a reader scanning for a season finds it by the number, not by the caption. */
 .record__num {
-  margin: 0;
+  /* Anton carries ~0.1em of leading above the cap even at line-height 0.82,
+     which opened a visible gap under the kicker. Tuck most of it back so the
+     caption and the numeral read as one stacked label, without the caps
+     colliding with the caption. */
+  margin: -0.04em 0 0;
   font-family: var(--font-display);
   font-size: clamp(56px, 7vw, 110px);
   line-height: 0.82;
@@ -295,7 +299,9 @@
 .record__data {
   display: grid;
   align-content: start;
-  gap: var(--spacing-4);
+  /* One even rhythm. Was 4px here fighting an 8px margin under the champion
+     line, so "Champion -> result" sat tight and "result -> venue" sat loose. */
+  gap: var(--spacing-8);
   color: var(--color-ink);
 }
 
@@ -309,7 +315,7 @@
 }
 
 .record__value {
-  margin: 0 0 var(--spacing-8);
+  margin: 0;
   font-family: var(--font-display);
   font-size: var(--text-heading-sm);
   line-height: 1.05;
@@ -407,6 +413,16 @@ a.party__card:hover .party__name {
        the most room because it is the reason anybody scrolls this far. */
     grid-template-columns: minmax(110px, 0.9fr) minmax(0, 2.6fr) minmax(180px, 1.1fr);
     gap: var(--spacing-40);
+    /* The numeral and the data column each hold a few lines against a photo
+       that runs 2:1 - top-aligned they pinned to a corner with a screen of
+       empty track beneath. Centred, each column reads as sitting WITH the
+       photograph. */
+    align-items: center;
+  }
+
+  /* The parties row's second span is a full card grid, not one photo, so its
+     label stays at the top where a heading belongs. */
+  .record__row--parties {
     align-items: start;
   }
 

@@ -629,9 +629,19 @@ export default {
   // Instagram is first because following Frontier there is the one thing we
   // want a visitor to do. Keep it first.
   //
-  // The other three have no address yet. Leave them as TODO and they simply do
-  // not appear on the site. Paste a real link in and that one shows up on its
-  // own, in the order it sits in this list. Nothing else needs changing.
+  // The other four have no address yet. Leave one as TODO and it normally does
+  // not appear on the site at all - a link that opens nothing is worse than no
+  // link. Paste a real URL in and that tile turns live, in the order it sits in
+  // this list. Nothing else needs changing.
+  //
+  // Facebook, LinkedIn, Sofascore and WhatsApp already have their platform mark
+  // built in - the tile draws the logo the moment a real URL is here. Sofascore
+  // has no logo and shows its name in the tile instead.
+  //
+  // `placeholder: true` is the exception: it draws the tile NOW, greyed and
+  // unclickable, before the URL exists. On Facebook and LinkedIn today because
+  // the owner asked to see them in place. Delete the line the moment the real
+  // URL lands - a live tile beside two greyed ones is the point.
   // ==========================================================================
   // ==========================================================================
   // THE PEOPLE who run Frontier.
@@ -677,6 +687,12 @@ export default {
       handle: "@frontierfootball",
       url: "https://www.tiktok.com/@frontierfootball",
     },
+    // Frontier's Facebook page. Replace "TODO" with the page URL
+    // (facebook.com/...) and delete the `placeholder` line to make it live.
+    { name: "Facebook", url: "TODO", placeholder: true },
+    // Frontier's LinkedIn page. Replace "TODO" with the company/page URL
+    // (linkedin.com/...) and delete the `placeholder` line to make it live.
+    { name: "LinkedIn", url: "TODO", placeholder: true },
     // The Sofascore page carrying Frontier's results. Named in a post, but the
     // address itself was never written down.
     { name: "Sofascore", url: "TODO" },

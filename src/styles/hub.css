@@ -1,21 +1,18 @@
 /* Frontier Football — the links hub.
-   One outlined slab holding a ruled stack of handles at display scale, with any
-   handle-less links as pills beneath it. A seventh layout family: a single large
-   object rather than a list, a grid or a strip, so it does not repeat the
-   partner logo strip directly above it or the footer directly below. The rule
-   between rows is a hairline at display scale, the site's plainest divider used
-   large rather than a new idea.
+   A row of outlined tiles, one per platform Frontier lives on, each carrying
+   that platform's mark. The tile is the .pill primitive squared: same ink
+   outline and paper fill, the card radius instead of the pill radius, the
+   pill's text padding dropped. Not a new layout family - the smallest version
+   of one the page already uses.
 
    PAPER, NOT INK. The logo marquee above this section and the footer below it
    are both ink fills. A third dark surface here would turn the bottom quarter of
-   a cream page dark, which is a bigger break than any one section is worth.
-   Outlined on paper keeps the site's language (a filled, ink-outlined surface)
-   without the stack.
+   a cream page dark. Outlined on paper keeps the site's language without the
+   stack.
 
    PAPER, NOT YELLOW EITHER. HOUSE-RULES section 2 reserves yellow for the primary
    action, and the nav and hero already spend it on this exact destination. A
-   third yellow control with one intent is the duplicate-CTA failure. Same
-   destination, unmissable size, lower weight.
+   third yellow control with one intent is the duplicate-CTA failure.
 
    Colours used: paper and ink only. No literal hex anywhere in this file. */
 
@@ -46,151 +43,66 @@
   color: var(--color-ink);
 }
 
-/* ============ THE SLAB ============ */
-/* The outline and the radius belong to the slab; the rows inside it are ruled,
-   not boxed. Boxing each row would make this a card list, which is the layout
-   family the champions grid already spent. */
-.hub__slab {
+/* ============ THE TILES ============ */
+/* Empty today only if every link is TODO. Instagram and TikTok render now;
+   Facebook, LinkedIn, Sofascore and WhatsApp each appear as another tile the
+   moment content.js carries an address for them, with no code change. */
+.hub__tiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-16);
   margin: 0;
   padding: 0;
-  border: var(--outline-width) solid var(--color-ink);
-  /* The elevated radius, since this is the largest single object on the page
-     below the hero. Matches the site's 20 / 40 / pill system. */
-  border-radius: var(--radius-card-elevated);
-  background: var(--color-paper);
-  color: var(--color-ink);
   list-style: none;
-  /* The rows run to the slab's edges, so without this the first row's hover
-     tint would square off the rounded corners. */
-  overflow: hidden;
 }
 
-/* ============ ONE HANDLE PER ROW ============ */
-/* Padding is on the row rather than the slab so the rule between two rows runs
-   the full width of the object instead of stopping short in a gutter. */
-/* Handle left, platform right, sharing one baseline. The label used to sit above
-   the handle, which was fine while the slab held a single centred statement and
-   there was nothing to the right of it. With the handle set at display scale and
-   the slab running the full container, the longest handle still leaves about
-   400px of empty slab to its right, and a second row leaves more. Putting the
-   platform at the far end spends that space on structure instead of leaving it
-   as a void, and gives the row two anchored edges the way the partner index
-   does. */
-.hub__row {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: baseline;
-  column-gap: var(--spacing-24);
-  /* Down from a flat 32px with the type. The row was mostly air around a
-     handle that no longer needs that much room. */
-  padding: var(--spacing-20) var(--spacing-24);
-  color: var(--color-ink);
+/* .pill supplies the ink outline, the paper fill and the ink text colour. The
+   tile resquares it: a fixed height, a minimum width equal to that height so a
+   single glyph sits in a true square, and the card radius rather than the
+   pill's fully-round one. A text fallback (a platform with no glyph) keeps the
+   horizontal padding and grows past the square into a rounded rectangle. */
+.hub__tile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--spacing-60);
+  height: var(--spacing-60);
+  padding: 0 var(--spacing-16);
+  border-radius: var(--radius-card);
   text-decoration: none;
   transition:
     background-color var(--duration-fast) var(--ease-out),
     transform var(--duration-fast) var(--ease-out);
 }
 
-/* One rule between rows, never above the first or below the last: the slab's
-   own outline already closes both ends. */
-.hub__slab li + li .hub__row {
-  border-block-start: var(--outline-width-1) solid var(--color-ink);
-}
-
-/* A lift would drag one row out of the slab it is ruled into, so the row tints
-   and nudges instead. Yellow is reserved for the primary action (HOUSE-RULES
-   section 2), so the tint is a lift of paper, the same derivative the section
-   bands use. */
-.hub__row:hover {
+/* Lifts on hover, the same nudge the old pill row used. Yellow is reserved for
+   the primary action, so the fill is a lift of paper - the derivative the
+   section bands already use. */
+.hub__tile:not(.hub__tile--soon):hover {
   background: var(--color-paper-lift);
-  transform: translateX(var(--spacing-8));
+  transform: translateY(-2px);
 }
 
-/* Placed rather than ordered: the label stays first in the DOM so a screen
-   reader announces the platform before the handle, and moves to the right of the
-   row visually. */
-.hub__label {
-  /* Block, not the inline default. The phone fallback below drops the grid, and
-     an inline label there sits on the same line as the handle and collides with
-     it. */
-  display: block;
-  grid-row: 1;
-  grid-column: 2;
-  justify-self: end;
+/* A placeholder: the platform is coming but has no address yet. Dashed outline
+   and dimmed so it reads as "not ready" rather than "broken", and it does not
+   lift or respond to the pointer because there is nothing to press. */
+.hub__tile--soon {
+  border-style: dashed;
+  opacity: 0.45;
+  cursor: default;
+}
+
+.hub__glyph {
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+  fill: currentColor;
+}
+
+/* A platform whose mark is not in hub.js's ICONS map. Reads as a label, matching
+   the pill type it inherits from. */
+.hub__name {
   font-size: var(--text-caption);
   font-weight: 700;
-  /* Positive tracking, since this is the one place on the page running caps at
-     caption size and it needs to read as a label rather than a cramped word. */
-  letter-spacing: 0.16em;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
-  white-space: nowrap;
-}
-
-/* The handle IS the section. Lowercase rather than the site's usual display
-   caps: a handle is something people type, and typing it is the point.
-
-   Sized with the same clamp shape tokens.css uses (min at 320px, max at 1440px,
-   linear between) rather than a raw vw, because a raw vw large enough to fill
-   this slab on a desktop overflows it on a phone: "@frontierfootballl" is
-   eighteen unbroken characters and cannot wrap usefully. overflow-wrap is the
-   belt to that braces: no width can push it out of the page, whatever handle is
-   pasted in later.
-
-   64px at 1440. Both rows share one size: at 132px the eighteen characters ran
-   the width of the slab and read as shouting rather than as a handle, and the
-   step-down that used to shrink every row after the first made the two handles
-   look like different kinds of thing. Ordering alone carries the priority
-   Instagram-first is asking for. */
-.hub__statement {
-  grid-row: 1;
-  grid-column: 1;
-  font-family: var(--font-display);
-  /* Was clamp(20px ... 64px), which at desktop width put a handle at 64px -
-     bigger than the section's own headline and reading as two enormous buttons
-     rather than as an index of where Frontier lives. Halved on the owner's call
-     2026-09-04: 18px on a phone, 34px at 1440. */
-  font-size: clamp(18px, calc(18px + 16 * (100vw - 320px) / 1120), 34px);
-  line-height: 0.92;
-  letter-spacing: -0.01em;
-  overflow-wrap: anywhere;
-}
-
-/* On a phone the label has nowhere to sit beside a handle that already uses the
-   full measure, so the row goes back to a stack. */
-@media (max-width: 599px) {
-  .hub__row {
-    display: block;
-    padding: var(--spacing-24) var(--spacing-20);
-  }
-
-  /* justify-self has to be unset by hand. Chrome applies block-level box
-     alignment, so the value set for the grid keeps shrink-wrapping the label and
-     pinning it to the right edge even after the grid is gone. */
-  .hub__label {
-    justify-self: start;
-    margin-bottom: var(--spacing-8);
-  }
-}
-
-/* ============ THE REST, WHEN THEY ARRIVE ============ */
-/* Empty today: Sofascore and WhatsApp are both TODO in content.js and are absent
-   rather than drawn greyed out. Pasting either address in fills this row with no
-   code change, as a pill rather than a slab row, because neither has a handle to
-   set at display scale. */
-.hub__more {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-12);
-  margin: var(--spacing-24) 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.hub__pill {
-  text-decoration: none;
-  transition: transform var(--duration-fast) var(--ease-out);
-}
-
-.hub__pill:hover {
-  transform: translateY(-2px);
 }

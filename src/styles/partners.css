@@ -61,6 +61,10 @@
 .partners__strip {
   min-height: clamp(100px, 13vw, 148px);
   padding-block: var(--spacing-28);
+  /* Owner's call: transparent over .partners' paper ground, not .marquee's
+     ink band - the logo chips already carry their own paper tiles, so the
+     strip doesn't need a second ink surface under them. */
+  background: transparent;
 }
 
 /* The loop. components.css animates .marquee__track by -50% for a two-run
@@ -163,7 +167,10 @@
   line-height: 1;
   text-transform: uppercase;
   letter-spacing: 0.02em;
-  color: var(--color-paper);
+  /* Ink, not paper: the strip sits on .partners' paper ground now that the
+     band itself is transparent, so a no-chip handle needs the dark-on-light
+     pairing every other partners label on this page uses. */
+  color: var(--color-ink);
   opacity: 0.85;
   white-space: nowrap;
 }

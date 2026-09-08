@@ -118,9 +118,11 @@ function emailRow(href) {
   return p;
 }
 
-/* Everywhere else Frontier is reachable, minus whatever became the button
-   above: contactRoutes() has already dropped it. Plain text and links, not a
-   second set of buttons - the page has one action and this row is not it. */
+/* The one other place worth following Frontier, minus whatever became the
+   button above (contactRoutes() drops that). Capped at one at the call site:
+   this row is a nudge to the account that matters, not a directory of every
+   profile - "message us on TikTok" is not a thing anyone does. Plain text and
+   a link, not a second button; the page has one action and this row is not it. */
 function channelRow(channels) {
   const p = document.createElement("p");
   p.className = "contact-channels";
@@ -192,7 +194,7 @@ export function renderContactRoutes(mount, data, { only } = {}) {
   // Not when email IS the button: the address would then be printed twice, once
   // as the thing to press and once underneath it.
   if (routes.email && routes.primary.kind !== "email") slab.append(emailRow(routes.email));
-  if (routes.channels.length > 0) slab.append(channelRow(routes.channels));
+  if (routes.channels.length > 0) slab.append(channelRow(routes.channels.slice(0, 1)));
 
   mount.replaceChildren(slab);
   wireReveal(mount.querySelectorAll("[data-reveal]"));

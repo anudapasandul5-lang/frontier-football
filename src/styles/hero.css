@@ -5,27 +5,49 @@
 
 /* ============ PILL NAV ============ */
 .nav {
-  position: relative;
-  z-index: 10;
+  /* Sticky, not overlaid: on every page except the home hero the nav reserves
+     its own row in flow and pins there once scrolled past. It needs an opaque
+     backdrop so scrolled-under content doesn't show through the ink links.
+     The home page opts into .nav--overlay below, which floats it over the hero
+     video with no fill until scrolled. */
+  position: sticky;
+  top: 0;
+  /* Above everything that scrolls under it. The coverflow gives its centre
+     tile an inline z-index of 10 (src/gallery.js) and it was tying with the
+     nav and painting over the fixed bar; the nav is chrome and always wins. */
+  z-index: 100;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--spacing-16);
-  max-width: var(--page-max-width);
-  margin: 0 auto;
-  padding: var(--spacing-16) var(--page-gutter);
+  width: 100%;
+  /* Full-bleed box (so the sticky background covers edge to edge on wide
+     screens) with side padding doing the old max-width + margin:auto
+     centring: page-gutter until the content would exceed --page-max-width,
+     then half the leftover width, same as before. */
+  padding: var(--spacing-16) max(var(--page-gutter), calc((100% - var(--page-max-width)) / 2));
+  background: var(--color-paper);
+  transition: background-color var(--duration-base) var(--ease-out);
 }
 
-/* Home page only. The nav lifts out of flow and floats over the hero so the
-   video runs full-bleed to the top of the screen behind it. gallery.html keeps
-   the plain in-flow .nav - it has no hero, so an overlay there would land on
-   the page headline. left/right rather than a width keeps the max-width +
-   auto-margin centring from the base rule. The hero's cream wash sits behind
-   this (the wash covers the whole hero, which now starts at y=0), so the ink
-   nav items keep the same contrast the headline does. */
+/* Home only. Fixed rather than sticky so it lifts out of flow and the hero
+   fills the screen behind it; transparent so the video reads edge to edge
+   under the ink links (the hero's own cream wash keeps them legible, the same
+   wash the headline sits on). src/hero.js adds .is-scrolled once the hero has
+   been scrolled past, and from there it is the ordinary cream bar. */
 .nav--overlay {
-  position: absolute;
-  inset: 0 0 auto;
+  position: fixed;
+  background: transparent;
+}
+
+/* Once solid it is a bar floating over content, not a row in flow, so it needs
+   an edge: a section below scrolls up UNDER it and without a boundary the
+   coverflow photos looked clipped at an invisible cream-on-cream line. A 1px
+   ink hairline, the site's plainest divider, laid on with box-shadow so it
+   never shifts the bar's height. */
+.nav--overlay.is-scrolled {
+  background: var(--color-paper);
+  box-shadow: 0 var(--outline-width-1) 0 var(--color-ink);
 }
 
 .nav__brand {
@@ -43,8 +65,10 @@
 /* The nav was brand on the left and one CTA on the right until the photos page
    existed. Every page now carries a group of plain links there instead: the
    Follow pill was removed from all five navs on 2026-09-04 (the owner's call)
-   and its .nav__cta rules went with it. Follow lives in the home hero and in
-   every footer. */
+   and its .nav__cta rules went with it. Follow now lives only as an icon tile
+   in the home page's "Find Frontier" hub (src/hub.js) - the hero's own CTAs
+   point at Collaborate/Events instead, and the footer link went with it too
+   on 2026-09-08. */
 .nav__end {
   display: flex;
   /* Wraps, and does not refuse to shrink. It held three short words until
@@ -103,9 +127,12 @@
      on show); the owner wants the video edge to edge. */
   min-height: 100svh;
   background: var(--color-paper);
-  /* Top pad clears the overlaid nav (~86px) so the centred stage never rides
-     under it on a short or landscape screen. */
-  padding: var(--spacing-80) var(--spacing-24) var(--spacing-60);
+  /* Top pad clears the fixed, overlaid nav (measured ~86px tall) so the
+     centred stage never rides under it on a short or landscape screen - the
+     60px token alone left the headline colliding with the nav at 900x568.
+     src/hero.js's NAV_CLEARANCE toggles the nav's fill at the same edge. No
+     token sits at 88px, so this is a literal rather than a var. */
+  padding: 88px var(--spacing-24) var(--spacing-60);
 }
 
 .hero__bg,
@@ -227,13 +254,11 @@
   }
 
   /* Full-bleed on a phone too, by the owner's call: the video plays at every
-     width, so the nav stays overlaid and the hero keeps the desktop 100svh
-     from the base rule. Only the gutters and the bottom shrink - the top pad
-     stays at the base 80px because it is what clears the overlaid nav, and the
-     nav is only ~20px shorter here than it is above 600px. There is no
-     --spacing-64 token; reaching for one made the whole shorthand invalid at
-     computed-value time, which zeroed the padding rather than failing loudly. */
+     width, so the hero keeps the desktop 100svh from the base rule. Only the
+     gutters and the bottom shrink - the top pad stays at the base 88px because
+     it is what clears the overlaid nav, and the nav is only ~20px shorter here
+     than it is above 600px. */
   .hero {
-    padding: var(--spacing-80) var(--spacing-16) var(--spacing-40);
+    padding: 88px var(--spacing-16) var(--spacing-40);
   }
 }
