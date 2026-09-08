@@ -48,7 +48,10 @@ function mark(partner) {
     // partner with a logo file must still be readable to anyone who cannot
     // see it.
     logo.alt = partner.name;
-    logo.loading = "lazy";
+    // No loading="lazy": the chip is width:auto with no intrinsic size until
+    // the image loads, so the pre-load box is 0px wide and Chrome's lazy
+    // loader never schedules the fetch - it starves forever, empty pill on
+    // screen. These are ~20-60KB each and always-visible marquee content.
     logo.decoding = "async";
     chip.append(logo);
     return chip;
