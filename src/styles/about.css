@@ -235,11 +235,10 @@
 /* The numeral is the loudest thing in the row and it is doing the navigating:
    a reader scanning for a season finds it by the number, not by the caption. */
 .record__num {
-  /* Anton carries ~0.1em of leading above the cap even at line-height 0.82,
-     which opened a visible gap under the kicker. Tuck most of it back so the
-     caption and the numeral read as one stacked label, without the caps
-     colliding with the caption. */
-  margin: -0.04em 0 0;
+  /* Anton's ~0.1em of leading above the cap ate the gap entirely and the
+     glyph's bounding box overlapped the kicker's by 4px, so the two looked
+     glued together instead of stacked. spacing-8 restores a visible seam. */
+  margin: var(--spacing-8) 0 0;
   font-family: var(--font-display);
   font-size: clamp(56px, 7vw, 110px);
   line-height: 0.82;
