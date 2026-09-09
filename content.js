@@ -875,35 +875,6 @@ export default {
   // that has been and gone stays on the page until you delete its block.
   // ==========================================================================
   events: [
-  // ##########################################################################
-  // ## PLACEHOLDER DATA - NOT REAL. DO NOT PUSH THIS LIVE.                  ##
-  // ##                                                                      ##
-  // ## Every value marked `PLACEHOLDER` below was invented on 2026-09-07 so ##
-  // ## the pages could be looked at with something in them. None of it was  ##
-  // ## measured, confirmed or supplied by anyone at Frontier.               ##
-  // ##                                                                      ##
-  // ## A follower count is the one claim on this site a brand can check in  ##
-  // ## ten seconds, and a session time is what a player turns up on. Both   ##
-  // ## are worse wrong than missing (docs/HOUSE-RULES.md section 7).        ##
-  // ##                                                                      ##
-  // ## Replace every one of them with a real value, or set it back to       ##
-  // ## "TODO" - the site draws nothing at all for a TODO and that is the    ##
-  // ## safe state.                                                          ##
-  // ##########################################################################
-    {
-      name: "PLACEHOLDER - 4 x 4 Series SZN 7",
-      date: "PLACEHOLDER - Sat 20 Sep 2026",
-      venue: "PLACEHOLDER - Athlete 360",
-      note: "PLACEHOLDER - team entries open now.",
-      url: "TODO",
-    },
-    {
-      name: "PLACEHOLDER - Division 0, second edition",
-      date: "PLACEHOLDER - Fri 3 Oct 2026",
-      venue: "PLACEHOLDER - Pixels N Pints",
-      note: "PLACEHOLDER - FC26 on PS5, 32 players.",
-      url: "TODO",
-    },
     // { name: "TODO", date: "TODO", venue: "TODO", note: "TODO", url: "TODO" },
   ],
 };
