@@ -78,7 +78,11 @@
 /* Full-colour sticker card, not a cream wash. The wash is the hero's device
    and reusing it here would be the same idea twice. Real photography carries
    its own colours and is exempt from the six (HOUSE-RULES section 2). */
-.story__photo {
+/* BOTH classes, for the reason written above .marquee.partners__strip in
+   partners.css: components.css loads last in the build, so a bare
+   .story__photo lost aspect-ratio and border to .photo-tile on the live site
+   while looking correct in dev. */
+.photo-tile.story__photo {
   aspect-ratio: 8 / 5;
   border: none;
 }

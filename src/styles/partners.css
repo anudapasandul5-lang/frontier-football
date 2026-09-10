@@ -58,7 +58,12 @@
 /* .marquee in components.css gives the ink ground, the clip and the flex
    centring. Overridden here: the strip is taller than the tagline band because
    a logo needs more vertical room than a line of caps, and the pad matches. */
-.partners__strip {
+/* BOTH classes, on purpose. Vite emits the CSS chunks in module-graph order
+   and components.css lands LAST on the built page, so a bare .partners__strip
+   loses all three of these to .marquee at equal specificity — in production
+   only, because vite dev keeps index.html's link order and the band looked
+   right locally. 0,2,0 wins whatever the order. */
+.marquee.partners__strip {
   min-height: clamp(100px, 13vw, 148px);
   padding-block: var(--spacing-28);
   /* Owner's call: transparent over .partners' paper ground, not .marquee's
