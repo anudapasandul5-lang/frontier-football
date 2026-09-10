@@ -787,11 +787,28 @@ export default {
     // World Cup Edition WITH @seixed and @address.lk. No competition has ever
     // carried a partner's name, and saying otherwise would be a claim nobody
     // can stand behind (docs/HOUSE-RULES.md sections 7 and 9).
+    //
+    // The last two lines were added 2026-09-10 from the owner's own 4x4 Series
+    // proposal deck, which is the source the Sep-22 brief names for this page.
+    // Both describe things the deck's own photographs show happening at
+    // Frontier nights, run by partners already in the eleven: drinks handed out
+    // from a branded tent at the venue, and a juggling/crossbar challenge run
+    // on the night. Neither invents a partner and neither carries a name, which
+    // is what section 9 forbids.
+    //
+    // WHAT WAS DELIBERATELY NOT TAKEN FROM THE DECK. The deck says Alpha
+    // Tournament was "sponsored by Red Bull" and Turf Wars by Hypebam. Hypebam
+    // is one of the recorded eleven; Red Bull is not, anywhere on this site.
+    // Section 9 says never invent a sponsor and section 7 settled that all
+    // eleven are called partners rather than sponsors, so adding Red Bull here
+    // would be two rule breaks at once. It waits for the owner.
     offer: [
       "Named on tournament posters and graphics",
       "On the ground at the venue on match nights",
       "Named in the posts and reels from the night",
       "Competitions co-presented, like Division 0 with @seixed and @address.lk",
+      "Product put straight into the hands of players and the people watching",
+      "A challenge run at the venue on the night, with the prize on the table",
     ],
   },
 
