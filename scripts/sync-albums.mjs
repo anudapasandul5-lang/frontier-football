@@ -30,8 +30,7 @@ const OUT = resolve(dirname(fileURLToPath(import.meta.url)), "../public/albums")
    all, so their cards keep the "Photos are on the way." line rather than
    linking at an empty page. Also absent, pending the owner confirming which
    card each belongs to: `4x4 Photos` (1HGXOPq8HVLiX7bg1WXkzT7IJwdeIrpJs, 88
-   files), `UCL FINAL NIGHT - PSG vs Arsenal`
-   (1LI43OOBwg14x5l5h-E3OTw5f2z-kGyXe, 189) and `Frontier Watch Along @ Main`
+   files) and `Frontier Watch Along @ Main`
    (1PCXYIZOqqoCEZtUHtnjvnIH_b3aYx6Tv, 18). Adding a line here is all each one
    needs once the mapping is settled. */
 const ALBUMS = {
@@ -41,6 +40,13 @@ const ALBUMS = {
   "szn-4": "1aqiStgYq6IRnL-Ev2GdEDWDu4HgzrpZu",
   "szn-6": "1CstLyLWgy79Yqp0d-NQ3Rnux1-MAbxeR",
   "division-0": "1fkDf7Igl7RtVIKxxxeuGikZqo6Eg7se1",
+  // Watch parties. Asked for by the owner on 2026-09-10: these open on the
+  // site like every other card rather than sending a visitor out to Drive.
+  "wa-final-esp-arg": "1hOfEz1uHcPT0fx8Ca4Dv86bhcj7WMMsU",
+  "wa-semi-eng-arg": "1MFdyJn1AwLtSq_Flkg8PB_EqFX1a15CV",
+  "wa-semi-esp-fra": "15y_x5dnOdsGQvmjPm0JaIqeLpoGWB5BM",
+  "wa-norway-england": "1CZXXR7ZNFmPaOFudf8wDXNlPFlaKnxlh",
+  "wa-ucl-final-night": "1LI43OOBwg14x5l5h-E3OTw5f2z-kGyXe",
 };
 
 const CONCURRENCY = 24;

@@ -299,7 +299,7 @@ export default {
       // Which album on this site the "View photos" button opens. It matches a
       // file in public/albums/, written by `npm run albums:sync`. Leave it as
       // "TODO" and the card still shows, saying the photos are on the way.
-      albumId: "TODO",
+      albumId: "wa-final-esp-arg",
       // A short line under the name. The month, or which matches it covered.
       note: "TODO",
       // A picture from the night. Put the file in the public/champions/ folder
@@ -313,6 +313,7 @@ export default {
     },
     {
       name: "Semi-final: England vs Argentina",
+      albumId: "wa-semi-eng-arg",
       note: "TODO",
       photo: "/champions/wa-semi-eng-arg.webp",
       photoAlt: "A packed watch-along crowd reacts to the match on screen.",
@@ -322,6 +323,7 @@ export default {
     },
     {
       name: "Semi-final: Spain vs France",
+      albumId: "wa-semi-esp-fra",
       note: "TODO",
       photo: "/champions/wa-semi-esp-fra.webp",
       photoAlt: "Two fans celebrate with their arms up at the watch-along.",
@@ -331,6 +333,7 @@ export default {
     },
     {
       name: "Norway vs England",
+      albumId: "wa-norway-england",
       note: "TODO",
       photo: "/champions/wa-norway-england.webp",
       photoAlt: "A fan cheers with both arms raised, phone in hand, mid-match.",
@@ -342,6 +345,7 @@ export default {
       // Not part of the same run of matches as the four above, but it is still
       // a night in front of a screen, so it belongs in this group.
       name: "UCL Final Night",
+      albumId: "wa-ucl-final-night",
       note: "TODO",
       photo: "/champions/wa-ucl-final-night.webp",
       photoAlt: "Fans in red shirts cheer with their arms raised at the watch-along.",

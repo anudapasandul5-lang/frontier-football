@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-03",
+  "generatedAt": "2026-09-10",
   "albums": [
     {
       "id": "szn-1",
@@ -30,6 +30,31 @@
       "id": "division-0",
       "folderId": "1fkDf7Igl7RtVIKxxxeuGikZqo6Eg7se1",
       "count": 64
+    },
+    {
+      "id": "wa-final-esp-arg",
+      "folderId": "1hOfEz1uHcPT0fx8Ca4Dv86bhcj7WMMsU",
+      "count": 257
+    },
+    {
+      "id": "wa-semi-eng-arg",
+      "folderId": "1MFdyJn1AwLtSq_Flkg8PB_EqFX1a15CV",
+      "count": 177
+    },
+    {
+      "id": "wa-semi-esp-fra",
+      "folderId": "15y_x5dnOdsGQvmjPm0JaIqeLpoGWB5BM",
+      "count": 52
+    },
+    {
+      "id": "wa-norway-england",
+      "folderId": "1CZXXR7ZNFmPaOFudf8wDXNlPFlaKnxlh",
+      "count": 124
+    },
+    {
+      "id": "wa-ucl-final-night",
+      "folderId": "1LI43OOBwg14x5l5h-E3OTw5f2z-kGyXe",
+      "count": 189
     }
   ]
 }

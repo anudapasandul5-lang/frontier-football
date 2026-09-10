@@ -200,15 +200,19 @@ function tabbedGroups(groups) {
 export function renderGalleryPage(mount) {
   const data = parseContent(content);
 
-  const seasonEntries = data.seasons.map((season) => ({
-    title: seasonName(season.season),
-    champion: season.champion,
-    note: season.note,
-    photo: season.photo,
-    photoAlt: season.photoAlt,
-    driveFolder: season.driveFolder,
-    albumId: season.albumId,
-  }));
+  // content.js lists seasons newest first for the champions grid; the gallery
+  // reads as a run and opens on SZN 1, same as the About page journey.
+  const seasonEntries = [...data.seasons]
+    .sort((a, b) => a.season - b.season)
+    .map((season) => ({
+      title: seasonName(season.season),
+      champion: season.champion,
+      note: season.note,
+      photo: season.photo,
+      photoAlt: season.photoAlt,
+      driveFolder: season.driveFolder,
+      albumId: season.albumId,
+    }));
 
   // Turf Wars and Division 0 are not seasons of the 4x4 Series (CONTEXT.md), so
   // each becomes its own tab rather than being sorted among the seasons or with
