@@ -595,10 +595,42 @@ describe("collaborate.offer", () => {
     // owner's, typed into content.js. Nothing here is phrased by the code, and a
     // half finished line is absent rather than printed. HOUSE-RULES section 9.
     const { collaborate } = parseContent({
+      collaborate: {
+        offer: [
+          { title: "Enhanced visibility", body: "Reach a focused audience." },
+          { title: "TODO: ask", body: "Something." },
+          { title: "", body: "Orphaned body." },
+        ],
+      },
+    });
+
+    expect(collaborate.offer).toEqual([
+      { title: "Enhanced visibility", body: "Reach a focused audience." },
+    ]);
+  });
+
+  it("prints a title on its own when the body is not recorded yet", () => {
+    // Same rule the sessions follow: an unrecorded half is one line shorter,
+    // never an empty line. Only the title identifies the row.
+    const { collaborate } = parseContent({
+      collaborate: { offer: [{ title: "Product distribution", body: "TODO" }] },
+    });
+
+    expect(collaborate.offer).toEqual([
+      { title: "Product distribution", body: null },
+    ]);
+  });
+
+  it("still accepts a plain string, which is what the list used to be", () => {
+    // The owner hand-edits content.js and every row was a bare string until
+    // 2026-09-10. Reverting one to a string must not throw.
+    const { collaborate } = parseContent({
       collaborate: { offer: ["Named on tournament posters", "TODO: ask", ""] },
     });
 
-    expect(collaborate.offer).toEqual(["Named on tournament posters"]);
+    expect(collaborate.offer).toEqual([
+      { title: "Named on tournament posters", body: null },
+    ]);
   });
 
   it("survives the list being deleted entirely", () => {

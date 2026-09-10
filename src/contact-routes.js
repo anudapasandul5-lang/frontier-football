@@ -214,7 +214,7 @@ export function renderOffer(mount, lines) {
   const ul = document.createElement("ul");
   ul.className = "offer__list";
   ul.append(
-    ...lines.map((line) => {
+    ...lines.map((row) => {
       // NOT .pill. components.css says in as many words that a pill's outline
       // and fill read as a clickable chip, which is why .eyebrow exists as a
       // label instead. These lines are statements, not controls: a ruled row,
@@ -222,9 +222,26 @@ export function renderOffer(mount, lines) {
       const li = document.createElement("li");
       li.className = "offer__item";
       li.dataset.reveal = "";
+
+      // A <strong> rather than a heading: five headings inside one list under
+      // an existing <h2> would put five more entries in a screen reader's
+      // heading outline for what is one section of five short statements.
+      const title = document.createElement("strong");
+      title.className = "offer__title";
       // textContent, never innerHTML: content.js is hand-written and must never
       // need escaping by hand.
-      li.textContent = line;
+      title.textContent = row.title;
+      li.append(title);
+
+      // Left out entirely when unrecorded rather than printed as an empty
+      // line, the same rule every other renderer in this repo follows.
+      if (row.body) {
+        const body = document.createElement("span");
+        body.className = "offer__body";
+        body.textContent = row.body;
+        li.append(body);
+      }
+
       return li;
     }),
   );

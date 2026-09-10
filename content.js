@@ -788,27 +788,48 @@ export default {
     // carried a partner's name, and saying otherwise would be a claim nobody
     // can stand behind (docs/HOUSE-RULES.md sections 7 and 9).
     //
-    // The last two lines were added 2026-09-10 from the owner's own 4x4 Series
-    // proposal deck, which is the source the Sep-22 brief names for this page.
-    // Both describe things the deck's own photographs show happening at
-    // Frontier nights, run by partners already in the eleven: drinks handed out
-    // from a branded tent at the venue, and a juggling/crossbar challenge run
-    // on the night. Neither invents a partner and neither carries a name, which
-    // is what section 9 forbids.
+    // REPLACED WHOLESALE ON 2026-09-10 by the owner's call. These five are the
+    // "Why collaborate with us" slide of the owner's own 4x4 Series proposal
+    // deck, which the Sep-22 brief names as the content source for this page.
+    // The four earlier lines were a record of what partners had already had;
+    // these five are what Frontier offers. The heading above them, "What a
+    // partner gets", reads correctly for either.
     //
-    // WHAT WAS DELIBERATELY NOT TAKEN FROM THE DECK. The deck says Alpha
-    // Tournament was "sponsored by Red Bull" and Turf Wars by Hypebam. Hypebam
-    // is one of the recorded eleven; Red Bull is not, anywhere on this site.
-    // Section 9 says never invent a sponsor and section 7 settled that all
-    // eleven are called partners rather than sponsors, so adding Red Bull here
+    // EACH ROW IS A TITLE AND A BODY. Leave `body` as "TODO" and the row prints
+    // as a title on its own; a row with no `title` is dropped entirely, the same
+    // both-halves rule the reach rows follow.
+    //
+    // "futsal" stays. It is the sport, not the old brand: the home page hero
+    // already reads "Built by the futsal community". The dead pre-rebrand
+    // handle is the thing that never appears (HOUSE-RULES section 7).
+    //
+    // WHAT WAS DELIBERATELY NOT TAKEN FROM THE DECK. It says Alpha Tournament
+    // was "sponsored by Red Bull" and Turf Wars by Hypebam. Hypebam is one of
+    // the recorded eleven; Red Bull is not, anywhere on this site. Section 9
+    // says never invent a sponsor and section 7 settled that all eleven are
+    // called partners rather than sponsors, so putting Red Bull on the page
     // would be two rule breaks at once. It waits for the owner.
     offer: [
-      "Named on tournament posters and graphics",
-      "On the ground at the venue on match nights",
-      "Named in the posts and reels from the night",
-      "Competitions co-presented, like Division 0 with @seixed and @address.lk",
-      "Product put straight into the hands of players and the people watching",
-      "A challenge run at the venue on the night, with the prize on the table",
+      {
+        title: "Enhanced visibility",
+        body: "Reach a focused futsal audience through live event exposure and consistent digital content reach.",
+      },
+      {
+        title: "Community engagement",
+        body: "Align your brand with a growing futsal movement built on passion, culture and community.",
+      },
+      {
+        title: "Customizable opportunities",
+        body: "Activate your brand your way, through tailored on-ground presence and digital storytelling.",
+      },
+      {
+        title: "Product distribution",
+        body: "Place your product directly into the hands of players and fans for real-world brand impact.",
+      },
+      {
+        title: "Branding opportunities",
+        body: "Gain strong on-site branding, event mentions and dedicated social content that keeps your brand visible beyond match day.",
+      },
     ],
   },
 

@@ -229,6 +229,24 @@ function parseReach(raw) {
   };
 }
 
+/* One thing a partner gets: a short name for it and a line saying what it means.
+
+   The title is what identifies the row, so a row without one is dropped by the
+   caller - a body with nothing over it is a sentence floating in a ruled list.
+   The body is optional and the row prints one line shorter without it, the same
+   way a session with no venue does.
+
+   A plain string is still accepted and becomes a title with no body. The owner
+   hand-edits this file and the list was five plain strings until 2026-09-10;
+   reverting one row to a string should not throw. */
+function parseOffer(raw) {
+  if (typeof raw === "string") return { title: recorded(raw), body: null };
+  return {
+    title: recorded(raw?.title),
+    body: recorded(raw?.body),
+  };
+}
+
 function parseCollaborate(raw) {
   const source = raw ?? {};
   return {
@@ -236,7 +254,7 @@ function parseCollaborate(raw) {
     // A list rather than a sentence so the page survives the owner adding a
     // fifth or deleting the lot (HOUSE-RULES section 7), and so nothing here is
     // phrased by this file - every claim is the owner's own.
-    offer: (source.offer ?? []).map(recorded).filter(Boolean),
+    offer: (source.offer ?? []).map(parseOffer).filter((row) => row.title),
   };
 }
 

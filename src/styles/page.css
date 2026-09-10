@@ -221,13 +221,40 @@
 
 /* A ruled index, the same device the partners section uses. Deliberately not
    .pill: components.css says a pill's outline and fill read as a clickable
-   chip, and none of these four lines is a control. */
+   chip, and none of these lines is a control.
+
+   A column since 2026-09-10, when the rows became a name and a line explaining
+   it rather than one statement each. The gap is what separates the two, not a
+   rule: a hairline inside a row that already sits between two hairlines reads
+   as a table nobody asked for. */
 .offer__item {
-  padding: var(--spacing-16) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  padding: var(--spacing-20) 0;
   border-bottom: var(--outline-width-1) solid var(--color-ink);
-  font-size: var(--text-subheading);
-  line-height: 1.35;
   color: var(--color-ink);
+}
+
+/* Display face, so the five names carry the scan and the bodies are read only
+   by someone who has stopped on one. Not uppercase: these are five different
+   lengths and setting them in caps at this size turns the column into a wall. */
+.offer__title {
+  font-family: var(--font-display);
+  font-size: var(--text-subheading);
+  font-weight: 400;
+  line-height: var(--leading-heading);
+  letter-spacing: 0.01em;
+}
+
+/* Body face, one step down, at a measure that breaks before the eye has to
+   travel. 58ch rather than the list's own 64ch: the title above it is short,
+   so a body running the full width of the rule looks unmoored from it. */
+.offer__body {
+  max-width: 58ch;
+  font-size: var(--text-body-lg);
+  line-height: 1.5;
+  opacity: 0.85;
 }
 
 @media (min-width: 768px) {
