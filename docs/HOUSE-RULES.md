@@ -101,6 +101,13 @@ maximised short laptop (1900x780) will push your CTA below the fold.
   any `npx` call carrying two or more positional args as `npm run`, so
   `npx vite --port 5173 --strictPort` dies with `Missing script: "vite"`. Use
   `npm run dev -- --port 5173` or `./node_modules/.bin/vite`.
+- **Overriding a `components.css` primitive from a page stylesheet needs BOTH
+  classes in the selector.** Vite emits the CSS chunks in module-graph order and
+  `components.css` lands LAST on the built page, so `.partners__strip {}` loses to
+  `.marquee {}` at equal specificity in production while looking correct under
+  `vite dev`, which keeps the `<link>` order in `index.html`. Write
+  `.marquee.partners__strip {}`. Cost the partner strip a navy band and the story
+  photo its 8/5 crop for two days before anyone saw it (fixed `0735281`).
 - `styleguide.html` renders every primitive. Check there before writing new
   CSS — the thing you need probably exists.
 
