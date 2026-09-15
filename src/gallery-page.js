@@ -48,54 +48,84 @@ function albumPhoto(entry) {
 
 /* `champion` is only present on a season or a competition. A watch party has
    no such field at all, so `"champion" in entry` is false for it rather than
-   the card having to guess from a null it can't tell apart from "unrecorded". */
-function albumCard(entry, index) {
+   the card having to guess from a null it can't tell apart from "unrecorded".
+
+   Poster treatment (owner picked "Season Posters" from design-explorations/
+   gallery/ 2026-09-15): a photo cover with a local scrim, the season number
+   overlaid, and a coloured footer strip below - the card's own
+   card--yellow/orange/red/green fill shows through there since the poster art
+   only covers the top. Whole card is the link when there is one, so the
+   footer's "View photos" is a plain span, never a nested <a> - can't put a
+   .btn inside a card that's itself an <a>. */
+function albumCard(entry, index, groupLabel) {
   const li = document.createElement("li");
   li.className = "album-grid__cell";
   li.dataset.reveal = "";
 
-  const card = document.createElement("div");
-  card.className = `card ${CARD_COLOURS[index % CARD_COLOURS.length]} album-card`;
-  if (!entry.photo) card.classList.add("album-card--textonly");
-
-  const photo = albumPhoto(entry);
-  if (photo) card.append(photo);
-
-  card.append(albumLine("album-card__title", entry.title));
-
-  if ("champion" in entry) {
-    card.append(albumLine("album-card__champion", entry.champion ?? "Not recorded yet"));
-    if (!entry.champion) card.lastElementChild.classList.add("album-card__champion--absent");
-  }
-
-  if (entry.note) card.append(albumLine("album-card__note", entry.note));
-
   // An album on this site first: the photographs are shown here rather than
   // handed off to Drive. driveFolder is kept as the secondary way out for
-  // anyone who wants the original, full-resolution files, which the site never
-  // serves.
-  if (entry.albumId) {
-    const link = document.createElement("a");
-    link.className = "btn btn--secondary album-card__link";
-    // Encoded even though every id in content.js is a plain slug: this value
-    // goes into a URL, and the day one is not a slug is the day it silently
-    // stops being one parameter.
-    link.href = `/album.html?album=${encodeURIComponent(entry.albumId)}`;
-    link.textContent = "View photos";
-    card.append(link);
-  } else if (entry.driveFolder) {
-    const link = document.createElement("a");
-    link.className = "btn btn--secondary album-card__link";
-    link.href = entry.driveFolder;
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
-    link.textContent = "View photos";
-    card.append(link);
+  // anyone who wants the original, full-resolution files, which the site
+  // never serves.
+  const href = entry.albumId
+    ? `/album.html?album=${encodeURIComponent(entry.albumId)}`
+    : entry.driveFolder || null;
+
+  const card = document.createElement(href ? "a" : "div");
+  card.className = `card ${CARD_COLOURS[index % CARD_COLOURS.length]} album-card`;
+  if (href) {
+    card.href = href;
+    // No aria-label here: the poster's own text (title, champion, note,
+    // footer "View photos") is already the accessible name. A label would
+    // replace it outright and a screen-reader user would hear only "Open
+    // SZN 3 album" instead of the champion and note that are still visibly
+    // on the card.
+    if (!entry.albumId) {
+      card.target = "_blank";
+      card.rel = "noopener noreferrer";
+    }
   } else {
     // Still shows, saying the photos are on the way, rather than a dead link
     // or a card that vanishes the moment a folder goes missing.
-    card.append(albumLine("album-card__pending", "Photos are on the way."));
+    card.classList.add("album-card--pending");
   }
+
+  const art = document.createElement("div");
+  art.className = "album-card__art";
+
+  const photo = albumPhoto(entry);
+  if (photo) art.append(photo);
+
+  const scrim = document.createElement("div");
+  scrim.className = "album-card__scrim";
+  art.append(scrim);
+
+  if (groupLabel) art.append(albumLine("album-card__masthead", groupLabel));
+
+  const copy = document.createElement("div");
+  copy.className = "album-card__copy";
+  if (entry.number) {
+    const number = albumLine("album-card__number", entry.number);
+    number.setAttribute("aria-hidden", "true");
+    copy.append(number);
+  }
+  copy.append(albumLine("album-card__title", entry.title));
+  if ("champion" in entry) {
+    const champion = albumLine("album-card__champion", entry.champion ?? "Not recorded yet");
+    if (!entry.champion) champion.classList.add("album-card__champion--absent");
+    copy.append(champion);
+  }
+  if (entry.note) copy.append(albumLine("album-card__note", entry.note));
+  art.append(copy);
+  card.append(art);
+
+  const footer = document.createElement("div");
+  footer.className = "album-card__footer";
+  footer.append(
+    href
+      ? albumLine("album-card__footer-text", "View photos")
+      : albumLine("album-card__pending", "Photos are on the way."),
+  );
+  card.append(footer);
 
   li.append(card);
   return li;
@@ -105,10 +135,10 @@ function albumCard(entry, index) {
 // builds a one-card grid on its own tab, and without this every one of them
 // reset to index 0 - card--yellow for Turf Wars AND Division 0 - instead of
 // picking up where the six SZN cards left off.
-function albumGrid(entries, startAt = 0) {
+function albumGrid(entries, startAt = 0, groupLabel = "") {
   const ul = document.createElement("ul");
   ul.className = "album-grid";
-  ul.append(...entries.map((entry, i) => albumCard(entry, startAt + i)));
+  ul.append(...entries.map((entry, i) => albumCard(entry, startAt + i, groupLabel)));
   return ul;
 }
 
@@ -206,6 +236,7 @@ export function renderGalleryPage(mount) {
     .sort((a, b) => a.season - b.season)
     .map((season) => ({
       title: seasonName(season.season),
+      number: String(season.season).padStart(2, "0"),
       champion: season.champion,
       note: season.note,
       photo: season.photo,
@@ -219,6 +250,7 @@ export function renderGalleryPage(mount) {
   // each other. File order from content.js, the same order champions.js uses.
   const competitionEntries = data.competitions.map((competition) => ({
     title: competition.name,
+    number: "01",
     champion: competition.champion,
     note: competition.note,
     photo: competition.photo,
@@ -227,8 +259,9 @@ export function renderGalleryPage(mount) {
     albumId: competition.albumId,
   }));
 
-  const watchPartyEntries = data.watchAlongs.map((watchAlong) => ({
+  const watchPartyEntries = data.watchAlongs.map((watchAlong, index) => ({
     title: watchAlong.name,
+    number: String(index + 1).padStart(2, "0"),
     note: watchAlong.note,
     photo: watchAlong.photo,
     photoAlt: watchAlong.photoAlt,
@@ -238,7 +271,8 @@ export function renderGalleryPage(mount) {
 
   const groups = [];
   if (seasonEntries.length > 0) {
-    groups.push({ id: "series", label: "4x4 Series", build: () => albumGrid(seasonEntries) });
+    const label = "4x4 Series";
+    groups.push({ id: "series", label, build: () => albumGrid(seasonEntries, 0, label) });
   }
   const usedIds = new Set(groups.map((g) => g.id));
   competitionEntries.forEach((entry, index) => {
@@ -256,16 +290,14 @@ export function renderGalleryPage(mount) {
       id,
       label: entry.title,
       // Continues the card-colour cycle from the seasons rather than resetting
-      // to card--yellow for every single-card competition tab.
+      // to card--yellow for every single-card competition tab. No groupLabel:
+      // a competition's masthead would just repeat its own title right below.
       build: () => albumGrid([entry], seasonEntries.length + index),
     });
   });
   if (watchPartyEntries.length > 0) {
-    groups.push({
-      id: "watch-parties",
-      label: "Watch Parties",
-      build: () => albumGrid(watchPartyEntries),
-    });
+    const label = "Watch Parties";
+    groups.push({ id: "watch-parties", label, build: () => albumGrid(watchPartyEntries, 0, label) });
   }
 
   // No groups means no page content. The head stays static markup so a

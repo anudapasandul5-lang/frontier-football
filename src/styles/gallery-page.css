@@ -152,48 +152,122 @@
   display: flex;
 }
 
+/* Poster cards (owner picked "Season posters" from design-explorations/
+   gallery/, 2026-09-15): a photo cover with a local scrim, the season number
+   overlaid in cream, and a coloured footer strip below - the strip is just
+   the card's own card--yellow/orange/red/green fill showing through where
+   the art box doesn't cover it, no separate background needed.
+
+   Deliberately NOT the prototype's density-tuned 6-column grid (fixed to
+   read right at exactly 5 albums, with nth-last-child rules to match) - kept
+   this page's own 1/2/3-column flow instead, because the comment above
+   .album-grid is the one promise this page makes: correct at any card count,
+   not just today's. */
 .album-card {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: var(--spacing-4);
   width: 100%;
-  padding: var(--spacing-24);
-  border-radius: var(--radius-card-elevated);
+  overflow: hidden;
+  /* Most cards are an <a> (src/gallery-page.js): without this the browser's
+     default link underline shows through the in-flow footer text. */
+  text-decoration: none;
   transition: transform var(--duration-base) var(--ease-out);
 }
 
-.album-card:hover {
+/* HOUSE-RULES section 4: overriding a components.css primitive from a page
+   stylesheet needs both classes in the selector, or the built page (Vite
+   emits components.css last) silently loses to .card's own padding/radius
+   even though this looks right under `vite dev`. */
+.card.album-card {
+  padding: 0;
+  border-radius: var(--radius-card-elevated);
+}
+
+/* Only a linked card lifts on hover - a pending (.album-card--pending) card
+   is a plain, non-interactive <div> and shouldn't imply it's clickable. */
+a.album-card:hover,
+a.album-card:focus-visible {
   transform: translateY(-4px);
 }
 
+.album-card__art {
+  position: relative;
+  height: clamp(280px, 34vw, 420px);
+  background: var(--color-ink);
+}
+
 .album-card__photo {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: clamp(150px, 16vw, 230px);
+  height: 100%;
   object-fit: cover;
-  object-position: center 22%;
-  margin-bottom: var(--spacing-16);
-  border: var(--outline-width) solid currentColor;
-  border-radius: calc(var(--radius-card-elevated) - var(--card-padding));
+  object-position: center 25%;
+  transition: transform var(--duration-base) var(--ease-out);
 }
 
-/* A card with no photo steps its title up to fill the space the picture would
-   have taken, so it reads as a deliberate treatment rather than a failed load. */
-.album-card--textonly .album-card__title {
-  font-size: clamp(26px, 3vw, 40px);
+.album-card:hover .album-card__photo,
+.album-card:focus-visible .album-card__photo {
+  transform: scale(1.045);
 }
 
-.album-card__title {
-  font-family: var(--font-display);
-  font-size: var(--text-heading-sm);
-  line-height: 1;
+.album-card__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(12, 32, 55, 0.65) 0%,
+    transparent 25%,
+    rgba(12, 32, 55, 0.05) 40%,
+    rgba(12, 32, 55, 0.9) 73%,
+    var(--color-ink) 100%
+  );
+}
+
+.album-card__masthead {
+  position: absolute;
+  left: var(--spacing-20);
+  right: var(--spacing-20);
+  top: var(--spacing-16);
+  padding-bottom: var(--spacing-8);
+  border-bottom: var(--outline-width) solid rgba(255, 248, 219, 0.65);
+  color: var(--color-paper);
+  font-size: var(--text-caption);
+  letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
+.album-card__copy {
+  position: absolute;
+  left: var(--spacing-20);
+  right: var(--spacing-20);
+  bottom: var(--spacing-20);
+  color: var(--color-paper);
+}
+
+.album-card__number {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(56px, 7vw, 92px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: var(--spacing-12);
+}
+
+.album-card__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(24px, 2.6vw, 32px);
+  line-height: 1.1;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
 .album-card__champion {
+  margin-top: var(--spacing-8);
   font-size: var(--text-subheading);
   font-weight: 700;
-  line-height: 1.15;
+  line-height: 1.2;
 }
 
 /* Same 0.85 floor champions.css uses: measured against the orange fill at
@@ -204,18 +278,32 @@
 }
 
 .album-card__note {
+  margin-top: var(--spacing-4);
   font-size: var(--text-caption);
-  opacity: 0.9;
+  opacity: 0.85;
+}
+
+.album-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: var(--spacing-16) var(--spacing-20);
+  font-size: var(--text-caption);
+}
+
+.album-card__footer-text {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+}
+
+.album-card__footer-text::after {
+  content: "\2197"; /* same arrow glyph the rest of the site's outbound links use */
 }
 
 .album-card__pending {
-  font-size: var(--text-caption);
-  opacity: 0.9;
+  opacity: 0.85;
   font-style: italic;
-}
-
-.album-card__link {
-  margin-top: var(--spacing-12);
 }
 
 @media (max-width: 599px) {
@@ -230,5 +318,9 @@
   .gallery-page__tabs,
   .album-grid {
     padding: 0 var(--spacing-16);
+  }
+
+  .album-card__number {
+    font-size: 56px;
   }
 }
