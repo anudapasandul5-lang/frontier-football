@@ -906,6 +906,9 @@ export default {
   //
   // A row with no figure or no label is left off the page.
   //
+  // The FIRST row is printed as the one oversized number; the others stack
+  // beside it. To make a different number the big one, move its row to the top.
+  //
   // "Events" here means every night Frontier has ever hosted. It is NOT the
   // EVENTS list further down, which is only the dated ones still to come.
   // ==========================================================================

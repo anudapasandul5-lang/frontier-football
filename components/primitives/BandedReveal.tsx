@@ -3,8 +3,10 @@ import type { CSSProperties } from "react";
 /* A photo that arrives in horizontal bands. The <img> is always in the server
    HTML and visible without JS; the covers exist only in the motion pre-state
    (globals.css) and slide off when the one reveal observer marks the figure
-   revealed. `cover` should match the canvas behind it. */
+   revealed. `cover` should match the canvas behind it. `as="span"` makes it
+   phrasing content, for a photo set inside a line of type. */
 export function BandedReveal({
+  as: Tag = "figure",
   src,
   alt,
   width,
@@ -15,6 +17,7 @@ export function BandedReveal({
   imgClassName = "",
   noReferrer = false,
 }: {
+  as?: "figure" | "span";
   src: string;
   alt: string;
   width: number;
@@ -26,7 +29,7 @@ export function BandedReveal({
   noReferrer?: boolean;
 }) {
   return (
-    <figure data-reveal className={`banded ${className}`} style={{ "--bands": bands, "--cover": cover } as CSSProperties}>
+    <Tag data-reveal className={`banded ${className}`} style={{ "--bands": bands, "--cover": cover } as CSSProperties}>
       <img
         src={src}
         alt={alt}
@@ -40,6 +43,6 @@ export function BandedReveal({
       {Array.from({ length: bands }, (_, i) => (
         <span key={i} aria-hidden="true" className="banded__cover" style={{ "--i": i } as CSSProperties} />
       ))}
-    </figure>
+    </Tag>
   );
 }

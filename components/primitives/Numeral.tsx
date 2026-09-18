@@ -5,7 +5,7 @@ export function Numeral({ figure, caption }: { figure: string; caption: string }
       <span className="font-display text-[clamp(6rem,16vw,10rem)] leading-[0.85] font-bold uppercase">
         {figure}
       </span>
-      <span className="text-[13px] leading-snug">{caption}</span>
+      <span className="text-[13px] leading-snug text-[var(--tone-muted)]">{caption}</span>
     </p>
   );
 }
