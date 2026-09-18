@@ -1,0 +1,180 @@
+{
+  "branding": {
+    "colorScheme": "light",
+    "fonts": [
+      {
+        "family": "Inter",
+        "role": "body"
+      },
+      {
+        "family": "Oswald",
+        "role": "heading"
+      },
+      {
+        "family": "Instrument Serif",
+        "role": "unknown"
+      },
+      {
+        "family": "Boldonse",
+        "role": "unknown"
+      }
+    ],
+    "colors": {
+      "primary": "#E84634",
+      "secondary": "#4091DA",
+      "accent": "#4091DA",
+      "background": "#EFEAE0",
+      "textPrimary": "#0A0A0A",
+      "link": "#4091DA"
+    },
+    "typography": {
+      "fontFamilies": {
+        "primary": "Inter",
+        "heading": "Oswald"
+      },
+      "fontStacks": {
+        "heading": [
+          "Instrument Serif",
+          "serif"
+        ],
+        "body": [
+          "sans-serif"
+        ],
+        "paragraph": [
+          "Inter",
+          "sans-serif"
+        ]
+      },
+      "fontSizes": {
+        "h1": "64px",
+        "h2": "40px",
+        "body": "13px"
+      }
+    },
+    "spacing": {
+      "baseUnit": 4,
+      "borderRadius": "0px"
+    },
+    "components": {
+      "input": {
+        "background": "transparent",
+        "textColor": "#EFEAE0",
+        "borderColor": null,
+        "borderRadius": "0px",
+        "borderRadiusCorners": {
+          "topLeft": "0px",
+          "topRight": "0px",
+          "bottomRight": "0px",
+          "bottomLeft": "0px"
+        },
+        "shadow": "none"
+      }
+    },
+    "images": {
+      "logo": null,
+      "favicon": "https://framerusercontent.com/images/ke8cIWks2v04kLde0iU4FgreJY.svg",
+      "ogImage": "https://framerusercontent.com/images/G58Ns9EJGYVPZWBeMwqGjLeICs.jpg"
+    },
+    "personality": {
+      "tone": "modern",
+      "energy": "medium",
+      "targetAudience": "football fans, sports enthusiasts, general public interested in the 2026 World Cup"
+    },
+    "designSystem": {
+      "framework": "unknown",
+      "componentLibrary": ""
+    },
+    "confidence": {
+      "buttons": 0,
+      "colors": 0.9,
+      "overall": 0.45
+    },
+    "__llm_metadata": {
+      "logoSelection": {
+        "llmCalled": false,
+        "llmSucceeded": false,
+        "finalSource": "none"
+      },
+      "buttonClassification": {
+        "llmCalled": false,
+        "llmSucceeded": false
+      }
+    },
+    "brandName": "United"
+  },
+  "metadata": {
+    "robots": "max-image-preview:large",
+    "ogImage": "https://framerusercontent.com/images/G58Ns9EJGYVPZWBeMwqGjLeICs.jpg",
+    "ogTitle": "United - Football & the 2026 World Cup",
+    "og:description": "An editorial tribute to football, the world's most unifying sport, building anticipation for the 2026 FIFA World Cup.",
+    "ogDescription": "An editorial tribute to football, the world's most unifying sport, building anticipation for the 2026 FIFA World Cup.",
+    "title": "United - Football & the 2026 World Cup",
+    "description": "An editorial tribute to football, the world's most unifying sport, building anticipation for the 2026 FIFA World Cup.",
+    "og:title": "United - Football & the 2026 World Cup",
+    "twitter:description": "An editorial tribute to football, the world's most unifying sport, building anticipation for the 2026 FIFA World Cup.",
+    "og:image": "https://framerusercontent.com/images/G58Ns9EJGYVPZWBeMwqGjLeICs.jpg",
+    "language": "en",
+    "color-scheme": "light dark",
+    "twitter:image": "https://framerusercontent.com/images/G58Ns9EJGYVPZWBeMwqGjLeICs.jpg",
+    "framer-search-index": "https://framerusercontent.com/sites/2W6czVdUA6c9ReEuogDZYx/searchIndex-dxihjZp2uU5m.json",
+    "viewport": [
+      "width=device-width",
+      "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    ],
+    "twitter:card": "summary_large_image",
+    "twitter:title": "United - Football & the 2026 World Cup",
+    "og:url": "https://united-in-football.framer.website/",
+    "framer-search-index-fallback": "https://framerusercontent.com/sites/2W6czVdUA6c9ReEuogDZYx/searchIndex-4xTNC6saEe8Z.json",
+    "ogUrl": "https://united-in-football.framer.website/",
+    "generator": "Framer fd0ec14",
+    "og:type": "website",
+    "favicon": "https://framerusercontent.com/images/ke8cIWks2v04kLde0iU4FgreJY.svg",
+    "scrapeId": "01a0b123-d07c-740b-a84c-abc838869be1",
+    "sourceURL": "https://united-in-football.framer.website/",
+    "url": "https://united-in-football.framer.website/",
+    "statusCode": 200,
+    "contentType": "text/html",
+    "timezone": "America/New_York",
+    "proxyUsed": "basic",
+    "indexId": "05e65713-0346-474e-91ac-9c55bc6b221a",
+    "creditsUsed": 1,
+    "concurrencyLimited": false
+  },
+  "images": [
+    "https://framerusercontent.com/images/OA1ZmLfDtyXR3CLw3qcNPd92ds.jpg?width=2000&height=3000",
+    "https://framerusercontent.com/images/iX21rXiDv223ojLnJIozLYjttP4.webp?width=2361&height=3000",
+    "https://framerusercontent.com/images/guN4s04ZGRFOx5xo4LCps6e9E0.png?width=500&height=876",
+    "https://framerusercontent.com/images/WXgtbS5npGPXQpRc3LgJFuQaNk.jpg?width=3000&height=3750",
+    "https://framerusercontent.com/images/xWRHptWyO71YXuTtFDBZGs32LxI.png?width=1824&height=802",
+    "https://framerusercontent.com/images/3YRdpBNzqD0zov0TRcfYH4T1Ns.svg?width=228&height=351",
+    "https://framerusercontent.com/images/e3YvcwXjApUFMlYZuXmeKKNX25I.jpg?width=3000&height=4493",
+    "https://framerusercontent.com/images/53kKS6spm0zypfYeGbhvivShfk.png?width=714&height=970",
+    "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 xmlns:xlink=%22http://www.w3.org/1999/xlink%22 viewBox=%220 0 8 12%22><path d=%22M 8 0 L 8 4 L 4 4 L 0 0 Z%22 fill=%22rgb(255, 255, 255",
+    "https://framerusercontent.com/images/cLgOE0R0k9bvjhdQUWULzMQRW5A.jpg?width=3000&height=4503",
+    "https://framerusercontent.com/images/icjrvw8Cy6hBGNCB48372xsog.jpg?width=3000&height=3812",
+    "https://framerusercontent.com/images/hxxJoRiAbbfOMRt8Jh4wvWh77o.png?width=1190&height=570",
+    "https://framerusercontent.com/images/lRmoUXbBzrISCtyfZNjmjWOfBzY.jpg?width=3000&height=3750",
+    "https://framerusercontent.com/images/uaXuaPRJwoyQQcBsUMrNNCzw.png?width=1444&height=672",
+    "https://framerusercontent.com/images/efUsxt2y61R25gRaPAH0OFODdqk.png?width=1000&height=1000",
+    "https://framerusercontent.com/images/l5f2T7wRBjJvcwphG7R1WZJWpkA.webp?width=2004&height=3000",
+    "https://framerusercontent.com/images/9rPPGwPg1SSSKKPxCqCflyi1KU.png?width=2160&height=2880",
+    "https://framerusercontent.com/images/vTeZkVzWY2I4y9vJJCx1oa0faE0.jpg?width=3000&height=4502",
+    "https://framerusercontent.com/images/q4LGsCmTngN8MX8jOHyOTrf10w.jpg?width=3000&height=3750",
+    "https://framerusercontent.com/images/FotM8QnR2fadLSXEAlNEc91uZXM.jpg?width=3000&height=2000",
+    "https://framerusercontent.com/images/p4CB6n0qr7lXDBrD67eObYuW05U.png?width=960&height=1134",
+    "https://framerusercontent.com/images/AhGYamFzvq2rjxbpxhQSRkL9cNI.png?width=5428&height=2402",
+    "https://framerusercontent.com/images/sg73VUdzedgctSWkQwqyoaPPE.webp?width=2000&height=3000",
+    "https://framerusercontent.com/images/3b1qbWqTj1eEj5VLDCKRscvAp9M.png?width=2398&height=3198",
+    "https://framerusercontent.com/images/sMhJodvmd3NvqfSP3booqdyrzE.webp?width=1501&height=2000",
+    "https://framerusercontent.com/images/9qFQmianykKcLraeEQ8L240aU.png?width=500&height=591",
+    "https://framerusercontent.com/images/rM1AsUeP8Z35eWoFi9lOWaoc5o.jpg?width=2036&height=3042",
+    "https://framerusercontent.com/images/iGvyhuuUIbHkCLzKmQg9cXOVhI.png?width=1189&height=2576",
+    "https://framerusercontent.com/images/DGYNscNEKQT2OfDhpWPkH0rRtU.png?width=1500&height=1500",
+    "https://framerusercontent.com/images/6yXvOGN0SWvhhE2Foey1gx9rpg.webp?width=4115&height=3000",
+    "https://framerusercontent.com/images/5f6XunMXSvxhgC08oVt6ExEfEfU.jpg?width=3000&height=2399",
+    "https://framerusercontent.com/images/eOzvZsWDZVFV02gDtTecB4VE.jpg?width=3000&height=3750",
+    "https://framerusercontent.com/images/kvRCGVEopG778nMmuYoRaMwaf0.png?width=960&height=1625",
+    "https://framerusercontent.com/images/fx6qQrhQjqLEzIUEP4CQ6uaAk8.webp?width=4500&height=3000",
+    "https://framerusercontent.com/images/W7pFITmokxwktxhYVKI51YXuE4.png?width=960&height=1253"
+  ]
+}
