@@ -20,7 +20,9 @@ export function Hero() {
       <div className="frame flex flex-1 items-center justify-center pt-6 pb-20">
         <div className="relative w-full max-w-[880px] text-center">
           {/* h1 first so the heading is read first; it is positioned, so it still
-              paints over the paragraph that follows it. */}
+              paints over the paragraph that follows it. Yellow on bone is
+              1.44:1, below WCAG's 3:1 for large text: the owner kept it
+              deliberately on 2026-09-18 (United's overprint). Do not "fix" it. */}
           <h1 className="hero-overprint pointer-events-none absolute inset-0 grid xl:-inset-x-[120px] place-content-center font-display text-[clamp(2.25rem,6.9vw,6.75rem)] leading-[0.86] font-bold text-yellow uppercase">
             <span>Built by the</span>
             <span>futsal community.</span>
