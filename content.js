@@ -896,6 +896,28 @@ export default {
   ],
 
   // ==========================================================================
+  // STATS - the four big numbers on the home page.
+  //
+  //   figure  the number exactly as it should print, "3.4M+" and all. The
+  //           site never rounds it or works it out from anything else.
+  //   label   what the number counts.
+  //   asOf    the day the number was true. Change it when you change the
+  //           figure, so nobody reads an old count as today's.
+  //
+  // A row with no figure or no label is left off the page.
+  //
+  // "Events" here means every night Frontier has ever hosted. It is NOT the
+  // EVENTS list further down, which is only the dated ones still to come.
+  // ==========================================================================
+  // Source: the owner, in session on 2026-09-18.
+  stats: [
+    { figure: "3.4M+", label: "Instagram views", asOf: "2026-09-18" },
+    { figure: "50+", label: "Partners", asOf: "2026-09-18" },
+    { figure: "400+", label: "In the community", asOf: "2026-09-18" },
+    { figure: "15+", label: "Events", asOf: "2026-09-18" },
+  ],
+
+  // ==========================================================================
   // EVENTS - the one-off nights that have a date on them.
   //
   // The bottom half of the events page. Seasons, tournaments, watch-alongs -

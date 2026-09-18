@@ -1,224 +1,94 @@
-# Frontier Football — house rules
+# Frontier Football v2: house rules
 
-Standing constraints and hard-won findings for every remaining ticket.
-Each ticket prompt tells you to read this first. It replaces the per-ticket
-boilerplate, so keep it current: if a ticket discovers something that would
-have saved the previous session an hour, it belongs here.
+Standing constraints for every v2 ticket. Read this before building. This file
+lives on branch `v2` and **replaces v1's rules for v2**; `main` keeps v1's copy.
+The decisions behind it are ADR-0001 (adopt United) and ADR-0002 (Next.js).
+The plan is `Projects/Frontier Football/plans/v2-united-redesign.md` in the vault.
 
----
+## 0. What v1 rules are retired, and why
 
-## 1. The look, as signed off after T3
+| v1 rule (on `main`) | v2 status |
+|---|---|
+| s1 "cream poster", dark cinematic is a failure state | **Retired.** v2 is United: bone and ink, ink is the default canvas (ADR-0001). |
+| s2 six colours, yellow is the primary CTA only | **Retired.** United's seven; yellow `#FABA2A` is the one hero mark. |
+| s3 Anton + Space Grotesk | **Retired.** Instrument Serif + Oswald + Geist. The *method* (measure leading in-browser, cap display by viewport height) still applies. |
+| s4 stack locked: vanilla + Vite, four deps | **Retired.** Next 16 + React + TS 7 + Tailwind v4 (ADR-0002). The npx finding and the "both classes" lesson still apply in spirit. |
+| s5 one marquee, hero is the only showpiece | **Retired.** United choreography, bounded by the perf gate in section 5. Reduced-motion, transform/opacity-only and the reveal-must-never-strand-content rules are **kept**. |
+| s6 media, s7 content | **Kept** verbatim below. |
+| s9 "never add an events section" | **Replaced** by the empty-events rule: the act exists and is absent from the DOM while `events` is empty. |
+| s9 "never ship a colour outside the six" | **Replaced** by section 2 below. |
 
-The site is a **cream poster**, not a dark cinematic football site and not a
-pastel Scandinavian one. Both of those are named failure states.
+## 1. The look
 
-- Page ground is `--color-paper` (#FFF8DB) everywhere.
-- Display type is giant, centred, crushed, ink-coloured.
-- Colour arrives as **filled, ink-outlined surfaces** — sticker cards, pills,
-  panels — never as a timid 4px accent.
-- Photography and video sit **behind a cream wash**, so footage reads
-  as texture and movement while the palette stays Frontier's. The hero wash is
-  `color-mix(... --color-paper 60%, transparent)` (was 86%, pulled down
-  2026-09-02 - the video was invisible); floor is ~55% before dark-ink type
-  starts losing frames without a local scrim.
-- Rounding is generous: 20px cards, 40px elevated cards, fully pill buttons.
+`docs/design/united/DESIGN.md` is the visual law. In short: one canvas per
+act, edge to edge; ink is the default, bone the relief. 0px corners, no
+shadows, no gradients, no tints. 11px letterspaced micro-labels above the
+thing they label. The serif is never uppercased; Oswald is never sentence
+case. Body measure 45-55 characters. Declarative headlines with a full stop.
+No CTA language; the one action is following Instagram, as a micro-caps link.
 
-The hero is the reference for tone. Match its confidence and its restraint.
+## 2. Palette
 
-## 2. Palette — six colours, nothing else ships
+Tokens live in `app/globals.css` under `@theme`.
 
 | Token | Hex | Role |
 |---|---|---|
-| `--color-paper` | `#FFF8DB` | page ground |
-| `--color-ink` | `#0C2037` | type, every outline |
-| `--color-yellow` | `#FABA2A` | THE hero colour — primary CTA only |
-| `--color-green` | `#305552` | deep counterweight, panels |
-| `--color-red` | `#87292D` | hot accent, badges |
-| `--color-orange` | `#E97404` | fourth sticker colour |
+| `bone` | `#EFEAE0` | relief canvas |
+| `ink` | `#0A0A0A` | default canvas and type on bone |
+| `yellow` | `#FABA2A` | Frontier's yellow. Hero display type only, once. |
+| `green` | `#2BA662` | 4 x 4 Series colour field. Whole viewport only. |
+| `blue` | `#4091DA` | Turf Wars colour field. Whole viewport only. |
+| `red` | `#E84634` | Division 0 colour field. Whole viewport only. |
+| `teal` | `#0C727E` | closing band. Whole viewport (or the closing band) only. |
+| `muted` | `#A8A29A` | secondary text on ink |
+| `label` | `#555350` | micro-labels on bone |
 
-Card rows cycle yellow → green → red → orange as filled surfaces.
-**Yellow is reserved for the primary action.** Do not dilute it by using it
-for decoration; that is why the follow CTA is unmissable.
+The Frontier crest keeps its own colours and is exempt. Real photographs are
+exempt. Nothing else ships.
 
-**T4's green stats band is gone, deliberately, as of 2026-08-28.** T8 removed it
-and the owner confirmed the removal when a later session restored it. The home
-page now carries *no* inversion in its section rhythm at all — it runs paper and
-paper-lift from the hero to the marquee. Do not "restore" the band, and do not
-add a replacement inversion on the grounds that the page needs one. Anything
-that used to lean on it is stale: see section 7 on the "11 Partners" stat.
+## 3. Typography
 
-**Ink is also the footer fill, and that is NOT an inversion.** The footer sits
-outside `<main>`, repeats on every page and carries no section content, exactly
-as the nav does: it is chrome, and BUILD-PROMPT's palette table says "footer
-fill" in as many words. What this rule still forbids is a *stack* of dark
-surfaces: T7 kept
-the links hub ink-outlined on paper rather than ink-filled, because the marquee
-and footer beneath it are both ink and three in a row turns a cream page dark.
+- `font-serif` Instrument Serif: emotional lines. `font-display` Oswald,
+  uppercase always: structural lines, numerals. `font-sans` Geist: body,
+  labels, table cells. All three via `next/font` in `app/layout.tsx`.
+- Display leading 0.85-0.9, **verified per face in the browser** before it
+  ships (v1 lost a day to Anton colliding at 0.8).
+- Cap any giant headline by viewport height as well as width: 1900x780 has
+  caught two below-the-fold bugs.
 
-Real photography carries its own colours and is exempt.
+## 4. Stack
 
-## 3. Typography — and the leading trap
+- Next.js 16 App Router, static export to `out/`. Server Components by
+  default. `"use client"` only in `components/motion/` leaves.
+- Tailwind v4 utilities; tokens in `@theme`. Radius and shadow scales are
+  zeroed there on purpose. Do not re-add them.
+- Scroll engine: GSAP ScrollTrigger via `useGSAP`, Lenis on `gsap.ticker`.
+  Motion (motion.dev) for UI springs only, never for scroll.
+- **`npx <cmd>` with two or more positional args misparses on this machine.**
+  Use npm scripts, `node_modules/.bin/<tool>`, or a global binary.
+- Logic lives in `lib/` with vitest tests beside it. `content.js` stays at the
+  root, hand-edited, TODO strings meaning absent.
+- `npm run build` then `npm run serve` serves `out/` on port 4173, LAN-visible,
+  for Lighthouse and for the owner's phone.
 
-- `--font-display` is **Anton**. `--font-body` is **Space Grotesk**.
-- No licensed Super Squad / Telegraf files were ever supplied. Leave the
-  TODO comment in `tokens.css` alone.
+## 5. Motion contract
 
-**FINDING — do not re-derive:** opacity on a filled sticker card is a
-contrast change, not a styling choice. Ink at 0.75 over `--color-orange`
-composites to 3.95:1, which clears AA only while the text is large; the same
-line is 18px on a phone, where it fails. Muted text on a filled card stays at
-**0.85 or above**, and caption-scale muted text at **0.9**. Compute it, do not
-look at it.
+- **Content renders on the server.** Every act's text and images are in the
+  static HTML. A motion wrapper sets its pre-animation state from JS after
+  hydration, and only under `prefers-reduced-motion: no-preference`. With JS
+  off or reduced motion on, every act is fully visible and static.
+- Animate transform and opacity (and clip-path for reveals) only.
+- No reveal may strand content: anything the page jumps past is revealed
+  (v1's `shouldReveal`, ported to `lib/reveal.ts`, is the reference).
+- Perf gate: Lighthouse mobile performance >= 90, accessibility >= 95 on the
+  exported home page. A motion piece that breaks it is simplified.
+- Easing tokens: `--ease-out`, `--ease-in-out`, `--ease-drawer`. Never ease-in.
 
-**FINDING, measured in-browser — do not re-derive:**
-Anton's uppercase ink is **0.88em** tall (ascent 0.87, descent 0.01), but
-its content area is 1.5em. `--leading-display` is `0.8`, which the brand
-guide specified for Super Squad. **At 0.8, Anton's lines physically
-collide.** Use `line-height: 0.92` on any multi-line Anton display block.
-0.92 still reads crushed against a normal 1.2.
+## 6. Media (carried from v1, still true)
 
-If you ever set a giant headline, also cap it by viewport height, not just
-width — three lines at 0.9 leading cost ~2.7x the font size, and a
-maximised short laptop (1900x780) will push your CTA below the fold.
+> Paths such as `src/styles/gallery.css` below refer to v1 on `main`. The
+> findings about the media itself hold on v2 unchanged.
 
-## 4. Stack — locked, do not reopen
-
-- Plain HTML + CSS + JS on Vite. No framework, no Tailwind, no component
-  library, no animation library.
-- **Four dependencies now: `vite`, `vitest`, `lenis`, `gsap`. Ask before adding
-  any more.** This rule said "exactly two" until 2026-09-03 and was already
-  stale when it was read - `lenis` had gone in with the smooth-scroll work. The
-  owner approved `gsap` explicitly for the About page's pinned timeline after
-  being shown the cost. Both approvals are on the record; a fifth is not.
-  **`gsap` is imported by `src/about.js` only.** Do not import it from
-  `src/smooth-scroll.js` or any shared module: `index.html` and `gallery.html`
-  must not pay 47KB gzipped for a section they do not have.
-- `src/styles/tokens.css`, `base.css`, `components.css` are the signed-off
-  design system from T1. Reuse their primitives (`.card`, `.card--yellow`,
-  `.btn--primary`, `.pill`, `.band`, `.marquee`). Do not reinvent them and
-  do not edit the tokens without saying so.
-- **`npx <cmd> --flag value` misparses on this machine.** npm 11 reinterprets
-  any `npx` call carrying two or more positional args as `npm run`, so
-  `npx vite --port 5173 --strictPort` dies with `Missing script: "vite"`. Use
-  `npm run dev -- --port 5173` or `./node_modules/.bin/vite`.
-- **Overriding a `components.css` primitive from a page stylesheet needs BOTH
-  classes in the selector.** Vite emits the CSS chunks in module-graph order and
-  `components.css` lands LAST on the built page, so `.partners__strip {}` loses to
-  `.marquee {}` at equal specificity in production while looking correct under
-  `vite dev`, which keeps the `<link>` order in `index.html`. Write
-  `.marquee.partners__strip {}`. Cost the partner strip a navy band and the story
-  photo its 8/5 crop for two days before anyone saw it (fixed `0735281`).
-- `styleguide.html` renders every primitive. Check there before writing new
-  CSS — the thing you need probably exists.
-
-## 5. Motion budget
-
-The hero is the only showpiece. Everything below it is calm:
-reveal-on-scroll (transform + opacity, IntersectionObserver), hover lift on
-cards, and at most **one** marquee across the whole site.
-
-**The marquee is SPENT as of T7.** It carries the brand tagline as a seam between
-the links hub and the footer, on `index.html` only. Two identical `.marquee__run`
-spans inside one `.marquee__track` translated to -50%, the second one
-`aria-hidden="true"` so a screen reader does not read the strip twice. It is on
-the home page rather than inside the footer precisely because the footer repeats
-on both pages and that would render the site's one marquee twice.
-`styleguide.html` also draws it: that is the design-system page, not a site page.
-Whatever a marquee carries must also sit still somewhere, since moving text
-cannot be read by anyone who needs time. The tagline's still copy is the partners
-section's lede. **Do not add a second marquee.**
-
-Hard rules:
-- Animate `transform` and `opacity` only. Nothing that triggers layout.
-- **No `window.addEventListener("scroll")`.** Use IntersectionObserver or
-  native CSS scroll-driven animation (`animation-timeline: scroll()`).
-- `prefers-reduced-motion` must produce a genuinely static result, not a
-  faster one. `base.css` already kills animation and transition globally
-  under that query; anything JS-driven must check `matchMedia` itself.
-
-**The About page's timeline spine is a sanctioned exception to "transform and
-opacity only", and it is the only one.** `src/styles/about.css` animates
-`stroke-dashoffset` on `animation-timeline: view()` so the curve draws itself as
-you scroll. It repaints and does not trigger layout, and there is no
-transform-only way to draw a line along its own length. Two things about it are
-load-bearing and must not be "tidied":
-
-- The base `stroke-dashoffset` is **0** (fully drawn). The undrawn start state
-  lives inside `@supports (animation-timeline: scroll())` **and**
-  `@media (prefers-reduced-motion: no-preference)`. Declare the undrawn length as
-  the base and the spine is **invisible** both for reduced-motion readers (this
-  file's own `base.css` sets `animation: none !important`, which strips the
-  animation and leaves the declared offset) and on any browser without
-  scroll-driven animation. Verified in-browser 2026-09-03: under reduced motion
-  the computed offset is `0px` and `animation-name` is `none`.
-- The path's `d` is **generated** in `src/about.js` from the rendered node
-  positions and regenerated on a `ResizeObserver`, per section 7's changing-count
-  rule. Nodes are pushed 40px left/right of centre by CSS `transform` at 900px
-  and up: without that every node shares an x, and a curve through collinear
-  points renders as a plain vertical rule. `getBoundingClientRect` reports the
-  transformed box, which is why the offset can live in CSS.
-
-**The About page's record is a plain vertical list, and it got there the long
-way. Do not rebuild what was already tried:**
-
-1. Alternating cards on a generated SVG curve. The owner's verdict was "basic",
-   and it was: alternating cards on a centre line is the timeline every site
-   builds, a hairline curve loses against saturated sticker cards, and half of
-   every row was empty cream.
-2. A pinned horizontal pan (GSAP ScrollTrigger, `pin: true`). Built, working,
-   and rejected the same day - the owner wanted it vertical.
-3. The **editorial record** that ships: one row per entry, three columns (the
-   season numeral, the photograph, what is known), a hairline between rows and
-   no connecting line at all. The SVG spine and every line of code that measured
-   it are gone, `spinePath()` with them.
-
-**No card fills in that section.** The four sticker colours cycle on the
-champions grid and the gallery page; running them under full-bleed photography
-as well put two loud systems on top of each other. The record is paper, ink and
-the photographs' own colour, which section 2 exempts.
-
-**GSAP's remaining job is the row stagger and the photo parallax**, both behind
-`gsap.matchMedia("(prefers-reduced-motion: no-preference)")`. Under that setting
-nothing is created at all - not a slower entrance, none. `gsap.matchMedia` over a
-hand-rolled check because it reverts what it created when the query stops
-matching. Verified 2026-09-03: with reduced motion on, every column is opacity 1
-with `transform: none`.
-
-**Lenis and ScrollTrigger must be introduced.** `src/about.js` does
-`lenis.on("scroll", ScrollTrigger.update)`. GSAP's docs prefer handing the rAF
-loop to `gsap.ticker`; that is deliberately not done, because it would mean
-`smooth-scroll.js` importing GSAP and charging `index.html` and `gallery.html`
-47KB for a section they do not have.
-
-**Two measurement traps were paid for in that section, both worth keeping:**
-
-- `getBoundingClientRect` reports the TRANSFORMED box. Anything measured on a
-  page where transforms animate (`.is-pre` translates by `--reveal-shift`, GSAP
-  slides and parallaxes) reads a moving number, and there is no "settled" moment
-  to read it at instead. Use `offsetLeft`/`offsetTop` when you want layout.
-- **`aspect-ratio` is inert on an `<img>` that carries a `height` attribute
-  unless CSS also sets `height: auto`.** Landscape watch-party photographs
-  rendered as tall portrait crops with the subject cut out.
-
-**There is exactly ONE reveal observer: `src/reveal.js`.** Do not write a
-second. It takes an iterable of elements rather than a root, so a section with
-`data-reveal` attributes passes `root.querySelectorAll("[data-reveal]")` and the
-hero passes `stage.children`. Two things in it are load-bearing:
-
-- It reveals an element whose `boundingClientRect.bottom <= 0`, not only an
-  intersecting one. Without that, anything the page jumps past (a deep link,
-  scroll restoration on reload) stays at opacity 0 forever, and an invisible
-  section on a cream page does not look broken, it looks unbuilt.
-- It reads `matchMedia` inside the function, never at module scope. A top-level
-  call makes the module unimportable in vitest's node environment.
-
-`.is-pre` / `.is-revealed` live unscoped in `components.css`. That puts them at
-the same specificity as any `.block__element` rule, so **an element that reveals
-must not also carry its own `transition` shorthand** — a later stylesheet wins
-and the reveal's opacity snaps while its transform eases. Give the reveal and
-the hover separate elements, as `.champions__cell` and `.champions__card` do.
-
-## 6. Media — the pattern that is already working
 
 Video and heavy imagery use **opt-in loading**, established in the hero:
 
@@ -365,7 +235,11 @@ Clips deviate from the 16:9 rule above on purpose: the strip sizes every tile
 from its own media, so a vertical clip stays vertical rather than being cropped
 to a shape the strip does not need.
 
-## 7. Content — never invent
+## 7. Content: never invent (carried from v1, still true)
+
+> v2 additions: the `stats` list (section 7a below) and the rule that the
+> home page's events act renders nothing while `events` is empty.
+
 
 Known and usable:
 - Instagram **@frontierfootballl** — verified live. The brand guide's
@@ -452,40 +326,35 @@ SZN 5 champion · every Golden Boot · every Golden Glove · every runner-up ·
 Turf Wars champion and runner-up · the domain · WhatsApp community link.
 (The TikTok handle came in on 2026-08-28 and is no longer TODO.)
 
+## 7a. The numbers act (v2)
+
+`stats` in `content.js`: owner-supplied figures (2026-09-18), each with
+`asOf`. Printed verbatim by `stats()` in `lib/content-data.ts`; never computed,
+never rounded. "50+ Partners" is a count; the `partners` list is only the
+names recorded, and both are true. "15+ Events" means every night Frontier has
+hosted, not the `events` list (CONTEXT.md).
+
 ## 8. Workflow per ticket
 
-- **Load the `design-taste-frontend` skill FIRST and design the UI with it.**
-  (The About page, 2026-09-03, was built with `high-end-visual-design` instead
-  at the owner's explicit instruction. That was a one-off override, not a change
-  to this rule.)
-  It is not a review step and not a visual pass at the end — it drives the
-  build. Before writing any markup or CSS: state its one-line Design Read,
-  set its three dials (VARIANCE / MOTION / DENSITY) with reasons from the
-  brief, pick the layout family, and only then build. Running it after the
-  fact is using it wrong.
-  **Do not use `impeccable`** — it was dropped from this project.
-- TDD applies to **real logic only**: the content loader, the missing-data
-  path, the gallery lightbox, any filter. Failing test first. Do **not**
-  write tests for static markup or CSS.
-- Verify in a real browser with `agent-browser` at **320, 390, 768, 1440**
-  and at one wide-but-short window (**1900x780** — it has caught two
-  separate below-the-fold bugs).
-- **Assert, do not eyeball.** Check `document.documentElement.scrollWidth`
-  vs `clientWidth` for overflow, and read computed styles to prove
-  reduced-motion actually removed motion.
-- **Screenshots cannot be sent to the owner.** Run `npm run dev` and give
-  them the localhost URL to look at themselves.
-- Mark any deliberate corner-cut with a `ponytail:` comment naming the
-  ceiling and the upgrade path.
-- Build one ticket, then STOP and wait for sign-off.
+- Load `design-taste-frontend` and state its Design Read and three dials
+  before markup for any UI ticket.
+- TDD for real logic only (lib/, the stats list, the empty-events path,
+  album/gallery logic). No tests for static markup or CSS.
+- Verify with `agent-browser` at 320, 390, 768, 1440 and 1900x780. Assert
+  overflow (`scrollWidth` vs `clientWidth`) and reduced motion by computed
+  style; do not eyeball.
+- `/code-review` before any commit with logic in it. One commit per ticket on
+  `v2`. Never push, never deploy, never commit to `main`.
+- Mark deliberate corner-cuts with a `ponytail:` comment naming the ceiling.
 
 ## 9. Never
 
 - Never use `@frontierfutsall`.
-- Never invent a champion, score, follower count, sponsor, or date.
-- Never add an events, fixtures, or countdown section — tournaments are on
-  break and a dormant block is worse than none.
+- Never invent a champion, score, count, sponsor, venue or date. Unknown
+  champion prints a muted em dash.
+- Never render a section that is empty. The events act is absent while
+  `events` is empty.
+- Never ship an AI-generated image, a colour outside section 2, a rounded
+  corner, a shadow or a gradient.
 - Never introduce a backend, database, CMS, or form that posts anywhere.
-- Never ship a colour outside the six.
-- Never add a dependency without asking.
-- Never commit `.env` or print the kie.ai key.
+- Never commit `.env` or print a key.

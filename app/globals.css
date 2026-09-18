@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+/* v2 tokens: United's system (docs/design/united/DESIGN.md) with Frontier's own
+   yellow. Every chromatic field colour is for WHOLE VIEWPORTS only; see
+   docs/HOUSE-RULES.md section 2. Radius and shadow scales are zeroed so no
+   utility can reintroduce either. */
+@theme inline {
+  --color-bone: #efeae0;
+  --color-ink: #0a0a0a;
+  --color-yellow: #faba2a; /* Frontier's, not United's #F4C518 (plan Q9) */
+  --color-green: #2ba662;
+  --color-blue: #4091da;
+  --color-red: #e84634;
+  --color-teal: #0c727e;
+  --color-muted: #a8a29a; /* secondary text on ink */
+  --color-label: #555350; /* micro-labels on bone */
+
+  --font-serif: var(--font-instrument-serif), "Times New Roman", serif;
+  --font-display: var(--font-oswald), "Arial Narrow", sans-serif;
+  --font-sans: var(--font-geist), system-ui, sans-serif;
+
+  --radius-*: initial;
+  --shadow-*: initial;
+  --inset-shadow-*: initial;
+  --drop-shadow-*: initial;
+  --text-shadow-*: initial;
+
+  /* Motion (emil-design-eng): strong custom curves, never ease-in. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+@layer base {
+  *,
+  ::before,
+  ::after {
+    border-radius: 0;
+  }
+
+  html {
+    background: var(--color-ink);
+    color: var(--color-bone);
+    font-family: var(--font-sans);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    overflow-x: clip;
+  }
+
+  :focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+  }
+
+  /* Reduced motion is static, not slower (HOUSE-RULES section 5). JS-driven
+     motion checks the query itself and never sets a pre-state under it. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}

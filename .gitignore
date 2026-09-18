@@ -23,3 +23,9 @@ Thumbs.db
 
 # vendored agent skills (see skills-lock.json to restore)
 .agents/
+
+# next
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo

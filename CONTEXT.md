@@ -9,7 +9,7 @@ synonyms in a later ticket.
 A season is one edition of the 4x4 Series. The official user-facing name is
 **"4 x 4 Series SZN 5"** — spaced `4 x 4`, then `Series`, then `SZN` and the number. Older
 captions and graphics say only "SZN 5"; on the site the full form is what prints. It is
-built in one place, `seasonName()` in src/content-data.js — never re-typed per renderer.
+built in one place, `seasonName()` in lib/content-data.ts — never re-typed per renderer.
 Data key: `season` (a number or id like `"szn-5"`) — never store the display string as a
 key.
 
@@ -45,8 +45,9 @@ a copy-paste, not a code change. An entry with no `name` is dropped, since a car
 is its name.
 
 **Turf Wars**
-A non-seasonal competition, played on turf. Ran Aug 2025. Not a season of the 4x4 Series
-and not folded into the SZN honours grid.
+A non-seasonal competition, played on turf, at Club Fusion. Where Frontier started
+(owner, 2026-09-03); its month is still TODO. The old "Aug 2025" was wrong and is gone.
+Not a season of the 4x4 Series and not folded into the SZN honours grid.
 
 **Division 0**
 A FIFA/FC26 console tournament played on PS5, not on a pitch. Frontier's own posts spell it
@@ -65,7 +66,7 @@ needed both as one list. It is a genuine umbrella and not a synonym for either:
 `competition` is already defined above as "a Frontier tournament that is NOT a
 season", so this word was already doing that job informally. No data key of its own, since it is a view over `seasons` and `competitions`, in
 that order. **There is no `tournaments()` function** - this line used to claim
-one lived in `src/content-data.js` and it never did; `src/gallery-page.js`
+one lived in `lib/content-data.ts` and it never did; `src/gallery-page.js`
 assembles the list inline from `parseContent()`'s output. Corrected 2026-09-03
 after the stale claim was copied into a plan as fact.
 
@@ -131,7 +132,7 @@ One weekly night. Data key: `sessions`, a list of
 `{ day, name, time, venue, format, price, note }`. `day` is what names the card;
 everything else prints only when recorded. A block carrying nothing but its day
 is dropped, because "Thursday" alone tells a player nothing. Code: `sessions()`
-in `src/content-data.js`. Not to be confused with a **season**, which is a
+in `lib/content-data.ts`. Not to be confused with a **season**, which is a
 competition (see above).
 
 **Event**
@@ -139,7 +140,7 @@ One dated one-off. Data key: `events`, a list of
 `{ name, date, venue, note, url }`, and it ships empty. **Nothing filters by
 date**: `date` is free text the owner writes the way they say it out loud, so a
 finished event stays on the page until its block is deleted. Code:
-`upcomingEvents()` in `src/content-data.js`.
+`upcomingEvents()` in `lib/content-data.ts`.
 
 **Drive folder**
 A link to the Google Drive folder itself. Data key: `driveFolder`, kept beside
@@ -168,7 +169,7 @@ of `{ name, handle, url }` at the root of content.js, in priority order. Order l
 file rather than in code so the owner can reorder without a developer. A link whose `url` is
 TODO is **absent** from the markup, never present and disabled: a control that announces a
 TikTok and then refuses to open it is worse than no control. Code: `outboundLinks()` in
-`src/content-data.js`.
+`lib/content-data.ts`.
 
 The hub gives its statement slab to the **first renderable link** rather than to Instagram
 by name, so a handle blanked while somebody re-checks it degrades to the next link instead
@@ -184,7 +185,7 @@ order the names were recorded. Deliberately not sorted: alphabetising, or floati
 with logos, would imply a ranking nobody set. An entry with no `name` is dropped, since a
 row's content is its name. An entry with no `url` is **kept** and drawn as plain text, which
 is what makes it different from a link: a partner is a name Frontier wants to credit whether
-or not anyone has checked its address. Code: `partners()` in `src/content-data.js`.
+or not anyone has checked its address. Code: `partners()` in `lib/content-data.ts`.
 
 Names are printed **verbatim** as they appear in HOUSE-RULES section 7 — `@main.sportsbar`,
 and `Sofascore` / `ThePapare` without an `@` because they were recorded as company names
@@ -192,13 +193,34 @@ rather than handles. Tidying `drinkhypebam` into "Hype Bam" would be inventing a
 nobody supplied. No category label goes under a name.
 
 **Marquee**
-The site's one moving strip, spent in T7 on the brand tagline. See HOUSE-RULES section 5.
-Not a data key: its copy is in the markup, because it is brand copy rather than content the
-owner edits.
+A strip that repeats and scrolls horizontally. v1 allowed one; v2 (United) uses them as a
+component: the home page's photo marquee and the partners strip. Whatever a marquee carries
+must also sit still somewhere readable. Not a data key.
 
 **Reigning**
 Describes the champion of the most recent *completed* season — i.e. the most recent season
 whose `champion` field is filled in, never a season still marked TODO.
+
+**Stat**
+One of the home page's big numbers: a `figure` printed verbatim ("3.4M+"), a `label`, and
+the `asOf` day it was true. Data key: `stats`, a list at the root of content.js, supplied by
+the owner on 2026-09-18. Code: `stats()` in `lib/content-data.ts`. Never computed from
+another list and never rounded.
+
+**Partner count vs partner list**
+"50+ Partners" is the owner's count. `partners` lists only the ones whose name somebody
+recorded (eleven today). The stat shows the count and the strip shows the names; both are
+true and neither is derived from the other.
+
+**"Events" in a stat vs Event**
+The stat "15+ Events" counts every night Frontier has ever hosted. An **Event** (above) is
+one dated, upcoming one-off in `events`. Code never mixes them: the stat is `stats[]`, the
+act is `upcomingEvents()`.
+
+**Community member**
+A person in the Frontier community: someone who plays, watches or turns up. The owner's
+"400+ In the community" counts them. User-facing copy: "in the community". No data key
+beyond the stat.
 
 ## User-facing copy vs data keys
 
@@ -208,11 +230,11 @@ display copy. Their data keys are the plain English forms above (`season`, `gold
 spelled the same. Turf Wars and Division 0 have no keys of their own: they are entries in
 `competitions`, named by their `name` field.
 
-## No events surface
+## Events on the home page (v2)
 
-Tournaments are currently on break. The site has no events, fixtures, or countdown surface,
-and this build does not introduce a "fixture" concept in code or copy. If match-by-match
-scheduling returns later, that is a future ticket's decision, not assumed here.
+The home page has an events act fed by `upcomingEvents()`. While `events` is empty it
+renders nothing at all, not a heading and not a placeholder. There is still no "fixture"
+concept in code or copy. (Replaces v1's "No events surface", stale since the events page.)
 
 ## Known vs TODO content
 
@@ -232,7 +254,7 @@ Owner confirmation turns either into a one-word edit.
 **Journey**
 The About page's forward-running sequence of stops: the first competition, then
 every season oldest-first, then any remaining competition. Code: `journey()` in
-`src/content-data.js`. No data key of its own - it is a view over `competitions`
+`lib/content-data.ts`. No data key of its own - it is a view over `competitions`
 and `seasons`, reversing the newest-first order the champions grid wants. Turf
 Wars opens it because Turf Wars is where Frontier started (owner, 2026-09-03).
 Once every stop has a real `date`, sorting by date replaces the file-order rule.
@@ -244,13 +266,13 @@ An entry with no `name` is dropped, the same rule competitions and watch-alongs
 use. With the list empty the About page's people section is absent entirely
 rather than present-and-empty: nobody has agreed to be named, and a card
 standing in for a real person is worse than no section. Code: `people()` in
-`src/content-data.js`.
+`lib/content-data.ts`.
 
 **Spine**
 The generated SVG curve threading the About page's journey stops. Decorative and
 `aria-hidden`: it carries nothing the stops do not already say in text. Not
 content, not a data key. Its `d` comes from `spinePath()` in
-`src/content-data.js`, which is pure arithmetic so it can be tested without a
+`lib/content-data.ts`, which is pure arithmetic so it can be tested without a
 DOM. See HOUSE-RULES section 5 for the two ways it degrades and why the base
 state is fully drawn.
 
