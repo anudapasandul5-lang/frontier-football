@@ -10,7 +10,7 @@ import { Marquee } from "@/components/primitives/Marquee";
 import { MicroLabel } from "@/components/primitives/MicroLabel";
 import { Nav } from "@/components/primitives/Nav";
 import { Numeral } from "@/components/primitives/Numeral";
-import { ResultsTable } from "@/components/primitives/ResultsTable";
+import { ResultsTable, Unrecorded } from "@/components/primitives/ResultsTable";
 import { Stat } from "@/components/primitives/Stat";
 import { TickRule } from "@/components/primitives/TickRule";
 
@@ -22,7 +22,6 @@ export default function Styleguide() {
   const data = parseContent(raw);
   const figures = stats(data);
   const [lead, ...rest] = figures;
-  const dash = <span className="text-[var(--tone-muted)]">&mdash;</span>;
 
   return (
     <main>
@@ -71,7 +70,7 @@ export default function Styleguide() {
             ]}
             rows={data.seasons.map((s) => ({
               id: String(s.season),
-              cells: { season: seasonName(s.season), champion: s.champion ?? dash, venue: s.venue ?? dash },
+              cells: { season: seasonName(s.season), champion: s.champion ?? <Unrecorded />, venue: s.venue ?? <Unrecorded /> },
             }))}
           />
           <CreditBody credit="Credit + body pair">

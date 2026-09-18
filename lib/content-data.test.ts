@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
 import {
+  championRows,
   contactRoutes,
   reach,
   stats,
@@ -842,6 +843,34 @@ describe("stats", () => {
       { figure: "50+", label: "Partners", asOf: "2026-09-18" },
       { figure: "400+", label: "In the community", asOf: "2026-09-18" },
       { figure: "15+", label: "Events", asOf: "2026-09-18" },
+    ]);
+  });
+});
+
+describe("championRows", () => {
+  it("prints every season in content.js order, a missing champion or venue as null", () => {
+    const data = parseContent({
+      seasons: [
+        { season: 7, champion: "TODO", venue: "TODO", albumId: "TODO", driveFolder: "TODO" },
+        { season: 6, champion: "Spain", venue: "Athlete 360", albumId: "szn-6" },
+      ],
+    });
+    expect(championRows(data)).toEqual([
+      { id: "szn-7", name: "4 x 4 Series SZN 7", champion: null, venue: null, photos: null },
+      { id: "szn-6", name: "4 x 4 Series SZN 6", champion: "Spain", venue: "Athlete 360", photos: "/album?album=szn-6" },
+    ]);
+  });
+
+  it("opens the on-site album first and falls back to the Drive folder", () => {
+    const data = parseContent({
+      seasons: [
+        { season: 2, albumId: "szn-2", driveFolder: "https://drive.google.com/x" },
+        { season: 1, albumId: "TODO", driveFolder: "https://drive.google.com/y" },
+      ],
+    });
+    expect(championRows(data).map((row) => row.photos)).toEqual([
+      "/album?album=szn-2",
+      "https://drive.google.com/y",
     ]);
   });
 });

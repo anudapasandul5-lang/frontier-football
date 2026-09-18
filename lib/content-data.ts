@@ -497,6 +497,22 @@ export function seasonName(season: number | string) {
   return `4 x 4 Series SZN ${season}`;
 }
 
+/* The home page's champions table: every season, in content.js's order (newest
+   first). Nothing is dropped for being unrecorded; a season with no champion
+   still happened, and the table prints a muted dash for it (plan Q19).
+
+   Photos go to the album on this site when one is synced, else out to the
+   Drive folder, else nowhere: the same order the gallery cards use. */
+export function championRows(data: Content) {
+  return data.seasons.map((season) => ({
+    id: `szn-${season.season}`,
+    name: seasonName(season.season),
+    champion: season.champion,
+    venue: season.venue,
+    photos: season.albumId ? `/album?album=${encodeURIComponent(season.albumId)}` : season.driveFolder,
+  }));
+}
+
 /* The About page's timeline, told forwards.
 
    content.js lists seasons NEWEST first, because that is the order the champions

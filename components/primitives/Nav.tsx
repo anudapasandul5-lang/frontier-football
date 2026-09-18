@@ -1,7 +1,7 @@
 import raw from "@/content.js";
 import { outboundLinks, parseContent } from "@/lib/content-data";
 
-const pages = [
+export const pages = [
   { href: "/events", label: "Events" },
   { href: "/collaborate", label: "Collaborate" },
   { href: "/about", label: "About" },

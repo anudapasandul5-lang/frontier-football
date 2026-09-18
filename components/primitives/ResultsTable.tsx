@@ -30,7 +30,7 @@ export function ResultsTable({ caption, columns, rows }: { caption: string; colu
               <td
                 role="cell"
                 key={c.key}
-                className={`font-display leading-tight uppercase sm:py-5 sm:pr-6 ${
+                className={`font-display leading-tight uppercase sm:py-5 sm:pr-6 sm:last:pr-0 ${
                   i === 0 ? "text-[clamp(1.125rem,1.8vw,1.5rem)]" : "text-[clamp(0.95rem,1.4vw,1.25rem)]"
                 } ${c.className ?? ""}`}
               >
@@ -41,5 +41,18 @@ export function ResultsTable({ caption, columns, rows }: { caption: string; colu
         ))}
       </tbody>
     </table>
+  );
+}
+
+/* A cell with nothing recorded: a muted dash, read aloud as what it means
+   (plan Q19). Never a guess, and never an empty cell that looks like a bug. */
+export function Unrecorded() {
+  return (
+    <>
+      <span aria-hidden="true" className="text-[var(--tone-muted)]">
+        &mdash;
+      </span>
+      <span className="sr-only">Not recorded yet</span>
+    </>
   );
 }
