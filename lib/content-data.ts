@@ -450,7 +450,9 @@ export function reach(data: Content) {
    `partners` holds only the names somebody recorded; the stat and the strip are
    both true and neither is derived from the other (CONTEXT.md). */
 export function stats(data: Content) {
-  return data.stats.filter((row) => row.figure && row.label);
+  return data.stats.filter(
+    (row): row is typeof row & { figure: string; label: string } => Boolean(row.figure && row.label),
+  );
 }
 
 /* The weekly nights worth drawing.

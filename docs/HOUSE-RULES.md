@@ -77,6 +77,13 @@ exempt. Nothing else ships.
   static HTML. A motion wrapper sets its pre-animation state from JS after
   hydration, and only under `prefers-reduced-motion: no-preference`. With JS
   off or reduced motion on, every act is fully visible and static.
+- **`components/motion/MotionGate.tsx` is the one switch.** After hydration,
+  and only under `no-preference`, it sets `<html data-motion="on">` and hands
+  every `[data-reveal]` element to `wireReveal()`. Every CSS pre-state and
+  every CSS animation is scoped under `:root[data-motion="on"]`, so JS off and
+  reduced motion both get the static page by construction.
+- The nav is **not fixed**: it would pass over bone, ink and four colour
+  fields, and no one text colour reads on all six (T2 decision).
 - Animate transform and opacity (and clip-path for reveals) only.
 - No reveal may strand content: anything the page jumps past is revealed
   (v1's `shouldReveal`, ported to `lib/reveal.ts`, is the reference).

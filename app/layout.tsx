@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Instrument_Serif, Oswald } from "next/font/google";
+import { MotionGate } from "@/components/motion/MotionGate";
 import "./globals.css";
 
 const serif = Instrument_Serif({
@@ -34,6 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             this tag into <head>. */}
         <meta property="og:image" content="/og.jpg" />
         {children}
+        <MotionGate />
       </body>
     </html>
   );

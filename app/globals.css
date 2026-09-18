@@ -45,10 +45,6 @@
     -webkit-text-size-adjust: 100%;
   }
 
-  body {
-    overflow-x: clip;
-  }
-
   :focus-visible {
     outline: 2px solid currentColor;
     outline-offset: 3px;
@@ -65,5 +61,143 @@
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Canvases. One per act, edge to edge (DESIGN.md). Each sets the text colour
+   and --tone-muted, the colour micro-labels and secondary text take on it.
+   Contrast (WCAG, computed): label on bone 6.3:1, muted on ink 7.9:1, ink on
+   green 6.4:1, on blue 6.1:1, on red 5.3:1, bone on teal 4.6:1.
+   ------------------------------------------------------------------------- */
+@utility canvas-bone {
+  --canvas: var(--color-bone);
+  background-color: var(--canvas);
+  color: var(--color-ink);
+  --tone-muted: var(--color-label);
+}
+@utility canvas-ink {
+  --canvas: var(--color-ink);
+  background-color: var(--canvas);
+  color: var(--color-bone);
+  --tone-muted: var(--color-muted);
+}
+@utility canvas-green {
+  --canvas: var(--color-green);
+  background-color: var(--canvas);
+  color: var(--color-ink);
+  --tone-muted: var(--color-ink);
+}
+@utility canvas-blue {
+  --canvas: var(--color-blue);
+  background-color: var(--canvas);
+  color: var(--color-ink);
+  --tone-muted: var(--color-ink);
+}
+@utility canvas-red {
+  --canvas: var(--color-red);
+  background-color: var(--canvas);
+  color: var(--color-ink);
+  --tone-muted: var(--color-ink);
+}
+@utility canvas-teal {
+  --canvas: var(--color-teal);
+  background-color: var(--canvas);
+  color: var(--color-bone);
+  --tone-muted: var(--color-bone);
+}
+
+/* 11px letterspaced caps: the label that sits above the thing it labels. */
+@utility micro {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--tone-muted);
+}
+
+/* Container: ~1170px with wide gutters at 1920 (DESIGN.md), 16px on a phone. */
+@utility frame {
+  width: 100%;
+  max-width: 1170px;
+  margin-inline: auto;
+  padding-inline: 16px;
+  @media (width >= 48rem) {
+    padding-inline: 32px;
+  }
+}
+
+@layer components {
+  /* The tick rule: a row of short vertical strokes instead of an <hr>. A mask,
+     not a gradient: one element, colour follows currentColor, and `space`
+     spreads the ticks so both ends land on one. */
+  .tick-rule {
+    height: 12px;
+    background-color: currentColor;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='12'%3E%3Crect width='1' height='12'/%3E%3C/svg%3E")
+      left center / 20px 12px space no-repeat;
+  }
+
+  /* Marquee: two identical runs, the track slides by half its width. It only
+     moves once MotionGate has set data-motion="on", which it does after
+     hydration and only under prefers-reduced-motion: no-preference. JS off or
+     reduced motion: a still row, first run readable, overflow clipped. */
+  .marquee {
+    overflow: hidden;
+  }
+  .marquee__track {
+    display: flex;
+    width: max-content;
+  }
+  .marquee__run {
+    display: flex;
+    flex-shrink: 0;
+  }
+  :root[data-motion="on"] .marquee__track {
+    animation: marquee var(--marquee-duration, 40s) linear infinite;
+  }
+  :root[data-motion="on"] .marquee:is(:hover, :focus-within, [data-paused]) .marquee__track {
+    animation-play-state: paused;
+  }
+
+  .marquee__pause {
+    display: none;
+  }
+  :root[data-motion="on"] .marquee__pause {
+    display: block;
+    margin-left: auto;
+  }
+
+  /* Banded reveal: covers in the canvas colour sit over the photo and slide
+     off band by band. Covers exist only in the pre-state MotionGate sets, so
+     with JS off or reduced motion the photo is simply there. */
+  .banded {
+    position: relative;
+    overflow: hidden;
+  }
+  .banded__cover {
+    display: none;
+  }
+  :root[data-motion="on"] .banded.is-pre .banded__cover {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(var(--i) * 100% / var(--bands));
+    height: calc(100% / var(--bands) + 1px);
+    background-color: var(--cover, var(--color-ink));
+    transform-origin: right center;
+  }
+  :root[data-motion="on"] .banded.is-revealed .banded__cover {
+    transform: scaleX(0);
+    transition: transform 900ms var(--ease-in-out) calc(var(--i) * 70ms);
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
   }
 }
