@@ -201,3 +201,17 @@
     transform: translateX(-50%);
   }
 }
+
+/* Act 3's centre photo is a card on the still page. Once motion is on it is a
+   full-bleed window that MomentMotion shrinks back to the card and opens.
+   Unlayered, so it beats the card's utilities. */
+:root[data-motion="on"] .moment-centre {
+  inset: 0;
+  width: auto;
+  translate: none;
+  overflow: hidden;
+}
+:root[data-motion="on"] .moment-centre img {
+  height: 100%;
+  object-fit: cover;
+}

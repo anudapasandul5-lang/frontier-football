@@ -1,8 +1,16 @@
-// Interim home for the T1 scaffold; T3-T5 replace it with the nine acts.
+import { Hero } from "@/components/acts/Hero";
+import { Moment } from "@/components/acts/Moment";
+import { SmoothScroll } from "@/components/motion/SmoothScroll";
+
+// Acts 1 and 3 (T3). Acts 2 and 4-9 land in T4 and T5.
 export default function Home() {
   return (
-    <main className="grid min-h-svh place-items-center bg-bone text-ink">
-      <img src="/crest.webp" alt="Frontier Football crest" width={525} height={640} className="w-32 h-auto" />
-    </main>
+    <>
+      <SmoothScroll />
+      <main>
+        <Hero />
+        <Moment />
+      </main>
+    </>
   );
 }
