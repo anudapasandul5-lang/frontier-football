@@ -21,6 +21,8 @@ export default defineConfig({
         events: resolve(__dirname, 'events.html'),
         album: resolve(__dirname, 'album.html'),
         styleguide: resolve(__dirname, 'styleguide.html'),
+        // Internal design preview, noindex; shared as a Vercel preview URL.
+        galleryDirections: resolve(__dirname, 'design-explorations/gallery/index.html'),
       },
     },
   },
