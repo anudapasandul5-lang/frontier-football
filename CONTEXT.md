@@ -252,11 +252,12 @@ Spain — both can be true, since SZN 6 was a country-named edition, but nobody 
 Owner confirmation turns either into a one-word edit.
 
 **Journey**
-The About page's forward-running sequence of stops: the first competition, then
-every season oldest-first, then any remaining competition. Code: `journey()` in
-`lib/content-data.ts`. No data key of its own - it is a view over `competitions`
-and `seasons`, reversing the newest-first order the champions grid wants. Turf
-Wars opens it because Turf Wars is where Frontier started (owner, 2026-09-03).
+The About page's forward-running sequence of stops: the competitions flagged
+`beforeSeries`, then every season oldest-first, then every other competition.
+Code: `journey()` in `lib/content-data.ts`. No data key of its own - it is a view
+over `competitions` and `seasons`, reversing the newest-first order the champions
+grid wants. The Frontier Futsal Tournament opens it, then Turf Wars (owner,
+2026-09-22: the tournament came first). The gallery tabs follow the same flag.
 Once every stop has a real `date`, sorting by date replaces the file-order rule.
 
 **Person**
@@ -275,6 +276,59 @@ content, not a data key. Its `d` comes from `spinePath()` in
 `lib/content-data.ts`, which is pure arithmetic so it can be tested without a
 DOM. See HOUSE-RULES section 5 for the two ways it degrades and why the base
 state is fully drawn.
+
+## Terms added by the implementation-guide plan (2026-09-22)
+
+**Activity**
+Any format Frontier runs or hosts, as the Community page lists it: the Frontier
+Futsal Tournament, the 4x4 Series, Turf Wars, Division 0, watch-alongs, and the
+Sunday Football League. Umbrella over **Tournament**, **Watch-along** and the
+league. Not a **Session** (one weekly night) and not an **Event** (one dated
+one-off).
+
+**Past activity**
+An activity with no open registration. Every activity except the Sunday Football
+League is past today. Shown as a record of what Frontier has done, never with a
+join button.
+
+**Sunday Football League**
+Frontier's live activity and a Frontier sub-brand: a "SUNDAY LEAGUE" wordmark in
+Frontier type and colours plus one accent colour. The only activity that takes a
+**Registration**. Avoid: "Sunday League" alone in running copy (it is the
+wordmark, not the name).
+
+**Registration**
+A prefilled WhatsApp message to Frontier's number. Not a form and not stored
+anywhere: Frontier handles each one personally. Two kinds exist for the league:
+**Team registration** and **Free agent** registration, each with its own
+prefilled text.
+
+**Team registration**
+A registration made on behalf of a whole team entering the Sunday Football
+League. User-facing copy: "Register a team".
+
+**Free agent**
+A player with no team who wants Frontier to place them in one. User-facing copy:
+"Join as a free agent".
+
+**Frontier Futsal Tournament**
+Frontier's first futsal tournament, run before the rebrand. A competition, shown
+with no year, and the first gallery tab. Not a season of the 4x4 Series.
+
+**Album** (amended)
+An album's photographs may now come from ThePapare as well as Drive. ThePapare
+photos are watermarked and credited "Photos: ThePapare"; they are never an
+album's hero.
+
+**Night mode**
+The deep-ink, floodlight-yellow colour scheme for dark sections: video, stats,
+album heroes, the gallery index, the Events results wall and Collaborate. Bone
+stays the ground for reading-heavy sections. A section is night mode or bone,
+never a user toggle. Avoid: "dark mode" (implies a visitor preference).
+
+**Results wall**
+The Events page's opening scoreboard: one row per finished season or
+competition, six columns, night mode.
 
 **Date and venue**
 When a season, competition or watch-along ran, and where. Data keys: `date` and
