@@ -10,10 +10,10 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 /* L0 PROTOTYPE: the hero's scroll-scrubbed sequence. The hero pins and the
    scroll plays the clip, frame by frame, onto a canvas laid over the static
-   first frame. Budget (plan, performance): 60 frames at 540x960 on desktop
-   (1.1MB), 24 at 360x640 on a phone (0.26MB), all requested only after the
-   window `load` event so they never compete with the LCP image. Until a frame
-   has arrived the canvas keeps the last one it drew, and until the first
+   first frame. Budget (plan, performance): 58 frames at 1280x720 on desktop
+   (3.0MB), 24 at 640x360 on a phone (0.46MB), requested on the first scroll
+   intent after the window `load` event so they never compete with the LCP image.
+   Until a frame has arrived the canvas keeps the last one it drew, and until the first
    draw it is invisible, so a slow network shows the still, never a blank.
    Reduced motion: nothing here runs; the still is the hero. */
 
@@ -37,6 +37,9 @@ export function HeroScrub() {
         const frames: HTMLImageElement[] = [];
         let wanted = 0;
         let live = true; // a frame landing after teardown must not repaint
+        let ready = document.readyState === "complete";
+        let requested = false;
+        let loaded = false;
 
         const draw = (i: number) => {
           wanted = i;
@@ -52,6 +55,8 @@ export function HeroScrub() {
         };
 
         const load = () => {
+          if (!ready || !requested || loaded) return;
+          loaded = true;
           for (let i = 0; i < count; i++) {
             const img = new Image();
             img.decoding = "async";
@@ -60,8 +65,17 @@ export function HeroScrub() {
             frames[i] = img;
           }
         };
-        if (document.readyState === "complete") load();
-        else window.addEventListener("load", load, { once: true });
+        const activate = () => {
+          requested = true;
+          load();
+        };
+        const onWindowLoad = () => {
+          ready = true;
+          load();
+        };
+        if (!ready) window.addEventListener("load", onWindowLoad, { once: true });
+        for (const event of ["wheel", "touchstart", "keydown", "scroll"])
+          window.addEventListener(event, activate, { passive: true });
 
         const playhead = { frame: 0 };
         gsap.to(playhead, {
@@ -75,7 +89,9 @@ export function HeroScrub() {
         return () => {
           live = false;
           for (const img of frames) img.onload = null;
-          window.removeEventListener("load", load);
+          window.removeEventListener("load", onWindowLoad);
+          for (const event of ["wheel", "touchstart", "keydown", "scroll"])
+            window.removeEventListener(event, activate);
           el.style.opacity = "0";
         };
       },
