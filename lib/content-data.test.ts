@@ -120,7 +120,22 @@ describe("parseContent", () => {
       venue: null,
       driveFolder: null,
       albumId: null,
+      beforeSeries: false,
     });
+  });
+
+  // A competition that ran before the 4x4 Series leads the gallery tabs and
+  // the About timeline. Only a literal true counts, so a stray "TODO" never
+  // reorders either.
+  it("reads beforeSeries as a strict yes", () => {
+    const { competitions } = parseContent({
+      competitions: [
+        { name: "Frontier Futsal Tournament", beforeSeries: true },
+        { name: "Turf Wars", beforeSeries: "TODO" },
+        { name: "Division 0" },
+      ],
+    });
+    expect(competitions.map((c) => c.beforeSeries)).toEqual([true, false, false]);
   });
 
   it("reads more than one competition, in the order written", () => {
@@ -334,18 +349,23 @@ describe("link placeholder flag", () => {
 });
 
 describe("journey", () => {
-  it("puts Turf Wars first, then the seasons oldest first, then the other competitions", () => {
+  it("puts the competitions that came before the series first, then the seasons oldest first, then the rest", () => {
     // The About page tells the story forward. content.js lists seasons newest
     // first because that is the order the champions grid wants, so the ordering
     // lives here rather than in the file the owner edits.
     const stops = journey(
       parseContent({
         seasons: [{ season: 3 }, { season: 2 }, { season: 1 }],
-        competitions: [{ name: "Turf Wars" }, { name: "Division 0" }],
+        competitions: [
+          { name: "Frontier Futsal Tournament", beforeSeries: true },
+          { name: "Turf Wars", beforeSeries: true },
+          { name: "Division 0" },
+        ],
       }),
     );
 
     expect(stops.map((stop) => stop.name)).toEqual([
+      "Frontier Futsal Tournament",
       "Turf Wars",
       "4 x 4 Series SZN 1",
       "4 x 4 Series SZN 2",

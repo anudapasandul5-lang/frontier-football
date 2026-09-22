@@ -9,8 +9,9 @@
 import { seasonName, type Raw } from "./content-data";
 
 /* Drive stores the photographs, the site presents them (docs/HOUSE-RULES.md).
-   Nothing in public/albums/ is a photograph; it is a list of Drive file ids and
-   the shape of each frame. Both sizes were probed against real files and both
+   For a Drive album, public/albums/<id>.json is a list of Drive file ids and
+   the shape of each frame. The one exception is a ThePapare import, whose
+   WebP files are committed under public/albums/<id>/ (albumItems below). Both sizes were probed against real files and both
    return image bytes, with Drive doing the downscaling from the ~38 MB
    originals. Not always JPEG: Drive answers in the source file's own format, and
    SZN 1 is a PNG album. */
@@ -57,11 +58,42 @@ function dimensions(item: Raw) {
 
 /* An item with no id is dropped rather than rendered: its <img> would request
    the page itself and draw a broken-image icon in the middle of the grid, the
-   same guard galleryItems() applies to content.js's "TODO". */
+   same guard galleryItems() applies to content.js's "TODO".
+
+   Two sources share one shape. A Drive item is `i` (a file id) and its pixels
+   are Drive thumbnails. A self-hosted item, written by
+   scripts/papare-import.mjs, is `s` (full WebP) and `t` (400px WebP), both
+   under /albums/; anything else in those fields is refused, because they end
+   up in an <img src>. */
+const LOCAL = /^\/albums\/[a-z0-9-]+\/[a-z0-9-]+\.webp$/;
+
+function source(item: Raw) {
+  if (typeof item?.i === "string" && item.i !== "") {
+    return { id: item.i as string, thumb: thumbUrl(item.i), full: thumbUrl(item.i, LIGHTBOX_WIDTH) };
+  }
+  if (typeof item?.s === "string" && typeof item?.t === "string" && LOCAL.test(item.s) && LOCAL.test(item.t)) {
+    return { id: item.s as string, thumb: item.t as string, full: item.s as string };
+  }
+  return null;
+}
+
 export function albumItems(manifest: Raw) {
-  return ((manifest ?? {}).items ?? [])
-    .filter((item: Raw) => typeof item?.i === "string" && item.i !== "")
-    .map((item: Raw) => ({ id: item.i as string, ...dimensions(item) }));
+  return ((manifest ?? {}).items ?? []).flatMap((item: Raw) => {
+    const src = source(item);
+    return src ? [{ id: src.id, ...dimensions(item), thumb: src.thumb, full: src.full }] : [];
+  });
+}
+
+/* Who took the photographs and where the full set lives, for an album that is
+   not Frontier's own (a ThePapare import). `watermarked` is carried so nothing
+   ever picks one of these frames as a hero or a full-bleed image. */
+export function albumCredit(manifest: Raw) {
+  const m = manifest ?? {};
+  return {
+    credit: typeof m.credit === "string" && m.credit ? (m.credit as string) : null,
+    source: typeof m.source === "string" && m.source.startsWith("https://") ? (m.source as string) : null,
+    watermarked: m.watermarked === true,
+  };
 }
 
 /* These photographs have no captions and never will — there are over three
@@ -83,11 +115,17 @@ export function tileLabel(index: number, total: number, title?: string | null) {
    coverflow's. isClip is always false: Drive's thumbnail endpoint serves a
    still for a video, so a clip could only ever be a frozen frame here, and the
    two mp4s in the archive are deliberately out of these albums. */
-export type AlbumItem = ReturnType<typeof albumItems>[number];
+export type AlbumItem = {
+  id: string;
+  width: number;
+  height: number;
+  thumb: string;
+  full: string;
+};
 
 export function lightboxItems(items: AlbumItem[], title?: string | null) {
   return items.map((item) => ({
-    src: thumbUrl(item.id, LIGHTBOX_WIDTH),
+    src: item.full,
     // The album's name alone, not tileLabel's "Photo 3 of 869". The lightbox
     // announces the position itself and appends this after it, so passing the
     // position here has it read out twice: "3 of 869. Photo 3 of 869, SZN 4".

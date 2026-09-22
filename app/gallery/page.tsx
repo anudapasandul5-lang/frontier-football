@@ -96,19 +96,22 @@ export default function Gallery() {
   const watch: Entry[] = data.watchAlongs.filter((w) => w.name).map((w, i) => ({ title: w.name!, number: String(i + 1).padStart(2, "0"), ...pick(w) }));
 
   const groups: { id: string; label: string; panel: React.ReactNode }[] = [];
-  if (seasons.length > 0) groups.push({ id: "series", label: "4x4 Series", panel: <Grid entries={seasons} groupLabel="4x4 Series" /> });
-  // Reserve Watch Parties' id too, so a competition named "Watch Parties"
-  // cannot take it first.
-  const used = new Set([...groups.map((g) => g.id), "watch-parties"]);
-  data.competitions.forEach((c, i) => {
-    if (!c.name) return; // a card with no name has nothing to say
+  // Reserve the series and Watch Parties ids, so a competition named either
+  // cannot take them first.
+  const used = new Set(["series", "watch-parties"]);
+  const competitionTabs = data.competitions.map((c, i) => {
     // "Division 0" and "Division-0" both appear in content.js history and slug
     // the same; de-duplicate so no two tabs share an id.
-    let id = c.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+    let id = c.name!.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
     if (!id || used.has(id)) id = `competition-${i}`;
     used.add(id);
-    groups.push({ id, label: c.name, panel: <Grid entries={[{ title: c.name, number: "01", champion: c.champion, ...pick(c) }]} /> });
+    return { first: c.beforeSeries, id, label: c.name!, panel: <Grid entries={[{ title: c.name!, number: "01", champion: c.champion, ...pick(c) }]} /> };
   });
+  // Competitions that ran before the series (Frontier Futsal Tournament, Turf
+  // Wars) lead, then the series, then the rest, each in content.js order.
+  groups.push(...competitionTabs.filter((t) => t.first));
+  if (seasons.length > 0) groups.push({ id: "series", label: "4x4 Series", panel: <Grid entries={seasons} groupLabel="4x4 Series" /> });
+  groups.push(...competitionTabs.filter((t) => !t.first));
   if (watch.length > 0) groups.push({ id: "watch-parties", label: "Watch Parties", panel: <Grid entries={watch} groupLabel="Watch Parties" /> });
 
   return (

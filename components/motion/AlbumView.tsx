@@ -6,19 +6,21 @@ import raw from "@/content.js";
 import { parseContent } from "@/lib/content-data";
 import { CLOSED, closeLightbox, openLightbox, stepIndex, type LightboxState } from "@/lib/gallery-data";
 import {
+  albumCredit,
   albumIdFromQuery,
   albumItems,
   albumTitle,
   lightboxItems,
   manifestUrl,
-  thumbUrl,
   tileLabel,
   type AlbumItem,
 } from "@/lib/album-data";
 
 const button = "min-h-11 cursor-pointer border-2 border-ink px-6 py-2 font-display text-lg leading-none uppercase hover:bg-ink hover:text-bone";
 
-export function AlbumHead({ title, count }: { title: string; count: number }) {
+type Credit = ReturnType<typeof albumCredit>;
+
+export function AlbumHead({ title, count, credit }: { title: string; count: number; credit?: Credit }) {
   return (
     <div className="frame pb-10">
       <p className="micro mb-4">Gallery</p>
@@ -28,6 +30,20 @@ export function AlbumHead({ title, count }: { title: string; count: number }) {
           {count.toLocaleString("en")} photographs.
         </p>
       ) : null}
+      {credit?.credit ? (
+        <p className="mt-2 text-muted">
+          {credit.credit}.
+          {credit.source ? (
+            <>
+              {" "}
+              <a href={credit.source} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-ink">
+                See the full set on ThePapare
+              </a>
+              .
+            </>
+          ) : null}
+        </p>
+      ) : null}
       <a href="/gallery" className={`${button} mt-6 inline-flex items-center`}>
         All albums
       </a>
@@ -35,10 +51,10 @@ export function AlbumHead({ title, count }: { title: string; count: number }) {
   );
 }
 
-type Load = { state: "loading" } | { state: "failed" } | { state: "ready"; items: AlbumItem[] };
+type Load = { state: "loading" } | { state: "failed" } | { state: "ready"; items: AlbumItem[]; credit: Credit };
 
 /* One album from ?album=<id>, in a CSS-columns masonry, from public/albums/.
-   The pixels are Drive thumbnails. Two measured traps carried from v1:
+   The pixels are Drive thumbnails, or committed WebP for a ThePapare import. Two measured traps carried from v1:
    - src is withheld until a tile nears the viewport. loading="lazy" let all
      463 SZN 3 images ask Drive at once and 462 came back empty.
    - referrerPolicy="no-referrer" on every Drive image, or Drive refuses most
@@ -63,7 +79,7 @@ export function AlbumView() {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();
       })
-      .then((json) => live && setLoad({ state: "ready", items: albumItems(json) }))
+      .then((json) => live && setLoad({ state: "ready", items: albumItems(json), credit: albumCredit(json) }))
       .catch(() => live && setLoad({ state: "failed" }));
     return () => {
       live = false;
@@ -123,7 +139,7 @@ export function AlbumView() {
   const items = load.items;
   return (
     <>
-      <AlbumHead title={title} count={items.length} />
+      <AlbumHead title={title} count={items.length} credit={load.credit} />
       <Lightbox items={lightboxItems(items, title)}>
         {(open) => (
           <ul ref={grid} className="frame columns-1 gap-2 min-[461px]:columns-2 min-[701px]:columns-3 min-[1101px]:columns-4">
@@ -136,7 +152,7 @@ export function AlbumView() {
                   className="block w-full cursor-pointer overflow-hidden transition-transform duration-150 ease-[var(--ease-out)] hover:scale-[1.02]"
                 >
                   <img
-                    data-src={thumbUrl(item.id)}
+                    data-src={item.thumb}
                     alt=""
                     width={item.width}
                     height={item.height}

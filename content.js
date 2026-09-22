@@ -211,9 +211,41 @@ export default {
   // change the words. To take one off the site, delete its block.
   competitions: [
     {
+      // Frontier's first futsal tournament, from before the rebrand. Shown
+      // with no year, on purpose.
+      name: "Frontier Futsal Tournament",
+      // The photos are ThePapare's (album 10932), imported with
+      // `npm run albums:papare -- frontier-futsal`. They are watermarked, so
+      // the album credits "Photos: ThePapare" and they are never used as a
+      // hero or a card picture.
+      albumId: "frontier-futsal",
+      // true = it ran before the 4x4 Series, so it comes first in the gallery
+      // tabs and on the About page's timeline. It came before Turf Wars
+      // (owner, 2026-09-22), so it sits above Turf Wars in this list.
+      beforeSeries: true,
+      note: "TODO",
+      // ThePapare's prize-giving photos show a women's and a men's winning
+      // team, but not their names. Fill these in once confirmed.
+      champion: "TODO",
+      runnerUp: "TODO",
+      // No clean picture yet: every photo in the album carries ThePapare's
+      // watermark. Leave as "TODO" until a clean one is found on Drive or
+      // Instagram.
+      photo: "TODO",
+      photoAlt: "TODO",
+      date: "TODO",
+      // Club Fusion signage is visible in ThePapare's photos. Confirm before
+      // writing it here.
+      venue: "TODO",
+      driveFolder: "TODO",
+    },
+    {
       // The name shown on the card. A competition with no name is skipped, so
       // this is the one line that must be filled in.
       name: "Turf Wars",
+      // Ran before the 4x4 Series: first in the gallery tabs and on the
+      // timeline, after the Frontier Futsal Tournament.
+      beforeSeries: true,
       // Which album on this site the "View photos" button opens. It matches a
       // file in public/albums/, written by `npm run albums:sync`. Leave it as
       // "TODO" and the card still shows, saying the photos are on the way.
@@ -221,10 +253,7 @@ export default {
       // A short line under the champion. Use it for when it ran, or for what
       // kind of competition it is.
       //
-      // THIS USED TO SAY "Aug 2025" AND THAT WAS WRONG. Turf Wars is where
-      // Frontier started and Frontier started in 2024, so August 2025 cannot be
-      // right. Nobody has said what the real month was, so it is blank until
-      // somebody does. Write it in the `date` line below, not here.
+      // When it ran goes in the `date` line below, not here.
       note: "TODO",
       // The team that won it.
       champion: "TODO",

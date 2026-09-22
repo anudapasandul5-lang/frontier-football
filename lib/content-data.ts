@@ -74,6 +74,9 @@ function parseCompetition(raw: Raw) {
     date: recorded(raw.date),
     venue: recorded(raw.venue),
     driveFolder: recorded(raw.driveFolder),
+    // Ran before the 4x4 Series, so it leads the gallery tabs and the About
+    // timeline. Strictly true, so a stray "TODO" never reorders either.
+    beforeSeries: raw.beforeSeries === true,
   };
 }
 
@@ -519,23 +522,25 @@ export function championRows(data: Content) {
    grid wants. A journey runs the other way, so the reversal lives here rather
    than in the file the owner edits.
 
-   Order: the first competition opens, the seasons run in the middle, and any
-   remaining competition closes. File order carrying meaning is the convention
-   this file already uses for `partners` and `links`, and it puts Turf Wars at
-   the front because Turf Wars is where Frontier started.
+   Order: the competitions flagged `beforeSeries` open (the Frontier Futsal
+   Tournament, then Turf Wars), the seasons run in the middle, and every other
+   competition closes. Within each group, file order.
 
    ponytail: once every stop has a real `date`, sorting by date is strictly
    better and deletes this rule. Nothing can be sorted by date while every date
    in the file is still TODO. */
 export function journey(data: Content) {
-  const [opener, ...rest] = data.competitions;
   const seasons = [...data.seasons]
     .sort((a, b) => a.season - b.season)
     // The stop carries a `name` like every other stop so the renderer never
     // branches on which collection something came from.
     .map((season) => ({ ...season, name: seasonName(season.season) }));
 
-  return [...(opener ? [opener] : []), ...seasons, ...rest];
+  return [
+    ...data.competitions.filter((c) => c.beforeSeries),
+    ...seasons,
+    ...data.competitions.filter((c) => !c.beforeSeries),
+  ];
 }
 
 /* The people who run Frontier, in the order content.js lists them.
