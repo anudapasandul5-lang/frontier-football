@@ -19,6 +19,9 @@ export default function Collaborate() {
   return (
     <PageShell>
       <div className="min-[1100px]:frame min-[1100px]:grid min-[1100px]:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] min-[1100px]:items-start min-[1100px]:gap-x-15 min-[1100px]:[&>section]:px-0 min-[1100px]:[&>section:last-child]:pt-20">
+        {/* Source: Frontier's own event posters (Instagram cache, 2026-09-22 audit):
+            4x4 Series at Athlete 360 Nugegoda, Turf Wars at Club Fusion Boralesgamuwa,
+            watch-alongs at Main Sports Bar. "Small-sided" = the 4x4 format. */}
         <Masthead eyebrow="For brands" lines={["Collaborate", "with us"]} compact>
           Frontier runs small-sided football in Colombo and the culture that comes with it. Here is who sees it,
           what a partner gets, and who is already standing alongside us.

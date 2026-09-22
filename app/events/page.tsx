@@ -24,6 +24,9 @@ export default function EventsPage() {
 
   return (
     <PageShell>
+      {/* UNSOURCED (T1 audit, 2026-09-22): "every week" and "here is when we play"
+          have no backing while content.js sessions are all TODO, and the 4x4 Series
+          posters say "monthly tournaments". Owner to supply weekly details or new copy. */}
       <Masthead eyebrow="For players" lines={["Come and", "play"]}>
         Frontier runs every week, and there is usually something bigger on the way. Here is when we play and what is
         coming up.
