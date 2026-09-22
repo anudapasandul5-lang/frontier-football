@@ -29,7 +29,7 @@ export function Hero() {
   return (
     <section id="hero" className="canvas-bone relative flex min-h-svh flex-col overflow-hidden">
       <Nav crestPriority />
-      <div className="frame relative flex flex-1 flex-col items-center justify-center gap-6 pt-2 pb-8 md:gap-10">
+      <div id="content" className="frame relative flex flex-1 flex-col items-center justify-center gap-6 pt-2 pb-8 md:gap-10">
         <div className="relative grid w-full max-w-[760px] text-center">
           {/* h1 first so it is read first; both share one grid cell, z-1 paints it
               over the paragraph. Yellow on bone is 1.44:1: the owner's

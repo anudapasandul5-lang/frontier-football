@@ -12,7 +12,7 @@ export function PageShell({ children }: { children: ReactNode }) {
       <SmoothScroll />
       <div className="canvas-bone">
         <Nav />
-        <main id="top">{children}</main>
+        <main id="content">{children}</main>
       </div>
       <Footer />
     </>

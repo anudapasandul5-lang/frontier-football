@@ -34,6 +34,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             against localhost:3000, which is worse than relative. React hoists
             this tag into <head>. */}
         <meta property="og:image" content="/og.jpg" />
+        {/* First tab stop on every page: jumps past the nav (Web Interface
+            Guidelines, T5 2026-09-22). Hidden until focused. */}
+        <a
+          href="#content"
+          className="sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:top-3 focus-visible:left-3 focus-visible:z-50 focus-visible:bg-yellow focus-visible:px-4 focus-visible:py-3 focus-visible:font-display focus-visible:font-bold focus-visible:text-ink focus-visible:uppercase"
+        >
+          Skip to content
+        </a>
         {children}
         <MotionGate />
       </body>
