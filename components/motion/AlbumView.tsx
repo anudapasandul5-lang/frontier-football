@@ -103,7 +103,11 @@ export function AlbumView() {
         <AlbumHead title={title} count={0} />
         {load.state === "failed" ? (
           <p className="frame text-lg">These photographs could not be loaded just now. Try again in a moment.</p>
-        ) : null}
+        ) : (
+          // Holds the footer below the fold until the grid lands; without it the
+          // grid shoved an on-screen footer down (CLS 0.19 at 412px).
+          <div className="min-h-svh" />
+        )}
       </>
     );
   }

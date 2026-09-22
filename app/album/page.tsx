@@ -12,7 +12,19 @@ export default function Album() {
   return (
     <PageShell>
       <section className="pt-8 pb-12 sm:pt-12 sm:pb-20">
-        <Suspense fallback={<AlbumHead title="Album" count={0} />}>
+        <Suspense
+          fallback={
+            <>
+              <AlbumHead title="Album" count={0} />
+              <noscript>
+                <p className="frame max-w-[46ch] text-[clamp(1.125rem,1rem+0.5vw,1.5rem)] leading-[1.35]">
+                  The photographs in this album load with JavaScript. Turn it on to see them.
+                </p>
+              </noscript>
+              <div className="min-h-svh" />
+            </>
+          }
+        >
           <AlbumView />
         </Suspense>
       </section>

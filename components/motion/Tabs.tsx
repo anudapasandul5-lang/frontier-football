@@ -1,16 +1,19 @@
 "use client";
 
-import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
+import { useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 import { stepIndex } from "@/lib/gallery-data";
 
+/* JS off: the tab bar can't work, so show every panel under its own heading. */
+const NO_JS_CSS = ".tabs-bar{display:none}.tabs-panel,.tabs-heading{display:block!important}.tabs-panel{margin-bottom:4rem}";
+
 /* The ARIA tabs pattern: roving tabindex, arrows move and wrap, Home/End jump.
-   Before hydration (and with JS off) there is no tab bar and every panel shows
-   under its own heading, so nothing is unreachable without JS. */
+   The server renders the tabbed state itself, so hydration moves nothing (a
+   heading-per-panel fallback swapped for the taller tab bar shifted the page
+   82px at 412px wide, CLS 0.10). With JS off, the <noscript> style above takes
+   over, so nothing is unreachable. */
 export function Tabs({ label, groups }: { label: string; groups: { id: string; label: string; panel: ReactNode }[] }) {
-  const [ready, setReady] = useState(false);
   const [selected, setSelected] = useState(0);
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
-  useEffect(() => setReady(true), []);
 
   const select = (index: number, focus = false) => {
     setSelected(index);
@@ -28,44 +31,45 @@ export function Tabs({ label, groups }: { label: string; groups: { id: string; l
 
   return (
     <>
-      {ready ? (
-        <div role="tablist" aria-label={label} onKeyDown={onKeyDown} className="frame mb-8 flex flex-wrap gap-2">
-          {groups.map((g, i) => (
-            <button
-              key={g.id}
-              ref={(el) => {
-                tabs.current[i] = el;
-              }}
-              type="button"
-              role="tab"
-              id={`tab-${g.id}`}
-              aria-controls={`panel-${g.id}`}
-              aria-selected={i === selected}
-              tabIndex={i === selected ? 0 : -1}
-              onClick={() => select(i)}
-              className="min-h-11 cursor-pointer border-2 border-ink px-6 py-2 font-display text-[clamp(1.125rem,1rem+0.5vw,1.5rem)] leading-none uppercase aria-selected:bg-ink aria-selected:text-bone"
-            >
-              {g.label}
-            </button>
-          ))}
-        </div>
-      ) : null}
+      <noscript>
+        <style>{NO_JS_CSS}</style>
+      </noscript>
+      <div role="tablist" aria-label={label} onKeyDown={onKeyDown} className="tabs-bar frame mb-8 flex flex-wrap gap-2">
+        {groups.map((g, i) => (
+          <button
+            key={g.id}
+            ref={(el) => {
+              tabs.current[i] = el;
+            }}
+            type="button"
+            role="tab"
+            id={`tab-${g.id}`}
+            aria-controls={`panel-${g.id}`}
+            aria-selected={i === selected}
+            tabIndex={i === selected ? 0 : -1}
+            onClick={() => select(i)}
+            className="min-h-11 cursor-pointer border-2 border-ink px-6 py-2 font-display text-[clamp(1.125rem,1rem+0.5vw,1.5rem)] leading-none uppercase aria-selected:bg-ink aria-selected:text-bone"
+          >
+            {g.label}
+          </button>
+        ))}
+      </div>
       {groups.map((g, i) => (
         <div
           key={g.id}
           id={`panel-${g.id}`}
-          role={ready ? "tabpanel" : undefined}
-          aria-labelledby={ready ? `tab-${g.id}` : undefined}
-          tabIndex={ready ? 0 : undefined}
-          hidden={ready && i !== selected}
-          className="outline-none"
+          role="tabpanel"
+          aria-labelledby={`tab-${g.id}`}
+          tabIndex={0}
+          // Inline, not the hidden attribute: Tailwind's reset makes [hidden] a layered
+          // !important, which no unlayered rule (the <noscript> one) can undo.
+          style={i === selected ? undefined : { display: "none" }}
+          className="tabs-panel outline-none"
         >
-          {ready ? null : (
-            <h2 className="frame mb-6 font-display text-[clamp(1.375rem,1.2rem+0.7vw,1.875rem)] leading-none uppercase">
-              {g.label}
-            </h2>
-          )}
-          <div className={ready ? "" : "mb-16"}>{g.panel}</div>
+          <h2 style={{ display: "none" }} className="tabs-heading frame mb-6 font-display text-[clamp(1.375rem,1.2rem+0.7vw,1.875rem)] leading-none uppercase">
+            {g.label}
+          </h2>
+          {g.panel}
         </div>
       ))}
     </>
