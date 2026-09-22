@@ -3,10 +3,11 @@ import { outboundLinks, parseContent } from "@/lib/content-data";
 import { Menu } from "@/components/primitives/Menu";
 
 export const pages = [
+  { href: "/who-we-are", label: "Who We Are" },
   { href: "/events", label: "Events" },
-  { href: "/collaborate", label: "Collaborate" },
-  { href: "/about", label: "About" },
   { href: "/gallery", label: "Gallery" },
+  { href: "/collaborate", label: "Collaborate" },
+  { href: "/contact", label: "Contact" },
 ];
 
 /* Three-part nav (DESIGN.md): page links left, crest centre, the one action
@@ -19,8 +20,6 @@ export const pages = [
    its url there removes the link instead of shipping a dead one. */
 export function Nav({ crestPriority = false }: { crestPriority?: boolean }) {
   const instagram = outboundLinks(parseContent(raw)).find((link) => link.name === "Instagram");
-  // L0 PROTOTYPE: crest left, MENU right; the page links live in the
-  // full-screen menu (owner-locked). Takes its canvas colour, as before.
   return (
     <header className="frame relative z-10 flex h-20 items-center justify-between">
       <a href="/" className="block" aria-label="Frontier Football, home">

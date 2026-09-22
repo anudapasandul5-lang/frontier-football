@@ -2,6 +2,8 @@
   "framework": "nextjs",
   "redirects": [
     { "source": "/index.html", "destination": "/", "permanent": true },
-    { "source": "/:page(about|album|collaborate|contact|events|gallery)\\.html", "destination": "/:page", "permanent": true }
+    { "source": "/about.html", "destination": "/who-we-are", "permanent": true },
+    { "source": "/about", "destination": "/who-we-are", "permanent": true },
+    { "source": "/:page(album|collaborate|contact|events|gallery)\\.html", "destination": "/:page", "permanent": true }
   ]
 }

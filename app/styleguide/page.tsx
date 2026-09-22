@@ -36,7 +36,7 @@ export default function Styleguide() {
               Collision.
             </p>
             <p className="font-serif text-[clamp(1.75rem,4vw,2.5rem)] leading-[1.05]">
-              Instrument Serif carries the emotional line. Oswald carries the structure.
+              Instrument Serif carries the accent line. Bricolage Grotesque carries the headlines.
             </p>
             <p className="max-w-[52ch] text-[15px] leading-relaxed">
               Geist sets the body. It holds a narrow measure even on a wide screen, and it never fills its column.

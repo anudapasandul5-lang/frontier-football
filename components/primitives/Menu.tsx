@@ -3,18 +3,13 @@
 import { useRef } from "react";
 import { usePathname } from "next/navigation";
 
-/* L0 PROTOTYPE: the full-screen ink menu (owner-locked). Seven giant condensed
-   links; on a desktop pointer the hovered link puts its photo behind the
-   list. A native modal <dialog>: showModal() makes the page behind inert, so
-   Tab stays inside, Escape closes it and focus returns to the MENU button,
-   all without hand-written focus code. Who We Are and Community are stubs
-   until L1 and L7 build them. */
+/* A native modal keeps focus in the menu and returns it to the trigger on
+   Escape. Community joins this list only when its page is ready to publish. */
 export const menuLinks = [
   { href: "/", label: "Home", photo: "/champions/szn-6.webp" },
   { href: "/who-we-are", label: "Who We Are", photo: "/champions/szn-1.webp" },
   { href: "/events", label: "Events", photo: "/champions/szn-4.webp" },
   { href: "/gallery", label: "Gallery", photo: "/champions/wa-final-esp-arg.webp" },
-  { href: "/community", label: "Community", photo: "/champions/szn-2.webp" },
   { href: "/collaborate", label: "Collaborate", photo: "/champions/wa-semi-esp-fra.webp" },
   { href: "/contact", label: "Contact", photo: "/champions/wa-ucl-final-night.webp" },
 ];
@@ -22,6 +17,20 @@ export const menuLinks = [
 export function Menu({ instagram }: { instagram: { url: string; handle: string } | null }) {
   const dialog = useRef<HTMLDialogElement>(null);
   const path = usePathname();
+
+  function keepFocusInside(event: React.KeyboardEvent<HTMLDialogElement>) {
+    if (event.key !== "Tab") return;
+    const links = [...event.currentTarget.querySelectorAll<HTMLElement>("a, button")];
+    const first = links[0];
+    const last = links.at(-1);
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last?.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first?.focus();
+    }
+  }
 
   return (
     <>
@@ -36,7 +45,7 @@ export function Menu({ instagram }: { instagram: { url: string; handle: string }
       >
         Menu
       </button>
-      <dialog ref={dialog} id="site-menu" aria-label="Menu" className="menu">
+      <dialog ref={dialog} id="site-menu" aria-label="Menu" className="menu" onKeyDown={keepFocusInside}>
         <div className="frame relative z-10 flex h-20 items-center justify-between">
           <a href="/" aria-label="Frontier Football, home" onClick={() => dialog.current?.close()}>
             <img src="/crest.webp" alt="" width={525} height={640} className="h-14 w-auto" />
