@@ -97,7 +97,9 @@ export default function Gallery() {
 
   const groups: { id: string; label: string; panel: React.ReactNode }[] = [];
   if (seasons.length > 0) groups.push({ id: "series", label: "4x4 Series", panel: <Grid entries={seasons} groupLabel="4x4 Series" /> });
-  const used = new Set(groups.map((g) => g.id));
+  // Reserve Watch Parties' id too, so a competition named "Watch Parties"
+  // cannot take it first.
+  const used = new Set([...groups.map((g) => g.id), "watch-parties"]);
   data.competitions.forEach((c, i) => {
     if (!c.name) return; // a card with no name has nothing to say
     // "Division 0" and "Division-0" both appear in content.js history and slug

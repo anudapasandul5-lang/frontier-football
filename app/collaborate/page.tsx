@@ -36,10 +36,10 @@ export default function Collaborate() {
             <dl className="grid grid-cols-[repeat(auto-fit,minmax(14rem,1fr))] gap-8">
               {figures.map((row) => (
                 <div key={row.label} className="flex flex-col gap-2 border-t border-bone/40 pt-4">
+                  <dt className="micro">{row.label}</dt>
                   <dd className="font-display text-[clamp(2.5rem,5vw,4rem)] leading-[0.9] font-semibold uppercase">
                     {row.figure}
                   </dd>
-                  <dt className="order-first micro">{row.label}</dt>
                   {row.asOf ? <dd className="micro">As of {row.asOf}</dd> : null}
                 </div>
               ))}
