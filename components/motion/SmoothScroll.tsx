@@ -23,6 +23,7 @@ export function SmoothScroll() {
       gsap.ticker.lagSmoothing(0);
       return () => {
         gsap.ticker.remove(tick);
+        gsap.ticker.lagSmoothing(500, 33); // GSAP's default
         lenis.destroy();
       };
     });

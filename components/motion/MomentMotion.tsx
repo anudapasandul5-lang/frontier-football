@@ -79,12 +79,19 @@ export function MomentMotion() {
         defaults: { ease: "none" },
         scrollTrigger: { trigger: stage, start: "top top", end: "+=450%", pin: true, scrub: 0.6, invalidateOnRefresh: true },
       });
+      // Drift and fly-off are ONE tween so the markers never stop between
+      // them: two tweens meant a linear drift, then a fly-off starting from
+      // rest, a visible stall at the seam. The linear term keeps them moving from
+      // the first scroll; the t^4 term puts them 0.18 out when the zoom starts
+      // (the old drift distance), then flings them. Ease-in is fine here only
+      // because the scroll is the clock: nothing waits on it.
       tl.addLabel("drift")
-        .to(markers, { x: (_, el) => away(el, 0.18).x, y: (_, el) => away(el, 0.18).y, rotation: "+=4", duration: 1 })
-        .to(open, { p: 0.08, duration: 1, onUpdate: render }, "<")
-        .addLabel("zoom")
-        .to(markers, { x: (_, el) => away(el, 2.4).x, y: (_, el) => away(el, 2.4).y, autoAlpha: 0, duration: 1.2, ease: "power2.in" })
-        .to(open, { p: 1, duration: 1.2, ease: "power2.inOut", onUpdate: render }, "<")
+        .to(markers, { x: (_, el) => away(el, 2.4).x, y: (_, el) => away(el, 2.4).y, duration: 2.2, ease: (t) => 0.08 * t + 0.92 * t ** 4 })
+        .to(markers, { rotation: "+=4", duration: 1 }, "drift")
+        .to(open, { p: 0.08, duration: 1, onUpdate: render }, "drift")
+        .addLabel("zoom", 1)
+        .to(markers, { autoAlpha: 0, duration: 1.2 }, "zoom")
+        .to(open, { p: 1, duration: 1.2, ease: "power2.inOut", onUpdate: render }, "zoom")
         // Panel one is the same photo at the same size, so the swap is unseen.
         .addLabel("unfold")
         .set(strip, { autoAlpha: 1 })

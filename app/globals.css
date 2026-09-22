@@ -158,8 +158,14 @@
   :root[data-motion="on"] .marquee__track {
     animation: marquee var(--marquee-duration, 40s) linear infinite;
   }
-  :root[data-motion="on"] .marquee:is(:hover, :focus-within, [data-paused]) .marquee__track {
+  :root[data-motion="on"] .marquee:is(:focus-within, [data-paused]) .marquee__track {
     animation-play-state: paused;
+  }
+  /* Touch keeps :hover after a tap, which froze the marquee for good. */
+  @media (hover: hover) and (pointer: fine) {
+    :root[data-motion="on"] .marquee:hover .marquee__track {
+      animation-play-state: paused;
+    }
   }
 
   .marquee__pause {
@@ -192,7 +198,7 @@
   }
   :root[data-motion="on"] .banded.is-revealed .banded__cover {
     transform: scaleX(0);
-    transition: transform 900ms var(--ease-in-out) calc(var(--i) * 70ms);
+    transition: transform 900ms var(--ease-out) calc(var(--i) * 70ms);
   }
 }
 
