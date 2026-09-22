@@ -233,7 +233,9 @@ export default {
       // Picture of the winning team.
       photo: "/champions/turf-wars.webp",
       photoAlt: "The Turf Wars champions with their hands on the trophy.",
-      date: "TODO",
+      // Source: Frontier's own Turf Wars poster (Instagram cache, 2026-09-22):
+      // "Club Fusion, Boralesgamuwa, July 26th 2025".
+      date: "26 July 2025",
       venue: "Club Fusion",
       // Link to the full photo folder for Turf Wars on Google Drive.
       // Paste the folder's share link here. Leave it as "TODO" and the card
@@ -585,6 +587,11 @@ export default {
   // that we cannot back up. If you know that one of them sponsored Frontier,
   // tell whoever is building the site and they will add that properly.
   //
+  // WHO PAID (owner, 2026-09-22): HypeBam, IODEX, Reignite, Seixed and
+  // Address.lk paid money. ThePapare is a media partner; Red Bull gave product
+  // and branding. The site still calls everyone "partner" until a
+  // past-delivery section is designed (plan T5).
+  //
   // THE NAMES are written exactly the way they appear in Frontier's own posts.
   // Nine of them are Instagram handles, so they start with an @. Sofascore and
   // ThePapare were written as company names rather than handles, so they do not.
@@ -625,6 +632,13 @@ export default {
     { name: "@absystudios", logo: "/partners/absy-studios.png", url: "TODO" },
     { name: "@zone360.lk", logo: "TODO", url: "TODO" },
     { name: "@athlete360_sl", logo: "/partners/athlete-360.png", url: "TODO" },
+    // Added 2026-09-22 on the owner's word. Seixed co-presented Division 0 with
+    // @address.lk; Reignite ran on-site stands; Red Bull did branding, an
+    // activation and drinks at the Alpha Tournament. Names as brands, not
+    // handles, until someone checks each handle.
+    { name: "Seixed", logo: "TODO", url: "TODO" },
+    { name: "Reignite", logo: "TODO", url: "TODO" },
+    { name: "Red Bull", logo: "TODO", url: "TODO" },
   ],
 
   // ==========================================================================
@@ -800,6 +814,8 @@ export default {
     // says never invent a sponsor and section 7 settled that all eleven are
     // called partners rather than sponsors, so putting Red Bull on the page
     // would be two rule breaks at once. It waits for the owner.
+    // UPDATE 2026-09-22: the owner confirmed Red Bull (branding, activation and
+    // drinks at Alpha Tournament; not paid), so it is now in PARTNERS below.
     offer: [
       {
         title: "Enhanced visibility",
@@ -847,7 +863,9 @@ export default {
   // on the page. Fill in one field and it appears.
   // ==========================================================================
   // The invented 2026-09-07 Thursday/Sunday blocks were reset to TODO on
-  // 2026-09-22 so they do not render. Fill in real details to bring one back.
+  // 2026-09-22. Later that day the owner confirmed Sunday is real: evenings,
+  // 7-10pm, venue changes week to week. Format and price to follow from the
+  // owner. Thursday is not a session; its block stays TODO so it never renders.
   sessions: [
     {
       day: "Thursday",
@@ -861,8 +879,8 @@ export default {
     {
       day: "Sunday",
       name: "TODO",
-      time: "TODO",
-      venue: "TODO",
+      time: "7pm - 10pm",
+      venue: "Changes each week",
       format: "TODO",
       price: "TODO",
       note: "TODO",
