@@ -731,11 +731,10 @@ export default {
     // the country code: without it the link does not error, it opens a chat
     // with nobody. Leading 0 dropped, +94 added, which is the same number.
     whatsapp: "+94 76 343 1469",
-    // Supplied by the owner on 2026-09-04. NOTE: futsal, not football - this is
-    // the pre-rebrand address and it is genuinely the live account (Frontier's
-    // Google Drive is on it). Do not "correct" it to frontierfootball@gmail.com,
-    // which is not an inbox anyone reads.
-    email: "frontierfutsal@gmail.com",
+    // Supplied by the owner on 2026-09-22, replacing the pre-rebrand
+    // frontierfutsal@gmail.com. That old account still owns Frontier's Google
+    // Drive; only the address printed on the site changed.
+    email: "Info.frontierfootball@gmail.com",
     partnerMessage: "Hi Frontier, I'd like to talk about partnering.",
     playerMessage: "Hi Frontier, I'd like to join the next season.",
   },
@@ -762,25 +761,13 @@ export default {
   // ==========================================================================
   collaborate: {
     reach: [
-      // Fill these in from the real accounts. Delete a row you cannot measure.
-  // ##########################################################################
-  // ## PLACEHOLDER DATA - NOT REAL. DO NOT PUSH THIS LIVE.                  ##
-  // ##                                                                      ##
-  // ## Every value marked `PLACEHOLDER` below was invented on 2026-09-07 so ##
-  // ## the pages could be looked at with something in them. None of it was  ##
-  // ## measured, confirmed or supplied by anyone at Frontier.               ##
-  // ##                                                                      ##
-  // ## A follower count is the one claim on this site a brand can check in  ##
-  // ## ten seconds, and a session time is what a player turns up on. Both   ##
-  // ## are worse wrong than missing (docs/HOUSE-RULES.md section 7).        ##
-  // ##                                                                      ##
-  // ## Replace every one of them with a real value, or set it back to       ##
-  // ## "TODO" - the site draws nothing at all for a TODO and that is the    ##
-  // ## safe state.                                                          ##
-  // ##########################################################################
-      { figure: "4.2K", label: "Instagram followers", asOf: "PLACEHOLDER" },
-      { figure: "18K", label: "Average views per reel", asOf: "PLACEHOLDER" },
-      { figure: "240", label: "Players through a season", asOf: "PLACEHOLDER" },
+      // Source: the owner, in session on 2026-09-22. Replaces the invented
+      // 2026-09-07 placeholders. Delete a row you cannot measure.
+      { figure: "3.4M+", label: "Instagram views", asOf: "2026-09-22" },
+      { figure: "914", label: "Instagram followers", asOf: "2026-09-22" },
+      { figure: "400+", label: "Growing community", asOf: "2026-09-22" },
+      { figure: "50+", label: "Partners", asOf: "2026-09-22" },
+      { figure: "15+", label: "Events", asOf: "2026-09-22" },
     ],
 
     // What a partner has actually had from Frontier. Confirmed by the owner on
@@ -859,39 +846,26 @@ export default {
   // player nothing, so a night needs at least one real detail before it goes
   // on the page. Fill in one field and it appears.
   // ==========================================================================
+  // The invented 2026-09-07 Thursday/Sunday blocks were reset to TODO on
+  // 2026-09-22 so they do not render. Fill in real details to bring one back.
   sessions: [
-  // ##########################################################################
-  // ## PLACEHOLDER DATA - NOT REAL. DO NOT PUSH THIS LIVE.                  ##
-  // ##                                                                      ##
-  // ## Every value marked `PLACEHOLDER` below was invented on 2026-09-07 so ##
-  // ## the pages could be looked at with something in them. None of it was  ##
-  // ## measured, confirmed or supplied by anyone at Frontier.               ##
-  // ##                                                                      ##
-  // ## A follower count is the one claim on this site a brand can check in  ##
-  // ## ten seconds, and a session time is what a player turns up on. Both   ##
-  // ## are worse wrong than missing (docs/HOUSE-RULES.md section 7).        ##
-  // ##                                                                      ##
-  // ## Replace every one of them with a real value, or set it back to       ##
-  // ## "TODO" - the site draws nothing at all for a TODO and that is the    ##
-  // ## safe state.                                                          ##
-  // ##########################################################################
     {
       day: "Thursday",
-      name: "PLACEHOLDER - Thursday Night Frontier",
-      time: "PLACEHOLDER - 8pm - 10pm",
-      venue: "PLACEHOLDER - Athlete 360",
-      format: "PLACEHOLDER - 4 v 4, rolling subs",
-      price: "PLACEHOLDER - LKR 1,000 a head",
-      note: "PLACEHOLDER - turn up on your own and we put you in a team.",
+      name: "TODO",
+      time: "TODO",
+      venue: "TODO",
+      format: "TODO",
+      price: "TODO",
+      note: "TODO",
     },
     {
       day: "Sunday",
-      name: "PLACEHOLDER - Sunday Sessions",
-      time: "PLACEHOLDER - 5pm - 7pm",
-      venue: "PLACEHOLDER - Athlete 360",
-      format: "PLACEHOLDER - open run, mixed ability",
-      price: "PLACEHOLDER - LKR 1,000 a head",
-      note: "PLACEHOLDER - message us by Saturday so we know the numbers.",
+      name: "TODO",
+      time: "TODO",
+      venue: "TODO",
+      format: "TODO",
+      price: "TODO",
+      note: "TODO",
     },
   ],
 
