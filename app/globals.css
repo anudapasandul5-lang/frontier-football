@@ -14,10 +14,12 @@
   --color-teal: #0c727e;
   --color-muted: #a8a29a; /* secondary text on ink */
   --color-label: #555350; /* micro-labels on bone */
+  --color-night: #0b0e13; /* night mode: floodlit ink, a touch of blue (L0) */
 
   --font-serif: var(--font-instrument-serif), "Times New Roman", serif;
-  --font-display: var(--font-oswald), "Arial Narrow", sans-serif;
-  --font-sans: var(--font-geist), system-ui, sans-serif;
+  /* L0 PROTOTYPE: faces switch on html[data-display|data-body] (TypeSwitch). */
+  --font-display: var(--display-face);
+  --font-sans: var(--body-face);
 
   --radius-*: initial;
   --shadow-*: initial;
@@ -36,6 +38,23 @@
   ::before,
   ::after {
     border-radius: 0;
+  }
+
+  /* L0 font A/B. A: Oswald headlines, Geist body. B: Bricolage Grotesque at
+     its narrowest width (wdth 75) for headlines, Bricolage for body. */
+  :root {
+    --display-face: var(--font-oswald), "Arial Narrow", sans-serif;
+    --body-face: var(--font-geist), system-ui, sans-serif;
+  }
+  :root[data-display="b"] {
+    --display-face: var(--font-bricolage), "Arial Narrow", sans-serif;
+  }
+  :root[data-display="b"] .font-display {
+    font-variation-settings: "wdth" 75;
+    letter-spacing: -0.01em;
+  }
+  :root[data-body="b"] {
+    --body-face: var(--font-bricolage), system-ui, sans-serif;
   }
 
   html {
@@ -78,6 +97,15 @@
 }
 @utility canvas-ink {
   --canvas: var(--color-ink);
+  background-color: var(--canvas);
+  color: var(--color-bone);
+  --tone-muted: var(--color-muted);
+}
+/* Night mode (L0): the floodlit-game canvas for the hero, video, stats,
+   album heroes and results wall. Bone body 16.1:1, muted 7.6:1, yellow 11.2:1
+   on #0b0e13 (computed, WCAG). */
+@utility canvas-night {
+  --canvas: var(--color-night);
   background-color: var(--canvas);
   color: var(--color-bone);
   --tone-muted: var(--color-muted);
@@ -220,4 +248,107 @@
 :root[data-motion="on"] .moment-centre img {
   height: 100%;
   object-fit: cover;
+}
+
+/* ---------------------------------------------------------------------------
+   L0 PROTOTYPE (look approval only, branch l0-look). Menu, hard wipe and the
+   View Transitions spike. Folded into real tickets once the owner approves.
+   ------------------------------------------------------------------------- */
+
+/* Full-screen ink menu: a native modal <dialog>, so focus stays inside, the
+   page behind goes inert and Escape closes it with no JS. Opens with a hard
+   wipe down from the top, closes back up faster (asymmetric, emil). */
+.menu {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--color-ink);
+  color: var(--color-bone);
+  overscroll-behavior: contain;
+}
+.menu::backdrop {
+  background: transparent;
+}
+:root[data-motion="on"] .menu {
+  clip-path: inset(0 0 0 0);
+  transition:
+    clip-path 420ms var(--ease-in-out),
+    display 420ms allow-discrete,
+    overlay 420ms allow-discrete;
+}
+:root[data-motion="on"] .menu:not([open]) {
+  clip-path: inset(0 0 100% 0);
+  transition-duration: 240ms;
+}
+@starting-style {
+  :root[data-motion="on"] .menu[open] {
+    clip-path: inset(0 0 100% 0);
+  }
+}
+/* The photo behind the hovered link. Desktop pointer only: on a phone the
+   menu is a plain list. */
+.menu__photo {
+  display: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  .menu__photo {
+    display: block;
+    opacity: 0;
+    scale: 1.04;
+    transition:
+      opacity 200ms ease,
+      scale 600ms var(--ease-out);
+  }
+  .menu__item:is(:hover, :focus-within) .menu__photo {
+    opacity: 0.45;
+    scale: 1;
+  }
+}
+
+/* Hard image wipe: a diagonal broadcast-replay cut. A yellow slab crosses
+   first, the photo follows 140ms behind it. The clip exists only in the
+   pre-state MotionGate sets, so JS off or reduced motion shows the photo. */
+:root[data-motion="on"] .wipe.is-pre .wipe__layer {
+  clip-path: polygon(0 0, 0 0, -25% 100%, 0 100%);
+}
+:root[data-motion="on"] .wipe.is-revealed .wipe__layer {
+  clip-path: polygon(0 0, 125% 0, 100% 100%, 0 100%);
+  transition: clip-path 700ms var(--ease-in-out) var(--wipe-delay, 0ms);
+}
+/* The slab exists only for the cut: never at rest (JS off, reduced motion),
+   and it fades once the photo has crossed, so a slow or failed Drive image
+   leaves ink, not a yellow screen. */
+.wipe__flash {
+  display: none;
+}
+:root[data-motion="on"] .wipe__flash {
+  display: block;
+}
+:root[data-motion="on"] .wipe.is-revealed .wipe__flash {
+  opacity: 0;
+  transition:
+    clip-path 700ms var(--ease-in-out),
+    opacity 200ms ease 900ms;
+}
+
+/* View Transitions spike: gallery card photo morphs into the album hero. */
+::view-transition {
+  pointer-events: none;
+}
+::view-transition-group(.morph) {
+  animation-duration: 450ms;
+  animation-timing-function: var(--ease-in-out);
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
 }

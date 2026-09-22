@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Instrument_Serif, Oswald } from "next/font/google";
+import { Bricolage_Grotesque, Geist, Instrument_Serif, Oswald } from "next/font/google";
 import { MotionGate } from "@/components/motion/MotionGate";
+import { TypeSwitch } from "@/components/motion/TypeSwitch";
 import "./globals.css";
 
 const serif = Instrument_Serif({
@@ -11,6 +12,8 @@ const serif = Instrument_Serif({
 });
 const display = Oswald({ subsets: ["latin"], variable: "--font-oswald" });
 const sans = Geist({ subsets: ["latin"], variable: "--font-geist" });
+// L0 font test B (owner picks A or B; the loser is removed).
+const bricolage = Bricolage_Grotesque({ subsets: ["latin"], axes: ["wdth", "opsz"], variable: "--font-bricolage", preload: false });
 
 export const metadata: Metadata = {
   title: { default: "Frontier Football", template: "%s - Frontier Football" },
@@ -27,7 +30,7 @@ export const viewport: Viewport = { themeColor: "#0a0a0a" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${serif.variable} ${display.variable} ${sans.variable}`}>
+    <html lang="en" className={`${serif.variable} ${display.variable} ${sans.variable} ${bricolage.variable}`}>
       <body>
         {/* ponytail: og:image stays root-relative until the domain is recorded
             (content.js TODO). Next's metadata API would make it absolute
@@ -44,6 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
         {children}
         <MotionGate />
+        <TypeSwitch />
       </body>
     </html>
   );

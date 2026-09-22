@@ -11,8 +11,11 @@ const STILL = { id: "1HBvbjQitxALSxMpRR8-1G72A2VWA2zek", w: 400, h: 368 };
 
 export function WhoWeAre() {
   return (
-    <section aria-labelledby="who-heading" className="canvas-ink relative">
-      <div className="relative h-svh overflow-hidden">
+    <section aria-labelledby="who-heading" className="canvas-night relative">
+      {/* L0 PROTOTYPE: the one hard image wipe. data-reveal hands it to the
+          reveal observer; the yellow slab crosses first, the photo follows. */}
+      <div data-reveal className="wipe relative h-svh overflow-hidden">
+        <span aria-hidden="true" className="wipe__layer wipe__flash absolute inset-0 bg-yellow" />
         <img
           src={thumbUrl(STILL.id, 2000)}
           alt="A 4 x 4 Series SZN 6 team together on the pitch at night, names on their shirts"
@@ -21,9 +24,10 @@ export function WhoWeAre() {
           loading="lazy"
           decoding="async"
           referrerPolicy="no-referrer"
-          className="absolute inset-0 h-full w-full object-cover"
+          style={{ "--wipe-delay": "140ms" } as React.CSSProperties}
+          className="wipe__layer absolute inset-0 h-full w-full object-cover"
         />
-        <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink via-ink/50 to-transparent" />
+        <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-night via-night/50 to-transparent" />
         <div className="frame absolute inset-x-0 bottom-0 pb-[clamp(2rem,8vh,5rem)]">
           <p className="micro mb-3 text-yellow">Who we are</p>
           <h2

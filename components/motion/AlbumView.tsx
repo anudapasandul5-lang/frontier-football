@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState, type KeyboardEvent } from "react";
+import { useEffect, useRef, useState, ViewTransition, type KeyboardEvent } from "react";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import raw from "@/content.js";
 import { parseContent } from "@/lib/content-data";
@@ -18,9 +19,28 @@ import {
 
 const button = "min-h-11 cursor-pointer border-2 border-ink px-6 py-2 font-display text-lg leading-none uppercase hover:bg-ink hover:text-bone";
 
-export function AlbumHead({ title, count }: { title: string; count: number }) {
+type Cover = { photo: string; alt: string };
+
+/* L0 SPIKE: the album hero the gallery card's photo morphs into. Same
+   ViewTransition name as the card, so React pairs them on navigation. */
+function albumCover(id: string | null): Cover | null {
+  if (!id) return null;
+  const data = parseContent(raw);
+  const entry = [...data.seasons, ...data.competitions, ...data.watchAlongs].find((e) => e.albumId === id);
+  return entry?.photo ? { photo: entry.photo, alt: entry.photoAlt ?? "" } : null;
+}
+
+export function AlbumHead({ title, count, id = null }: { title: string; count: number; id?: string | null }) {
+  const cover = albumCover(id);
   return (
     <div className="frame pb-10">
+      {cover ? (
+        <ViewTransition name={`album-${id}`} share="morph" default="none">
+          <div className="relative mb-8 aspect-[16/10] overflow-hidden bg-ink md:aspect-[16/7]">
+            <img src={cover.photo} alt={cover.alt} className="absolute inset-0 size-full object-cover object-[center_25%]" />
+          </div>
+        </ViewTransition>
+      ) : null}
       <p className="micro mb-4">Gallery</p>
       <h1 className="font-display text-[clamp(3rem,9vw,8.75rem)] leading-[0.88] font-bold uppercase">{title}</h1>
       {count > 0 ? (
@@ -28,9 +48,9 @@ export function AlbumHead({ title, count }: { title: string; count: number }) {
           {count.toLocaleString("en")} photographs.
         </p>
       ) : null}
-      <a href="/gallery" className={`${button} mt-6 inline-flex items-center`}>
+      <Link href="/gallery" className={`${button} mt-6 inline-flex items-center`}>
         All albums
-      </a>
+      </Link>
     </div>
   );
 }
@@ -100,7 +120,7 @@ export function AlbumView() {
   if (load.state !== "ready") {
     return (
       <>
-        <AlbumHead title={title} count={0} />
+        <AlbumHead id={id} title={title} count={0} />
         {load.state === "failed" ? (
           <p className="frame text-lg">These photographs could not be loaded just now. Try again in a moment.</p>
         ) : (
@@ -114,7 +134,7 @@ export function AlbumView() {
   if (load.items.length === 0) {
     return (
       <>
-        <AlbumHead title={title} count={0} />
+        <AlbumHead id={id} title={title} count={0} />
         <p className="frame text-lg">Photos are on the way.</p>
       </>
     );
@@ -123,7 +143,7 @@ export function AlbumView() {
   const items = load.items;
   return (
     <>
-      <AlbumHead title={title} count={items.length} />
+      <AlbumHead id={id} title={title} count={items.length} />
       <Lightbox items={lightboxItems(items, title)}>
         {(open) => (
           <ul ref={grid} className="frame columns-1 gap-2 min-[461px]:columns-2 min-[701px]:columns-3 min-[1101px]:columns-4">

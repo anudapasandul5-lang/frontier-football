@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { ViewTransition } from "react";
 import raw from "@/content.js";
 import { parseContent, seasonName } from "@/lib/content-data";
 import { Tabs } from "@/components/motion/Tabs";
@@ -24,16 +26,19 @@ type Entry = {
    whole card is the link, and its visible text is its accessible name. */
 function Card({ entry, groupLabel }: { entry: Entry; groupLabel?: string }) {
   const href = entry.albumId ? `/album?album=${encodeURIComponent(entry.albumId)}` : entry.driveFolder;
-  const Tag = href ? "a" : "div";
+  // L0 SPIKE: on-site albums are client-side <Link>s so the card photo can
+  // morph into the album hero (React <ViewTransition>, shared name).
+  const Tag = entry.albumId ? Link : href ? "a" : "div";
   const external = href && !entry.albumId ? { target: "_blank", rel: "noopener noreferrer" } : {};
 
   return (
     <li className="flex">
       <Tag
-        {...(href ? { href } : {})}
+        {...((href ? { href } : {}) as { href: string })}
         {...external}
         className="group canvas-ink flex w-full flex-col overflow-hidden"
       >
+        <ViewTransition name={entry.albumId ? `album-${entry.albumId}` : undefined} share="morph" default="none">
         <div className="relative aspect-[16/10] overflow-hidden bg-ink">
           {entry.photo ? (
             <img
@@ -47,6 +52,7 @@ function Card({ entry, groupLabel }: { entry: Entry; groupLabel?: string }) {
             />
           ) : null}
         </div>
+        </ViewTransition>
         <div className="flex flex-1 flex-col gap-2 p-5">
           {groupLabel ? <p className="micro border-b border-bone/30 pb-2">{groupLabel}</p> : null}
           <p aria-hidden="true" className="mt-2 font-display text-[clamp(3.5rem,7vw,5.75rem)] leading-none font-bold">
