@@ -4,9 +4,9 @@
    green bar under LEAGUE. The accessible name is the full league name, since
    the wordmark alone is not the name. */
 export function SundayLeagueMark({ size = "lg" }: { size?: "lg" | "sm" }) {
-  const word = size === "lg" ? "text-[clamp(4rem,16vw,10rem)]" : "text-[clamp(3rem,10vw,5.5rem)]";
+  const word = size === "lg" ? "text-[clamp(4rem,22cqw,10rem)]" : "text-[clamp(3rem,10vw,5.5rem)]";
   return (
-    <div role="img" aria-label="Frontier Sunday Football League" className="inline-flex flex-col items-start">
+    <div role="img" aria-label="Frontier Sunday Football League" className="inline-flex w-full flex-col items-start">
       <div className="mb-3 flex items-center gap-3">
         <img src="/crest.webp" alt="" width={525} height={640} loading="lazy" className={size === "lg" ? "h-12 w-auto" : "h-9 w-auto"} />
         <span className="micro text-current">Frontier presents</span>

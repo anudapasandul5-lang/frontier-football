@@ -39,7 +39,7 @@ export function Masthead({
       <h1
         className={`mt-5 font-display leading-[0.88] font-bold uppercase ${
           compact
-            ? "text-[min(clamp(2.5rem,13vw,13.75rem),20vh)] min-[1100px]:text-[min(clamp(3rem,7vw,7.5rem),22vh)]"
+            ? "text-[min(clamp(2.5rem,13vw,13.75rem),20vh)] min-[1100px]:text-[min(9cqw,7.5rem,22vh)]"
             : "text-[min(clamp(2.5rem,13vw,13.75rem),20vh)]"
         }`}
       >

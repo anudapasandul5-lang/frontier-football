@@ -27,7 +27,7 @@ const TILES = [
 function RecordRow({ stop }: { stop: Stop }) {
   const season = "season" in stop && typeof stop.season === "number" ? stop.season : null;
   return (
-    <li className="record-row grid gap-5 border-t border-ink/20 py-10 first:border-t-0 first:pt-0 min-[900px]:grid-cols-[minmax(110px,0.9fr)_minmax(0,2.6fr)_minmax(180px,1.1fr)] min-[900px]:items-center min-[900px]:gap-10">
+    <li className="record-row grid gap-5 border-t border-ink/20 py-10 first:border-t-0 first:pt-0 min-[900px]:grid-cols-[minmax(180px,0.9fr)_minmax(0,2.6fr)_minmax(180px,1.1fr)] min-[900px]:items-center min-[900px]:gap-10">
       {season !== null ? (
         <div className="flex items-baseline gap-2 min-[900px]:block">
           <p className="micro">4 x 4 Series SZN</p>

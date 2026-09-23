@@ -30,7 +30,7 @@ export default function CommunityPage() {
 
       <section aria-labelledby="league-heading" className="canvas-night">
         <div className="frame grid gap-12 py-[clamp(4rem,12vh,8rem)] lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-end">
-          <div>
+          <div className="@container min-w-0">
             <h2 id="league-heading" className="sr-only">
               Sunday Football League
             </h2>

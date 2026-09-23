@@ -4,6 +4,11 @@ import { parseContent, partners, reach, stats } from "@/lib/content-data";
 import { CountUpFigure } from "@/components/motion/CountUpFigure";
 import { ContactRoutes } from "@/components/pages/ContactRoutes";
 import { Masthead, PageShell } from "@/components/pages/PageShell";
+import { Marquee } from "@/components/primitives/Marquee";
+
+// Same rhythm as the home page's partner strip (components/acts/Partners.tsx).
+const item = "mr-[clamp(2rem,5vw,4.5rem)] flex h-[clamp(2.75rem,5vw,4.5rem)] shrink-0 items-center";
+const type = "font-display text-[clamp(1.25rem,2.4vw,2rem)] leading-none font-bold whitespace-nowrap uppercase text-current";
 
 export const metadata: Metadata = { title: "Collaborate" };
 
@@ -22,7 +27,7 @@ export default function Collaborate() {
 
   return (
     <PageShell>
-      <div className="min-[1100px]:frame min-[1100px]:grid min-[1100px]:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] min-[1100px]:items-start min-[1100px]:gap-x-15 min-[1100px]:[&>section]:px-0 min-[1100px]:[&>section:last-child]:pt-20">
+      <div className="@container min-[1100px]:frame min-[1100px]:grid min-[1100px]:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] min-[1100px]:items-start min-[1100px]:gap-x-15 min-[1100px]:[&>section]:px-0 min-[1100px]:[&>section:last-child]:pt-20">
         {/* Source: Frontier's own event posters (Instagram cache, 2026-09-22 audit):
             4x4 Series at Athlete 360 Nugegoda, Turf Wars at Club Fusion Boralesgamuwa,
             watch-alongs at Main Sports Bar. "Small-sided" = the 4x4 format. */}
@@ -81,26 +86,32 @@ export default function Collaborate() {
             <h2 id="partners-heading" className="micro mb-8">
               {count ? `${count.figure} ${count.label}` : "Partners"}
             </h2>
-            <ul className="grid grid-cols-[repeat(auto-fill,minmax(min(10rem,100%),1fr))] gap-3">
+            <Marquee label="Frontier partners" seconds={45}>
               {names.map((p) => {
-                const chip = p.logo ? (
-                  <img src={p.logo} alt={p.name ?? ""} loading="lazy" className="h-12 w-full object-contain" />
+                const mark = p.logo ? (
+                  <span className="flex h-full items-center rounded-sm bg-bone px-4">
+                    <img
+                      src={p.logo}
+                      alt={p.name ?? ""}
+                      loading="lazy"
+                      decoding="async"
+                      className="h-[65%] w-auto max-w-[clamp(8rem,13vw,11rem)] object-contain"
+                    />
+                  </span>
                 ) : (
-                  <span className="font-display text-lg leading-none font-bold uppercase">{p.name}</span>
+                  <span className={type}>{p.name}</span>
                 );
-                return (
-                  <li key={p.name} className="flex h-24 items-center justify-center rounded-sm bg-bone px-4 text-center text-ink">
-                    {p.url ? (
-                      <a href={p.url} className="flex h-full w-full items-center justify-center">
-                        {chip}
-                      </a>
-                    ) : (
-                      chip
-                    )}
-                  </li>
+                return p.url ? (
+                  <a key={p.name} href={p.url} className={`${item} transition-opacity duration-150 hover:opacity-70`}>
+                    {mark}
+                  </a>
+                ) : (
+                  <span key={p.name} className={item}>
+                    {mark}
+                  </span>
                 );
               })}
-            </ul>
+            </Marquee>
           </div>
         </section>
       ) : null}
