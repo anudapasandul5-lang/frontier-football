@@ -29,16 +29,21 @@ function albumHref(albumId: unknown) {
    on any of them: only the Sunday Football League takes a Registration. */
 export function activities(content: Raw) {
   const competitions = ((content?.competitions ?? []) as Raw[]).filter((c) => recorded(c.name));
-  const seasons = ((content?.seasons ?? []) as Raw[]).map((s) => Number(s.season)).filter(Number.isFinite);
+  const seasonRows = ((content?.seasons ?? []) as Raw[]).filter((s) => Number.isFinite(Number(s.season)));
+  const seasons = seasonRows.map((s) => Number(s.season));
   const parties = ((content?.watchAlongs ?? []) as Raw[]).filter((w) => recorded(w.name));
-  const competition = (c: Raw) => ({ name: recorded(c.name)!, note: recorded(c.note), href: albumHref(c.albumId) });
+  // The photo is for the pointer preview on the list (Interactions data-preview).
+  const newest = [...seasonRows].sort((a, b) => Number(b.season) - Number(a.season)).find((s) => recorded(s.photo));
+  const competition = (c: Raw) => ({ name: recorded(c.name)!, note: recorded(c.note), href: albumHref(c.albumId), photo: recorded(c.photo) });
 
   return [
     ...competitions.filter((c) => c.beforeSeries === true).map(competition),
     ...(seasons.length
-      ? [{ name: "4 x 4 Series", note: `SZN ${Math.min(...seasons)} to SZN ${Math.max(...seasons)}`, href: "/gallery" }]
+      ? [{ name: "4 x 4 Series", note: `SZN ${Math.min(...seasons)} to SZN ${Math.max(...seasons)}`, href: "/gallery", photo: newest ? recorded(newest.photo) : null }]
       : []),
     ...competitions.filter((c) => c.beforeSeries !== true).map(competition),
-    ...(parties.length ? [{ name: "Watch-alongs", note: `${parties.length} match nights on the big screen`, href: "/gallery" }] : []),
+    ...(parties.length
+      ? [{ name: "Watch-alongs", note: `${parties.length} match nights on the big screen`, href: "/gallery", photo: recorded(parties.find((w) => recorded(w.photo))?.photo) }]
+      : []),
   ];
 }

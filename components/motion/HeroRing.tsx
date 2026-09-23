@@ -21,19 +21,20 @@ import { useEffect, useRef } from "react";
    the photos load on idle after first paint. Reduced motion: one still frame.
    No WebGL: the bone hero with its type. */
 
-// Full-resolution frames from Frontier's own Drive albums (owner, 2026-09-23:
-// the 720px Instagram grabs looked soft). 1200px WebP in public/home/ring/.
+// Full-resolution frames from the "Road to World Cup" Drive folder (owner,
+// 2026-09-23): SZN 06, Division 0 and the World Cup watch-alongs, all free of
+// burned-in logos. 1200 x 800 WebP (3:2) in public/home/ring/.
 const PHOTOS = [
-  "/home/ring/szn4-greeting.webp",
-  "/home/ring/wa-ucl-dance.webp",
-  "/home/ring/szn4-medal.webp",
-  "/home/ring/wa-final-hug.webp",
-  "/home/ring/szn2-number-9.webp",
-  "/home/ring/wa-ucl-cheer.webp",
-  "/home/ring/szn3-handshake.webp",
-  "/home/ring/szn4-number-10.webp",
-  "/home/ring/wa-ucl-phone.webp",
-  "/home/ring/szn2-trophy.webp",
+  "/home/ring/trophy-lift.webp",
+  "/home/ring/final-screen.webp",
+  "/home/ring/through-the-net.webp",
+  "/home/ring/spain-flag.webp",
+  "/home/ring/keeper-slide.webp",
+  "/home/ring/final-cheer.webp",
+  "/home/ring/night-ten.webp",
+  "/home/ring/division-0.webp",
+  "/home/ring/medals.webp",
+  "/home/ring/pointing.webp",
 ];
 
 const RADIUS = 6;

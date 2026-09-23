@@ -24,7 +24,11 @@ export function SplitReveal({
   return (
     <Tag id={id} data-reveal className={`split ${className}`}>
       {lines.map((line, l) => (
-        <span key={l} className={`block ${lineClassName}`}>
+        <Fragment key={l}>
+        {/* A space between line blocks, so the accessible name reads "Who we
+            are", not "Who weare". Blocks render it invisibly. */}
+        {l > 0 ? " " : null}
+        <span className={`block ${lineClassName}`}>
           {line.split(" ").map((word, w, words) => (
             <Fragment key={w}>
               <span className="split__w">
@@ -36,6 +40,7 @@ export function SplitReveal({
             </Fragment>
           ))}
         </span>
+        </Fragment>
       ))}
     </Tag>
   );

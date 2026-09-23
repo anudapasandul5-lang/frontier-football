@@ -3,7 +3,11 @@ import { Fragment } from "react";
 import raw from "@/content.js";
 import { journey, parseContent, people } from "@/lib/content-data";
 import { AboutMotion } from "@/components/motion/AboutMotion";
+import { NextPage } from "@/components/pages/NextPage";
+import { PageHero } from "@/components/pages/PageHero";
 import { PageShell } from "@/components/pages/PageShell";
+import { PhotoStrip } from "@/components/pages/PhotoStrip";
+import { SplitReveal } from "@/components/primitives/SplitReveal";
 
 export const metadata: Metadata = { title: "Who We Are" };
 
@@ -12,14 +16,6 @@ type Party = ReturnType<typeof parseContent>["watchAlongs"][number];
 
 const h2 = "font-display text-[clamp(2.125rem,5.4vw,5.25rem)] leading-[0.9] font-bold uppercase";
 
-/* Photos overlap the type on a screen wide enough; below 768px they stack
-   un-rotated, where an overlap would land on the words. Decorative: each is
-   captioned on the gallery page, so hidden here rather than described twice. */
-const TILES = [
-  { src: "/gallery/p11.webp", w: 1280, h: 658, pos: "md:top-[2%] md:right-[6%] md:w-[30%] md:rotate-[2.5deg]" },
-  { src: "/gallery/p06.webp", w: 1280, h: 853, pos: "md:top-[36%] md:right-[38%] md:w-[24%] md:-rotate-[3.5deg]" },
-  { src: "/gallery/p14.webp", w: 1280, h: 649, pos: "md:top-[58%] md:right-[2%] md:w-[26%] md:-rotate-[1.5deg]" },
-];
 
 /* One row of the record: identity, photo, what is actually known. Champion
    prints "Not recorded yet" rather than vanishing (a record with a silent gap
@@ -130,50 +126,38 @@ export default function WhoWeAre() {
   const crew = people(data);
 
   return (
-    <PageShell>
-      <section className="pt-10 pb-12 md:pt-20 md:pb-32">
-        <div className="frame relative md:min-h-[62vh]">
-          <p className="micro mb-5">Since the Frontier Futsal Tournament</p>
-          <h1 className="relative z-[1] font-display text-[min(clamp(2.5rem,13vw,13.75rem),20vh)] leading-[0.88] font-bold uppercase">
-            Who we
-            <br />
-            are
-          </h1>
-          <p className="relative z-[1] mt-8 max-w-[46ch] text-[clamp(1.125rem,1rem+0.5vw,1.5rem)] leading-[1.45] md:max-w-[36%]">
-            Frontier started in Colombo in 2024 so small sided football here had somewhere to happen. It began with one
-            night on turf and it is six seasons deep now.
-          </p>
-          <div aria-hidden="true" className="mt-10 grid gap-4 md:mt-0 md:block">
-            {TILES.map((tile, i) => (
-              <figure key={tile.src} className={`border-2 border-ink bg-bone p-2 md:absolute ${tile.pos}`}>
-                <img
-                  src={tile.src}
-                  width={tile.w}
-                  height={tile.h}
-                  alt=""
-                  loading={i === 0 ? undefined : "lazy"}
-                  decoding="async"
-                  className="block aspect-[4/3] w-full object-cover"
-                />
-              </figure>
-            ))}
-          </div>
-        </div>
-      </section>
-
+    <PageShell
+      hero={
+        <PageHero
+          chapter="Who we are"
+          eyebrow="Since the Frontier Futsal Tournament"
+          lines={["Who we", "are."]}
+          photo={{ src: "/heroes/who.webp", alt: "A long table of supporters with Argentina flags at the World Cup final watch-along", position: "center 40%" }}
+        >
+          Frontier started in Colombo in 2024 so small sided football here had somewhere to happen. It began with one
+          night on turf and it is six seasons deep now.
+        </PageHero>
+      }
+    >
+      <PhotoStrip
+        photos={[
+          { src: "/who/szn6-scramble.webp", alt: "Players scrambling for the ball in front of goal at 4 x 4 Series SZN 06" },
+          { src: "/who/division-0-crowd.webp", alt: "Players and friends at the Division 0 console tournament" },
+          { src: "/who/norway-england-fan.webp", alt: "A fan with both arms up at the Norway vs England watch-along" },
+        ]}
+      />
 
       {/* The owner's own words, from the 4x4 Series proposal deck (2026-09-10).
           v1's green band; ink now (strict bone/ink, owner 2026-09-22). */}
-      <section aria-labelledby="who-heading" className="canvas-ink py-12 sm:py-20">
+      <section data-tone="bone" data-chapter="Our story" aria-labelledby="who-heading" className="canvas-ink py-[clamp(4rem,14vh,9rem)]">
         <div className="frame">
-          <h2 id="who-heading" className={`${h2} mb-6 sm:mb-8`}>
-            Who we are
-          </h2>
+          <p className="micro mb-4 text-yellow">Our story</p>
+          <SplitReveal id="who-heading" lines={["A main stage."]} className="mb-8 font-display text-[clamp(3rem,10vw,9rem)] leading-[0.85] font-bold uppercase" />
           <p className="max-w-[58ch] text-[15px] leading-relaxed">
             Frontier Football has evolved into a main stage for Sri Lanka&apos;s futsal community, built to spotlight talent and
             unite everyone who shares a passion for the game.
           </p>
-          <p className="my-6 max-w-[30ch] font-serif text-[clamp(1.5rem,3.2vw,2.75rem)] leading-[1.1] sm:my-8">
+          <p className="my-10 max-w-[22ch] font-serif text-[clamp(2.25rem,5.5vw,5rem)] leading-[1.02] text-yellow sm:my-14">
             Talent was never missing. The platform was.
           </p>
           <p className="max-w-[58ch] text-[15px] leading-relaxed">
@@ -184,9 +168,9 @@ export default function WhoWeAre() {
         </div>
       </section>
 
-      <section className="py-12 sm:py-20">
+      <section data-tone="ink" data-chapter="The run so far" aria-labelledby="run-heading" className="py-[clamp(4rem,12vh,8rem)]">
         <div className="frame">
-          <h2 className={h2}>The run so far</h2>
+          <SplitReveal id="run-heading" lines={["The run so far"]} className={h2} />
           <p className="mt-6 max-w-[52ch] text-[15px] leading-relaxed">
             The Frontier Futsal Tournament first, then Turf Wars, then the 4x4 Series, with the watch parties running alongside it. Where a champion, a month or
             a venue is missing, nobody has written it down yet.
@@ -206,7 +190,7 @@ export default function WhoWeAre() {
       {/* Absent while content.js lists nobody: no stand-in for someone who has
           not agreed to be named. */}
       {crew.length > 0 ? (
-        <section className="frame py-12 sm:py-20">
+        <section data-tone="ink" data-chapter="The people" className="frame py-12 sm:py-20">
           <h2 className={`${h2} mb-10`}>The people</h2>
           <ul className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,240px),1fr))] gap-6">
             {crew.map((person) => (
@@ -231,6 +215,7 @@ export default function WhoWeAre() {
           </ul>
         </section>
       ) : null}
+      <NextPage current="/who-we-are" />
       <AboutMotion />
     </PageShell>
   );

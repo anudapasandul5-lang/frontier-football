@@ -2,7 +2,12 @@ import type { Metadata } from "next";
 import raw from "@/content.js";
 import { parseContent, resultRows, sessions, upcomingEvents } from "@/lib/content-data";
 import { Events as Upcoming } from "@/components/acts/Events";
-import { Masthead, PageShell } from "@/components/pages/PageShell";
+import { NextPage } from "@/components/pages/NextPage";
+import { PageHero, heroButton } from "@/components/pages/PageHero";
+import { PageShell } from "@/components/pages/PageShell";
+import { Roll } from "@/components/primitives/Roll";
+import { SplitReveal } from "@/components/primitives/SplitReveal";
+import { PhotoStrip } from "@/components/pages/PhotoStrip";
 import { ResultsTable, Unrecorded } from "@/components/primitives/ResultsTable";
 
 export const metadata: Metadata = { title: "Events" };
@@ -27,22 +32,49 @@ export default function EventsPage() {
   const results = resultRows(data);
 
   return (
-    <PageShell night>
-      {/* Source: owner, 2026-09-22 - the Sunday evening session (content.js
-          sessions) backs "every week"; the monthly 4x4 Series is the bigger thing. */}
-      <Masthead eyebrow="For players" lines={["Come and", "play"]}>
-        Frontier runs every week, and there is usually something bigger on the way. Here is when we play and what is
-        coming up.
-      </Masthead>
+    <PageShell
+      night
+      hero={
+        /* Source: owner, 2026-09-22 - the Sunday evening session (content.js
+           sessions) backs "every week"; the monthly 4x4 Series is the bigger thing. */
+        <PageHero
+          chapter="Events"
+          eyebrow="For players"
+          lines={["Come and", "play."]}
+          photo={{ src: "/heroes/events.webp", alt: "A 4 x 4 Series SZN 06 match under the floodlights at night", position: "center 40%" }}
+          actions={
+            <>
+              <a href="#results-heading" className={`${heroButton} bg-yellow text-ink`}>
+                <Roll>Every result</Roll>
+              </a>
+              {nights.length > 0 ? (
+                <a href="#sessions-heading" className={`${heroButton} border-2 border-bone hover:bg-bone hover:text-ink`}>
+                  <Roll>Every week</Roll>
+                </a>
+              ) : null}
+            </>
+          }
+        >
+          Frontier runs every week, and there is usually something bigger on the way. Here is when we play and what is
+          coming up.
+        </PageHero>
+      }
+    >
+      <PhotoStrip
+        photos={[
+          { src: "/pages/events-strike.webp", alt: "A player strikes the ball at a 4 x 4 Series SZN 06 match" },
+          { src: "/pages/events-keeper.webp", alt: "A goalkeeper dives on the ball under the lights at SZN 06" },
+          { src: "/pages/events-day-match.webp", alt: "Two players chase the ball on the Athlete 360 pitch" },
+        ]}
+      />
 
       {results.length > 0 ? (
-        <section aria-labelledby="results-heading" className="frame pb-[clamp(4rem,14vh,9rem)]">
-          <h2
+        <section data-tone="bone" data-chapter="Results" aria-labelledby="results-heading" className="frame scroll-mt-24 pb-[clamp(4rem,14vh,9rem)]">
+          <SplitReveal
             id="results-heading"
+            lines={["Every result."]}
             className="mb-[clamp(2rem,6vh,4rem)] font-display text-[clamp(3rem,min(9vw,15svh),7.5rem)] leading-[0.88] font-bold uppercase"
-          >
-            Every result.
-          </h2>
+          />
           <ResultsTable
             labelled
             caption="Results of every Frontier season and competition, newest season first"
@@ -77,7 +109,7 @@ export default function EventsPage() {
       ) : null}
 
       {nights.length > 0 ? (
-        <section aria-labelledby="sessions-heading" className="frame pb-15">
+        <section data-tone="bone" data-chapter="Every week" aria-labelledby="sessions-heading" className="frame scroll-mt-24 py-[clamp(4rem,12vh,8rem)]">
           <h2 id="sessions-heading" className="mb-6 font-display text-[clamp(1.375rem,1.2rem+0.7vw,1.875rem)] leading-none uppercase">
             Every week
           </h2>
@@ -104,6 +136,7 @@ export default function EventsPage() {
       ) : null}
 
       <Upcoming events={upcomingEvents(data)} />
+      <NextPage current="/events" />
     </PageShell>
   );
 }

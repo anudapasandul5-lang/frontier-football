@@ -50,7 +50,7 @@ describe("activities", () => {
       "Division 0",
       "Watch-alongs",
     ]);
-    for (const activity of past) expect(Object.keys(activity).sort()).toEqual(["href", "name", "note"]);
+    for (const activity of past) expect(Object.keys(activity).sort()).toEqual(["href", "name", "note", "photo"]);
   });
 
   it("links a past activity to its album when it has one, otherwise to the gallery", () => {
@@ -59,5 +59,19 @@ describe("activities", () => {
     expect(byName["Turf Wars"]).toBe("/gallery");
     expect(byName["4 x 4 Series"]).toBe("/gallery");
     expect(byName["Division 0"]).toBe("/albums/division-0");
+  });
+
+  it("carries a photo for each activity: its own, the newest season's, or the first watch-along's", () => {
+    const withPhotos = {
+      ...content,
+      seasons: [{ season: 1, photo: "/champions/szn-1.webp" }, { season: 2, photo: "/champions/szn-2.webp" }],
+      competitions: [{ name: "Division 0", photo: "/champions/division-0.webp" }, { name: "Turf Wars", photo: "TODO" }],
+      watchAlongs: [{ name: "Final", photo: "/champions/wa-final.webp" }],
+    };
+    const byName = Object.fromEntries(activities(withPhotos).map((a) => [a.name, a.photo]));
+    expect(byName["Division 0"]).toBe("/champions/division-0.webp");
+    expect(byName["Turf Wars"]).toBeNull();
+    expect(byName["4 x 4 Series"]).toBe("/champions/szn-2.webp");
+    expect(byName["Watch-alongs"]).toBe("/champions/wa-final.webp");
   });
 });

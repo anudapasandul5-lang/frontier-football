@@ -43,13 +43,13 @@ export function CommunityTeaser() {
             <Roll>See the league</Roll>
           </a>
         </div>
-        {/* A real Frontier Sunday: players greeting at a 4 x 4 Series match,
-            full resolution from the SZN 4 Drive album. */}
+        {/* A real Frontier game: a goalmouth scramble in 4 x 4 Series SZN 06,
+            full resolution from the Drive album. */}
         <img
-          src="/home/ring/szn4-greeting.webp"
-          alt="Players greeting each other on the pitch at a 4 x 4 Series match"
+          src="/who/szn6-scramble.webp"
+          alt="Players scrambling for the ball in front of goal at a 4 x 4 Series match"
           width={1200}
-          height={801}
+          height={900}
           loading="lazy"
           decoding="async"
           data-parallax="-0.06"

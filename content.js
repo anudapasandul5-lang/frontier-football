@@ -337,7 +337,7 @@ export default {
       // A picture from the night. Put the file in the public/champions/ folder
       // and write its name here, the same way the champion photos work.
       photo: "/champions/wa-final-esp-arg.webp",
-      photoAlt: "A fan raises an arm as the room watches the match on the big screen.",
+      photoAlt: "Argentina and Spain fans crowd round a table with flags at the World Cup final watch-along.",
       date: "TODO",
       venue: "TODO",
       // The Google Drive folder holding the photos from this night.
@@ -348,7 +348,7 @@ export default {
       albumId: "wa-semi-eng-arg",
       note: "TODO",
       photo: "/champions/wa-semi-eng-arg.webp",
-      photoAlt: "A packed watch-along crowd reacts to the match on screen.",
+      photoAlt: "A packed crowd in Argentina shirts celebrates at the England vs Argentina watch-along.",
       date: "TODO",
       venue: "TODO",
       driveFolder: "https://drive.google.com/drive/folders/1MFdyJn1AwLtSq_Flkg8PB_EqFX1a15CV",
@@ -358,7 +358,7 @@ export default {
       albumId: "wa-semi-esp-fra",
       note: "TODO",
       photo: "/champions/wa-semi-esp-fra.webp",
-      photoAlt: "Two fans celebrate with their arms up at the watch-along.",
+      photoAlt: "Fans on their feet reacting to the Spain vs France semi-final.",
       date: "TODO",
       venue: "TODO",
       driveFolder: "https://drive.google.com/drive/folders/15y_x5dnOdsGQvmjPm0JaIqeLpoGWB5BM",
@@ -368,7 +368,7 @@ export default {
       albumId: "wa-norway-england",
       note: "TODO",
       photo: "/champions/wa-norway-england.webp",
-      photoAlt: "A fan cheers with both arms raised, phone in hand, mid-match.",
+      photoAlt: "An England fan in a 1966 shirt punches the air at the Norway vs England watch-along.",
       date: "TODO",
       venue: "TODO",
       driveFolder: "https://drive.google.com/drive/folders/1CZXXR7ZNFmPaOFudf8wDXNlPFlaKnxlh",
@@ -714,11 +714,9 @@ export default {
   // said yes to it.
   // ==========================================================================
   people: [
-    // PLACEHOLDER rows for the ticket-11 preview only. Replace each with a real
-    // person who has said yes (see ASK FIRST above), or delete it. The
-    // PLACEHOLDER gate (`npm run gate:placeholder`) fails while any remain.
-    { name: "PLACEHOLDER Name", role: "PLACEHOLDER Role", photo: "TODO", photoAlt: "TODO" },
-    { name: "PLACEHOLDER Name 2", role: "PLACEHOLDER Role", photo: "TODO", photoAlt: "TODO" },
+    // Empty for the 2026-09-24 production release (owner: "hide held parts"):
+    // the section stays off the page until a real person who has said yes is
+    // added here (see ASK FIRST above).
     // { name: "TODO", role: "TODO", photo: "TODO", photoAlt: "TODO" },
   ],
 
@@ -726,8 +724,8 @@ export default {
   // SUNDAY FOOTBALL LEAGUE - the Community page's one live activity.
   //
   //   details   the facts a team needs before registering. Each one shows as a
-  //             label and a value. Replace every PLACEHOLDER with the real
-  //             answer; the site will not go to production while any remain.
+  //             label and a value. Replace every TODO with the real answer;
+  //             a TODO row is left off the page.
   //   teamMessage / freeAgentMessage
   //             what gets typed into WhatsApp for the person, one per button,
   //             so you can tell a team from a free agent before they type.
@@ -736,11 +734,13 @@ export default {
   // ==========================================================================
   league: {
     details: [
-      { label: "Starts", value: "PLACEHOLDER" },
-      { label: "When", value: "PLACEHOLDER (Sundays)" },
-      { label: "Where", value: "PLACEHOLDER" },
-      { label: "Format", value: "PLACEHOLDER" },
-      { label: "Entry", value: "PLACEHOLDER" },
+      // "TODO" hides a row (2026-09-24 production release: owner chose to hide
+      // the unfinished details). Replace TODO with the real answer to show it.
+      { label: "Starts", value: "TODO" },
+      { label: "When", value: "TODO" },
+      { label: "Where", value: "TODO" },
+      { label: "Format", value: "TODO" },
+      { label: "Entry", value: "TODO" },
     ],
     teamMessage: "Hi Frontier, I'd like to register a team for the Sunday Football League.",
     freeAgentMessage: "Hi Frontier, I'd like to join the Sunday Football League as a free agent.",

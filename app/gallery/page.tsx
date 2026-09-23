@@ -4,6 +4,8 @@ import { ViewTransition } from "react";
 import raw from "@/content.js";
 import { parseContent, seasonName } from "@/lib/content-data";
 import { Tabs } from "@/components/motion/Tabs";
+import { NextPage } from "@/components/pages/NextPage";
+import { PageHero } from "@/components/pages/PageHero";
 import { PageShell } from "@/components/pages/PageShell";
 import { BandedReveal } from "@/components/primitives/BandedReveal";
 
@@ -123,19 +125,22 @@ export default function Gallery() {
   if (watch.length > 0) groups.push({ id: "watch-parties", label: "Watch Parties", panel: <Grid entries={watch} groupLabel="Watch Parties" /> });
 
   return (
-    <PageShell>
-      <section className="canvas-ink pt-8 pb-12 sm:pt-12 sm:pb-20">
-        <div className="frame pb-8 sm:pb-12 min-[900px]:flex min-[900px]:items-end min-[900px]:justify-between min-[900px]:gap-10">
-          <div>
-            <p className="micro mb-4">Our stories</p>
-            <h1 className="font-display text-[clamp(3rem,9vw,8.75rem)] leading-[0.88] font-bold uppercase">Gallery</h1>
-          </div>
-          <p className="mt-4 max-w-[46ch] text-[clamp(1.125rem,1rem+0.5vw,1.5rem)] leading-[1.35] min-[900px]:mt-0 min-[900px]:text-right">
-            Every photograph and clip Frontier has shared, pulled into one gallery.
-          </p>
-        </div>
+    <PageShell
+      hero={
+        <PageHero
+          chapter="Gallery"
+          eyebrow="Our stories"
+          lines={["The", "gallery."]}
+          photo={{ src: "/heroes/gallery.webp", alt: "Supporters with their arms up in front of the big screen at a Frontier watch-along", position: "center 30%" }}
+        >
+          Every photograph and clip Frontier has shared, pulled into one gallery.
+        </PageHero>
+      }
+    >
+      <section data-tone="bone" data-chapter="Albums" aria-label="Albums" className="canvas-ink pt-[clamp(3rem,10vh,6rem)] pb-12 sm:pb-20">
         {groups.length === 1 ? groups[0].panel : groups.length > 1 ? <Tabs label="Gallery sections" groups={groups} theme="night" /> : null}
       </section>
+      <NextPage current="/gallery" />
     </PageShell>
   );
 }

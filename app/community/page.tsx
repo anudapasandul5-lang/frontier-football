@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import raw from "@/content.js";
 import { parseContent, recorded } from "@/lib/content-data";
 import { registrations } from "@/lib/community";
-import { Masthead, PageShell } from "@/components/pages/PageShell";
+import { NextPage } from "@/components/pages/NextPage";
+import { PageHero } from "@/components/pages/PageHero";
+import { PageShell } from "@/components/pages/PageShell";
+import { PhotoStrip } from "@/components/pages/PhotoStrip";
 import { PastActivities } from "@/components/pages/PastActivities";
 import { SundayLeagueMark } from "@/components/primitives/SundayLeagueMark";
 
@@ -23,12 +26,27 @@ export default function CommunityPage() {
   const buttons = registrations(raw);
 
   return (
-    <PageShell>
-      <Masthead eyebrow="Community" lines={["Play with", "Frontier"]}>
-        Every format Frontier has run, and the league you can join now.
-      </Masthead>
+    <PageShell
+      hero={
+        <PageHero
+          chapter="Community"
+          eyebrow="Community"
+          lines={["Play with", "Frontier."]}
+          photo={{ src: "/heroes/community.webp", alt: "A supporter dancing in front of the big screen at a Frontier watch-along", position: "30% center" }}
+        >
+          Every format Frontier has run, and the league you can join now.
+        </PageHero>
+      }
+    >
+      <PhotoStrip
+        photos={[
+          { src: "/pages/community-team.webp", alt: "A 4 x 4 Series team arm in arm on the pitch" },
+          { src: "/pages/community-final-table.webp", alt: "Argentina and Spain fans together at the World Cup final watch-along" },
+          { src: "/pages/community-division-0.webp", alt: "Players crowding round the console at the Division 0 tournament" },
+        ]}
+      />
 
-      <section aria-labelledby="league-heading" className="canvas-night">
+      <section data-tone="bone" data-chapter="Sunday League" aria-labelledby="league-heading" className="canvas-night">
         <div className="frame grid gap-12 py-[clamp(4rem,12vh,8rem)] lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-end">
           <div className="@container min-w-0">
             <h2 id="league-heading" className="sr-only">
@@ -78,6 +96,7 @@ export default function CommunityPage() {
       </section>
 
       <PastActivities />
+      <NextPage current="/community" />
     </PageShell>
   );
 }

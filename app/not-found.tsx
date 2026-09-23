@@ -32,11 +32,11 @@ export default function NotFound() {
         </div>
         <figure className="relative h-[50svh] min-h-[320px] overflow-hidden md:h-auto">
           <img
-            src="/home/dribble.webp"
-            alt="A player dribbling under the floodlights during the 4 x 4 Series"
-            width={720}
-            height={1280}
-            className="absolute inset-0 size-full object-cover"
+            src="/home/moment-strike.webp"
+            alt="A player lining up a shot under the floodlights in the 4 x 4 Series"
+            width={1200}
+            height={1000}
+            className="absolute inset-0 size-full object-cover object-[65%_center]"
           />
         </figure>
       </section>

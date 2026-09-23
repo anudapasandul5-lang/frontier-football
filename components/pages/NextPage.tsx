@@ -1,0 +1,37 @@
+import { Roll } from "@/components/primitives/Roll";
+
+/* Every inner page ends by handing the reader on, in menu order, the way the
+   home page's acts run into each other. The whole band is the link; a photo
+   from the next page follows the pointer over it (Interactions: data-preview)
+   and the cursor ring says where it goes. */
+const order = [
+  { href: "/who-we-are", label: "Who We Are", photo: "/heroes/who.webp" },
+  { href: "/events", label: "Events", photo: "/heroes/events.webp" },
+  { href: "/gallery", label: "Gallery", photo: "/heroes/gallery.webp" },
+  { href: "/community", label: "Community", photo: "/heroes/community.webp" },
+  { href: "/collaborate", label: "Collaborate", photo: "/heroes/collaborate.webp" },
+  { href: "/contact", label: "Contact", photo: "/heroes/contact.webp" },
+];
+
+export function NextPage({ current }: { current: string }) {
+  const i = order.findIndex((p) => p.href === current);
+  const next = order[(i + 1) % order.length];
+  return (
+    <section data-tone="bone" data-chapter="Next" className="canvas-ink border-t border-bone/15">
+      <a
+        href={next.href}
+        data-preview={next.photo}
+        data-cursor="Go"
+        className="frame group flex flex-col gap-4 py-[clamp(4rem,14vh,9rem)]"
+      >
+        <span className="micro text-yellow">Next</span>
+        <span className="flex items-end justify-between gap-6 font-display text-[clamp(3rem,12vw,11rem)] leading-[0.85] font-bold uppercase">
+          <Roll>{next.label}</Roll>
+          <span aria-hidden="true" className="shrink-0 transition-transform duration-300 group-hover:translate-x-3">
+            &rarr;
+          </span>
+        </span>
+      </a>
+    </section>
+  );
+}
