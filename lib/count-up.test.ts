@@ -10,6 +10,10 @@ describe("parseCountFigure", () => {
     expect(parseCountFigure("400+")).toEqual({ value: 400, decimals: 0, suffix: "+" });
   });
 
+  it("rejects a figure with a thousands separator rather than counting its first digits", () => {
+    expect(parseCountFigure("1,200+")).toBeNull();
+  });
+
   it("rejects copy that is not a count", () => {
     expect(parseCountFigure("Sold out")).toBeNull();
   });

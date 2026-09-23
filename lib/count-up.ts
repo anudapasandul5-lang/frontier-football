@@ -5,7 +5,9 @@ export type ParsedCountFigure = {
 };
 
 export function parseCountFigure(figure: string): ParsedCountFigure | null {
-  const match = figure.trim().match(/^(\d+(?:\.(\d+))?)(.*)$/);
+  // A digit or comma in the suffix means a figure like "1,200+": not a plain
+  // count, so it is shown as written rather than counted from its first digits.
+  const match = figure.trim().match(/^(\d+(?:\.(\d+))?)([^\d,]*)$/);
   if (!match) return null;
 
   return {

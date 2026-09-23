@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { countFrame } from "@/lib/count-up";
+import { shouldReveal } from "@/lib/reveal";
 
 const DURATION_MS = 1200;
 
@@ -24,7 +25,15 @@ export function CountUpFigure({ figure, className = "" }: { figure: string; clas
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry?.isIntersecting || started) return;
+        if (!entry || started) return;
+        // Already above the viewport (scroll restored on reload, End, an
+        // anchor below): nothing to watch, so land on the real figure.
+        if (entry.boundingClientRect.bottom <= 0) {
+          observer.disconnect();
+          finish();
+          return;
+        }
+        if (!shouldReveal(entry) || entry.intersectionRatio < 0.35) return;
         started = true;
         observer.disconnect();
         const startedAt = performance.now();
@@ -52,8 +61,12 @@ export function CountUpFigure({ figure, className = "" }: { figure: string; clas
   }, [figure]);
 
   return (
-    <span ref={ref} aria-label={figure} className={className}>
-      {figure}
+    // Screen readers get the real figure, never a frame of the count.
+    <span className={className}>
+      <span ref={ref} aria-hidden="true">
+        {figure}
+      </span>
+      <span className="sr-only">{figure}</span>
     </span>
   );
 }

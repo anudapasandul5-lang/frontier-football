@@ -34,3 +34,6 @@ out-nojs/
 # vercel CLI link + graft's local graph cache (regenerable: `graft build`)
 .vercel
 /graft/
+
+# vitest JSON reporter output
+.vitest/
