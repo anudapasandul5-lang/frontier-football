@@ -5,7 +5,7 @@ import { Numeral } from "@/components/primitives/Numeral";
 import { Stat } from "@/components/primitives/Stat";
 import { TickRule } from "@/components/primitives/TickRule";
 
-/* Act 4, United's "The Universal Language": the one bone act. Display line
+/* Act 4, Ticket 04's night-mode count-up. Display line
    left, label and body right and offset down, then the stat stack against one
    oversized numeral.
 
@@ -27,7 +27,7 @@ export function Numbers() {
     : null;
 
   return (
-    <section id="numbers" aria-labelledby="numbers-heading" className="canvas-bone py-[clamp(4rem,14vh,9rem)]">
+    <section id="numbers" aria-labelledby="numbers-heading" className="canvas-night py-[clamp(4rem,14vh,9rem)]">
       <div className="frame flex flex-col gap-[clamp(3rem,10vh,7rem)]">
         <TickRule />
         <div className="grid gap-6 md:grid-cols-[minmax(0,11fr)_minmax(0,9fr)] md:gap-10">
@@ -46,7 +46,7 @@ export function Numbers() {
           </div>
         </div>
         <div className="grid gap-12 md:grid-cols-[minmax(0,11fr)_minmax(0,9fr)] md:gap-10">
-          <dl className="flex flex-col gap-8 text-label md:pl-3">
+          <dl className="flex flex-col gap-8 text-[var(--tone-muted)] md:pl-3">
             {rest.map((s) => (
               <Stat key={s.label} label={s.label} figure={s.figure} />
             ))}

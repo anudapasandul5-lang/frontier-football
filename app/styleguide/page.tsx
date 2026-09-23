@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import raw from "@/content.js";
-import { thumbUrl } from "@/lib/album-data";
 import { parseContent, partners, seasonName, stats } from "@/lib/content-data";
 import { marqueePhotos } from "@/lib/home-photos";
 import { BandedReveal } from "@/components/primitives/BandedReveal";
@@ -88,12 +87,11 @@ export default function Styleguide() {
           {marqueePhotos.map((p) => (
             <img
               key={p.id}
-              src={thumbUrl(p.id, 800)}
+              src={p.src}
               alt={p.alt}
               width={p.w}
               height={p.h}
               loading="lazy"
-              referrerPolicy="no-referrer"
               className="mr-3 h-[clamp(12rem,32vw,22rem)] w-auto"
             />
           ))}

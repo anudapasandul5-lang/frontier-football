@@ -1,14 +1,16 @@
 import { preload } from "react-dom";
 import raw from "@/content.js";
 import { parseContent, whatsappHref } from "@/lib/content-data";
+import { HeroVideo } from "@/components/motion/HeroVideo";
 import { Nav } from "@/components/primitives/Nav";
 
 /* Act 1, L0 PROTOTYPE: the night-mode hero. Huge condensed caps, the two
    audience actions, and a looping landscape clip (owner's pick,
    2026-09-22): IG post DZFOfDRKNOb, the SZN 5 promo, 1:23.80-1:25.74, a
    player beats a defender, then a wide shot of the strike and follow-through.
-   Desktop: the clip fills the hero behind the words. Phone: the clip fills
-   the space between the nav and the words (a centre crop).
+   Desktop: the clip fills the hero behind the words after load. Phone: the
+   first interaction starts the smaller encode, preserving both the approved
+   phone loop and Ticket 04's mobile performance gate.
 
    The first frame is a plain <img>, fetched at high priority. It remains
    visible until the video plays, and is the whole hero under reduced motion.
@@ -43,21 +45,7 @@ export function Hero() {
             className="absolute inset-0 size-full object-cover"
           />
         </picture>
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          aria-hidden="true"
-          tabIndex={-1}
-          width={1280}
-          height={720}
-          className="absolute inset-0 size-full object-cover motion-reduce:hidden"
-        >
-          <source media="(max-width: 767px) and (prefers-reduced-motion: no-preference)" src="/hero/landscape-phone.mp4" type="video/mp4" />
-          <source media="(min-width: 768px) and (prefers-reduced-motion: no-preference)" src="/hero/landscape-desktop.mp4" type="video/mp4" />
-        </video>
+        <HeroVideo />
         {/* Scrim for the words: heavier bottom-left, where they sit. */}
         <span
           aria-hidden="true"
@@ -67,7 +55,7 @@ export function Hero() {
         <span aria-hidden="true" className="absolute inset-x-0 top-0 hidden h-40 bg-gradient-to-b from-night/80 to-transparent md:block" />
       </div>
       <div id="content" className="frame flex flex-col gap-6 pt-6 md:flex-1 md:justify-end md:pt-6 pb-[clamp(1.5rem,6vh,4rem)] md:gap-8 md:pb-[clamp(2rem,8vh,5rem)]">
-        <h1 className="font-display text-[clamp(3.5rem,20vw,6rem)] leading-[0.84] font-bold uppercase md:text-[min(12vw,22vh)]">
+        <h1 className="hero-wordmark font-display text-[clamp(3.5rem,20vw,6rem)] leading-[0.84] font-bold uppercase md:text-[min(12vw,22vh)]">
           <span className="block">Frontier</span>
           <span className="block text-yellow">Football.</span>
         </h1>

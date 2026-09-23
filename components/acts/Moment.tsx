@@ -1,5 +1,4 @@
 import type { CSSProperties } from "react";
-import { thumbUrl } from "@/lib/album-data";
 import { marqueePhotos, statementPhoto, type HomePhoto } from "@/lib/home-photos";
 import { MomentMotion } from "@/components/motion/MomentMotion";
 
@@ -22,21 +21,17 @@ const scatter = [
   { x: 0.9, y: 0.43, r: -6 },
   { x: 0.29, y: 0.83, r: 8 },
   { x: 0.74, y: 0.86, r: -5 },
-  { x: 0.56, y: 0.1, r: 4 },
-  { x: 0.12, y: 0.78, r: -9 },
-  { x: 0.9, y: 0.74, r: 7 },
 ];
 
 function Photo({ p, width, className = "", style, eager = false }: { p: HomePhoto; width: number; className?: string; style?: CSSProperties; eager?: boolean }) {
   return (
     <img
-      src={thumbUrl(p.id, width)}
+      src={p.src}
       alt={p.alt}
       width={p.w}
       height={p.h}
       loading={eager ? "eager" : "lazy"}
       decoding="async"
-      referrerPolicy="no-referrer"
       className={className}
       style={style}
     />
@@ -58,10 +53,10 @@ function Headline() {
 export function Moment() {
   // The pan strip reuses the statement frame first, so the hand-off from the
   // zoomed photo to the strip is the same picture in the same place.
-  const strip = [statementPhoto, marqueePhotos[1], marqueePhotos[3], marqueePhotos[5]];
+  const strip = [statementPhoto, marqueePhotos[0], marqueePhotos[2], marqueePhotos[4], marqueePhotos[5]];
 
   return (
-    <section id="moment" aria-labelledby="moment-heading" className="canvas-ink relative">
+    <section id="moment" aria-labelledby="moment-heading" className="canvas-ink relative overflow-x-clip">
       <div className="moment-stage relative h-svh overflow-hidden">
         {marqueePhotos.map((p, i) => (
           <Photo

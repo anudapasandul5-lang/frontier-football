@@ -7,10 +7,15 @@ const serif = Instrument_Serif({
   weight: "400",
   style: ["normal", "italic"],
   subsets: ["latin"],
+  // The serif first appears below the hero. Do not let its two files compete
+  // with the phone LCP image and the above-fold display/body faces.
+  preload: false,
   variable: "--font-instrument-serif",
 });
 const sans = Geist({ subsets: ["latin"], variable: "--font-geist" });
-const bricolage = Bricolage_Grotesque({ subsets: ["latin"], axes: ["wdth", "opsz"], variable: "--font-bricolage" });
+// Headlines use the 75-width setting; optical size is never set. Omitting that
+// unused axis materially reduces the preloaded variable font.
+const bricolage = Bricolage_Grotesque({ subsets: ["latin"], axes: ["wdth"], variable: "--font-bricolage" });
 
 export const metadata: Metadata = {
   title: { default: "Frontier Football", template: "%s - Frontier Football" },

@@ -70,6 +70,32 @@
   }
 }
 
+/* Ticket 04's FRONTIER FOOTBALL wipe crosses the already-visible wordmark.
+   It never clips the LCP content: the earlier clip-path version made Chrome
+   defer the hero's largest paint under mobile CPU throttling. */
+.hero-wordmark {
+  position: relative;
+  isolation: isolate;
+}
+.hero-wordmark::after {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--color-yellow);
+  content: "";
+  pointer-events: none;
+  transform: scaleX(0);
+}
+:root[data-motion="on"] .hero-wordmark::after {
+  animation: hero-wordmark-wipe 480ms var(--ease-in-out) both;
+}
+@keyframes hero-wordmark-wipe {
+  0% { transform: scaleX(0); transform-origin: left; }
+  48% { transform: scaleX(1); transform-origin: left; }
+  52% { transform: scaleX(1); transform-origin: right; }
+  100% { transform: scaleX(0); transform-origin: right; }
+}
+
 /* ---------------------------------------------------------------------------
    Canvases. One per act, edge to edge (DESIGN.md). Each sets the text colour
    and --tone-muted, the colour micro-labels and secondary text take on it.
