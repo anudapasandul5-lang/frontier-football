@@ -49,6 +49,11 @@ export function manifestUrl(id: string) {
   return `/albums/${id}.json`;
 }
 
+export function albumIds(data: Raw): string[] {
+  const entries = [...((data ?? {}).seasons ?? []), ...((data ?? {}).competitions ?? []), ...((data ?? {}).watchAlongs ?? [])];
+  return [...new Set(entries.map((entry: Raw) => entry.albumId).filter((id: unknown): id is string => typeof id === "string" && /^[a-z0-9-]+$/.test(id)))];
+}
+
 function dimensions(item: Raw) {
   const w = Number(item.w);
   const h = Number(item.h);
@@ -151,4 +156,23 @@ export function albumTitle(data: Raw, id: string | null) {
     (e: Raw) => e.albumId === id,
   );
   return other?.name ?? null;
+}
+
+/* The album header uses the same verified event record as its gallery card.
+   An absent field stays absent; a watch party never gains a result. */
+export function albumStory(data: Raw, id: string | null) {
+  if (!id) return null;
+  const season = ((data ?? {}).seasons ?? []).find((s: Raw) => s.albumId === id);
+  const event = season ?? [...((data ?? {}).competitions ?? []), ...((data ?? {}).watchAlongs ?? [])].find((e: Raw) => e.albumId === id);
+  if (!event) return null;
+  return {
+    title: season ? seasonName(season.season) : event.name,
+    photo: event.photo ?? null,
+    photoAlt: event.photoAlt ?? null,
+    photoCredit: event.photoCredit ?? null,
+    champion: event.champion ?? null,
+    note: event.note ?? null,
+    date: event.date ?? null,
+    venue: event.venue ?? null,
+  };
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type KeyboardEvent } from "react";
+import { useEffect, useRef, useState, ViewTransition, type KeyboardEvent } from "react";
 import { useSearchParams } from "next/navigation";
 import raw from "@/content.js";
 import { parseContent } from "@/lib/content-data";
@@ -9,7 +9,7 @@ import {
   albumCredit,
   albumIdFromQuery,
   albumItems,
-  albumTitle,
+  albumStory,
   lightboxItems,
   manifestUrl,
   tileLabel,
@@ -19,24 +19,42 @@ import {
 const button = "min-h-11 cursor-pointer border-2 border-ink px-6 py-2 font-display text-lg leading-none uppercase hover:bg-ink hover:text-bone";
 
 type Credit = ReturnType<typeof albumCredit>;
+type Story = NonNullable<ReturnType<typeof albumStory>>;
 
-export function AlbumHead({ title, count, credit }: { title: string; count: number; credit?: Credit }) {
+export function AlbumHead({ title, count, credit, story, id }: { title: string; count: number; credit?: Credit; story?: Story | null; id?: string | null }) {
   return (
-    <div className="frame pb-10">
-      <p className="micro mb-4">Gallery</p>
-      <h1 className="font-display text-[clamp(3rem,9vw,8.75rem)] leading-[0.88] font-bold uppercase">{title}</h1>
+    <div className="canvas-ink mb-10">
+      <div className={`md:min-h-[min(75svh,760px)] ${story?.photo ? "grid md:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)]" : "flex flex-col justify-end"}`}>
+        <div className="frame flex flex-col justify-end py-10 md:py-20">
+          <p className="micro mb-5">Frontier / Gallery</p>
+          <h1 className="max-w-[15ch] font-display text-[clamp(3rem,8vw,8.5rem)] leading-[0.88] font-bold uppercase [text-wrap:balance]">{title}</h1>
+          {story?.note ? <p className="mt-6 max-w-[38ch] text-xl">{story.note}</p> : null}
+          {story?.champion ? <p className="mt-5 text-xl">Champions: <strong>{story.champion}</strong></p> : null}
+          {story?.date || story?.venue ? <p className="micro mt-5">{[story.date, story.venue].filter(Boolean).join(" / ")}</p> : null}
+          {story ? <a href="#album-photos" className="micro mt-10 w-fit border-b border-bone pb-1">Explore the photographs ↓</a> : null}
+        </div>
+        {story?.photo ? (
+          <ViewTransition name={`album-cover-${id}`} share="album-cover" default="none">
+            <figure className="relative h-[55svh] min-h-[350px] overflow-hidden md:h-full">
+              <img src={story.photo} alt={story.photoAlt ?? title} className={`size-full ${story.photo.startsWith("/albums/") ? "object-contain" : "object-cover"}`} fetchPriority="high" />
+              {story.photoCredit ? <figcaption className="absolute bottom-0 left-0 bg-ink px-4 py-2 text-xs text-bone">Photo: {story.photoCredit}</figcaption> : null}
+            </figure>
+          </ViewTransition>
+        ) : null}
+      </div>
+      <div className="frame border-t border-bone/30 py-5">
       {count > 0 ? (
-        <p className="mt-4 text-[clamp(1.125rem,1rem+0.5vw,1.5rem)] leading-[1.35]">
+        <p className="text-[clamp(1.125rem,1rem+0.5vw,1.5rem)] leading-[1.35]">
           {count.toLocaleString("en")} photographs.
         </p>
       ) : null}
       {credit?.credit ? (
-        <p className="mt-2 text-muted">
+        <p className="mt-2 text-bone/75">
           {credit.credit}.
           {credit.source ? (
             <>
               {" "}
-              <a href={credit.source} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-ink">
+              <a href={credit.source} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-yellow">
                 See the full set on ThePapare
               </a>
               .
@@ -44,9 +62,10 @@ export function AlbumHead({ title, count, credit }: { title: string; count: numb
           ) : null}
         </p>
       ) : null}
-      <a href="/gallery" className={`${button} mt-6 inline-flex items-center`}>
+      <a href="/gallery" className="micro mt-5 inline-flex min-h-11 items-center border-b border-bone hover:text-yellow">
         All albums
       </a>
+      </div>
     </div>
   );
 }
@@ -59,9 +78,14 @@ type Load = { state: "loading" } | { state: "failed" } | { state: "ready"; items
      463 SZN 3 images ask Drive at once and 462 came back empty.
    - referrerPolicy="no-referrer" on every Drive image, or Drive refuses most
      requests (1 of 12 loaded with the default policy, 12 of 12 without). */
-export function AlbumView() {
+export function QueryAlbumView() {
   const id = albumIdFromQuery(useSearchParams().toString());
-  const title = albumTitle(parseContent(raw), id);
+  return <AlbumView key={id} id={id} />;
+}
+
+export function AlbumView({ id }: { id: string | null }) {
+  const story = albumStory(parseContent(raw), id);
+  const title = story?.title ?? null;
   const [load, setLoad] = useState<Load>({ state: "loading" });
   const grid = useRef<HTMLUListElement>(null);
 
@@ -116,13 +140,13 @@ export function AlbumView() {
   if (load.state !== "ready") {
     return (
       <>
-        <AlbumHead title={title} count={0} />
+        <AlbumHead title={title} count={0} story={story} id={id} />
         {load.state === "failed" ? (
-          <p className="frame text-lg">These photographs could not be loaded just now. Try again in a moment.</p>
+          <p id="album-photos" className="frame scroll-mt-24 text-lg">These photographs could not be loaded just now. Try again in a moment.</p>
         ) : (
           // Holds the footer below the fold until the grid lands; without it the
           // grid shoved an on-screen footer down (CLS 0.19 at 412px).
-          <div className="min-h-svh" />
+          <div id="album-photos" className="min-h-svh scroll-mt-24" />
         )}
       </>
     );
@@ -130,8 +154,8 @@ export function AlbumView() {
   if (load.items.length === 0) {
     return (
       <>
-        <AlbumHead title={title} count={0} />
-        <p className="frame text-lg">Photos are on the way.</p>
+        <AlbumHead title={title} count={0} story={story} id={id} />
+        <p id="album-photos" className="frame scroll-mt-24 text-lg">Photos are on the way.</p>
       </>
     );
   }
@@ -139,7 +163,11 @@ export function AlbumView() {
   const items = load.items;
   return (
     <>
-      <AlbumHead title={title} count={items.length} credit={load.credit} />
+      <AlbumHead title={title} count={items.length} credit={load.credit} story={story} id={id} />
+      <div id="album-photos" className="frame mb-6 flex scroll-mt-24 items-end justify-between border-t-2 border-ink pt-5">
+        <h2 className="font-display text-[clamp(2rem,5vw,4rem)] leading-none uppercase">Every frame</h2>
+        <p className="micro">{items.length.toLocaleString("en")} photos</p>
+      </div>
       <Lightbox items={lightboxItems(items, title)}>
         {(open) => (
           <ul ref={grid} className="frame columns-1 gap-2 min-[461px]:columns-2 min-[701px]:columns-3 min-[1101px]:columns-4">

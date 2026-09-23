@@ -98,12 +98,11 @@ export default {
       runnerUp: "TODO",
       goldenBoot: "TODO",
       goldenGlove: "TODO",
-      // No picture yet. The SZN 5 champions post is a ThePapare photograph
-      // with their photographer's copyright watermark printed across it, so it
-      // is not ours to crop and re-use. Ask ThePapare, or use a photo of your
-      // own, then point this line at it.
-      photo: "TODO",
-      photoAlt: "TODO",
+      // Clean frame at 24s of Frontier's own 026-DaDIerCqF4H.mp4 Instagram
+      // post, whose caption identifies this SZN 5 event. ThePapare photos stay
+      // in the credited album and are never cropped into a hero.
+      photo: "/gallery/szn-5-hero.webp",
+      photoAlt: "Two 4x4 Series trophies and medals set out after SZN 5.",
       date: "TODO",
       venue: "Athlete 360",
       // Link to this season's full photo folder on Google Drive. Paste the
@@ -229,11 +228,12 @@ export default {
       // team, but not their names. Fill these in once confirmed.
       champion: "TODO",
       runnerUp: "TODO",
-      // No clean picture yet: every photo in the album carries ThePapare's
-      // watermark. Leave as "TODO" until a clean one is found on Drive or
-      // Instagram.
-      photo: "TODO",
-      photoAlt: "TODO",
+      // Owner-approved 2026-09-23: use a selected ThePapare photograph here,
+      // preserving its visible Milinda Deshan/ThePapare watermark and album
+      // credit. This file is already part of the curated local album.
+      photo: "/albums/frontier-futsal/b36221d4200375031890d20c95f5162c.webp",
+      photoAlt: "A player in black controls the ball against two defenders in teal at the Frontier Futsal Tournament.",
+      photoCredit: "Milinda Deshan / ThePapare",
       date: "TODO",
       // Club Fusion signage is visible in ThePapare's photos. Confirm before
       // writing it here.

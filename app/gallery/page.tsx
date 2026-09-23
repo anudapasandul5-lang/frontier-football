@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { ViewTransition } from "react";
 import raw from "@/content.js";
 import { parseContent, seasonName } from "@/lib/content-data";
 import { Tabs } from "@/components/motion/Tabs";
 import { PageShell } from "@/components/pages/PageShell";
+import { BandedReveal } from "@/components/primitives/BandedReveal";
 
 export const metadata: Metadata = { title: "Gallery" };
 
@@ -22,30 +25,24 @@ type Entry = {
    ink panel carrying the number and title. An album opens on this site; a card
    with no album links out to Drive; neither shows "Photos are on the way". The
    whole card is the link, and its visible text is its accessible name. */
-function Card({ entry, groupLabel }: { entry: Entry; groupLabel?: string }) {
-  const href = entry.albumId ? `/album?album=${encodeURIComponent(entry.albumId)}` : entry.driveFolder;
-  const Tag = href ? "a" : "div";
-  const external = href && !entry.albumId ? { target: "_blank", rel: "noopener noreferrer" } : {};
-
-  return (
-    <li className="flex">
-      <Tag
-        {...(href ? { href } : {})}
-        {...external}
-        className="group canvas-ink flex w-full flex-col overflow-hidden"
-      >
+function Card({ entry, groupLabel, wide = false }: { entry: Entry; groupLabel?: string; wide?: boolean }) {
+  const href = entry.albumId ? `/albums/${encodeURIComponent(entry.albumId)}` : entry.driveFolder;
+  const body = (
+    <>
         <div className="relative aspect-[16/10] overflow-hidden bg-ink">
           {entry.photo ? (
-            <img
-              src={entry.photo}
-              alt={entry.photoAlt ?? `${entry.title}.`}
-              width={800}
-              height={450}
-              loading="lazy"
-              decoding="async"
-              className="absolute inset-0 size-full object-cover object-[center_25%] transition-transform duration-250 ease-[var(--ease-out)] group-hover:scale-[1.045]"
-            />
-          ) : null}
+            entry.albumId ? (
+              <ViewTransition name={`album-cover-${entry.albumId}`} share="album-cover" default="none">
+                <BandedReveal src={entry.photo} alt={entry.photoAlt ?? `${entry.title}.`} width={800} height={450} bands={4} className="gallery-cover absolute inset-0 size-full [&>img]:h-full" imgClassName={entry.photo.startsWith("/albums/") ? "object-contain" : "object-cover object-[center_25%]"} />
+              </ViewTransition>
+            ) : (
+              <BandedReveal src={entry.photo} alt={entry.photoAlt ?? `${entry.title}.`} width={800} height={450} bands={4} className="gallery-cover absolute inset-0 size-full [&>img]:h-full" imgClassName={entry.photo.startsWith("/albums/") ? "object-contain" : "object-cover object-[center_25%]"} />
+            )
+          ) : (
+            <span aria-hidden="true" className="absolute inset-0 flex items-center justify-center px-8 text-center font-display text-[clamp(2.5rem,4vw,4rem)] leading-none font-bold uppercase text-bone/45">
+              {entry.title}
+            </span>
+          )}
         </div>
         <div className="flex flex-1 flex-col gap-2 p-5">
           {groupLabel ? <p className="micro border-b border-bone/30 pb-2">{groupLabel}</p> : null}
@@ -63,16 +60,27 @@ function Card({ entry, groupLabel }: { entry: Entry; groupLabel?: string }) {
           {entry.note ? <p className="text-[12px] text-muted">{entry.note}</p> : null}
           <p className="micro mt-auto pt-4 text-right">{href ? "View photos" : <i>Photos are on the way.</i>}</p>
         </div>
-      </Tag>
+    </>
+  );
+
+  return (
+    <li className="flex">
+      {entry.albumId ? (
+        <Link href={href!} className={`group canvas-ink flex w-full flex-col overflow-hidden border border-bone/25 ${wide ? "min-[700px]:grid min-[700px]:grid-cols-2" : ""}`}>{body}</Link>
+      ) : href ? (
+        <a href={href} target="_blank" rel="noopener noreferrer" className={`group canvas-ink flex w-full flex-col overflow-hidden border border-bone/25 ${wide ? "min-[700px]:grid min-[700px]:grid-cols-2" : ""}`}>{body}</a>
+      ) : (
+        <div className={`group canvas-ink flex w-full flex-col overflow-hidden border border-bone/25 ${wide ? "min-[700px]:grid min-[700px]:grid-cols-2" : ""}`}>{body}</div>
+      )}
     </li>
   );
 }
 
 function Grid({ entries, groupLabel }: { entries: Entry[]; groupLabel?: string }) {
   return (
-    <ul className="frame grid gap-4 min-[620px]:grid-cols-2 min-[1000px]:grid-cols-3">
+    <ul className={`frame grid gap-4 ${entries.length > 1 ? "min-[620px]:grid-cols-2 min-[1000px]:grid-cols-3" : ""}`}>
       {entries.map((entry) => (
-        <Card key={entry.title} entry={entry} groupLabel={groupLabel} />
+        <Card key={entry.title} entry={entry} groupLabel={groupLabel} wide={entries.length === 1} />
       ))}
     </ul>
   );
@@ -116,7 +124,7 @@ export default function Gallery() {
 
   return (
     <PageShell>
-      <section className="pt-8 pb-12 sm:pt-12 sm:pb-20">
+      <section className="canvas-ink pt-8 pb-12 sm:pt-12 sm:pb-20">
         <div className="frame pb-8 sm:pb-12 min-[900px]:flex min-[900px]:items-end min-[900px]:justify-between min-[900px]:gap-10">
           <div>
             <p className="micro mb-4">Our stories</p>
@@ -126,7 +134,7 @@ export default function Gallery() {
             Every photograph and clip Frontier has shared, pulled into one gallery.
           </p>
         </div>
-        {groups.length === 1 ? groups[0].panel : groups.length > 1 ? <Tabs label="Gallery sections" groups={groups} /> : null}
+        {groups.length === 1 ? groups[0].panel : groups.length > 1 ? <Tabs label="Gallery sections" groups={groups} theme="night" /> : null}
       </section>
     </PageShell>
   );

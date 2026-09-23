@@ -2,6 +2,8 @@ import { describe, it, expect } from "vitest";
 import {
   albumIdFromQuery,
   albumTitle,
+  albumStory,
+  albumIds,
   albumCredit,
   albumItems,
   lightboxItems,
@@ -9,6 +11,32 @@ import {
   thumbUrl,
   tileLabel,
 } from "./album-data";
+
+describe("albumStory", () => {
+  const data = {
+    seasons: [{ season: 5, albumId: "szn-5", champion: null, photo: "/gallery/szn-5-hero.webp", photoAlt: "SZN 5 trophies", venue: "Athlete 360", note: null, date: null }],
+    competitions: [{ name: "Frontier Futsal Tournament", albumId: "frontier-futsal", champion: null, photo: "/albums/frontier-futsal/hero.webp", photoAlt: "Players contest the ball", photoCredit: "Milinda Deshan / ThePapare", venue: null, note: null, date: null }],
+    watchAlongs: [{ name: "Final night", albumId: "final-night", photo: "/champions/final.webp", photoAlt: "Fans watching", venue: null, note: null, date: null }],
+  };
+
+  it("uses recorded cover and venue without inventing a result", () => {
+    expect(albumStory(data, "szn-5")).toMatchObject({ title: "4 x 4 Series SZN 5", photo: "/gallery/szn-5-hero.webp", champion: null, venue: "Athlete 360" });
+  });
+
+  it("keeps the tournament photographer credit without inventing a result", () => {
+    expect(albumStory(data, "frontier-futsal")).toMatchObject({ photoCredit: "Milinda Deshan / ThePapare", champion: null });
+  });
+
+  it("does not give a watch party a champion", () => {
+    expect(albumStory(data, "final-night")).toMatchObject({ title: "Final night", champion: null });
+  });
+});
+
+describe("albumIds", () => {
+  it("returns one static path per recorded safe album id", () => {
+    expect(albumIds({ seasons: [{ albumId: "szn-5" }], competitions: [{ albumId: "szn-5" }, { albumId: "frontier-futsal" }], watchAlongs: [{ albumId: "../bad" }, { albumId: null }] })).toEqual(["szn-5", "frontier-futsal"]);
+  });
+});
 
 describe("albumIdFromQuery", () => {
   it("reads the album id", () => {

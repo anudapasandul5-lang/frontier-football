@@ -39,6 +39,7 @@ function parseSeason(raw: Raw) {
     // broken-image icon inside the card.
     photo: recorded(raw.photo),
     photoAlt: recorded(raw.photoAlt),
+    photoCredit: recorded(raw.photoCredit),
     // When it ran and where. Both were added for the About page's journey and
     // both are TODO across the whole file today, so every stop renders one or
     // two lines shorter rather than printing a guess.
@@ -66,6 +67,7 @@ function parseCompetition(raw: Raw) {
     runnerUp: recorded(raw.runnerUp),
     photo: recorded(raw.photo),
     photoAlt: recorded(raw.photoAlt),
+    photoCredit: recorded(raw.photoCredit),
     // The album on this site that this card's "View photos" button opens —
     // the key of a file in public/albums/, written by `npm run albums:sync`.
     // driveFolder stays as well: it is the escape hatch to the original,
@@ -90,6 +92,7 @@ function parseWatchAlong(raw: Raw) {
     note: recorded(raw.note),
     photo: recorded(raw.photo),
     photoAlt: recorded(raw.photoAlt),
+    photoCredit: recorded(raw.photoCredit),
     // The album on this site that this card's "View photos" button opens —
     // the key of a file in public/albums/, written by `npm run albums:sync`.
     // driveFolder stays as well: it is the escape hatch to the original,
@@ -512,7 +515,7 @@ export function championRows(data: Content) {
     name: seasonName(season.season),
     champion: season.champion,
     venue: season.venue,
-    photos: season.albumId ? `/album?album=${encodeURIComponent(season.albumId)}` : season.driveFolder,
+    photos: season.albumId ? `/albums/${encodeURIComponent(season.albumId)}` : season.driveFolder,
   }));
 }
 

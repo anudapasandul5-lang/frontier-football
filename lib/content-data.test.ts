@@ -41,6 +41,7 @@ describe("parseContent", () => {
       note: "A note",
       photo: "/champions/szn-4.webp",
       photoAlt: "A description",
+      photoCredit: null,
       date: null,
       venue: null,
       driveFolder: null,
@@ -116,6 +117,7 @@ describe("parseContent", () => {
       runnerUp: null,
       photo: "/champions/turf-wars.webp",
       photoAlt: null,
+      photoCredit: null,
       date: null,
       venue: null,
       driveFolder: null,
@@ -877,7 +879,7 @@ describe("championRows", () => {
     });
     expect(championRows(data)).toEqual([
       { id: "szn-7", name: "4 x 4 Series SZN 7", champion: null, venue: null, photos: null },
-      { id: "szn-6", name: "4 x 4 Series SZN 6", champion: "Spain", venue: "Athlete 360", photos: "/album?album=szn-6" },
+      { id: "szn-6", name: "4 x 4 Series SZN 6", champion: "Spain", venue: "Athlete 360", photos: "/albums/szn-6" },
     ]);
   });
 
@@ -889,7 +891,7 @@ describe("championRows", () => {
       ],
     });
     expect(championRows(data).map((row) => row.photos)).toEqual([
-      "/album?album=szn-2",
+      "/albums/szn-2",
       "https://drive.google.com/y",
     ]);
   });
