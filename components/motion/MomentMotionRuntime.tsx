@@ -74,6 +74,11 @@ export default function MomentMotionRuntime() {
         .addLabel("pan")
         .to(strip, { x: () => -(strip.scrollWidth - stage.clientWidth), duration: 2.4 })
         .to(last, { autoAlpha: 1, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.5");
+      // This pin arrives lazily, after triggers further down (the competitions
+      // slider) have measured their starts without its 450% of scroll. Re-sort
+      // into page order and re-measure, or those starts land ~4.5 screens early.
+      ScrollTrigger.sort();
+      ScrollTrigger.refresh();
       return () => {
         ScrollTrigger.removeEventListener("refresh", measure);
         delete document.documentElement.dataset.motion;
