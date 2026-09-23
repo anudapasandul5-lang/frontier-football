@@ -29,6 +29,10 @@ const ALBUMS = {
     papareId: 10932,
     source: "https://www.thepapare.com/photos-frontier-futsal-tournament-2024/",
   },
+  "szn-5": {
+    papareId: 13152,
+    source: "https://www.thepapare.com/photos-frontier-futsal-4x4-series-szn5/",
+  },
 };
 
 const CREDIT = "Photos: ThePapare";

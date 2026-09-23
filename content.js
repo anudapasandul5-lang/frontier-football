@@ -88,10 +88,11 @@ export default {
     },
     {
       season: 5,
-      // Which album on this site the "View photos" button opens. It matches a
-      // file in public/albums/, written by `npm run albums:sync`. Leave it as
-      // "TODO" and the card still shows, saying the photos are on the way.
-      albumId: "TODO",
+      // The photos are ThePapare's (album 13152), imported with
+      // `npm run albums:papare -- szn-5`. They are watermarked, so the album
+      // credits "Photos: ThePapare" and they are never used as a hero or a
+      // card picture.
+      albumId: "szn-5",
       champion: "TODO",
       note: "TODO",
       runnerUp: "TODO",
