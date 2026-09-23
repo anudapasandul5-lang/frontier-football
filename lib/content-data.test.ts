@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import {
   championRows,
+  resultRows,
   contactRoutes,
   reach,
   stats,
@@ -871,6 +872,27 @@ describe("championRows", () => {
     expect(championRows(data).map((row) => row.photos)).toEqual([
       "/album?album=szn-2",
       "https://drive.google.com/y",
+    ]);
+  });
+});
+
+describe("resultRows", () => {
+  it("lists every season, then every competition, with nothing recorded as null", () => {
+    const data = parseContent({
+      seasons: [
+        { season: 6, champion: "Spain", runnerUp: "TODO", date: "TODO", venue: "Athlete 360", albumId: "szn-6" },
+        { season: 5, champion: "TODO", venue: "TODO", albumId: "TODO", driveFolder: "TODO" },
+      ],
+      competitions: [
+        { name: "Turf Wars", champion: "TODO", runnerUp: "TODO", date: "26 July 2025", venue: "Club Fusion" },
+        { name: "Division 0", albumId: "TODO", driveFolder: "https://drive.google.com/d" },
+      ],
+    });
+    expect(resultRows(data)).toEqual([
+      { id: "szn-6", name: "4 x 4 Series SZN 6", date: null, venue: "Athlete 360", champion: "Spain", runnerUp: null, photos: "/album?album=szn-6" },
+      { id: "szn-5", name: "4 x 4 Series SZN 5", date: null, venue: null, champion: null, runnerUp: null, photos: null },
+      { id: "turf-wars", name: "Turf Wars", date: "26 July 2025", venue: "Club Fusion", champion: null, runnerUp: null, photos: null },
+      { id: "division-0", name: "Division 0", date: null, venue: null, champion: null, runnerUp: null, photos: "https://drive.google.com/d" },
     ]);
   });
 });

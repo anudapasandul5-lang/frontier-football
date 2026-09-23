@@ -5,12 +5,13 @@ import { Nav } from "@/components/primitives/Nav";
 
 /* The frame every page except home sits in (T7). Bone, v1's cream carried to
    the v2 palette (owner, 2026-09-22): the ported pages keep their v1 layout,
-   and v1 was a light page. Nav takes the canvas colour like it does on home. */
-export function PageShell({ children }: { children: ReactNode }) {
+   and v1 was a light page. Nav takes the canvas colour like it does on home.
+   `night` puts the whole page on night mode (Events, L6). */
+export function PageShell({ children, night = false }: { children: ReactNode; night?: boolean }) {
   return (
     <>
       <SmoothScroll />
-      <div className="canvas-bone">
+      <div className={night ? "canvas-night" : "canvas-bone"}>
         <Nav />
         <main id="content">{children}</main>
       </div>

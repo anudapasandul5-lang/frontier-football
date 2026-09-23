@@ -441,7 +441,9 @@ export function outboundLinks(data: Content) {
    is the owner's running order and a "biggest number first" rule would quietly
    rearrange the page every time a figure was updated. */
 export function reach(data: Content) {
-  return data.collaborate.reach.filter((row) => row.figure && row.label);
+  return data.collaborate.reach.filter(
+    (row): row is typeof row & { figure: string; label: string } => Boolean(row.figure && row.label),
+  );
 }
 
 /* The home page's numbers, verbatim and in content.js's order.
@@ -509,7 +511,33 @@ export function championRows(data: Content) {
     name: seasonName(season.season),
     champion: season.champion,
     venue: season.venue,
-    photos: season.albumId ? `/album?album=${encodeURIComponent(season.albumId)}` : season.driveFolder,
+    photos: photosHref(season),
+  }));
+}
+
+function photosHref(row: { albumId: string | null; driveFolder: string | null }) {
+  return row.albumId ? `/album?album=${encodeURIComponent(row.albumId)}` : row.driveFolder;
+}
+
+/* The Events page's results wall: every season (newest first), then every
+   competition in content.js's order. Nothing is dropped for being unrecorded;
+   the wall prints a muted dash for it (plan Q19). Watch-alongs are not here:
+   nobody wins one.
+
+   ponytail: seasons and competitions are not interleaved by date because no
+   season has a date yet. Sort by date once they do. */
+export function resultRows(data: Content) {
+  return [
+    ...data.seasons.map((s) => ({ id: `szn-${s.season}`, name: seasonName(s.season), ...s })),
+    ...data.competitions.map((c) => ({ id: c.name!.toLowerCase().replace(/[^a-z0-9]+/g, "-"), ...c, name: c.name! })),
+  ].map((row) => ({
+    id: row.id,
+    name: row.name,
+    date: row.date,
+    venue: row.venue,
+    champion: row.champion,
+    runnerUp: row.runnerUp,
+    photos: photosHref(row),
   }));
 }
 
