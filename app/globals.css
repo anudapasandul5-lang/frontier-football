@@ -709,38 +709,6 @@
   cursor: grabbing;
 }
 
-/* The closing Follow link: a bar wipes in under it on hover, and out the far
-   side on leave (asymmetric origin, like a broadcast underline). Without a
-   fine pointer it is simply underlined. */
-.follow-link {
-  position: relative;
-  display: inline-block;
-  text-decoration: underline;
-  text-underline-offset: 0.1em;
-}
-@media (hover: hover) and (pointer: fine) {
-  .follow-link {
-    text-decoration: none;
-  }
-  .follow-link::after {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -0.06em;
-    height: 0.07em;
-    background: currentColor;
-    content: "";
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 500ms var(--ease-in-out);
-  }
-  .follow-link:hover::after,
-  .follow-link:focus-visible::after {
-    transform: scaleX(1);
-    transform-origin: left;
-  }
-}
-
 
 /* Floating header (home): fixed, tone-aware, hides on the way down. */
 .site-header {
@@ -792,13 +760,6 @@ body:has(#hero)::after {
   .hero-weave {
     row-gap: 19.5vw;
   }
-}
-
-/* The closing sign-off: two lines set to span the viewport. */
-.closing-mark {
-  font-size: 25.8vw;
-  letter-spacing: -0.02em;
-  margin-bottom: -0.06em;
 }
 
 /* The Community chapter’s league name, sized to its column. */
