@@ -162,22 +162,6 @@ export default function WhoWeAre() {
         </div>
       </section>
 
-      <section aria-label="Frontier on the pitch" className="canvas-night py-12 sm:py-20">
-        <div className="frame">
-          <figure className="max-w-5xl">
-            <img
-              src="/gallery/p11.webp"
-              alt="Players on the pitch at a Frontier Football event."
-              width={1280}
-              height={658}
-              loading="lazy"
-              decoding="async"
-              className="block aspect-video w-full object-cover"
-            />
-            <figcaption className="micro mt-4">Frontier, on the pitch.</figcaption>
-          </figure>
-        </div>
-      </section>
 
       {/* The owner's own words, from the 4x4 Series proposal deck (2026-09-10).
           v1's green band; ink now (strict bone/ink, owner 2026-09-22). */}
