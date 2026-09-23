@@ -11,11 +11,17 @@ const NO_JS_CSS = ".tabs-bar{display:none}.tabs-panel,.tabs-heading{display:bloc
    heading-per-panel fallback swapped for the taller tab bar shifted the page
    82px at 412px wide, CLS 0.10). With JS off, the <noscript> style above takes
    over, so nothing is unreachable. */
-export function Tabs({ label, groups }: { label: string; groups: { id: string; label: string; panel: ReactNode }[] }) {
+export function Tabs({ label, groups, theme = "bone" }: { label: string; groups: { id: string; label: string; panel: ReactNode }[]; theme?: "bone" | "night" }) {
   const [selected, setSelected] = useState(0);
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
 
   const select = (index: number, focus = false) => {
+    // A tab press is a high-frequency navigation action: reveal its hidden
+    // photos before showing the panel, so the panel change itself is instant.
+    document.getElementById(`panel-${groups[index].id}`)?.querySelectorAll("[data-reveal]").forEach((el) => {
+      el.classList.remove("is-pre");
+      el.classList.add("is-revealed");
+    });
     setSelected(index);
     if (focus) tabs.current[index]?.focus();
   };
@@ -48,7 +54,7 @@ export function Tabs({ label, groups }: { label: string; groups: { id: string; l
             aria-selected={i === selected}
             tabIndex={i === selected ? 0 : -1}
             onClick={() => select(i)}
-            className="min-h-11 cursor-pointer border-2 border-ink px-6 py-2 font-display text-[clamp(1.125rem,1rem+0.5vw,1.5rem)] leading-none uppercase aria-selected:bg-ink aria-selected:text-bone"
+            className={`min-h-11 cursor-pointer border-2 px-6 py-2 font-display text-[clamp(1.125rem,1rem+0.5vw,1.5rem)] leading-none uppercase ${theme === "night" ? "border-bone/65 aria-selected:bg-bone aria-selected:text-ink" : "border-ink aria-selected:bg-ink aria-selected:text-bone"}`}
           >
             {g.label}
           </button>

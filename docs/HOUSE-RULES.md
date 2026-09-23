@@ -152,9 +152,12 @@ applied before resizing to 1280px wide:
 | Norway vs England | `DSC_2912.jpg` | none |
 | UCL Final Night | `DSC_4069.jpg` | 24% (large crest + MAIN, matches the table above) |
 
-SZN 5 stays text-only: `driveFolder` is `TODO` (no folder to pull a frame from) and its only
-champions-post photo carries ThePapare's watermark (section above). Nothing to crop until one
-of those changes.
+SZN 5 has a clean cover frame from Frontier's own `026-DaDIerCqF4H.mp4` event
+video (24s, trophy table); `driveFolder` is still `TODO`. Its watermarked
+ThePapare photographs stay in the credited album. Frontier Futsal Tournament
+uses an already-imported ThePapare photograph as its cover by owner decision
+on 2026-09-23: keep the Milinda Deshan/ThePapare watermark fully visible and
+show the photographer credit beside it.
 
 **SZN 5's champions post is not ours.** `025-DZsCdd6is2X.jpg` carries a
 "©Ashan Senevirath… www.thepapare.com" watermark across the team. Cropping it

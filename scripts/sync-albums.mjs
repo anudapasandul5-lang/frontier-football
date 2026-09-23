@@ -27,12 +27,14 @@ const OUT = resolve(dirname(fileURLToPath(import.meta.url)), "../public/albums")
    and the same one album.html reads from its query string.
 
    Deliberately absent: SZN 5 and Turf Wars have no photo folder in Drive at
-   all, so their cards keep the "Photos are on the way." line rather than
-   linking at an empty page. Also absent, pending the owner confirming which
-   card each belongs to: `4x4 Photos` (1HGXOPq8HVLiX7bg1WXkzT7IJwdeIrpJs, 88
-   files) and `Frontier Watch Along @ Main`
-   (1PCXYIZOqqoCEZtUHtnjvnIH_b3aYx6Tv, 18). Adding a line here is all each one
-   needs once the mapping is settled. */
+   all. SZN 5's album is ThePapare's, imported by scripts/papare-import.mjs;
+   Turf Wars keeps the "Photos are on the way." line rather than linking at an
+   empty page. Also absent: `4x4 Photos` (1HGXOPq8HVLiX7bg1WXkzT7IJwdeIrpJs,
+   88 files), pending the owner confirming which card it belongs to, and
+   `Frontier Watch Along @ Main - Man City vs Arsenal`
+   (1PCXYIZOqqoCEZtUHtnjvnIH_b3aYx6Tv), which holds only voice notes and
+   videos, no photographs (audited 2026-09-23). Adding a line here is all a
+   folder needs once its mapping is settled. */
 const ALBUMS = {
   "szn-1": "18fxPlbuFWK1KWtKPedgNnm3DbIxw4VKW",
   "szn-2": "1G5VcXwTNeIMI_K7eSrRf0ndZalg_8S66",

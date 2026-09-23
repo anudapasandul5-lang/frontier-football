@@ -42,6 +42,7 @@ describe("parseContent", () => {
       note: "A note",
       photo: "/champions/szn-4.webp",
       photoAlt: "A description",
+      photoCredit: null,
       date: null,
       venue: null,
       driveFolder: null,
@@ -117,11 +118,27 @@ describe("parseContent", () => {
       runnerUp: null,
       photo: "/champions/turf-wars.webp",
       photoAlt: null,
+      photoCredit: null,
       date: null,
       venue: null,
       driveFolder: null,
       albumId: null,
+      beforeSeries: false,
     });
+  });
+
+  // A competition that ran before the 4x4 Series leads the gallery tabs and
+  // the About timeline. Only a literal true counts, so a stray "TODO" never
+  // reorders either.
+  it("reads beforeSeries as a strict yes", () => {
+    const { competitions } = parseContent({
+      competitions: [
+        { name: "Frontier Futsal Tournament", beforeSeries: true },
+        { name: "Turf Wars", beforeSeries: "TODO" },
+        { name: "Division 0" },
+      ],
+    });
+    expect(competitions.map((c) => c.beforeSeries)).toEqual([true, false, false]);
   });
 
   it("reads more than one competition, in the order written", () => {
@@ -335,18 +352,23 @@ describe("link placeholder flag", () => {
 });
 
 describe("journey", () => {
-  it("puts Turf Wars first, then the seasons oldest first, then the other competitions", () => {
+  it("puts the competitions that came before the series first, then the seasons oldest first, then the rest", () => {
     // The About page tells the story forward. content.js lists seasons newest
     // first because that is the order the champions grid wants, so the ordering
     // lives here rather than in the file the owner edits.
     const stops = journey(
       parseContent({
         seasons: [{ season: 3 }, { season: 2 }, { season: 1 }],
-        competitions: [{ name: "Turf Wars" }, { name: "Division 0" }],
+        competitions: [
+          { name: "Frontier Futsal Tournament", beforeSeries: true },
+          { name: "Turf Wars", beforeSeries: true },
+          { name: "Division 0" },
+        ],
       }),
     );
 
     expect(stops.map((stop) => stop.name)).toEqual([
+      "Frontier Futsal Tournament",
       "Turf Wars",
       "4 x 4 Series SZN 1",
       "4 x 4 Series SZN 2",
@@ -858,7 +880,7 @@ describe("championRows", () => {
     });
     expect(championRows(data)).toEqual([
       { id: "szn-7", name: "4 x 4 Series SZN 7", champion: null, venue: null, photos: null },
-      { id: "szn-6", name: "4 x 4 Series SZN 6", champion: "Spain", venue: "Athlete 360", photos: "/album?album=szn-6" },
+      { id: "szn-6", name: "4 x 4 Series SZN 6", champion: "Spain", venue: "Athlete 360", photos: "/albums/szn-6" },
     ]);
   });
 
@@ -870,7 +892,7 @@ describe("championRows", () => {
       ],
     });
     expect(championRows(data).map((row) => row.photos)).toEqual([
-      "/album?album=szn-2",
+      "/albums/szn-2",
       "https://drive.google.com/y",
     ]);
   });
@@ -889,7 +911,7 @@ describe("resultRows", () => {
       ],
     });
     expect(resultRows(data)).toEqual([
-      { id: "szn-6", name: "4 x 4 Series SZN 6", date: null, venue: "Athlete 360", champion: "Spain", runnerUp: null, photos: "/album?album=szn-6" },
+      { id: "szn-6", name: "4 x 4 Series SZN 6", date: null, venue: "Athlete 360", champion: "Spain", runnerUp: null, photos: "/albums/szn-6" },
       { id: "szn-5", name: "4 x 4 Series SZN 5", date: null, venue: null, champion: null, runnerUp: null, photos: null },
       { id: "turf-wars", name: "Turf Wars", date: "26 July 2025", venue: "Club Fusion", champion: null, runnerUp: null, photos: null },
       { id: "division-0", name: "Division 0", date: null, venue: null, champion: null, runnerUp: null, photos: "https://drive.google.com/d" },

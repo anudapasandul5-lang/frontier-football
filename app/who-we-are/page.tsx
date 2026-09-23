@@ -134,7 +134,7 @@ export default function WhoWeAre() {
     <PageShell>
       <section className="pt-10 pb-12 md:pt-20 md:pb-32">
         <div className="frame relative md:min-h-[62vh]">
-          <p className="micro mb-5">Colombo, since 2024</p>
+          <p className="micro mb-5">Since the Frontier Futsal Tournament</p>
           <h1 className="relative z-[1] font-display text-[min(clamp(2.5rem,13vw,13.75rem),20vh)] leading-[0.88] font-bold uppercase">
             Who we
             <br />
@@ -189,7 +189,7 @@ export default function WhoWeAre() {
         <div className="frame">
           <h2 className={h2}>The run so far</h2>
           <p className="mt-6 max-w-[52ch] text-[15px] leading-relaxed">
-            Frontier has run small-sided tournaments and watch parties in Colombo. Where a champion, a month or
+            The Frontier Futsal Tournament first, then Turf Wars, then the 4x4 Series, with the watch parties running alongside it. Where a champion, a month or
             a venue is missing, nobody has written it down yet.
           </p>
           <ol className="mt-15">

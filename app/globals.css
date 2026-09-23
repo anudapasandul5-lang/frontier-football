@@ -249,6 +249,26 @@
   }
 }
 
+/* Gallery covers carry one named photo into the album header. Other routes
+   remain instant; reduced motion bypasses the shared-element animation. */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-group(.album-cover) {
+    animation-duration: 260ms;
+    animation-timing-function: var(--ease-in-out);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(.album-cover),
+  ::view-transition-old(.album-cover),
+  ::view-transition-new(.album-cover) {
+    animation-duration: 0.01ms !important;
+  }
+}
+:root[data-motion="on"] .gallery-cover.is-revealed .banded__cover {
+  transition-duration: 420ms;
+  transition-delay: calc(var(--i) * 45ms);
+}
+
 /* Act 3's centre photo is a card on the still page. Once motion is on it is a
    full-bleed window that MomentMotion shrinks back to the card and opens.
    Unlayered, so it beats the card's utilities. */

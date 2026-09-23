@@ -5,6 +5,7 @@ import raw from "@/content.js";
 import { parseContent, seasonName } from "@/lib/content-data";
 import { Tabs } from "@/components/motion/Tabs";
 import { PageShell } from "@/components/pages/PageShell";
+import { BandedReveal } from "@/components/primitives/BandedReveal";
 
 export const metadata: Metadata = { title: "Gallery" };
 
@@ -24,35 +25,25 @@ type Entry = {
    ink panel carrying the number and title. An album opens on this site; a card
    with no album links out to Drive; neither shows "Photos are on the way". The
    whole card is the link, and its visible text is its accessible name. */
-function Card({ entry, groupLabel }: { entry: Entry; groupLabel?: string }) {
-  const href = entry.albumId ? `/album?album=${encodeURIComponent(entry.albumId)}` : entry.driveFolder;
-  // L0 SPIKE: on-site albums are client-side <Link>s so the card photo can
-  // morph into the album hero (React <ViewTransition>, shared name).
-  const Tag = entry.albumId ? Link : href ? "a" : "div";
-  const external = href && !entry.albumId ? { target: "_blank", rel: "noopener noreferrer" } : {};
-
-  return (
-    <li className="flex">
-      <Tag
-        {...((href ? { href } : {}) as { href: string })}
-        {...external}
-        className="group canvas-ink flex w-full flex-col overflow-hidden"
-      >
-        <ViewTransition name={entry.albumId ? `album-${entry.albumId}` : undefined} share="morph" default="none">
+function Card({ entry, groupLabel, wide = false }: { entry: Entry; groupLabel?: string; wide?: boolean }) {
+  const href = entry.albumId ? `/albums/${encodeURIComponent(entry.albumId)}` : entry.driveFolder;
+  const body = (
+    <>
         <div className="relative aspect-[16/10] overflow-hidden bg-ink">
           {entry.photo ? (
-            <img
-              src={entry.photo}
-              alt={entry.photoAlt ?? `${entry.title}.`}
-              width={800}
-              height={450}
-              loading="lazy"
-              decoding="async"
-              className="absolute inset-0 size-full object-cover object-[center_25%] transition-transform duration-250 ease-[var(--ease-out)] group-hover:scale-[1.045]"
-            />
-          ) : null}
+            entry.albumId ? (
+              <ViewTransition name={`album-cover-${entry.albumId}`} share="album-cover" default="none">
+                <BandedReveal src={entry.photo} alt={entry.photoAlt ?? `${entry.title}.`} width={800} height={450} bands={4} className="gallery-cover absolute inset-0 size-full [&>img]:h-full" imgClassName={entry.photo.startsWith("/albums/") ? "object-contain" : "object-cover object-[center_25%]"} />
+              </ViewTransition>
+            ) : (
+              <BandedReveal src={entry.photo} alt={entry.photoAlt ?? `${entry.title}.`} width={800} height={450} bands={4} className="gallery-cover absolute inset-0 size-full [&>img]:h-full" imgClassName={entry.photo.startsWith("/albums/") ? "object-contain" : "object-cover object-[center_25%]"} />
+            )
+          ) : (
+            <span aria-hidden="true" className="absolute inset-0 flex items-center justify-center px-8 text-center font-display text-[clamp(2.5rem,4vw,4rem)] leading-none font-bold uppercase text-bone/45">
+              {entry.title}
+            </span>
+          )}
         </div>
-        </ViewTransition>
         <div className="flex flex-1 flex-col gap-2 p-5">
           {groupLabel ? <p className="micro border-b border-bone/30 pb-2">{groupLabel}</p> : null}
           <p aria-hidden="true" className="mt-2 font-display text-[clamp(3.5rem,7vw,5.75rem)] leading-none font-bold">
@@ -69,16 +60,27 @@ function Card({ entry, groupLabel }: { entry: Entry; groupLabel?: string }) {
           {entry.note ? <p className="text-[12px] text-muted">{entry.note}</p> : null}
           <p className="micro mt-auto pt-4 text-right">{href ? "View photos" : <i>Photos are on the way.</i>}</p>
         </div>
-      </Tag>
+    </>
+  );
+
+  return (
+    <li className="flex">
+      {entry.albumId ? (
+        <Link href={href!} className={`group canvas-ink flex w-full flex-col overflow-hidden border border-bone/25 ${wide ? "min-[700px]:grid min-[700px]:grid-cols-2" : ""}`}>{body}</Link>
+      ) : href ? (
+        <a href={href} target="_blank" rel="noopener noreferrer" className={`group canvas-ink flex w-full flex-col overflow-hidden border border-bone/25 ${wide ? "min-[700px]:grid min-[700px]:grid-cols-2" : ""}`}>{body}</a>
+      ) : (
+        <div className={`group canvas-ink flex w-full flex-col overflow-hidden border border-bone/25 ${wide ? "min-[700px]:grid min-[700px]:grid-cols-2" : ""}`}>{body}</div>
+      )}
     </li>
   );
 }
 
 function Grid({ entries, groupLabel }: { entries: Entry[]; groupLabel?: string }) {
   return (
-    <ul className="frame grid gap-4 min-[620px]:grid-cols-2 min-[1000px]:grid-cols-3">
+    <ul className={`frame grid gap-4 ${entries.length > 1 ? "min-[620px]:grid-cols-2 min-[1000px]:grid-cols-3" : ""}`}>
       {entries.map((entry) => (
-        <Card key={entry.title} entry={entry} groupLabel={groupLabel} />
+        <Card key={entry.title} entry={entry} groupLabel={groupLabel} wide={entries.length === 1} />
       ))}
     </ul>
   );
@@ -102,24 +104,27 @@ export default function Gallery() {
   const watch: Entry[] = data.watchAlongs.filter((w) => w.name).map((w, i) => ({ title: w.name!, number: String(i + 1).padStart(2, "0"), ...pick(w) }));
 
   const groups: { id: string; label: string; panel: React.ReactNode }[] = [];
-  if (seasons.length > 0) groups.push({ id: "series", label: "4x4 Series", panel: <Grid entries={seasons} groupLabel="4x4 Series" /> });
-  // Reserve Watch Parties' id too, so a competition named "Watch Parties"
-  // cannot take it first.
-  const used = new Set([...groups.map((g) => g.id), "watch-parties"]);
-  data.competitions.forEach((c, i) => {
-    if (!c.name) return; // a card with no name has nothing to say
+  // Reserve the series and Watch Parties ids, so a competition named either
+  // cannot take them first.
+  const used = new Set(["series", "watch-parties"]);
+  const competitionTabs = data.competitions.map((c, i) => {
     // "Division 0" and "Division-0" both appear in content.js history and slug
     // the same; de-duplicate so no two tabs share an id.
-    let id = c.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+    let id = c.name!.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
     if (!id || used.has(id)) id = `competition-${i}`;
     used.add(id);
-    groups.push({ id, label: c.name, panel: <Grid entries={[{ title: c.name, number: "01", champion: c.champion, ...pick(c) }]} /> });
+    return { first: c.beforeSeries, id, label: c.name!, panel: <Grid entries={[{ title: c.name!, number: "01", champion: c.champion, ...pick(c) }]} /> };
   });
+  // Competitions that ran before the series (Frontier Futsal Tournament, Turf
+  // Wars) lead, then the series, then the rest, each in content.js order.
+  groups.push(...competitionTabs.filter((t) => t.first));
+  if (seasons.length > 0) groups.push({ id: "series", label: "4x4 Series", panel: <Grid entries={seasons} groupLabel="4x4 Series" /> });
+  groups.push(...competitionTabs.filter((t) => !t.first));
   if (watch.length > 0) groups.push({ id: "watch-parties", label: "Watch Parties", panel: <Grid entries={watch} groupLabel="Watch Parties" /> });
 
   return (
     <PageShell>
-      <section className="pt-8 pb-12 sm:pt-12 sm:pb-20">
+      <section className="canvas-ink pt-8 pb-12 sm:pt-12 sm:pb-20">
         <div className="frame pb-8 sm:pb-12 min-[900px]:flex min-[900px]:items-end min-[900px]:justify-between min-[900px]:gap-10">
           <div>
             <p className="micro mb-4">Our stories</p>
@@ -129,7 +134,7 @@ export default function Gallery() {
             Every photograph and clip Frontier has shared, pulled into one gallery.
           </p>
         </div>
-        {groups.length === 1 ? groups[0].panel : groups.length > 1 ? <Tabs label="Gallery sections" groups={groups} /> : null}
+        {groups.length === 1 ? groups[0].panel : groups.length > 1 ? <Tabs label="Gallery sections" groups={groups} theme="night" /> : null}
       </section>
     </PageShell>
   );

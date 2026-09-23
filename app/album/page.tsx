@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { AlbumHead, AlbumView } from "@/components/motion/AlbumView";
+import { AlbumHead, QueryAlbumView } from "@/components/motion/AlbumView";
 import { PageShell } from "@/components/pages/PageShell";
 
 export const metadata: Metadata = { title: "Album" };
@@ -25,7 +25,7 @@ export default function Album() {
             </>
           }
         >
-          <AlbumView />
+          <QueryAlbumView />
         </Suspense>
       </section>
     </PageShell>

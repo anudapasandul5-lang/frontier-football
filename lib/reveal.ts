@@ -63,4 +63,5 @@ export function wireReveal(elements: Iterable<Element>) {
     el.classList.add("is-pre");
     observer.observe(el);
   }
+  return () => observer.disconnect();
 }
