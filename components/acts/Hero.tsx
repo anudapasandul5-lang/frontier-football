@@ -30,7 +30,6 @@ export function Hero() {
       id="hero"
       data-tone="ink"
       data-chapter="Home"
-      data-cursor="Drag"
       className="canvas-bone relative isolate flex min-h-svh touch-pan-y flex-col overflow-hidden select-none"
     >
       <Nav crestPriority floating />

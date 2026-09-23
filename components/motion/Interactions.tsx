@@ -128,7 +128,7 @@ export function Interactions() {
       const c = cursor.current;
       if (!c || !pointerFx()) return;
       // A link or button speaks for itself: it only carries a label it names,
-      // never one inherited from the section around it (the hero’s "Drag").
+      // never one inherited from the section around it.
       const link = target?.closest<HTMLElement>("a, button");
       const labelled = link ? (link.dataset.cursor ? link : null) : target?.closest<HTMLElement>("[data-cursor]");
       const interactive = link ?? labelled;
