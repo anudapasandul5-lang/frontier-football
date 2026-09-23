@@ -2,6 +2,7 @@ import raw from "@/content.js";
 import { championRows, parseContent, seasonName } from "@/lib/content-data";
 import { BandedReveal } from "@/components/primitives/BandedReveal";
 import { ResultsTable, Unrecorded } from "@/components/primitives/ResultsTable";
+import { SplitReveal } from "@/components/primitives/SplitReveal";
 import { TickRule } from "@/components/primitives/TickRule";
 
 /* Act 6, United's World Champions: a condensed headline, one photograph in the
@@ -18,17 +19,16 @@ export function Champions() {
   const latest = data.seasons.find((s) => s.champion && s.photo);
 
   return (
-    <section id="champions" aria-labelledby="champions-heading" className="canvas-ink py-[clamp(4rem,14vh,9rem)]">
+    <section id="champions" data-tone="bone" aria-labelledby="champions-heading" className="canvas-ink py-[clamp(4rem,14vh,9rem)]">
       <div className="frame flex flex-col gap-[clamp(3rem,10vh,6rem)]">
         <TickRule />
         <div className="grid gap-10 md:grid-cols-[minmax(0,11fr)_minmax(0,9fr)]">
-          <h2
-            id="champions-heading"
-            className="font-display text-[clamp(3rem,min(9vw,15svh),7.5rem)] leading-[0.88] font-bold text-balance uppercase"
-          >
-            Every season, and who won it.
-          </h2>
-          {latest ? (
+            <SplitReveal
+              id="champions-heading"
+              lines={["Every season,", "and who won it."]}
+              className="font-display text-[clamp(3rem,min(9vw,15svh),7.5rem)] leading-[0.88] font-bold uppercase"
+            />
+            {latest ? (
             <figure className="flex flex-col gap-3 md:mt-[clamp(3rem,12vh,8rem)]">
               <BandedReveal
                 as="span"
@@ -43,7 +43,7 @@ export function Champions() {
                 {seasonName(latest.season)} champions, {latest.champion}
               </figcaption>
             </figure>
-          ) : null}
+            ) : null}
         </div>
         <ResultsTable
           caption="4 x 4 Series champions, newest season first"
@@ -55,6 +55,8 @@ export function Champions() {
           ]}
           rows={rows.map((row) => ({
             id: row.id,
+            // A season’s photo follows the pointer over its row (opus55).
+            preview: data.seasons.find((s) => `szn-${s.season}` === row.id)?.photo ?? undefined,
             cells: {
               season: row.name,
               champion: row.champion ?? <Unrecorded />,

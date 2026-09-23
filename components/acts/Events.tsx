@@ -12,7 +12,7 @@ export function Events({ events }: { events: Event[] }) {
   if (events.length === 0) return null;
 
   return (
-    <section id="events" aria-labelledby="events-heading" className="canvas-ink pb-[clamp(4rem,14vh,9rem)]">
+    <section id="events" data-tone="bone" aria-labelledby="events-heading" className="canvas-ink pb-[clamp(4rem,14vh,9rem)]">
       <div className="frame flex flex-col gap-[clamp(2.5rem,8vh,5rem)]">
         <TickRule />
         <h2

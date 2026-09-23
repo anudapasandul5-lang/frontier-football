@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
 export type Column = { key: string; label: string; className?: string };
-export type Row = { id: string; cells: Record<string, ReactNode> };
+export type Row = { id: string; cells: Record<string, ReactNode>; preview?: string };
 
 /* United's results table: condensed caps, one hairline between rows, generous
    row height. Below 640px each row folds into a two-column block; explicit
@@ -36,6 +36,7 @@ export function ResultsTable({
           <tr
             role="row"
             key={row.id}
+            data-preview={row.preview}
             className={`border-t border-current/25 max-sm:grid max-sm:gap-x-4 max-sm:py-4 ${
               labelled ? "max-sm:grid-cols-2 max-sm:gap-y-3" : "max-sm:grid-cols-[minmax(0,1fr)_auto] max-sm:gap-y-1"
             }`}

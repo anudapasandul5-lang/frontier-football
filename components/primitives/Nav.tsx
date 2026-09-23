@@ -19,10 +19,20 @@ export const pages = [
 
    Instagram is looked up from content.js rather than typed here, so blanking
    its url there removes the link instead of shipping a dead one. */
-export function Nav({ crestPriority = false }: { crestPriority?: boolean }) {
+/* `floating` (home, opus55): the header is fixed, takes the text colour of
+   whatever canvas is under it (Interactions.tsx sets data-ui-tone), slides
+   away while the reader scrolls down and returns on the way up. A spacer
+   keeps the hero's layout where the header used to sit. */
+export function Nav({ crestPriority = false, floating = false }: { crestPriority?: boolean; floating?: boolean }) {
   const instagram = outboundLinks(parseContent(raw)).find((link) => link.name === "Instagram");
   return (
-    <header className="frame relative z-10 flex h-20 items-center justify-between">
+    <>
+    {floating ? <div aria-hidden="true" className="h-20" /> : null}
+    <header
+      data-floating={floating || undefined}
+      className={floating ? "site-header" : "frame relative z-10 flex h-20 items-center justify-between"}
+    >
+      <div className={floating ? "frame flex h-20 items-center justify-between" : "contents"}>
       <a href="/" className="block" aria-label="Frontier Football, home">
         <img
           src="/crest.webp"
@@ -34,6 +44,8 @@ export function Nav({ crestPriority = false }: { crestPriority?: boolean }) {
         />
       </a>
       <Menu instagram={instagram?.url ? { url: instagram.url, handle: instagram.handle ?? "" } : null} />
+      </div>
     </header>
+    </>
   );
 }

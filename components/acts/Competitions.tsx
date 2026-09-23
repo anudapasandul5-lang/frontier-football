@@ -62,7 +62,7 @@ export function Competitions() {
     });
 
   return (
-    <div id="competitions" className="relative overflow-hidden">
+    <div id="competitions" data-tone="ink" data-chapter="Events" className="relative overflow-hidden">
       <div className="competitions-track">
         {panels.map((p) => (
           <ColourField key={p.tone} tone={p.tone} labelledBy={`field-${p.tone}`} className="relative isolate overflow-hidden">

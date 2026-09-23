@@ -447,3 +447,362 @@
     animation: none !important;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Home microinteractions (opus55-redesign). Every moving pre-state is scoped
+   under :root[data-motion="on"], so JS off and reduced motion get the still
+   page. Pointer effects are also gated on a fine pointer.
+   ------------------------------------------------------------------------- */
+
+/* Split reveal: each word rises out of its own line. The padding and matching
+   negative margin give descenders room inside the clip at 0.88 leading. */
+.split__w {
+  display: inline-block;
+  overflow: hidden;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+  vertical-align: top;
+}
+.split__i {
+  display: inline-block;
+}
+:root[data-motion="on"] .split.is-pre .split__i {
+  transform: translateY(108%);
+}
+:root[data-motion="on"] .split.is-revealed .split__i {
+  transform: none;
+  transition: transform 1000ms var(--ease-out) var(--d, 0ms);
+}
+
+/* Rolling label: the text slides up, its copy rolls in from below. */
+.roll {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+}
+.roll__in {
+  position: relative;
+  display: block;
+}
+.roll__copy {
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+@media (hover: hover) and (pointer: fine) {
+  :root[data-motion="on"] .roll__in {
+    transition: transform 420ms var(--ease-out);
+  }
+  :root[data-motion="on"] :is(a, button):is(:hover, :focus-visible) .roll__in {
+    transform: translateY(-100%);
+  }
+}
+
+/* Buttons: magnetic (Interactions.tsx sets `translate`), pressed with `scale`.
+   Separate properties, so neither overwrites the other. */
+.btn {
+  transition:
+    scale 160ms var(--ease-out),
+    background-color 200ms ease,
+    color 200ms ease;
+}
+.btn:active {
+  scale: 0.96;
+}
+
+/* The cursor: a square frame, like everything else here (0px corners), that
+   trails the pointer and opens into a filled label over things you can use. */
+.cursor,
+.row-preview {
+  display: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  :root[data-motion="on"] .cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 70;
+    display: block;
+    pointer-events: none;
+    color: var(--color-bone);
+  }
+  :root[data-motion="on"] .cursor[data-ui-tone="ink"] {
+    color: var(--color-ink);
+  }
+  .cursor__ring {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 22px;
+    height: 22px;
+    border: 1.5px solid currentColor;
+    translate: -50% -50%;
+    transition:
+      width 260ms var(--ease-out),
+      height 260ms var(--ease-out),
+      background-color 200ms ease,
+      scale 160ms var(--ease-out),
+      opacity 200ms ease;
+  }
+  .cursor[data-state="hover"] .cursor__ring {
+    width: 48px;
+    height: 48px;
+  }
+  .cursor[data-labelled="true"] .cursor__ring {
+    width: 84px;
+    height: 84px;
+    background-color: currentColor;
+  }
+  .cursor[data-pressed] .cursor__ring {
+    scale: 0.85;
+  }
+  .cursor[data-state="gone"] .cursor__ring {
+    opacity: 0;
+  }
+  .cursor__label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    translate: -50% -50%;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--color-ink);
+    opacity: 0;
+    transition: opacity 160ms ease;
+  }
+  .cursor[data-ui-tone="ink"] .cursor__label {
+    color: var(--color-bone);
+  }
+  .cursor[data-labelled="true"] .cursor__label {
+    opacity: 1;
+    transition-delay: 80ms;
+  }
+
+  /* A season's photo following the pointer over its results row. */
+  :root[data-motion="on"] .row-preview {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 60;
+    display: block;
+    width: clamp(180px, 18vw, 280px);
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    pointer-events: none;
+    opacity: 0;
+    scale: 0.9;
+    transition:
+      opacity 200ms ease,
+      scale 300ms var(--ease-out);
+  }
+  :root[data-motion="on"] .row-preview[data-show="true"] {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+/* Results rows that carry a preview slide their first cell on hover. */
+@media (hover: hover) and (pointer: fine) {
+  [data-preview] td {
+    transition: translate 300ms var(--ease-out);
+  }
+  [data-preview]:hover td:first-child {
+    translate: 12px 0;
+  }
+  [data-preview]:hover {
+    border-top-color: currentColor;
+  }
+}
+
+/* Chapter indicator: bottom left, where the reader is and how far along. */
+.chapter-indicator {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 40;
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  width: 120px;
+  pointer-events: none;
+  color: var(--color-bone);
+  transition:
+    color 200ms ease,
+    opacity 300ms ease;
+}
+.chapter-indicator[data-show="false"] {
+  opacity: 0;
+}
+.chapter-indicator[data-ui-tone="ink"] {
+  color: var(--color-ink);
+}
+/* Only where the page has a gutter wide enough to hold it clear of the
+   1170px frame. */
+@media (width >= 90rem) {
+  .chapter-indicator {
+    display: flex;
+  }
+}
+.chapter-indicator__text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+:root[data-motion="on"] .chapter-indicator__text {
+  animation: chapter-in 500ms var(--ease-out) both;
+}
+@keyframes chapter-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+.chapter-indicator__rule {
+  width: 16px;
+  height: 1px;
+  background: currentColor;
+}
+.chapter-indicator__track {
+  position: relative;
+  display: block;
+  height: 2px;
+  background: color-mix(in srgb, currentColor 25%, transparent);
+}
+.chapter-indicator__bar {
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+/* Hero scroll cue: a short rule with a segment running down it. */
+.hero-cue__line {
+  position: relative;
+  display: block;
+  width: 1px;
+  height: 36px;
+  overflow: hidden;
+  background: color-mix(in srgb, currentColor 30%, transparent);
+}
+.hero-cue__line::after {
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+  content: "";
+  transform: scaleY(0.35);
+  transform-origin: top;
+}
+:root[data-motion="on"] .hero-cue__line::after {
+  animation: cue 1.8s var(--ease-in-out) infinite;
+}
+@keyframes cue {
+  0% { transform: translateY(-100%) scaleY(0.35); }
+  100% { transform: translateY(100%) scaleY(0.35); }
+}
+/* Grabbing while the trophy is being dragged. */
+#hero[data-dragging] {
+  cursor: grabbing;
+}
+
+/* The closing Follow link: a bar wipes in under it on hover, and out the far
+   side on leave (asymmetric origin, like a broadcast underline). Without a
+   fine pointer it is simply underlined. */
+.follow-link {
+  position: relative;
+  display: inline-block;
+  text-decoration: underline;
+  text-underline-offset: 0.1em;
+}
+@media (hover: hover) and (pointer: fine) {
+  .follow-link {
+    text-decoration: none;
+  }
+  .follow-link::after {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.06em;
+    height: 0.07em;
+    background: currentColor;
+    content: "";
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 500ms var(--ease-in-out);
+  }
+  .follow-link:hover::after,
+  .follow-link:focus-visible::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+
+/* Floating header (home): fixed, tone-aware, hides on the way down. */
+.site-header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 50;
+  color: var(--color-ink);
+  transition:
+    color 250ms ease,
+    transform 450ms var(--ease-out);
+}
+.site-header[data-ui-tone="bone"] {
+  color: var(--color-bone);
+}
+.site-header[data-hidden="true"] {
+  transform: translateY(-110%);
+}
+
+/* Film grain over the home page: one static noise tile, stepped around so
+   it reads as live grain rather than a dirty screen. */
+body:has(#hero)::after {
+  position: fixed;
+  inset: -50%;
+  z-index: 65;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+  content: "";
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+:root[data-motion="on"] body:has(#hero)::after {
+  animation: grain 0.9s steps(6) infinite;
+}
+@keyframes grain {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-3%, 2%); }
+  40% { transform: translate(2%, -4%); }
+  60% { transform: translate(-4%, -1%); }
+  80% { transform: translate(3%, 3%); }
+  100% { transform: translate(0, 0); }
+}
+
+/* Hero weave: the gap between the two caps lines is the photo band's height,
+   which HeroRing scales with the viewport width. */
+.hero-weave {
+  row-gap: 52vw;
+}
+@media (width >= 48rem) {
+  .hero-weave {
+    row-gap: 19.5vw;
+  }
+}
+
+/* The closing sign-off: two lines set to span the viewport. */
+.closing-mark {
+  font-size: 25.8vw;
+  letter-spacing: -0.02em;
+  margin-bottom: -0.06em;
+}
+
+/* The Community chapter’s league name, sized to its column. */
+.community-mark {
+  font-size: clamp(4rem, min(10vw, 20svh), 11rem);
+  letter-spacing: -0.02em;
+}

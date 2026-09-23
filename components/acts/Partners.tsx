@@ -1,10 +1,11 @@
 import raw from "@/content.js";
 import { parseContent, partners, stats } from "@/lib/content-data";
 import { Marquee } from "@/components/primitives/Marquee";
+import { CountUpFigure } from "@/components/motion/CountUpFigure";
 
 // Logo and text-fallback share one height band so the strip keeps one rhythm.
-const item = "mr-[clamp(2rem,5vw,4.5rem)] flex h-[clamp(2.75rem,5vw,4.5rem)] shrink-0 items-center";
-const type = "font-display text-[clamp(1.25rem,2.4vw,2rem)] leading-none font-bold whitespace-nowrap uppercase";
+const item = "mr-[clamp(2.5rem,6vw,6rem)] flex h-[clamp(3.5rem,7vw,6.5rem)] shrink-0 items-center";
+const type = "font-display text-[clamp(1.75rem,3.6vw,3.25rem)] leading-none font-bold whitespace-nowrap uppercase";
 
 /* Act 8, United's micro-label over a text marquee, on bone. The label is the
    owner's count ("50+ Partners", content.js stats); the strip is only the
@@ -21,11 +22,23 @@ export function Partners() {
   const count = stats(data).find((s) => s.label === "Partners");
 
   return (
-    <section aria-labelledby="partners-heading" className="canvas-bone flex flex-col gap-5 py-[clamp(2.5rem,7vh,4.5rem)]">
-      <div className="frame">
-        <h2 id="partners-heading" className="micro">
-          {count ? `${count.figure} ${count.label}` : "Partners"}
+    <section aria-labelledby="partners-heading" data-tone="ink" data-chapter="Collaborate" className="canvas-bone flex flex-col gap-[clamp(2.5rem,8vh,5rem)] py-[clamp(4rem,14vh,9rem)]">
+      {/* opus55: the count is a beat of its own, the strip runs under it. */}
+      <div className="frame flex flex-wrap items-end justify-between gap-6">
+        <h2 id="partners-heading" className="flex flex-col gap-3">
+          <span className="micro">Brands that back the game</span>
+          {count ? (
+            <span className="flex items-baseline gap-4 font-display leading-[0.8] font-bold uppercase">
+              <CountUpFigure figure={count.figure} className="text-[clamp(6rem,16vw,15rem)]" />
+              <span className="text-[clamp(2rem,5vw,4.5rem)]">{count.label}</span>
+            </span>
+          ) : (
+            <span className="font-display text-[clamp(3rem,8vw,7rem)] leading-[0.85] font-bold uppercase">Partners</span>
+          )}
         </h2>
+        <a href="/collaborate" data-magnetic="0.2" className="btn flex min-h-12 items-center border-2 border-ink px-6 font-display text-lg font-bold uppercase hover:bg-ink hover:text-bone">
+          Partner with us
+        </a>
       </div>
       <Marquee label="Frontier partners" seconds={45}>
         {names.map((p) => {

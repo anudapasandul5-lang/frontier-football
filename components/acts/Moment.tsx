@@ -56,7 +56,7 @@ export function Moment() {
   const strip = [statementPhoto, marqueePhotos[0], marqueePhotos[2], marqueePhotos[4], marqueePhotos[5]];
 
   return (
-    <section id="moment" aria-labelledby="moment-heading" className="canvas-ink relative overflow-x-clip">
+    <section id="moment" data-tone="bone" aria-labelledby="moment-heading" className="canvas-ink relative overflow-x-clip">
       <div className="moment-stage relative h-svh overflow-hidden">
         {marqueePhotos.map((p, i) => (
           <Photo

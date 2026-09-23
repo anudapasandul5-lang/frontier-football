@@ -20,17 +20,11 @@ export function HeroMotion() {
     if (!hero) return;
     const mm = gsap.matchMedia();
     mm.add("(prefers-reduced-motion: no-preference)", () => {
-      gsap.to(hero.querySelector(".hero-overprint"), {
-        yPercent: -35,
-        ease: "none",
-        scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: true },
-      });
-      // The trophy leaves slower than the page, so it reads as further back.
-      gsap.to(hero.querySelector(".hero-trophy"), {
-        yPercent: 15,
-        ease: "none",
-        scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: true },
-      });
+      // The two caps lines part sideways as they lift (opus55).
+      const lines = hero.querySelectorAll(".hero-line");
+      const scrub = { trigger: hero, start: "top top", end: "bottom top", scrub: true };
+      gsap.to(lines[0], { xPercent: -14, yPercent: -60, ease: "none", scrollTrigger: scrub });
+      gsap.to(lines[1], { xPercent: 10, yPercent: -30, ease: "none", scrollTrigger: scrub });
     });
     return () => mm.revert();
   }, []);
