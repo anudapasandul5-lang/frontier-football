@@ -28,6 +28,28 @@ export const marqueePhotos: HomePhoto[] = [
   { id: "1HBvbjQitxALSxMpRR8-1G72A2VWA2zek", album: "szn-6", w: 400, h: 368, alt: szn6 },
 ];
 
+/* Act 5's slider panels (owner, 2026-09-23: bigger photos, blended into the
+   colour). Each panel has one full-bleed background frame and up to two framed
+   ones. Division 0 frames are from its album and were checked at 800px for
+   burned-in marks (none). 4 x 4 frames reuse the clean SZN 6 set above. Turf
+   Wars has only the one champions photo anywhere in the project, so it gets
+   the background alone until its Drive folder is linked in content.js. */
+const div0 = "The Division 0 PS5 tournament at Pixels N Pints";
+
+export const competitionPhotos: Record<"4 x 4 Series" | "Division 0", { bg: HomePhoto; frames: HomePhoto[] }> = {
+  "4 x 4 Series": {
+    bg: marqueePhotos[0],
+    frames: [marqueePhotos[2], marqueePhotos[4]],
+  },
+  "Division 0": {
+    bg: { id: "1nXzq0DGAcDU8jSlpVDr86OFwk2FBZ2_h", album: "division-0", w: 400, h: 266, alt: div0 },
+    frames: [
+      { id: "1tFbmDB8xFRn6V7PgGSi4_hRm_ordP63s", album: "division-0", w: 400, h: 600, alt: "The Pixels N Pints gaming and sports bar entrance" },
+      { id: "19_NtvhsJCWDnFmaKn3fa7eB2dlnUeLpF", album: "division-0", w: 400, h: 266, alt: div0 },
+    ],
+  },
+};
+
 /* Act 3: a crowd with their hands on their heads, the frame that says what
    a watch-along is without a caption. Dark enough to carry bone serif. */
 export const statementPhoto: HomePhoto = {

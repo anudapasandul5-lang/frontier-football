@@ -25,6 +25,12 @@ export function HeroMotion() {
         ease: "none",
         scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: true },
       });
+      // The trophy leaves slower than the page, so it reads as further back.
+      gsap.to(hero.querySelector(".hero-trophy"), {
+        yPercent: 15,
+        ease: "none",
+        scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: true },
+      });
     });
     return () => mm.revert();
   }, []);
