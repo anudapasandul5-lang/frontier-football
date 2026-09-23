@@ -12,8 +12,8 @@ import { HeroRing } from "@/components/motion/HeroRing";
 
    opus55 redesign: the trophy is now something to play with (drag it, it
    leans to the pointer, then flies off to travel with the reader; TrophyStage), the two
-   caps lines part sideways on scroll (HeroMotion), the buttons are magnetic
-   with rolling labels, and a label row frames the stage like a broadcast
+   caps lines part sideways on scroll (HeroMotion), the buttons have
+   rolling labels (not magnetic: owner, 2026-09-23), and a label row frames the stage like a broadcast
    lower third. Label copy is the site's own description (layout.tsx
    metadata) and Who We Are's "Sri Lanka's futsal community".
 
@@ -49,13 +49,12 @@ export function Hero() {
         <div className="flex flex-wrap items-center justify-center gap-3 max-sm:mx-auto">
           <a
             href={playHref ?? "/contact"}
-            data-magnetic="0.25"
             {...(playHref ? { target: "_blank", rel: "noopener noreferrer", "aria-label": "Join next season (opens WhatsApp in a new tab)" } : {})}
             className={`${button} bg-yellow text-ink`}
           >
             <Roll>Join next season</Roll>
           </a>
-          <a href="/collaborate" data-magnetic="0.25" className={`${button} border-2 border-ink hover:bg-ink hover:text-bone`}>
+          <a href="/collaborate" className={`${button} border-2 border-ink hover:bg-ink hover:text-bone`}>
             <Roll>Partner with us</Roll>
           </a>
         </div>
