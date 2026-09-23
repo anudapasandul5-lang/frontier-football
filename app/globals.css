@@ -421,6 +421,17 @@
     opacity 200ms ease 900ms;
 }
 
+/* Stat bars on home: each bar draws in from the left, staggered by
+   --bar-delay. Clip only in the MotionGate pre-state, so JS off or reduced
+   motion shows full bars. */
+:root[data-motion="on"] .stat-bar.is-pre {
+  clip-path: inset(0 100% 0 0);
+}
+:root[data-motion="on"] .stat-bar.is-revealed {
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 900ms var(--ease-out) var(--bar-delay, 0ms);
+}
+
 /* View Transitions spike: gallery card photo morphs into the album hero. */
 ::view-transition {
   pointer-events: none;

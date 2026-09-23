@@ -15,23 +15,31 @@ import { Intro } from "@/components/motion/Intro";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { Footer } from "@/components/primitives/Footer";
 
-// The nine acts (plan section 5), plus Who We Are under the hero (T2, 2026-09-22). Events renders nothing while content.js has none.
+// Sections follow the menu order (owner, 2026-09-23): Home, Who We Are, Events,
+// Gallery, Community, Collaborate, Contact. Events renders nothing while content.js has none.
 export default function Home() {
   return (
     <>
       <Intro />
       <SmoothScroll />
       <main>
+        {/* Home */}
         <Hero />
+        {/* Who We Are */}
         <WhoWeAre />
-        <Strip />
         <Moment />
         <Numbers />
+        {/* Events */}
         <Competitions />
         <Champions />
         <Events events={upcomingEvents(parseContent(raw))} />
+        {/* Gallery */}
+        <Strip />
+        {/* Community (held with the page) */}
         <CommunityTeaser />
+        {/* Collaborate */}
         <Partners />
+        {/* Contact */}
         <Closing />
       </main>
       <Footer />

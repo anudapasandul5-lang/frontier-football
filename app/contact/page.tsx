@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import raw from "@/content.js";
 import { outboundLinks, parseContent, whatsappHref } from "@/lib/content-data";
 import { Masthead, PageShell } from "@/components/pages/PageShell";
+import { PastActivities } from "@/components/pages/PastActivities";
 
 export const metadata: Metadata = { title: "Contact" };
 
@@ -44,6 +45,7 @@ export default function Contact() {
           ) : null}
         </div>
       </section>
+      <PastActivities />
     </PageShell>
   );
 }

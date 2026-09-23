@@ -1,8 +1,18 @@
+import type { CSSProperties } from "react";
 import raw from "@/content.js";
 import { parseContent, stats } from "@/lib/content-data";
 import { MicroLabel } from "@/components/primitives/MicroLabel";
 import { Numeral } from "@/components/primitives/Numeral";
-import { Stat } from "@/components/primitives/Stat";
+import { CountUpFigure } from "@/components/motion/CountUpFigure";
+
+// The stat bars (owner, 2026-09-23, from United's metric bars): Frontier's
+// green, yellow and blue, each shorter than the one above, drawn in left to
+// right one after another. Ink reads on all three (canvas-* utilities).
+const bars = [
+  { tone: "bg-green", width: "100%" },
+  { tone: "bg-yellow", width: "88%" },
+  { tone: "bg-blue", width: "76%" },
+];
 import { TickRule } from "@/components/primitives/TickRule";
 
 /* Act 4, Ticket 04's night-mode count-up. Display line
@@ -46,10 +56,23 @@ export function Numbers() {
           </div>
         </div>
         <div className="grid gap-12 md:grid-cols-[minmax(0,11fr)_minmax(0,9fr)] md:gap-10">
-          <dl className="flex flex-col gap-8 text-[var(--tone-muted)] md:pl-3">
-            {rest.map((s) => (
-              <Stat key={s.label} label={s.label} figure={s.figure} />
-            ))}
+          <dl className="flex flex-col gap-3">
+            {rest.map((s, i) => {
+              const bar = bars[i % bars.length];
+              return (
+                <div
+                  key={s.label}
+                  data-reveal
+                  className={`stat-bar flex flex-col gap-2 px-6 py-5 text-ink [--tone-muted:var(--color-ink)] sm:px-8 sm:py-6 ${bar.tone}`}
+                  style={{ width: bar.width, "--bar-delay": `${i * 140}ms` } as CSSProperties}
+                >
+                  <dt className="micro">{s.label}</dt>
+                  <dd>
+                    <CountUpFigure figure={s.figure} className="font-display text-[clamp(2.5rem,5vw,3.5rem)] leading-[0.9] font-semibold uppercase tabular-nums" />
+                  </dd>
+                </div>
+              );
+            })}
           </dl>
           <div className="md:self-center">
             <Numeral figure={lead.figure} caption={lead.label} />
