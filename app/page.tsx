@@ -2,6 +2,7 @@ import raw from "@/content.js";
 import { parseContent, upcomingEvents } from "@/lib/content-data";
 import { Champions } from "@/components/acts/Champions";
 import { Closing } from "@/components/acts/Closing";
+import { CommunityTeaser } from "@/components/acts/CommunityTeaser";
 import { Competitions } from "@/components/acts/Competitions";
 import { Events } from "@/components/acts/Events";
 import { Hero } from "@/components/acts/Hero";
@@ -29,6 +30,7 @@ export default function Home() {
         <Competitions />
         <Champions />
         <Events events={upcomingEvents(parseContent(raw))} />
+        <CommunityTeaser />
         <Partners />
         <Closing />
       </main>

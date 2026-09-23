@@ -6,7 +6,6 @@ import { AboutMotion } from "@/components/motion/AboutMotion";
 import { PageShell } from "@/components/pages/PageShell";
 
 export const metadata: Metadata = { title: "Who We Are" };
-const PEOPLE_RELEASED = false;
 
 type Stop = ReturnType<typeof journey>[number];
 type Party = ReturnType<typeof parseContent>["watchAlongs"][number];
@@ -206,7 +205,7 @@ export default function WhoWeAre() {
 
       {/* Absent while content.js lists nobody: no stand-in for someone who has
           not agreed to be named. */}
-      {PEOPLE_RELEASED && crew.length > 0 ? (
+      {crew.length > 0 ? (
         <section className="frame py-12 sm:py-20">
           <h2 className={`${h2} mb-10`}>The people</h2>
           <ul className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,240px),1fr))] gap-6">

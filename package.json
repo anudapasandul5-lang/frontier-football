@@ -10,6 +10,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
+    "gate:placeholder": "node scripts/placeholder-gate.mjs",
     "albums:sync": "node scripts/sync-albums.mjs",
     "albums:papare": "node scripts/papare-import.mjs"
   },

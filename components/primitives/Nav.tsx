@@ -6,6 +6,7 @@ export const pages = [
   { href: "/who-we-are", label: "Who We Are" },
   { href: "/events", label: "Events" },
   { href: "/gallery", label: "Gallery" },
+  { href: "/community", label: "Community" },
   { href: "/collaborate", label: "Collaborate" },
   { href: "/contact", label: "Contact" },
 ];

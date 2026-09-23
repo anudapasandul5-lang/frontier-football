@@ -4,12 +4,13 @@ import { useRef } from "react";
 import { usePathname } from "next/navigation";
 
 /* A native modal keeps focus in the menu and returns it to the trigger on
-   Escape. Community joins this list only when its page is ready to publish. */
+   Escape. Seven links since Community (L7). */
 export const menuLinks = [
   { href: "/", label: "Home", photo: "/champions/szn-6.webp" },
   { href: "/who-we-are", label: "Who We Are", photo: "/champions/szn-1.webp" },
   { href: "/events", label: "Events", photo: "/champions/szn-4.webp" },
   { href: "/gallery", label: "Gallery", photo: "/champions/wa-final-esp-arg.webp" },
+  { href: "/community", label: "Community", photo: "/champions/division-0.webp" },
   { href: "/collaborate", label: "Collaborate", photo: "/champions/wa-semi-esp-fra.webp" },
   { href: "/contact", label: "Contact", photo: "/champions/wa-ucl-final-night.webp" },
 ];

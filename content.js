@@ -714,8 +714,37 @@ export default {
   // said yes to it.
   // ==========================================================================
   people: [
+    // PLACEHOLDER rows for the ticket-11 preview only. Replace each with a real
+    // person who has said yes (see ASK FIRST above), or delete it. The
+    // PLACEHOLDER gate (`npm run gate:placeholder`) fails while any remain.
+    { name: "PLACEHOLDER Name", role: "PLACEHOLDER Role", photo: "TODO", photoAlt: "TODO" },
+    { name: "PLACEHOLDER Name 2", role: "PLACEHOLDER Role", photo: "TODO", photoAlt: "TODO" },
     // { name: "TODO", role: "TODO", photo: "TODO", photoAlt: "TODO" },
   ],
+
+  // ==========================================================================
+  // SUNDAY FOOTBALL LEAGUE - the Community page's one live activity.
+  //
+  //   details   the facts a team needs before registering. Each one shows as a
+  //             label and a value. Replace every PLACEHOLDER with the real
+  //             answer; the site will not go to production while any remain.
+  //   teamMessage / freeAgentMessage
+  //             what gets typed into WhatsApp for the person, one per button,
+  //             so you can tell a team from a free agent before they type.
+  //             Sent to contact.whatsapp below. Leave one as "TODO" and its
+  //             button disappears.
+  // ==========================================================================
+  league: {
+    details: [
+      { label: "Starts", value: "PLACEHOLDER" },
+      { label: "When", value: "PLACEHOLDER (Sundays)" },
+      { label: "Where", value: "PLACEHOLDER" },
+      { label: "Format", value: "PLACEHOLDER" },
+      { label: "Entry", value: "PLACEHOLDER" },
+    ],
+    teamMessage: "Hi Frontier, I'd like to register a team for the Sunday Football League.",
+    freeAgentMessage: "Hi Frontier, I'd like to join the Sunday Football League as a free agent.",
+  },
 
   links: [
     // The main one. Verified live. The 'handle' is what gets printed big on
