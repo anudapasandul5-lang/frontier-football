@@ -10,6 +10,7 @@ import { Numbers } from "@/components/acts/Numbers";
 import { Partners } from "@/components/acts/Partners";
 import { Strip } from "@/components/acts/Strip";
 import { WhoWeAre } from "@/components/acts/WhoWeAre";
+import { Intro } from "@/components/motion/Intro";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { Footer } from "@/components/primitives/Footer";
 
@@ -17,6 +18,7 @@ import { Footer } from "@/components/primitives/Footer";
 export default function Home() {
   return (
     <>
+      <Intro />
       <SmoothScroll />
       <main>
         <Hero />

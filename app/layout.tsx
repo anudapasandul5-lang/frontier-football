@@ -17,7 +17,15 @@ const sans = Geist({ subsets: ["latin"], variable: "--font-geist" });
 // unused axis materially reduces the preloaded variable font.
 const bricolage = Bricolage_Grotesque({ subsets: ["latin"], axes: ["wdth"], variable: "--font-bricolage" });
 
+/* Link previews need absolute image URLs. Vercel names the deployment at
+   build time: production uses the project domain, a preview uses its own URL
+   so its cards can be checked before release. Anything else (local builds)
+   falls back to the production domain. */
+const host =
+  process.env.VERCEL_ENV === "preview" ? process.env.VERCEL_URL : process.env.VERCEL_PROJECT_PRODUCTION_URL;
+
 export const metadata: Metadata = {
+  metadataBase: new URL(`https://${host ?? "frontier-football.vercel.app"}`),
   title: { default: "Frontier Football", template: "%s - Frontier Football" },
   description: "Small-sided football and the culture around it, in Colombo.",
   icons: { icon: "/favicon.png" },
@@ -26,19 +34,15 @@ export const metadata: Metadata = {
     title: "Frontier Football",
     description: "Small-sided football and the culture around it, in Colombo.",
   },
+  twitter: { card: "summary_large_image" },
 };
 
 export const viewport: Viewport = { themeColor: "#0a0a0a" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${serif.variable} ${sans.variable} ${bricolage.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${serif.variable} ${sans.variable} ${bricolage.variable}`}>
       <body>
-        {/* ponytail: og:image stays root-relative until the domain is recorded
-            (content.js TODO). Next's metadata API would make it absolute
-            against localhost:3000, which is worse than relative. React hoists
-            this tag into <head>. */}
-        <meta property="og:image" content="/og.jpg" />
         {/* First tab stop on every page: jumps past the nav (Web Interface
             Guidelines, T5 2026-09-22). Hidden until focused. */}
         <a

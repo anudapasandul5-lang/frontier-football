@@ -96,6 +96,57 @@
   100% { transform: scaleX(0); transform-origin: right; }
 }
 
+/* The first-visit intro (components/motion/Intro.tsx), 1.2s end to end: crest
+   settles, a yellow bar wipes the wordmark in, then the whole panel lifts off
+   the hero. Transform and opacity only. It never blocks a tap. The hero's own
+   wordmark wipe waits until the panel has lifted. */
+.intro {
+  display: none;
+}
+:root[data-intro] .intro {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  background: var(--canvas);
+  pointer-events: none;
+  animation: intro-lift 400ms var(--ease-in-out) 800ms both;
+}
+.intro-crest {
+  animation: intro-crest 350ms var(--ease-out) both;
+}
+.intro-word {
+  position: relative;
+  isolation: isolate;
+  animation: intro-word-show 1ms linear 380ms both;
+}
+.intro-word::after {
+  position: absolute;
+  inset: 0;
+  visibility: visible;
+  background: var(--color-yellow);
+  content: "";
+  animation: hero-wordmark-wipe 440ms var(--ease-in-out) 150ms both;
+}
+:root[data-intro][data-motion="on"] .hero-wordmark::after {
+  animation-delay: 1.1s;
+}
+@keyframes intro-lift {
+  to { transform: translateY(-100%); visibility: hidden; }
+}
+@keyframes intro-crest {
+  from { opacity: 0; transform: scale(0.9); }
+}
+/* The letters stay hidden until the bar covers them; the bar itself stays
+   visible (its own visibility wins over the inherited value). */
+@keyframes intro-word-show {
+  from { visibility: hidden; }
+}
+
 /* ---------------------------------------------------------------------------
    Canvases. One per act, edge to edge (DESIGN.md). Each sets the text colour
    and --tone-muted, the colour micro-labels and secondary text take on it.

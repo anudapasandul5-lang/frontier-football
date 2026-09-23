@@ -42,7 +42,8 @@ createServer(async (req, res) => {
   const text = /\.(html|js|css|json|svg|txt)$/.test(file);
   const gzip = text && /\bgzip\b/.test(req.headers["accept-encoding"] ?? "");
   res.writeHead(file.endsWith("404.html") && !path.endsWith("404") ? 404 : 200, {
-    "content-type": types[extname(file)] ?? "application/octet-stream",
+    // The OG cards export without an extension; vercel.json types them too.
+    "content-type": file.endsWith("opengraph-image") ? "image/jpeg" : (types[extname(file)] ?? "application/octet-stream"),
     ...(gzip && { "content-encoding": "gzip", vary: "accept-encoding" }),
     ...(file.includes(`${sep}_next${sep}static${sep}`) && { "cache-control": "public, max-age=31536000, immutable" }),
   });
