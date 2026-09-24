@@ -31,7 +31,10 @@ export function Numbers() {
     : null;
 
   return (
-    <section id="numbers" data-tone="bone" aria-labelledby="numbers-heading" className="canvas-night relative">
+    <section id="numbers" data-tone="bone" aria-labelledby="numbers-heading" className="canvas-night relative overflow-clip">
+      {/* -mb lets the stuck layer hang up to a screen past the section's end;
+          overflow-clip (not hidden, which would break sticky) cuts it there so
+          it never paints over the next act. */}
       <div aria-hidden="true" className="sticky top-0 -mb-[100svh] h-svh overflow-hidden">
         <CourtScene />
         {/* Keeps the figures readable where the lines run behind them. */}
