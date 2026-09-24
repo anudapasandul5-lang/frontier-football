@@ -175,58 +175,24 @@ function WatchGrid({ albums }: { albums: StoryAlbum[] }) {
   );
 }
 
-/* A competition that is its own thing (Division 0, played on a console):
-   split, on blue, so it never reads as another season. */
-function FeatureBand({ album }: { album: StoryAlbum }) {
-  return (
-    <Link href={`/albums/${album.id}`} data-cursor="Open" className="group canvas-blue grid min-[900px]:grid-cols-2">
-      <div className="frame flex flex-col justify-end gap-5 py-[clamp(3rem,10vh,6rem)] min-[900px]:mr-0 min-[900px]:max-w-[585px]">
-        {album.note ? <p className="micro">{album.note}</p> : null}
-        <h3 className="font-display text-[min(clamp(3.5rem,8.5vw,8rem),24svh)] leading-[0.84] font-bold whitespace-nowrap uppercase">{album.title}</h3>
-        {album.champion ? <p className="text-xl">Champions <strong>{album.champion}</strong></p> : null}
-        <div className="flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-ink/30 pt-4">
-          <Meta album={album} />
-          {open}
-        </div>
-      </div>
-      <div className="relative h-[clamp(320px,60svh,640px)] overflow-hidden">
-        {album.photo ? <Cover album={album} className="absolute inset-0 size-full object-cover transition-transform duration-700 ease-[var(--ease-out)] group-hover:scale-[1.03]" /> : null}
-      </div>
-    </Link>
-  );
-}
-
 function ChapterBlock({ chapter }: { chapter: Chapter }) {
   const total = chapter.albums.reduce((s, a) => s + a.count, 0);
   const many = chapter.albums.length > 1;
-  // A feature band carries its own big title; card grids need a heading.
-  const band = chapter.kind === "feature" && chapter.albums[0].treatment === "photo";
-  const headed = many || !band;
   return (
-    <section id={chapter.id} data-tone="bone" data-chapter={chapter.label} aria-labelledby={`${chapter.id}-heading`} className={`canvas-night scroll-mt-4 pb-2 sm:pb-3 ${headed ? "" : "pt-[clamp(3rem,10vh,6rem)]"}`}>
-      {/* Over a feature band a visible heading would print the same words
-          twice, so it is kept for screen readers only. */}
-      {headed ? (
-        <header className="frame flex flex-wrap items-end justify-between gap-x-8 gap-y-2 pt-[clamp(4rem,14vh,8rem)] pb-8">
-          <h2 id={`${chapter.id}-heading`} className="font-display text-[clamp(2.5rem,7vw,6rem)] leading-[0.9] font-bold uppercase">
-            {chapter.label}
-          </h2>
-          {/* One album: its row already says how many photos. */}
-          {many ? (
-            <p className="micro">
-              {chapter.albums.length} albums · {photos(total)}
-            </p>
-          ) : null}
-        </header>
-      ) : (
-        <h2 id={`${chapter.id}-heading`} className="sr-only">
+    <section id={chapter.id} data-tone="bone" data-chapter={chapter.label} aria-labelledby={`${chapter.id}-heading`} className="canvas-night scroll-mt-4 pb-2 sm:pb-3">
+      <header className="frame flex flex-wrap items-end justify-between gap-x-8 gap-y-2 pt-[clamp(4rem,14vh,8rem)] pb-8">
+        <h2 id={`${chapter.id}-heading`} className="font-display text-[clamp(2.5rem,7vw,6rem)] leading-[0.9] font-bold uppercase">
           {chapter.label}
         </h2>
-      )}
+        {/* One album: its card already says how many photos. */}
+        {many ? (
+          <p className="micro">
+            {chapter.albums.length} albums · {photos(total)}
+          </p>
+        ) : null}
+      </header>
       {chapter.kind === "watch" ? (
         <WatchGrid albums={chapter.albums} />
-      ) : band ? (
-        <FeatureBand album={chapter.albums[0]} />
       ) : (
         <AlbumCards albums={chapter.albums} />
       )}
