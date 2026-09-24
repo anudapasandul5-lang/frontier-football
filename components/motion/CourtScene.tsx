@@ -53,13 +53,15 @@ export function CourtScene() {
       const { LineMaterial } = await import("three/addons/lines/LineMaterial.js");
       if (disposed) return;
 
+      // Phones: capped DPR and no MSAA, the two biggest GPU costs per frame.
+      const phone = window.matchMedia("(max-width: 899px)").matches;
       let renderer: InstanceType<typeof THREE.WebGLRenderer>;
       try {
-        renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer = new THREE.WebGLRenderer({ alpha: true, antialias: !phone });
       } catch {
         return;
       }
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, phone ? 1.5 : 2));
       el.appendChild(renderer.domElement);
 
       const scene = new THREE.Scene();

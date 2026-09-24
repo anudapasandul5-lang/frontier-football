@@ -65,7 +65,7 @@ export function Numbers() {
           {all.map((s, i) => (
             <div
               key={s.label}
-              className={`frame flex min-h-[85svh] flex-col justify-center gap-4 ${i % 2 ? "md:items-end md:text-right" : ""}`}
+              className={`frame flex min-h-[85svh] flex-col max-md:min-h-[45svh] justify-center gap-4 ${i % 2 ? "md:items-end md:text-right" : ""}`}
             >
                 <dt className={`flex items-center gap-4 font-display text-[clamp(2rem,4.5vw,4.5rem)] leading-[0.9] font-bold uppercase ${i % 2 ? "md:flex-row-reverse" : ""}`}>
                   <span className="tabular-nums">{String(i + 1).padStart(2, "0")}</span>

@@ -86,13 +86,15 @@ export function HeroRing() {
       const THREE = await import("three");
       if (disposed) return;
 
+      // Phones: capped DPR and no MSAA, the two biggest GPU costs per frame.
+      const phone = window.matchMedia("(max-width: 899px)").matches;
       let renderer: InstanceType<typeof THREE.WebGLRenderer>;
       try {
-        renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer = new THREE.WebGLRenderer({ alpha: true, antialias: !phone });
       } catch {
         return;
       }
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, phone ? 1.5 : 2));
       el.appendChild(renderer.domElement);
 
       const scene = new THREE.Scene();
@@ -108,7 +110,6 @@ export function HeroRing() {
       const panelW = RADIUS * arc;
       const loader = new THREE.TextureLoader();
       // Phones get the 800px copies: about a third of the bytes, same look at panel size.
-      const narrow = window.matchMedia("(max-width: 899px)").matches;
       const materials: InstanceType<typeof THREE.ShaderMaterial>[] = [];
       const geometries: InstanceType<typeof THREE.CylinderGeometry>[] = [];
 
@@ -131,7 +132,7 @@ export function HeroRing() {
             materials.push(material);
             ring.add(new THREE.Mesh(geometry, material));
             loader.load(
-              narrow ? phoneSrc(src, 800) : src,
+              phone ? phoneSrc(src, 800) : src,
               (texture) => {
                 texture.colorSpace = THREE.SRGBColorSpace;
                 texture.anisotropy = 4;

@@ -19,7 +19,10 @@ export default function MomentMotionRuntime() {
     if (!section || !stage) return;
 
     const mm = gsap.matchMedia();
-    mm.add("(prefers-reduced-motion: no-preference)", () => {
+    // Phones get a shorter pin: 450% is 5.5 screens of thumb-scrolling.
+    mm.add({ motion: "(prefers-reduced-motion: no-preference)", narrow: "(max-width: 899px)" }, (context) => {
+      const { motion, narrow } = context.conditions!;
+      if (!motion) return;
       document.documentElement.dataset.motion = "on";
       const q = gsap.utils.selector(section);
       const last = q(".moment-line--last");
@@ -59,7 +62,7 @@ export default function MomentMotionRuntime() {
 
       const tl = gsap.timeline({
         defaults: { ease: "none" },
-        scrollTrigger: { trigger: stage, start: "top top", end: "+=450%", pin: true, scrub: 0.6, invalidateOnRefresh: true },
+        scrollTrigger: { trigger: stage, start: "top top", end: narrow ? "+=220%" : "+=450%", pin: true, scrub: 0.6, invalidateOnRefresh: true },
       });
       tl.addLabel("drift")
         .to(markers, { x: (_, el) => away(el, 2.4).x, y: (_, el) => away(el, 2.4).y, duration: 2.2, ease: (t) => 0.08 * t + 0.92 * t ** 4 })
@@ -75,7 +78,7 @@ export default function MomentMotionRuntime() {
         .to(strip, { x: () => -(strip.scrollWidth - stage.clientWidth), duration: 2.4 })
         .to(last, { autoAlpha: 1, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.5");
       // This pin arrives lazily, after triggers further down (the competitions
-      // slider) have measured their starts without its 450% of scroll. Re-sort
+      // slider) have measured their starts without its pinned scroll. Re-sort
       // into page order and re-measure, or those starts land ~4.5 screens early.
       ScrollTrigger.sort();
       ScrollTrigger.refresh();
