@@ -35,12 +35,13 @@ export function Hero() {
       <Nav crestPriority floating />
       <HeroRing />
       <div id="content" className="frame relative flex flex-1 flex-col items-center justify-center pb-4">
-        {/* The photo band (HeroRing, z-2) weaves through the headline: the
-            first line sits behind it, the second in front. Yellow on bone is
-            the owner's deliberate overprint (2026-09-18). */}
-        <h1 className="pointer-events-none flex flex-col items-center hero-weave text-center font-display text-[clamp(2.4rem,9.2vw,9.5rem)] leading-[0.86] font-bold whitespace-nowrap text-yellow uppercase">
-          <span className="hero-line relative z-[1]">Built by the</span>
-          <span className="hero-line relative z-[3]">football community.</span>
+        {/* Yellow is the owner's deliberate lettering (2026-09-18). Yellow on
+            bone is 1.45:1, so each line sits on a close-fitting ink slab
+            (11:1) above the photo band (HeroRing, z-2): no photo ever runs
+            behind or over the words (UX audit T2, 2026-09-24). */}
+        <h1 className="pointer-events-none flex flex-col items-center hero-weave text-center font-display text-[clamp(min(2.4rem,10vw),9.2vw,9.5rem)] leading-[0.86] font-bold whitespace-nowrap text-yellow uppercase">
+          <span className="hero-line relative z-[3] bg-ink px-[0.08em] pt-[0.06em] pb-[0.02em]">Built by the</span>
+          <span className="hero-line relative z-[3] bg-ink px-[0.08em] pt-[0.06em] pb-[0.02em]">football community.</span>
         </h1>
       </div>
 
