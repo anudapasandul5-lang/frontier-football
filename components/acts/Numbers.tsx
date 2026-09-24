@@ -43,7 +43,7 @@ export function Numbers() {
       </div>
 
       <div className="relative">
-        <div className="frame flex min-h-svh flex-col justify-center gap-[clamp(2rem,7vh,4rem)] py-[clamp(4rem,12vh,8rem)]">
+        <div className="frame flex min-h-svh flex-col justify-center gap-[clamp(2rem,7vh,4rem)] py-[clamp(4rem,12vh,8rem)] max-md:min-h-0">
           <TickRule />
           <div className="grid gap-6 md:grid-cols-[minmax(0,11fr)_minmax(0,9fr)] md:gap-10">
             <SplitReveal
@@ -65,7 +65,7 @@ export function Numbers() {
           {all.map((s, i) => (
             <div
               key={s.label}
-              className={`frame flex min-h-[85svh] flex-col max-md:min-h-[45svh] justify-center gap-4 ${i % 2 ? "md:items-end md:text-right" : ""}`}
+              className={`frame flex min-h-[85svh] flex-col justify-center gap-4 max-md:min-h-0 max-md:py-10 ${i % 2 ? "md:items-end md:text-right" : ""}`}
             >
                 <dt className={`flex items-center gap-4 font-display text-[clamp(2rem,4.5vw,4.5rem)] leading-[0.9] font-bold uppercase ${i % 2 ? "md:flex-row-reverse" : ""}`}>
                   <span className="tabular-nums">{String(i + 1).padStart(2, "0")}</span>
@@ -87,7 +87,7 @@ export function Numbers() {
             </div>
           ))}
         </dl>
-        <div className="h-[15svh]" />
+        <div className="h-[15svh] max-md:hidden" />
       </div>
     </section>
   );

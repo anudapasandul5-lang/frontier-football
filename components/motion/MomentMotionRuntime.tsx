@@ -19,7 +19,8 @@ export default function MomentMotionRuntime() {
     if (!section || !stage) return;
 
     const mm = gsap.matchMedia();
-    // Phones get a shorter pin: 450% is 5.5 screens of thumb-scrolling.
+    // Phones get a shorter pin: 450% is 5.5 screens of thumb-scrolling, and
+    // the home page on a phone was over 12 screens long (UX audit T3).
     mm.add({ motion: "(prefers-reduced-motion: no-preference)", narrow: "(max-width: 899px)" }, (context) => {
       const { motion, narrow } = context.conditions!;
       if (!motion) return;
@@ -62,7 +63,7 @@ export default function MomentMotionRuntime() {
 
       const tl = gsap.timeline({
         defaults: { ease: "none" },
-        scrollTrigger: { trigger: stage, start: "top top", end: narrow ? "+=220%" : "+=450%", pin: true, scrub: 0.6, invalidateOnRefresh: true },
+        scrollTrigger: { trigger: stage, start: "top top", end: narrow ? "+=120%" : "+=450%", pin: true, scrub: 0.6, invalidateOnRefresh: true },
       });
       tl.addLabel("drift")
         .to(markers, { x: (_, el) => away(el, 2.4).x, y: (_, el) => away(el, 2.4).y, duration: 2.2, ease: (t) => 0.08 * t + 0.92 * t ** 4 })
