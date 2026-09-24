@@ -13,7 +13,7 @@ import { phoneSrc } from "@/lib/phone-image";
    - Only the near side is drawn: the ring reads as one curved band, in
      full colour.
    - The band threads the headline: its middle is projected onto the midline
-     between the two caps lines; both lines sit in front on ink slabs (UX audit T2).
+     between the two caps lines; both lines sit in front (UX audit T2).
    - Seen level, not from above (owner, 2026-09-23: "flat band"): the camera
      sits at the ring's own height and the ring has no roll, so the band runs
      straight across the hero instead of as a slanted smile.
