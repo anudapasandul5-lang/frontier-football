@@ -95,7 +95,7 @@ export default function EventsPage() {
                 champion: recorded(row.champion),
                 runnerUp: recorded(row.runnerUp),
                 photos: row.photos ? (
-                  <a href={row.photos} className="underline underline-offset-4 hover:no-underline">
+                  <a href={row.photos} className="inline-flex min-h-11 items-center underline underline-offset-4 hover:no-underline">
                     {row.photos.startsWith("/") ? "Album" : "Drive"}
                     <span className="sr-only">, {row.name}</span>
                   </a>

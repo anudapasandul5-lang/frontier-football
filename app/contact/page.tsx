@@ -22,7 +22,8 @@ export default function Contact() {
   const socials = outboundLinks(data).filter((link) => link.name === "Instagram" || link.name === "TikTok");
   // Lowercase: an address set in caps reads as shouting and breaks badly.
   // It wraps only at its dots and @ (the <wbr>s below), never mid-word.
-  const big = "block font-display text-[clamp(1.6rem,4.6vw,4.25rem)] leading-[0.95] font-bold underline-offset-[0.12em] hover:underline";
+  // min-h-11: a 44px tap target on phones, where one line is only 24px tall.
+  const big = "block min-h-11 font-display text-[clamp(1.6rem,4.6vw,4.25rem)] leading-[0.95] font-bold underline-offset-[0.12em] hover:underline";
 
   return (
     <PageShell
