@@ -63,15 +63,15 @@ export function Numbers() {
               key={s.label}
               className={`frame flex min-h-[85svh] flex-col justify-center gap-4 ${i % 2 ? "md:items-end md:text-right" : ""}`}
             >
-                <dt className={`micro flex items-center gap-3 ${i % 2 ? "md:flex-row-reverse" : ""}`}>
+                <dt className={`flex items-center gap-4 font-display text-[clamp(2rem,4.5vw,4.5rem)] leading-[0.9] font-bold uppercase ${i % 2 ? "md:flex-row-reverse" : ""}`}>
                   <span className="tabular-nums">{String(i + 1).padStart(2, "0")}</span>
-                  <span aria-hidden="true" className="h-px w-8 bg-current" />
+                  <span aria-hidden="true" className="h-[3px] w-12 shrink-0 bg-current" />
                   {s.label}
                 </dt>
                 <dd className={`flex flex-col gap-5 ${i % 2 ? "md:items-end" : ""}`}>
                   <CountUpFigure
                     figure={s.figure}
-                    className="font-display text-[clamp(6rem,min(30vw,42svh),22rem)] leading-[0.8] font-bold tracking-[-0.02em] uppercase"
+                    className="font-display text-[clamp(4.5rem,min(15vw,21svh),11rem)] leading-[0.8] font-bold tracking-[-0.02em] uppercase"
                   />
                   <span
                     data-reveal
