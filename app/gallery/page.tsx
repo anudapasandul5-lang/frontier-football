@@ -28,9 +28,10 @@ function ReelRow({ frames, drift, lead = false }: { frames: ReelFrame[]; drift: 
     <div data-drift={drift} data-drift-flat className="flex w-max gap-2 sm:gap-3">
       {[0, 1].map((copy) =>
         frames.map((f, i) => {
-          // Only the first two frames of the lead row race for bandwidth; the
-          // rest wait, and the off-screen copies load lazily (mobile LCP).
-          const first = lead && !copy && i < 2;
+          // The drift opens about a frame and a half in, so frames 1-3 are what
+          // a phone sees first (frame 3 is its LCP): they get the bandwidth.
+          // The duplicate copy loads lazily.
+          const first = lead && !copy && i < 3;
           const img = (
             <img
               src={f.src}
@@ -45,7 +46,9 @@ function ReelRow({ frames, drift, lead = false }: { frames: ReelFrame[]; drift: 
           );
           const key = `${copy}-${f.src}`;
           return f.albumId ? (
-            <Link key={key} href={`/albums/${f.albumId}`} data-cursor="Open" aria-hidden={copy ? true : undefined} tabIndex={copy ? -1 : undefined} className="block shrink-0 overflow-hidden">
+            // No prefetch: a prefetched album page brings its full-size hero
+            // as a high-priority preload (~400KB), racing the reel on a phone.
+            <Link key={key} href={`/albums/${f.albumId}`} prefetch={false} data-cursor="Open" aria-hidden={copy ? true : undefined} tabIndex={copy ? -1 : undefined} className="block shrink-0 overflow-hidden">
               {img}
             </Link>
           ) : (
