@@ -1,31 +1,27 @@
 /* Three full-resolution Frontier photos under a page's masthead (owner,
-   2026-09-23: the inner pages had no photographs). Portrait 3:4 crops from the
-   Drive albums, stored in public/pages/. The outer two tilt a little so the
-   strip reads as prints laid down, not a stock grid; they sit straight below
-   640px, where a tilt would cost width. */
+   2026-09-23: the inner pages had no photographs). Landscape 4:3 crops from
+   the Drive albums, stored in public/pages/ and public/who/. Straight and
+   unframed (owner, 2026-09-24: the tilted 3:4 prints cut the subjects off
+   and read as crooked scans). */
 
 export type StripPhoto = { src: string; alt: string };
-
-const tilt = ["sm:-rotate-2", "sm:translate-y-6", "sm:rotate-[1.5deg]"];
-// Each print drifts against the scroll at its own rate (Interactions).
-const drift = ["-0.05", "0.07", "-0.03"];
 
 export function PhotoStrip({ photos }: { photos: StripPhoto[] }) {
   return (
     <section aria-label="Photographs" className="frame py-[clamp(3rem,10vh,6rem)]">
-      <div className="grid grid-cols-3 gap-2 sm:gap-5">
+      {/* Phone: one wide photo over two, so none shrinks to a thumbnail. */}
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-4">
         {photos.map((p, i) => (
-          <figure key={p.src} data-parallax={drift[i % drift.length]} className={`border-2 border-current bg-bone p-1 sm:p-2 ${tilt[i % tilt.length]}`}>
-            <img
-              src={p.src}
-              alt={p.alt}
-              width={900}
-              height={1200}
-              loading="lazy"
-              decoding="async"
-              className="block aspect-[3/4] w-full object-cover"
-            />
-          </figure>
+          <img
+            key={p.src}
+            src={p.src}
+            alt={p.alt}
+            width={1200}
+            height={900}
+            loading="lazy"
+            decoding="async"
+            className={`block aspect-[4/3] w-full object-cover ${i === 0 ? "col-span-2 sm:col-span-1" : ""}`}
+          />
         ))}
       </div>
     </section>

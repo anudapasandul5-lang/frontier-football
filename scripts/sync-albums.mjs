@@ -26,10 +26,8 @@ const OUT = resolve(dirname(fileURLToPath(import.meta.url)), "../public/albums")
 /* id → Drive folder. The id is the same key content.js carries as `albumId`
    and the same one album.html reads from its query string.
 
-   Deliberately absent: SZN 5 and Turf Wars have no photo folder in Drive at
-   all. SZN 5's album is ThePapare's, imported by scripts/papare-import.mjs;
-   Turf Wars keeps the "Photos are on the way." line rather than linking at an
-   empty page. Also absent: `4x4 Photos` (1HGXOPq8HVLiX7bg1WXkzT7IJwdeIrpJs,
+   Deliberately absent: SZN 5 has no photo folder in Drive at all. Its album
+   is ThePapare's, imported by scripts/papare-import.mjs. Also absent: `4x4 Photos` (1HGXOPq8HVLiX7bg1WXkzT7IJwdeIrpJs,
    88 files), pending the owner confirming which card it belongs to, and
    `Frontier Watch Along @ Main - Man City vs Arsenal`
    (1PCXYIZOqqoCEZtUHtnjvnIH_b3aYx6Tv), which holds only voice notes and

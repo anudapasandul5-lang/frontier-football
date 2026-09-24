@@ -4,8 +4,9 @@ import { thumbUrl } from "@/lib/album-data";
 import { competitionPhotos, type DrivePhoto } from "@/lib/home-photos";
 import { MicroLabel } from "@/components/primitives/MicroLabel";
 
-/* Act 5, one colour card per competition in time order: blue Turf Wars, green
-   4 x 4 Series, red Division 0.
+/* Act 5, one colour card per competition in time order: green 4 x 4 Series,
+   red Division 0. (The blue Turf Wars card was removed by the owner,
+   2026-09-24.)
 
    2026-09-24, owner: the pinned sideways slider of full-screen panels looked
    empty and did not match its neighbours, through two restyles. Picked from
@@ -14,18 +15,17 @@ import { MicroLabel } from "@/components/primitives/MicroLabel";
    than a viewport, which HOUSE-RULES section 2 forbids; the exception is
    recorded there. No section heading (owner), only the micro-label.
 
-   Copy, all sourced: every 4 x 4 Series season at Athlete 360, Turf Wars at
-   Club Fusion, Division 0 at Pixels N Pints (owner, 2026-09-03, HOUSE-RULES
-   section 7); Turf Wars "where it started" (same); Division 0 on PS5
-   (CONTEXT.md, content.js note). Names, venues, dates and the Turf Wars photo
-   come from content.js, so a competition deleted there leaves the act and a
-   "TODO" fact is left out. */
-type Tone = "blue" | "green" | "red";
+   Copy, all sourced: every 4 x 4 Series season at Athlete 360, Division 0 at
+   Pixels N Pints (owner, 2026-09-03, HOUSE-RULES section 7); Division 0 on
+   PS5 (CONTEXT.md, content.js note). Names, venues and dates come from
+   content.js, so a competition deleted there leaves the act and a "TODO"
+   fact is left out. */
+type Tone = "green" | "red";
 type Shot = { src: string; alt: string };
 type Card = { tone: Tone; name: string; photo: Shot | null; facts: (string | null)[]; line: string };
 
 // Literal class names, so Tailwind emits them and the --color-* they read.
-const fill: Record<Tone, string> = { blue: "bg-blue", green: "bg-green", red: "bg-red" };
+const fill: Record<Tone, string> = { green: "bg-green", red: "bg-red" };
 
 const drive = (p: DrivePhoto | undefined): Shot | null => (p ? { src: thumbUrl(p.id, 800), alt: p.alt } : null);
 const landscape = (ps: DrivePhoto[]) => ps.find((p) => p.w >= p.h) ?? ps[0];
@@ -33,18 +33,9 @@ const landscape = (ps: DrivePhoto[]) => ps.find((p) => p.w >= p.h) ?? ps[0];
 export function Competitions() {
   const data = parseContent(raw);
   const competition = (name: string) => data.competitions.find((c) => c.name === name);
-  const turfWars = competition("Turf Wars");
   const divisionZero = competition("Division 0");
 
   const cards: Card[] = [];
-  if (turfWars)
-    cards.push({
-      tone: "blue",
-      name: "Turf Wars",
-      photo: turfWars.photo ? { src: turfWars.photo, alt: turfWars.photoAlt ?? "" } : null,
-      facts: [turfWars.venue, turfWars.date],
-      line: "Where it started.",
-    });
   cards.push({
     tone: "green",
     name: "4 x 4 Series",
@@ -69,7 +60,7 @@ export function Competitions() {
         <MicroLabel as="h2" id="competitions-label" className="text-(--tone-muted)">
           Competitions
         </MicroLabel>
-        <ul className="mt-8 grid gap-4 md:grid-cols-3">
+        <ul className="mt-8 grid gap-4 md:grid-cols-2">
           {cards.map((c, n) => (
             <li key={c.tone} className={`${fill[c.tone]} text-ink flex flex-col [--tone-muted:var(--color-ink)]`}>
               {c.photo ? (

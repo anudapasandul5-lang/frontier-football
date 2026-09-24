@@ -23,8 +23,10 @@ export type StoryAlbum = {
   /* "photo": the band is the photograph. "type": the band is the name on
      colour, because the only photo is watermarked (ThePapare) or missing. */
   treatment: "photo" | "type";
-  /* A clean Frontier photo small enough to sit beside the name on a "type"
-     band. Never a ThePapare frame: those live under /albums/. */
+  /* The picture on a "type" card: content.js's `photo`. That can be a
+     ThePapare frame (under /albums/) with its watermark left in, when the
+     owner has picked one for that album (owner, 2026-09-24). It never leads
+     as a cover and never morphs; it only fills the card. */
   inset: string | null;
 };
 
@@ -56,7 +58,7 @@ function album(entry: Entry, title: string, short: string | null, facts: AlbumFa
     photo: clean,
     photoAlt: entry.photoAlt,
     treatment,
-    inset: treatment === "type" ? clean : null,
+    inset: treatment === "type" ? entry.photo : null,
   };
 }
 

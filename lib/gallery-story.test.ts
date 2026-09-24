@@ -47,10 +47,11 @@ describe("galleryChapters", () => {
     expect(s2.champion).toBeNull();
   });
 
-  it("never leads with a watermarked album's photo; keeps a clean inset when there is one", () => {
+  it("never leads with a watermarked album's photo; still shows the owner-picked frame as its card picture", () => {
     const futsal = chapters[0].albums[0];
     expect(futsal.treatment).toBe("type");
-    expect(futsal.inset).toBeNull(); // its photo is a ThePapare frame
+    expect(futsal.photo).toBeNull(); // a ThePapare frame is never the cover
+    expect(futsal.inset).toBe("/albums/frontier-futsal/a.webp");
     const szn5 = chapters[1].albums[2];
     expect(szn5.treatment).toBe("type");
     expect(szn5.inset).toBe("/gallery/szn-5-hero.webp");

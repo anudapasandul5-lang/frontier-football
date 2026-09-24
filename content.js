@@ -28,8 +28,8 @@
 
    ADDING A COMPETITION THAT IS NOT A SEASON
    -----------------------------------------
-   Turf Wars and Division 0 are not seasons of the 4x4 Series, so they live in
-   their own `competitions` list further down instead of in `seasons`.
+   Tournaments like Division 0 are not seasons of the 4x4 Series, so they live
+   in their own `competitions` list further down instead of in `seasons`.
 
    ADDING A CHAMPIONS PHOTO
    ------------------------
@@ -75,8 +75,7 @@ export default {
       // timeline simply prints that line shorter - it never guesses a month.
       //
       // The venues came from the owner on 2026-09-03: every season of the 4x4
-      // Series was played at Athlete 360, Turf Wars was at Club Fusion, and
-      // Division 0 was at Pixels N Pints. The watch parties are still blank -
+      // Series was played at Athlete 360 and Division 0 was at Pixels N Pints. The watch parties are still blank -
       // nobody has said which venue hosted which night.
       date: "TODO",
       venue: "Athlete 360",
@@ -211,17 +210,18 @@ export default {
   // change the words. To take one off the site, delete its block.
   competitions: [
     {
-      // Frontier's first futsal tournament, from before the rebrand. Shown
-      // with no year, on purpose.
-      name: "Frontier Futsal Tournament",
+      // Frontier's first tournament, from before the rebrand. Shown with no
+      // year, on purpose. It ran as the "Frontier Futsal Tournament" (that is
+      // ThePapare's title for the album); the owner renamed it here on
+      // 2026-09-24. The albumId below keeps the old spelling so URLs hold.
+      name: "Frontier Football Tournament",
       // The photos are ThePapare's (album 10932), imported with
       // `npm run albums:papare -- frontier-futsal`. They are watermarked, so
       // the album credits "Photos: ThePapare" and they are never used as a
       // hero or a card picture.
       albumId: "frontier-futsal",
       // true = it ran before the 4x4 Series, so it comes first in the gallery
-      // tabs and on the About page's timeline. It came before Turf Wars
-      // (owner, 2026-09-22), so it sits above Turf Wars in this list.
+      // tabs and on the About page's timeline.
       beforeSeries: true,
       note: "TODO",
       // ThePapare's prize-giving photos show a women's and a men's winning
@@ -232,7 +232,7 @@ export default {
       // preserving its visible Milinda Deshan/ThePapare watermark and album
       // credit. This file is already part of the curated local album.
       photo: "/albums/frontier-futsal/b36221d4200375031890d20c95f5162c.webp",
-      photoAlt: "A player in black controls the ball against two defenders in teal at the Frontier Futsal Tournament.",
+      photoAlt: "A player in black controls the ball against two defenders in teal at the Frontier Football Tournament.",
       photoCredit: "Milinda Deshan / ThePapare",
       date: "TODO",
       // Club Fusion signage is visible in ThePapare's photos. Confirm before
@@ -240,39 +240,11 @@ export default {
       venue: "TODO",
       driveFolder: "TODO",
     },
+    // Turf Wars was removed from the whole site by the owner on 2026-09-24.
+    // Do not add it back without asking.
     {
       // The name shown on the card. A competition with no name is skipped, so
       // this is the one line that must be filled in.
-      name: "Turf Wars",
-      // Ran before the 4x4 Series: first in the gallery tabs and on the
-      // timeline, after the Frontier Futsal Tournament.
-      beforeSeries: true,
-      // Which album on this site the "View photos" button opens. It matches a
-      // file in public/albums/, written by `npm run albums:sync`. Leave it as
-      // "TODO" and the card still shows, saying the photos are on the way.
-      albumId: "TODO",
-      // A short line under the champion. Use it for when it ran, or for what
-      // kind of competition it is.
-      //
-      // When it ran goes in the `date` line below, not here.
-      note: "TODO",
-      // The team that won it.
-      champion: "TODO",
-      // The team that finished second.
-      runnerUp: "TODO",
-      // Picture of the winning team.
-      photo: "/champions/turf-wars.webp",
-      photoAlt: "The Turf Wars champions with their hands on the trophy.",
-      // Source: Frontier's own Turf Wars poster (Instagram cache, 2026-09-22):
-      // "Club Fusion, Boralesgamuwa, July 26th 2025".
-      date: "26 July 2025",
-      venue: "Club Fusion",
-      // Link to the full photo folder for Turf Wars on Google Drive.
-      // Paste the folder's share link here. Leave it as "TODO" and the card
-      // still shows, saying the photos are on the way.
-      driveFolder: "TODO",
-    },
-    {
       name: "Division 0",
       // Which album on this site the "View photos" button opens. It matches a
       // file in public/albums/, written by `npm run albums:sync`. Leave it as
@@ -863,9 +835,9 @@ export default {
     // as a title on its own; a row with no `title` is dropped entirely, the same
     // both-halves rule the reach rows follow.
     //
-    // "futsal" stays. It is the sport, not the old brand: the home page hero
-    // already reads "Built by the futsal community". The dead pre-rebrand
-    // handle is the thing that never appears (HOUSE-RULES section 7).
+    // "football", not "futsal", in all site copy (owner, 2026-09-24; this
+    // reverses the earlier call that kept "futsal" as the sport). The dead
+    // pre-rebrand handle still never appears (HOUSE-RULES section 7).
     //
     // WHAT WAS DELIBERATELY NOT TAKEN FROM THE DECK. It says Alpha Tournament
     // was "sponsored by Red Bull" and Turf Wars by Hypebam. Hypebam is one of
@@ -878,11 +850,11 @@ export default {
     offer: [
       {
         title: "Enhanced visibility",
-        body: "Reach a focused futsal audience through live event exposure and consistent digital content reach.",
+        body: "Reach a focused football audience through live event exposure and consistent digital content reach.",
       },
       {
         title: "Community engagement",
-        body: "Align your brand with a growing futsal movement built on passion, culture and community.",
+        body: "Align your brand with a growing football movement built on passion, culture and community.",
       },
       {
         title: "Customizable opportunities",

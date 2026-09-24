@@ -17,16 +17,17 @@ const n = (x: number) => x.toLocaleString("en");
 const photos = (x: number) => `${n(x)} photo${x === 1 ? "" : "s"}`;
 
 /* The opening reel is the hero (plan stress test 3: a photo hero plus a reel
-   pushed the albums to the third screen). Two rows slide against each other
+   pushed the albums to the third screen). One row, under the heading, slides
    with the scroll (data-drift, no autoplay, so reduced motion is simply
-   still). Each row holds its frames twice so a slide never shows a gap; the
+   still); the row above the heading was removed by the owner, 2026-09-24.
+   Each row holds its frames twice so a slide never shows a gap; the
    copy is hidden from assistive tech and the tab order. */
 function ReelRow({ frames, drift, lead = false }: { frames: ReelFrame[]; drift: string; lead?: boolean }) {
   return (
     <div data-drift={drift} data-drift-flat className="flex w-max gap-2 sm:gap-3">
       {[0, 1].map((copy) =>
         frames.map((f, i) => {
-          // Only the first two frames of the top row race for bandwidth; the
+          // Only the first two frames of the lead row race for bandwidth; the
           // rest wait, and the off-screen copies load lazily (mobile LCP).
           const first = lead && !copy && i < 2;
           const img = (
@@ -59,9 +60,8 @@ function ReelRow({ frames, drift, lead = false }: { frames: ReelFrame[]; drift: 
 
 function Reel({ albums, total }: { albums: number; total: number }) {
   return (
-    <section data-tone="bone" data-chapter="Gallery" aria-labelledby="page-heading" className="canvas-night relative isolate flex min-h-svh flex-col justify-center gap-[clamp(1rem,3svh,2rem)] overflow-hidden pt-24 pb-10">
+    <section data-tone="bone" data-chapter="Gallery" aria-labelledby="page-heading" className="canvas-night relative isolate flex flex-col gap-[clamp(1rem,3svh,2rem)] overflow-hidden pt-4 pb-10">
       <Nav floating />
-      <ReelRow frames={reel.slice(0, 5)} drift="-0.14" lead />
       <div className="frame">
         <p className="micro mb-4 text-yellow">Gallery</p>
         <SplitReveal
@@ -75,7 +75,7 @@ function Reel({ albums, total }: { albums: number; total: number }) {
           {n(albums)} albums and {n(total)} photographs from every Frontier night, on the pitch and in front of the screen.
         </p>
       </div>
-      <ReelRow frames={reel.slice(5)} drift="0.14" />
+      <ReelRow frames={reel.slice(5)} drift="0.14" lead />
     </section>
   );
 }

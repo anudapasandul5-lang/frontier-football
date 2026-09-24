@@ -15,9 +15,10 @@ import { HeroRing } from "@/components/motion/HeroRing";
    caps lines part sideways on scroll (HeroMotion), the buttons have
    rolling labels (not magnetic: owner, 2026-09-23), and a label row frames the stage like a broadcast
    lower third. Label copy is the site's own description (layout.tsx
-   metadata) and Who We Are's "Sri Lanka's futsal community".
+   metadata) and Who We Are's "Sri Lanka's football community".
 
-   "Built by the futsal community": v1's signed-off hero headline. */
+   "Built by the football community": v1's hero headline, "futsal" swapped
+   for "football" by the owner on 2026-09-24. */
 
 const content = parseContent(raw);
 const playHref = whatsappHref(content.contact.whatsapp, content.contact.playerMessage);
@@ -40,7 +41,7 @@ export function Hero() {
             the owner's deliberate overprint (2026-09-18). */}
         <h1 className="pointer-events-none flex flex-col items-center hero-weave text-center font-display text-[clamp(2.4rem,9.2vw,9.5rem)] leading-[0.86] font-bold whitespace-nowrap text-yellow uppercase">
           <span className="hero-line relative z-[1]">Built by the</span>
-          <span className="hero-line relative z-[3]">futsal community.</span>
+          <span className="hero-line relative z-[3]">football community.</span>
         </h1>
       </div>
 

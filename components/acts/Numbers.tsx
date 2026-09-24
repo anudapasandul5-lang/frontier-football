@@ -15,8 +15,9 @@ import { CourtScene } from "@/components/motion/CourtScene";
    Every figure, label and date is content.js's stats (owner, asOf), in its
    order; the lead is its first row, 3.4M+ Instagram views today. The bars
    under each figure are the owner's United-style stat bars (2026-09-23), one
-   per brand colour. Copy: Turf Wars "where it started" is the owner's
-   (HOUSE-RULES section 7); six seasons and the watch-alongs are content.js. */
+   per brand colour. Copy: the Frontier Football Tournament came first
+   (content.js, owner 2026-09-22); six seasons and the watch-alongs are
+   content.js. Turf Wars was removed by the owner, 2026-09-24. */
 
 const bars = ["bg-yellow", "bg-green", "bg-blue", "bg-red"];
 
@@ -53,7 +54,7 @@ export function Numbers() {
             <div className="flex max-w-[44ch] flex-col gap-4 md:mt-[clamp(3rem,14vh,9rem)]">
               {asOf ? <MicroLabel>As of {asOf}</MicroLabel> : null}
               <p className="text-[15px] leading-relaxed text-bone/85">
-                It started with Turf Wars at Club Fusion. Six seasons of the 4 x 4 Series have run since, and the big
+                It started with the Frontier Football Tournament. Six seasons of the 4 x 4 Series have run since, and the big
                 games get watched together.
               </p>
             </div>

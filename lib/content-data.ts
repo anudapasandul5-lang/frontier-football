@@ -110,7 +110,7 @@ export function parseContent(raw: Raw) {
   const source = raw ?? {};
   return {
     seasons: ((source.seasons ?? []) as Raw[]).map(parseSeason),
-    // Turf Wars and Division 0 are not seasons of the 4x4 Series (CONTEXT.md),
+    // Division 0 and the like are not seasons of the 4x4 Series (CONTEXT.md),
     // so they are a sibling collection rather than entries in `seasons`. A list
     // and not two named keys: the second one is what turned the special case
     // into a collection, and a third costs the owner a copy-paste, not a code
@@ -553,8 +553,8 @@ export function resultRows(data: Content) {
    grid wants. A journey runs the other way, so the reversal lives here rather
    than in the file the owner edits.
 
-   Order: the competitions flagged `beforeSeries` open (the Frontier Futsal
-   Tournament, then Turf Wars), the seasons run in the middle, and every other
+   Order: the competitions flagged `beforeSeries` open (the Frontier Football
+   Tournament), the seasons run in the middle, and every other
    competition closes. Within each group, file order.
 
    ponytail: once every stop has a real `date`, sorting by date is strictly

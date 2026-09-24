@@ -30,9 +30,7 @@ export const statementPhoto: HomePhoto = { id: "1lzIdThKRPby0xAHllSw-4Jz7Rbb_nw3
 /* Act 5's competition cards pick one landscape photo each from these, served from Drive
    at view time (thumbUrl, no-referrer). The 4 x 4 frames are clean SZN 6 picks
    from T2; the Division 0 frames are from its album and were checked at 800px
-   for burned-in marks (none). Turf Wars has only the one 800px champions photo
-   anywhere in the project, read from content.js, until its Drive folder is
-   linked there. Full-bleed backgrounds were dropped 2026-09-24 (too soft). */
+   for burned-in marks (none). Full-bleed backgrounds were dropped 2026-09-24 (too soft). */
 export type DrivePhoto = { id: string; w: number; h: number; alt: string };
 
 const szn6 = "A 4 x 4 Series SZN 6 match at Athlete 360";

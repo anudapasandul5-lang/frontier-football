@@ -35,8 +35,7 @@ export default function Collaborate() {
     <PageShell
       hero={
         /* Source: Frontier's own event posters (Instagram cache, 2026-09-22 audit):
-           4x4 Series at Athlete 360 Nugegoda, Turf Wars at Club Fusion Boralesgamuwa,
-           watch-alongs at Main Sports Bar. "Small-sided" = the 4x4 format. */
+           4x4 Series at Athlete 360 Nugegoda, watch-alongs at Main Sports Bar. "Small-sided" = the 4x4 format. */
         <PageHero
           chapter="Collaborate"
           eyebrow="For brands"
