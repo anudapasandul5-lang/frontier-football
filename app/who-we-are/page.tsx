@@ -8,6 +8,7 @@ import { PageHero } from "@/components/pages/PageHero";
 import { PageShell } from "@/components/pages/PageShell";
 import { PhotoStrip } from "@/components/pages/PhotoStrip";
 import { SplitReveal } from "@/components/primitives/SplitReveal";
+import { phoneSrcSet } from "@/lib/phone-image";
 
 export const metadata: Metadata = { title: "Who We Are" };
 
@@ -38,6 +39,8 @@ function RecordRow({ stop }: { stop: Stop }) {
         <figure className="aspect-video overflow-hidden border-2 border-ink min-[900px]:aspect-[2/1]">
           <img
             src={stop.photo}
+            srcSet={phoneSrcSet(stop.photo)}
+            sizes="100vw"
             alt={stop.photoAlt ?? `A photograph from ${stop.name}.`}
             width={1200}
             height={675}
@@ -82,6 +85,8 @@ function PartiesRow({ parties }: { parties: Party[] }) {
               {party.photo ? (
                 <img
                   src={party.photo}
+                  srcSet={phoneSrcSet(party.photo)}
+                  sizes="(min-width: 768px) 33vw, 100vw"
                   alt={party.photoAlt ?? `A photograph from ${party.name}.`}
                   width={400}
                   height={300}
@@ -199,6 +204,8 @@ export default function WhoWeAre() {
                   <figure className="border-2 border-ink bg-bone p-1">
                     <img
                       src={person.photo}
+                      srcSet={phoneSrcSet(person.photo)}
+                      sizes="(min-width: 768px) 25vw, 50vw"
                       alt={person.photoAlt ?? `${person.name}.`}
                       width={600}
                       height={750}

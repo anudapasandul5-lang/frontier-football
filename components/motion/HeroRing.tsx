@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { phoneSrc } from "@/lib/phone-image";
 
 /* The hero's 3D centrepiece (opus55): a slowly turning ring of Frontier's
    own photographs (match nights, watch-alongs, champions) with the yellow
@@ -106,6 +107,8 @@ export function HeroRing() {
       const arc = step * (1 - GAP);
       const panelW = RADIUS * arc;
       const loader = new THREE.TextureLoader();
+      // Phones get the 800px copies: about a third of the bytes, same look at panel size.
+      const narrow = window.matchMedia("(max-width: 899px)").matches;
       const materials: InstanceType<typeof THREE.ShaderMaterial>[] = [];
       const geometries: InstanceType<typeof THREE.CylinderGeometry>[] = [];
 
@@ -128,7 +131,7 @@ export function HeroRing() {
             materials.push(material);
             ring.add(new THREE.Mesh(geometry, material));
             loader.load(
-              src,
+              narrow ? phoneSrc(src, 800) : src,
               (texture) => {
                 texture.colorSpace = THREE.SRGBColorSpace;
                 texture.anisotropy = 4;

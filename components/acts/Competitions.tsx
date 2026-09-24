@@ -3,6 +3,7 @@ import { parseContent } from "@/lib/content-data";
 import { thumbUrl } from "@/lib/album-data";
 import { competitionPhotos, type DrivePhoto } from "@/lib/home-photos";
 import { MicroLabel } from "@/components/primitives/MicroLabel";
+import { phoneSrcSet } from "@/lib/phone-image";
 
 /* Act 5, one colour card per competition in time order: green 4 x 4 Series,
    red Division 0. (The blue Turf Wars card was removed by the owner,
@@ -66,6 +67,8 @@ export function Competitions() {
               {c.photo ? (
                 <img
                   src={c.photo.src}
+                  srcSet={phoneSrcSet(c.photo.src)}
+                  sizes="(min-width: 768px) 33vw, 100vw"
                   alt={c.photo.alt}
                   loading="lazy"
                   decoding="async"

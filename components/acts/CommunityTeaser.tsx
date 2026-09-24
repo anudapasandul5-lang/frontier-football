@@ -20,7 +20,7 @@ export function CommunityTeaser() {
       <div className="frame grid items-center gap-x-[clamp(2rem,5vw,5rem)] gap-y-10 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
         <div className="flex flex-col items-start gap-[clamp(1.5rem,4vh,2.5rem)]">
           <div className="flex items-center gap-3">
-            <img src="/crest.webp" alt="" width={525} height={640} loading="lazy" className="h-10 w-auto" />
+            <img src="/crest-sm.webp" alt="" width={295} height={360} loading="lazy" className="h-10 w-auto" />
             <span className="micro">Frontier presents</span>
           </div>
           <SplitReveal

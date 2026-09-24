@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import { marqueePhotos, statementPhoto, type HomePhoto } from "@/lib/home-photos";
 import { MomentMotion } from "@/components/motion/MomentMotion";
+import { phoneSrcSet } from "@/lib/phone-image";
 
 /* Act 3, United's pinned photo act. The server markup is a complete, still
    poster: headline, label, both lines, every photo that
@@ -27,6 +28,9 @@ function Photo({ p, width, className = "", style, eager = false }: { p: HomePhot
   return (
     <img
       src={p.src}
+      srcSet={phoneSrcSet(p.src)}
+      // Markers are at most 160px wide; everything else can fill the stage.
+      sizes={width <= 400 ? "160px" : "100vw"}
       alt={p.alt}
       width={p.w}
       height={p.h}

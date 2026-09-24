@@ -19,6 +19,8 @@ export function WhoWeAre() {
         <span aria-hidden="true" className="wipe__layer wipe__flash absolute inset-0 bg-yellow" />
         <img
           src={thumbUrl(STILL.id, 2000)}
+          srcSet={[800, 1200, 2000].map((w) => `${thumbUrl(STILL.id, w)} ${w}w`).join(", ")}
+          sizes="100vw"
           alt="A 4 x 4 Series SZN 6 team together on the pitch at night, names on their shirts"
           width={STILL.w}
           height={STILL.h}

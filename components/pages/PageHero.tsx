@@ -1,6 +1,7 @@
 import { ViewTransition, type CSSProperties, type ReactNode } from "react";
 import { Nav } from "@/components/primitives/Nav";
 import { SplitReveal } from "@/components/primitives/SplitReveal";
+import { phoneSrcSet } from "@/lib/phone-image";
 
 /* The inner pages' first act, in the home page's language (owner, 2026-09-23:
    "redesign the other pages like you did the homescreen"). A full-screen
@@ -35,6 +36,8 @@ export function PageHero({
   const image = (
     <img
       src={photo.src}
+      srcSet={phoneSrcSet(photo.src)}
+      sizes="100vw"
       alt={photo.alt}
       width={2000}
       height={1335}

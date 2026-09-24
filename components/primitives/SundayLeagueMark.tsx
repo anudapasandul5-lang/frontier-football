@@ -8,7 +8,7 @@ export function SundayLeagueMark({ size = "lg" }: { size?: "lg" | "sm" }) {
   return (
     <div role="img" aria-label="Frontier Sunday Football League" className="inline-flex w-full flex-col items-start">
       <div className="mb-3 flex items-center gap-3">
-        <img src="/crest.webp" alt="" width={525} height={640} loading="lazy" className={size === "lg" ? "h-12 w-auto" : "h-9 w-auto"} />
+        <img src="/crest-sm.webp" alt="" width={295} height={360} loading="lazy" className={size === "lg" ? "h-12 w-auto" : "h-9 w-auto"} />
         <span className="micro text-current">Frontier presents</span>
       </div>
       <span aria-hidden="true" className={`font-display ${word} leading-[0.82] font-bold uppercase`}>

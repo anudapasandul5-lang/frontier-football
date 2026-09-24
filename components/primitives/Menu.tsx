@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { usePathname } from "next/navigation";
+import { phoneSrcSet } from "@/lib/phone-image";
 
 /* A native modal keeps focus in the menu and returns it to the trigger on
    Escape. Seven links since Community (L7). */
@@ -49,7 +50,7 @@ export function Menu({ instagram }: { instagram: { url: string; handle: string }
       <dialog ref={dialog} id="site-menu" aria-label="Menu" className="menu" onKeyDown={keepFocusInside}>
         <div className="frame relative z-10 flex h-20 items-center justify-between">
           <a href="/" aria-label="Frontier Football, home" onClick={() => dialog.current?.close()}>
-            <img src="/crest.webp" alt="" width={525} height={640} className="h-14 w-auto" />
+            <img src="/crest-sm.webp" alt="" width={295} height={360} className="h-14 w-auto" />
           </a>
           <button
             type="button"
@@ -67,6 +68,8 @@ export function Menu({ instagram }: { instagram: { url: string; handle: string }
               <li key={link.href} className="menu__item">
                 <img
                   src={link.photo}
+                  srcSet={phoneSrcSet(link.photo)}
+                  sizes="100vw"
                   alt=""
                   loading="lazy"
                   decoding="async"

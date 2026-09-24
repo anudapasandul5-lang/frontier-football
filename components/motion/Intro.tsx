@@ -11,7 +11,7 @@ export function Intro() {
     <>
       <script dangerouslySetInnerHTML={{ __html: introScript }} />
       <div aria-hidden="true" className="intro canvas-night">
-        <img src="/crest.webp" alt="" width={525} height={640} className="intro-crest h-28 w-auto md:h-36" />
+        <img src="/crest-sm.webp" alt="" width={295} height={360} className="intro-crest h-28 w-auto md:h-36" />
         <p className="intro-word font-display text-[clamp(2.5rem,11vw,7rem)] leading-[0.84] font-bold uppercase">
           Frontier <span className="text-yellow">Football.</span>
         </p>

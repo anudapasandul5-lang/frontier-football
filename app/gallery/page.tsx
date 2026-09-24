@@ -10,6 +10,7 @@ import { NextPage } from "@/components/pages/NextPage";
 import { PageShell } from "@/components/pages/PageShell";
 import { Nav } from "@/components/primitives/Nav";
 import { SplitReveal } from "@/components/primitives/SplitReveal";
+import { phoneSrcSet } from "@/lib/phone-image";
 
 export const metadata: Metadata = { title: "Gallery" };
 
@@ -87,7 +88,7 @@ function Cover({ album, className }: { album: StoryAlbum; className: string }) {
   if (!cover) return null;
   return (
     <ViewTransition name={`album-cover-${album.id}`} share="album-cover" default="none">
-      <img src={cover.src} alt={cover.alt || `${album.title}.`} width={1600} height={900} loading="lazy" decoding="async" className={className} />
+      <img src={cover.src} srcSet={phoneSrcSet(cover.src)} sizes="(min-width: 768px) 50vw, 100vw" alt={cover.alt || `${album.title}.`} width={1600} height={900} loading="lazy" decoding="async" className={className} />
     </ViewTransition>
   );
 }
@@ -125,7 +126,7 @@ function AlbumCards({ albums }: { albums: StoryAlbum[] }) {
               {cover ? (
                 <Cover album={album} className="absolute inset-0 size-full object-cover object-[center_30%] transition-transform duration-700 ease-[var(--ease-out)] group-hover:scale-[1.04]" />
               ) : pic ? (
-                <img src={pic} alt={album.photoAlt ?? ""} width={720} height={900} loading="lazy" decoding="async" className="absolute inset-0 size-full object-cover transition-transform duration-700 ease-[var(--ease-out)] group-hover:scale-[1.04]" />
+                <img src={pic} srcSet={phoneSrcSet(pic)} sizes="(min-width: 768px) 33vw, 100vw" alt={album.photoAlt ?? ""} width={720} height={900} loading="lazy" decoding="async" className="absolute inset-0 size-full object-cover transition-transform duration-700 ease-[var(--ease-out)] group-hover:scale-[1.04]" />
               ) : null}
               {pic ? <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-night/90 via-night/15 to-transparent" /> : null}
               <div className="relative flex flex-col gap-3 p-5 sm:p-6">

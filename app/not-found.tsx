@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PageShell } from "@/components/pages/PageShell";
+import { phoneSrcSet } from "@/lib/phone-image";
 
 export const metadata: Metadata = { title: "Offside", robots: { index: false } };
 
@@ -33,6 +34,8 @@ export default function NotFound() {
         <figure className="relative h-[50svh] min-h-[320px] overflow-hidden md:h-auto">
           <img
             src="/home/moment-strike.webp"
+            srcSet={phoneSrcSet("/home/moment-strike.webp")}
+            sizes="100vw"
             alt="A player lining up a shot under the floodlights in the 4 x 4 Series"
             width={1200}
             height={1000}

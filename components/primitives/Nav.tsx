@@ -35,10 +35,10 @@ export function Nav({ crestPriority = false, floating = false }: { crestPriority
       <div className={floating ? "frame flex h-20 items-center justify-between" : "contents"}>
       <a href="/" className="block" aria-label="Frontier Football, home">
         <img
-          src="/crest.webp"
+          src="/crest-sm.webp"
           alt=""
-          width={525}
-          height={640}
+          width={295}
+          height={360}
           className="h-14 w-auto"
           fetchPriority={crestPriority ? "high" : undefined}
         />

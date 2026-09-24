@@ -4,6 +4,8 @@
    unframed (owner, 2026-09-24: the tilted 3:4 prints cut the subjects off
    and read as crooked scans). */
 
+import { phoneSrcSet } from "@/lib/phone-image";
+
 export type StripPhoto = { src: string; alt: string };
 
 export function PhotoStrip({ photos }: { photos: StripPhoto[] }) {
@@ -15,6 +17,8 @@ export function PhotoStrip({ photos }: { photos: StripPhoto[] }) {
           <img
             key={p.src}
             src={p.src}
+            srcSet={phoneSrcSet(p.src)}
+            sizes={i === 0 ? "(min-width: 640px) 33vw, 100vw" : "(min-width: 640px) 33vw, 50vw"}
             alt={p.alt}
             width={1200}
             height={900}
