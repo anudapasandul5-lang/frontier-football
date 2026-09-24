@@ -46,6 +46,12 @@ Tokens live in `app/globals.css` under `@theme`.
 The Frontier crest keeps its own colours and is exempt. Real photographs are
 exempt. Nothing else ships.
 
+**Exception (owner, 2026-09-24):** the home Competitions act
+(`components/acts/Competitions.tsx`) is three solid blue, green and red cards
+on bone, smaller than a viewport. It replaced the full-screen colour slider,
+which the owner rejected through two restyles; the owner picked it from three
+mocks knowing it breaks the rule above. Do not "fix" it back.
+
 ## 3. Typography
 
 - `font-serif` Instrument Serif: emotional lines. `font-display` Oswald,
