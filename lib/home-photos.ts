@@ -26,28 +26,25 @@ export const marqueePhotos: HomePhoto[] = [
    introducing a seventh unapproved image. */
 export const statementPhoto = marqueePhotos[1];
 
-/* Act 5's slider panels (owner, 2026-09-23: bigger photos, blended into the
-   colour). Each panel has one full-bleed background frame and up to two framed
-   ones, served from Drive at view time (thumbUrl, no-referrer). The 4 x 4
-   frames are clean SZN 6 picks from T2; the Division 0 frames are from its
-   album and were checked at 800px for burned-in marks (none). Turf Wars has
-   only the one champions photo anywhere in the project, so it gets the
-   background alone until its Drive folder is linked in content.js. */
+/* Act 5's competition cards pick one landscape photo each from these, served from Drive
+   at view time (thumbUrl, no-referrer). The 4 x 4 frames are clean SZN 6 picks
+   from T2; the Division 0 frames are from its album and were checked at 800px
+   for burned-in marks (none). Turf Wars has only the one 800px champions photo
+   anywhere in the project, read from content.js, until its Drive folder is
+   linked there. Full-bleed backgrounds were dropped 2026-09-24 (too soft). */
 export type DrivePhoto = { id: string; w: number; h: number; alt: string };
 
 const szn6 = "A 4 x 4 Series SZN 6 match at Athlete 360";
 const div0 = "The Division 0 PS5 tournament at Pixels N Pints";
 
-export const competitionPhotos: Record<"4 x 4 Series" | "Division 0", { bg: DrivePhoto; frames: DrivePhoto[] }> = {
+export const competitionPhotos: Record<"4 x 4 Series" | "Division 0", { frames: DrivePhoto[] }> = {
   "4 x 4 Series": {
-    bg: { id: "1OJuaW4WQYaCBXMaQxaBo0Erw0o_v22FU", w: 400, h: 266, alt: szn6 },
     frames: [
       { id: "14oAKa0Rir7wqe6sbVRD2Li2RG-sTGV6U", w: 400, h: 291, alt: szn6 },
       { id: "1t0Xtc7eN3YWW_k7YDW3iUH9CNtGBCGF4", w: 400, h: 266, alt: szn6 },
     ],
   },
   "Division 0": {
-    bg: { id: "1nXzq0DGAcDU8jSlpVDr86OFwk2FBZ2_h", w: 400, h: 266, alt: div0 },
     frames: [
       { id: "1tFbmDB8xFRn6V7PgGSi4_hRm_ordP63s", w: 400, h: 600, alt: "The Pixels N Pints gaming and sports bar entrance" },
       { id: "19_NtvhsJCWDnFmaKn3fa7eB2dlnUeLpF", w: 400, h: 266, alt: div0 },

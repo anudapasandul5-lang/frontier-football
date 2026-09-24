@@ -92,7 +92,8 @@ Derived text values (**inferred** from screenshot, not computed properties):
 
 **Palette rules observed:**
 - The four chromatic fields (green, blue, red, teal) never appear as accents, borders, or
-  small UI. They are only ever **whole viewports**.
+  small UI. They are only ever **whole viewports**. (Frontier exception, owner 2026-09-24:
+  the home Competitions act uses them as three cards on bone; see HOUSE-RULES section 2.)
 - Yellow is the exception and appears exactly once, as hero type.
 - No gradients. No shadows. No tints of the brand colours.
 
