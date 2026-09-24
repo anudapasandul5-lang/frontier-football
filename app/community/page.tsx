@@ -46,7 +46,7 @@ export default function CommunityPage() {
         ]}
       />
 
-      <section data-tone="bone" data-chapter="Sunday League" aria-labelledby="league-heading" className="canvas-night">
+      <section id="sunday-league" data-tone="bone" data-chapter="Sunday League" aria-labelledby="league-heading" className="canvas-night scroll-mt-24">
         <div className="frame grid gap-12 py-[clamp(4rem,12vh,8rem)] lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-end">
           <div className="@container min-w-0">
             <h2 id="league-heading" className="sr-only">

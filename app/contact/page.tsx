@@ -52,7 +52,11 @@ export default function Contact() {
             </>
           }
         >
-          Players: message us on WhatsApp until Community opens. Brands: see{" "}
+          For Sunday League,{" "}
+          <a href="/community#sunday-league" className="underline underline-offset-4">
+            register a team or join as a free agent
+          </a>
+          . Brands: see{" "}
           <a href="/collaborate" className="underline underline-offset-4">Collaborate</a>.
         </PageHero>
       }

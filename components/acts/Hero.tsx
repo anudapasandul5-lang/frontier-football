@@ -1,5 +1,3 @@
-import raw from "@/content.js";
-import { parseContent, whatsappHref } from "@/lib/content-data";
 import { Nav } from "@/components/primitives/Nav";
 import { Roll } from "@/components/primitives/Roll";
 import { HeroMotion } from "@/components/motion/HeroMotion";
@@ -18,10 +16,11 @@ import { HeroRing } from "@/components/motion/HeroRing";
    metadata) and Who We Are's "Sri Lanka's football community".
 
    "Built by the football community": v1's hero headline, "futsal" swapped
-   for "football" by the owner on 2026-09-24. */
+   for "football" by the owner on 2026-09-24.
 
-const content = parseContent(raw);
-const playHref = whatsappHref(content.contact.whatsapp, content.contact.playerMessage);
+   UX audit T1 (2026-09-24): the player action goes to the Sunday League
+   section on Community, where the team and free-agent drafts live, and the
+   phone shows the offer and place in one line above the actions. */
 
 const button = "btn flex min-h-11 items-center px-6 font-display text-[clamp(0.9rem,0.8rem+0.3vw,1.1rem)] font-bold uppercase";
 
@@ -45,15 +44,14 @@ export function Hero() {
         </h1>
       </div>
 
-      <div className="frame relative z-[3] flex items-center justify-between gap-4 pb-6">
+      <div className="frame relative z-[3] flex items-center justify-between gap-4 pb-6 max-sm:flex-col max-sm:gap-3">
+        <p className="micro text-center sm:hidden">
+          <span className="whitespace-nowrap">Small-sided football ·</span> <span className="whitespace-nowrap">Colombo, Sri Lanka</span>
+        </p>
         <p className="micro max-sm:hidden">Small-sided football</p>
-        <div className="flex flex-wrap items-center justify-center gap-3 max-sm:mx-auto">
-          <a
-            href={playHref ?? "/contact"}
-            {...(playHref ? { target: "_blank", rel: "noopener noreferrer", "aria-label": "Join next season (opens WhatsApp in a new tab)" } : {})}
-            className={`${button} bg-yellow text-ink`}
-          >
-            <Roll>Join next season</Roll>
+        <div className="flex flex-wrap items-center justify-center gap-3">
+          <a href="/community#sunday-league" className={`${button} bg-yellow text-ink`}>
+            <Roll>Explore Sunday League</Roll>
           </a>
           <a href="/collaborate" className={`${button} border-2 border-ink hover:bg-ink hover:text-bone`}>
             <Roll>Partner with us</Roll>

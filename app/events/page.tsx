@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import raw from "@/content.js";
-import { parseContent, resultRows, sessions, upcomingEvents } from "@/lib/content-data";
+import { parseContent, resultRows, sessions, upcomingEvents, whatsappHref } from "@/lib/content-data";
 import { Events as Upcoming } from "@/components/acts/Events";
 import { NextPage } from "@/components/pages/NextPage";
 import { PageHero, heroButton } from "@/components/pages/PageHero";
@@ -21,6 +21,11 @@ const FACTS = [
 
 const recorded = (value: string | null) => value ?? <Unrecorded />;
 
+/* A question about the weekly session, not a League registration: whether the
+   Sunday session and the Sunday Football League are one offer is unconfirmed
+   (UX audit T1, 2026-09-24), so the two drafts stay separate. */
+const sessionMessage = "Hi Frontier, I'd like to ask about this Sunday's football session and venue.";
+
 /* The player's page, in night mode (L6). The results wall leads: every season
    and competition Frontier has run, a muted dash for anything not recorded
    (plan Q19). Then the weekly nights and the dated one-offs, each printed only
@@ -30,6 +35,7 @@ export default function EventsPage() {
   const data = parseContent(raw);
   const nights = sessions(data);
   const results = resultRows(data);
+  const askHref = whatsappHref(data.contact.whatsapp, sessionMessage);
 
   return (
     <PageShell
@@ -132,6 +138,17 @@ export default function EventsPage() {
               </li>
             ))}
           </ul>
+          {askHref ? (
+            <a
+              href={askHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Ask about this Sunday (opens WhatsApp in a new tab)"
+              className={`${heroButton} mt-8 w-fit bg-yellow text-ink`}
+            >
+              <Roll>Ask about this Sunday</Roll>
+            </a>
+          ) : null}
         </section>
       ) : null}
 
