@@ -69,7 +69,7 @@ export default function Contact() {
               <div>
                 <dt className="micro mb-3">Email</dt>
                 <dd>
-                  <a className={big} href={`mailto:${email}`} data-cursor="Email">
+                  <a className={big} href={`mailto:${email}`}>
                     {email.split(/(?=[.@])/).map((part, i) => (
                       <span key={i}>
                         {i > 0 ? <wbr /> : null}
@@ -89,7 +89,7 @@ export default function Contact() {
                     href={playerLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    data-cursor="Message"
+                   
                     aria-label={`Message ${whatsapp} on WhatsApp (opens in a new tab)`}
                   >
                     {whatsapp}

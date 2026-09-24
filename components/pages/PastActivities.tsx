@@ -26,7 +26,7 @@ export function PastActivities() {
             <a
               href={activity.href}
               data-preview={activity.photo ?? undefined}
-              data-cursor="Photos"
+             
               className="group grid grid-cols-[3ch_minmax(0,1fr)_auto] items-center gap-x-4 py-6 transition-colors duration-200 hover:bg-ink hover:text-bone focus-visible:bg-ink focus-visible:text-bone sm:gap-x-8 sm:px-4"
             >
               <span className="micro tabular-nums group-hover:text-bone/70 group-focus-visible:text-bone/70">{String(i + 1).padStart(2, "0")}</span>

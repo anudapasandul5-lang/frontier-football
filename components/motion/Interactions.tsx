@@ -6,11 +6,9 @@ import { useEffect, useRef, useState } from "react";
    server components:
 
    - [data-tone="ink"|"bone"] on every canvas: the text colour there. The
-     cursor and the chapter indicator take it on, so they read on every field
-     without a blend mode inventing off-palette colours.
+     chapter indicator takes it on, so it reads on every field without a blend mode inventing off-palette colours.
    - [data-chapter="Label"]: where a menu chapter starts (indicator).
    - [data-magnetic="0.3"]: pulled toward the pointer when it comes close.
-   - [data-cursor="Label"]: the cursor ring grows and says this.
    - [data-preview="/img.webp"]: a photo follows the pointer over the element.
    - [data-drift="-0.35"]: a row of type that slides with the scroll.
      Add data-drift-flat for a photo row that should slide without leaning.
@@ -27,8 +25,6 @@ type Magnet = { el: HTMLElement; x: number; y: number; strength: number };
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
 export function Interactions() {
-  const cursor = useRef<HTMLDivElement>(null);
-  const label = useRef<HTMLSpanElement>(null);
   const preview = useRef<HTMLImageElement>(null);
   const indicator = useRef<HTMLDivElement>(null);
   const bar = useRef<HTMLSpanElement>(null);
@@ -125,19 +121,8 @@ export function Interactions() {
         cy = py;
         inside = true;
       }
+      if (!pointerFx()) return;
       const target = e.target instanceof Element ? e.target : null;
-      const c = cursor.current;
-      if (!c || !pointerFx()) return;
-      // A link or button speaks for itself: it only carries a label it names,
-      // never one inherited from the section around it.
-      const link = target?.closest<HTMLElement>("a, button");
-      const labelled = link ? (link.dataset.cursor ? link : null) : target?.closest<HTMLElement>("[data-cursor]");
-      const interactive = link ?? labelled;
-      c.dataset.state = interactive ? "hover" : "idle";
-      if (label.current) label.current.textContent = labelled?.dataset.cursor ?? "";
-      c.dataset.labelled = labelled ? "true" : "false";
-      c.dataset.uiTone = target?.closest<HTMLElement>("[data-tone]")?.dataset.tone ?? "bone";
-
       const row = target?.closest<HTMLElement>("[data-preview]");
       const img = preview.current;
       if (img) {
@@ -149,16 +134,11 @@ export function Interactions() {
     };
     const onLeave = () => {
       inside = false;
-      if (cursor.current) cursor.current.dataset.state = "gone";
       if (preview.current) preview.current.dataset.show = "false";
       previewSrc = "";
     };
-    const onDown = () => cursor.current?.setAttribute("data-pressed", "true");
-    const onUp = () => cursor.current?.removeAttribute("data-pressed");
     window.addEventListener("pointermove", onMove, { passive: true });
     document.documentElement.addEventListener("pointerleave", onLeave);
-    window.addEventListener("pointerdown", onDown, { passive: true });
-    window.addEventListener("pointerup", onUp, { passive: true });
 
     const tracks = [...document.querySelectorAll(".marquee__track")];
     const drifts = [...document.querySelectorAll<HTMLElement>("[data-drift]")].map((el) => ({ el, last: Infinity }));
@@ -171,13 +151,12 @@ export function Interactions() {
       raf = requestAnimationFrame(tick);
       const fx = pointerFx();
 
-      // Cursor ring trails the pointer; the preview photo trails further and
-      // leans into its own horizontal speed.
+      // The preview photo trails the pointer and leans into its own
+      // horizontal speed.
       if (fx && inside) {
         prevCx = cx;
         cx = lerp(cx, px, 0.22);
         cy = lerp(cy, py, 0.22);
-        cursor.current?.style.setProperty("transform", `translate3d(${cx}px, ${cy}px, 0)`);
         const img = preview.current;
         if (img?.dataset.show === "true") {
           const lean = Math.max(-12, Math.min(12, (cx - prevCx) * 0.6));
@@ -271,8 +250,6 @@ export function Interactions() {
       window.removeEventListener("resize", onScroll);
       window.removeEventListener("pointermove", onMove);
       document.documentElement.removeEventListener("pointerleave", onLeave);
-      window.removeEventListener("pointerdown", onDown);
-      window.removeEventListener("pointerup", onUp);
       for (const m of magnets) m.el.style.translate = "";
       for (const z of zooms) z.el.style.scale = "";
       for (const q of parallax) q.el.style.translate = "";
@@ -284,10 +261,6 @@ export function Interactions() {
 
   return (
     <>
-      <div ref={cursor} aria-hidden="true" className="cursor" data-state="gone">
-        <span className="cursor__ring" />
-        <span ref={label} className="cursor__label" />
-      </div>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img ref={preview} alt="" aria-hidden="true" className="row-preview" data-show="false" />
       <div ref={indicator} aria-hidden="true" className="chapter-indicator micro" data-ui-tone="bone" data-show="false">

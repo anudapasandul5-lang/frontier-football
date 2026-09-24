@@ -98,7 +98,7 @@ function Justified({ tiles, rowHeight, onOpen, labelFor }: { tiles: Tile[]; rowH
         const ratio = t.width / t.height;
         return (
           <li key={t.key} style={{ flexGrow: ratio, flexBasis: `calc(${ratio} * var(--row-h))` }}>
-            <button type="button" aria-label={labelFor(i)} onClick={(e) => onOpen(i, e.currentTarget)} data-cursor="View" className="group block w-full cursor-pointer overflow-hidden bg-bone/5">
+            <button type="button" aria-label={labelFor(i)} onClick={(e) => onOpen(i, e.currentTarget)} className="group block w-full cursor-pointer overflow-hidden bg-bone/5">
               <img
                 src={t.src}
                 data-src={t.lazySrc}

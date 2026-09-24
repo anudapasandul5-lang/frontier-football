@@ -21,7 +21,7 @@ export function NextPage({ current }: { current: string }) {
       <a
         href={next.href}
         data-preview={next.photo}
-        data-cursor="Go"
+       
         className="frame group flex flex-col gap-4 py-[clamp(2.5rem,7vh,4.5rem)]"
       >
         <span className="micro text-yellow">Next</span>

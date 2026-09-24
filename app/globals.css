@@ -506,78 +506,11 @@
   scale: 0.96;
 }
 
-/* The cursor: a square frame, like everything else here (0px corners), that
-   trails the pointer and opens into a filled label over things you can use. */
-.cursor,
+/* Fine pointers only. */
 .row-preview {
   display: none;
 }
 @media (hover: hover) and (pointer: fine) {
-  :root[data-motion="on"] .cursor {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 70;
-    display: block;
-    pointer-events: none;
-    color: var(--color-bone);
-  }
-  :root[data-motion="on"] .cursor[data-ui-tone="ink"] {
-    color: var(--color-ink);
-  }
-  .cursor__ring {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 22px;
-    height: 22px;
-    border: 1.5px solid currentColor;
-    translate: -50% -50%;
-    transition:
-      width 260ms var(--ease-out),
-      height 260ms var(--ease-out),
-      background-color 200ms ease,
-      scale 160ms var(--ease-out),
-      opacity 200ms ease;
-  }
-  .cursor[data-state="hover"] .cursor__ring {
-    width: 48px;
-    height: 48px;
-  }
-  .cursor[data-labelled="true"] .cursor__ring {
-    width: 84px;
-    height: 84px;
-    background-color: currentColor;
-  }
-  .cursor[data-pressed] .cursor__ring {
-    scale: 0.85;
-  }
-  .cursor[data-state="gone"] .cursor__ring {
-    opacity: 0;
-  }
-  .cursor__label {
-    position: absolute;
-    top: 0;
-    left: 0;
-    translate: -50% -50%;
-    font-family: var(--font-sans);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    white-space: nowrap;
-    color: var(--color-ink);
-    opacity: 0;
-    transition: opacity 160ms ease;
-  }
-  .cursor[data-ui-tone="ink"] .cursor__label {
-    color: var(--color-bone);
-  }
-  .cursor[data-labelled="true"] .cursor__label {
-    opacity: 1;
-    transition-delay: 80ms;
-  }
-
   /* A season's photo following the pointer over its results row. */
   :root[data-motion="on"] .row-preview {
     position: fixed;
