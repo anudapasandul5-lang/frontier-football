@@ -1,4 +1,4 @@
-import type { CSSProperties, ReactNode } from "react";
+import { ViewTransition, type CSSProperties, type ReactNode } from "react";
 import { Nav } from "@/components/primitives/Nav";
 import { SplitReveal } from "@/components/primitives/SplitReveal";
 
@@ -19,6 +19,7 @@ export function PageHero({
   children,
   actions,
   labels = ["Frontier Football", "Colombo, Sri Lanka"],
+  transition,
 }: {
   chapter: string;
   eyebrow: string;
@@ -27,7 +28,24 @@ export function PageHero({
   children?: ReactNode;
   actions?: ReactNode;
   labels?: [string, string];
+  /* Shared-element name: an album hero morphs from the gallery band that
+     opened it. */
+  transition?: string;
 }) {
+  const image = (
+    <img
+      src={photo.src}
+      alt={photo.alt}
+      width={2000}
+      height={1335}
+      fetchPriority="high"
+      decoding="async"
+      data-zoom="0.16"
+      style={{ "--wipe-delay": "140ms", objectPosition: photo.position ?? "center" } as CSSProperties}
+      className="wipe__layer absolute inset-0 h-full w-full object-cover"
+    />
+  );
+
   return (
     <section
       data-tone="bone"
@@ -37,17 +55,13 @@ export function PageHero({
     >
       <div data-reveal className="wipe absolute inset-0 -z-10 overflow-hidden">
         <span aria-hidden="true" className="wipe__layer wipe__flash absolute inset-0 bg-yellow" />
-        <img
-          src={photo.src}
-          alt={photo.alt}
-          width={2000}
-          height={1335}
-          fetchPriority="high"
-          decoding="async"
-          data-zoom="0.16"
-          style={{ "--wipe-delay": "140ms", objectPosition: photo.position ?? "center" } as CSSProperties}
-          className="wipe__layer absolute inset-0 h-full w-full object-cover"
-        />
+        {transition ? (
+          <ViewTransition name={transition} share="album-cover" default="none">
+            {image}
+          </ViewTransition>
+        ) : (
+          image
+        )}
         <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-night via-night/55 to-night/10" />
       </div>
 
@@ -70,10 +84,14 @@ export function PageHero({
         {actions ? <div className="mt-7 flex flex-wrap gap-3">{actions}</div> : null}
       </div>
 
-      <div className="frame flex items-center justify-between gap-4 border-t border-bone/25 py-4">
-        <p className="micro">{labels[0]}</p>
-        <p className="micro max-sm:hidden">Scroll</p>
-        <p className="micro">{labels[1]}</p>
+      {/* The rule sits on an inner row so it starts where the text does, not
+          at the frame's padding edge. */}
+      <div className="frame">
+        <div className="flex items-center justify-between gap-4 border-t border-bone/25 py-4">
+          <p className="micro">{labels[0]}</p>
+          <p className="micro max-sm:hidden">Scroll</p>
+          <p className="micro">{labels[1]}</p>
+        </div>
       </div>
     </section>
   );

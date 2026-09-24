@@ -13,6 +13,7 @@ import { useEffect, useRef, useState } from "react";
    - [data-cursor="Label"]: the cursor ring grows and says this.
    - [data-preview="/img.webp"]: a photo follows the pointer over the element.
    - [data-drift="-0.35"]: a row of type that slides with the scroll.
+     Add data-drift-flat for a photo row that should slide without leaning.
    - [data-parallax="-0.18"]: drifts against the scroll.
    - [data-zoom="0.18"]: settles from enlarged as its section arrives.
    - .marquee__track: runs faster with scroll speed, and backwards on the way up.
@@ -245,7 +246,9 @@ export function Interactions() {
           const x = (p - 0.5) * Number(d.el.dataset.drift) * window.innerWidth * 2 - d.el.scrollWidth / 6;
           if (Math.abs(x - d.last) > 0.1 || Math.abs(skew) > 0.01) {
             d.last = x;
-            d.el.style.transform = `translate3d(${x.toFixed(1)}px, 0, 0) skewX(${skew.toFixed(2)}deg)`;
+            // data-drift-flat: photo rows slide but never lean; skew suits type only.
+            const lean = d.el.dataset.driftFlat === undefined ? skew : 0;
+            d.el.style.transform = `translate3d(${x.toFixed(1)}px, 0, 0) skewX(${lean.toFixed(2)}deg)`;
           }
         }
 

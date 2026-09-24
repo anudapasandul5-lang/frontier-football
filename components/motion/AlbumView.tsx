@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState, ViewTransition, type KeyboardEvent } from "react";
+import { useEffect, useId, useRef, useState, ViewTransition, type CSSProperties, type KeyboardEvent, type ReactNode } from "react";
 import { useSearchParams } from "next/navigation";
 import raw from "@/content.js";
 import { parseContent } from "@/lib/content-data";
-import { CLOSED, closeLightbox, openLightbox, stepIndex, type LightboxState } from "@/lib/gallery-data";
+import { CLOSED, closeLightbox, countLabel, openLightbox, stepIndex, type LightboxState } from "@/lib/gallery-data";
+import type { Highlight } from "@/lib/highlights";
 import {
   albumCredit,
   albumIdFromQuery,
@@ -16,7 +17,8 @@ import {
   type AlbumItem,
 } from "@/lib/album-data";
 
-const button = "min-h-11 cursor-pointer border-2 border-ink px-6 py-2 font-display text-lg leading-none uppercase hover:bg-ink hover:text-bone";
+// Square icon buttons on the dark lightbox; 48px keeps them thumb-sized.
+const button = "flex size-12 cursor-pointer items-center justify-center border border-bone/40 font-display text-2xl leading-none text-bone transition-colors hover:border-yellow hover:text-yellow";
 
 type Credit = ReturnType<typeof albumCredit>;
 type Story = NonNullable<ReturnType<typeof albumStory>>;
@@ -72,7 +74,7 @@ export function AlbumHead({ title, count, credit, story, id }: { title: string; 
 
 type Load = { state: "loading" } | { state: "failed" } | { state: "ready"; items: AlbumItem[]; credit: Credit };
 
-/* One album from ?album=<id>, in a CSS-columns masonry, from public/albums/.
+/* One album from ?album=<id>, in justified rows, from public/albums/.
    The pixels are Drive thumbnails, or committed WebP for a ThePapare import. Two measured traps carried from v1:
    - src is withheld until a tile nears the viewport. loading="lazy" let all
      463 SZN 3 images ask Drive at once and 462 came back empty.
@@ -83,11 +85,72 @@ export function QueryAlbumView() {
   return <AlbumView key={id} id={id} />;
 }
 
-export function AlbumView({ id }: { id: string | null }) {
+type Tile = { key: string; src?: string; lazySrc?: string; width: number; height: number; alt: string };
+
+/* Justified rows in CSS alone: each tile grows in proportion to its own
+   aspect ratio from a basis of ratio x --row-h, so a row fills the width and
+   no photo is cropped. The ::after filler stops a short last row from
+   stretching its few tiles to full width. */
+function Justified({ tiles, rowHeight, onOpen, labelFor }: { tiles: Tile[]; rowHeight: string; onOpen: (i: number, el: HTMLElement) => void; labelFor: (i: number) => string }) {
+  return (
+    <ul className="frame flex flex-wrap gap-2 after:grow-[999] after:content-['']" style={{ "--row-h": rowHeight } as CSSProperties}>
+      {tiles.map((t, i) => {
+        const ratio = t.width / t.height;
+        return (
+          <li key={t.key} style={{ flexGrow: ratio, flexBasis: `calc(${ratio} * var(--row-h))` }}>
+            <button type="button" aria-label={labelFor(i)} onClick={(e) => onOpen(i, e.currentTarget)} data-cursor="View" className="group block w-full cursor-pointer overflow-hidden bg-bone/5">
+              <img
+                src={t.src}
+                data-src={t.lazySrc}
+                alt={t.alt}
+                width={t.width}
+                height={t.height}
+                // Explicit: a src-less image is not reliably sized from its
+                // attributes, and the rows would reshuffle as pixels land.
+                style={{ aspectRatio: `${t.width} / ${t.height}` }}
+                loading={t.src ? "lazy" : undefined}
+                decoding="async"
+                referrerPolicy="no-referrer"
+                className="block h-auto w-full transition-transform duration-500 ease-[var(--ease-out)] group-hover:scale-[1.03]"
+              />
+            </button>
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
+/* The album's own words first: the hand-picked frames, big. */
+function Highlights({ items, title }: { items: Highlight[]; title: string }) {
+  const slides = items.map((h) => ({ src: h.src, alt: h.alt, isClip: false, width: h.w, height: h.h }));
+  return (
+    <section aria-labelledby="highlights-heading" className="pt-[clamp(3rem,10vh,6rem)]">
+      <div className="frame mb-8 flex items-end justify-between gap-6">
+        <h2 id="highlights-heading" className="font-display text-[clamp(2.5rem,7vw,6rem)] leading-[0.9] font-bold uppercase">
+          Highlights
+        </h2>
+        <p className="micro">{items.length} picked frames</p>
+      </div>
+      <Lightbox items={slides}>
+        {(open) => (
+          <Justified
+            tiles={items.map((h) => ({ key: h.src, src: h.src, width: h.w, height: h.h, alt: h.alt }))}
+            rowHeight="clamp(150px, 24vw, 320px)"
+            onOpen={open}
+            labelFor={(i) => `Open highlight ${i + 1} of ${items.length}, ${title}`}
+          />
+        )}
+      </Lightbox>
+    </section>
+  );
+}
+
+export function AlbumView({ id, head = true, highlights = [] }: { id: string | null; head?: boolean; highlights?: Highlight[] }) {
   const story = albumStory(parseContent(raw), id);
   const title = story?.title ?? null;
   const [load, setLoad] = useState<Load>({ state: "loading" });
-  const grid = useRef<HTMLUListElement>(null);
+  const grid = useRef<HTMLElement>(null);
 
   // Set again on every load change: Next re-applies the metadata title
   // ("Album") after hydration, so a single early write does not stick.
@@ -137,12 +200,24 @@ export function AlbumView({ id }: { id: string | null }) {
       </>
     );
   }
-  if (load.state !== "ready") {
+
+  const ready = load.state === "ready" ? load : null;
+  const top = head ? <AlbumHead title={title} count={ready?.items.length ?? 0} credit={ready?.credit} story={story} id={id} /> : null;
+  const picks = highlights.length > 0 ? <Highlights items={highlights} title={title} /> : null;
+
+  if (!ready || ready.items.length === 0) {
     return (
       <>
-        <AlbumHead title={title} count={0} story={story} id={id} />
+        {top}
+        {picks}
         {load.state === "failed" ? (
-          <p id="album-photos" className="frame scroll-mt-24 text-lg">These photographs could not be loaded just now. Try again in a moment.</p>
+          <p id="album-photos" className="frame scroll-mt-24 pt-12 text-lg">
+            These photographs could not be loaded just now. Try again in a moment.
+          </p>
+        ) : ready ? (
+          <p id="album-photos" className="frame scroll-mt-24 pt-12 text-lg">
+            Photos are on the way.
+          </p>
         ) : (
           // Holds the footer below the fold until the grid lands; without it the
           // grid shoved an on-screen footer down (CLS 0.19 at 412px).
@@ -151,64 +226,60 @@ export function AlbumView({ id }: { id: string | null }) {
       </>
     );
   }
-  if (load.items.length === 0) {
-    return (
-      <>
-        <AlbumHead title={title} count={0} story={story} id={id} />
-        <p id="album-photos" className="frame scroll-mt-24 text-lg">Photos are on the way.</p>
-      </>
-    );
-  }
 
-  const items = load.items;
+  const { items, credit } = ready;
   return (
     <>
-      <AlbumHead title={title} count={items.length} credit={load.credit} story={story} id={id} />
-      <div id="album-photos" className="frame mb-6 flex scroll-mt-24 items-end justify-between border-t-2 border-ink pt-5">
-        <h2 className="font-display text-[clamp(2rem,5vw,4rem)] leading-none uppercase">Every frame</h2>
-        <p className="micro">{items.length.toLocaleString("en")} photos</p>
-      </div>
-      <Lightbox items={lightboxItems(items, title)}>
-        {(open) => (
-          <ul ref={grid} className="frame columns-1 gap-2 min-[461px]:columns-2 min-[701px]:columns-3 min-[1101px]:columns-4">
-            {items.map((item, i) => (
-              <li key={item.id} className="mb-2 break-inside-avoid">
-                <button
-                  type="button"
-                  aria-label={tileLabel(i, items.length, title)}
-                  onClick={(event) => open(i, event.currentTarget)}
-                  className="block w-full cursor-pointer overflow-hidden transition-transform duration-150 ease-[var(--ease-out)] hover:scale-[1.02]"
-                >
-                  <img
-                    data-src={item.thumb}
-                    alt=""
-                    width={item.width}
-                    height={item.height}
-                    // Explicit: a src-less image is not reliably sized from its
-                    // attributes, and the columns would reshuffle as pixels land.
-                    style={{ aspectRatio: `${item.width} / ${item.height}` }}
-                    decoding="async"
-                    referrerPolicy="no-referrer"
-                    className="block h-auto w-full bg-ink/10"
-                  />
-                </button>
-              </li>
-            ))}
-          </ul>
-        )}
-      </Lightbox>
+      {top}
+      {picks}
+      <section ref={grid} id="album-photos" aria-labelledby="all-heading" className="scroll-mt-24 pt-[clamp(4rem,12vh,7rem)]">
+        <div className="frame mb-8 flex flex-wrap items-end justify-between gap-x-6 gap-y-3">
+          <h2 id="all-heading" className="font-display text-[clamp(2.5rem,7vw,6rem)] leading-[0.9] font-bold uppercase">
+            All {items.length.toLocaleString("en")}
+          </h2>
+          {!head && credit.credit ? (
+            <p className="micro">
+              {credit.credit}
+              {credit.source ? (
+                <>
+                  {" · "}
+                  <a href={credit.source} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-yellow">
+                    Full set on ThePapare
+                  </a>
+                </>
+              ) : null}
+            </p>
+          ) : null}
+        </div>
+        <Lightbox items={lightboxItems(items, title)}>
+          {(open) => (
+            <Justified
+              tiles={items.map((item) => ({ key: item.id, lazySrc: item.thumb, width: item.width, height: item.height, alt: "" }))}
+              rowHeight="clamp(110px, 17vw, 230px)"
+              onOpen={open}
+              labelFor={(i) => tileLabel(i, items.length, title)}
+            />
+          )}
+        </Lightbox>
+      </section>
     </>
   );
 }
 
-type Slide = ReturnType<typeof lightboxItems>[number];
+type Slide = { src: string; alt: string };
 
 /* Native <dialog>: focus trap, Escape and the inert page come from the
-   platform. Position is announced, never printed. Every route out (Escape,
-   Close, backdrop) arrives at the close event once; focus goes back to the
-   tile that opened it. */
-function Lightbox({ items, children }: { items: Slide[]; children: (open: (i: number, opener: HTMLElement) => void) => React.ReactNode }) {
+   platform. Dark, because photographs read best on dark. The position is
+   printed and announced; arrow keys, the buttons or a sideways swipe step
+   through, and the neighbours are fetched ahead so the next frame is ready.
+   Every route out (Escape, Close, backdrop) arrives at the close event once;
+   focus goes back to the tile that opened it. */
+function Lightbox({ items, children }: { items: Slide[]; children: (open: (i: number, opener: HTMLElement) => void) => ReactNode }) {
   const dialog = useRef<HTMLDialogElement>(null);
+  const swipe = useRef<number | null>(null);
+  // An album page holds two lightboxes (Highlights and All), so the label id
+  // must be unique per instance.
+  const titleId = useId();
   const [state, setState] = useState<LightboxState>(CLOSED);
 
   const open = (index: number, opener: HTMLElement) => {
@@ -229,23 +300,48 @@ function Lightbox({ items, children }: { items: Slide[]; children: (open: (i: nu
   };
   const item = state.isOpen ? items[state.index] : null;
 
+  useEffect(() => {
+    if (!state.isOpen || items.length < 2) return;
+    for (const d of [1, -1]) {
+      const img = new Image();
+      img.referrerPolicy = "no-referrer";
+      img.src = items[stepIndex(state.index, d, items.length)].src;
+    }
+  }, [state.isOpen, state.index, items]);
+
   return (
     <>
       {children(open)}
       <dialog
         ref={dialog}
-        aria-labelledby="lightbox-title"
+        aria-labelledby={titleId}
         onClose={onClose}
         onKeyDown={onKeyDown}
         onClick={(event) => event.target === event.currentTarget && dialog.current?.close()}
-        className="fixed inset-0 m-0 hidden size-full max-h-none max-w-none grid-rows-[minmax(0,1fr)_auto] gap-4 border-0 bg-bone/92 px-4 pt-15 pb-4 text-ink open:grid backdrop:bg-transparent sm:px-6 sm:pt-20 sm:pb-6"
+        onPointerDown={(e) => (swipe.current = e.clientX)}
+        onPointerUp={(e) => {
+          const start = swipe.current;
+          swipe.current = null;
+          if (start === null || e.pointerType === "mouse") return;
+          const dx = e.clientX - start;
+          if (Math.abs(dx) > 50) step(dx < 0 ? 1 : -1);
+        }}
+        className="fixed inset-0 m-0 hidden size-full max-h-none max-w-none touch-pan-y grid-rows-[auto_minmax(0,1fr)_auto] gap-4 border-0 bg-night/96 p-4 text-bone open:grid backdrop:bg-transparent sm:p-6"
       >
-        <h2 id="lightbox-title" className="sr-only">
+        <h2 id={titleId} className="sr-only">
           Gallery
         </h2>
         <p className="sr-only" aria-live="polite">
           {item ? `${state.index + 1} of ${items.length}. ${item.alt}`.trim() : ""}
         </p>
+        <div className="flex items-center justify-between">
+          <p aria-hidden="true" className="micro">
+            {state.isOpen ? countLabel(state.index, items.length) : ""}
+          </p>
+          <button type="button" aria-label="Close" className={button} onClick={() => dialog.current?.close()}>
+            ×
+          </button>
+        </div>
         <div className="pointer-events-none grid min-h-0 grid-rows-[minmax(0,1fr)] place-items-center">
           {item ? (
             <img
@@ -253,22 +349,21 @@ function Lightbox({ items, children }: { items: Slide[]; children: (open: (i: nu
               src={item.src}
               alt={item.alt || "A Frontier photograph."}
               referrerPolicy="no-referrer"
-              className="pointer-events-auto h-auto max-h-full w-auto max-w-[min(100%,1100px)] border-2 border-ink bg-bone"
+              draggable={false}
+              className="pointer-events-auto h-auto max-h-full w-auto max-w-[min(100%,1400px)] select-none"
             />
           ) : null}
         </div>
         <div className="flex justify-center gap-3">
-          <button type="button" className={button} onClick={() => step(-1)}>
-            Previous
+          <button type="button" aria-label="Previous photo" className={button} onClick={() => step(-1)}>
+            ←
           </button>
-          <button type="button" className={button} onClick={() => step(1)}>
-            Next
+          <button type="button" aria-label="Next photo" className={button} onClick={() => step(1)}>
+            →
           </button>
         </div>
-        <button type="button" className={`${button} absolute top-4 right-4 sm:top-6 sm:right-6`} onClick={() => dialog.current?.close()}>
-          Close
-        </button>
       </dialog>
     </>
   );
 }
+

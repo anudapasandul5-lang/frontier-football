@@ -2,144 +2,262 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ViewTransition } from "react";
 import raw from "@/content.js";
-import { parseContent, seasonName } from "@/lib/content-data";
-import { Tabs } from "@/components/motion/Tabs";
+import { albumIds } from "@/lib/album-data";
+import { albumFacts } from "@/lib/album-facts";
+import { galleryChapters, type Chapter, type StoryAlbum } from "@/lib/gallery-story";
+import { coverFor, reel, type ReelFrame } from "@/lib/highlights";
 import { NextPage } from "@/components/pages/NextPage";
-import { PageHero } from "@/components/pages/PageHero";
 import { PageShell } from "@/components/pages/PageShell";
-import { BandedReveal } from "@/components/primitives/BandedReveal";
+import { Nav } from "@/components/primitives/Nav";
+import { SplitReveal } from "@/components/primitives/SplitReveal";
 
 export const metadata: Metadata = { title: "Gallery" };
 
-type Entry = {
-  title: string;
-  number: string;
-  champion?: string | null; // absent on a watch party: it has no champion at all
-  note: string | null;
-  photo: string | null;
-  photoAlt: string | null;
-  driveFolder: string | null;
-  albumId: string | null;
-};
+const n = (x: number) => x.toLocaleString("en");
+const photos = (x: number) => `${n(x)} photo${x === 1 ? "" : "s"}`;
 
-/* The poster card (owner picked "Season Posters", 2026-09-15). v1 laid its text
-   over a gradient scrim; v2 has no gradients, so the photo sits above a solid
-   ink panel carrying the number and title. An album opens on this site; a card
-   with no album links out to Drive; neither shows "Photos are on the way". The
-   whole card is the link, and its visible text is its accessible name. */
-function Card({ entry, groupLabel, wide = false }: { entry: Entry; groupLabel?: string; wide?: boolean }) {
-  const href = entry.albumId ? `/albums/${encodeURIComponent(entry.albumId)}` : entry.driveFolder;
-  const body = (
-    <>
-        <div className="relative aspect-[16/10] overflow-hidden bg-ink">
-          {entry.photo ? (
-            entry.albumId ? (
-              <ViewTransition name={`album-cover-${entry.albumId}`} share="album-cover" default="none">
-                <BandedReveal src={entry.photo} alt={entry.photoAlt ?? `${entry.title}.`} width={800} height={450} bands={4} className="gallery-cover absolute inset-0 size-full [&>img]:h-full" imgClassName={entry.photo.startsWith("/albums/") ? "object-contain" : "object-cover object-[center_25%]"} />
-              </ViewTransition>
-            ) : (
-              <BandedReveal src={entry.photo} alt={entry.photoAlt ?? `${entry.title}.`} width={800} height={450} bands={4} className="gallery-cover absolute inset-0 size-full [&>img]:h-full" imgClassName={entry.photo.startsWith("/albums/") ? "object-contain" : "object-cover object-[center_25%]"} />
-            )
-          ) : (
-            <span aria-hidden="true" className="absolute inset-0 flex items-center justify-center px-8 text-center font-display text-[clamp(2.5rem,4vw,4rem)] leading-none font-bold uppercase text-bone/45">
-              {entry.title}
-            </span>
-          )}
-        </div>
-        <div className="flex flex-1 flex-col gap-2 p-5">
-          {groupLabel ? <p className="micro border-b border-bone/30 pb-2">{groupLabel}</p> : null}
-          <p aria-hidden="true" className="mt-2 font-display text-[clamp(3.5rem,7vw,5.75rem)] leading-none font-bold">
-            {entry.number}
-          </p>
-          <p className="font-display text-[clamp(1.5rem,2.6vw,2rem)] leading-[1.1] uppercase [text-wrap:balance]">
-            {entry.title}
-          </p>
-          {"champion" in entry ? (
-            <p className={`text-[clamp(1.125rem,1rem+0.5vw,1.5rem)] leading-tight ${entry.champion ? "font-bold" : "text-muted"}`}>
-              {entry.champion ?? "Not recorded yet"}
-            </p>
-          ) : null}
-          {entry.note ? <p className="text-[12px] text-muted">{entry.note}</p> : null}
-          <p className="micro mt-auto pt-4 text-right">{href ? "View photos" : <i>Photos are on the way.</i>}</p>
-        </div>
-    </>
-  );
-
+/* The opening reel is the hero (plan stress test 3: a photo hero plus a reel
+   pushed the albums to the third screen). Two rows slide against each other
+   with the scroll (data-drift, no autoplay, so reduced motion is simply
+   still). Each row holds its frames twice so a slide never shows a gap; the
+   copy is hidden from assistive tech and the tab order. */
+function ReelRow({ frames, drift, lead = false }: { frames: ReelFrame[]; drift: string; lead?: boolean }) {
   return (
-    <li className="flex">
-      {entry.albumId ? (
-        <Link href={href!} className={`group canvas-ink flex w-full flex-col overflow-hidden border border-bone/25 ${wide ? "min-[700px]:grid min-[700px]:grid-cols-2" : ""}`}>{body}</Link>
-      ) : href ? (
-        <a href={href} target="_blank" rel="noopener noreferrer" className={`group canvas-ink flex w-full flex-col overflow-hidden border border-bone/25 ${wide ? "min-[700px]:grid min-[700px]:grid-cols-2" : ""}`}>{body}</a>
-      ) : (
-        <div className={`group canvas-ink flex w-full flex-col overflow-hidden border border-bone/25 ${wide ? "min-[700px]:grid min-[700px]:grid-cols-2" : ""}`}>{body}</div>
+    <div data-drift={drift} data-drift-flat className="flex w-max gap-2 sm:gap-3">
+      {[0, 1].map((copy) =>
+        frames.map((f, i) => {
+          // Only the first two frames of the top row race for bandwidth; the
+          // rest wait, and the off-screen copies load lazily (mobile LCP).
+          const first = lead && !copy && i < 2;
+          const img = (
+            <img
+              src={f.src}
+              alt={copy ? "" : f.alt}
+              width={f.w}
+              height={f.h}
+              decoding="async"
+              fetchPriority={first ? "high" : "auto"}
+              loading={copy ? "lazy" : undefined}
+              className="h-[clamp(130px,25svh,300px)] w-auto object-cover"
+            />
+          );
+          const key = `${copy}-${f.src}`;
+          return f.albumId ? (
+            <Link key={key} href={`/albums/${f.albumId}`} data-cursor="Open" aria-hidden={copy ? true : undefined} tabIndex={copy ? -1 : undefined} className="block shrink-0 overflow-hidden">
+              {img}
+            </Link>
+          ) : (
+            <span key={key} className="block shrink-0 overflow-hidden">
+              {img}
+            </span>
+          );
+        }),
       )}
-    </li>
+    </div>
   );
 }
 
-function Grid({ entries, groupLabel }: { entries: Entry[]; groupLabel?: string }) {
+function Reel({ albums, total }: { albums: number; total: number }) {
   return (
-    <ul className={`frame grid gap-4 ${entries.length > 1 ? "min-[620px]:grid-cols-2 min-[1000px]:grid-cols-3" : ""}`}>
-      {entries.map((entry) => (
-        <Card key={entry.title} entry={entry} groupLabel={groupLabel} wide={entries.length === 1} />
+    <section data-tone="bone" data-chapter="Gallery" aria-labelledby="page-heading" className="canvas-night relative isolate flex min-h-svh flex-col justify-center gap-[clamp(1rem,3svh,2rem)] overflow-hidden pt-24 pb-10">
+      <Nav floating />
+      <ReelRow frames={reel.slice(0, 5)} drift="-0.14" lead />
+      <div className="frame">
+        <p className="micro mb-4 text-yellow">Gallery</p>
+        <SplitReveal
+          as="h1"
+          id="page-heading"
+          lines={["What it", "feels like."]}
+          lineClassName="last:text-yellow"
+          className="font-display text-[min(clamp(3.25rem,13vw,10rem),20svh)] leading-[0.84] font-bold uppercase"
+        />
+        <p className="mt-5 max-w-[44ch] text-[clamp(1.05rem,0.95rem+0.45vw,1.35rem)] leading-[1.45] text-bone/85">
+          {n(albums)} albums and {n(total)} photographs from every Frontier night, on the pitch and in front of the screen.
+        </p>
+      </div>
+      <ReelRow frames={reel.slice(5)} drift="0.14" />
+    </section>
+  );
+}
+
+/* The album's cover, morphing into its hero on the album page. Both pages
+   pick the picture with coverFor, so the two ends of the morph match. */
+function Cover({ album, className }: { album: StoryAlbum; className: string }) {
+  const cover = coverFor(album);
+  if (!cover) return null;
+  return (
+    <ViewTransition name={`album-cover-${album.id}`} share="album-cover" default="none">
+      <img src={cover.src} alt={cover.alt || `${album.title}.`} width={1600} height={900} loading="lazy" decoding="async" className={className} />
+    </ViewTransition>
+  );
+}
+
+function Meta({ album }: { album: StoryAlbum }) {
+  return <p className="micro !text-current/80">{[photos(album.count), album.venue].filter(Boolean).join(" · ")}</p>;
+}
+
+const open = (
+  <span className="micro !text-current inline-flex items-center gap-2">
+    Open album <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+  </span>
+);
+
+/* Seasons and tournaments as photo cards (owner, 2026-09-24: full-screen
+   bands were too big, index rows hid the photos behind a hover). Three to a
+   row, 4:5, the name over the photo. An album whose own frames are
+   watermarked shows its clean Frontier photo if it has one; with none it is a
+   yellow card carrying just the name. */
+function AlbumCards({ albums }: { albums: StoryAlbum[] }) {
+  return (
+    <ul className="frame grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      {albums.map((album) => {
+        // Watermarked albums have no clean cover; the inset (a clean Frontier
+        // frame) stands in, never morphing, and with neither it is a yellow card.
+        const cover = album.treatment === "photo" ? coverFor(album) : null;
+        const pic = cover?.src ?? album.inset;
+        return (
+          <li key={album.id}>
+            <Link
+              href={`/albums/${album.id}`}
+              data-cursor="Open"
+              className={`group relative flex aspect-[4/3] flex-col justify-end overflow-hidden sm:aspect-[4/5] ${pic ? "text-bone" : "bg-yellow text-ink"}`}
+            >
+              {cover ? (
+                <Cover album={album} className="absolute inset-0 size-full object-cover object-[center_30%] transition-transform duration-700 ease-[var(--ease-out)] group-hover:scale-[1.04]" />
+              ) : pic ? (
+                <img src={pic} alt={album.photoAlt ?? ""} width={720} height={900} loading="lazy" decoding="async" className="absolute inset-0 size-full object-cover transition-transform duration-700 ease-[var(--ease-out)] group-hover:scale-[1.04]" />
+              ) : null}
+              {pic ? <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-night/90 via-night/15 to-transparent" /> : null}
+              <div className="relative flex flex-col gap-3 p-5 sm:p-6">
+                <h3 className="font-display text-[clamp(2.5rem,4.2vw,4rem)] leading-[0.88] font-bold uppercase [text-wrap:balance]">{album.short ?? album.title}</h3>
+                {album.champion ? (
+                  <p className="text-base leading-tight">
+                    Champions <strong>{album.champion}</strong>
+                  </p>
+                ) : null}
+                <div className={`flex items-center justify-between gap-4 border-t pt-3 ${pic ? "border-bone/30" : "border-ink/30"}`}>
+                  <Meta album={album} />
+                  <span aria-hidden="true" className="font-display text-2xl leading-none transition-transform duration-300 group-hover:translate-x-1">
+                    →
+                  </span>
+                </div>
+              </div>
+            </Link>
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
+/* Watch parties are nights Frontier watched, not ran: smaller bands, side by
+   side, under one heading (stress test 1). The first two take half the row
+   each, the rest share thirds. */
+function WatchGrid({ albums }: { albums: StoryAlbum[] }) {
+  return (
+    <ul className="frame grid gap-2 min-[700px]:grid-cols-6 sm:gap-3">
+      {albums.map((album, i) => (
+        <li key={album.id} className={i < 2 ? "min-[700px]:col-span-3" : "min-[700px]:col-span-2"}>
+          <Link href={`/albums/${album.id}`} data-cursor="Open" className={`group relative block overflow-hidden text-bone ${i < 2 ? "h-[clamp(320px,62svh,620px)]" : "h-[clamp(300px,48svh,480px)]"}`}>
+            {album.photo ? <Cover album={album} className="absolute inset-0 size-full object-cover transition-transform duration-700 ease-[var(--ease-out)] group-hover:scale-[1.04]" /> : null}
+            <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-night/90 via-night/20 to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 flex flex-col gap-3 p-5 sm:p-6">
+              <h3 className="max-w-[16ch] font-display text-[clamp(1.9rem,3.4vw,3.25rem)] leading-[0.9] font-bold uppercase [text-wrap:balance]">{album.title}</h3>
+              <div className="flex items-center justify-between gap-4 border-t border-bone/30 pt-3">
+                <Meta album={album} />
+                {open}
+              </div>
+            </div>
+          </Link>
+        </li>
       ))}
     </ul>
   );
 }
 
-/* One tab per competition (owner, 2026-09-08), plus Watch Parties: nights
-   Frontier watched football rather than ran it. Seasons open on SZN 1. */
+/* A competition that is its own thing (Division 0, played on a console):
+   split, on blue, so it never reads as another season. */
+function FeatureBand({ album }: { album: StoryAlbum }) {
+  return (
+    <Link href={`/albums/${album.id}`} data-cursor="Open" className="group canvas-blue grid min-[900px]:grid-cols-2">
+      <div className="frame flex flex-col justify-end gap-5 py-[clamp(3rem,10vh,6rem)] min-[900px]:mr-0 min-[900px]:max-w-[585px]">
+        {album.note ? <p className="micro">{album.note}</p> : null}
+        <h3 className="font-display text-[min(clamp(3.5rem,8.5vw,8rem),24svh)] leading-[0.84] font-bold whitespace-nowrap uppercase">{album.title}</h3>
+        {album.champion ? <p className="text-xl">Champions <strong>{album.champion}</strong></p> : null}
+        <div className="flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-ink/30 pt-4">
+          <Meta album={album} />
+          {open}
+        </div>
+      </div>
+      <div className="relative h-[clamp(320px,60svh,640px)] overflow-hidden">
+        {album.photo ? <Cover album={album} className="absolute inset-0 size-full object-cover transition-transform duration-700 ease-[var(--ease-out)] group-hover:scale-[1.03]" /> : null}
+      </div>
+    </Link>
+  );
+}
+
+function ChapterBlock({ chapter }: { chapter: Chapter }) {
+  const total = chapter.albums.reduce((s, a) => s + a.count, 0);
+  const many = chapter.albums.length > 1;
+  // A feature band carries its own big title; card grids need a heading.
+  const band = chapter.kind === "feature" && chapter.albums[0].treatment === "photo";
+  const headed = many || !band;
+  return (
+    <section id={chapter.id} data-tone="bone" data-chapter={chapter.label} aria-labelledby={`${chapter.id}-heading`} className={`canvas-night scroll-mt-4 pb-2 sm:pb-3 ${headed ? "" : "pt-[clamp(3rem,10vh,6rem)]"}`}>
+      {/* Over a feature band a visible heading would print the same words
+          twice, so it is kept for screen readers only. */}
+      {headed ? (
+        <header className="frame flex flex-wrap items-end justify-between gap-x-8 gap-y-2 pt-[clamp(4rem,14vh,8rem)] pb-8">
+          <h2 id={`${chapter.id}-heading`} className="font-display text-[clamp(2.5rem,7vw,6rem)] leading-[0.9] font-bold uppercase">
+            {chapter.label}
+          </h2>
+          {/* One album: its row already says how many photos. */}
+          {many ? (
+            <p className="micro">
+              {chapter.albums.length} albums · {photos(total)}
+            </p>
+          ) : null}
+        </header>
+      ) : (
+        <h2 id={`${chapter.id}-heading`} className="sr-only">
+          {chapter.label}
+        </h2>
+      )}
+      {chapter.kind === "watch" ? (
+        <WatchGrid albums={chapter.albums} />
+      ) : band ? (
+        <FeatureBand album={chapter.albums[0]} />
+      ) : (
+        <AlbumCards albums={chapter.albums} />
+      )}
+    </section>
+  );
+}
+
 export default function Gallery() {
-  const data = parseContent(raw);
-  const pick = ({ note, photo, photoAlt, driveFolder, albumId }: Omit<Entry, "title" | "number">) => ({
-    note,
-    photo,
-    photoAlt,
-    driveFolder,
-    albumId,
-  });
-
-  const seasons: Entry[] = [...data.seasons]
-    .sort((a, b) => a.season - b.season)
-    .map((s) => ({ title: seasonName(s.season), number: String(s.season).padStart(2, "0"), champion: s.champion, ...pick(s) }));
-  const watch: Entry[] = data.watchAlongs.filter((w) => w.name).map((w, i) => ({ title: w.name!, number: String(i + 1).padStart(2, "0"), ...pick(w) }));
-
-  const groups: { id: string; label: string; panel: React.ReactNode }[] = [];
-  // Reserve the series and Watch Parties ids, so a competition named either
-  // cannot take them first.
-  const used = new Set(["series", "watch-parties"]);
-  const competitionTabs = data.competitions.map((c, i) => {
-    // "Division 0" and "Division-0" both appear in content.js history and slug
-    // the same; de-duplicate so no two tabs share an id.
-    let id = c.name!.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-    if (!id || used.has(id)) id = `competition-${i}`;
-    used.add(id);
-    return { first: c.beforeSeries, id, label: c.name!, panel: <Grid entries={[{ title: c.name!, number: "01", champion: c.champion, ...pick(c) }]} /> };
-  });
-  // Competitions that ran before the series (Frontier Futsal Tournament, Turf
-  // Wars) lead, then the series, then the rest, each in content.js order.
-  groups.push(...competitionTabs.filter((t) => t.first));
-  if (seasons.length > 0) groups.push({ id: "series", label: "4x4 Series", panel: <Grid entries={seasons} groupLabel="4x4 Series" /> });
-  groups.push(...competitionTabs.filter((t) => !t.first));
-  if (watch.length > 0) groups.push({ id: "watch-parties", label: "Watch Parties", panel: <Grid entries={watch} groupLabel="Watch Parties" /> });
+  const chapters = galleryChapters(raw, albumFacts(albumIds(raw)));
+  const albums = chapters.flatMap((c) => c.albums);
+  const total = albums.reduce((s, a) => s + a.count, 0);
 
   return (
-    <PageShell
-      hero={
-        <PageHero
-          chapter="Gallery"
-          eyebrow="Our stories"
-          lines={["The", "gallery."]}
-          photo={{ src: "/heroes/gallery.webp", alt: "Supporters with their arms up in front of the big screen at a Frontier watch-along", position: "center 30%" }}
-        >
-          Every photograph and clip Frontier has shared, pulled into one gallery.
-        </PageHero>
-      }
-    >
-      <section data-tone="bone" data-chapter="Albums" aria-label="Albums" className="canvas-ink pt-[clamp(3rem,10vh,6rem)] pb-12 sm:pb-20">
-        {groups.length === 1 ? groups[0].panel : groups.length > 1 ? <Tabs label="Gallery sections" groups={groups} theme="night" /> : null}
-      </section>
+    <PageShell hero={<Reel albums={albums.length} total={total} />}>
+      {/* Jump links, not tabs: every album stays on the page, and the chapter
+          indicator (Interactions) shows where the reader is. */}
+      <nav aria-label="Gallery chapters" className="canvas-night border-y border-bone/15">
+        <ul className="frame flex flex-wrap gap-x-8 gap-y-2 py-5">
+          {chapters.map((c) => (
+            <li key={c.id}>
+              <a href={`#${c.id}`} className="inline-flex min-h-11 items-center gap-2 font-display text-[clamp(1.1rem,1rem+0.4vw,1.5rem)] uppercase hover:text-yellow">
+                {c.label}
+                <span className="micro">{c.albums.length > 1 ? c.albums.length : ""}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      {chapters.map((c) => (
+        <ChapterBlock key={c.id} chapter={c} />
+      ))}
       <NextPage current="/gallery" />
     </PageShell>
   );
