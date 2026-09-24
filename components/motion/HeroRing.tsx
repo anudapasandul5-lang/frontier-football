@@ -7,7 +7,7 @@ import { useEffect, useRef } from "react";
    caps overprinted on it.
 
    - Drag sideways anywhere on the hero to spin it; a fling keeps its momentum.
-   - The ring turns toward the pointer and bows with scroll speed.
+   - The ring turns toward the pointer (no scroll bow: owner, 2026-09-24, it read as warped).
    - As the hero scrolls away the ring tips up toward the camera.
    - Only the near side is drawn: the ring reads as one curved band, in
      full colour.
@@ -44,14 +44,10 @@ const GAP = 0.1; // fraction of each panel's arc left empty
 const PANEL_H = (RADIUS * ((Math.PI * 2) / PHOTOS.length) * (1 - GAP)) / 1.5;
 
 const vertex = /* glsl */ `
-  uniform float uBend;
   varying vec2 vUv;
   void main() {
     vUv = uv;
-    vec3 p = position;
-    // Bow each panel with scroll speed: the middle of the panel lifts more.
-    p.y += sin(uv.x * 3.14159) * uBend;
-    gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
   }
 `;
 
@@ -99,7 +95,7 @@ export function HeroRing() {
       el.appendChild(renderer.domElement);
 
       const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
+      const camera = new THREE.PerspectiveCamera(18, 1, 0.1, 200);
       const tilt = new THREE.Group(); // lean + scroll tilt
       const ring = new THREE.Group(); // spin
       tilt.add(ring);
@@ -126,7 +122,6 @@ export function HeroRing() {
                 uScale: { value: new THREE.Vector2(1, 1) },
                 uBone: { value: bone },
                 uFade: { value: 1 },
-                uBend: { value: 0 },
               },
             });
             geometries.push(geometry);
@@ -176,12 +171,13 @@ export function HeroRing() {
       const lines = hero.querySelectorAll<HTMLElement>(".hero-line");
       const front = new THREE.Vector3();
       let anchorY = 0.5; // where the band's middle should sit, as a fraction of the canvas
+      // Layout offsets, not getBoundingClientRect: HeroMotion's scroll
+      // transforms on the lines must not move the anchor.
+      const content = hero.querySelector<HTMLElement>("#content");
       const measure = () => {
-        const box = el.getBoundingClientRect();
-        if (lines.length < 2 || !box.height) return;
-        const a = lines[0].getBoundingClientRect();
-        const b = lines[1].getBoundingClientRect();
-        anchorY = ((a.top + a.height / 2 + b.top + b.height / 2) / 2 - box.top) / box.height;
+        if (lines.length < 2 || !content || !el.clientHeight) return;
+        const mid = (l: HTMLElement) => content.offsetTop + l.offsetTop + l.offsetHeight / 2;
+        anchorY = (mid(lines[0]) + mid(lines[1])) / 2 / el.clientHeight;
       };
       const pose = (l: { x: number; y: number }, away: number) => {
         // No roll and no resting pitch: the band stays level.
@@ -200,6 +196,7 @@ export function HeroRing() {
       };
 
       resize();
+      void document.fonts.ready.then(() => !disposed && measure());
 
       const still = window.matchMedia("(prefers-reduced-motion: reduce)");
       const bornAt = performance.now();
@@ -209,7 +206,6 @@ export function HeroRing() {
       let leanTo = { x: 0, y: 0 };
       let drag: { id: number; x: number; t: number } | null = null;
       let lastScroll = window.scrollY;
-      let bend = 0;
 
       const onMove = (e: PointerEvent) => {
         leanTo = { x: e.clientY / window.innerHeight - 0.5, y: e.clientX / window.innerWidth - 0.5 };
@@ -239,7 +235,6 @@ export function HeroRing() {
           spin += (0.12 - spin) * Math.min(1, dt * 1.2);
           yaw += (spin + dy * 0.02) * dt;
         }
-        bend += (Math.max(-0.6, Math.min(0.6, dy * 0.02)) - bend) * Math.min(1, dt * 6);
         lean.x += (leanTo.x - lean.x) * Math.min(1, dt * 3);
         lean.y += (leanTo.y - lean.y) * Math.min(1, dt * 3);
 
@@ -251,7 +246,6 @@ export function HeroRing() {
         materials.forEach((m, i) => {
           const local = Math.max(0, Math.min(1, (t - i * 0.06) / 0.6));
           m.uniforms.uFade.value = 1 - local * local * (3 - 2 * local);
-          m.uniforms.uBend.value = bend;
         });
         pose(lean, away);
         renderer.render(scene, camera);

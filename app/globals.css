@@ -758,7 +758,7 @@ body:has(#hero)::after {
 }
 @media (width >= 48rem) {
   .hero-weave {
-    row-gap: 19.5vw;
+    row-gap: 21vw;
   }
 }
 
