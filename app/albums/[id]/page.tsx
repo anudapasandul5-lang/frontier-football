@@ -5,7 +5,7 @@ import { parseContent } from "@/lib/content-data";
 import { albumIds, albumStory } from "@/lib/album-data";
 import { albumFacts } from "@/lib/album-facts";
 import { galleryChapters, nextAlbum } from "@/lib/gallery-story";
-import { coverFor, highlights } from "@/lib/highlights";
+import { albumHero, highlights } from "@/lib/highlights";
 import { AlbumView } from "@/components/motion/AlbumView";
 import { PageHero, heroButton } from "@/components/pages/PageHero";
 import { PageShell } from "@/components/pages/PageShell";
@@ -42,14 +42,7 @@ export default async function AlbumPage({ params }: { params: Promise<{ id: stri
     );
   }
 
-  // Never a watermarked frame up front: the album's clean cover, else its
-  // first highlight, else the gallery's own hero.
-  const clean = album.treatment === "photo" ? coverFor(album, "full") : null;
-  const cover = clean
-    ? { src: clean.src, alt: clean.alt || album.title }
-    : picks[0]
-      ? { src: picks[0].src, alt: picks[0].alt }
-      : { src: "/heroes/gallery.webp", alt: "Supporters with their arms up in front of the big screen at a Frontier watch-along" };
+  const cover = albumHero(album);
   const lines = chapter.kind === "series" ? ["4x4 Series", album.title] : [album.title];
   const facts = [`${album.count.toLocaleString("en")} photos`, album.venue].filter(Boolean).join(" · ");
 
@@ -60,8 +53,8 @@ export default async function AlbumPage({ params }: { params: Promise<{ id: stri
           chapter={album.short ?? album.title}
           eyebrow={chapter.kind === "series" ? facts : `${chapter.label} · ${facts}`}
           lines={lines}
-          photo={{ ...cover, position: "center 35%" }}
-          transition={clean ? `album-cover-${album.id}` : undefined}
+          photo={{ src: cover.src, alt: cover.alt, position: "center 35%" }}
+          transition={cover.morph ? `album-cover-${album.id}` : undefined}
           labels={["Frontier / Gallery", album.champion ? `Champions: ${album.champion}` : "Colombo, Sri Lanka"]}
           actions={
             <>

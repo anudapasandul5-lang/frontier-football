@@ -187,3 +187,24 @@ export function coverFor(album: { id: string; champion: string | null; photo: st
   if (!lead) return null;
   return { src: size === "card" ? `/gallery/cover/${album.id}.webp` : lead.src, alt: lead.alt };
 }
+
+/* The album page's full-screen hero. Never a watermarked frame up front: the
+   album's clean cover (which also morphs from its gallery card), else a clean
+   owner-picked frame of a watermarked album (SZN 5's trophy still), else its
+   first highlight, else the gallery's own hero. */
+export function albumHero(album: {
+  id: string;
+  title: string;
+  champion: string | null;
+  photo: string | null;
+  photoAlt: string | null;
+  treatment: "photo" | "type";
+  inset: string | null;
+}) {
+  const clean = album.treatment === "photo" ? coverFor(album, "full") : null;
+  if (clean) return { src: clean.src, alt: clean.alt || album.title, morph: true };
+  if (album.inset && !album.inset.startsWith("/albums/")) return { src: album.inset, alt: album.photoAlt || album.title, morph: false };
+  const lead = highlights[album.id]?.[0];
+  if (lead) return { src: lead.src, alt: lead.alt, morph: false };
+  return { src: "/heroes/gallery.webp", alt: "Supporters with their arms up in front of the big screen at a Frontier watch-along", morph: false };
+}
