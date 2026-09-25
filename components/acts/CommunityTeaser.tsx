@@ -37,7 +37,6 @@ export function CommunityTeaser() {
           <p className="max-w-[34ch] text-lg leading-snug">Bring a team or come alone as a free agent. Sundays, with Frontier.</p>
           <a
             href="/community"
-            data-magnetic="0.25"
             className="btn flex min-h-14 items-center bg-ink px-8 font-display text-[clamp(1rem,0.9rem+0.4vw,1.35rem)] font-bold text-bone uppercase hover:bg-bone hover:text-ink"
           >
             <Roll>See the league</Roll>

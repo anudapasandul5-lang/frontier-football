@@ -5,9 +5,9 @@ import { competitionPhotos, type DrivePhoto } from "@/lib/home-photos";
 import { MicroLabel } from "@/components/primitives/MicroLabel";
 import { phoneSrcSet } from "@/lib/phone-image";
 
-/* Act 5, one colour card per competition in time order: green 4 x 4 Series,
-   red Division 0. (The blue Turf Wars card was removed by the owner,
-   2026-09-24.)
+/* Act 5, one colour card per competition in time order: blue Frontier
+   Football Tournament, green 4 x 4 Series, red Division 0. (The blue Turf
+   Wars card was removed by the owner, 2026-09-24; blue is free again.)
 
    2026-09-24, owner: the pinned sideways slider of full-screen panels looked
    empty and did not match its neighbours, through two restyles. Picked from
@@ -21,12 +21,12 @@ import { phoneSrcSet } from "@/lib/phone-image";
    PS5 (CONTEXT.md, content.js note). Names, venues and dates come from
    content.js, so a competition deleted there leaves the act and a "TODO"
    fact is left out. */
-type Tone = "green" | "red";
-type Shot = { src: string; alt: string };
+type Tone = "blue" | "green" | "red";
+type Shot = { src: string; alt: string; credit?: string };
 type Card = { tone: Tone; name: string; photo: Shot | null; facts: (string | null)[]; line: string };
 
 // Literal class names, so Tailwind emits them and the --color-* they read.
-const fill: Record<Tone, string> = { green: "bg-green", red: "bg-red" };
+const fill: Record<Tone, string> = { blue: "bg-blue", green: "bg-green", red: "bg-red" };
 
 const drive = (p: DrivePhoto | undefined): Shot | null => (p ? { src: thumbUrl(p.id, 800), alt: p.alt } : null);
 const landscape = (ps: DrivePhoto[]) => ps.find((p) => p.w >= p.h) ?? ps[0];
@@ -35,8 +35,20 @@ export function Competitions() {
   const data = parseContent(raw);
   const competition = (name: string) => data.competitions.find((c) => c.name === name);
   const divisionZero = competition("Division 0");
+  const tournament = competition("Frontier Football Tournament");
 
   const cards: Card[] = [];
+  // Owner-approved 2026-09-23 (HOUSE-RULES section 7, content.js): this
+  // ThePapare frame carries its own watermark, so its credit shows on the
+  // card rather than staying implicit like the Drive photos above.
+  if (tournament?.photo)
+    cards.push({
+      tone: "blue",
+      name: tournament.name!,
+      photo: { src: tournament.photo, alt: tournament.photoAlt ?? "", credit: tournament.photoCredit ?? undefined },
+      facts: [tournament.venue, tournament.date],
+      line: "Where it began.",
+    });
   cards.push({
     tone: "green",
     name: "4 x 4 Series",
@@ -58,23 +70,28 @@ export function Competitions() {
   return (
     <section id="competitions" data-tone="ink" data-chapter="Events" aria-labelledby="competitions-label" className="canvas-bone py-[clamp(4rem,14vh,9rem)]">
       <div className="frame">
-        <MicroLabel as="h2" id="competitions-label" className="text-(--tone-muted)">
+        <MicroLabel as="h2" id="competitions-label" className="text-(--tone-muted) text-[clamp(0.875rem,0.7rem+0.6vw,1.25rem)]">
           Competitions
         </MicroLabel>
         <ul className="mt-8 grid gap-4 md:grid-cols-2">
           {cards.map((c, n) => (
             <li key={c.tone} className={`${fill[c.tone]} text-ink flex flex-col [--tone-muted:var(--color-ink)]`}>
               {c.photo ? (
-                <img
-                  src={c.photo.src}
-                  srcSet={phoneSrcSet(c.photo.src)}
-                  sizes="(min-width: 768px) 33vw, 100vw"
-                  alt={c.photo.alt}
-                  loading="lazy"
-                  decoding="async"
-                  referrerPolicy="no-referrer"
-                  className="aspect-[3/2] w-full object-cover"
-                />
+                <figure className="relative">
+                  <img
+                    src={c.photo.src}
+                    srcSet={phoneSrcSet(c.photo.src)}
+                    sizes="(min-width: 768px) 33vw, 100vw"
+                    alt={c.photo.alt}
+                    loading="lazy"
+                    decoding="async"
+                    referrerPolicy="no-referrer"
+                    className="aspect-[3/2] w-full object-cover"
+                  />
+                  {c.photo.credit ? (
+                    <figcaption className="absolute bottom-0 left-0 bg-ink px-4 py-2 text-xs text-bone">Photo: {c.photo.credit}</figcaption>
+                  ) : null}
+                </figure>
               ) : null}
               <div className="flex flex-1 flex-col gap-4 p-6 pb-7">
                 <p className="micro">

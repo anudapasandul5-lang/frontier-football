@@ -50,12 +50,15 @@ export function PageHero({
   );
 
   return (
+    <>
+    <Nav floating />
     <section
       data-tone="bone"
       data-chapter={chapter}
       aria-labelledby="page-heading"
       className="canvas-night relative isolate flex min-h-svh flex-col overflow-hidden"
     >
+      <div aria-hidden="true" className="h-20 shrink-0" />
       <div data-reveal className="wipe absolute inset-0 -z-10 overflow-hidden">
         <span aria-hidden="true" className="wipe__layer wipe__flash absolute inset-0 bg-yellow" />
         {transition ? (
@@ -68,10 +71,8 @@ export function PageHero({
         <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-night via-night/55 to-night/10" />
       </div>
 
-      <Nav floating />
-
       <div className="frame flex flex-1 flex-col justify-end pb-[clamp(1.5rem,5vh,3.5rem)]">
-        <p className="micro mb-4 text-yellow">{eyebrow}</p>
+        <p className="micro mb-4 text-yellow text-[clamp(0.875rem,0.7rem+0.6vw,1.25rem)]">{eyebrow}</p>
         <SplitReveal
           as="h1"
           id="page-heading"
@@ -97,6 +98,7 @@ export function PageHero({
         </div>
       </div>
     </section>
+    </>
   );
 }
 

@@ -63,8 +63,7 @@ const fragment = /* glsl */ `
     vec2 uv = vec2(1.0 - vUv.x, vUv.y);
     uv = (uv - 0.5) * uScale + 0.5;
     vec4 c = texture2D(uMap, uv);
-    // Full colour on every panel (owner, 2026-09-23: no black and white).
-    c.rgb = clamp((c.rgb - 0.5) * 1.1 + 0.5, 0.0, 1.0);
+    // Keep each photo's original colour and contrast across the ring.
     // Arrival: each photo develops out of the bone canvas.
     c.rgb = mix(c.rgb, uBone, uFade);
     gl_FragColor = vec4(c.rgb, 1.0);

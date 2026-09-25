@@ -19,15 +19,13 @@ export const pages = [
 
    Instagram is looked up from content.js rather than typed here, so blanking
    its url there removes the link instead of shipping a dead one. */
-/* `floating` (home, opus55): the header is fixed, takes the text colour of
-   whatever canvas is under it (Interactions.tsx sets data-ui-tone), slides
-   away while the reader scrolls down and returns on the way up. A spacer
-   keeps the hero's layout where the header used to sit. */
+/* `floating` (home, opus55): the header is fixed and takes the text colour of
+   the canvas under it (Interactions.tsx sets data-ui-tone). The calling hero
+   provides its own spacer so its canvas also covers the header area. */
 export function Nav({ crestPriority = false, floating = false }: { crestPriority?: boolean; floating?: boolean }) {
   const instagram = outboundLinks(parseContent(raw)).find((link) => link.name === "Instagram");
   return (
     <>
-    {floating ? <div aria-hidden="true" className="h-20" /> : null}
     <header
       data-floating={floating || undefined}
       className={floating ? "site-header" : "frame relative z-10 flex h-20 items-center justify-between"}

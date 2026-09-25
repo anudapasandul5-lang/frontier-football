@@ -67,10 +67,12 @@ function ReelRow({ frames, drift, lead = false }: { frames: ReelFrame[]; drift: 
 
 function Reel({ albums, total }: { albums: number; total: number }) {
   return (
+    <>
+    <Nav floating />
     <section data-tone="bone" data-chapter="Gallery" aria-labelledby="page-heading" className="canvas-night relative isolate flex flex-col gap-[clamp(1rem,3svh,2rem)] overflow-hidden pt-4 pb-10">
-      <Nav floating />
+      <div aria-hidden="true" className="h-20 shrink-0" />
       <div className="frame">
-        <p className="micro mb-4 text-yellow">Gallery</p>
+        <p className="micro mb-4 text-yellow text-[clamp(0.875rem,0.7rem+0.6vw,1.25rem)]">Gallery</p>
         <SplitReveal
           as="h1"
           id="page-heading"
@@ -84,6 +86,7 @@ function Reel({ albums, total }: { albums: number; total: number }) {
       </div>
       <ReelRow frames={reel.slice(5)} drift="0.14" lead />
     </section>
+    </>
   );
 }
 

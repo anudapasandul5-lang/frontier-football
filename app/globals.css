@@ -506,47 +506,6 @@
   scale: 0.96;
 }
 
-/* Fine pointers only. */
-.row-preview {
-  display: none;
-}
-@media (hover: hover) and (pointer: fine) {
-  /* A season's photo following the pointer over its results row. */
-  :root[data-motion="on"] .row-preview {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 60;
-    display: block;
-    width: clamp(180px, 18vw, 280px);
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    pointer-events: none;
-    opacity: 0;
-    scale: 0.9;
-    transition:
-      opacity 200ms ease,
-      scale 300ms var(--ease-out);
-  }
-  :root[data-motion="on"] .row-preview[data-show="true"] {
-    opacity: 1;
-    scale: 1;
-  }
-}
-
-/* Results rows that carry a preview slide their first cell on hover. */
-@media (hover: hover) and (pointer: fine) {
-  [data-preview] td {
-    transition: translate 300ms var(--ease-out);
-  }
-  [data-preview]:hover td:first-child {
-    translate: 12px 0;
-  }
-  [data-preview]:hover {
-    border-top-color: currentColor;
-  }
-}
-
 /* Chapter indicator: bottom left, where the reader is and how far along. */
 .chapter-indicator {
   position: fixed;

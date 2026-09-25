@@ -36,7 +36,7 @@ export function Partners() {
             <span className="font-display text-[clamp(3rem,8vw,7rem)] leading-[0.85] font-bold uppercase">Partners</span>
           )}
         </h2>
-        <a href="/collaborate" data-magnetic="0.2" className="btn flex min-h-12 items-center border-2 border-ink px-6 font-display text-lg font-bold uppercase hover:bg-ink hover:text-bone">
+        <a href="/collaborate" className="btn flex min-h-12 items-center border-2 border-ink px-6 font-display text-lg font-bold uppercase hover:bg-ink hover:text-bone">
           Partner with us
         </a>
       </div>

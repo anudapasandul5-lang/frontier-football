@@ -6,9 +6,8 @@ import { SplitReveal } from "@/components/primitives/SplitReveal";
    Shared by Community and Contact (owner, 2026-09-23: Contact carries all
    activities and tournaments). Renders nothing while content.js has none.
 
-   opus55: numbered rows in the home results-table manner. Each row's photo
-   follows the pointer (Interactions data-preview) and the whole row is the
-   link to its photos. */
+   opus55: numbered rows in the home results-table manner. The whole row is
+   the link to its photos. */
 export function PastActivities() {
   const past = activities(raw);
   if (past.length === 0) return null;
@@ -25,8 +24,6 @@ export function PastActivities() {
           <li key={activity.name} className="border-b border-ink/20">
             <a
               href={activity.href}
-              data-preview={activity.photo ?? undefined}
-             
               className="group grid grid-cols-[3ch_minmax(0,1fr)_auto] items-center gap-x-4 py-6 transition-colors duration-200 hover:bg-ink hover:text-bone focus-visible:bg-ink focus-visible:text-bone sm:gap-x-8 sm:px-4"
             >
               <span className="micro tabular-nums group-hover:text-bone/70 group-focus-visible:text-bone/70">{String(i + 1).padStart(2, "0")}</span>

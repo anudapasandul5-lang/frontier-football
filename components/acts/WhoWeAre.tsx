@@ -32,7 +32,7 @@ export function WhoWeAre() {
           className="wipe__layer absolute inset-0 h-full w-full object-cover"
         />
         <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-night via-night/50 to-transparent" />
-        <div className="frame absolute inset-x-0 bottom-0 pb-[clamp(2rem,8vh,5rem)]">
+        <div className="frame absolute inset-x-0 top-0 pt-[clamp(2rem,8vh,5rem)]">
           <p className="micro mb-3 text-yellow">Who we are</p>
           <SplitReveal
             id="who-heading"

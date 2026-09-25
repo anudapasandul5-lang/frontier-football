@@ -106,10 +106,10 @@ export default function Collaborate() {
       ) : null}
 
       {names.length > 0 ? (
-        <section data-reveal data-tone="bone" data-chapter="Partners" aria-labelledby="partners-heading" className="wipe canvas-night relative overflow-hidden py-15 md:py-20">
+        <section data-reveal data-tone="ink" data-chapter="Partners" aria-labelledby="partners-heading" className="wipe canvas-bone relative overflow-hidden py-15 md:py-20">
           <span aria-hidden="true" className="wipe__layer wipe__flash absolute inset-0 bg-yellow" />
           <div className="wipe__layer frame relative" style={{ "--wipe-delay": "140ms" } as React.CSSProperties}>
-            <p className="micro mb-4 text-yellow">Already alongside us</p>
+            <p className="micro mb-4">Already alongside us</p>
             <SplitReveal
               id="partners-heading"
               lines={[count ? `${count.figure} ${count.label}.` : "Partners."]}
@@ -118,15 +118,13 @@ export default function Collaborate() {
             <Marquee label="Frontier partners" seconds={45}>
               {names.map((p) => {
                 const mark = p.logo ? (
-                  <span className="flex h-full items-center rounded-sm bg-bone px-4">
-                    <img
-                      src={p.logo}
-                      alt={p.name ?? ""}
-                      loading="lazy"
-                      decoding="async"
-                      className="h-[65%] w-auto max-w-[clamp(8rem,13vw,11rem)] object-contain"
-                    />
-                  </span>
+                  <img
+                    src={p.logo}
+                    alt={p.name ?? ""}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-[65%] w-auto max-w-[clamp(8rem,13vw,11rem)] object-contain"
+                  />
                 ) : (
                   <span className={type}>{p.name}</span>
                 );

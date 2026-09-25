@@ -26,13 +26,15 @@ const button = "btn flex min-h-11 items-center px-6 font-display text-[clamp(0.9
 
 export function Hero() {
   return (
+    <>
+    <Nav crestPriority floating />
     <section
       id="hero"
       data-tone="ink"
       data-chapter="Home"
       className="canvas-bone relative isolate flex min-h-svh touch-pan-y flex-col overflow-hidden select-none"
     >
-      <Nav crestPriority floating />
+      <div aria-hidden="true" className="h-20 shrink-0" />
       <HeroRing />
       <div id="content" className="frame relative flex flex-1 flex-col items-center justify-center pb-4">
         {/* Yellow on bone is the owner's deliberate overprint (2026-09-18).
@@ -62,5 +64,6 @@ export function Hero() {
       </div>
       <HeroMotion />
     </section>
+    </>
   );
 }

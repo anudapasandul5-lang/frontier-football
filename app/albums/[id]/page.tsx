@@ -74,7 +74,7 @@ export default async function AlbumPage({ params }: { params: Promise<{ id: stri
       </section>
       {next ? (
         <section data-tone="bone" data-chapter="Next album" className="canvas-ink border-t border-bone/15">
-          <Link href={`/albums/${next.id}`} data-preview={next.photo ?? next.inset ?? undefined} className="frame group flex flex-col gap-4 py-[clamp(4rem,14vh,9rem)]">
+          <Link href={`/albums/${next.id}`} className="frame group flex flex-col gap-4 py-[clamp(4rem,14vh,9rem)]">
             <span className="micro text-yellow">Next album · {next.count.toLocaleString("en")} photos</span>
             <span className="flex items-end justify-between gap-6 font-display text-[clamp(3rem,11vw,10rem)] leading-[0.85] font-bold uppercase">
               <Roll>{next.short ?? next.title}</Roll>
