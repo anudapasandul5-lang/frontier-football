@@ -25,7 +25,10 @@ const photos = (x: number) => `${n(x)} photo${x === 1 ? "" : "s"}`;
    copy is hidden from assistive tech and the tab order. */
 function ReelRow({ frames, drift, lead = false }: { frames: ReelFrame[]; drift: string; lead?: boolean }) {
   return (
-    <div data-drift={drift} data-drift-flat className="flex w-max gap-2 sm:gap-3">
+    // Start where the drift (Interactions) puts the row at the top of the
+    // page, a sixth of its width in. From 0, frame 3 only slid into view
+    // once the script ran, which held the phone LCP ~3.5s after it loaded.
+    <div data-drift={drift} data-drift-flat className="flex w-max gap-2 sm:gap-3" style={{ transform: "translate3d(-16.667%, 0, 0)" }}>
       {[0, 1].map((copy) =>
         frames.map((f, i) => {
           // The drift opens about a frame and a half in, so frames 1-3 are what
