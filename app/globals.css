@@ -655,3 +655,27 @@ body:has(#hero)::after {
   font-size: clamp(4rem, min(10vw, 20svh), 11rem);
   letter-spacing: -0.02em;
 }
+
+/* Competitions index: the stage shows the first photo until a row is hovered
+   or focused, then that row's photo. Pure CSS via :has, so no client JS. The
+   per-index rules out-rank the "hide everything" rule by specificity. */
+@media (hover: hover) {
+  .comp:has(.comp__item:is(:hover, :focus-visible)) .comp__stage figure {
+    opacity: 0;
+  }
+  .comp:has(.comp__item[data-i="0"]:is(:hover, :focus-visible)) .comp__stage figure[data-i="0"],
+  .comp:has(.comp__item[data-i="1"]:is(:hover, :focus-visible)) .comp__stage figure[data-i="1"],
+  .comp:has(.comp__item[data-i="2"]:is(:hover, :focus-visible)) .comp__stage figure[data-i="2"] {
+    opacity: 1;
+  }
+}
+
+/* The hovered name steps in from the fill's edge (transform only). */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .comp__name {
+    transition: transform 400ms var(--ease-out);
+  }
+  .comp__item:is(:hover, :focus-visible) .comp__name {
+    transform: translateX(1.25rem);
+  }
+}
