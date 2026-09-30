@@ -51,6 +51,12 @@ exempt. Nothing else ships.
 on bone, smaller than a viewport. It replaced the full-screen colour slider,
 which the owner rejected through two restyles; the owner picked it from three
 mocks knowing it breaks the rule above. Do not "fix" it back.
+2026-09-28, owner: the cards became "the deck" (sticky, full-photo) after a
+poster wall was rejected. 2026-09-30, owner: replaced by the split-screen
+broadcast, picked from a static mock: a colour panel beside a photo, sides
+alternating, a score-bug tag, no stat strip, no motion runtime
+(`CompetitionsMotion.tsx` deleted). Still smaller than a viewport, still no
+section heading.
 
 ## 3. Typography
 
