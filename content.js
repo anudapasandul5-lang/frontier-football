@@ -54,16 +54,16 @@ export default {
       albumId: "szn-6",
       // The team that won. This is the main thing on the card. If it is TODO,
       // the card says "Not recorded yet" instead.
-      champion: "Spain",
+      champion: "Ramadan FC",
       // A short line under the champion, for anything unusual about the
       // season. Leave it as "TODO" if there is nothing to say.
-      note: "World Cup Edition",
+      note: "World Cup Edition - Ramadan FC's 4th title",
       // The team that finished second.
-      runnerUp: "TODO",
+      runnerUp: "Sampath FC",
       // Top scorer of the season.
-      goldenBoot: "TODO",
+      goldenBoot: "Umar Shakil",
       // Best goalkeeper of the season.
-      goldenGlove: "TODO",
+      goldenGlove: "Mushtaq Thasleem",
       // Picture of the winning team. Lives in `public/champions/`.
       photo: "/champions/szn-6.webp",
       // What the picture shows, read aloud to anyone using a screen reader.
@@ -92,11 +92,11 @@ export default {
       // credits "Photos: ThePapare" and they are never used as a hero or a
       // card picture.
       albumId: "szn-5",
-      champion: "TODO",
+      champion: "Panadura 7s",
       note: "TODO",
       runnerUp: "TODO",
-      goldenBoot: "TODO",
-      goldenGlove: "TODO",
+      goldenBoot: "Mohamed Hadil",
+      goldenGlove: "Inamul",
       // Clean frame at 24s of Frontier's own 026-DaDIerCqF4H.mp4 Instagram
       // post, whose caption identifies this SZN 5 event. ThePapare photos stay
       // in the credited album and are never cropped into a hero.
@@ -117,10 +117,10 @@ export default {
       // "TODO" and the card still shows, saying the photos are on the way.
       albumId: "szn-4",
       champion: "Pantera FC",
-      note: "TODO",
+      note: "Ended Ramadan FC's 3-peat",
       runnerUp: "TODO",
-      goldenBoot: "TODO",
-      goldenGlove: "TODO",
+      goldenBoot: "Aathif Asmi",
+      goldenGlove: "Shuaib Ali",
       photo: "/champions/szn-4.webp",
       photoAlt: "The 4 x 4 Series SZN 4 champions holding the trophy together after the final.",
       date: "TODO",
@@ -138,10 +138,10 @@ export default {
       // "TODO" and the card still shows, saying the photos are on the way.
       albumId: "szn-3",
       champion: "Ramadan FC",
-      note: "TODO",
+      note: "3-peat",
       runnerUp: "TODO",
-      goldenBoot: "TODO",
-      goldenGlove: "TODO",
+      goldenBoot: "Umar",
+      goldenGlove: "Shalitha",
       photo: "/champions/szn-3.webp",
       photoAlt: "The 4 x 4 Series SZN 3 champions wearing their medals, with the trophy.",
       date: "TODO",
@@ -153,20 +153,20 @@ export default {
       driveFolder: "https://drive.google.com/drive/folders/1n3WeRh87N8bBVia1gQJ5pafeCrXkc9Bn",
     },
 
-    // SZN 1 and SZN 2. Nothing about these two has been confirmed yet, so
-    // every line is "TODO" and the cards show "Not recorded yet" rather than
-    // a guess. Fill the names in as they come.
+    // SZN 1 and SZN 2. Champion confirmed (Ramadan FC, back-to-back) from
+    // Frontier's own SZN 2 recap post. Runner-up, and SZN 1's Golden Boot and
+    // Golden Glove, were never announced, so those stay "TODO".
     {
       season: 2,
       // Which album on this site the "View photos" button opens. It matches a
       // file in public/albums/, written by `npm run albums:sync`. Leave it as
       // "TODO" and the card still shows, saying the photos are on the way.
       albumId: "szn-2",
-      champion: "TODO",
-      note: "TODO",
+      champion: "Ramadan FC",
+      note: "Back-to-back",
       runnerUp: "TODO",
-      goldenBoot: "TODO",
-      goldenGlove: "TODO",
+      goldenBoot: "Umar",
+      goldenGlove: "Charlie",
       // A match-action frame from the SZN 2 Drive folder - not a champions
       // photo (the winner is still unknown), just proof there was a season.
       photo: "/champions/szn-2.webp",
@@ -185,7 +185,7 @@ export default {
       // file in public/albums/, written by `npm run albums:sync`. Leave it as
       // "TODO" and the card still shows, saying the photos are on the way.
       albumId: "szn-1",
-      champion: "TODO",
+      champion: "Ramadan FC",
       note: "TODO",
       runnerUp: "TODO",
       goldenBoot: "TODO",
@@ -225,8 +225,8 @@ export default {
       beforeSeries: true,
       note: "TODO",
       // ThePapare's prize-giving photos show a women's and a men's winning
-      // team, but not their names. Fill these in once confirmed.
-      champion: "TODO",
+      // team. Champion confirmed by the owner; runner-up still unconfirmed.
+      champion: "Clowns FC",
       runnerUp: "TODO",
       // Owner-approved 2026-09-23: use a selected ThePapare photograph here,
       // preserving its visible Milinda Deshan/ThePapare watermark and album

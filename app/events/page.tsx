@@ -89,7 +89,6 @@ export default function EventsPage() {
               { key: "date", label: "Date" },
               { key: "venue", label: "Venue" },
               { key: "champion", label: "Champion", className: "text-yellow" },
-              { key: "runnerUp", label: "Runner-up" },
               { key: "photos", label: "Photos", className: "sm:text-right" },
             ]}
             rows={results.map((row) => ({
@@ -99,7 +98,6 @@ export default function EventsPage() {
                 date: recorded(row.date),
                 venue: recorded(row.venue),
                 champion: recorded(row.champion),
-                runnerUp: recorded(row.runnerUp),
                 photos: row.photos ? (
                   <a href={row.photos} className="inline-flex min-h-11 items-center underline underline-offset-4 hover:no-underline">
                     {row.photos.startsWith("/") ? "Album" : "Drive"}

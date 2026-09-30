@@ -6,7 +6,6 @@ import { AboutMotion } from "@/components/motion/AboutMotion";
 import { NextPage } from "@/components/pages/NextPage";
 import { PageHero } from "@/components/pages/PageHero";
 import { PageShell } from "@/components/pages/PageShell";
-import { PhotoStrip } from "@/components/pages/PhotoStrip";
 import { SplitReveal } from "@/components/primitives/SplitReveal";
 import { phoneSrcSet } from "@/lib/phone-image";
 
@@ -144,14 +143,6 @@ export default function WhoWeAre() {
         </PageHero>
       }
     >
-      <PhotoStrip
-        photos={[
-          { src: "/who/szn6-scramble.webp", alt: "Players scrambling for the ball in front of goal at 4 x 4 Series SZN 06" },
-          { src: "/who/division-0-crowd.webp", alt: "Players and friends at the Division 0 console tournament" },
-          { src: "/who/norway-england-fan.webp", alt: "A fan with both arms up at the Norway vs England watch-along" },
-        ]}
-      />
-
       {/* The owner's own words, from the 4x4 Series proposal deck (2026-09-10).
           v1's green band; ink now (strict bone/ink, owner 2026-09-22). */}
       <section data-tone="bone" data-chapter="Our story" aria-labelledby="who-heading" className="canvas-ink py-[clamp(4rem,14vh,9rem)]">

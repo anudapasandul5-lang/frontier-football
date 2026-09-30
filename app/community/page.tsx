@@ -34,7 +34,7 @@ export default function CommunityPage() {
           lines={["Play with", "Frontier."]}
           photo={{ src: "/heroes/community.webp", alt: "A supporter dancing in front of the big screen at a Frontier watch-along", position: "30% center" }}
         >
-          Every format Frontier has run, and the league you can join now.
+          Every format Frontier has run, and the weekly football carnival you can join now: fast rotations, free entry, real community.
         </PageHero>
       }
     >

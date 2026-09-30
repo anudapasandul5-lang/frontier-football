@@ -80,9 +80,6 @@ function Reel({ albums, total }: { albums: number; total: number }) {
           lineClassName="last:text-yellow"
           className="font-display text-[min(clamp(3.25rem,13vw,10rem),20svh)] leading-[0.84] font-bold uppercase"
         />
-        <p className="mt-5 max-w-[44ch] text-[clamp(1.05rem,0.95rem+0.45vw,1.35rem)] leading-[1.45] text-bone/85">
-          {n(albums)} albums and {n(total)} photographs from every Frontier night, on the pitch and in front of the screen.
-        </p>
       </div>
       <ReelRow frames={reel.slice(5)} drift="0.14" lead />
     </section>
