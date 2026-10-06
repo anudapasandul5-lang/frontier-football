@@ -7,13 +7,12 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-/* v1's about.js timeline, moved to useGSAP (T7). Each record row's columns
-   rise in with a short stagger as the row reaches the lower screen; above
-   900px each photo drifts inside its frame as it passes. Transform and opacity
-   only. Created inside matchMedia("no-preference"), so reduced motion creates
-   nothing and switching it on mid-visit reverts everything. The pre-state is
-   set here, after hydration, so JS off shows every row. ScrollTrigger fires
-   onEnter even when a jump skips past a row, so no row is stranded. */
+/* Paper tilt, hover lift and scroll reveal use separate wrappers, so their
+   transforms compose. Only uncredited photos drift inside their frames; a
+   credited photo retains its complete crop and watermark. Reduced motion
+   creates nothing and switching it on mid-visit reverts everything. The
+   pre-state is set after hydration, so JS off shows the complete scrapbook.
+   ScrollTrigger also reveals cards skipped by an anchor jump. */
 export function AboutMotion() {
   const anchor = useRef<HTMLSpanElement>(null);
 
@@ -27,22 +26,21 @@ export function AboutMotion() {
     mm.add({ motion: "(prefers-reduced-motion: no-preference)", wide: "(min-width: 900px)" }, (context) => {
       const { motion, wide } = context.conditions!;
       if (!motion) return;
-      for (const row of root.querySelectorAll(".record-row")) {
-        gsap.from(row.children, {
+      for (const row of root.querySelectorAll(".scrapbook-reveal")) {
+        gsap.from(row, {
           opacity: 0,
-          y: 28,
-          duration: 0.6,
-          stagger: 0.08,
+          y: 36,
+          duration: 0.75,
           ease: "power3.out",
-          scrollTrigger: { trigger: row, start: "top 85%", once: true },
+          scrollTrigger: { trigger: row, start: "top 92%", once: true },
         });
       }
       if (wide) {
-        for (const photo of root.querySelectorAll(".record-photo")) {
+        for (const photo of root.querySelectorAll(".scrapbook-photo")) {
           gsap.fromTo(
             photo,
-            { yPercent: -6 },
-            { yPercent: 6, ease: "none", scrollTrigger: { trigger: photo, start: "top bottom", end: "bottom top", scrub: true } },
+            { scale: 1.08, yPercent: -3 },
+            { yPercent: 3, ease: "none", scrollTrigger: { trigger: photo.parentElement, start: "top bottom", end: "bottom top", scrub: true } },
           );
         }
       }
