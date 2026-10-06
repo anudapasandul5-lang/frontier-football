@@ -7,12 +7,10 @@ import { PageHero, heroButton } from "@/components/pages/PageHero";
 import { PageShell } from "@/components/pages/PageShell";
 import { Roll } from "@/components/primitives/Roll";
 import { SplitReveal } from "@/components/primitives/SplitReveal";
+import { phoneSrcSet } from "@/lib/phone-image";
 import { PhotoStrip } from "@/components/pages/PhotoStrip";
-import { ResultsTable, Unrecorded } from "@/components/primitives/ResultsTable";
 
 export const metadata: Metadata = { title: "Events" };
-
-const recorded = (value: string | null) => value ?? <Unrecorded />;
 
 /* A question about the weekly session, not a League registration: whether the
    Sunday session and the Sunday Football League are one offer is unconfirmed
@@ -90,43 +88,83 @@ export default function EventsPage() {
 
       <Upcoming events={upcomingEvents(data)} />
       {results.length > 0 ? (
-        <section data-tone="bone" id="hall-of-fame" data-chapter="Hall of Fame" aria-labelledby="results-heading" className="frame scroll-mt-24 pb-[clamp(4rem,14vh,9rem)]">
+        /* Hall of Fame: a trophy wall, not a spreadsheet (owner, 2026-10-07:
+           the castle-hall table read as tacky). One row per event, the
+           champion in big yellow, the rest small and muted. Unknowns say so. */
+        <section data-tone="bone" id="hall-of-fame" data-chapter="Hall of Fame" aria-labelledby="results-heading" className="frame scroll-mt-24 pt-[clamp(3rem,10vh,6rem)] pb-[clamp(4rem,14vh,9rem)]">
+          <p aria-hidden="true" className="mb-4 flex gap-2 text-yellow">
+            {[0, 1, 2].map((i) => (
+              <svg key={i} viewBox="0 0 24 24" className="size-5" fill="currentColor">
+                <path d="M12 2l2.9 6.6 7.1.7-5.4 4.8 1.6 7L12 17.3 5.8 21.1l1.6-7L2 9.3l7.1-.7z" />
+              </svg>
+            ))}
+          </p>
           <SplitReveal
             id="results-heading"
             lines={["Hall of Fame"]}
-            className="mb-[clamp(2rem,6vh,4rem)] font-display text-[clamp(3rem,min(9vw,15svh),7.5rem)] leading-[0.88] font-bold uppercase"
+            className="mb-4 font-display text-[clamp(3rem,min(9vw,15svh),7.5rem)] leading-[0.88] font-bold uppercase"
           />
-          <p className="mb-8 max-w-[58ch] text-lg leading-relaxed">The winners of every Frontier event, and the stats behind them.</p>
-          <ResultsTable
-            labelled
-            caption="Results of every Frontier season and competition, newest season first"
-            columns={[
-              { key: "name", label: "Event", className: "max-sm:col-span-2" },
-              { key: "date", label: "Date" },
-              { key: "venue", label: "Venue" },
-              { key: "champion", label: "Champion", className: "text-yellow" },
-              { key: "runnerUp", label: "Runner-up" },
-              { key: "photos", label: "Photos", className: "sm:text-right" },
-            ]}
-            rows={results.map((row) => ({
-              id: row.id,
-              cells: {
-                name: row.name,
-                date: recorded(row.date),
-                venue: recorded(row.venue),
-                champion: recorded(row.champion),
-                runnerUp: recorded(row.runnerUp),
-                photos: row.photos ? (
-                  <a href={row.photos} className="inline-flex min-h-11 items-center underline underline-offset-4 hover:no-underline">
-                    {row.photos.startsWith("/") ? "Album" : "Drive"}
-                    <span className="sr-only">, {row.name}</span>
-                  </a>
-                ) : (
-                  <Unrecorded />
-                ),
-              },
-            }))}
-          />
+          <p className="mb-[clamp(2rem,6vh,4rem)] max-w-[58ch] text-lg leading-relaxed">The winners of every Frontier event, and the stats behind them.</p>
+          <ol aria-labelledby="results-heading" className="border-t border-bone/25">
+            {results.map((row, i) => {
+              const meta = [row.venue, row.date, row.runnerUp ? `Runner-up ${row.runnerUp}` : null].filter(Boolean).join("  ·  ");
+              return (
+                <li
+                  key={row.id}
+                  data-reveal
+                  className="hof-row group relative grid grid-cols-[5.5rem_minmax(0,1fr)] gap-x-4 gap-y-3 border-b border-bone/25 py-[clamp(1rem,2.5vh,1.75rem)] sm:grid-cols-[8rem_minmax(0,1fr)] md:grid-cols-[clamp(9rem,13vw,12rem)_minmax(0,1fr)_minmax(0,1fr)_auto] md:items-center md:gap-x-8"
+                >
+                  {/* A yellow edge grows in on hover: the row lifting out of the wall. */}
+                  <span aria-hidden="true" className="absolute inset-y-0 -left-[clamp(0.5rem,1.5vw,1.25rem)] w-1 origin-bottom scale-y-0 bg-yellow transition-transform duration-300 ease-[var(--ease-out)] group-hover:scale-y-100 max-md:hidden" />
+                  <div className="photo-frame relative row-span-3 self-start overflow-hidden md:row-span-1 md:self-center">
+                    {row.photo ? (
+                      <img
+                        src={row.photo}
+                        srcSet={phoneSrcSet(row.photo)}
+                        sizes="(min-width: 768px) 12rem, 8rem"
+                        alt={row.photoAlt ?? `${row.name}`}
+                        width={1200}
+                        height={900}
+                        loading="lazy"
+                        decoding="async"
+                        className="block aspect-[4/3] w-full object-cover transition-[transform,filter] duration-500 ease-[var(--ease-out)] md:grayscale-[0.9] md:group-hover:scale-[1.06] md:group-hover:grayscale-0"
+                      />
+                    ) : (
+                      <div aria-hidden="true" className="grid aspect-[4/3] w-full place-items-center bg-bone/[0.06] text-yellow/60">
+                        <svg viewBox="0 0 24 24" className="size-6" fill="currentColor">
+                          <path d="M12 2l2.9 6.6 7.1.7-5.4 4.8 1.6 7L12 17.3 5.8 21.1l1.6-7L2 9.3l7.1-.7z" />
+                        </svg>
+                      </div>
+                    )}
+                    <span className="absolute top-0 left-0 bg-yellow px-1.5 py-0.5 font-display text-xs font-bold text-ink tabular-nums">{String(i + 1).padStart(2, "0")}</span>
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="font-display text-[clamp(1.125rem,1rem+1vw,1.875rem)] leading-none uppercase">{row.name}</h3>
+                    {meta ? <p className="micro mt-2">{meta}</p> : null}
+                  </div>
+                  <div className="col-start-2 min-w-0 md:col-start-3">
+                    <p className="micro">Champion</p>
+                    {row.champion ? (
+                      <p className="hof-champ mt-1 font-display text-[clamp(1.5rem,1.1rem+2.4vw,3.5rem)] leading-[0.9] font-bold text-yellow uppercase transition-transform duration-500 ease-[var(--ease-out)] group-hover:translate-x-1.5">
+                        {row.champion}
+                      </p>
+                    ) : (
+                      <p className="mt-1 text-[15px] text-[var(--tone-muted)]">Not recorded yet</p>
+                    )}
+                  </div>
+                  {row.photos ? (
+                    <a
+                      href={row.photos}
+                      className="group/btn col-start-2 inline-flex min-h-11 w-fit items-center gap-2 border border-bone/40 px-4 font-display text-sm uppercase transition-[color,background-color,border-color,transform] duration-200 ease-[var(--ease-out)] hover:border-yellow hover:bg-yellow hover:text-ink active:scale-[0.97] md:col-start-4"
+                    >
+                      Photos <span aria-hidden="true" className="transition-transform duration-200 ease-[var(--ease-out)] group-hover/btn:translate-x-1">&rarr;</span>
+                      <span className="sr-only">, {row.name}</span>
+                    </a>
+                  ) : null}
+                </li>
+              );
+            })}
+          </ol>
         </section>
       ) : null}
 

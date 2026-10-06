@@ -10,6 +10,7 @@ import { Roll } from "@/components/primitives/Roll";
 import { SplitReveal } from "@/components/primitives/SplitReveal";
 import { PhotoStrip } from "@/components/pages/PhotoStrip";
 import { Marquee } from "@/components/primitives/Marquee";
+import { phoneSrcSet } from "@/lib/phone-image";
 
 // Same rhythm as the home page's partner strip (components/acts/Partners.tsx).
 const item = "mr-[clamp(2rem,5vw,4.5rem)] flex h-[clamp(2.75rem,5vw,4.5rem)] shrink-0 items-center";
@@ -41,8 +42,9 @@ export default function Collaborate() {
           lines={["Collaborate", "with us."]}
           photo={{ src: "/heroes/collaborate.webp", alt: "A packed watch-along under a partner's banner, the match on the big screen", position: "center 35%" }}
           actions={
-            <a href="#routes-partner" className={`${heroButton} bg-yellow text-ink`}>
+            <a href="#talk" className={`${heroButton} group min-h-14 w-full max-w-[36rem] justify-between bg-yellow text-ink`}>
               <Roll>I want to partner</Roll>
+              <span aria-hidden="true" className="transition-transform duration-200 ease-[var(--ease-out)] group-hover:translate-y-1">&darr;</span>
             </a>
           }
         >
@@ -54,7 +56,7 @@ export default function Collaborate() {
         photos={[
           { src: "/pages/collab-venue.webp", alt: "The Pixels N Pints entrance, venue partner for Division 0" },
           { src: "/pages/collab-bar-crowd.webp", alt: "A full room at a Frontier watch-along at Main Sports Bar" },
-          { src: "/pages/collab-partner-can.webp", alt: "A giant partner drink can on display at Division 0" },
+          { src: "/home/moment-celebration.webp", alt: "A fan celebrates at a Frontier watch-along" },
         ]}
       />
 
@@ -91,12 +93,29 @@ export default function Collaborate() {
             lines={["What a partner gets"]}
             className="mb-10 font-display text-[clamp(2.5rem,8vw,7rem)] leading-[0.88] font-bold uppercase"
           />
+          {/* Zigzag (owner reference, 2026-10-07): card 1 text left and photo
+              right, then alternating. On a phone the photo always sits on top. */}
           <ol className="border-t-2 border-ink">
             {offer.map((row, i) => (
-              <li key={row.title} className="grid grid-cols-[3ch_minmax(0,1fr)] gap-x-4 border-b border-ink/20 py-7 sm:grid-cols-[3ch_minmax(0,1fr)_minmax(0,1fr)] sm:gap-x-8">
-                <span className="micro pt-2 tabular-nums">{String(i + 1).padStart(2, "0")}</span>
-                <strong className="font-display text-[clamp(1.6rem,1.1rem+2vw,3rem)] leading-[0.95] font-bold uppercase">{row.title}</strong>
-                {row.body ? <span className="col-start-2 mt-3 max-w-[48ch] text-[clamp(1rem,0.95rem+0.2vw,1.125rem)] leading-normal sm:col-start-3 sm:mt-0 sm:pt-1">{row.body}</span> : null}
+              <li key={row.title} className="grid items-center gap-6 border-b border-ink/20 py-[clamp(2rem,6vh,3.5rem)] md:grid-cols-2 md:gap-[clamp(2rem,5vw,5rem)]">
+                {row.photo ? (
+                  <img
+                    src={row.photo}
+                    srcSet={phoneSrcSet(row.photo)}
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    alt={row.alt ?? ""}
+                    width={1200}
+                    height={900}
+                    loading="lazy"
+                    decoding="async"
+                    className={`block aspect-[4/3] w-full object-cover ${i % 2 === 0 ? "md:order-2" : ""}`}
+                  />
+                ) : null}
+                <div>
+                  <span className="micro tabular-nums">{String(i + 1).padStart(2, "0")}</span>
+                  <strong className="mt-3 block font-display text-[clamp(1.75rem,1.2rem+2.2vw,3.5rem)] leading-[0.95] font-bold uppercase">{row.title}</strong>
+                  {row.body ? <p className="mt-4 max-w-[44ch] text-[clamp(1.05rem,0.95rem+0.35vw,1.3rem)] leading-normal">{row.body}</p> : null}
+                </div>
               </li>
             ))}
           </ol>
@@ -138,16 +157,33 @@ export default function Collaborate() {
 
       {/* The page's action, again at the foot, on the yellow the hero button
           uses. The card keeps its own sr-only heading; the big line is display. */}
-      <div data-tone="ink" data-chapter="Talk to us" className="@container bg-yellow pt-[clamp(4rem,12vh,8rem)] text-ink">
-        <div className="frame pb-8">
-          <p aria-hidden="true" className="font-display text-[clamp(3rem,10vw,9rem)] leading-[0.85] font-bold uppercase">
-            Talk to us.
-          </p>
-          <p className="mt-5 max-w-[46ch] text-[clamp(1.05rem,0.95rem+0.45vw,1.4rem)] leading-[1.45]">
-            One message is all it takes.
-          </p>
+      {/* id="talk": the hero button lands here, with the headline at the top
+          (no scroll margin: the band's own padding clears the crest). */}
+      <div id="talk" data-tone="ink" data-chapter="Talk to us" className="overflow-x-clip bg-yellow py-[clamp(4rem,12vh,8rem)] text-ink">
+        <div className="frame grid items-center gap-[clamp(3rem,6vw,5rem)] md:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
+          <div>
+            <p aria-hidden="true" className="font-display text-[clamp(3.5rem,11vw,10rem)] leading-[0.82] font-bold uppercase">
+              Talk
+              <br />
+              to us.
+            </p>
+            <p className="mt-6 max-w-[46ch] text-[clamp(1.1rem,0.95rem+0.6vw,1.6rem)] leading-[1.4]">One message is all it takes.</p>
+            <ContactRoutes only="partner" heading="Talk to us" />
+          </div>
+          <div className="relative mx-auto w-full max-w-[30rem] md:mx-0">
+            <img
+              src="/pages/collab-partner-can.webp"
+              srcSet={phoneSrcSet("/pages/collab-partner-can.webp")}
+              sizes="(min-width: 768px) 40vw, 90vw"
+              alt="A giant partner drink can on display at Division 0"
+              width={1200}
+              height={900}
+              loading="lazy"
+              decoding="async"
+              className="block aspect-[4/5] w-full rotate-[2.5deg] border-[6px] border-ink object-cover"
+            />
+          </div>
         </div>
-        <ContactRoutes only="partner" heading="Talk to us" />
       </div>
       <NextPage current="/collaborate" />
     </PageShell>

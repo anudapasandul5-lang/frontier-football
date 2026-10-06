@@ -115,14 +115,14 @@ export function Competitions() {
                     className="font-display text-[clamp(2.25rem,5.6vw,5.5rem)] leading-[0.86] font-bold text-balance uppercase"
                   />
                 </div>
-                <figure className="relative aspect-[4/3] overflow-hidden bg-ink md:hidden">
+                <figure className="photo-frame relative aspect-[4/3] overflow-hidden bg-ink md:hidden">
                   {shot(r, "100vw", "absolute inset-0 h-full w-full object-cover")}
                   {credit(r)}
                 </figure>
               </li>
             ))}
           </ul>
-          <div className="comp__stage relative hidden overflow-hidden bg-ink md:block">
+          <div className="photo-frame comp__stage relative hidden overflow-hidden bg-ink md:block">
             {rows.map((r, i) => (
               <figure key={r.tone} data-i={i} aria-hidden="true" className="absolute inset-0 opacity-0 transition-opacity duration-300 ease-(--ease-out) first:opacity-100">
                 {shot(r, "(min-width: 1140px) 520px, 45vw", "absolute inset-0 h-full w-full object-cover")}

@@ -39,6 +39,29 @@
     border-radius: 0;
   }
 
+  :root {
+    --radius-photo: clamp(0.75rem, 1.2vw, 1.25rem);
+  }
+
+  /* Photo frames are the one rounded thing (owner, 2026-10-07: "curved, not
+     sharp ends, site wide"). Every img and video rounds; full-bleed
+     backgrounds (absolute inset-0) and logos and the crest (png/svg, crest
+     files, object-contain) stay square. A wrapper that clips a scaled photo
+     takes .photo-frame so its corners round too. */
+  img,
+  video,
+  .photo-frame {
+    border-radius: var(--radius-photo);
+  }
+  img.inset-0,
+  video.inset-0,
+  img.object-contain,
+  img[src$=".png"],
+  img[src$=".svg"],
+  img[src*="crest"] {
+    border-radius: 0;
+  }
+
   .font-display {
     font-variation-settings: "wdth" 75;
     letter-spacing: -0.01em;
@@ -680,3 +703,28 @@ body:has(#hero)::after {
     transform: translateX(1.25rem);
   }
 }
+
+/* Hall of Fame rows (events page): each row rises in as it reaches the
+   viewport, then its champion's name wipes on left to right. Same contract as
+   .wipe: the pre-state exists only under data-motion="on", so JS off and
+   reduced motion show every row at rest. */
+:root[data-motion="on"] .hof-row.is-pre:not(.is-revealed) {
+  opacity: 0;
+  transform: translateY(1.5rem);
+}
+:root[data-motion="on"] .hof-row.is-pre:not(.is-revealed) .hof-champ {
+  clip-path: inset(0 100% 0 0);
+}
+:root[data-motion="on"] .hof-row.is-revealed {
+  transition:
+    opacity 600ms var(--ease-out),
+    transform 700ms var(--ease-out);
+}
+:root[data-motion="on"] .hof-row.is-revealed .hof-champ {
+  clip-path: inset(0 -5% 0 0);
+  transition:
+    clip-path 700ms var(--ease-in-out) 250ms,
+    transform 500ms var(--ease-out);
+}
+
+

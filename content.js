@@ -44,11 +44,34 @@
 export default {
   // Signed-off website copy containing event facts (owner, 2026-10-07).
   milestones: "It started with Ground Zero, one night on turf in Colombo. Then came Turf Wars, the 4 x 4 Series, watch parties and Division 0, our FC 26 tournament. Every one added another chapter. The numbers below show how far it has come.",
+  // Each story's collage on the Community page. Photos must be landscape.
   communityStories: [
-    { name: "Ground Zero", body: "It all began here. One night on turf in Colombo, in 2024. Players came with something to prove, the crowd came to see it, and nobody who was there forgot it. Every Frontier night since traces back to this one." },
-    { name: "4 x 4 Series", body: "Six seasons. One venue. The same turf, new rivalries every season, and a place that started to feel like home. Every season added more faces, more goals and more stories worth telling." },
-    { name: "Watch Parties", body: "The big games hit different when you watch them together. Strangers turned into friends, every goal got a roar, and every heartbreak was shared by the whole room." },
-    { name: "Division 0", body: "Football without the grass. Controllers in hand, Division 0 gave the game another pitch. The pride was the same, the bragging rights were the same and so was the love of the game." },
+    { name: "Ground Zero", body: "It all began here. One night on turf in Colombo, in 2024. Players came with something to prove, the crowd came to see it, and nobody who was there forgot it. Every Frontier night since traces back to this one.",
+    credit: "Photos: ThePapare",
+    photos: [
+      { src: "/albums/frontier-futsal/9792a16def4ab58717fd323264cf486d.webp", alt: "Two players fight for the ball at Ground Zero" },
+      { src: "/albums/frontier-futsal/028d44b1500220bc9a69eadecee302c8.webp", alt: "A player in yellow runs onto the ball at Ground Zero" },
+      { src: "/albums/frontier-futsal/cd3591a33cca4c3591f1f01eb0437bfc.webp", alt: "Three players close in on the ball at Ground Zero" },
+    ] },
+    { name: "4 x 4 Series", body: "Six seasons. One venue. The same turf, new rivalries every season, and a place that started to feel like home. Every season added more faces, more goals and more stories worth telling.",
+    photos: [
+      { src: "/champions/szn-2.webp", alt: "The 4 x 4 Series SZN 2 champions" },
+      { src: "/champions/szn-4.webp", alt: "The 4 x 4 Series SZN 4 champions" },
+      { src: "/champions/szn-6.webp", alt: "The 4 x 4 Series SZN 6 champions" },
+    ] },
+    { name: "Watch Parties", body: "The big games hit different when you watch them together. Strangers turned into friends, every goal got a roar, and every heartbreak was shared by the whole room.",
+    photos: [
+      { src: "/champions/wa-semi-eng-arg.webp", alt: "Fans at the England v Argentina semi-final watch party" },
+      { src: "/champions/wa-ucl-final-night.webp", alt: "Fans at the Champions League final watch party" },
+      { src: "/champions/wa-final-esp-arg.webp", alt: "Spain and Argentina fans at the World Cup final watch party" },
+    ] },
+    { name: "Division 0", body: "Football without the grass. Controllers in hand, Division 0 gave the game another pitch. The pride was the same, the bragging rights were the same and so was the love of the game.",
+    photos: [
+      { src: "/champions/division-0.webp", alt: "Players at the Division 0 FC 26 tournament" },
+      { src: "https://drive.google.com/thumbnail?id=12p617pNQRoxt3Ae0DsPqI1UMWX6dHeND&sz=w1200", alt: "A Division 0 match on the big screen, controllers in hand" },
+      { src: "https://drive.google.com/thumbnail?id=1JySS8J-819N82HC7EiALOFOttBQ1uNul&sz=w1200", alt: "Players on the sofas mid-match at Division 0" },
+      { src: "/who/division-0-crowd.webp", alt: "A crowd gathers round the console at Division 0" },
+    ] },
   ],
   aboutIntro: "Frontier Football started in Colombo in 2024 with one night on turf and a simple dream: Sri Lankan football deserves the biggest stage. Two years in, it is a large, growing community.",
 
@@ -861,22 +884,32 @@ export default {
       {
         title: "Enhanced visibility",
         body: "Put your brand in front of a focused football audience, live at our events and every day through our content.",
+        photo: "/home/moment-crowd.webp",
+        alt: "A packed room at Main Sports Bar watching the match",
       },
       {
         title: "Community engagement",
         body: "Stand with a growing football movement built on passion, culture and community.",
+        photo: "/home/moment-flags.webp",
+        alt: "Fans with Argentina flags at a Frontier watch party",
       },
       {
         title: "Customizable opportunities",
         body: "Show up your way: on the ground at our events, or through stories we tell together online.",
+        photo: "/home/moment-strike.webp",
+        alt: "A player strikes the ball under the lights at a Frontier match",
       },
       {
         title: "Product distribution",
         body: "Get your product into the hands of players and fans, where it counts.",
+        photo: "/pages/contact-trophies.webp",
+        alt: "Trophies, medals and partner product boxes at a Frontier final",
       },
       {
         title: "Branding opportunities",
         body: "Strong on-site branding, event mentions and dedicated social content, so your brand stays visible well past match day.",
+        photo: "/pages/collab-partner-can.webp",
+        alt: "A giant partner drink can on display at Division 0",
       },
     ],
   },

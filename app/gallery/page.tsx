@@ -51,11 +51,11 @@ function ReelRow({ frames, drift, lead = false }: { frames: ReelFrame[]; drift: 
           return f.albumId ? (
             // No prefetch: a prefetched album page brings its full-size hero
             // as a high-priority preload (~400KB), racing the reel on a phone.
-            <Link key={key} href={`/albums/${f.albumId}`} prefetch={false} aria-hidden={copy ? true : undefined} tabIndex={copy ? -1 : undefined} className="block shrink-0 overflow-hidden">
+            <Link key={key} href={`/albums/${f.albumId}`} prefetch={false} aria-hidden={copy ? true : undefined} tabIndex={copy ? -1 : undefined} className="photo-frame block shrink-0 overflow-hidden">
               {img}
             </Link>
           ) : (
-            <span key={key} className="block shrink-0 overflow-hidden">
+            <span key={key} className="photo-frame block shrink-0 overflow-hidden">
               {img}
             </span>
           );
@@ -130,7 +130,7 @@ function AlbumCards({ albums }: { albums: StoryAlbum[] }) {
             <Link
               href={`/albums/${album.id}`}
              
-              className={`group relative flex aspect-[4/3] flex-col justify-end overflow-hidden sm:aspect-[4/5] ${pic ? "text-bone" : "bg-yellow text-ink"}`}
+              className={`photo-frame group relative flex aspect-[4/3] flex-col justify-end overflow-hidden sm:aspect-[4/5] ${pic ? "text-bone" : "bg-yellow text-ink"}`}
             >
               {cover ? (
                 <Cover album={album} className="absolute inset-0 size-full object-cover object-[center_30%] transition-transform duration-700 ease-[var(--ease-out)] group-hover:scale-[1.04]" />
@@ -168,7 +168,7 @@ function WatchGrid({ albums }: { albums: StoryAlbum[] }) {
     <ul className="frame grid gap-2 min-[700px]:grid-cols-6 sm:gap-3">
       {albums.map((album, i) => (
         <li key={album.id} className={i < 2 ? "min-[700px]:col-span-3" : "min-[700px]:col-span-2"}>
-          <Link href={`/albums/${album.id}`} className={`group relative block overflow-hidden text-bone ${i < 2 ? "h-[clamp(320px,62svh,620px)]" : "h-[clamp(300px,48svh,480px)]"}`}>
+          <Link href={`/albums/${album.id}`} className={`photo-frame group relative block overflow-hidden text-bone ${i < 2 ? "h-[clamp(320px,62svh,620px)]" : "h-[clamp(300px,48svh,480px)]"}`}>
             {album.photo ? <Cover album={album} className="absolute inset-0 size-full object-cover transition-transform duration-700 ease-[var(--ease-out)] group-hover:scale-[1.04]" /> : null}
             <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-night/90 via-night/20 to-transparent" />
             <div className="absolute inset-x-0 bottom-0 flex flex-col gap-3 p-5 sm:p-6">

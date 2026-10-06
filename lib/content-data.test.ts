@@ -630,7 +630,7 @@ describe("collaborate.offer", () => {
     });
 
     expect(collaborate.offer).toEqual([
-      { title: "Enhanced visibility", body: "Reach a focused audience." },
+      { title: "Enhanced visibility", body: "Reach a focused audience.", photo: null, alt: null },
     ]);
   });
 
@@ -642,7 +642,7 @@ describe("collaborate.offer", () => {
     });
 
     expect(collaborate.offer).toEqual([
-      { title: "Product distribution", body: null },
+      { title: "Product distribution", body: null, photo: null, alt: null },
     ]);
   });
 
@@ -654,7 +654,7 @@ describe("collaborate.offer", () => {
     });
 
     expect(collaborate.offer).toEqual([
-      { title: "Named on tournament posters", body: null },
+      { title: "Named on tournament posters", body: null, photo: null, alt: null },
     ]);
   });
 
@@ -911,10 +911,10 @@ describe("resultRows", () => {
       ],
     });
     expect(resultRows(data)).toEqual([
-      { id: "szn-6", name: "4 x 4 Series SZN 6", date: null, venue: "Athlete 360", champion: "Spain", runnerUp: null, photos: "/albums/szn-6" },
-      { id: "szn-5", name: "4 x 4 Series SZN 5", date: null, venue: null, champion: null, runnerUp: null, photos: null },
-      { id: "turf-wars", name: "Turf Wars", date: "26 July 2025", venue: "Club Fusion", champion: null, runnerUp: null, photos: null },
-      { id: "division-0", name: "Division 0", date: null, venue: null, champion: null, runnerUp: null, photos: "https://drive.google.com/d" },
+      { id: "szn-6", name: "4 x 4 Series SZN 6", date: null, venue: "Athlete 360", champion: "Spain", runnerUp: null, photos: "/albums/szn-6", photo: null, photoAlt: null },
+      { id: "szn-5", name: "4 x 4 Series SZN 5", date: null, venue: null, champion: null, runnerUp: null, photos: null, photo: null, photoAlt: null },
+      { id: "turf-wars", name: "Turf Wars", date: "26 July 2025", venue: "Club Fusion", champion: null, runnerUp: null, photos: null, photo: null, photoAlt: null },
+      { id: "division-0", name: "Division 0", date: null, venue: null, champion: null, runnerUp: null, photos: "https://drive.google.com/d", photo: null, photoAlt: null },
     ]);
   });
 });

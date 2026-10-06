@@ -256,10 +256,12 @@ function parseReach(raw: Raw) {
    hand-edits this file and the list was five plain strings until 2026-09-10;
    reverting one row to a string should not throw. */
 function parseOffer(raw: Raw) {
-  if (typeof raw === "string") return { title: recorded(raw), body: null };
+  if (typeof raw === "string") return { title: recorded(raw), body: null, photo: null, alt: null };
   return {
     title: recorded(raw?.title),
     body: recorded(raw?.body),
+    photo: recorded(raw?.photo),
+    alt: recorded(raw?.alt),
   };
 }
 
@@ -544,6 +546,8 @@ export function resultRows(data: Content) {
     champion: row.champion,
     runnerUp: row.runnerUp,
     photos: photosHref(row),
+    photo: row.photo,
+    photoAlt: row.photoAlt,
   }));
 }
 

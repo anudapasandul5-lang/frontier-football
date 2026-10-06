@@ -41,18 +41,61 @@ export default function WhoWeAre() {
 
       {/* Signed-off story copy, on the page's bone background. */}
       <section data-tone="ink" data-chapter="Our story" aria-labelledby="who-heading" className="canvas-bone py-[clamp(4rem,14vh,9rem)]">
+        {/* United's editorial moves (docs/design/united/DESIGN.md): a tick-rule
+            under a micro-label, an unbalanced 55/45 split with the small body
+            offset right, the serif line set against the condensed caps, and
+            one photo to break the text wall (owner, 2026-10-07: "too plain"). */}
         <div className="frame">
-          <p className="micro mb-4 text-ink">Our story</p>
-          <SplitReveal id="who-heading" lines={["A platform."]} className="mb-8 font-display text-[clamp(3rem,10vw,9rem)] leading-[0.85] font-bold uppercase" />
-          <p className="max-w-[58ch] text-[clamp(1.125rem,1.5vw,1.375rem)] leading-relaxed">
-            Frontier Football is a platform for Sri Lanka’s football community. We spotlight talent and bring together everyone who loves the game.
-          </p>
-          <p className="my-10 max-w-[22ch] font-serif text-[clamp(2.25rem,5.5vw,5rem)] leading-[1.02] text-ink sm:my-14">
-            Talent was never missing. The platform was.
-          </p>
-          <p className="max-w-[58ch] text-[clamp(1.125rem,1.5vw,1.375rem)] leading-relaxed">
-            We build the space where players shine, get recognised and grow, in a community that goes well beyond casual play. Through tournaments, collaborations and digital content, football culture and brands meet here.
-          </p>
+          <div className="mb-[clamp(2rem,5vh,3.5rem)] flex items-center gap-4">
+            <p className="micro shrink-0 text-ink">Our story</p>
+            <span aria-hidden="true" className="h-2 flex-1 border-x border-b border-ink/40" />
+          </div>
+          <div>
+            <SplitReveal id="who-heading" lines={["A platform."]} className="font-display text-[clamp(3rem,10vw,9rem)] leading-[0.85] font-bold uppercase" />
+            <p className="mt-8 max-w-[46ch] text-[clamp(1.125rem,1.5vw,1.375rem)] leading-relaxed md:ml-[55%]">
+              Frontier Football is a platform for Sri Lanka’s football community. We spotlight talent and bring together everyone who loves the game.
+            </p>
+          </div>
+          <blockquote className="relative my-[clamp(3rem,10vh,6rem)] border-y border-ink py-[clamp(2rem,6vh,4rem)]">
+            <span aria-hidden="true" className="pointer-events-none absolute -top-[0.38em] left-0 font-serif text-[clamp(6rem,14vw,12rem)] leading-none text-yellow select-none">
+              &ldquo;
+            </span>
+            {/* The closing mark mirrors the opening one: same size, hanging on
+                the bottom rule at the right, so the pair bookends the line. */}
+            <span aria-hidden="true" className="pointer-events-none absolute right-0 -bottom-[0.62em] font-serif text-[clamp(6rem,14vw,12rem)] leading-none text-yellow select-none">
+              &rdquo;
+            </span>
+            <p className="relative font-serif text-[clamp(2.5rem,7vw,6.5rem)] leading-[0.98] text-ink">
+              Talent was never missing.{" "}
+              <em className="block italic md:pl-[18%]">
+The platform was.</em>
+            </p>
+          </blockquote>
+          <div className="grid gap-8 md:grid-cols-[45fr_55fr] md:items-center md:gap-[clamp(2rem,5vw,5rem)]">
+            <img
+              src="/home/moment-duel.webp"
+              srcSet={phoneSrcSet("/home/moment-duel.webp")}
+              sizes="(min-width: 768px) 45vw, 100vw"
+              alt="Two players go shoulder to shoulder for the ball at a Frontier match"
+              width={1200}
+              height={900}
+              loading="lazy"
+              decoding="async"
+              className="block aspect-[4/3] w-full object-cover"
+            />
+            <div>
+              <p className="max-w-[46ch] text-[clamp(1.125rem,1.5vw,1.375rem)] leading-relaxed">
+                We build the space where players shine, get recognised and grow, in a community that goes well beyond casual play. Through tournaments, collaborations and digital content, football culture and brands meet here.
+              </p>
+              <ul aria-label="What we do" className="mt-8 flex flex-wrap gap-2">
+                {["Tournaments", "Collaborations", "Digital content"].map((t) => (
+                  <li key={t} className="border border-ink px-4 py-2 font-display text-sm uppercase">
+                    {t}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
       </section>
 

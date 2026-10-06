@@ -34,22 +34,26 @@ export default function Contact() {
           lines={["Get in", "touch."]}
           photo={{ src: "/heroes/contact.webp", alt: "Four friends together beside a beer tower at a Frontier watch-along", position: "center 30%" }}
           actions={
-            <>
+            /* Full-width stacked bars, as in the signed-off copy doc (owner,
+               2026-10-07); the hero photo stays. */
+            <div className="grid w-full max-w-[36rem] gap-3">
               {playerLink ? (
                 <a
                   href={playerLink}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Message Frontier on WhatsApp (opens in a new tab)"
-                  className={`${heroButton} bg-yellow text-ink`}
+                  className={`${heroButton} group min-h-14 w-full justify-between bg-yellow text-ink`}
                 >
                   <Roll>WhatsApp us</Roll>
+                  <span aria-hidden="true" className="transition-transform duration-200 ease-[var(--ease-out)] group-hover:translate-x-1">&rarr;</span>
                 </a>
               ) : null}
-              <a href="/collaborate" className={`${heroButton} border-2 border-bone hover:bg-bone hover:text-ink`}>
+              <a href="/collaborate" className={`${heroButton} group min-h-14 w-full justify-between border-2 border-bone hover:bg-bone hover:text-ink`}>
                 <Roll>For brands</Roll>
+                <span aria-hidden="true" className="transition-transform duration-200 ease-[var(--ease-out)] group-hover:translate-x-1">&rarr;</span>
               </a>
-            </>
+            </div>
           }
         >
           Playing Sunday League?{" "}

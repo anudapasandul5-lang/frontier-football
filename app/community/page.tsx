@@ -8,10 +8,47 @@ import { PageShell } from "@/components/pages/PageShell";
 import { PhotoStrip } from "@/components/pages/PhotoStrip";
 import { SplitReveal } from "@/components/primitives/SplitReveal";
 import { SundayLeagueMark } from "@/components/primitives/SundayLeagueMark";
+import { phoneSrcSet } from "@/lib/phone-image";
 
 export const metadata: Metadata = { title: "Community" };
 
 const button = "flex min-h-12 items-center px-6 font-display text-[clamp(1rem,0.9rem+0.4vw,1.25rem)] font-bold uppercase transition-transform duration-150 ease-[var(--ease-out)] active:scale-[0.97]";
+
+/* Each event's scrapbook collage (owner reference, 2026-10-07): bone-framed
+   prints on a darker tray, each tipped a fraction of a degree. Kept under 1deg
+   because the owner rejected strongly tilted prints as crooked scans
+   (2026-09-24). Layout runs by story order: one big print on the left, three
+   in a row, one big print on the right, then a 2 x 2 grid. */
+const layouts = ["lead-left", "row", "lead-right", "grid"] as const;
+type Layout = (typeof layouts)[number];
+
+const grids: Record<Layout, string> = {
+  "lead-left": "grid-cols-[3fr_2fr] grid-rows-2 [&>*:first-child]:row-span-2 h-[clamp(16rem,42vw,30rem)]",
+  row: "grid-cols-3 h-[clamp(9rem,26vw,20rem)]",
+  "lead-right": "grid-cols-[2fr_3fr] grid-rows-2 [&>*:last-child]:col-start-2 [&>*:last-child]:row-span-2 [&>*:last-child]:row-start-1 h-[clamp(16rem,42vw,30rem)]",
+  grid: "grid-cols-2 grid-rows-2 h-[clamp(16rem,42vw,30rem)]",
+};
+const tilts = ["-rotate-[0.8deg]", "rotate-[0.6deg]", "-rotate-[0.4deg]", "rotate-[0.9deg]"];
+
+function Collage({ photos, layout }: { photos: { src: string; alt: string }[]; layout: Layout }) {
+  return (
+    <div className={`photo-frame grid gap-[clamp(0.5rem,1.5vw,1rem)] bg-ink/[0.08] p-[clamp(0.5rem,1.5vw,1rem)] ${grids[layout]}`}>
+      {photos.map((p, i) => (
+        <img
+          key={p.src}
+          src={p.src}
+          srcSet={phoneSrcSet(p.src)}
+          sizes="(min-width: 640px) 50vw, 100vw"
+          alt={p.alt}
+          loading="lazy"
+          decoding="async"
+          referrerPolicy="no-referrer"
+          className={`block size-full min-h-0 border-[clamp(3px,0.6vw,6px)] border-bone object-cover transition-transform duration-500 ease-[var(--ease-out)] hover:rotate-0 ${tilts[i % tilts.length]}`}
+        />
+      ))}
+    </div>
+  );
+}
 
 /* The Community page (plan L7): the Sunday Football League, the one live
    activity, on night mode with its two Registrations and the email; then every
@@ -88,10 +125,13 @@ export default function CommunityPage() {
       <section data-tone="ink" data-chapter="Every event we have done" aria-labelledby="past-heading" className="frame py-[clamp(4rem,12vh,8rem)]">
         <SplitReveal id="past-heading" lines={["Every event we have done"]} className="mb-10 font-display text-[clamp(2.5rem,8vw,7rem)] leading-[0.88] font-bold uppercase" />
         <ol className="border-t-2 border-ink">
-          {raw.communityStories.map((story) => (
-            <li key={story.name} className="grid gap-6 border-b border-ink/20 py-7 sm:grid-cols-2 sm:gap-8">
-              <h3 className="font-display text-[clamp(1.75rem,1.2rem+2.4vw,3.75rem)] leading-none font-bold uppercase">{story.name}</h3>
-              <p className="max-w-[58ch] text-lg leading-relaxed">{story.body}</p>
+          {raw.communityStories.map((story, i) => (
+            <li key={story.name} className="border-b border-ink/20 py-[clamp(2rem,6vh,3.5rem)]">
+              <p className="micro mb-2">Event {i + 1}</p>
+              <h3 className="mb-6 font-display text-[clamp(1.75rem,1.2rem+2.4vw,3.75rem)] leading-none font-bold uppercase">{story.name}</h3>
+              <Collage photos={story.photos} layout={layouts[i % layouts.length]} />
+              {"credit" in story ? <p className="micro mt-2">{story.credit}</p> : null}
+              <p className="mt-6 max-w-[62ch] text-lg leading-relaxed">{story.body}</p>
             </li>
           ))}
         </ol>

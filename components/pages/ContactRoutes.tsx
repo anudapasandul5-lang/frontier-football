@@ -36,18 +36,19 @@ function RouteCell({ route, primary }: { route: Route; primary: boolean }) {
         href={route.href ?? undefined}
         {...external}
         aria-label={copy.aria}
-        className={`flex min-h-11 items-center justify-center px-6 py-5 text-center font-display text-[clamp(1.125rem,1rem+0.5vw,1.5rem)] uppercase ${
-          primary ? "bg-bone text-ink hover:bg-bone/85" : "border border-bone text-bone hover:bg-bone/10"
+        className={`group flex min-h-16 items-center justify-between gap-6 px-6 py-5 font-display text-[clamp(1.25rem,1rem+0.9vw,2rem)] font-bold uppercase transition-[background-color,color,transform] duration-200 ease-[var(--ease-out)] active:scale-[0.98] ${
+          primary ? "bg-ink text-yellow hover:bg-ink/90" : "border-2 border-ink text-ink hover:bg-ink hover:text-yellow"
         }`}
       >
         {copy.label}
+        <span aria-hidden="true" className="transition-transform duration-300 ease-[var(--ease-out)] group-hover:translate-x-1.5">&rarr;</span>
       </a>
     </li>
   );
 }
 
-/* v1's green action slab, on ink now that colour fields are whole viewports
-   only (HOUSE-RULES section 2; owner chose strict bone/ink, 2026-09-22). No
+/* The action bars, set inside the caller's own band (the Collaborate closing,
+   2026-10-07: the old ink card read flat on the yellow). No
    form: HOUSE-RULES forbids anything that posts. `only` narrows to one
    audience inside contactRoutes, so the email/Instagram fallback still runs.
    Nothing recorded anywhere: the section is absent, not an empty slab. */
@@ -57,13 +58,13 @@ export function ContactRoutes({ only, heading }: { only: "partner" | "player"; h
   const single = !routes.secondary;
 
   return (
-    <section aria-labelledby={`routes-${only}`} className="frame pb-16">
+    <section aria-labelledby={`routes-${only}`} className="mt-10">
       {/* For screen readers: on screen the buttons say what this is. */}
       <h2 id={`routes-${only}`} className="sr-only">
         {heading}
       </h2>
-      <div className={`canvas-ink p-6 py-8 md:p-12 ${single ? "max-w-[40rem]" : ""}`}>
-        <ul className={`grid gap-6 ${single ? "" : "sm:grid-cols-2"}`}>
+      <div className={single ? "max-w-[36rem]" : ""}>
+        <ul className={`grid gap-3 ${single ? "" : "sm:grid-cols-2"}`}>
           <RouteCell route={routes.primary} primary />
           {routes.secondary ? <RouteCell route={routes.secondary} primary={false} /> : null}
         </ul>
