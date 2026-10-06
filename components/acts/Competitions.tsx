@@ -122,7 +122,7 @@ export function Competitions() {
               </li>
             ))}
           </ul>
-          <div className="photo-frame comp__stage relative hidden overflow-hidden bg-ink md:block">
+          <div className="comp__stage relative hidden overflow-hidden bg-ink md:block">
             {rows.map((r, i) => (
               <figure key={r.tone} data-i={i} aria-hidden="true" className="absolute inset-0 opacity-0 transition-opacity duration-300 ease-(--ease-out) first:opacity-100">
                 {shot(r, "(min-width: 1140px) 520px, 45vw", "absolute inset-0 h-full w-full object-cover")}
