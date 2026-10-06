@@ -151,19 +151,18 @@ export default function WhoWeAre() {
         ]}
       />
 
-      {/* The owner's own words, from the 4x4 Series proposal deck (2026-09-10).
-          v1's green band; ink now (strict bone/ink, owner 2026-09-22). */}
-      <section data-tone="bone" data-chapter="Our story" aria-labelledby="who-heading" className="canvas-ink py-[clamp(4rem,14vh,9rem)]">
+      {/* Signed-off story copy, on the page's bone background. */}
+      <section data-tone="ink" data-chapter="Our story" aria-labelledby="who-heading" className="canvas-bone py-[clamp(4rem,14vh,9rem)]">
         <div className="frame">
-          <p className="micro mb-4 text-yellow">Our story</p>
+          <p className="micro mb-4 text-ink">Our story</p>
           <SplitReveal id="who-heading" lines={["A platform."]} className="mb-8 font-display text-[clamp(3rem,10vw,9rem)] leading-[0.85] font-bold uppercase" />
-          <p className="max-w-[58ch] text-[15px] leading-relaxed">
+          <p className="max-w-[58ch] text-[clamp(1.125rem,1.5vw,1.375rem)] leading-relaxed">
             Frontier Football is a platform for Sri Lanka’s football community. We spotlight talent and bring together everyone who loves the game.
           </p>
-          <p className="my-10 max-w-[22ch] font-serif text-[clamp(2.25rem,5.5vw,5rem)] leading-[1.02] text-yellow sm:my-14">
+          <p className="my-10 max-w-[22ch] font-serif text-[clamp(2.25rem,5.5vw,5rem)] leading-[1.02] text-ink sm:my-14">
             Talent was never missing. The platform was.
           </p>
-          <p className="max-w-[58ch] text-[15px] leading-relaxed">
+          <p className="max-w-[58ch] text-[clamp(1.125rem,1.5vw,1.375rem)] leading-relaxed">
             We build the space where players shine, get recognised and grow, in a community that goes well beyond casual play. Through tournaments, collaborations and digital content, football culture and brands meet here.
           </p>
         </div>
