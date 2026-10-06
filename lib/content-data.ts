@@ -553,8 +553,7 @@ export function resultRows(data: Content) {
    grid wants. A journey runs the other way, so the reversal lives here rather
    than in the file the owner edits.
 
-   Order: the competitions flagged `beforeSeries` open (the Frontier Football
-   Tournament), the seasons run in the middle, and every other
+   Order: the competitions flagged `beforeSeries` open (Ground Zero), the seasons run in the middle, and every other
    competition closes. Within each group, file order.
 
    ponytail: once every stop has a real `date`, sorting by date is strictly

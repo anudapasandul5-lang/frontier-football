@@ -6,8 +6,7 @@ import { MicroLabel } from "@/components/primitives/MicroLabel";
 import { phoneSrcSet } from "@/lib/phone-image";
 import { SplitReveal } from "@/components/primitives/SplitReveal";
 
-/* Act 5, one row per competition in time order: blue Frontier Football
-   Tournament, green 4 x 4 Series, red Division 0.
+/* Act 5, one row per competition in time order: blue Ground Zero, green 4 x 4 Series, red Division 0.
 
    History, all owner calls: a pinned sideways slider (rejected twice,
    2026-09-24), three solid colour cards (2026-09-24), a poster wall (rejected
@@ -19,7 +18,7 @@ import { SplitReveal } from "@/components/primitives/SplitReveal";
    (numbered tags read as template).
    Plain server markup, CSS-only swap. No section heading (owner), only
    the micro-label. A competition deleted from content.js leaves the act. */
-type Tone = "blue" | "green" | "red";
+type Tone = "blue" | "green" | "red" | "yellow";
 type Shot = { src: string; alt: string; credit?: string };
 type Row = { tone: Tone; name: string; line: string; photo: Shot | null };
 
@@ -28,6 +27,7 @@ const hoverFill: Record<Tone, string> = {
   blue: "hover:bg-blue focus-visible:bg-blue",
   green: "hover:bg-green focus-visible:bg-green",
   red: "hover:bg-red focus-visible:bg-red",
+  yellow: "hover:bg-yellow focus-visible:bg-yellow",
 };
 
 const drive = (p: DrivePhoto | undefined): Shot | null => (p ? { src: thumbUrl(p.id, 1600), alt: p.alt } : null);
@@ -37,7 +37,7 @@ export function Competitions() {
   const data = parseContent(raw);
   const competition = (name: string) => data.competitions.find((c) => c.name === name);
   const divisionZero = competition("Division 0");
-  const tournament = competition("Frontier Football Tournament");
+  const tournament = competition("Ground Zero");
 
   const rows: Row[] = [];
   // Owner-approved 2026-09-23 (HOUSE-RULES section 7, content.js): this
@@ -46,21 +46,30 @@ export function Competitions() {
     rows.push({
       tone: "blue",
       name: tournament.name!,
-      line: "Where it began",
+      line: "Where it all began.",
       photo: { src: tournament.photo, alt: tournament.photoAlt ?? "", credit: tournament.photoCredit ?? undefined },
     });
   rows.push({
     tone: "green",
     name: "4 x 4 Series",
-    line: "Six seasons. One venue.",
+    line: "Six seasons. One venue. A new standard.",
     photo: drive(landscape(competitionPhotos["4 x 4 Series"].frames)),
   });
   if (divisionZero)
     rows.push({
       tone: "red",
       name: "Division 0",
-      line: "Played on PS5.",
+      line: "Played on the virtual pitch.",
       photo: drive(landscape(competitionPhotos["Division 0"].frames)),
+    });
+
+  const party = data.watchAlongs.find((event) => event.photo?.startsWith("/champions/wa-"));
+  if (party)
+    rows.push({
+      tone: "yellow",
+      name: "Watch Parties",
+      line: "The big games, watched together.",
+      photo: { src: party.photo!, alt: party.photoAlt ?? "" },
     });
 
   const shot = (r: Row, sizes: string, className: string) =>
@@ -83,7 +92,7 @@ export function Competitions() {
     <section id="competitions" data-tone="ink" data-chapter="Events" aria-labelledby="competitions-label" className="canvas-bone py-[clamp(4rem,14vh,9rem)]">
       <div className="frame">
         <MicroLabel as="h2" id="competitions-label" className="text-(--tone-muted) text-[clamp(0.875rem,0.7rem+0.6vw,1.25rem)]">
-          Competitions
+          Events
         </MicroLabel>
         {/* Index: the names are the interface. On a pointer screen, hovering
             (or tabbing to) a row fills it with its colour and swaps the photo

@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import raw from "@/content.js";
-import { parseContent, recorded } from "@/lib/content-data";
+import { recorded } from "@/lib/content-data";
 import { registrations } from "@/lib/community";
 import { NextPage } from "@/components/pages/NextPage";
 import { PageHero } from "@/components/pages/PageHero";
 import { PageShell } from "@/components/pages/PageShell";
 import { PhotoStrip } from "@/components/pages/PhotoStrip";
-import { PastActivities } from "@/components/pages/PastActivities";
+import { SplitReveal } from "@/components/primitives/SplitReveal";
 import { SundayLeagueMark } from "@/components/primitives/SundayLeagueMark";
 
 export const metadata: Metadata = { title: "Community" };
@@ -19,7 +19,6 @@ const button = "flex min-h-12 items-center px-6 font-display text-[clamp(1rem,0.
    are PLACEHOLDER until the owner supplies them, and the PLACEHOLDER gate keeps
    this page out of production until then. */
 export default function CommunityPage() {
-  const email = parseContent(raw).contact.email;
   const details = ((raw.league?.details ?? []) as { label: unknown; value: unknown }[])
     .map((row) => ({ label: recorded(row.label), value: recorded(row.value) }))
     .filter((row): row is { label: string; value: string } => Boolean(row.label && row.value));
@@ -31,10 +30,10 @@ export default function CommunityPage() {
         <PageHero
           chapter="Community"
           eyebrow="Community"
-          lines={["Play with", "Frontier."]}
+          lines={["More than", "a game."]}
           photo={{ src: "/heroes/community.webp", alt: "A supporter dancing in front of the big screen at a Frontier watch-along", position: "30% center" }}
         >
-          Every format Frontier has run, and the league you can join now.
+          Your next game starts here. Join the league.
         </PageHero>
       }
     >
@@ -82,20 +81,21 @@ export default function CommunityPage() {
                 ))}
               </div>
             ) : null}
-            {email ? (
-              <p className="mt-6 text-bone/80">
-                Or email{" "}
-                <a href={`mailto:${email}`} className="underline underline-offset-4 hover:text-yellow">
-                  {email}
-                </a>
-                .
-              </p>
-            ) : null}
           </div>
         </div>
       </section>
 
-      <PastActivities />
+      <section data-tone="ink" data-chapter="Every event we have done" aria-labelledby="past-heading" className="frame py-[clamp(4rem,12vh,8rem)]">
+        <SplitReveal id="past-heading" lines={["Every event we have done"]} className="mb-10 font-display text-[clamp(2.5rem,8vw,7rem)] leading-[0.88] font-bold uppercase" />
+        <ol className="border-t-2 border-ink">
+          {raw.communityStories.map((story) => (
+            <li key={story.name} className="grid gap-6 border-b border-ink/20 py-7 sm:grid-cols-2 sm:gap-8">
+              <h3 className="font-display text-[clamp(1.75rem,1.2rem+2.4vw,3.75rem)] leading-none font-bold uppercase">{story.name}</h3>
+              <p className="max-w-[58ch] text-lg leading-relaxed">{story.body}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
       <NextPage current="/community" />
     </PageShell>
   );

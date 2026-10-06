@@ -42,8 +42,17 @@
    =========================================================================== */
 
 export default {
-  // Every season of the 4x4 Series, newest first. The first one in this list
-  // is drawn as the big wide card at the top of the grid.
+  // Signed-off website copy containing event facts (owner, 2026-10-07).
+  milestones: "It started with Ground Zero, one night on turf in Colombo. Then came Turf Wars, the 4 x 4 Series, watch parties and Division 0, our FC 26 tournament. Every one added another chapter. The numbers below show how far it has come.",
+  communityStories: [
+    { name: "Ground Zero", body: "It all began here. One night on turf in Colombo, in 2024. Players came with something to prove, the crowd came to see it, and nobody who was there forgot it. Every Frontier night since traces back to this one." },
+    { name: "4 x 4 Series", body: "Six seasons. One venue. The same turf, new rivalries every season, and a place that started to feel like home. Every season added more faces, more goals and more stories worth telling." },
+    { name: "Watch Parties", body: "The big games hit different when you watch them together. Strangers turned into friends, every goal got a roar, and every heartbreak was shared by the whole room." },
+    { name: "Division 0", body: "Football without the grass. Controllers in hand, Division 0 gave the game another pitch. The pride was the same, the bragging rights were the same and so was the love of the game." },
+  ],
+  aboutIntro: "Frontier Football started in Colombo in 2024 with one night on turf and a simple dream: Sri Lankan football deserves the biggest stage. Two years in, it is a large, growing community.",
+
+  // Every season of the 4x4 Series, newest first.
   seasons: [
     {
       // The season number. Shows on the card as "SZN 6". Just the number.
@@ -213,8 +222,8 @@ export default {
       // Frontier's first tournament, from before the rebrand. Shown with no
       // year, on purpose. It ran as the "Frontier Futsal Tournament" (that is
       // ThePapare's title for the album); the owner renamed it here on
-      // 2026-09-24. The albumId below keeps the old spelling so URLs hold.
-      name: "Frontier Football Tournament",
+      // 2026-09-24, then Ground Zero on 2026-10-07. The albumId stays unchanged.
+      name: "Ground Zero",
       // The photos are ThePapare's (album 10932), imported with
       // `npm run albums:papare -- frontier-futsal`. They are watermarked, so
       // the album credits "Photos: ThePapare" and they are never used as a
@@ -232,7 +241,7 @@ export default {
       // preserving its visible Milinda Deshan/ThePapare watermark and album
       // credit. This file is already part of the curated local album.
       photo: "/albums/frontier-futsal/b36221d4200375031890d20c95f5162c.webp",
-      photoAlt: "A player in black controls the ball against two defenders in teal at the Frontier Football Tournament.",
+      photoAlt: "A player in black controls the ball against two defenders in teal at Ground Zero.",
       photoCredit: "Milinda Deshan / ThePapare",
       date: "TODO",
       // Club Fusion signage is visible in ThePapare's photos. Confirm before
@@ -705,12 +714,13 @@ export default {
   //             button disappears.
   // ==========================================================================
   league: {
+    sessionLine: "Every Sunday, 7 pm to 10 pm, at Club Fusion, Borella. Community sessions, open to everyone.",
     details: [
       // "TODO" hides a row (2026-09-24 production release: owner chose to hide
       // the unfinished details). Replace TODO with the real answer to show it.
       { label: "Starts", value: "TODO" },
-      { label: "When", value: "TODO" },
-      { label: "Where", value: "TODO" },
+      { label: "When", value: "Every Sunday, 7 pm to 10 pm" },
+      { label: "Where", value: "Club Fusion, Borella" },
       { label: "Format", value: "TODO" },
       { label: "Entry", value: "TODO" },
     ],
@@ -850,23 +860,23 @@ export default {
     offer: [
       {
         title: "Enhanced visibility",
-        body: "Reach a focused football audience through live event exposure and consistent digital content reach.",
+        body: "Put your brand in front of a focused football audience, live at our events and every day through our content.",
       },
       {
         title: "Community engagement",
-        body: "Align your brand with a growing football movement built on passion, culture and community.",
+        body: "Stand with a growing football movement built on passion, culture and community.",
       },
       {
         title: "Customizable opportunities",
-        body: "Activate your brand your way, through tailored on-ground presence and digital storytelling.",
+        body: "Show up your way: on the ground at our events, or through stories we tell together online.",
       },
       {
         title: "Product distribution",
-        body: "Place your product directly into the hands of players and fans for real-world brand impact.",
+        body: "Get your product into the hands of players and fans, where it counts.",
       },
       {
         title: "Branding opportunities",
-        body: "Gain strong on-site branding, event mentions and dedicated social content that keeps your brand visible beyond match day.",
+        body: "Strong on-site branding, event mentions and dedicated social content, so your brand stays visible well past match day.",
       },
     ],
   },
@@ -895,7 +905,7 @@ export default {
   // ==========================================================================
   // The invented 2026-09-07 Thursday/Sunday blocks were reset to TODO on
   // 2026-09-22. Later that day the owner confirmed Sunday is real: evenings,
-  // 7-10pm, venue changes week to week. Format and price to follow from the
+  // 7-10pm. On 2026-10-07 the owner confirmed Club Fusion, Borella. Format and price to follow from the
   // owner. Thursday is not a session; its block stays TODO so it never renders.
   sessions: [
     {
@@ -910,8 +920,8 @@ export default {
     {
       day: "Sunday",
       name: "TODO",
-      time: "7pm - 10pm",
-      venue: "Changes each week",
+      time: "7 pm to 10 pm",
+      venue: "Club Fusion, Borella",
       format: "TODO",
       price: "TODO",
       note: "TODO",

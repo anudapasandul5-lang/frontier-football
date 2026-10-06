@@ -24,22 +24,16 @@ export function CommunityTeaser() {
             <span className="micro">Frontier presents</span>
           </div>
           <SplitReveal
-            as="p"
-            lines={["Sunday", "League."]}
-            step={80}
-            className="community-mark font-display leading-[0.8] font-bold uppercase"
-          />
-          <SplitReveal
             id="community-teaser-heading"
             lines={["Join the community."]}
             className="font-display text-[clamp(2rem,4vw,3.75rem)] leading-[0.88] font-bold uppercase"
           />
-          <p className="max-w-[34ch] text-lg leading-snug">Bring a team or come alone as a free agent. Sundays, with Frontier.</p>
+          <p className="max-w-[34ch] text-lg leading-snug">Bring your team, or come alone and find one. Every Sunday, there is a place for you with Frontier.</p>
           <a
             href="/community"
             className="btn flex min-h-14 items-center bg-ink px-8 font-display text-[clamp(1rem,0.9rem+0.4vw,1.35rem)] font-bold text-bone uppercase hover:bg-bone hover:text-ink"
           >
-            <Roll>See the league</Roll>
+            <Roll>See how to join</Roll>
           </a>
         </div>
         {/* A real Frontier game: a goalmouth scramble in 4 x 4 Series SZN 06,

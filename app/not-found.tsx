@@ -20,7 +20,7 @@ export default function NotFound() {
             Offside<span className="text-yellow">.</span>
           </h1>
           <p className="mt-6 max-w-[34ch] text-[clamp(1.125rem,1rem+0.5vw,1.5rem)] leading-snug">
-            That page was never in play. It may have moved, or the link is wrong.
+            That page was never in play. It may have moved, or the link is off.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a href="/" className={`${button} bg-yellow text-ink`}>

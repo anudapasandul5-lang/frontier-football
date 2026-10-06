@@ -12,13 +12,6 @@ import { ResultsTable, Unrecorded } from "@/components/primitives/ResultsTable";
 
 export const metadata: Metadata = { title: "Events" };
 
-const FACTS = [
-  ["time", "Time"],
-  ["venue", "Venue"],
-  ["format", "Format"],
-  ["price", "Price"],
-] as const;
-
 const recorded = (value: string | null) => value ?? <Unrecorded />;
 
 /* A question about the weekly session, not a League registration: whether the
@@ -46,23 +39,24 @@ export default function EventsPage() {
         <PageHero
           chapter="Events"
           eyebrow="For players"
-          lines={["Come and", "play."]}
+          lines={["Join the", "action."]}
           photo={{ src: "/heroes/events.webp", alt: "A 4 x 4 Series SZN 06 match under the floodlights at night", position: "center 40%" }}
           actions={
             <>
-              <a href="#results-heading" className={`${heroButton} bg-yellow text-ink`}>
-                <Roll>Every result</Roll>
-              </a>
               {nights.length > 0 ? (
-                <a href="#sessions-heading" className={`${heroButton} border-2 border-bone hover:bg-bone hover:text-ink`}>
-                  <Roll>Every week</Roll>
+                <a href="#join" className={`${heroButton} bg-yellow text-ink`}>
+                  <Roll>Join us</Roll>
+                </a>
+              ) : null}
+              {results.length > 0 ? (
+                <a href="#hall-of-fame" className={`${heroButton} border-2 border-bone hover:bg-bone hover:text-ink`}>
+                  <Roll>Hall of Fame</Roll>
                 </a>
               ) : null}
             </>
           }
         >
-          Frontier runs every week, and there is usually something bigger on the way. Here is when we play and what is
-          coming up.
+          Frontier runs every week, and something bigger is usually on the way. Here is when we play and what is coming up.
         </PageHero>
       }
     >
@@ -74,13 +68,35 @@ export default function EventsPage() {
         ]}
       />
 
+      {nights.length > 0 ? (
+        <section data-tone="bone" id="join" data-chapter="Join us" aria-labelledby="sessions-heading" className="frame scroll-mt-24 py-[clamp(4rem,12vh,8rem)]">
+          <h2 id="sessions-heading" className="mb-6 font-display text-[clamp(1.375rem,1.2rem+0.7vw,1.875rem)] leading-none uppercase">
+            Join us
+          </h2>
+          <p className="max-w-[58ch] text-lg leading-relaxed">{raw.league.sessionLine}</p>
+          {askHref ? (
+            <a
+              href={askHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Ask about this Sunday (opens WhatsApp in a new tab)"
+              className={`${heroButton} mt-8 w-fit bg-yellow text-ink`}
+            >
+              <Roll>Ask about this Sunday</Roll>
+            </a>
+          ) : null}
+        </section>
+      ) : null}
+
+      <Upcoming events={upcomingEvents(data)} />
       {results.length > 0 ? (
-        <section data-tone="bone" data-chapter="Results" aria-labelledby="results-heading" className="frame scroll-mt-24 pb-[clamp(4rem,14vh,9rem)]">
+        <section data-tone="bone" id="hall-of-fame" data-chapter="Hall of Fame" aria-labelledby="results-heading" className="frame scroll-mt-24 pb-[clamp(4rem,14vh,9rem)]">
           <SplitReveal
             id="results-heading"
-            lines={["Every result."]}
+            lines={["Hall of Fame"]}
             className="mb-[clamp(2rem,6vh,4rem)] font-display text-[clamp(3rem,min(9vw,15svh),7.5rem)] leading-[0.88] font-bold uppercase"
           />
+          <p className="mb-8 max-w-[58ch] text-lg leading-relaxed">The winners of every Frontier event, and the stats behind them.</p>
           <ResultsTable
             labelled
             caption="Results of every Frontier season and competition, newest season first"
@@ -114,45 +130,6 @@ export default function EventsPage() {
         </section>
       ) : null}
 
-      {nights.length > 0 ? (
-        <section data-tone="bone" data-chapter="Every week" aria-labelledby="sessions-heading" className="frame scroll-mt-24 py-[clamp(4rem,12vh,8rem)]">
-          <h2 id="sessions-heading" className="mb-6 font-display text-[clamp(1.375rem,1.2rem+0.7vw,1.875rem)] leading-none uppercase">
-            Every week
-          </h2>
-          <ul className="grid grid-cols-[repeat(auto-fit,minmax(min(17rem,100%),1fr))] gap-6">
-            {nights.map((night, i) => (
-              <li key={`${night.day}-${i}`} className="flex flex-col gap-3 border-2 border-current p-6">
-                <h3 className="font-display text-[clamp(1.375rem,1.2rem+0.7vw,1.875rem)] leading-none uppercase">{night.day}</h3>
-                {night.name ? <p className="text-[clamp(1.125rem,1rem+0.5vw,1.5rem)] leading-tight font-bold">{night.name}</p> : null}
-                {FACTS.some(([key]) => night[key]) ? (
-                  <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 text-[15px] leading-snug">
-                    {FACTS.filter(([key]) => night[key]).map(([key, label]) => (
-                      <div key={key} className="contents">
-                        <dt className="micro self-center">{label}</dt>
-                        <dd>{night[key]}</dd>
-                      </div>
-                    ))}
-                  </dl>
-                ) : null}
-                {night.note ? <p className="border-t border-current pt-3 text-[15px] leading-[1.45]">{night.note}</p> : null}
-              </li>
-            ))}
-          </ul>
-          {askHref ? (
-            <a
-              href={askHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Ask about this Sunday (opens WhatsApp in a new tab)"
-              className={`${heroButton} mt-8 w-fit bg-yellow text-ink`}
-            >
-              <Roll>Ask about this Sunday</Roll>
-            </a>
-          ) : null}
-        </section>
-      ) : null}
-
-      <Upcoming events={upcomingEvents(data)} />
       <NextPage current="/events" />
     </PageShell>
   );

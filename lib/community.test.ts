@@ -20,11 +20,11 @@ describe("registrations", () => {
   it("gives each button its own prefilled WhatsApp text to Frontier's number", () => {
     const [team, freeAgent] = registrations(content);
     expect(team).toEqual({
-      label: "Register a team",
+      label: "Register team",
       href: `https://wa.me/94763431469?text=${encodeURIComponent(content.league.teamMessage)}`,
     });
     expect(freeAgent).toEqual({
-      label: "Join as a free agent",
+      label: "Join solo player",
       href: `https://wa.me/94763431469?text=${encodeURIComponent(content.league.freeAgentMessage)}`,
     });
     expect(team.href).not.toBe(freeAgent.href);
@@ -32,7 +32,7 @@ describe("registrations", () => {
 
   it("drops a button whose message is unrecorded rather than opening a blank chat", () => {
     const result = registrations({ ...content, league: { ...content.league, freeAgentMessage: "TODO" } });
-    expect(result.map((r) => r.label)).toEqual(["Register a team"]);
+    expect(result.map((r) => r.label)).toEqual(["Register team"]);
   });
 
   it("offers no buttons when no WhatsApp number is recorded", () => {

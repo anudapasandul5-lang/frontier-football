@@ -19,8 +19,9 @@ export function Events({ events }: { events: Event[] }) {
           id="events-heading"
           className="font-display text-[clamp(3rem,min(9vw,15svh),7.5rem)] leading-[0.88] font-bold uppercase"
         >
-          Next up.
+          Our events
         </h2>
+        <p className="max-w-[58ch] text-lg leading-relaxed">Watch parties, game nights, community sessions and our football events. See what is coming up and be there.</p>
         <ResultsTable
           caption="Upcoming Frontier events"
           columns={[

@@ -65,7 +65,7 @@ function ReelRow({ frames, drift, lead = false }: { frames: ReelFrame[]; drift: 
   );
 }
 
-function Reel({ albums, total }: { albums: number; total: number }) {
+function Reel() {
   return (
     <>
     <Nav floating />
@@ -76,12 +76,12 @@ function Reel({ albums, total }: { albums: number; total: number }) {
         <SplitReveal
           as="h1"
           id="page-heading"
-          lines={["What it", "feels like."]}
+          lines={["The experience."]}
           lineClassName="last:text-yellow"
           className="font-display text-[min(clamp(3.25rem,13vw,10rem),20svh)] leading-[0.84] font-bold uppercase"
         />
         <p className="mt-5 max-w-[44ch] text-[clamp(1.05rem,0.95rem+0.45vw,1.35rem)] leading-[1.45] text-bone/85">
-          {n(albums)} albums and {n(total)} photographs from every Frontier night, on the pitch and in front of the screen.
+          What it feels like.
         </p>
       </div>
       <ReelRow frames={reel.slice(5)} drift="0.14" lead />
@@ -212,11 +212,9 @@ function ChapterBlock({ chapter }: { chapter: Chapter }) {
 
 export default function Gallery() {
   const chapters = galleryChapters(raw, albumFacts(albumIds(raw)));
-  const albums = chapters.flatMap((c) => c.albums);
-  const total = albums.reduce((s, a) => s + a.count, 0);
 
   return (
-    <PageShell hero={<Reel albums={albums.length} total={total} />}>
+    <PageShell hero={<Reel />}>
       {/* Jump links, not tabs: every album stays on the page, and the chapter
           indicator (Interactions) shows where the reader is. */}
       <nav aria-label="Gallery chapters" className="canvas-night border-y border-bone/15">

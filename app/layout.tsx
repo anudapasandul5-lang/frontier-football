@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Geist, Instrument_Serif } from "next/font/google";
 import { MotionGate } from "@/components/motion/MotionGate";
+import { siteDescription } from "@/lib/og";
 import "./globals.css";
 
 const serif = Instrument_Serif({
@@ -27,12 +28,12 @@ const host =
 export const metadata: Metadata = {
   metadataBase: new URL(`https://${host ?? "frontier-football.vercel.app"}`),
   title: { default: "Frontier Football", template: "%s - Frontier Football" },
-  description: "Small-sided football and the culture around it, in Colombo.",
+  description: siteDescription,
   icons: { icon: "/favicon.png" },
   openGraph: {
     type: "website",
     title: "Frontier Football",
-    description: "Small-sided football and the culture around it, in Colombo.",
+    description: siteDescription,
   },
   twitter: { card: "summary_large_image" },
 };

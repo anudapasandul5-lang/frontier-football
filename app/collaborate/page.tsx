@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import raw from "@/content.js";
-import { parseContent, partners, reach, stats } from "@/lib/content-data";
+import { parseContent, partners, reach } from "@/lib/content-data";
 import { CountUpFigure } from "@/components/motion/CountUpFigure";
 import { ContactRoutes } from "@/components/pages/ContactRoutes";
 import { NextPage } from "@/components/pages/NextPage";
@@ -29,7 +29,6 @@ export default function Collaborate() {
   const figures = reach(data);
   const offer = data.collaborate.offer;
   const names = partners(data);
-  const count = stats(data).find((s) => s.label === "Partners");
 
   return (
     <PageShell
@@ -47,8 +46,7 @@ export default function Collaborate() {
             </a>
           }
         >
-          Frontier runs small-sided football in Colombo and the culture that comes with it. Here is who sees it, what a
-          partner gets, and who is already standing alongside us.
+          Frontier brings together football, community and culture in Colombo. See who we reach, how partners can get involved, and who is already with us.
         </PageHero>
       }
     >
@@ -109,12 +107,7 @@ export default function Collaborate() {
         <section data-reveal data-tone="ink" data-chapter="Partners" aria-labelledby="partners-heading" className="wipe canvas-bone relative overflow-hidden py-15 md:py-20">
           <span aria-hidden="true" className="wipe__layer wipe__flash absolute inset-0 bg-yellow" />
           <div className="wipe__layer frame relative" style={{ "--wipe-delay": "140ms" } as React.CSSProperties}>
-            <p className="micro mb-4">Already alongside us</p>
-            <SplitReveal
-              id="partners-heading"
-              lines={[count ? `${count.figure} ${count.label}.` : "Partners."]}
-              className="mb-10 font-display text-[clamp(3rem,9vw,8rem)] leading-[0.85] font-bold uppercase"
-            />
+            <h2 id="partners-heading" className="micro mb-4">Already alongside us</h2>
             <Marquee label="Frontier partners" seconds={45}>
               {names.map((p) => {
                 const mark = p.logo ? (
@@ -151,7 +144,7 @@ export default function Collaborate() {
             Talk to us.
           </p>
           <p className="mt-5 max-w-[46ch] text-[clamp(1.05rem,0.95rem+0.45vw,1.4rem)] leading-[1.45]">
-            One message is all it takes to start.
+            One message is all it takes.
           </p>
         </div>
         <ContactRoutes only="partner" heading="Talk to us" />

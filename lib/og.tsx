@@ -13,6 +13,7 @@ import sharp from "sharp";
    site's headline setting), instanced with fontTools into assets/og/. */
 export const ogSize = { width: 1200, height: 630 };
 export const ogContentType = "image/jpeg";
+export const siteDescription = "Frontier Football is Sri Lanka’s football community. Tournaments, Sunday League and the culture around the game, in Colombo.";
 
 const fontData = readFile(join(process.cwd(), "assets/og/bricolage-75-700.ttf"));
 

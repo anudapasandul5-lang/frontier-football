@@ -9,8 +9,8 @@ export function registrations(content: Raw) {
   const number = content?.contact?.whatsapp;
   const league = content?.league ?? {};
   return [
-    { label: "Register a team", message: league.teamMessage },
-    { label: "Join as a free agent", message: league.freeAgentMessage },
+    { label: "Register team", message: league.teamMessage },
+    { label: "Join solo player", message: league.freeAgentMessage },
   ].flatMap(({ label, message }) => {
     // whatsappHref still opens a chat with no text; that is not a registration.
     const href = recorded(message) ? whatsappHref(number, message) : null;

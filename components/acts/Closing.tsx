@@ -23,7 +23,7 @@ export function Closing() {
       <div className="frame relative flex flex-col gap-[clamp(2rem,6vh,4rem)]">
         <TickRule />
         <p className="max-w-[18ch] font-serif text-[clamp(2.25rem,min(6vw,10svh),4.5rem)] leading-[1.02]">
-          Small-sided football and the culture around it, in Colombo.
+          Small-sided football and the culture around it, from the heart of Sri Lanka.
         </p>
         <h2 id="closing-heading" className="sr-only">
           Follow Frontier Football

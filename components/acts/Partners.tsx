@@ -1,7 +1,6 @@
 import raw from "@/content.js";
-import { parseContent, partners, stats } from "@/lib/content-data";
+import { parseContent, partners } from "@/lib/content-data";
 import { Marquee } from "@/components/primitives/Marquee";
-import { CountUpFigure } from "@/components/motion/CountUpFigure";
 
 // Logo and text-fallback share one height band so the strip keeps one rhythm.
 const item = "mr-[clamp(2.5rem,6vw,6rem)] flex h-[clamp(3.5rem,7vw,6.5rem)] shrink-0 items-center";
@@ -19,7 +18,6 @@ export function Partners() {
   const data = parseContent(raw);
   const names = partners(data);
   if (names.length === 0) return null;
-  const count = stats(data).find((s) => s.label === "Partners");
 
   return (
     <section aria-labelledby="partners-heading" data-tone="ink" data-chapter="Collaborate" className="canvas-bone flex flex-col gap-[clamp(2.5rem,8vh,5rem)] py-[clamp(4rem,14vh,9rem)]">
@@ -27,14 +25,6 @@ export function Partners() {
       <div className="frame flex flex-wrap items-end justify-between gap-6">
         <h2 id="partners-heading" className="flex flex-col gap-3">
           <span className="micro">Brands that back the game</span>
-          {count ? (
-            <span className="flex items-baseline gap-4 font-display leading-[0.8] font-bold uppercase">
-              <CountUpFigure figure={count.figure} className="text-[clamp(6rem,16vw,15rem)]" />
-              <span className="text-[clamp(2rem,5vw,4.5rem)]">{count.label}</span>
-            </span>
-          ) : (
-            <span className="font-display text-[clamp(3rem,8vw,7rem)] leading-[0.85] font-bold uppercase">Partners</span>
-          )}
         </h2>
         <a href="/collaborate" className="btn flex min-h-12 items-center border-2 border-ink px-6 font-display text-lg font-bold uppercase hover:bg-ink hover:text-bone">
           Partner with us

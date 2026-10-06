@@ -4,8 +4,8 @@ import { contactRoutes, parseContent } from "@/lib/content-data";
 type Route = NonNullable<ReturnType<typeof contactRoutes>["primary"]>;
 
 const ROUTE_COPY = {
-  partner: { label: "I want to partner", hint: "Brands, venues and anyone bringing something to the night." },
-  player: { label: "I want to play", hint: "Teams and players after a spot in the next season." },
+  partner: { label: "I want to partner" },
+  player: { label: "I want to play" },
 };
 
 /* What a button says and what it promises. A wa.me link or a profile leaves
@@ -18,12 +18,11 @@ function routeCopy(route: Route) {
     return { ...copy, aria: `${copy.label} (opens WhatsApp in a new tab)` };
   }
   if (route.kind === "email") {
-    return { label: "Email us", hint: "The fastest way we have until a number is listed.", aria: undefined };
+    return { label: "Email us", aria: undefined };
   }
   const name = "name" in route ? route.name : "";
   return {
     label: `Message us on ${name}`,
-    hint: "A DM reaches us the same day, most days.",
     aria: `Message Frontier Football on ${name} (opens in a new tab)`,
   };
 }
@@ -43,7 +42,6 @@ function RouteCell({ route, primary }: { route: Route; primary: boolean }) {
       >
         {copy.label}
       </a>
-      <p className="text-[15px] leading-[1.45] text-muted">{copy.hint}</p>
     </li>
   );
 }
@@ -69,31 +67,6 @@ export function ContactRoutes({ only, heading }: { only: "partner" | "player"; h
           <RouteCell route={routes.primary} primary />
           {routes.secondary ? <RouteCell route={routes.secondary} primary={false} /> : null}
         </ul>
-        {routes.email && routes.primary.kind !== "email" ? (
-          <p className="mt-8 text-[15px] leading-normal">
-            <span className="text-muted">Or email</span>{" "}
-            <a href={routes.email} className="font-bold underline underline-offset-[3px]">
-              {routes.email.slice("mailto:".length)}
-            </a>
-          </p>
-        ) : null}
-        {routes.channels.length > 0 ? (
-          <p className="mt-3 text-[15px] leading-normal">
-            <span className="text-muted">Also on</span>{" "}
-            {routes.channels.slice(0, 1).map((link) => (
-              <a
-                key={link.name}
-                href={link.url!}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`Frontier Football on ${link.name} (opens in a new tab)`}
-                className="font-bold underline underline-offset-[3px]"
-              >
-                {link.handle ?? link.name}
-              </a>
-            ))}
-          </p>
-        ) : null}
       </div>
     </section>
   );

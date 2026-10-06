@@ -1,5 +1,6 @@
 import { Nav } from "@/components/primitives/Nav";
 import { Roll } from "@/components/primitives/Roll";
+import { MicroLabel } from "@/components/primitives/MicroLabel";
 import { HeroMotion } from "@/components/motion/HeroMotion";
 import { HeroRing } from "@/components/motion/HeroRing";
 
@@ -41,20 +42,21 @@ export function Hero() {
             Both lines sit above the photo band (HeroRing, z-2) so no photo
             covers the words. Ink slabs behind the lines were tried for
             contrast and rejected by the owner (UX audit T2, 2026-09-24). */}
-        <h1 className="pointer-events-none flex flex-col items-center hero-weave text-center font-display text-[clamp(min(2.4rem,10vw),9.2vw,9.5rem)] leading-[0.86] font-bold whitespace-nowrap text-yellow uppercase">
-          <span className="hero-line relative z-[3]">Built by the</span>
-          <span className="hero-line relative z-[3]">football community.</span>
+        <MicroLabel className="relative z-[3] mb-5 text-center">Football. Community. Culture.</MicroLabel>
+        <h1 className="pointer-events-none flex w-full max-w-[1100px] flex-col items-center gap-[clamp(8rem,14vh,11rem)] hero-weave text-center font-display text-[clamp(1.75rem,4.4vw,4.5rem)] leading-[0.95] font-bold text-yellow uppercase">
+          <span className="hero-line relative z-[3]">Football, community and culture.</span>
+          <span className="hero-line relative z-[3]">Giving Sri Lanka’s football a platform.</span>
         </h1>
       </div>
 
       <div className="frame relative z-[3] flex items-center justify-between gap-4 pb-6 max-sm:flex-col max-sm:gap-3">
         <p className="micro text-center sm:hidden">
-          <span className="whitespace-nowrap">Small-sided football ·</span> <span className="whitespace-nowrap">Colombo, Sri Lanka</span>
+          Colombo, Sri Lanka
         </p>
-        <p className="micro max-sm:hidden">Small-sided football</p>
+        <span aria-hidden="true" className="max-sm:hidden" />
         <div className="flex flex-wrap items-center justify-center gap-3">
-          <a href="/community#sunday-league" className={`${button} bg-yellow text-ink`}>
-            <Roll>Explore Sunday League</Roll>
+          <a href="/events" className={`${button} bg-yellow text-ink`}>
+            <Roll>Explore events</Roll>
           </a>
           <a href="/collaborate" className={`${button} border-2 border-ink hover:bg-ink hover:text-bone`}>
             <Roll>Partner with us</Roll>

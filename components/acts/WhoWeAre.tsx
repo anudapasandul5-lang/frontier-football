@@ -36,11 +36,11 @@ export function WhoWeAre() {
           <p className="micro mb-3 text-yellow">Who we are</p>
           <SplitReveal
             id="who-heading"
-            lines={["A main stage for Sri Lanka’s football community."]}
+            lines={["A platform for Sri Lanka’s football community."]}
             className="max-w-[18ch] font-display text-[clamp(2.2rem,5.4vw,5.25rem)] leading-[0.88] font-bold text-balance uppercase"
           />
           <p className="mt-4 max-w-[46ch] text-[clamp(0.95rem,0.9rem+0.3vw,1.15rem)] leading-relaxed text-bone/85">
-            Built to spotlight talent and unite everyone who shares a passion for the game.
+            A place for players, fans and brands to show up, get seen and be part of something bigger than the final whistle.
           </p>
         </div>
       </div>

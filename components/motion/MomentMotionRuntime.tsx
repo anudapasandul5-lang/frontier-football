@@ -66,7 +66,8 @@ export default function MomentMotionRuntime() {
         scrollTrigger: { trigger: stage, start: "top top", end: narrow ? "+=120%" : "+=450%", pin: true, scrub: 0.6, invalidateOnRefresh: true },
       });
       tl.addLabel("drift")
-        .to(markers, { x: (_, el) => away(el, 2.4).x, y: (_, el) => away(el, 2.4).y, duration: 2.2, ease: (t) => 0.08 * t + 0.92 * t ** 4 })
+        .to(last, { autoAlpha: 1, y: 0, duration: 0.25, ease: "power2.out" }, "drift")
+        .to(markers, { x: (_, el) => away(el, 2.4).x, y: (_, el) => away(el, 2.4).y, duration: 2.2, ease: (t) => 0.08 * t + 0.92 * t ** 4 }, "drift")
         .to(markers, { rotation: "+=4", duration: 1 }, "drift")
         .to(open, { p: 0.08, duration: 1, onUpdate: render }, "drift")
         .addLabel("zoom", 1)
@@ -76,8 +77,7 @@ export default function MomentMotionRuntime() {
         .set(strip, { autoAlpha: 1 })
         .set(centre, { autoAlpha: 0 })
         .addLabel("pan")
-        .to(strip, { x: () => -(strip.scrollWidth - stage.clientWidth), duration: 2.4 })
-        .to(last, { autoAlpha: 1, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.5");
+        .to(strip, { x: () => -(strip.scrollWidth - stage.clientWidth), duration: 2.4 });
       // This pin arrives lazily, after triggers further down (the competitions
       // slider) have measured their starts without its pinned scroll. Re-sort
       // into page order and re-measure, or those starts land ~4.5 screens early.

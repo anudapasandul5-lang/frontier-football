@@ -135,12 +135,11 @@ export default function WhoWeAre() {
       hero={
         <PageHero
           chapter="Who we are"
-          eyebrow="Since the Frontier Football Tournament"
+          eyebrow="Since Ground Zero"
           lines={["Who we", "are."]}
           photo={{ src: "/heroes/who.webp", alt: "A long table of supporters with Argentina flags at the World Cup final watch-along", position: "center 40%" }}
         >
-          Frontier started in Colombo in 2024 so small sided football here had somewhere to happen. It began with one
-          night on turf and it is six seasons deep now.
+          {raw.aboutIntro}
         </PageHero>
       }
     >
@@ -157,18 +156,15 @@ export default function WhoWeAre() {
       <section data-tone="bone" data-chapter="Our story" aria-labelledby="who-heading" className="canvas-ink py-[clamp(4rem,14vh,9rem)]">
         <div className="frame">
           <p className="micro mb-4 text-yellow">Our story</p>
-          <SplitReveal id="who-heading" lines={["A main stage."]} className="mb-8 font-display text-[clamp(3rem,10vw,9rem)] leading-[0.85] font-bold uppercase" />
+          <SplitReveal id="who-heading" lines={["A platform."]} className="mb-8 font-display text-[clamp(3rem,10vw,9rem)] leading-[0.85] font-bold uppercase" />
           <p className="max-w-[58ch] text-[15px] leading-relaxed">
-            Frontier Football has evolved into a main stage for Sri Lanka&apos;s football community, built to spotlight talent and
-            unite everyone who shares a passion for the game.
+            Frontier Football is a platform for Sri Lanka’s football community. We spotlight talent and bring together everyone who loves the game.
           </p>
           <p className="my-10 max-w-[22ch] font-serif text-[clamp(2.25rem,5.5vw,5rem)] leading-[1.02] text-yellow sm:my-14">
             Talent was never missing. The platform was.
           </p>
           <p className="max-w-[58ch] text-[15px] leading-relaxed">
-            Our mission is to create a space where players can shine, get recognised, and grow their presence within a
-            community that goes beyond casual play. Through tournaments, collaborations and engaging digital content,
-            Frontier Football has grown into a platform where football culture and brands naturally align.
+            We build the space where players shine, get recognised and grow, in a community that goes well beyond casual play. Through tournaments, collaborations and digital content, football culture and brands meet here.
           </p>
         </div>
       </section>
@@ -176,10 +172,6 @@ export default function WhoWeAre() {
       <section data-tone="ink" data-chapter="The run so far" aria-labelledby="run-heading" className="py-[clamp(4rem,12vh,8rem)]">
         <div className="frame">
           <SplitReveal id="run-heading" lines={["The run so far"]} className={h2} />
-          <p className="mt-6 max-w-[52ch] text-[15px] leading-relaxed">
-            The Frontier Football Tournament first, then the 4x4 Series, with the watch parties running alongside it. Where a champion, a month or
-            a venue is missing, nobody has written it down yet.
-          </p>
           <ol className="mt-15">
             {stops.map((stop) => (
               <Fragment key={stop.name}>

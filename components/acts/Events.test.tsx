@@ -18,6 +18,8 @@ describe("Events act", () => {
     const html = render([{ name: "SZN 7 Final", date: "TODO", venue: "Athlete 360" }]);
     expect(html).toContain("SZN 7 Final");
     expect(html).toContain("Athlete 360");
+    expect(html).toContain("Our events");
+    expect(html).toContain("Watch parties, game nights, community sessions and our football events. See what is coming up and be there.");
     expect(html).toContain("Not recorded yet");
   });
 });
