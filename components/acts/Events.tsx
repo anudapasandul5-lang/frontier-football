@@ -21,7 +21,7 @@ export function Events({ events }: { events: Event[] }) {
         >
           Our events
         </h2>
-        <p className="max-w-[58ch] text-lg leading-relaxed">Watch parties, game nights, community sessions and our football events. See what is coming up and be there.</p>
+        <p className="max-w-[58ch] text-[clamp(1.125rem,1rem+0.4vw,1.375rem)] leading-relaxed">Watch parties, game nights, community sessions and our football events. See what is coming up and be there.</p>
         <ResultsTable
           caption="Upcoming Frontier events"
           columns={[

@@ -9,11 +9,13 @@ const albumHref = (item?: Album) => item?.albumId ? `/albums/${encodeURIComponen
 
 export function Scrapbook({ data }: { data: Content }) {
   const ground = data.competitions.find((item) => item.name === "Ground Zero");
+  const turf = data.competitions.find((item) => item.name === "Turf Wars");
   const division = data.competitions.find((item) => item.name === "Division 0");
   const series = [...data.seasons].sort((a, b) => b.season - a.season).find((item) => item.photo);
   const party = data.watchAlongs.find((item) => item.photo);
   const pins = [
     { name: "Ground Zero", item: ground, href: albumHref(ground) },
+    { name: "Turf Wars", item: turf, href: albumHref(turf) },
     { name: "4 x 4 Series", item: series, href: data.seasons.length ? "/who-we-are/4x4-series" : null },
     { name: "Watch Parties", item: party, href: party ? "/gallery#watch-parties" : null },
     { name: "Division 0", item: division, href: albumHref(division) },
@@ -22,10 +24,10 @@ export function Scrapbook({ data }: { data: Content }) {
   return (
     <div className={styles.board}>
       <svg className={`${styles.thread} ${styles.desktopThread}`} viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M75 4 C94 16,14 11,25 27 C12 42,96 35,75 50 C94 67,7 57,25 73" vectorEffect="non-scaling-stroke" />
+        <path d="M75 3 C94 12,14 9,25 22 C12 31,96 28,75 40 C94 49,7 46,25 58 C12 67,96 64,75 77" vectorEffect="non-scaling-stroke" />
       </svg>
       <svg className={`${styles.thread} ${styles.mobileThread}`} viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M54 3 C95 12,10 16,45 27 C5 38,95 40,54 51 C95 63,6 63,45 75" vectorEffect="non-scaling-stroke" />
+        <path d="M54 2 C95 9,10 13,45 22 C5 30,95 32,54 41 C95 49,6 51,45 60 C5 68,95 70,54 79" vectorEffect="non-scaling-stroke" />
       </svg>
       <ol className={styles.pins}>
         {pins.map(({ name, item, href }, index) => {

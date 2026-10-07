@@ -1,12 +1,13 @@
-.board { position: relative; height: 1500px; margin-top: 72px; }
+.board { position: relative; height: 1875px; margin-top: 72px; }
 .thread { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: var(--color-ink); stroke-width: 1.5; pointer-events: none; }
 .mobileThread { display: none; }
 .pins { list-style: none; margin: 0; padding: 0; }
 .pin { position: absolute; width: 46%; isolation: isolate; }
-.pin:nth-child(1) { left: 52%; top: 4%; transform: rotate(-5deg); }
-.pin:nth-child(2) { left: 2%; top: 27%; transform: rotate(4deg); }
-.pin:nth-child(3) { left: 52%; top: 50%; transform: rotate(-3deg); }
-.pin:nth-child(4) { left: 2%; top: 73%; transform: rotate(5deg); }
+.pin:nth-child(1) { left: 52%; top: 3.2%; transform: rotate(-5deg); }
+.pin:nth-child(2) { left: 2%; top: 21.6%; transform: rotate(4deg); }
+.pin:nth-child(3) { left: 52%; top: 40%; transform: rotate(-3deg); }
+.pin:nth-child(4) { left: 2%; top: 58.4%; transform: rotate(5deg); }
+.pin:nth-child(5) { left: 52%; top: 76.8%; transform: rotate(-4deg); }
 .paper { display: block; position: relative; padding: 12px 12px 22px; border: 1px solid var(--color-ink); background: var(--color-bone); color: var(--color-ink); text-decoration: none; transition: transform .35s var(--ease-out); }
 .paper::before { content: ""; position: absolute; inset: 7px -7px -7px 7px; z-index: -1; border: 1px solid var(--color-ink); background: var(--color-bone); }
 .photo { margin: 0; overflow: hidden; aspect-ratio: 1.6; }
@@ -32,19 +33,20 @@
   a.paper:hover strong span { transform: translate(3px,-3px); }
 }
 @media (max-width:1000px) and (min-width:701px) {
-  .board { height: 1300px; }
+  .board { height: 1625px; }
   .paper strong { font-size: 30px; }
   .seasons { grid-template-columns: repeat(2,minmax(0,1fr)); }
 }
 @media (max-width:700px) {
-  .board { height: clamp(1280px,340vw,2200px); margin-top: 48px; }
+  .board { height: clamp(1600px,425vw,2750px); margin-top: 48px; }
   .desktopThread { display: none; }
   .mobileThread { display: block; }
   .pin { width: 86%; }
-  .pin:nth-child(1) { left: 11%; top: 3%; }
-  .pin:nth-child(2) { left: 2%; top: 27%; }
-  .pin:nth-child(3) { left: 11%; top: 51%; }
-  .pin:nth-child(4) { left: 2%; top: 75%; }
+  .pin:nth-child(1) { left: 11%; top: 2.4%; }
+  .pin:nth-child(2) { left: 2%; top: 21.6%; }
+  .pin:nth-child(3) { left: 11%; top: 40.8%; }
+  .pin:nth-child(4) { left: 2%; top: 60%; }
+  .pin:nth-child(5) { left: 11%; top: 79.2%; }
   .paper { padding: 8px 8px 18px; }
   .paper strong { font-size: 28px; margin: 16px 4px 0; }
   .paper strong span { font-size: 25px; }

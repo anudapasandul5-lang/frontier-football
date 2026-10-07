@@ -43,7 +43,7 @@ export function Hero() {
             covers the words. Ink slabs behind the lines were tried for
             contrast and rejected by the owner (UX audit T2, 2026-09-24). */}
         <MicroLabel className="relative z-[3] mb-5 text-center">Football. Community. Culture.</MicroLabel>
-        <h1 className="pointer-events-none flex w-full max-w-[1100px] flex-col items-center gap-[clamp(8rem,14vh,11rem)] hero-weave text-center font-display text-[clamp(1.75rem,4.4vw,4.5rem)] leading-[0.95] font-bold text-yellow uppercase">
+        <h1 className="pointer-events-none flex w-full flex-col items-center gap-[clamp(8rem,14vh,11rem)] hero-weave text-center font-display text-[clamp(1rem,5.9vw,7rem)] leading-[0.86] font-bold whitespace-nowrap text-yellow uppercase max-sm:text-[clamp(1.9rem,10vw,2.75rem)] max-sm:text-balance max-sm:whitespace-normal">
           <span className="hero-line relative z-[3]">Football, community and culture.</span>
           <span className="hero-line relative z-[3]">Giving Sri Lanka’s football a platform.</span>
         </h1>

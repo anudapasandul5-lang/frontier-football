@@ -39,7 +39,7 @@ export function WhoWeAre() {
             lines={["A platform for Sri Lanka’s football community."]}
             className="max-w-[18ch] font-display text-[clamp(2.2rem,5.4vw,5.25rem)] leading-[0.88] font-bold text-balance uppercase"
           />
-          <p className="mt-4 max-w-[46ch] text-[clamp(0.95rem,0.9rem+0.3vw,1.15rem)] leading-relaxed text-bone/85">
+          <p className="mt-5 max-w-[46ch] text-[clamp(1.0625rem,0.95rem+0.4vw,1.375rem)] leading-relaxed text-bone">
             A place for players, fans and brands to show up, get seen and be part of something bigger than the final whistle.
           </p>
         </div>

@@ -71,7 +71,7 @@ export default function EventsPage() {
           <h2 id="sessions-heading" className="mb-6 font-display text-[clamp(1.375rem,1.2rem+0.7vw,1.875rem)] leading-none uppercase">
             Join us
           </h2>
-          <p className="max-w-[58ch] text-lg leading-relaxed">{raw.league.sessionLine}</p>
+          <p className="max-w-[58ch] text-[clamp(1.125rem,1rem+0.4vw,1.375rem)] leading-relaxed">{raw.league.sessionLine}</p>
           {askHref ? (
             <a
               href={askHref}
@@ -104,7 +104,7 @@ export default function EventsPage() {
             lines={["Hall of Fame"]}
             className="mb-4 font-display text-[clamp(3rem,min(9vw,15svh),7.5rem)] leading-[0.88] font-bold uppercase"
           />
-          <p className="mb-[clamp(2rem,6vh,4rem)] max-w-[58ch] text-lg leading-relaxed">The winners of every Frontier event, and the stats behind them.</p>
+          <p className="mb-[clamp(2rem,6vh,4rem)] max-w-[58ch] text-[clamp(1.125rem,1rem+0.4vw,1.375rem)] leading-relaxed">The winners of every Frontier event, and the stats behind them.</p>
           <ol aria-labelledby="results-heading" className="border-t border-bone/25">
             {results.map((row, i) => {
               const meta = [row.venue, row.date, row.runnerUp ? `Runner-up ${row.runnerUp}` : null].filter(Boolean).join("  ·  ");

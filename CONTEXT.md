@@ -45,8 +45,8 @@ a copy-paste, not a code change. An entry with no `name` is dropped, since a car
 is its name.
 
 **Turf Wars**
-REMOVED FROM THE SITE by the owner on 2026-09-24: no card, album, timeline row or copy.
-Do not add it back without asking. Kept here as history only.
+Removed by the owner on 2026-09-24, then put back site-wide on 2026-10-07 (home Events
+list, Events page, gallery, Who We Are). Its album is pending the owner's Drive link.
 A non-seasonal competition, played on turf, at Club Fusion. Where Frontier started
 (owner, 2026-09-03); its month is still TODO. The old "Aug 2025" was wrong and is gone.
 Not a season of the 4x4 Series and not folded into the SZN honours grid.

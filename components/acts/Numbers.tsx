@@ -13,7 +13,7 @@ import { CourtScene } from "@/components/motion/CourtScene";
    (CourtScene). The court is the platform the Moment act says was missing.
 
    Every figure, label and date is content.js's stats (owner, asOf), in its
-   order; the lead is its first row, 3.4M+ Instagram views today. The bars
+   order; the lead is its first row, 3.4M+ social media views today. The bars
    under each figure are the owner's United-style stat bars (2026-09-23), one
    per brand colour. Copy: Ground Zero came first
    (content.js, owner 2026-09-22); six seasons and the watch-alongs are
@@ -46,15 +46,17 @@ export function Numbers() {
       <div className="relative">
         <div className="frame flex min-h-[70svh] flex-col justify-center gap-[clamp(2rem,7vh,4rem)] py-[clamp(4rem,12vh,8rem)] max-md:min-h-0">
           <TickRule />
-          <div className="grid gap-6 md:grid-cols-[minmax(0,11fr)_minmax(0,9fr)] md:gap-10">
+          {/* One long word ("Milestones.") fills the row on its own, so the
+              paragraph sits under it; side by side it ran into the copy. */}
+          <div className="flex flex-col gap-6 md:gap-10">
             <SplitReveal
               id="numbers-heading"
               lines={["Milestones."]}
-              className="font-display text-[clamp(3.25rem,min(12vw,20svh),10rem)] leading-[0.86] font-bold uppercase"
+              className="font-display text-[clamp(3rem,min(10.5vw,17svh),8.75rem)] leading-[0.86] font-bold uppercase"
             />
-            <div className="flex max-w-[44ch] flex-col gap-4 md:mt-[clamp(3rem,14vh,9rem)]">
+            <div className="flex max-w-[44ch] flex-col gap-4">
               {asOf ? <MicroLabel>As of {asOf}</MicroLabel> : null}
-              <p className="text-[15px] leading-relaxed text-bone/85">
+              <p className="text-[clamp(1.0625rem,0.95rem+0.3vw,1.25rem)] leading-relaxed text-bone">
                 {raw.milestones}
               </p>
             </div>

@@ -103,7 +103,7 @@ function Cover({ album, className }: { album: StoryAlbum; className: string }) {
 }
 
 function Meta({ album }: { album: StoryAlbum }) {
-  return <p className="micro !text-current/80">{[photos(album.count), album.venue].filter(Boolean).join(" · ")}</p>;
+  return <p className="micro !text-current/80">{[album.pending ? "Photos coming soon" : photos(album.count), album.venue].filter(Boolean).join(" · ")}</p>;
 }
 
 const open = (
@@ -125,11 +125,12 @@ function AlbumCards({ albums }: { albums: StoryAlbum[] }) {
         // frame) stands in, never morphing, and with neither it is a yellow card.
         const cover = album.treatment === "photo" ? coverFor(album) : null;
         const pic = cover?.src ?? album.inset;
+        // A pending album has no page yet: same card, not a link.
+        const Card = album.pending ? "div" : Link;
         return (
           <li key={album.id}>
-            <Link
-              href={`/albums/${album.id}`}
-             
+            <Card
+              href={album.pending ? undefined! : `/albums/${album.id}`}
               className={`photo-frame group relative flex aspect-[4/3] flex-col justify-end overflow-hidden sm:aspect-[4/5] ${pic ? "text-bone" : "bg-yellow text-ink"}`}
             >
               {cover ? (
@@ -147,12 +148,14 @@ function AlbumCards({ albums }: { albums: StoryAlbum[] }) {
                 ) : null}
                 <div className={`flex items-center justify-between gap-4 border-t pt-3 ${pic ? "border-bone/30" : "border-ink/30"}`}>
                   <Meta album={album} />
-                  <span aria-hidden="true" className="font-display text-2xl leading-none transition-transform duration-300 group-hover:translate-x-1">
-                    →
-                  </span>
+                  {album.pending ? null : (
+                    <span aria-hidden="true" className="font-display text-2xl leading-none transition-transform duration-300 group-hover:translate-x-1">
+                      →
+                    </span>
+                  )}
                 </div>
               </div>
-            </Link>
+            </Card>
           </li>
         );
       })}
@@ -187,6 +190,7 @@ function WatchGrid({ albums }: { albums: StoryAlbum[] }) {
 
 function ChapterBlock({ chapter }: { chapter: Chapter }) {
   const total = chapter.albums.reduce((s, a) => s + a.count, 0);
+  const live = chapter.albums.filter((a) => !a.pending).length;
   const many = chapter.albums.length > 1;
   return (
     <section id={chapter.id} data-tone="bone" data-chapter={chapter.label} aria-labelledby={`${chapter.id}-heading`} className="canvas-night scroll-mt-4 pb-2 sm:pb-3">
@@ -197,7 +201,7 @@ function ChapterBlock({ chapter }: { chapter: Chapter }) {
         {/* One album: its card already says how many photos. */}
         {many ? (
           <p className="micro">
-            {chapter.albums.length} albums · {photos(total)}
+            {live} {live === 1 ? "album" : "albums"} · {photos(total)}
           </p>
         ) : null}
       </header>

@@ -28,6 +28,9 @@ export type StoryAlbum = {
      owner has picked one for that album (owner, 2026-09-24). It never leads
      as a cover and never morphs; it only fills the card. */
   inset: string | null;
+  /* A competition whose photos are not on the site yet (Turf Wars, owner
+     2026-10-07): a card with its picture and no link, until its album syncs. */
+  pending: boolean;
 };
 
 export type Chapter = { id: string; label: string; kind: "tournament" | "series" | "watch" | "feature"; albums: StoryAlbum[] };
@@ -59,6 +62,25 @@ function album(entry: Entry, title: string, short: string | null, facts: AlbumFa
     photoAlt: entry.photoAlt,
     treatment,
     inset: treatment === "type" ? entry.photo : null,
+    pending: false,
+  };
+}
+
+function pendingAlbum(entry: Entry, title: string): StoryAlbum | null {
+  if (!entry.photo) return null;
+  return {
+    id: `pending-${title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
+    title,
+    short: null,
+    count: 0,
+    champion: entry.champion ?? null,
+    venue: entry.venue,
+    note: entry.note,
+    photo: null,
+    photoAlt: entry.photoAlt,
+    treatment: "type",
+    inset: entry.photo,
+    pending: true,
   };
 }
 
@@ -67,7 +89,7 @@ const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(
 export function galleryChapters(raw: Raw, facts: AlbumFacts): Chapter[] {
   const data = parseContent(raw);
   const keep = (a: StoryAlbum | null): a is StoryAlbum => a !== null;
-  const competition = (c: (typeof data.competitions)[number]) => album(c, c.name!, null, facts);
+  const competition = (c: (typeof data.competitions)[number]) => album(c, c.name!, null, facts) ?? (c.albumId ? null : pendingAlbum(c, c.name!));
 
   const chapters: Chapter[] = [
     { id: "origins", label: "Where it started", kind: "tournament", albums: data.competitions.filter((c) => c.beforeSeries).map(competition).filter(keep) },
@@ -89,7 +111,7 @@ export function galleryChapters(raw: Raw, facts: AlbumFacts): Chapter[] {
 }
 
 export function nextAlbum(chapters: Chapter[], id: string): StoryAlbum | null {
-  const all = chapters.flatMap((c) => c.albums);
+  const all = chapters.flatMap((c) => c.albums).filter((a) => !a.pending);
   const i = all.findIndex((a) => a.id === id);
   return i < 0 ? null : all[(i + 1) % all.length];
 }

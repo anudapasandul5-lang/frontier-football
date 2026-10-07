@@ -19,16 +19,15 @@ export function CommunityTeaser() {
     >
       <div className="frame grid items-center gap-x-[clamp(2rem,5vw,5rem)] gap-y-10 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
         <div className="flex flex-col items-start gap-[clamp(1.5rem,4vh,2.5rem)]">
-          <div className="flex items-center gap-3">
-            <img src="/crest-sm.webp" alt="" width={295} height={360} loading="lazy" className="h-10 w-auto" />
-            <span className="micro">Frontier presents</span>
-          </div>
           <SplitReveal
             id="community-teaser-heading"
-            lines={["Join the community."]}
-            className="font-display text-[clamp(2rem,4vw,3.75rem)] leading-[0.88] font-bold uppercase"
+            lines={["Join the", "community."]}
+            step={80}
+            className="community-mark font-display leading-[0.8] font-bold uppercase"
           />
-          <p className="max-w-[34ch] text-lg leading-snug">Bring your team, or come alone and find one. Every Sunday, there is a place for you with Frontier.</p>
+          {/* The heading takes the old "Sunday League." mark's poster scale
+              (owner, 2026-10-07: the smaller heading read too plain). */}
+          <p className="max-w-[34ch] text-[clamp(1.125rem,1rem+0.4vw,1.375rem)] leading-snug">Bring your team, or come alone and find one. Every Sunday, there is a place for you with Frontier.</p>
           <a
             href="/community"
             className="btn flex min-h-14 items-center bg-ink px-8 font-display text-[clamp(1rem,0.9rem+0.4vw,1.35rem)] font-bold text-bone uppercase hover:bg-bone hover:text-ink"

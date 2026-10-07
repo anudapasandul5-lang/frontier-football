@@ -862,7 +862,7 @@ describe("stats", () => {
   it("ships the four owner figures in content.js, dated", async () => {
     const { default: raw } = await import("../content.js");
     expect(stats(parseContent(raw))).toEqual([
-      { figure: "3.4M+", label: "Instagram views", asOf: "2026-09-18" },
+      { figure: "3.4M+", label: "Social media views", asOf: "2026-09-18" },
       { figure: "50+", label: "Partners", asOf: "2026-09-18" },
       { figure: "400+", label: "In the community", asOf: "2026-09-18" },
       { figure: "15+", label: "Events", asOf: "2026-09-18" },

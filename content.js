@@ -272,8 +272,28 @@ export default {
       venue: "TODO",
       driveFolder: "TODO",
     },
-    // Turf Wars was removed from the whole site by the owner on 2026-09-24.
-    // Do not add it back without asking.
+    {
+      // Back on the site (owner, 2026-10-07: "add turf wars throughout the
+      // site"). It ran after Ground Zero and before the 4x4 Series.
+      name: "Turf Wars",
+      beforeSeries: true,
+      // TODO: the owner is sending the Google Drive photo folder. Add it to
+      // the ALBUMS map, run `npm run albums:sync`, then set albumId to
+      // "turf-wars" and paste the share link into driveFolder.
+      albumId: "TODO",
+      note: "TODO",
+      champion: "TODO",
+      runnerUp: "TODO",
+      // The winners' photo from before the removal (restored from git).
+      // Swap for a pick from the Drive folder once it arrives.
+      photo: "/champions/turf-wars.webp",
+      photoAlt: "The Turf Wars champions with their hands on the trophy.",
+      // Source: Frontier's own Turf Wars poster (Instagram cache, 2026-09-22):
+      // "Club Fusion, Boralesgamuwa, July 26th 2025".
+      date: "26 July 2025",
+      venue: "Club Fusion",
+      driveFolder: "TODO",
+    },
     {
       // The name shown on the card. A competition with no name is skipped, so
       // this is the one line that must be filled in.
@@ -980,7 +1000,7 @@ export default {
   // ==========================================================================
   // Source: the owner, in session on 2026-09-18.
   stats: [
-    { figure: "3.4M+", label: "Instagram views", asOf: "2026-09-18" },
+    { figure: "3.4M+", label: "Social media views", asOf: "2026-09-18" },
     { figure: "50+", label: "Partners", asOf: "2026-09-18" },
     { figure: "400+", label: "In the community", asOf: "2026-09-18" },
     { figure: "15+", label: "Events", asOf: "2026-09-18" },

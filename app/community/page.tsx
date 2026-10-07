@@ -131,7 +131,7 @@ export default function CommunityPage() {
               <h3 className="mb-6 font-display text-[clamp(1.75rem,1.2rem+2.4vw,3.75rem)] leading-none font-bold uppercase">{story.name}</h3>
               <Collage photos={story.photos} layout={layouts[i % layouts.length]} />
               {"credit" in story ? <p className="micro mt-2">{story.credit}</p> : null}
-              <p className="mt-6 max-w-[62ch] text-lg leading-relaxed">{story.body}</p>
+              <p className="mt-6 max-w-[62ch] text-[clamp(1.125rem,1rem+0.4vw,1.375rem)] leading-relaxed">{story.body}</p>
             </li>
           ))}
         </ol>

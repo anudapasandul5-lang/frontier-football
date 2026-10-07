@@ -5,9 +5,9 @@ import { parseContent } from "@/lib/content-data";
 import { Scrapbook, SeriesSeasons } from "./Scrapbook";
 
 describe("Who We Are scrapbook", () => {
-  it("connects four events in the approved order and keeps existing album routes", () => {
+  it("connects five events in the approved order and keeps existing album routes", () => {
     const html = renderToStaticMarkup(<Scrapbook data={parseContent(raw)} />);
-    const names = ["Ground Zero", "4 x 4 Series", "Watch Parties", "Division 0"];
+    const names = ["Ground Zero", "Turf Wars", "4 x 4 Series", "Watch Parties", "Division 0"];
     const captions = [...html.matchAll(/<strong[^>]*>([^<]+)/g)].map((match) => match[1]);
     expect(captions).toEqual(names);
     expect(html).toContain('href="/who-we-are/4x4-series"');

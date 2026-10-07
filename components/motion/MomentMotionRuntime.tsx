@@ -60,13 +60,18 @@ export default function MomentMotionRuntime() {
       gsap.set(markers, { x: 0, y: 0, xPercent: -50, yPercent: -50 });
       gsap.set(strip, { display: "flex", autoAlpha: 0 });
       gsap.set(last, { autoAlpha: 0, y: 24 });
+      const strikeAt = () => {
+        const panel = [...strip.children].find((c) => c.querySelector('img[src*="moment-strike"]')) as HTMLElement | undefined;
+        const travel = strip.scrollWidth - stage.clientWidth;
+        if (!panel || travel <= 0) return 0.4;
+        return gsap.utils.clamp(0, 1, (panel.offsetLeft + panel.offsetWidth / 2 - stage.clientWidth / 2) / travel);
+      };
 
       const tl = gsap.timeline({
         defaults: { ease: "none" },
         scrollTrigger: { trigger: stage, start: "top top", end: narrow ? "+=120%" : "+=450%", pin: true, scrub: 0.6, invalidateOnRefresh: true },
       });
       tl.addLabel("drift")
-        .to(last, { autoAlpha: 1, y: 0, duration: 0.25, ease: "power2.out" }, "drift")
         .to(markers, { x: (_, el) => away(el, 2.4).x, y: (_, el) => away(el, 2.4).y, duration: 2.2, ease: (t) => 0.08 * t + 0.92 * t ** 4 }, "drift")
         .to(markers, { rotation: "+=4", duration: 1 }, "drift")
         .to(open, { p: 0.08, duration: 1, onUpdate: render }, "drift")
@@ -77,7 +82,11 @@ export default function MomentMotionRuntime() {
         .set(strip, { autoAlpha: 1 })
         .set(centre, { autoAlpha: 0 })
         .addLabel("pan")
-        .to(strip, { x: () => -(strip.scrollWidth - stage.clientWidth), duration: 2.4 });
+        // "The platform was." lands as the futsal photo (moment-strike) slides
+        // to the centre of the screen (owner, 2026-10-07). The pan is linear,
+        // so its share of the pan is where that panel's centre meets mid-screen.
+        .to(last, { autoAlpha: 1, y: 0, duration: 0.4, ease: "power2.out" }, `pan+=${strikeAt() * 2.4 - 0.3}`)
+        .to(strip, { x: () => -(strip.scrollWidth - stage.clientWidth), duration: 2.4 }, "pan");
       // This pin arrives lazily, after triggers further down (the competitions
       // slider) have measured their starts without its pinned scroll. Re-sort
       // into page order and re-measure, or those starts land ~4.5 screens early.

@@ -57,8 +57,17 @@ const fragment = /* glsl */ `
   uniform vec2 uScale;
   uniform vec3 uBone;
   uniform float uFade;
+  uniform vec2 uSize;
+  uniform float uRadius;
   varying vec2 vUv;
   void main() {
+    // Rounded corners, matching the site's photo frames (--radius-photo):
+    // a rounded-box distance in panel units, softened over one pixel.
+    vec2 q = abs(vUv - 0.5) * uSize - (0.5 * uSize - uRadius);
+    float d = length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - uRadius;
+    float edge = fwidth(d);
+    float alpha = 1.0 - smoothstep(-edge, edge, d);
+    if (alpha <= 0.0) discard;
     // Cover-fit the photo in the panel, and read it left to right from outside.
     vec2 uv = vec2(1.0 - vUv.x, vUv.y);
     uv = (uv - 0.5) * uScale + 0.5;
@@ -66,7 +75,7 @@ const fragment = /* glsl */ `
     // Keep each photo's original colour and contrast across the ring.
     // Arrival: each photo develops out of the bone canvas.
     c.rgb = mix(c.rgb, uBone, uFade);
-    gl_FragColor = vec4(c.rgb, 1.0);
+    gl_FragColor = vec4(c.rgb, alpha);
     #include <colorspace_fragment>
   }
 `;
@@ -120,11 +129,14 @@ export function HeroRing() {
               vertexShader: vertex,
               fragmentShader: fragment,
               side: THREE.FrontSide, // the far side is culled: the ring reads as one curved band
+              transparent: true, // only the anti-aliased rounded corners blend
               uniforms: {
                 uMap: { value: null },
                 uScale: { value: new THREE.Vector2(1, 1) },
                 uBone: { value: bone },
                 uFade: { value: 1 },
+                uSize: { value: new THREE.Vector2(panelW, PANEL_H) },
+                uRadius: { value: PANEL_H * 0.05 },
               },
             });
             geometries.push(geometry);

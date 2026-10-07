@@ -6,7 +6,8 @@ import { MicroLabel } from "@/components/primitives/MicroLabel";
 import { phoneSrcSet } from "@/lib/phone-image";
 import { SplitReveal } from "@/components/primitives/SplitReveal";
 
-/* Act 5, one row per competition in time order: blue Ground Zero, green 4 x 4 Series, red Division 0.
+/* Act 5, one row per competition in time order: blue Ground Zero, teal Turf
+   Wars, green 4 x 4 Series, red Division 0.
 
    History, all owner calls: a pinned sideways slider (rejected twice,
    2026-09-24), three solid colour cards (2026-09-24), a poster wall (rejected
@@ -18,13 +19,15 @@ import { SplitReveal } from "@/components/primitives/SplitReveal";
    (numbered tags read as template).
    Plain server markup, CSS-only swap. No section heading (owner), only
    the micro-label. A competition deleted from content.js leaves the act. */
-type Tone = "blue" | "green" | "red" | "yellow";
+type Tone = "blue" | "teal" | "green" | "red" | "yellow";
 type Shot = { src: string; alt: string; credit?: string };
 type Row = { tone: Tone; name: string; line: string; photo: Shot | null };
 
 // Literal class names, so Tailwind emits them and the --color-* they read.
 const hoverFill: Record<Tone, string> = {
   blue: "hover:bg-blue focus-visible:bg-blue",
+  // Teal is dark, so its row's name turns bone while filled.
+  teal: "hover:bg-teal hover:text-bone focus-visible:bg-teal focus-visible:text-bone",
   green: "hover:bg-green focus-visible:bg-green",
   red: "hover:bg-red focus-visible:bg-red",
   yellow: "hover:bg-yellow focus-visible:bg-yellow",
@@ -38,6 +41,7 @@ export function Competitions() {
   const competition = (name: string) => data.competitions.find((c) => c.name === name);
   const divisionZero = competition("Division 0");
   const tournament = competition("Ground Zero");
+  const turfWars = competition("Turf Wars");
 
   const rows: Row[] = [];
   // Owner-approved 2026-09-23 (HOUSE-RULES section 7, content.js): this
@@ -48,6 +52,13 @@ export function Competitions() {
       name: tournament.name!,
       line: "Where it all began.",
       photo: { src: tournament.photo, alt: tournament.photoAlt ?? "", credit: tournament.photoCredit ?? undefined },
+    });
+  if (turfWars?.photo)
+    rows.push({
+      tone: "teal",
+      name: turfWars.name!,
+      line: "On turf, at Club Fusion.",
+      photo: { src: turfWars.photo, alt: turfWars.photoAlt ?? "" },
     });
   rows.push({
     tone: "green",

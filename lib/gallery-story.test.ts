@@ -35,10 +35,18 @@ describe("galleryChapters", () => {
     expect(chapters[1].albums.map((a) => a.short)).toEqual(["SZN 01", "SZN 02", "SZN 05"]);
   });
 
-  it("drops anything without an album or without photos (Turf Wars, an empty watch party)", () => {
+  it("drops a watch party without photos", () => {
     const ids = chapters.flatMap((c) => c.albums.map((a) => a.id));
     expect(ids).not.toContain("wa-empty");
-    expect(chapters[0].albums.map((a) => a.title)).toEqual(["Frontier Futsal Tournament"]);
+  });
+
+  it("keeps a competition whose album is still on the way as a pending card with its photo", () => {
+    expect(chapters[0].albums.map((a) => a.title)).toEqual(["Frontier Futsal Tournament", "Turf Wars"]);
+    const turf = chapters[0].albums[1];
+    expect(turf.pending).toBe(true);
+    expect(turf.count).toBe(0);
+    expect(turf.inset).toBe("/champions/turf-wars.webp");
+    expect(chapters[0].albums[0].pending).toBe(false);
   });
 
   it("never prints an unrecorded champion", () => {
@@ -66,7 +74,7 @@ describe("galleryChapters", () => {
 describe("nextAlbum", () => {
   const chapters = galleryChapters(data, facts);
   it("walks the story order and wraps round", () => {
-    expect(nextAlbum(chapters, "frontier-futsal")?.id).toBe("szn-1");
+    expect(nextAlbum(chapters, "frontier-futsal")?.id).toBe("szn-1"); // skips pending Turf Wars
     expect(nextAlbum(chapters, "szn-5")?.id).toBe("wa-final");
     expect(nextAlbum(chapters, "division-0")?.id).toBe("frontier-futsal");
   });
