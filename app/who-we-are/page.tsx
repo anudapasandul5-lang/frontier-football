@@ -14,6 +14,25 @@ export const metadata: Metadata = { title: "Who We Are" };
 
 const h2 = "font-display text-[clamp(2.125rem,5.4vw,5.25rem)] leading-[0.9] font-bold uppercase";
 
+/* Faint pitch markings behind Our story, so the bone canvas reads as a
+   ground, not a blank page (owner, 2026-10-07: "the background is plain").
+   Ink at low opacity keeps it inside the palette. It sits inside the quote so
+   the halfway line and centre circle always cross the quote's middle; the
+   section's edge bands fade it out (owner: "align it with the lines"). Drawn in full by default;
+   AboutMotion draws the lines in on scroll when motion is allowed. */
+function PitchLines() {
+  const line = { pathLength: 1, className: "pitch-line" };
+  return (
+    <svg aria-hidden="true" viewBox="0 0 1000 1400" preserveAspectRatio="xMidYMid slice" className="pointer-events-none absolute top-1/2 left-1/2 -z-10 h-[2000px] w-screen -translate-x-1/2 -translate-y-1/2 fill-none stroke-ink/[0.09] [stroke-width:3]">
+      <rect {...line} x="40" y="40" width="920" height="1320" />
+      <path {...line} d="M40 700H960" />
+      <circle {...line} cx="500" cy="700" r="150" />
+      <path {...line} d="M220 40V300H780V40M380 40V120H620V40M400 300A120 120 0 0 0 600 300" />
+      <path {...line} d="M220 1360V1100H780V1360M380 1360V1280H620V1360M400 1100A120 120 0 0 1 600 1100" />
+    </svg>
+  );
+}
+
 export default function WhoWeAre() {
   const data = parseContent(raw);
   const crew = people(data);
@@ -40,38 +59,38 @@ export default function WhoWeAre() {
       />
 
       {/* Signed-off story copy, on the page's bone background. */}
-      <section data-tone="ink" data-chapter="Our story" aria-labelledby="who-heading" className="canvas-bone py-[clamp(4rem,14vh,9rem)]">
-        {/* United's editorial moves (docs/design/united/DESIGN.md): a tick-rule
-            under a micro-label, an unbalanced 55/45 split with the small body
-            offset right, the serif line set against the condensed caps, and
-            one photo to break the text wall (owner, 2026-10-07: "too plain"). */}
-        <div className="frame">
-          <div className="mb-[clamp(2rem,5vh,3.5rem)] flex items-center gap-4">
-            <p className="micro shrink-0 text-ink">Our story</p>
-            <span aria-hidden="true" className="h-2 flex-1 border-x border-b border-ink/40" />
-          </div>
-          <div>
+      <section data-tone="ink" data-chapter="Our story" aria-labelledby="who-heading" className="canvas-bone relative isolate overflow-clip py-[clamp(4rem,14vh,9rem)]">
+        <span aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 -z-[5] h-[15%] bg-[linear-gradient(var(--canvas),transparent)]" />
+        <span aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 -z-[5] h-[25%] bg-[linear-gradient(transparent,var(--canvas))]" />
+        {/* Label, headline, intro and quote share the pitch's centre line, so
+            the markings are the only decoration (owner, 2026-10-07: "a bit
+            messy", picked the centred option). The quote keeps its staggered
+            serif lines and yellow marks ("I like how the words in the commas
+            looked before"); the block is centred, the stagger inside it kept. */}
+        <div className="frame relative">
+          <p className="micro mb-[clamp(2rem,5vh,3.5rem)] text-center text-ink">Our story</p>
+          <div className="text-center">
             <SplitReveal id="who-heading" lines={["A platform."]} className="font-display text-[clamp(3rem,10vw,9rem)] leading-[0.85] font-bold uppercase" />
-            <p className="mt-8 max-w-[46ch] text-[clamp(1.125rem,1.5vw,1.375rem)] leading-relaxed md:ml-[55%]">
+            <p className="story-fade mx-auto mt-8 max-w-[46ch] text-balance text-[clamp(1.125rem,1.5vw,1.375rem)] leading-relaxed">
               Frontier Football is a platform for Sri Lanka’s football community. We spotlight talent and bring together everyone who loves the game.
             </p>
           </div>
-          <blockquote className="relative my-[clamp(3rem,10vh,6rem)] border-y border-ink py-[clamp(2rem,6vh,4rem)]">
-            <span aria-hidden="true" className="pointer-events-none absolute -top-[0.38em] left-0 font-serif text-[clamp(6rem,14vw,12rem)] leading-none text-yellow select-none">
+          <blockquote className="story-quote relative mx-auto my-[clamp(3rem,10vh,6rem)] w-fit py-[clamp(2rem,6vh,4rem)]">
+            <PitchLines />
+            <span aria-hidden="true" className="story-mark pointer-events-none absolute -top-[0.38em] left-0 font-serif text-[clamp(6rem,14vw,12rem)] leading-none text-yellow select-none">
               &ldquo;
             </span>
-            {/* The closing mark mirrors the opening one: same size, hanging on
-                the bottom rule at the right, so the pair bookends the line. */}
-            <span aria-hidden="true" className="pointer-events-none absolute right-0 -bottom-[0.62em] font-serif text-[clamp(6rem,14vw,12rem)] leading-none text-yellow select-none">
+            {/* The closing mark mirrors the opening one: same size, at the
+                bottom right, so the pair bookends the line. */}
+            <span aria-hidden="true" className="story-mark pointer-events-none absolute right-0 -bottom-[0.62em] font-serif text-[clamp(6rem,14vw,12rem)] leading-none text-yellow select-none">
               &rdquo;
             </span>
             <p className="relative font-serif text-[clamp(2.5rem,7vw,6.5rem)] leading-[0.98] text-ink">
-              Talent was never missing.{" "}
-              <em className="block italic md:pl-[18%]">
-The platform was.</em>
+              <span className="story-line block">Talent was never missing.</span>{" "}
+              <em className="story-line block italic md:pl-[2em]">The platform was.</em>
             </p>
           </blockquote>
-          <div className="grid gap-8 md:grid-cols-[45fr_55fr] md:items-center md:gap-[clamp(2rem,5vw,5rem)]">
+          <div className="story-duel grid gap-8 md:grid-cols-[45fr_55fr] md:items-center md:gap-[clamp(2rem,5vw,5rem)]">
             <img
               src="/home/moment-duel.webp"
               srcSet={phoneSrcSet("/home/moment-duel.webp")}
@@ -81,7 +100,7 @@ The platform was.</em>
               height={900}
               loading="lazy"
               decoding="async"
-              className="block aspect-[4/3] w-full object-cover"
+              className="story-photo block aspect-[4/3] w-full object-cover"
             />
             <div>
               <p className="max-w-[46ch] text-[clamp(1.125rem,1.5vw,1.375rem)] leading-relaxed">
@@ -89,7 +108,7 @@ The platform was.</em>
               </p>
               <ul aria-label="What we do" className="mt-8 flex flex-wrap gap-2">
                 {["Tournaments", "Collaborations", "Digital content"].map((t) => (
-                  <li key={t} className="border border-ink px-4 py-2 font-display text-sm uppercase">
+                  <li key={t} className="story-pill border border-ink px-4 py-2 font-display text-sm uppercase">
                     {t}
                   </li>
                 ))}
