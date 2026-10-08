@@ -1,0 +1,152 @@
+<!doctype html><meta charset=utf-8>
+<style>
+@font-face{font-family:Mono;src:url("file:///root/.claude/skills/synced/e0ba6eef-0505-44a5-8519-7122102ce657_8388ecc8-0b41-47b9-805d-92f89b7bcc61/canvas-design/canvas-fonts/DMMono-Regular.ttf")}
+@font-face{font-family:Shoulders;src:url("file:///root/.claude/skills/synced/e0ba6eef-0505-44a5-8519-7122102ce657_8388ecc8-0b41-47b9-805d-92f89b7bcc61/canvas-design/canvas-fonts/BigShoulders-Bold.ttf")}
+:root{--teal:#0c727e;--deep:#09626d;--bone:#efeae0;--yel:#faba2a;--hair:rgba(239,234,224,.55)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:transparent;width:1920px;height:1080px;overflow:hidden}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden}
+.bg #stage{background:
+  radial-gradient(ellipse 62% 58% at 50% 54%,rgba(255,255,255,.075),rgba(255,255,255,0) 70%),
+  radial-gradient(ellipse 120% 100% at 50% 50%,rgba(0,0,0,0) 55%,rgba(0,0,0,.22) 100%),var(--teal)}
+.frame{display:none}.bg .frame{display:block}
+.mono{font-family:Mono;font-size:11px;letter-spacing:.28em;color:rgba(239,234,224,.82);text-transform:uppercase;white-space:nowrap;position:absolute;line-height:1}
+.mono.dim{color:rgba(239,234,224,.5)}
+.reg{position:absolute;width:22px;height:22px;border-color:var(--hair);border-style:solid;border-width:0}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--yel);margin-right:14px;vertical-align:1px}
+.ticks{position:absolute;height:12px;background:
+  repeating-linear-gradient(90deg,var(--hair) 0 1px,transparent 1px 20px) bottom/100% 5px no-repeat,
+  repeating-linear-gradient(90deg,var(--hair) 0 1px,transparent 1px 100px) bottom/100% 12px no-repeat}
+/* dimension callouts */
+.dim-h{position:absolute;height:11px;border-left:1px solid var(--hair);border-right:1px solid var(--hair)}
+.dim-h::before{content:"";position:absolute;left:0;right:0;top:5px;border-top:1px solid var(--hair)}
+.dim-h span,.dim-v span{position:absolute;font-family:Mono;font-size:10px;letter-spacing:.24em;color:rgba(239,234,224,.82);background:var(--teal);padding:0 12px;line-height:11px}
+.dim-h span{left:50%;top:0;transform:translateX(-50%)}
+.dim-v{position:absolute;width:11px;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+.dim-v::before{content:"";position:absolute;top:0;bottom:0;left:5px;border-left:1px solid var(--hair)}
+.dim-v span{top:50%;left:5px;transform:translate(-50%,-50%) rotate(-90deg);padding:0 12px}
+
+/* ---------- MacBook ---------- */
+.mac{position:absolute}
+.lid{position:relative;border-radius:26px 26px 9px 9px;padding:2.5px;
+  background:linear-gradient(180deg,#a9acb1,#6e7176 40%,#55585d);}
+.bezel{position:relative;background:#040405;border-radius:24px 24px 7px 7px;padding:12px 12px 20px}
+.screen{position:relative;overflow:hidden;border-radius:7px 7px 2px 2px;background:#000}
+.screen img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
+.screen::after,.pscreen::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(118deg,rgba(255,255,255,.085) 0%,rgba(255,255,255,.02) 34%,rgba(255,255,255,0) 34.2%)}
+.notch{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:132px;height:17px;background:#040405;border-radius:0 0 9px 9px;z-index:2}
+.notch::after{content:"";position:absolute;left:50%;top:5px;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#2c3a4d,#0b0f16 70%)}
+.chin{position:absolute;left:0;right:0;bottom:4px;text-align:center;font:600 7px/1 -apple-system,Helvetica,Arial;letter-spacing:.06em;color:#4a4c50}
+.hinge{height:7px;margin:0 3%;background:linear-gradient(180deg,#1a1b1d,#3a3c40 60%,#5d6065);border-radius:0 0 3px 3px}
+.base{position:relative;height:17px;background:linear-gradient(180deg,#f2f3f4 0%,#d7d9dc 22%,#b8bbc0 60%,#8d9096 88%,#6f7277 100%);
+  border-radius:3px 3px 30px 30px/3px 3px 17px 17px;box-shadow:inset 0 1px 0 rgba(255,255,255,.9)}
+.base::after{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:15%;height:7px;border-radius:0 0 9px 9px;
+  background:linear-gradient(180deg,#9da0a5,#c9cbcf)}
+.floor{position:absolute;border-radius:50%;background:radial-gradient(ellipse at center,rgba(0,0,0,.55),rgba(0,0,0,.18) 45%,rgba(0,0,0,0) 70%);filter:blur(6px)}
+
+/* ---------- iPhone ---------- */
+.iphone{position:absolute;padding:3px;background:linear-gradient(140deg,#a3a5aa 0%,#5b5d62 22%,#3b3c40 50%,#55575c 78%,#9fa1a6 100%);
+  box-shadow:0 2px 0 rgba(255,255,255,.08) inset}
+.ib{position:relative;height:100%;background:#040405;padding:7px}
+.pscreen{position:relative;height:100%;overflow:hidden;background:#000}
+.pscreen img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
+.island{position:absolute;top:2.2%;left:50%;transform:translateX(-50%);width:29%;height:4.1%;background:#000;border-radius:99px;z-index:2}
+.btn{position:absolute;width:3px;border-radius:2px;background:linear-gradient(90deg,#3c3d41,#8a8c91,#4a4b4f)}
+
+/* ---------- browser window ---------- */
+.win{position:absolute;border-radius:12px;overflow:hidden;background:#0c0e12;
+  box-shadow:0 0 0 1px rgba(255,255,255,.08)}
+.bar{height:34px;display:flex;align-items:center;padding:0 16px;background:#16191e;border-bottom:1px solid #0a0b0e}
+.bar i{width:11px;height:11px;border-radius:50%;background:rgba(239,234,224,.22);margin-right:8px}
+.bar b{margin:0 auto;transform:translateX(-30px);width:380px;height:20px;border-radius:6px;background:#0d0f13;
+  font:400 10px/20px Mono;letter-spacing:.18em;color:rgba(239,234,224,.55);text-align:center}
+.win img{display:block;width:100%}
+.tag{position:absolute;left:0;top:-34px;text-transform:uppercase;font-family:Mono;font-size:13px;letter-spacing:.3em;color:rgba(239,234,224,.9);white-space:nowrap}
+.bg-only{display:none}.bg .bg-only{display:block}
+</style>
+<body>
+<div id=stage></div>
+<script>
+const q=new URLSearchParams(location.search); const plate=+q.get("plate"); if(q.get("bg")==="1")document.body.classList.add("bg");
+const st=document.getElementById("stage");
+const el=(html)=>{st.insertAdjacentHTML("beforeend",html)};
+const D="out/d1610/",P="out/phone/";
+function frame(n,title,sub){
+  const M=70;
+  el(`<div class=frame>
+   <div class=reg style="left:${M}px;top:${M}px;border-left-width:1px;border-top-width:1px"></div>
+   <div class=reg style="right:${M}px;top:${M}px;border-right-width:1px;border-top-width:1px"></div>
+   <div class=reg style="left:${M}px;bottom:${M}px;border-left-width:1px;border-bottom-width:1px"></div>
+   <div class=reg style="right:${M}px;bottom:${M}px;border-right-width:1px;border-bottom-width:1px"></div>
+   <div class=mono style="left:${M+40}px;top:${M+6}px"><span class=dot></span>Plate ${n}</div>
+   <div class="mono dim" style="left:${M+40}px;top:${M+30}px;padding-left:21px">${sub}</div>
+   <div class=mono style="right:${M+40}px;top:${M+6}px">Frontier Football</div>
+   <div class="mono dim" style="right:${M+40}px;top:${M+30}px">${title}</div>
+   <div class="mono dim" style="left:${M+40}px;bottom:${M+5}px">6.9271° N &nbsp;79.8612° E</div>
+   <div class=ticks style="left:${M+420}px;right:${M+420}px;bottom:${M+5}px"></div>
+   <div class="mono dim" style="right:${M+40}px;bottom:${M+5}px">${n} / 03</div></div>`);
+}
+function mac(x,y,sw,src,id=""){ // sw = screen width; 16:10
+  const sh=sw*10/16, lw=sw+29, bw=lw*1.13;
+  el(`<div class=floor style="left:${x+lw/2-bw*.52}px;top:${y+sh+32+17+24-22}px;width:${bw*1.04}px;height:44px"></div>
+  <div class=mac id="${id}" style="left:${x}px;top:${y}px;width:${lw}px">
+   <div class=lid><div class=bezel><div class=notch></div><div class=screen style="height:${sh}px"><img src="${src}"></div><div class=chin>MacBook Pro</div></div></div>
+   <div class=hinge></div>
+   <div class=base style="width:${bw}px;margin-left:${-(bw-lw)/2}px"></div></div>`);
+  return {x,y,w:lw,h:sh+32+5+7+17,bw};
+}
+function phone(x,y,w,src,z=1){
+  const h=w*(844/390)+ (w*0)+20; const r=w*0.17;
+  el(`<div class=floor style="left:${x-w*.05}px;top:${y+h-18}px;width:${w*1.1}px;height:34px;z-index:${z}"></div>
+  <div class=iphone style="left:${x}px;top:${y}px;width:${w}px;height:${h}px;border-radius:${r}px;z-index:${z};
+    box-shadow:0 ${w*.12}px ${w*.24}px rgba(0,0,0,.32),0 ${w*.03}px ${w*.06}px rgba(0,0,0,.25)">
+   <div class=btn style="left:-2px;top:${h*.19}px;height:${h*.045}px"></div>
+   <div class=btn style="left:-2px;top:${h*.27}px;height:${h*.085}px"></div>
+   <div class=btn style="left:-2px;top:${h*.38}px;height:${h*.085}px"></div>
+   <div class=btn style="right:-2px;top:${h*.30}px;height:${h*.13}px"></div>
+   <div class=ib style="border-radius:${r-3}px"><div class=pscreen style="border-radius:${r-10}px"><div class=island></div><img src="${src}"></div></div></div>`);
+  return {x,y,w,h};
+}
+const dimH=(x,y,w,t)=>el(`<div class="dim-h frame" style="left:${x}px;top:${y}px;width:${w}px"><span>${t}</span></div>`);
+const dimV=(x,y,h,t)=>el(`<div class="dim-v frame" style="left:${x}px;top:${y}px;height:${h}px"><span>${t}</span></div>`);
+
+if(plate===1){
+  frame("01","Home — Desktop / Mobile","Survey of the front door");
+  const m=mac(330,206,1000,D+"home.png");
+  const p=phone(1515,m.y+m.h-560,256,P+"home-hero.png",3);
+  dimH(m.x+12+2.5,m.y-44,1000,"1440");
+  dimH(p.x,p.y+p.h+40,p.w,"390");
+  dimV(p.x+p.w+44,p.y,p.h,"844");
+}
+if(plate===2){
+  frame("02","Events / Gallery / Community","Three rooms of the same house");
+  const W=660,H=W*900/1440+34;
+  el(`<div id=iso style="position:absolute;left:50%;top:50%;width:${W}px;height:${H}px;margin:${-H/2+150}px 0 0 ${-W/2+110}px;
+      transform-style:preserve-3d;transform:perspective(4200px) rotateX(50deg) rotateZ(-34deg)"></div>`);
+  const iso=document.getElementById("iso");
+  [["community","community","02.3"],["gallery","gallery","02.2"],["events","events","02.1"]].forEach(([f,u,n],i)=>{
+    const z=i*200, dx=(2-i)*-118, dy=(2-i)*-86;
+    iso.insertAdjacentHTML("beforeend",`
+     <div style="position:absolute;left:${dx+26}px;top:${dy+40}px;width:${W}px;height:${H}px;transform:translateZ(${z-1}px);
+       background:rgba(0,0,0,.30);filter:blur(22px);border-radius:12px"></div>
+     <div class=win style="left:${dx}px;top:${dy}px;width:${W}px;transform:translateZ(${z}px)">
+       <div class=bar><i></i><i></i><i></i><b>frontier / ${u}</b></div><img src="${D+f}.png"></div>
+     <div class="tag frame" style="left:${dx}px;top:${dy-34}px;transform:translateZ(${z}px)">${i===2?'<span class=dot></span>':''}${n} &nbsp;${f}</div>`);
+  });
+}
+if(plate===3){
+  frame("03","Who We Are / Events / Collaborate","Held in the hand");
+  const w=284, gap=130, y=228;
+  const cx=960; const xs=[cx-w*1.5-gap,cx-w/2,cx+w/2+gap];
+  const srcs=["who-we-are","events","collaborate"];
+  const ph=xs.map((x,i)=>phone(x,i===1?y-28:y+28,w,P+srcs[i]+"-hero.png",i===1?3:2));
+  const by=ph[0].y+ph[0].h+36;
+  el(`<div class=frame style="position:absolute;left:${xs[0]+w/2}px;top:${by}px;width:${xs[2]-xs[0]}px;border-top:1px solid var(--hair)"></div>`);
+  ph.forEach((p,i)=>{
+    el(`<div class=frame style="position:absolute;left:${p.x+w/2}px;top:${p.y+p.h+30}px;height:${by-(p.y+p.h+30)+6}px;border-left:1px solid var(--hair)"></div>
+     <div class="mono frame" style="left:${p.x+w/2}px;top:${by+22}px;transform:translateX(-50%)">03.${i+1} &nbsp;${srcs[i].replace(/-/g," ")}</div>`);
+  });
+  el(`<div class=frame style="position:absolute;left:${ph[1].x+w/2-5}px;top:${by-5}px;width:11px;height:11px;border-radius:50%;background:var(--yel)"></div>`);
+}
+</script>
