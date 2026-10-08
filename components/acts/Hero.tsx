@@ -31,21 +31,24 @@ export function Hero() {
     <Nav crestPriority floating />
     <section
       id="hero"
-      data-tone="ink"
+      data-tone="bone"
       data-chapter="Home"
-      className="canvas-bone relative isolate flex min-h-svh touch-pan-y flex-col overflow-hidden select-none"
+      className="canvas-teal relative isolate flex min-h-svh touch-pan-y flex-col overflow-hidden select-none"
     >
       <div aria-hidden="true" className="h-20 shrink-0" />
       <HeroRing />
       <div id="content" className="frame relative flex flex-1 flex-col items-center justify-center pb-4">
-        {/* Yellow on bone is the owner's deliberate overprint (2026-09-18).
+        {/* Teal hero, bone caps, yellow on the closing word of each line (owner,
+            2026-10-07: yellow on bone read as yellow on yellow, 1.45:1; night
+            canvas and off-palette darks rejected). Bone 4.7:1, yellow 3.3:1
+            (large display type).
             Both lines sit above the photo band (HeroRing, z-2) so no photo
             covers the words. Ink slabs behind the lines were tried for
             contrast and rejected by the owner (UX audit T2, 2026-09-24). */}
         <MicroLabel className="relative z-[3] mb-5 text-center">Football. Community. Culture.</MicroLabel>
-        <h1 className="pointer-events-none flex w-full flex-col items-center gap-[clamp(8rem,14vh,11rem)] hero-weave text-center font-display text-[clamp(1rem,5.9vw,7rem)] leading-[0.86] font-bold whitespace-nowrap text-yellow uppercase max-sm:text-[clamp(1.9rem,10vw,2.75rem)] max-sm:text-balance max-sm:whitespace-normal">
-          <span className="hero-line relative z-[3]">Football, community and culture.</span>
-          <span className="hero-line relative z-[3]">Giving Sri Lanka’s football a platform.</span>
+        <h1 className="pointer-events-none flex w-full flex-col items-center gap-[clamp(8rem,14vh,11rem)] hero-weave text-center font-display text-[clamp(1rem,5.9vw,7rem)] leading-[0.86] font-bold whitespace-nowrap text-bone uppercase max-sm:text-[clamp(1.9rem,10vw,2.75rem)] max-sm:text-balance max-sm:whitespace-normal">
+          <span className="hero-line relative z-[3]">Football, community and <span className="text-yellow">culture.</span></span>
+          <span className="hero-line relative z-[3]">Giving Sri Lanka’s football a <span className="text-yellow">platform.</span></span>
         </h1>
       </div>
 
@@ -58,7 +61,7 @@ export function Hero() {
           <a href="/events" className={`${button} bg-yellow text-ink`}>
             <Roll>Explore events</Roll>
           </a>
-          <a href="/collaborate" className={`${button} border-2 border-ink hover:bg-ink hover:text-bone`}>
+          <a href="/collaborate" className={`${button} border-2 border-bone hover:bg-bone hover:text-ink`}>
             <Roll>Partner with us</Roll>
           </a>
         </div>
