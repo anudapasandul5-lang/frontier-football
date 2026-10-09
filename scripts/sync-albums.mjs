@@ -47,6 +47,16 @@ const ALBUMS = {
   "wa-semi-esp-fra": "15y_x5dnOdsGQvmjPm0JaIqeLpoGWB5BM",
   "wa-norway-england": "1CZXXR7ZNFmPaOFudf8wDXNlPFlaKnxlh",
   "wa-ucl-final-night": "1LI43OOBwg14x5l5h-E3OTw5f2z-kGyXe",
+  // Curated picks (Stage 2, 2026-10-09): one new Drive folder per set, made by
+  // copying or uploading only the chosen frames. The full albums above are
+  // untouched; slots that want a hand-picked frame point at these.
+  "turf-wars": "1gih-t2kIMq7Nx1y7oLlTvf2zrJObRLNW",
+  "picks-szn-2": "1gtT-u0RgyXtcS19to1gZTuVkL8PC6Uty",
+  "picks-szn-4": "1wAZE5laQlMY6kzRTkwfTyANlGLvMpvrP",
+  "picks-szn-6": "1p_xmnnJg3M2zlcsOQCOJwtapUDH7Rv3O",
+  "picks-division-0": "1_2FO1y8gBjY4yTHk4XBnvBIRFTYbPxi1",
+  "picks-road-to-world-cup": "1FUfaxcc0dHielxCqVJj5eZG586fpg-yT",
+  "picks-ucl-watch-party": "1Nr5ZuBh-82emRoeYf0pgbXHWsELbIkZb",
 };
 
 const CONCURRENCY = 24;
