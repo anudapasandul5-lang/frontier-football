@@ -35,11 +35,12 @@ export function CommunityTeaser() {
             <Roll>See how to join</Roll>
           </a>
         </div>
-        {/* A real Frontier game: a goalmouth scramble in 4 x 4 Series SZN 06,
-            full resolution from the Drive album. */}
+        {/* The SZN 4 greeting frame, restored 2026-10-10 (owner) in place of the
+            SZN 6 scramble. Bottom 14% cropped: it held the HypeBam badge and the
+            old Frontier Futsal mark. */}
         <img
-          src="/who/szn6-scramble.webp"
-          alt="Players scrambling for the ball in front of goal at a 4 x 4 Series match"
+          src="/home/ring/szn4-greeting.webp"
+          alt="Players greeting each other on the pitch at a 4 x 4 Series match"
           width={1200}
           height={900}
           loading="lazy"
