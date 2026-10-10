@@ -1,0 +1,107 @@
+[
+  {
+    "file": "mockups/01-desktop-home-transparent.png",
+    "width": 2862,
+    "height": 1699,
+    "mode": "RGBA",
+    "bytes": 2512816
+  },
+  {
+    "file": "mockups/02-phone-home-transparent.png",
+    "width": 660,
+    "height": 1384,
+    "mode": "RGBA",
+    "bytes": 538172
+  },
+  {
+    "file": "mockups/03-responsive-showcase-3840x2160.png",
+    "width": 3840,
+    "height": 2160,
+    "mode": "RGB",
+    "bytes": 2730066
+  },
+  {
+    "file": "mockups/04-events-showcase-3840x2160.png",
+    "width": 3840,
+    "height": 2160,
+    "mode": "RGB",
+    "bytes": 3088993
+  },
+  {
+    "file": "mockups/05-mobile-trio-3840x2160.png",
+    "width": 3840,
+    "height": 2160,
+    "mode": "RGB",
+    "bytes": 1475755
+  },
+  {
+    "file": "PREVIEW.png",
+    "width": 1800,
+    "height": 1230,
+    "mode": "RGB",
+    "bytes": 1273187
+  },
+  {
+    "file": "screenshots/desktop/01-home-1920x1080.jpg",
+    "width": 1905,
+    "height": 1072,
+    "mode": "RGB",
+    "bytes": 162916
+  },
+  {
+    "file": "screenshots/desktop/02-who-we-are-1920x1080.jpg",
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB",
+    "bytes": 201623
+  },
+  {
+    "file": "screenshots/desktop/03-events-1920x1080.jpg",
+    "width": 1905,
+    "height": 1072,
+    "mode": "RGB",
+    "bytes": 224060
+  },
+  {
+    "file": "screenshots/desktop/04-gallery-1920x1080.jpg",
+    "width": 1905,
+    "height": 1072,
+    "mode": "RGB",
+    "bytes": 173343
+  },
+  {
+    "file": "screenshots/desktop/05-community-1920x1080.jpg",
+    "width": 1905,
+    "height": 793,
+    "mode": "RGB",
+    "bytes": 84219
+  },
+  {
+    "file": "screenshots/desktop/06-collaborate-1920x1080.jpg",
+    "width": 1905,
+    "height": 1072,
+    "mode": "RGB",
+    "bytes": 136822
+  },
+  {
+    "file": "screenshots/mobile/01-home-430x932.jpg",
+    "width": 430,
+    "height": 932,
+    "mode": "RGB",
+    "bytes": 38747
+  },
+  {
+    "file": "screenshots/mobile/03-events-430x932.jpg",
+    "width": 430,
+    "height": 932,
+    "mode": "RGB",
+    "bytes": 45571
+  },
+  {
+    "file": "screenshots/mobile/04-gallery-430x932.jpg",
+    "width": 430,
+    "height": 932,
+    "mode": "RGB",
+    "bytes": 53167
+  }
+]
