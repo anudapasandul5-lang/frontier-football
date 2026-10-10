@@ -42,7 +42,7 @@ export function CommunityTeaser() {
         <img
           src="/home/ring/szn4-greeting.webp"
           srcSet={phoneSrcSet("/home/ring/szn4-greeting.webp")}
-          sizes="(min-width: 768px) 40vw, 100vw"
+          sizes="(min-width: 768px) 65vw, 100vw"
           alt="Players greeting each other on the pitch at a 4 x 4 Series match"
           width={1200}
           height={900}
