@@ -8,6 +8,7 @@ import { PageShell } from "@/components/pages/PageShell";
 import { PhotoStrip } from "@/components/pages/PhotoStrip";
 import { SplitReveal } from "@/components/primitives/SplitReveal";
 import { SundayLeagueMark } from "@/components/primitives/SundayLeagueMark";
+import { thumbUrl } from "@/lib/album-data";
 import { phoneSrcSet } from "@/lib/phone-image";
 
 export const metadata: Metadata = { title: "Community" };
@@ -78,7 +79,7 @@ export default function CommunityPage() {
         photos={[
           { src: "/pages/community-team.webp", alt: "A 4 x 4 Series team arm in arm on the pitch" },
           { src: "/pages/community-final-table.webp", alt: "Argentina and Spain fans together at the World Cup final watch-along" },
-          { src: "/pages/community-division-0.webp", alt: "Players crowding round the console at the Division 0 tournament" },
+          { src: thumbUrl("1lFA0m_tmcOa9wps9e0Oh_a-48Ut2T2aX", 1200), alt: "Two men holding a gold trophy and a prize box at the Division 0 tournament" },
         ]}
       />
 

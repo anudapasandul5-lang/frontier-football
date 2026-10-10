@@ -13,6 +13,7 @@ import {
   albumStory,
   lightboxItems,
   manifestUrl,
+  refPolicy,
   tileLabel,
   type AlbumItem,
 } from "@/lib/album-data";
@@ -38,7 +39,7 @@ export function AlbumHead({ title, count, credit, story, id }: { title: string; 
         {story?.photo ? (
           <ViewTransition name={`album-cover-${id}`} share="album-cover" default="none">
             <figure className="relative h-[55svh] min-h-[350px] overflow-hidden md:h-full">
-              <img src={story.photo} alt={story.photoAlt ?? title} className={`size-full ${story.photo.startsWith("/albums/") ? "object-contain" : "object-cover"}`} fetchPriority="high" />
+              <img src={story.photo} alt={story.photoAlt ?? title} className={`size-full ${story.photo.startsWith("/albums/") ? "object-contain" : "object-cover"}`} fetchPriority="high" referrerPolicy={refPolicy(story.photo)} />
               {story.photoCredit ? <figcaption className="absolute bottom-0 left-0 bg-ink px-4 py-2 text-xs text-bone">Photo: {story.photoCredit}</figcaption> : null}
             </figure>
           </ViewTransition>

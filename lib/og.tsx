@@ -17,8 +17,19 @@ export const siteDescription = "Frontier Football is Sri Lanka’s football comm
 
 const fontData = readFile(join(process.cwd(), "assets/og/bricolage-75-700.ttf"));
 
+/* A Drive thumbnail URL is fetched at build time; if Drive is down the card
+   falls back to the site's own hero still rather than failing the build. */
+async function source(publicPath: string): Promise<string | Buffer> {
+  if (!publicPath.startsWith("http")) return join(process.cwd(), "public", publicPath);
+  try {
+    const res = await fetch(publicPath);
+    if (res.ok) return Buffer.from(await res.arrayBuffer());
+  } catch {}
+  return join(process.cwd(), "public/hero/still-desktop.webp");
+}
+
 async function dataUri(publicPath: string, width: number, height: number, fit: "cover" | "inside") {
-  const buffer = await sharp(join(process.cwd(), "public", publicPath))
+  const buffer = await sharp(await source(publicPath))
     .resize(width, height, { fit, position: "attention" })
     .flatten({ background: "#0b0e13" })
     .jpeg({ quality: 82 })

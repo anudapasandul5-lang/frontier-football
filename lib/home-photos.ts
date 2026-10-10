@@ -28,9 +28,9 @@ export const marqueePhotos: HomePhoto[] = [
 export const statementPhoto: HomePhoto = { id: "1lzIdThKRPby0xAHllSw-4Jz7Rbb_nw3H", src: "/home/moment-crowd.webp", sourceUrl: drive("1lzIdThKRPby0xAHllSw-4Jz7Rbb_nw3H"), w: 2000, h: 1335, alt: "A packed Frontier watch-along at Main Sports Bar" };
 
 /* Act 5's competition cards pick one landscape photo each from these, served from Drive
-   at view time (thumbUrl, no-referrer). The 4 x 4 frames are clean SZN 6 picks
-   from T2; the Division 0 frames are from its album and were checked at 800px
-   for burned-in marks (none). Full-bleed backgrounds were dropped 2026-09-24 (too soft). */
+   at view time (thumbUrl, no-referrer). The first frame of each is used. Both sets are
+   frames from the Stage 2 picks albums (picks-szn-6 #7 and #3, picks-division-0 #2
+   and #3; 2026-10-10), none with burned-in marks. Full-bleed backgrounds were dropped 2026-09-24 (too soft). */
 export type DrivePhoto = { id: string; w: number; h: number; alt: string };
 
 const szn6 = "A 4 x 4 Series SZN 6 match at Athlete 360";
@@ -39,14 +39,14 @@ const div0 = "The Division 0 PS5 tournament at Pixels N Pints";
 export const competitionPhotos: Record<"4 x 4 Series" | "Division 0", { frames: DrivePhoto[] }> = {
   "4 x 4 Series": {
     frames: [
-      { id: "14oAKa0Rir7wqe6sbVRD2Li2RG-sTGV6U", w: 400, h: 291, alt: szn6 },
-      { id: "1t0Xtc7eN3YWW_k7YDW3iUH9CNtGBCGF4", w: 400, h: 266, alt: szn6 },
+      { id: "1vyz8MJf1X4MRf-M3kCVxhVMxhy0ArPzn", w: 400, h: 311, alt: "Players lift trophies and medals under a green tent at 4 x 4 Series SZN 6" },
+      { id: "1EAcGlHAlGxo5QXKvhOJbik-tUB96u62U", w: 400, h: 357, alt: szn6 },
     ],
   },
   "Division 0": {
     frames: [
-      { id: "1tFbmDB8xFRn6V7PgGSi4_hRm_ordP63s", w: 400, h: 600, alt: "The Pixels N Pints gaming and sports bar entrance" },
-      { id: "19_NtvhsJCWDnFmaKn3fa7eB2dlnUeLpF", w: 400, h: 266, alt: div0 },
+      { id: "1-kJAls0gofEaVr3EieTM3otoHEFW0GMl", w: 400, h: 266, alt: div0 },
+      { id: "1gMmy2N8vMdtH2m3nqgNJWsYGPtb5s6dl", w: 400, h: 266, alt: div0 },
     ],
   },
 };

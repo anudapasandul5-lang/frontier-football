@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Content } from "@/lib/content-data";
+import { refPolicy } from "@/lib/album-data";
 import { phoneSrcSet } from "@/lib/phone-image";
 import styles from "./Scrapbook.module.css";
 
@@ -54,7 +55,7 @@ function PinPhoto({ item, name }: { item: Photo; name: string }) {
   return <figure className={styles.photo}>
     <img src={item.photo!} srcSet={item.photoCredit ? undefined : phoneSrcSet(item.photo!)}
       sizes="(max-width: 700px) 86vw, 46vw" alt={item.photoAlt ?? name}
-      width={1200} height={750} loading="lazy" decoding="async"
+      width={1200} height={750} referrerPolicy={refPolicy(item.photo!)} loading="lazy" decoding="async"
       className={item.photoCredit ? styles.credited : "scrapbook-photo"} />
   </figure>;
 }

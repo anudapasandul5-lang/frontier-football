@@ -27,6 +27,10 @@ const LIGHTBOX_WIDTH = 1600;
 const FALLBACK_WIDTH = 1200;
 const FALLBACK_HEIGHT = 800;
 
+/* Drive thumbnails refuse most requests that carry a referrer, so every <img>
+   that may show one sets no-referrer; a committed photo gets nothing. */
+export const refPolicy = (src: string) => (src.startsWith("http") ? ("no-referrer" as const) : undefined);
+
 export function thumbUrl(id: string, width = GRID_WIDTH) {
   return `https://drive.google.com/thumbnail?id=${encodeURIComponent(id)}&sz=w${width}`;
 }

@@ -277,17 +277,17 @@ export default {
       // site"). It ran after Ground Zero and before the 4x4 Series.
       name: "Turf Wars",
       beforeSeries: true,
-      // TODO: the owner is sending the Google Drive photo folder. Add it to
-      // the ALBUMS map, run `npm run albums:sync`, then set albumId to
-      // "turf-wars" and paste the share link into driveFolder.
-      albumId: "TODO",
+      // The owner's "Best 30 of the Album" picks, on Drive and synced
+      // (2026-10-10). driveFolder stays TODO: paste a share link there only
+      // if the owner wants one.
+      albumId: "turf-wars",
       note: "TODO",
       champion: "TODO",
       runnerUp: "TODO",
-      // The winners' photo from before the removal (restored from git).
-      // Swap for a pick from the Drive folder once it arrives.
-      photo: "/champions/turf-wars.webp",
-      photoAlt: "The Turf Wars champions with their hands on the trophy.",
+      // The winners, from the picks folder on Drive (turf-wars album, #22 of
+      // the owner's Best 30; 2026-10-10). Replaces the 800px poster crop.
+      photo: "https://drive.google.com/thumbnail?id=1-XPBIHqU4dxudCRdUMej_PrAnIA9kZzA&sz=w1600",
+      photoAlt: "The Turf Wars winners posed on the turf with their trophies and medals under the banner.",
       // Source: Frontier's own Turf Wars poster (Instagram cache, 2026-09-22):
       // "Club Fusion, Boralesgamuwa, July 26th 2025".
       date: "26 July 2025",

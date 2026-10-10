@@ -57,3 +57,6 @@ Decisions (Anuda): new photos reach slots through Drive albums + Drive thumbnail
 
 ## Still to do (Stage 2 part 2, fresh session)
 Steps 3-5 of the brief: re-pick every photo slot via Drive thumbnail URLs (`https://drive.google.com/thumbnail?id=<id>&sz=w1200`, `referrerpolicy="no-referrer"`), set Turf Wars `albumId: "turf-wars"` in content.js (~line 283), captions/alt from folder+event names only, slot report, tsc + test + `next build` + `next start` checks, agent-browser shots at 1440 and 400, push for preview. File ids per pick are in the pick lists; new-folder file ids come from `public/albums/<id>.json`.
+
+## Stage 2 part 2: DONE 2026-10-10
+Duplicates trashed, ThePapare picks imported (szn-5 121, frontier-futsal 132), slots re-picked. See `SLOT-REPORT.md`.

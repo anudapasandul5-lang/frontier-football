@@ -1,6 +1,7 @@
 import { ViewTransition, type CSSProperties, type ReactNode } from "react";
 import { Nav } from "@/components/primitives/Nav";
 import { SplitReveal } from "@/components/primitives/SplitReveal";
+import { refPolicy } from "@/lib/album-data";
 import { phoneSrcSet } from "@/lib/phone-image";
 
 /* The inner pages' first act, in the home page's language (owner, 2026-09-23:
@@ -42,6 +43,7 @@ export function PageHero({
       width={2000}
       height={1335}
       fetchPriority="high"
+      referrerPolicy={refPolicy(photo.src)}
       decoding="async"
       data-zoom="0.16"
       style={{ "--wipe-delay": "140ms", objectPosition: photo.position ?? "center" } as CSSProperties}

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ViewTransition } from "react";
 import raw from "@/content.js";
-import { albumIds } from "@/lib/album-data";
+import { albumIds, refPolicy } from "@/lib/album-data";
 import { albumFacts } from "@/lib/album-facts";
 import { galleryChapters, type Chapter, type StoryAlbum } from "@/lib/gallery-story";
 import { coverFor, reel, type ReelFrame } from "@/lib/highlights";
@@ -97,7 +97,7 @@ function Cover({ album, className }: { album: StoryAlbum; className: string }) {
   if (!cover) return null;
   return (
     <ViewTransition name={`album-cover-${album.id}`} share="album-cover" default="none">
-      <img src={cover.src} srcSet={phoneSrcSet(cover.src)} sizes="(min-width: 768px) 50vw, 100vw" alt={cover.alt || `${album.title}.`} width={1600} height={900} loading="lazy" decoding="async" className={className} />
+      <img src={cover.src} srcSet={phoneSrcSet(cover.src)} sizes="(min-width: 768px) 50vw, 100vw" alt={cover.alt || `${album.title}.`} width={1600} height={900} referrerPolicy={refPolicy(cover.src)} loading="lazy" decoding="async" className={className} />
     </ViewTransition>
   );
 }

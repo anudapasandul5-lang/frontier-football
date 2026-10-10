@@ -24,6 +24,7 @@ export function PhotoStrip({ photos }: { photos: StripPhoto[] }) {
             height={900}
             loading="lazy"
             decoding="async"
+            referrerPolicy={p.src.startsWith("http") ? "no-referrer" : undefined}
             className={`block aspect-[4/3] w-full object-cover ${i === 0 ? "col-span-2 sm:col-span-1" : ""}`}
           />
         ))}
