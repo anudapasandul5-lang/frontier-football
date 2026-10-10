@@ -1,5 +1,6 @@
 import { Roll } from "@/components/primitives/Roll";
 import { SplitReveal } from "@/components/primitives/SplitReveal";
+import { phoneSrcSet } from "@/lib/phone-image";
 
 /* The home page's "Join the community" teaser (plan L7): the Sunday Football
    League and one way in, to the Community page where the Registrations live.
@@ -40,6 +41,8 @@ export function CommunityTeaser() {
             old Frontier Futsal mark. */}
         <img
           src="/home/ring/szn4-greeting.webp"
+          srcSet={phoneSrcSet("/home/ring/szn4-greeting.webp")}
+          sizes="(min-width: 768px) 40vw, 100vw"
           alt="Players greeting each other on the pitch at a 4 x 4 Series match"
           width={1200}
           height={900}
