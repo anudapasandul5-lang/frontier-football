@@ -1,0 +1,1388 @@
+[
+  {
+    "page": "home",
+    "sourcePage": 3,
+    "placement": "SMALL LABEL ABOVE THE HEADLINE",
+    "text": "Football. Community. Culture.",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 3,
+    "placement": "SMALL LABEL ABOVE THE HEADLINE",
+    "text": "Football. Community. Culture.",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 3,
+    "placement": "BIG HEADLINE, TWO LINES",
+    "text": "Football, community and culture. Giving Sri Lanka’s football a platform.",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 3,
+    "placement": "BIG HEADLINE, TWO LINES",
+    "text": "Football, community and culture. Giving Sri Lanka’s football a platform.",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 3,
+    "placement": "BUTTON 1 (WAS “JOIN SUNDAY LEAGUE”)",
+    "text": "Explore events",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 3,
+    "placement": "BUTTON 1 (WAS “JOIN SUNDAY LEAGUE”)",
+    "text": "Explore events",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 3,
+    "placement": "BUTTON 2",
+    "text": "Partner with us",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 3,
+    "placement": "BUTTON 2",
+    "text": "Partner with us",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 3,
+    "placement": "LOCATION LINE",
+    "text": "Colombo, Sri Lanka",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 3,
+    "placement": "LOCATION LINE",
+    "text": "Colombo, Sri Lanka",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 3,
+    "placement": "SMALL LABEL",
+    "text": "Who we are",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 3,
+    "placement": "SMALL LABEL",
+    "text": "Who we are",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 3,
+    "placement": "HEADLINE",
+    "text": "A platform for Sri Lanka’s football community.",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 3,
+    "placement": "HEADLINE",
+    "text": "A platform for Sri Lanka’s football community.",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 3,
+    "placement": "LINE UNDER HEADLINE",
+    "text": "A place for players, fans and brands to show up, get seen and be part of something bigger than the final whistle.",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 3,
+    "placement": "LINE UNDER HEADLINE",
+    "text": "A place for players, fans and brands to show up, get seen and be part of something bigger than the final whistle.",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 4,
+    "placement": "SMALL LABEL",
+    "text": "Built by football. Powered by community.",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 4,
+    "placement": "SMALL LABEL",
+    "text": "Built by football. Powered by community.",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 4,
+    "placement": "HEADLINE (WAS “COUNTED SO FAR.”)",
+    "text": "Milestones.",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 4,
+    "placement": "HEADLINE (WAS “COUNTED SO FAR.”)",
+    "text": "Milestones.",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 4,
+    "placement": "PARAGRAPH",
+    "text": "It started with Ground Zero, one night on turf in Colombo. Then came Turf Wars, the 4 x 4 Series, watch parties and Division 0, our FC 26 tournament. Every one added another chapter. The numbers below show how far it has come.",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 4,
+    "placement": "PARAGRAPH",
+    "text": "It started with Ground Zero, one night on turf in Colombo. Then came Turf Wars, the 4 x 4 Series, watch parties and Division 0, our FC 26 tournament. Every one added another chapter. The numbers below show how far it has come.",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 4,
+    "placement": "SECTION LABEL (WAS “COMPETITIONS”)",
+    "text": "Events",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 4,
+    "placement": "SECTION LABEL (WAS “COMPETITIONS”)",
+    "text": "Events",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 4,
+    "placement": "CARD 1 LINE — GROUND ZERO",
+    "text": "Where it all began.",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 4,
+    "placement": "CARD 1 LINE — GROUND ZERO",
+    "text": "Where it all began.",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 4,
+    "placement": "CARD 2 LINE — 4 X 4 SERIES",
+    "text": "Six seasons. One venue. A new standard.",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 4,
+    "placement": "CARD 2 LINE — 4 X 4 SERIES",
+    "text": "Six seasons. One venue. A new standard.",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 4,
+    "placement": "CARD 3 LINE — DIVISION 0",
+    "text": "Played on the virtual pitch.",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 4,
+    "placement": "CARD 3 LINE — DIVISION 0",
+    "text": "Played on the virtual pitch.",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 4,
+    "placement": "CARD 4 LINE — WATCH PARTIES",
+    "text": "The big games, watched together.",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 4,
+    "placement": "CARD 4 LINE — WATCH PARTIES",
+    "text": "The big games, watched together.",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 5,
+    "placement": "SMALL LABEL",
+    "text": "Frontier presents",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 5,
+    "placement": "SMALL LABEL",
+    "text": "Frontier presents",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 5,
+    "placement": "HEADLINE",
+    "text": "Join the community.",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 5,
+    "placement": "HEADLINE",
+    "text": "Join the community.",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 5,
+    "placement": "PARAGRAPH",
+    "text": "Bring your team, or come alone and find one. Every Sunday, there is a place for you with Frontier.",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 5,
+    "placement": "PARAGRAPH",
+    "text": "Bring your team, or come alone and find one. Every Sunday, there is a place for you with Frontier.",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 5,
+    "placement": "BUTTON (WAS “SEE THE LEAGUE”)",
+    "text": "See how to join",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 5,
+    "placement": "BUTTON (WAS “SEE THE LEAGUE”)",
+    "text": "See how to join",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 5,
+    "placement": "SMALL LABEL",
+    "text": "Brands that back the game",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 5,
+    "placement": "SMALL LABEL",
+    "text": "Brands that back the game",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 5,
+    "placement": "BUTTON",
+    "text": "Partner with us",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 5,
+    "placement": "BUTTON",
+    "text": "Partner with us",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 5,
+    "placement": "LINE",
+    "text": "Small-sided football and the culture around it, from the heart of Sri Lanka.",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "home",
+    "sourcePage": 5,
+    "placement": "LINE",
+    "text": "Small-sided football and the culture around it, from the heart of Sri Lanka.",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "who-we-are",
+    "sourcePage": 6,
+    "placement": "SMALL LABEL ABOVE HEADLINE",
+    "text": "Since Ground Zero",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "who-we-are",
+    "sourcePage": 6,
+    "placement": "SMALL LABEL ABOVE HEADLINE",
+    "text": "Since Ground Zero",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "who-we-are",
+    "sourcePage": 6,
+    "placement": "HEADLINE",
+    "text": "Who we are.",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "who-we-are",
+    "sourcePage": 6,
+    "placement": "HEADLINE",
+    "text": "Who we are.",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "who-we-are",
+    "sourcePage": 6,
+    "placement": "INTRO PARAGRAPH, UNDER HEADLINE",
+    "text": "Frontier Football started in Colombo in 2024 with one night on turf and a simple dream: Sri Lankan football deserves the biggest stage. Two years in, it is a large, growing community.",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "who-we-are",
+    "sourcePage": 6,
+    "placement": "INTRO PARAGRAPH, UNDER HEADLINE",
+    "text": "Frontier Football started in Colombo in 2024 with one night on turf and a simple dream: Sri Lankan football deserves the biggest stage. Two years in, it is a large, growing community.",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "who-we-are",
+    "sourcePage": 6,
+    "placement": "SMALL LABEL",
+    "text": "Our story",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "who-we-are",
+    "sourcePage": 6,
+    "placement": "SMALL LABEL",
+    "text": "Our story",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "who-we-are",
+    "sourcePage": 6,
+    "placement": "HEADLINE",
+    "text": "A platform.",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "who-we-are",
+    "sourcePage": 6,
+    "placement": "HEADLINE",
+    "text": "A platform.",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "who-we-are",
+    "sourcePage": 6,
+    "placement": "PARAGRAPH 1",
+    "text": "Frontier Football is a platform for Sri Lanka’s football community. We spotlight talent and bring together everyone who loves the game.",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "who-we-are",
+    "sourcePage": 6,
+    "placement": "PARAGRAPH 1",
+    "text": "Frontier Football is a platform for Sri Lanka’s football community. We spotlight talent and bring together everyone who loves the game.",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "who-we-are",
+    "sourcePage": 6,
+    "placement": "PARAGRAPH 2",
+    "text": "We build the space where players shine, get recognised and grow, in a community that goes well beyond casual play. Through tournaments, collaborations and digital content, football culture and brands meet here.",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "who-we-are",
+    "sourcePage": 6,
+    "placement": "PARAGRAPH 2",
+    "text": "We build the space where players shine, get recognised and grow, in a community that goes well beyond casual play. Through tournaments, collaborations and digital content, football culture and brands meet here.",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "who-we-are",
+    "sourcePage": 7,
+    "placement": "HEADLINE",
+    "text": "The run so far",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "who-we-are",
+    "sourcePage": 7,
+    "placement": "HEADLINE",
+    "text": "The run so far",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "events",
+    "sourcePage": 8,
+    "placement": "SMALL LABEL ABOVE HEADLINE",
+    "text": "For players",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "events",
+    "sourcePage": 8,
+    "placement": "SMALL LABEL ABOVE HEADLINE",
+    "text": "For players",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "events",
+    "sourcePage": 8,
+    "placement": "HEADLINE (WAS “COME AND PLAY.”)",
+    "text": "Join the action.",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "events",
+    "sourcePage": 8,
+    "placement": "HEADLINE (WAS “COME AND PLAY.”)",
+    "text": "Join the action.",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "events",
+    "sourcePage": 8,
+    "placement": "INTRO PARAGRAPH",
+    "text": "Frontier runs every week, and something bigger is usually on the way. Here is when we play and what is coming up.",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "events",
+    "sourcePage": 8,
+    "placement": "INTRO PARAGRAPH",
+    "text": "Frontier runs every week, and something bigger is usually on the way. Here is when we play and what is coming up.",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "events",
+    "sourcePage": 8,
+    "placement": "BUTTON 1 (WAS “EVERY WEEK”)",
+    "text": "Join us",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "events",
+    "sourcePage": 8,
+    "placement": "BUTTON 1 (WAS “EVERY WEEK”)",
+    "text": "Join us",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "events",
+    "sourcePage": 8,
+    "placement": "BUTTON 2 (WAS “EVERY RESULT”)",
+    "text": "Hall of Fame",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "events",
+    "sourcePage": 8,
+    "placement": "BUTTON 2 (WAS “EVERY RESULT”)",
+    "text": "Hall of Fame",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "events",
+    "sourcePage": 8,
+    "placement": "SECTION HEADING",
+    "text": "Join us",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "events",
+    "sourcePage": 8,
+    "placement": "SECTION HEADING",
+    "text": "Join us",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "events",
+    "sourcePage": 8,
+    "placement": "WEEKLY SESSION LINE",
+    "text": "Every Sunday, 7 pm to 10 pm, at Club Fusion, Borella. Community sessions, open to everyone.",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "events",
+    "sourcePage": 8,
+    "placement": "WEEKLY SESSION LINE",
+    "text": "Every Sunday, 7 pm to 10 pm, at Club Fusion, Borella. Community sessions, open to everyone.",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "events",
+    "sourcePage": 8,
+    "placement": "BUTTON, SENDS A WHATSAPP MESSAGE",
+    "text": "Ask about this Sunday",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "events",
+    "sourcePage": 8,
+    "placement": "BUTTON, SENDS A WHATSAPP MESSAGE",
+    "text": "Ask about this Sunday",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "events",
+    "sourcePage": 9,
+    "placement": "SECTION HEADING",
+    "text": "Our events",
+    "width": 1440,
+    "matched": false,
+    "conditional": true
+  },
+  {
+    "page": "events",
+    "sourcePage": 9,
+    "placement": "SECTION HEADING",
+    "text": "Our events",
+    "width": 400,
+    "matched": false,
+    "conditional": true
+  },
+  {
+    "page": "events",
+    "sourcePage": 9,
+    "placement": "LINE UNDER IT",
+    "text": "Watch parties, game nights, community sessions and our football events. See what is coming up and be there.",
+    "width": 1440,
+    "matched": false,
+    "conditional": true
+  },
+  {
+    "page": "events",
+    "sourcePage": 9,
+    "placement": "LINE UNDER IT",
+    "text": "Watch parties, game nights, community sessions and our football events. See what is coming up and be there.",
+    "width": 400,
+    "matched": false,
+    "conditional": true
+  },
+  {
+    "page": "events",
+    "sourcePage": 9,
+    "placement": "SECTION HEADING",
+    "text": "Hall of Fame",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "events",
+    "sourcePage": 9,
+    "placement": "SECTION HEADING",
+    "text": "Hall of Fame",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "events",
+    "sourcePage": 9,
+    "placement": "LINE UNDER IT",
+    "text": "The winners of every Frontier event, and the stats behind them.",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "events",
+    "sourcePage": 9,
+    "placement": "LINE UNDER IT",
+    "text": "The winners of every Frontier event, and the stats behind them.",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "community",
+    "sourcePage": 10,
+    "placement": "SMALL LABEL ABOVE HEADLINE",
+    "text": "Community",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "community",
+    "sourcePage": 10,
+    "placement": "SMALL LABEL ABOVE HEADLINE",
+    "text": "Community",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "community",
+    "sourcePage": 10,
+    "placement": "HEADLINE (WAS “PLAY WITH FRONTIER.”)",
+    "text": "More than a game.",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "community",
+    "sourcePage": 10,
+    "placement": "HEADLINE (WAS “PLAY WITH FRONTIER.”)",
+    "text": "More than a game.",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "community",
+    "sourcePage": 10,
+    "placement": "INTRO PARAGRAPH",
+    "text": "Your next game starts here. Join the league.",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "community",
+    "sourcePage": 10,
+    "placement": "INTRO PARAGRAPH",
+    "text": "Your next game starts here. Join the league.",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "community",
+    "sourcePage": 10,
+    "placement": "SMALL LABEL, SUNDAY LEAGUE BLOCK",
+    "text": "Now registering",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "community",
+    "sourcePage": 10,
+    "placement": "SMALL LABEL, SUNDAY LEAGUE BLOCK",
+    "text": "Now registering",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "community",
+    "sourcePage": 10,
+    "placement": "EVENT 1",
+    "text": "Ground Zero",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "community",
+    "sourcePage": 10,
+    "placement": "EVENT 1",
+    "text": "Ground Zero",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "community",
+    "sourcePage": 11,
+    "placement": "EVENT 2",
+    "text": "4 x 4 Series",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "community",
+    "sourcePage": 11,
+    "placement": "EVENT 2",
+    "text": "4 x 4 Series",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "community",
+    "sourcePage": 11,
+    "placement": "EVENT 3",
+    "text": "Watch Parties",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "community",
+    "sourcePage": 11,
+    "placement": "EVENT 3",
+    "text": "Watch Parties",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "community",
+    "sourcePage": 11,
+    "placement": "EVENT 4",
+    "text": "Division 0",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "community",
+    "sourcePage": 11,
+    "placement": "EVENT 4",
+    "text": "Division 0",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "collaborate",
+    "sourcePage": 12,
+    "placement": "SMALL LABEL ABOVE HEADLINE",
+    "text": "For brands",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "collaborate",
+    "sourcePage": 12,
+    "placement": "SMALL LABEL ABOVE HEADLINE",
+    "text": "For brands",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "collaborate",
+    "sourcePage": 12,
+    "placement": "HEADLINE (UNCHANGED)",
+    "text": "Collaborate with us.",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "collaborate",
+    "sourcePage": 12,
+    "placement": "HEADLINE (UNCHANGED)",
+    "text": "Collaborate with us.",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "collaborate",
+    "sourcePage": 12,
+    "placement": "INTRO PARAGRAPH",
+    "text": "Frontier brings together football, community and culture in Colombo. See who we reach, how partners can get involved, and who is already with us.",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "collaborate",
+    "sourcePage": 12,
+    "placement": "INTRO PARAGRAPH",
+    "text": "Frontier brings together football, community and culture in Colombo. See who we reach, how partners can get involved, and who is already with us.",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "collaborate",
+    "sourcePage": 12,
+    "placement": "BUTTON",
+    "text": "I want to partner",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "collaborate",
+    "sourcePage": 12,
+    "placement": "BUTTON",
+    "text": "I want to partner",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "collaborate",
+    "sourcePage": 12,
+    "placement": "SMALL LABEL",
+    "text": "Reach",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "collaborate",
+    "sourcePage": 12,
+    "placement": "SMALL LABEL",
+    "text": "Reach",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "collaborate",
+    "sourcePage": 12,
+    "placement": "HEADLINE",
+    "text": "Who sees it.",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "collaborate",
+    "sourcePage": 12,
+    "placement": "HEADLINE",
+    "text": "Who sees it.",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "collaborate",
+    "sourcePage": 12,
+    "placement": "HEADLINE",
+    "text": "What a partner gets",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "collaborate",
+    "sourcePage": 12,
+    "placement": "HEADLINE",
+    "text": "What a partner gets",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "collaborate",
+    "sourcePage": 12,
+    "placement": "SMALL LABEL",
+    "text": "Already alongside us",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "collaborate",
+    "sourcePage": 12,
+    "placement": "SMALL LABEL",
+    "text": "Already alongside us",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "collaborate",
+    "sourcePage": 13,
+    "placement": "BIG LINE",
+    "text": "Talk to us.",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "collaborate",
+    "sourcePage": 13,
+    "placement": "BIG LINE",
+    "text": "Talk to us.",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "collaborate",
+    "sourcePage": 13,
+    "placement": "LINE UNDER IT",
+    "text": "One message is all it takes.",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "collaborate",
+    "sourcePage": 13,
+    "placement": "LINE UNDER IT",
+    "text": "One message is all it takes.",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "contact",
+    "sourcePage": 15,
+    "placement": "SMALL LABEL ABOVE HEADLINE",
+    "text": "Contact",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "contact",
+    "sourcePage": 15,
+    "placement": "SMALL LABEL ABOVE HEADLINE",
+    "text": "Contact",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "contact",
+    "sourcePage": 15,
+    "placement": "HEADLINE",
+    "text": "Get in touch.",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "contact",
+    "sourcePage": 15,
+    "placement": "HEADLINE",
+    "text": "Get in touch.",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "contact",
+    "sourcePage": 15,
+    "placement": "INTRO PARAGRAPH (TWO LINKS: “REGISTER TEAM OR JOIN SOLO PLAYER” AND “COLLABORATE”)",
+    "text": "Playing Sunday League? Register team or join solo player. Brands, head to Collaborate.",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "contact",
+    "sourcePage": 15,
+    "placement": "INTRO PARAGRAPH (TWO LINKS: “REGISTER TEAM OR JOIN SOLO PLAYER” AND “COLLABORATE”)",
+    "text": "Playing Sunday League? Register team or join solo player. Brands, head to Collaborate.",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "contact",
+    "sourcePage": 15,
+    "placement": "BUTTON 1",
+    "text": "WhatsApp us",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "contact",
+    "sourcePage": 15,
+    "placement": "BUTTON 1",
+    "text": "WhatsApp us",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "contact",
+    "sourcePage": 15,
+    "placement": "BUTTON 2",
+    "text": "For brands",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "contact",
+    "sourcePage": 15,
+    "placement": "BUTTON 2",
+    "text": "For brands",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "contact",
+    "sourcePage": 15,
+    "placement": "HEADLINE",
+    "text": "Say hello.",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "contact",
+    "sourcePage": 15,
+    "placement": "HEADLINE",
+    "text": "Say hello.",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "gallery",
+    "sourcePage": 16,
+    "placement": "SMALL LABEL",
+    "text": "Gallery",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "gallery",
+    "sourcePage": 16,
+    "placement": "SMALL LABEL",
+    "text": "Gallery",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "gallery",
+    "sourcePage": 16,
+    "placement": "HEADLINE (WAS “WHAT IT FEELS LIKE.”)",
+    "text": "The experience.",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "gallery",
+    "sourcePage": 16,
+    "placement": "HEADLINE (WAS “WHAT IT FEELS LIKE.”)",
+    "text": "The experience.",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "gallery",
+    "sourcePage": 16,
+    "placement": "LINE UNDER THE HEADLINE (REPLACES THE ALBUM AND PHOTOGRAPH COUNT)",
+    "text": "What it feels like.",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "gallery",
+    "sourcePage": 16,
+    "placement": "LINE UNDER THE HEADLINE (REPLACES THE ALBUM AND PHOTOGRAPH COUNT)",
+    "text": "What it feels like.",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "404",
+    "sourcePage": 17,
+    "placement": "SMALL LABEL",
+    "text": "404 / Page not found",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "404",
+    "sourcePage": 17,
+    "placement": "SMALL LABEL",
+    "text": "404 / Page not found",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "404",
+    "sourcePage": 17,
+    "placement": "HEADLINE",
+    "text": "Offside.",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "404",
+    "sourcePage": 17,
+    "placement": "HEADLINE",
+    "text": "Offside.",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "404",
+    "sourcePage": 17,
+    "placement": "LINE",
+    "text": "That page was never in play. It may have moved, or the link is off.",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "404",
+    "sourcePage": 17,
+    "placement": "LINE",
+    "text": "That page was never in play. It may have moved, or the link is off.",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "404",
+    "sourcePage": 17,
+    "placement": "BUTTON 1",
+    "text": "Back to home",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "404",
+    "sourcePage": 17,
+    "placement": "BUTTON 1",
+    "text": "Back to home",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "404",
+    "sourcePage": 17,
+    "placement": "BUTTON 2",
+    "text": "See the gallery",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "404",
+    "sourcePage": 17,
+    "placement": "BUTTON 2",
+    "text": "See the gallery",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "metadata",
+    "sourcePage": 18,
+    "placement": "SITE NAME",
+    "text": "Frontier Football",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "metadata",
+    "sourcePage": 18,
+    "placement": "SITE NAME",
+    "text": "Frontier Football",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "metadata",
+    "sourcePage": 18,
+    "placement": "DESCRIPTION",
+    "text": "Frontier Football is Sri Lanka’s football community. Tournaments, Sunday League and the culture around the game, in Colombo.",
+    "width": 1440,
+    "matched": true,
+    "conditional": false
+  },
+  {
+    "page": "metadata",
+    "sourcePage": 18,
+    "placement": "DESCRIPTION",
+    "text": "Frontier Football is Sri Lanka’s football community. Tournaments, Sunday League and the culture around the game, in Colombo.",
+    "width": 400,
+    "matched": true,
+    "conditional": false
+  }
+]

@@ -1,0 +1,387 @@
+# Additional strings outside the PDF copy cards
+
+These are preserved interface labels, facts, accessibility text, photo credits, and sections outside Ticket 1. Duplicate motion spans are deduplicated. The screenshots are the authority for visibility.
+
+## who-we-are 1440 px
+
+- Skip to content
+- Not recorded yet
+- 4 X 4 SERIES SZN
+- Athlete 360
+- RAMADAN FC
+- PANTERA FC
+- ALONGSIDE THE RUN
+- Final: Spain vs Argentina
+- Semi-final: England vs Argentina
+- Semi-final: Spain vs France
+- Norway vs England
+- UCL Final Night
+- SPAIN
+- World Cup Edition
+- Pixels N Pints
+- PS5 FC26 tournament
+- →
+- INSTAGRAM
+- (OPENS IN A NEW TAB)
+- TIKTOK
+- © 2026 FRONTIER FOOTBALL
+- 01
+
+## events 1440 px
+
+- Skip to content
+- Results of every Frontier season and competition, newest season first
+- EVENT	DATE	VENUE	CHAMPION	RUNNER-UP	PHOTOS
+- 4 X 4 SERIES SZN 6	—
+- NOT RECORDED YET
+- 	ATHLETE 360	SPAIN	—
+- , 4 X 4 SERIES SZN 6
+- 4 X 4 SERIES SZN 5	—
+- 	ATHLETE 360	—
+- , 4 X 4 SERIES SZN 5
+- 4 X 4 SERIES SZN 4	—
+- 	ATHLETE 360	PANTERA FC	—
+- , 4 X 4 SERIES SZN 4
+- 4 X 4 SERIES SZN 3	—
+- 	ATHLETE 360	RAMADAN FC	—
+- , 4 X 4 SERIES SZN 3
+- 4 X 4 SERIES SZN 2	—
+- , 4 X 4 SERIES SZN 2
+- 4 X 4 SERIES SZN 1	—
+- , 4 X 4 SERIES SZN 1
+- GROUND ZERO	—
+- , GROUND ZERO
+- DIVISION 0	—
+- 	PIXELS N PINTS	—
+- →
+- INSTAGRAM
+- (OPENS IN A NEW TAB)
+- TIKTOK
+- © 2026 FRONTIER FOOTBALL
+- 01
+
+## gallery 1440 px
+
+- Skip to content
+- WHERE IT STARTED
+- 4X4 SERIES
+- 123 PHOTOS
+- →
+- 6 ALBUMS · 3,196 PHOTOS
+- SZN 01
+- 502 PHOTOS · ATHLETE 360
+- SZN 02
+- 1,038 PHOTOS · ATHLETE 360
+- SZN 03
+- Champions Ramadan FC
+- 463 PHOTOS · ATHLETE 360
+- SZN 04
+- Champions Pantera FC
+- 869 PHOTOS · ATHLETE 360
+- SZN 05
+- 120 PHOTOS · ATHLETE 360
+- SZN 06
+- Champions Spain
+- 204 PHOTOS · ATHLETE 360
+- 5 ALBUMS · 799 PHOTOS
+- FINAL: SPAIN VS ARGENTINA
+- 257 PHOTOS
+- OPEN ALBUM
+- SEMI-FINAL: ENGLAND VS ARGENTINA
+- 177 PHOTOS
+- SEMI-FINAL: SPAIN VS FRANCE
+- 52 PHOTOS
+- NORWAY VS ENGLAND
+- 124 PHOTOS
+- UCL FINAL NIGHT
+- 189 PHOTOS
+- 64 PHOTOS · PIXELS N PINTS
+- INSTAGRAM
+- (OPENS IN A NEW TAB)
+- TIKTOK
+- © 2026 FRONTIER FOOTBALL
+- 01
+- 06
+
+## community 1440 px
+
+- Skip to content
+- Sunday Football League
+- →
+- INSTAGRAM
+- (OPENS IN A NEW TAB)
+- TIKTOK
+- © 2026 FRONTIER FOOTBALL
+- 01
+
+## contact 1440 px
+
+- Skip to content
+- EMAIL
+- Info.frontierfootball@gmail.com
+- +94 76 343 1469
+- @FRONTIERFOOTBALLL
+- @FRONTIERFOOTBALL
+- THE RECORD
+- WHAT WE’VE RUN
+- 01
+- →
+- : GROUND ZERO
+- SZN 1 TO SZN 6
+- : 4 X 4 SERIES
+- 03
+- PS5 FC26 TOURNAMENT
+- : DIVISION 0
+- WATCH-ALONGS
+- 5 MATCH NIGHTS ON THE BIG SCREEN
+- : WATCH-ALONGS
+- INSTAGRAM
+- (OPENS IN A NEW TAB)
+- TIKTOK
+- © 2026 FRONTIER FOOTBALL
+
+## 404 1440 px
+
+- Skip to content
+- INSTAGRAM
+- (OPENS IN A NEW TAB)
+- TIKTOK
+- © 2026 FRONTIER FOOTBALL
+
+## who-we-are 400 px
+
+- Skip to content
+- Not recorded yet
+- 4 X 4 SERIES SZN
+- Athlete 360
+- RAMADAN FC
+- PANTERA FC
+- ALONGSIDE THE RUN
+- Final: Spain vs Argentina
+- Semi-final: England vs Argentina
+- Semi-final: Spain vs France
+- Norway vs England
+- UCL Final Night
+- SPAIN
+- World Cup Edition
+- Pixels N Pints
+- PS5 FC26 tournament
+- →
+- INSTAGRAM
+- (OPENS IN A NEW TAB)
+- TIKTOK
+- © 2026 FRONTIER FOOTBALL
+
+## events 400 px
+
+- Skip to content
+- Results of every Frontier season and competition, newest season first
+- EVENT	DATE	VENUE	CHAMPION	RUNNER-UP	PHOTOS
+- 4 X 4 SERIES SZN 6
+- NOT RECORDED YET
+- ATHLETE 360
+- SPAIN
+- RUNNER-UP
+- , 4 X 4 SERIES SZN 6
+- 4 X 4 SERIES SZN 5
+- , 4 X 4 SERIES SZN 5
+- 4 X 4 SERIES SZN 4
+- PANTERA FC
+- , 4 X 4 SERIES SZN 4
+- 4 X 4 SERIES SZN 3
+- RAMADAN FC
+- , 4 X 4 SERIES SZN 3
+- 4 X 4 SERIES SZN 2
+- , 4 X 4 SERIES SZN 2
+- 4 X 4 SERIES SZN 1
+- , 4 X 4 SERIES SZN 1
+- , GROUND ZERO
+- PIXELS N PINTS
+- →
+- INSTAGRAM
+- (OPENS IN A NEW TAB)
+- TIKTOK
+- © 2026 FRONTIER FOOTBALL
+
+## gallery 400 px
+
+- Skip to content
+- WHERE IT STARTED
+- 4X4 SERIES
+- 123 PHOTOS
+- →
+- 6 ALBUMS · 3,196 PHOTOS
+- SZN 01
+- 502 PHOTOS · ATHLETE 360
+- SZN 02
+- 1,038 PHOTOS · ATHLETE 360
+- SZN 03
+- Champions Ramadan FC
+- 463 PHOTOS · ATHLETE 360
+- SZN 04
+- Champions Pantera FC
+- 869 PHOTOS · ATHLETE 360
+- SZN 05
+- 120 PHOTOS · ATHLETE 360
+- SZN 06
+- Champions Spain
+- 204 PHOTOS · ATHLETE 360
+- 5 ALBUMS · 799 PHOTOS
+- FINAL: SPAIN VS ARGENTINA
+- 257 PHOTOS
+- OPEN ALBUM
+- SEMI-FINAL: ENGLAND VS ARGENTINA
+- 177 PHOTOS
+- SEMI-FINAL: SPAIN VS FRANCE
+- 52 PHOTOS
+- NORWAY VS ENGLAND
+- 124 PHOTOS
+- UCL FINAL NIGHT
+- 189 PHOTOS
+- 64 PHOTOS · PIXELS N PINTS
+- INSTAGRAM
+- (OPENS IN A NEW TAB)
+- TIKTOK
+- © 2026 FRONTIER FOOTBALL
+
+## community 400 px
+
+- Skip to content
+- Sunday Football League
+- →
+- INSTAGRAM
+- (OPENS IN A NEW TAB)
+- TIKTOK
+- © 2026 FRONTIER FOOTBALL
+
+## contact 400 px
+
+- Skip to content
+- EMAIL
+- Info.frontierfootball@gmail.com
+- +94 76 343 1469
+- @FRONTIERFOOTBALLL
+- @FRONTIERFOOTBALL
+- THE RECORD
+- WHAT WE’VE RUN
+- 01
+- →
+- : GROUND ZERO
+- SZN 1 TO SZN 6
+- : 4 X 4 SERIES
+- 03
+- PS5 FC26 TOURNAMENT
+- : DIVISION 0
+- WATCH-ALONGS
+- 5 MATCH NIGHTS ON THE BIG SCREEN
+- : WATCH-ALONGS
+- INSTAGRAM
+- (OPENS IN A NEW TAB)
+- TIKTOK
+- © 2026 FRONTIER FOOTBALL
+
+## 404 400 px
+
+- Skip to content
+- INSTAGRAM
+- (OPENS IN A NEW TAB)
+- TIKTOK
+- © 2026 FRONTIER FOOTBALL
+
+## home 1440 px
+
+- Skip to content
+- AS OF SEPTEMBER 2026
+- 01
+- INSTAGRAM VIEWS
+- 3.4M+
+- 50+
+- 03
+- 400+
+- 15+
+- Photo: Milinda Deshan / ThePapare
+- @IODEXSRILANKA
+- @ZONE360.LK
+- SEIXED
+- REIGNITE
+- RED BULL
+- Follow Frontier Football
+- INSTAGRAM
+- (OPENS IN A NEW TAB)
+- TIKTOK
+- © 2026 FRONTIER FOOTBALL
+- 06
+
+## collaborate 1440 px
+
+- Skip to content
+- INSTAGRAM VIEWS
+- 3.4M+
+- AS OF 2026-09-22
+- INSTAGRAM FOLLOWERS
+- 914
+- 400+
+- 50+
+- 15+
+- 01
+- 03
+- 05
+- @IODEXSRILANKA
+- @ZONE360.LK
+- SEIXED
+- REIGNITE
+- RED BULL
+- →
+- INSTAGRAM
+- (OPENS IN A NEW TAB)
+- TIKTOK
+- © 2026 FRONTIER FOOTBALL
+- 06
+
+## home 400 px
+
+- Skip to content
+- AS OF SEPTEMBER 2026
+- 01
+- INSTAGRAM VIEWS
+- 3.4M+
+- 50+
+- 03
+- 400+
+- 15+
+- Photo: Milinda Deshan / ThePapare
+- @IODEXSRILANKA
+- @ZONE360.LK
+- SEIXED
+- REIGNITE
+- RED BULL
+- Follow Frontier Football
+- INSTAGRAM
+- (OPENS IN A NEW TAB)
+- TIKTOK
+- © 2026 FRONTIER FOOTBALL
+
+## collaborate 400 px
+
+- Skip to content
+- INSTAGRAM VIEWS
+- 3.4M+
+- AS OF 2026-09-22
+- INSTAGRAM FOLLOWERS
+- 914
+- 400+
+- 50+
+- 15+
+- 01
+- 03
+- 05
+- @IODEXSRILANKA
+- @ZONE360.LK
+- SEIXED
+- REIGNITE
+- RED BULL
+- →
+- INSTAGRAM
+- (OPENS IN A NEW TAB)
+- TIKTOK
+- © 2026 FRONTIER FOOTBALL

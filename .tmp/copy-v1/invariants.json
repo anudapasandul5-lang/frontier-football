@@ -1,0 +1,9 @@
+{
+  "pass": true,
+  "checks": [
+    "all WhatsApp drafts and contact data unchanged",
+    "album IDs, image paths and Drive URLs unchanged",
+    "seasons and recorded/unknown champions unchanged",
+    "watch-alongs, stats, partners, people and upcoming events unchanged"
+  ]
+}

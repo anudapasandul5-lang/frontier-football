@@ -1,0 +1,82 @@
+[
+  {
+    "width": 1440,
+    "normalMotionReveals": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "keyboardOpen": "http://localhost:4173/who-we-are/4x4-series",
+    "keyboardReturn": "http://localhost:4173/who-we-are#run-heading",
+    "allAlbums200": [
+      {
+        "href": "/albums/szn-1",
+        "status": 200
+      },
+      {
+        "href": "/albums/szn-2",
+        "status": 200
+      },
+      {
+        "href": "/albums/szn-3",
+        "status": 200
+      },
+      {
+        "href": "/albums/szn-4",
+        "status": 200
+      },
+      {
+        "href": "/albums/szn-5",
+        "status": 200
+      },
+      {
+        "href": "/albums/szn-6",
+        "status": 200
+      }
+    ],
+    "anchorJumpRevealsAll": true,
+    "reducedMotionResets": true,
+    "focusOutline": "3px"
+  },
+  {
+    "width": 400,
+    "normalMotionReveals": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "keyboardOpen": "http://localhost:4173/who-we-are/4x4-series",
+    "keyboardReturn": "http://localhost:4173/who-we-are#run-heading",
+    "allAlbums200": [
+      {
+        "href": "/albums/szn-1",
+        "status": 200
+      },
+      {
+        "href": "/albums/szn-2",
+        "status": 200
+      },
+      {
+        "href": "/albums/szn-3",
+        "status": 200
+      },
+      {
+        "href": "/albums/szn-4",
+        "status": 200
+      },
+      {
+        "href": "/albums/szn-5",
+        "status": 200
+      },
+      {
+        "href": "/albums/szn-6",
+        "status": 200
+      }
+    ],
+    "anchorJumpRevealsAll": true,
+    "reducedMotionResets": true,
+    "focusOutline": "3px"
+  }
+]

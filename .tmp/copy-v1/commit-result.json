@@ -1,0 +1,37 @@
+{
+  "branch": "copy-v1",
+  "commit": "688d0d7e32f11dcfa98ca3b6ef5f17d89be34892",
+  "files": [
+    "app/collaborate/page.tsx",
+    "app/community/page.tsx",
+    "app/contact/page.tsx",
+    "app/events/page.tsx",
+    "app/gallery/page.tsx",
+    "app/globals.css",
+    "app/layout.tsx",
+    "app/not-found.tsx",
+    "app/who-we-are/page.tsx",
+    "components/acts/Closing.tsx",
+    "components/acts/CommunityTeaser.tsx",
+    "components/acts/Competitions.tsx",
+    "components/acts/Events.test.tsx",
+    "components/acts/Events.tsx",
+    "components/acts/Hero.tsx",
+    "components/acts/Numbers.tsx",
+    "components/acts/Partners.tsx",
+    "components/acts/WhoWeAre.tsx",
+    "components/motion/MomentMotionRuntime.tsx",
+    "components/pages/ContactRoutes.tsx",
+    "content.js",
+    "docs/copy-v1-review.md",
+    "lib/community.test.ts",
+    "lib/community.ts",
+    "lib/content-data.ts",
+    "lib/og.tsx"
+  ],
+  "protectedHashes": {
+    ".mcp.json": "299068c6140cebd5263900f021be5abcb6c22b855fc3a6938e1a7f32d0b74b3a",
+    "t3-numbers-1440.png": "81b7f89689cc5ef915c0a4398a87065502fbb10b0d2fe686b55b126670aca8b1",
+    "skills-lock.json": "b6286ed9936d7c28a429e36ff042f1409e9a2ad6a811dd476d6acbf08ee9a7af"
+  }
+}

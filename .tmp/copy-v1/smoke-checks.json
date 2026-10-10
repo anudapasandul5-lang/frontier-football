@@ -1,0 +1,65 @@
+{
+  "events": {
+    "anchors": [
+      {
+        "exists": true,
+        "href": "#join"
+      },
+      {
+        "exists": true,
+        "href": "#hall-of-fame"
+      }
+    ],
+    "order": [
+      "join",
+      "hall-of-fame"
+    ],
+    "upcomingAbsent": true
+  },
+  "join": {
+    "hash": "#join",
+    "top": 95.5
+  },
+  "hall-of-fame": {
+    "hash": "#hall-of-fame",
+    "top": 96.28125
+  },
+  "moment390": {
+    "opacity": "1",
+    "sectionTop": -500
+  },
+  "watchParties": {
+    "focus": "3",
+    "photos": [
+      {
+        "loaded": true,
+        "opacity": "0"
+      },
+      {
+        "loaded": true,
+        "opacity": "0"
+      },
+      {
+        "loaded": true,
+        "opacity": "0"
+      },
+      {
+        "loaded": true,
+        "opacity": "1"
+      }
+    ]
+  },
+  "menu": {
+    "close": true,
+    "labels": [
+      "Home",
+      "Who We Are",
+      "Events",
+      "Gallery",
+      "Community",
+      "Collaborate",
+      "Contact"
+    ]
+  },
+  "menuClosed": true
+}

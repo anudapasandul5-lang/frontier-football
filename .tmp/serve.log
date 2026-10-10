@@ -1,0 +1,2 @@
+> node scripts/serve-out.mjs
+out/ on http://localhost:4173
