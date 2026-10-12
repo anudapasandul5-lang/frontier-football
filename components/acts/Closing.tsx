@@ -18,8 +18,26 @@ export function Closing() {
       aria-labelledby="closing-heading"
       data-tone="bone"
       data-chapter="Contact"
-      className="canvas-teal overflow-hidden py-[clamp(4rem,14vh,9rem)]"
+      data-closing
+      className="canvas-teal relative isolate overflow-hidden py-[clamp(4rem,14vh,9rem)]"
     >
+      {/* The page ends by completing a pitch: its lines are drawn in with the
+          scroll (HomeStory), the centre ring last, and the crest settles inside
+          it. Drawn in full by default, so a still page already has the pitch. */}
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 1400 700"
+        preserveAspectRatio="xMaxYMid slice"
+        className="pointer-events-none absolute inset-0 -z-10 h-full w-full fill-none stroke-bone/25 [stroke-width:3] max-md:opacity-60"
+      >
+        <path className="close-line" pathLength={1} d="M1400 40H40V660H1400" />
+        <path className="close-line" pathLength={1} d="M1000 40V660" />
+        <path className="close-line" pathLength={1} d="M40 200H260V500H40" />
+        <path className="close-line" pathLength={1} d="M40 280H130V420H40" />
+        <path className="close-line" pathLength={1} d="M260 290A120 120 0 0 1 260 410" />
+        <circle className="close-ring stroke-bone/70 max-md:hidden" pathLength={1} cx="1000" cy="350" r="170" />
+        <image className="close-crest max-md:hidden" href="/crest.webp" x="922" y="255" width="156" height="190" />
+      </svg>
       <div className="frame relative flex flex-col gap-[clamp(2rem,6vh,4rem)]">
         <TickRule />
         <p className="max-w-[18ch] font-serif text-[clamp(2.25rem,min(6vw,10svh),4.5rem)] leading-[1.02]">

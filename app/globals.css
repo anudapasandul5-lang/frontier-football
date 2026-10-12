@@ -729,3 +729,21 @@ body:has(#hero)::after {
 }
 
 
+
+/* Hall of Fame spotlight (PageStory): the row crossing the middle of the
+   screen takes the same lift as a hovered row, so the wall lights up under the
+   reader's scroll, on touch screens too. Only under data-motion="on". */
+:root[data-motion="on"] .hof-row.is-active > span[aria-hidden="true"]:first-child {
+  scale: 1 1;
+}
+:root[data-motion="on"] .hof-row.is-active .photo-frame img {
+  filter: grayscale(0);
+  scale: 1.06;
+}
+:root[data-motion="on"] .hof-row.is-active .hof-champ {
+  translate: 0.375rem 0;
+  transition:
+    clip-path 700ms var(--ease-in-out) 250ms,
+    transform 500ms var(--ease-out),
+    translate 500ms var(--ease-out);
+}

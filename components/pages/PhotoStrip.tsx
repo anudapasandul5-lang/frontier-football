@@ -10,7 +10,7 @@ export type StripPhoto = { src: string; alt: string };
 
 export function PhotoStrip({ photos }: { photos: StripPhoto[] }) {
   return (
-    <section aria-label="Photographs" className="frame py-[clamp(3rem,10vh,6rem)]">
+    <section aria-label="Photographs" data-strip className="frame py-[clamp(3rem,10vh,6rem)]">
       {/* Phone: one wide photo over two, so none shrinks to a thumbnail. */}
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-4">
         {photos.map((p, i) => (

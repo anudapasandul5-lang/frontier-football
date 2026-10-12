@@ -9,6 +9,7 @@ import { Moment } from "@/components/acts/Moment";
 import { Numbers } from "@/components/acts/Numbers";
 import { Partners } from "@/components/acts/Partners";
 import { WhoWeAre } from "@/components/acts/WhoWeAre";
+import { HomeStory } from "@/components/motion/HomeStory";
 import { Interactions } from "@/components/motion/Interactions";
 import { Intro } from "@/components/motion/Intro";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
@@ -41,6 +42,7 @@ export default function Home() {
       </main>
       <Footer />
       <Interactions />
+      <HomeStory />
     </>
   );
 }

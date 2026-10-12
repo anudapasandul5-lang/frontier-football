@@ -109,7 +109,7 @@ export function Competitions() {
             (or tabbing to) a row fills it with its colour and swaps the photo
             on the stage (CSS only, .comp in globals.css). Below md each row
             carries its own photo and the stage is not rendered. */}
-        <div className="comp mt-10 grid border-t-2 border-ink md:min-h-[560px] md:grid-cols-[1.1fr_1fr]">
+        <div data-comp className="comp mt-10 grid border-t-2 border-ink md:min-h-[560px] md:grid-cols-[1.1fr_1fr]">
           <ul className="flex flex-col">
             {rows.map((r, i) => (
               <li

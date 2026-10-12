@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import raw from "@/content.js";
 import { parseContent, resultRows, sessions, upcomingEvents, whatsappHref } from "@/lib/content-data";
 import { Events as Upcoming } from "@/components/acts/Events";
+import { PageStory } from "@/components/motion/PageStory";
 import { NextPage } from "@/components/pages/NextPage";
 import { PageHero, heroButton } from "@/components/pages/PageHero";
 import { PageShell } from "@/components/pages/PageShell";
@@ -67,17 +68,20 @@ export default function EventsPage() {
       />
 
       {nights.length > 0 ? (
-        <section data-tone="bone" id="join" data-chapter="Join us" aria-labelledby="sessions-heading" className="frame scroll-mt-24 py-[clamp(4rem,12vh,8rem)]">
-          <h2 id="sessions-heading" className="mb-6 font-display text-[clamp(1.375rem,1.2rem+0.7vw,1.875rem)] leading-none uppercase">
+        <section data-tone="bone" id="join" data-quiet data-chapter="Join us" aria-labelledby="sessions-heading" className="frame relative scroll-mt-24 py-[clamp(5rem,18vh,11rem)]">
+          {/* The kick-off line, drawn across as the reader arrives (PageStory). */}
+          <span aria-hidden="true" className="quiet-line absolute inset-x-0 top-[clamp(2rem,7vh,4rem)] h-0.5 bg-bone/35" />
+          <h2 id="sessions-heading" data-quiet-item className="mb-6 font-display text-[clamp(1.375rem,1.2rem+0.7vw,1.875rem)] leading-none uppercase">
             Join us
           </h2>
-          <p className="max-w-[58ch] text-[clamp(1.125rem,1rem+0.4vw,1.375rem)] leading-relaxed">{raw.league.sessionLine}</p>
+          <p data-quiet-item className="max-w-[58ch] text-[clamp(1.125rem,1rem+0.4vw,1.375rem)] leading-relaxed">{raw.league.sessionLine}</p>
           {askHref ? (
             <a
               href={askHref}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Ask about this Sunday (opens WhatsApp in a new tab)"
+              data-quiet-item
               className={`${heroButton} mt-8 w-fit bg-yellow text-ink`}
             >
               <Roll>Ask about this Sunday</Roll>
@@ -105,7 +109,7 @@ export default function EventsPage() {
             className="mb-4 font-display text-[clamp(3rem,min(9vw,15svh),7.5rem)] leading-[0.88] font-bold uppercase"
           />
           <p className="mb-[clamp(2rem,6vh,4rem)] max-w-[58ch] text-[clamp(1.125rem,1rem+0.4vw,1.375rem)] leading-relaxed">The winners of every Frontier event, and the stats behind them.</p>
-          <ol aria-labelledby="results-heading" className="border-t border-bone/25">
+          <ol aria-labelledby="results-heading" data-hof className="border-t border-bone/25">
             {results.map((row, i) => {
               const meta = [row.venue, row.date, row.runnerUp ? `Runner-up ${row.runnerUp}` : null].filter(Boolean).join("  ·  ");
               return (
@@ -169,6 +173,7 @@ export default function EventsPage() {
       ) : null}
 
       <NextPage current="/events" />
+      <PageStory />
     </PageShell>
   );
 }

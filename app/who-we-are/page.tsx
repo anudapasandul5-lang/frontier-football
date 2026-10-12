@@ -3,6 +3,7 @@ import raw from "@/content.js";
 import { parseContent, people } from "@/lib/content-data";
 import { Scrapbook } from "@/components/pages/Scrapbook";
 import { AboutMotion } from "@/components/motion/AboutMotion";
+import { PageStory } from "@/components/motion/PageStory";
 import { NextPage } from "@/components/pages/NextPage";
 import { PageHero } from "@/components/pages/PageHero";
 import { PageShell } from "@/components/pages/PageShell";
@@ -100,6 +101,7 @@ export default function WhoWeAre() {
               height={900}
               loading="lazy"
               decoding="async"
+              data-zoom="0.12"
               className="story-photo block aspect-[4/3] w-full object-cover"
             />
             <div>
@@ -157,6 +159,7 @@ export default function WhoWeAre() {
       ) : null}
       <NextPage current="/who-we-are" />
       <AboutMotion />
+      <PageStory />
     </PageShell>
   );
 }
