@@ -7,6 +7,16 @@ type Photo = { photo: string | null; photoAlt: string | null; photoCredit?: stri
 type Album = { albumId: string | null; driveFolder: string | null };
 const albumHref = (item?: Album) => item?.albumId ? `/albums/${encodeURIComponent(item.albumId)}` : item?.driveFolder;
 
+/* Each pin on the timeline has its own photo, so it never repeats the hall of
+   fame card or an album cover. Ground Zero is cut to the frame's 1.6:1 shape
+   (watermark whole), so its credited photo shows without bars. */
+const runPhotos: Record<string, { photo: string; photoAlt: string }> = {
+  "Ground Zero": { photo: "/pages/run-ground-zero.webp", photoAlt: "Two players race for the ball in a women's match at Ground Zero; photograph by ThePapare" },
+  "4 x 4 Series": { photo: "/pages/run-4x4.webp", photoAlt: "SZN 6 runners-up with their medals and the trophy" },
+  "Watch Parties": { photo: "/pages/run-watch-parties.webp", photoAlt: "A supporter laughs with her friends at the Norway v England watch party" },
+  "Division 0": { photo: "/pages/run-division-0.webp", photoAlt: "A Division 0 player in a red shirt plays a match from the sofa" },
+};
+
 export function Scrapbook({ data }: { data: Content }) {
   const ground = data.competitions.find((item) => item.name === "Ground Zero");
   const turf = data.competitions.find((item) => item.name === "Turf Wars");
@@ -33,7 +43,7 @@ export function Scrapbook({ data }: { data: Content }) {
         {pins.map(({ name, item, href }, index) => {
           const body = <>
             <span className={styles.number} aria-hidden="true">{index + 1}</span>
-            {item?.photo ? <PinPhoto item={item} name={name} /> : null}
+            {item?.photo ? <PinPhoto item={{ ...item, ...runPhotos[name] }} name={name} /> : null}
             <strong>{name}{href ? <span aria-hidden="true">↗</span> : null}</strong>
             {item && "photoCredit" in item && item.photoCredit ? <small className={styles.credit}>{item.photoCredit}</small> : null}
           </>;

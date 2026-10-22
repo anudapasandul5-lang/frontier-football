@@ -49,28 +49,26 @@ export default {
     { name: "Ground Zero", body: "It all began here. One night on turf in Colombo, in 2024. Players came with something to prove, the crowd came to see it, and nobody who was there forgot it. Every Frontier night since traces back to this one.",
     credit: "Photos: ThePapare",
     photos: [
-      { src: "/albums/frontier-futsal/9792a16def4ab58717fd323264cf486d.webp", alt: "Two players fight for the ball at Ground Zero" },
-      { src: "/albums/frontier-futsal/028d44b1500220bc9a69eadecee302c8.webp", alt: "A player in yellow runs onto the ball at Ground Zero" },
-      { src: "/albums/frontier-futsal/cd3591a33cca4c3591f1f01eb0437bfc.webp", alt: "Three players close in on the ball at Ground Zero" },
+      { src: "/pages/story-ground-zero-1.webp", alt: "Two players race for the ball in a women's match at Ground Zero" },
+      { src: "/pages/story-ground-zero-2.webp", alt: "A player drives at two defenders at Ground Zero" },
+      { src: "/pages/story-ground-zero-3.webp", alt: "Two players square up over the ball at Ground Zero" },
     ] },
     { name: "4 x 4 Series", body: "Six seasons. One venue. The same turf, new rivalries every season, and a place that started to feel like home. Every season added more faces, more goals and more stories worth telling.",
     photos: [
-      { src: "/champions/szn-2.webp", alt: "The 4 x 4 Series SZN 2 champions" },
-      { src: "/champions/szn-4.webp", alt: "The 4 x 4 Series SZN 4 champions" },
-      { src: "/champions/szn-6.webp", alt: "The 4 x 4 Series SZN 6 champions" },
+      { src: "/pages/story-4x4-1.webp", alt: "A player drives forward behind the net at 4 x 4 Series SZN 6" },
+      { src: "/pages/story-4x4-2.webp", alt: "A goalkeeper waits beside the ball at 4 x 4 Series SZN 6" },
+      { src: "/pages/story-4x4-3.webp", alt: "Players battle for the ball through the fence at 4 x 4 Series SZN 6" },
     ] },
     { name: "Watch Parties", body: "The big games hit different when you watch them together. Strangers turned into friends, every goal got a roar, and every heartbreak was shared by the whole room.",
     photos: [
-      { src: "/champions/wa-semi-eng-arg.webp", alt: "Fans at the England v Argentina semi-final watch party" },
-      { src: "/champions/wa-ucl-final-night.webp", alt: "Fans at the Champions League final watch party" },
-      { src: "/champions/wa-final-esp-arg.webp", alt: "Spain and Argentina fans at the World Cup final watch party" },
+      { src: "/pages/story-watch-1.webp", alt: "An England supporter punches the air at the Spain v France watch party" },
+      { src: "/pages/story-watch-2.webp", alt: "A supporter in an Argentina shirt at the Norway v England watch party" },
+      { src: "/pages/story-watch-3.webp", alt: "Supporters share a table at the World Cup final watch party" },
     ] },
     { name: "Division 0", body: "Football without the grass. Controllers in hand, Division 0 gave the game another pitch. The pride was the same, the bragging rights were the same and so was the love of the game.",
     photos: [
-      { src: "/champions/division-0.webp", alt: "Players at the Division 0 FC 26 tournament" },
-      { src: "https://drive.google.com/thumbnail?id=12p617pNQRoxt3Ae0DsPqI1UMWX6dHeND&sz=w1200", alt: "A Division 0 match on the big screen, controllers in hand" },
-      { src: "https://drive.google.com/thumbnail?id=1JySS8J-819N82HC7EiALOFOttBQ1uNul&sz=w1200", alt: "Players on the sofas mid-match at Division 0" },
-      { src: "/who/division-0-crowd.webp", alt: "A crowd gathers round the console at Division 0" },
+      { src: "/pages/story-division-0-1.webp", alt: "Players and friends follow a Division 0 match on screen at Pixels N Pints" },
+      { src: "/pages/story-division-0-2.webp", alt: "A Division 0 player plays in the dark at Pixels N Pints" },
     ] },
   ],
   aboutIntro: "Frontier Football started in Colombo in 2024 with one night on turf and a simple dream: Sri Lankan football deserves the biggest stage. Two years in, it is a large, growing community.",
@@ -120,20 +118,18 @@ export default {
     {
       season: 5,
       // The photos are ThePapare's (album 13152), imported with
-      // `npm run albums:papare -- szn-5`. They are watermarked, so the album
-      // credits "Photos: ThePapare" and they are never used as a hero or a
-      // card picture.
+      // `npm run albums:papare -- szn-5`. Photographer marks and credit remain
+      // visible on the selected photograph and the complete album.
       albumId: "szn-5",
-      champion: "TODO",
+      champion: "Panadura",
       note: "TODO",
       runnerUp: "TODO",
       goldenBoot: "TODO",
       goldenGlove: "TODO",
-      // Clean frame at 24s of Frontier's own 026-DaDIerCqF4H.mp4 Instagram
-      // post, whose caption identifies this SZN 5 event. ThePapare photos stay
-      // in the credited album and are never cropped into a hero.
+      // Photos-only selection, 2026-10-14: credited SZN5 trophy photograph.
       photo: "/gallery/szn-5-hero.webp",
-      photoAlt: "Two 4x4 Series trophies and medals set out after SZN 5.",
+      photoCredit: "ThePapare",
+      photoAlt: "Players raise the trophy together after 4 x 4 Series SZN 5; photograph by ThePapare",
       date: "TODO",
       venue: "Athlete 360",
       // Link to this season's full photo folder on Google Drive. Paste the
@@ -154,7 +150,7 @@ export default {
       goldenBoot: "TODO",
       goldenGlove: "TODO",
       photo: "/champions/szn-4.webp",
-      photoAlt: "The 4 x 4 Series SZN 4 champions holding the trophy together after the final.",
+      photoAlt: "Pantera FC players raise the trophy together after 4 x 4 Series SZN 4",
       date: "TODO",
       venue: "Athlete 360",
       // Link to this season's full photo folder on Google Drive. Paste the
@@ -175,7 +171,7 @@ export default {
       goldenBoot: "TODO",
       goldenGlove: "TODO",
       photo: "/champions/szn-3.webp",
-      photoAlt: "The 4 x 4 Series SZN 3 champions wearing their medals, with the trophy.",
+      photoAlt: "Ramadan FC with medals and the 4 x 4 Series SZN 3 trophy",
       date: "TODO",
       venue: "Athlete 360",
       // Link to this season's full photo folder on Google Drive. Paste the
@@ -194,15 +190,16 @@ export default {
       // file in public/albums/, written by `npm run albums:sync`. Leave it as
       // "TODO" and the card still shows, saying the photos are on the way.
       albumId: "szn-2",
-      champion: "TODO",
+      champion: "Ramadan FC",
       note: "TODO",
       runnerUp: "TODO",
       goldenBoot: "TODO",
       goldenGlove: "TODO",
-      // A match-action frame from the SZN 2 Drive folder - not a champions
-      // photo (the winner is still unknown), just proof there was a season.
+      // A group photo with the "4x4 Series Champions" cup (SZN 2 Drive folder,
+      // 03 Group Photos, DSC_1827, 2026-10-20). The team is not named in the
+      // photo. Champion from Arshad (WhatsApp, 2026-10-20): "szn 1-3 RFC".
       photo: "/champions/szn-2.webp",
-      photoAlt: "A 4 x 4 Series SZN 2 player lines up a shot as an opponent closes in.",
+      photoAlt: "Players pose with the 4 x 4 Series Champions trophy at SZN 2",
       date: "TODO",
       venue: "Athlete 360",
       // Link to this season's full photo folder on Google Drive. Paste the
@@ -217,7 +214,7 @@ export default {
       // file in public/albums/, written by `npm run albums:sync`. Leave it as
       // "TODO" and the card still shows, saying the photos are on the way.
       albumId: "szn-1",
-      champion: "TODO",
+      champion: "Ramadan FC",
       note: "TODO",
       runnerUp: "TODO",
       goldenBoot: "TODO",
@@ -226,7 +223,7 @@ export default {
       // docs/HOUSE-RULES.md section 6 (17% off the bottom clears the Frontier
       // crest and the REIGNITE wordmark).
       photo: "/champions/szn-1.webp",
-      photoAlt: "4 x 4 Series SZN 1 players challenge for the ball in the cage under floodlights.",
+      photoAlt: "Players challenge for the ball in the afternoon sun at 4 x 4 Series SZN 1",
       date: "TODO",
       venue: "Athlete 360",
       // Link to this season's full photo folder on Google Drive. Paste the
@@ -256,15 +253,15 @@ export default {
       // tabs and on the About page's timeline.
       beforeSeries: true,
       note: "TODO",
-      // ThePapare's prize-giving photos show a women's and a men's winning
-      // team, but not their names. Fill these in once confirmed.
-      champion: "TODO",
+      // Winners from Arshad (WhatsApp, 2026-10-20): "ground zero - clowns fc".
+      // The runner-up is still unknown.
+      champion: "Clowns FC",
       runnerUp: "TODO",
-      // Owner-approved 2026-09-23: use a selected ThePapare photograph here,
-      // preserving its visible Milinda Deshan/ThePapare watermark and album
-      // credit. This file is already part of the curated local album.
-      photo: "/albums/frontier-futsal/b36221d4200375031890d20c95f5162c.webp",
-      photoAlt: "A player in black controls the ball against two defenders in teal at Ground Zero.",
+      // Owner-approved 2026-09-23: a ThePapare photograph, with its Milinda
+      // Deshan/ThePapare watermark and credit kept. Refreshed 2026-10-20 from
+      // the owner's photo folder: the women's winners receiving the trophy.
+      photo: "/champions/ground-zero.webp",
+      photoAlt: "The women's winners receive the trophy at Ground Zero; photograph by ThePapare",
       photoCredit: "Milinda Deshan / ThePapare",
       date: "TODO",
       // Club Fusion signage is visible in ThePapare's photos. Confirm before
@@ -282,12 +279,12 @@ export default {
       // "turf-wars" and paste the share link into driveFolder.
       albumId: "TODO",
       note: "TODO",
-      champion: "TODO",
+      champion: "Panthera FC",
       runnerUp: "TODO",
       // The winners' photo from before the removal (restored from git).
       // Swap for a pick from the Drive folder once it arrives.
       photo: "/champions/turf-wars.webp",
-      photoAlt: "The Turf Wars champions with their hands on the trophy.",
+      photoAlt: "Turf Wars players and organisers together with a trophy at Club Fusion",
       // Source: Frontier's own Turf Wars poster (Instagram cache, 2026-09-22):
       // "Club Fusion, Boralesgamuwa, July 26th 2025".
       date: "26 July 2025",
@@ -307,12 +304,12 @@ export default {
       // post went up on 28 July 2026, so it looks like July, but that is a
       // guess from a post date and is not written on the site.
       note: "PS5 FC26 tournament",
-      champion: "TODO",
+      champion: "Yashen Caldera",
       runnerUp: "TODO",
-      // Not the winners: a photo from the night itself, since no champions
-      // picture was found. The description below says so honestly.
+      // The winner holding the trophy at Pixels N Pints (photo supplied by the
+      // owner in chat, 2026-10-20).
       photo: "/champions/division-0.webp",
-      photoAlt: "Players on a sofa at the Division 0 console tournament, controller in hand.",
+      photoAlt: "The Division 0 winner holds the trophy beside a Frontier screen at Pixels N Pints",
       date: "TODO",
       venue: "Pixels N Pints",
       // Link to the full photo folder for Division 0 on Google Drive.
@@ -361,7 +358,7 @@ export default {
       // A picture from the night. Put the file in the public/champions/ folder
       // and write its name here, the same way the champion photos work.
       photo: "/champions/wa-final-esp-arg.webp",
-      photoAlt: "Argentina and Spain fans crowd round a table with flags at the World Cup final watch-along.",
+      photoAlt: "Fans with Spain and Argentina flags at the World Cup final watch party",
       date: "TODO",
       venue: "TODO",
       // The Google Drive folder holding the photos from this night.
@@ -372,7 +369,7 @@ export default {
       albumId: "wa-semi-eng-arg",
       note: "TODO",
       photo: "/champions/wa-semi-eng-arg.webp",
-      photoAlt: "A packed crowd in Argentina shirts celebrates at the England vs Argentina watch-along.",
+      photoAlt: "Supporters punch the air at the England v Argentina watch party",
       date: "TODO",
       venue: "TODO",
       driveFolder: "https://drive.google.com/drive/folders/1MFdyJn1AwLtSq_Flkg8PB_EqFX1a15CV",
@@ -382,7 +379,7 @@ export default {
       albumId: "wa-semi-esp-fra",
       note: "TODO",
       photo: "/champions/wa-semi-esp-fra.webp",
-      photoAlt: "Fans on their feet reacting to the Spain vs France semi-final.",
+      photoAlt: "Friends in Paris Saint-Germain shirts sit together at the Spain v France watch party",
       date: "TODO",
       venue: "TODO",
       driveFolder: "https://drive.google.com/drive/folders/15y_x5dnOdsGQvmjPm0JaIqeLpoGWB5BM",
@@ -392,7 +389,7 @@ export default {
       albumId: "wa-norway-england",
       note: "TODO",
       photo: "/champions/wa-norway-england.webp",
-      photoAlt: "An England fan in a 1966 shirt punches the air at the Norway vs England watch-along.",
+      photoAlt: "Supporters leap up with their arms raised at the Norway v England watch party",
       date: "TODO",
       venue: "TODO",
       driveFolder: "https://drive.google.com/drive/folders/1CZXXR7ZNFmPaOFudf8wDXNlPFlaKnxlh",
@@ -404,7 +401,7 @@ export default {
       albumId: "wa-ucl-final-night",
       note: "TODO",
       photo: "/champions/wa-ucl-final-night.webp",
-      photoAlt: "Fans in red shirts cheer with their arms raised at the watch-along.",
+      photoAlt: "Two supporters embrace during the Champions League final watch party",
       date: "TODO",
       venue: "TODO",
       driveFolder: "https://drive.google.com/drive/folders/1LI43OOBwg14x5l5h-E3OTw5f2z-kGyXe",
@@ -904,32 +901,32 @@ export default {
       {
         title: "Enhanced visibility",
         body: "Put your brand in front of a focused football audience, live at our events and every day through our content.",
-        photo: "/home/moment-crowd.webp",
-        alt: "A packed room at Main Sports Bar watching the match",
+        photo: "/pages/offer-visibility.webp",
+        alt: "A packed bar of supporters at the World Cup final watch party",
       },
       {
         title: "Community engagement",
         body: "Stand with a growing football movement built on passion, culture and community.",
-        photo: "/home/moment-flags.webp",
-        alt: "Fans with Argentina flags at a Frontier watch party",
+        photo: "/pages/collab-community.webp",
+        alt: "Supporters pose with Argentina flags at the World Cup final watch party",
       },
       {
         title: "Customizable opportunities",
         body: "Show up your way: on the ground at our events, or through stories we tell together online.",
-        photo: "/home/moment-strike.webp",
-        alt: "A player strikes the ball under the lights at a Frontier match",
+        photo: "/pages/offer-custom.webp",
+        alt: "A referee and players during a night match at 4 x 4 Series SZN 6",
       },
       {
         title: "Product distribution",
         body: "Get your product into the hands of players and fans, where it counts.",
-        photo: "/pages/contact-trophies.webp",
-        alt: "Trophies, medals and partner product boxes at a Frontier final",
+        photo: "/pages/collab-prizes.webp",
+        alt: "A player receives an award and a partner prize box at the SZN 6 presentation",
       },
       {
         title: "Branding opportunities",
         body: "Strong on-site branding, event mentions and dedicated social content, so your brand stays visible well past match day.",
         photo: "/pages/collab-partner-can.webp",
-        alt: "A giant partner drink can on display at Division 0",
+        alt: "A giant Seixed bottle on display at Pixels N Pints during Division 0",
       },
     ],
   },

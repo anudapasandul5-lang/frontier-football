@@ -1,14 +1,14 @@
-import { thumbUrl } from "@/lib/album-data";
+import { phoneSrcSet } from "@/lib/phone-image";
 import { SplitReveal } from "@/components/primitives/SplitReveal";
 
-/* Who We Are: a full-bleed SZN 6 night with the owner's words on it. The
+/* Who We Are: reviewed daylight football with the owner's words on it. The
    guide's still-to-video treatment was tried here and removed by the owner
    (2026-09-22).
 
    Copy is the owner's, from the 4x4 Series proposal deck (2026-09-10), cut
    down; the Moment act already says "Talent was never missing", so it is not
-   repeated here. Still: Drive album szn-6. */
-const STILL = { id: "1HBvbjQitxALSxMpRR8-1G72A2VWA2zek", w: 400, h: 368 };
+   repeated here. Still: disk SZN4 DSC_2082, exported locally. */
+const STILL = { src: "/home/who-we-are.webp", w: 2400, h: 1600 };
 
 export function WhoWeAre() {
   return (
@@ -18,20 +18,19 @@ export function WhoWeAre() {
       <div data-reveal className="wipe relative h-svh overflow-hidden">
         <span aria-hidden="true" className="wipe__layer wipe__flash absolute inset-0 bg-yellow" />
         <img
-          src={thumbUrl(STILL.id, 2000)}
-          srcSet={[800, 1200, 2000].map((w) => `${thumbUrl(STILL.id, w)} ${w}w`).join(", ")}
-          sizes="100vw"
-          alt="A 4 x 4 Series SZN 6 team together on the pitch at night, names on their shirts"
+          src={STILL.src}
+          srcSet={phoneSrcSet(STILL.src)}
+          sizes="(max-width: 767px) 150svh, 100vw"
+          alt="Two players battle for the ball in a daylight 4 x 4 Series SZN 6 match"
           width={STILL.w}
           height={STILL.h}
           loading="lazy"
           decoding="async"
           referrerPolicy="no-referrer"
           style={{ "--wipe-delay": "140ms" } as React.CSSProperties}
-          data-zoom="0.18"
-          className="wipe__layer absolute inset-0 h-full w-full object-cover"
+          className="wipe__layer absolute inset-0 h-full w-full object-cover object-[48%_center] md:object-center"
         />
-        <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-night via-night/50 to-transparent" />
+        <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-night/80 via-night/30 to-night/20" />
         <div className="frame absolute inset-x-0 top-0 pt-[clamp(2rem,8vh,5rem)]">
           <p className="micro mb-3 text-yellow">Who we are</p>
           <SplitReveal

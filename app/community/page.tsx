@@ -20,13 +20,14 @@ const button = "flex min-h-12 items-center px-6 font-display text-[clamp(1rem,0.
    (2026-09-24). Layout runs by story order: one big print on the left, three
    in a row, one big print on the right, then a 2 x 2 grid. */
 const layouts = ["lead-left", "row", "lead-right", "grid"] as const;
-type Layout = (typeof layouts)[number];
+type Layout = (typeof layouts)[number] | "pair";
 
 const grids: Record<Layout, string> = {
   "lead-left": "grid-cols-[3fr_2fr] grid-rows-2 [&>*:first-child]:row-span-2 h-[clamp(16rem,42vw,30rem)]",
   row: "grid-cols-3 h-[clamp(9rem,26vw,20rem)]",
   "lead-right": "grid-cols-[2fr_3fr] grid-rows-2 [&>*:last-child]:col-start-2 [&>*:last-child]:row-span-2 [&>*:last-child]:row-start-1 h-[clamp(16rem,42vw,30rem)]",
   grid: "grid-cols-2 grid-rows-2 h-[clamp(16rem,42vw,30rem)]",
+  pair: "grid-cols-2 h-[clamp(11rem,30vw,22rem)]",
 };
 const tilts = ["-rotate-[0.8deg]", "rotate-[0.6deg]", "-rotate-[0.4deg]", "rotate-[0.9deg]"];
 
@@ -68,7 +69,7 @@ export default function CommunityPage() {
           chapter="Community"
           eyebrow="Community"
           lines={["More than", "a game."]}
-          photo={{ src: "/heroes/community.webp", alt: "A supporter dancing in front of the big screen at a Frontier watch-along", position: "30% center" }}
+          photo={{ src: "/heroes/community.webp", alt: "Four friends arm in arm at the Spain v France watch party", position: "center 20%" }}
         >
           Your next game starts here. Join the league.
         </PageHero>
@@ -76,9 +77,9 @@ export default function CommunityPage() {
     >
       <PhotoStrip
         photos={[
-          { src: "/pages/community-team.webp", alt: "A 4 x 4 Series team arm in arm on the pitch" },
-          { src: "/pages/community-final-table.webp", alt: "Argentina and Spain fans together at the World Cup final watch-along" },
-          { src: "/pages/community-division-0.webp", alt: "Players crowding round the console at the Division 0 tournament" },
+          { src: "/pages/community-team.webp", alt: "Teammates hold each other in a huddle at dusk at 4 x 4 Series SZN 6" },
+          { src: "/pages/community-final-table.webp", alt: "Friends with a Spain flag around a table at the World Cup final watch party" },
+          { src: "/pages/community-division-0.webp", alt: "Players join hands in a team huddle before a 4 x 4 Series SZN 6 match" },
         ]}
       />
 
@@ -129,7 +130,7 @@ export default function CommunityPage() {
             <li key={story.name} className="border-b border-ink/20 py-[clamp(2rem,6vh,3.5rem)]">
               <p className="micro mb-2">Event {i + 1}</p>
               <h3 className="mb-6 font-display text-[clamp(1.75rem,1.2rem+2.4vw,3.75rem)] leading-none font-bold uppercase">{story.name}</h3>
-              <Collage photos={story.photos} layout={layouts[i % layouts.length]} />
+              <Collage photos={story.photos} layout={story.photos.length === 2 ? "pair" : story.photos.length >= 4 ? "grid" : layouts[i % 3]} />
               {"credit" in story ? <p className="micro mt-2">{story.credit}</p> : null}
               <p className="mt-6 max-w-[62ch] text-[clamp(1.125rem,1rem+0.4vw,1.375rem)] leading-relaxed">{story.body}</p>
             </li>

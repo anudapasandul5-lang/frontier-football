@@ -1,7 +1,6 @@
 import raw from "@/content.js";
 import { parseContent } from "@/lib/content-data";
-import { thumbUrl } from "@/lib/album-data";
-import { competitionPhotos, type DrivePhoto } from "@/lib/home-photos";
+import { competitionPhotos } from "@/lib/home-photos";
 import { MicroLabel } from "@/components/primitives/MicroLabel";
 import { phoneSrcSet } from "@/lib/phone-image";
 import { SplitReveal } from "@/components/primitives/SplitReveal";
@@ -23,6 +22,18 @@ type Tone = "blue" | "teal" | "green" | "red" | "yellow";
 type Shot = { src: string; alt: string; credit?: string };
 type Row = { tone: Tone; name: string; line: string; photo: Shot | null };
 
+/* The desktop stage is near-square (about 527 x 558), so wide photos lost
+   their sides there. Each event has its own tall crop of a photo from the
+   same event (docs/photo-refresh-2026-10-20); phones keep the wide photo in
+   their 4:3 frame. A row without a stage crop falls back to its photo. */
+const stageCrop: Partial<Record<Tone, string>> = {
+  blue: "/pages/stage-ground-zero.webp",
+  teal: "/pages/stage-turf-wars.webp",
+  green: "/pages/stage-4x4.webp",
+  red: "/pages/stage-division-0.webp",
+  yellow: "/pages/stage-watch-parties.webp",
+};
+
 // Literal class names, so Tailwind emits them and the --color-* they read.
 const hoverFill: Record<Tone, string> = {
   blue: "hover:bg-blue focus-visible:bg-blue",
@@ -32,9 +43,6 @@ const hoverFill: Record<Tone, string> = {
   red: "hover:bg-red focus-visible:bg-red",
   yellow: "hover:bg-yellow focus-visible:bg-yellow",
 };
-
-const drive = (p: DrivePhoto | undefined): Shot | null => (p ? { src: thumbUrl(p.id, 1600), alt: p.alt } : null);
-const landscape = (ps: DrivePhoto[]) => ps.find((p) => p.w >= p.h) ?? ps[0];
 
 export function Competitions() {
   const data = parseContent(raw);
@@ -64,14 +72,14 @@ export function Competitions() {
     tone: "green",
     name: "4 x 4 Series",
     line: "Six seasons. One venue. A new standard.",
-    photo: drive(landscape(competitionPhotos["4 x 4 Series"].frames)),
+    photo: competitionPhotos["4 x 4 Series"],
   });
   if (divisionZero)
     rows.push({
       tone: "red",
       name: "Division 0",
       line: "Played on the virtual pitch.",
-      photo: drive(landscape(competitionPhotos["Division 0"].frames)),
+      photo: competitionPhotos["Division 0"],
     });
 
   const party = data.watchAlongs.find((event) => event.photo?.startsWith("/champions/wa-"));
@@ -83,19 +91,22 @@ export function Competitions() {
       photo: { src: party.photo!, alt: party.photoAlt ?? "" },
     });
 
-  const shot = (r: Row, sizes: string, className: string) =>
-    r.photo ? (
+  const shot = (r: Row, sizes: string, className: string, stage = false) => {
+    if (!r.photo) return null;
+    const src = (stage && stageCrop[r.tone]) || r.photo.src;
+    return (
       <img
-        src={r.photo.src}
-        srcSet={phoneSrcSet(r.photo.src)}
+        src={src}
+        srcSet={phoneSrcSet(src)}
         sizes={sizes}
         alt={r.photo.alt}
         loading="lazy"
         decoding="async"
         referrerPolicy="no-referrer"
-        className={`${className} ${r.photo.credit ? "object-right" : ""}`}
+        className={`${className} object-cover ${r.photo.credit && src === r.photo.src ? "object-right" : ""}`}
       />
-    ) : null;
+    );
+  };
   const credit = (r: Row) =>
     r.photo?.credit ? <figcaption className="absolute top-0 right-0 z-10 bg-ink px-3 py-1.5 text-xs text-bone">Photo: {r.photo.credit}</figcaption> : null;
 
@@ -127,7 +138,7 @@ export function Competitions() {
                   />
                 </div>
                 <figure className="photo-frame relative aspect-[4/3] overflow-hidden bg-ink md:hidden">
-                  {shot(r, "100vw", "absolute inset-0 h-full w-full object-cover")}
+                  {shot(r, "100vw", "absolute inset-0 h-full w-full")}
                   {credit(r)}
                 </figure>
               </li>
@@ -136,7 +147,7 @@ export function Competitions() {
           <div className="comp__stage relative hidden overflow-hidden bg-ink md:block">
             {rows.map((r, i) => (
               <figure key={r.tone} data-i={i} aria-hidden="true" className="absolute inset-0 opacity-0 transition-opacity duration-300 ease-(--ease-out) first:opacity-100">
-                {shot(r, "(min-width: 1140px) 520px, 45vw", "absolute inset-0 h-full w-full object-cover")}
+                {shot(r, "(min-width: 1140px) 520px, 45vw", "absolute inset-0 h-full w-full", true)}
                 {credit(r)}
                 <p className="font-display absolute bottom-0 left-0 z-10 bg-ink px-3 py-2 text-[0.8rem] leading-none font-bold tracking-[0.16em] text-bone uppercase">{r.line}</p>
               </figure>

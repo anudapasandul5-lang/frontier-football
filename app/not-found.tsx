@@ -33,10 +33,10 @@ export default function NotFound() {
         </div>
         <figure className="relative h-[50svh] min-h-[320px] overflow-hidden md:h-auto">
           <img
-            src="/home/moment-strike.webp"
-            srcSet={phoneSrcSet("/home/moment-strike.webp")}
+            src="/pages/notfound.webp"
+            srcSet={phoneSrcSet("/pages/notfound.webp")}
             sizes="100vw"
-            alt="A player lining up a shot under the floodlights in the 4 x 4 Series"
+            alt="Players chase the ball beside the palm trees at 4 x 4 Series SZN 6"
             width={1200}
             height={1000}
             className="absolute inset-0 size-full object-cover object-[65%_center]"

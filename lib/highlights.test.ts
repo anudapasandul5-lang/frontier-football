@@ -52,7 +52,7 @@ describe("coverFor", () => {
 
 describe("albumHero", () => {
   const base = { champion: null, photo: null, photoAlt: null, title: "T" };
-  it("leads a watermarked album with its clean owner frame, not the gallery's watch-party hero", () => {
+  it("leads SZN5 with its selected photo instead of the generic gallery frame", () => {
     const szn5 = { ...base, id: "szn-5", treatment: "type" as const, inset: "/gallery/szn-5-hero.webp", photoAlt: "SZN 5 trophies" };
     expect(albumHero(szn5)).toEqual({ src: "/gallery/szn-5-hero.webp", alt: "SZN 5 trophies", morph: false });
   });

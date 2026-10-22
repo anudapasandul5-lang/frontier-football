@@ -40,7 +40,7 @@ export default function Collaborate() {
           chapter="Collaborate"
           eyebrow="For brands"
           lines={["Collaborate", "with us."]}
-          photo={{ src: "/heroes/collaborate.webp", alt: "A packed watch-along under a partner's banner, the match on the big screen", position: "center 35%" }}
+          photo={{ src: "/heroes/collaborate.webp", alt: "A packed Main Sports Bar during the England v Argentina watch party", position: "center 35%" }}
           actions={
             <a href="#talk" className={`${heroButton} group min-h-14 w-full max-w-[36rem] justify-between bg-yellow text-ink`}>
               <Roll>I want to partner</Roll>
@@ -54,9 +54,9 @@ export default function Collaborate() {
     >
       <PhotoStrip
         photos={[
-          { src: "/pages/collab-venue.webp", alt: "The Pixels N Pints entrance, venue partner for Division 0" },
-          { src: "/pages/collab-bar-crowd.webp", alt: "A full room at a Frontier watch-along at Main Sports Bar" },
-          { src: "/home/moment-celebration.webp", alt: "A fan celebrates at a Frontier watch-along" },
+          { src: "/pages/collab-venue.webp", alt: "Fans gather inside Pixels N Pints, venue partner for Division 0" },
+          { src: "/pages/collab-bar-crowd.webp", alt: "A crowd holds its head in its hands at the England v Argentina watch party" },
+          { src: "/pages/collab-celebration.webp", alt: "A supporter celebrates in front of the big screen at the England v Argentina watch party" },
         ]}
       />
 
@@ -172,12 +172,12 @@ export default function Collaborate() {
           </div>
           <div className="relative mx-auto w-full max-w-[30rem] md:mx-0">
             <img
-              src="/pages/collab-partner-can.webp"
-              srcSet={phoneSrcSet("/pages/collab-partner-can.webp")}
+              src="/pages/collab-talk.webp"
+              srcSet={phoneSrcSet("/pages/collab-talk.webp")}
               sizes="(min-width: 768px) 40vw, 90vw"
-              alt="A giant partner drink can on display at Division 0"
-              width={1200}
-              height={900}
+              alt="A player controls the ball under the floodlights at a 4 x 4 Series SZN 6 match"
+              width={1600}
+              height={2000}
               loading="lazy"
               decoding="async"
               className="block aspect-[4/5] w-full rotate-[2.5deg] border-[6px] border-ink object-cover"

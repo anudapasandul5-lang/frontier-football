@@ -548,6 +548,7 @@ export function resultRows(data: Content) {
     photos: photosHref(row),
     photo: row.photo,
     photoAlt: row.photoAlt,
+    photoCredit: row.photoCredit,
   }));
 }
 

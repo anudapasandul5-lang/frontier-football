@@ -32,7 +32,7 @@ export default function Contact() {
           chapter="Contact"
           eyebrow="Contact"
           lines={["Get in", "touch."]}
-          photo={{ src: "/heroes/contact.webp", alt: "Four friends together beside a beer tower at a Frontier watch-along", position: "center 30%" }}
+          photo={{ src: "/heroes/contact.webp", alt: "Friends cheer and celebrate at their table at the Norway v England watch party", position: "center 30%" }}
           actions={
             /* Full-width stacked bars, as in the signed-off copy doc (owner,
                2026-10-07); the hero photo stays. */
@@ -139,9 +139,9 @@ export default function Contact() {
 
       <PhotoStrip
         photos={[
-          { src: "/pages/contact-cheer.webp", alt: "Fans cheering at a Frontier watch-along" },
-          { src: "/pages/contact-trophies.webp", alt: "4 x 4 Series trophies, medals and prizes laid out on the night" },
-          { src: "/pages/contact-watching.webp", alt: "Fans watching the match together at a watch-along" },
+          { src: "/pages/contact-cheer.webp", alt: "Supporters cheer with their arms up at the Norway v England watch party" },
+          { src: "/pages/contact-trophies.webp", alt: "SZN 6 winners with their medals, prizes and trophy at the presentation" },
+          { src: "/pages/contact-watching.webp", alt: "A full room watching England v Argentina at Main Sports Bar" },
         ]}
       />
       <PastActivities />

@@ -38,7 +38,7 @@ export default function EventsPage() {
           chapter="Events"
           eyebrow="For players"
           lines={["Join the", "action."]}
-          photo={{ src: "/heroes/events.webp", alt: "A 4 x 4 Series SZN 06 match under the floodlights at night", position: "center 40%" }}
+          photo={{ src: "/heroes/events.webp", alt: "Players close in on the ball under the floodlights at 4 x 4 Series SZN 6", position: "center 40%" }}
           actions={
             <>
               {nights.length > 0 ? (
@@ -60,9 +60,9 @@ export default function EventsPage() {
     >
       <PhotoStrip
         photos={[
-          { src: "/pages/events-strike.webp", alt: "A player strikes the ball at a 4 x 4 Series SZN 06 match" },
-          { src: "/pages/events-keeper.webp", alt: "A goalkeeper dives on the ball under the lights at SZN 06" },
-          { src: "/pages/events-day-match.webp", alt: "Two players chase the ball on the Athlete 360 pitch" },
+          { src: "/pages/events-strike.webp", alt: "A player drives forward with the ball in a daylight 4 x 4 Series SZN 6 match" },
+          { src: "/pages/events-keeper.webp", alt: "A goalkeeper gathers the ball on the edge of his area at SZN 6" },
+          { src: "/pages/events-day-match.webp", alt: "A player stretches to win the ball in a crowded box at 4 x 4 Series SZN 6" },
         ]}
       />
 
@@ -136,6 +136,7 @@ export default function EventsPage() {
                         </svg>
                       </div>
                     )}
+                    {row.photoCredit ? <p className="mt-1 text-xs text-bone/75">Photo: {row.photoCredit}</p> : null}
                     <span className="absolute top-0 left-0 bg-yellow px-1.5 py-0.5 font-display text-xs font-bold text-ink tabular-nums">{String(i + 1).padStart(2, "0")}</span>
                   </div>
                   <div className="min-w-0">

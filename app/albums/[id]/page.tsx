@@ -29,7 +29,6 @@ export default async function AlbumPage({ params }: { params: Promise<{ id: stri
   const chapters = galleryChapters(raw, albumFacts(albumIds(data)));
   const chapter = chapters.find((c) => c.albums.some((a) => a.id === id));
   const album = chapter?.albums.find((a) => a.id === id);
-  const picks = highlights[id] ?? [];
   const next = nextAlbum(chapters, id);
 
   if (!album || !chapter) {
@@ -43,6 +42,9 @@ export default async function AlbumPage({ params }: { params: Promise<{ id: stri
   }
 
   const cover = albumHero(album);
+  // The banner already shows the lead photo (an album's card and cover), so the
+  // highlights below it never show that same picture a second time.
+  const picks = (highlights[id] ?? []).filter((h) => h.alt !== cover.alt);
   const lines = chapter.kind === "series" ? ["4x4 Series", album.title] : [album.title];
   const facts = [`${album.count.toLocaleString("en")} photos`, album.venue].filter(Boolean).join(" · ");
 
@@ -53,7 +55,7 @@ export default async function AlbumPage({ params }: { params: Promise<{ id: stri
           chapter={album.short ?? album.title}
           eyebrow={chapter.kind === "series" ? facts : `${chapter.label} · ${facts}`}
           lines={lines}
-          photo={{ src: cover.src, alt: cover.alt, position: "center 35%" }}
+          photo={{ src: cover.src, alt: cover.alt, position: "center 35%", credit: albumStory(data, id)?.photoCredit ?? undefined }}
           transition={cover.morph ? `album-cover-${album.id}` : undefined}
           labels={["Frontier / Gallery", album.champion ? `Champions: ${album.champion}` : "Colombo, Sri Lanka"]}
           actions={

@@ -6,5 +6,5 @@ export const contentType = ogContentType;
 export const dynamic = "force-static";
 
 export default function Image() {
-  return ogCard({ title: "Who We Are", photo: "/home/moment-crowd.webp" });
+  return ogCard({ title: "Who We Are", photo: "/heroes/who.webp" });
 }

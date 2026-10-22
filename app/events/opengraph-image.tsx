@@ -6,5 +6,5 @@ export const contentType = ogContentType;
 export const dynamic = "force-static";
 
 export default function Image() {
-  return ogCard({ title: "Events", photo: "/champions/szn-6.webp" });
+  return ogCard({ title: "Events", photo: "/heroes/events.webp" });
 }

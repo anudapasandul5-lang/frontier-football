@@ -2,61 +2,57 @@
   "/heroes/collaborate.webp": [
     800,
     1200,
-    2000
+    2400
   ],
   "/heroes/community.webp": [
     800,
     1200,
-    2000
+    2400
   ],
   "/heroes/contact.webp": [
     800,
     1200,
-    2000
+    2400
   ],
   "/heroes/events.webp": [
     800,
     1200,
-    2000
+    2400
   ],
   "/heroes/gallery.webp": [
     800,
     1200,
-    2000
+    2400
   ],
   "/heroes/who.webp": [
     800,
     1200,
-    2000
+    2400
   ],
   "/home/moment-celebration.webp": [
     800,
-    1200
+    1200,
+    1600
   ],
   "/home/moment-crowd.webp": [
     800,
     1200,
-    2000
-  ],
-  "/home/moment-duel.webp": [
-    800,
-    1200
-  ],
-  "/home/moment-flags.webp": [
-    800,
-    1200
-  ],
-  "/home/moment-hands.webp": [
-    800,
-    1200
+    1600
   ],
   "/home/moment-night.webp": [
     800,
-    1200
+    1200,
+    1600
   ],
   "/home/moment-strike.webp": [
     800,
-    1200
+    1200,
+    1600
+  ],
+  "/home/moment-trophy.webp": [
+    800,
+    1200,
+    1280
   ],
   "/home/ring/division-0.webp": [
     800,
@@ -98,68 +94,262 @@
     800,
     1200
   ],
+  "/home/who-we-are.webp": [
+    800,
+    1200,
+    2400
+  ],
   "/pages/collab-bar-crowd.webp": [
     800,
-    1200
+    1200,
+    1600
+  ],
+  "/pages/collab-celebration.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/pages/collab-community.webp": [
+    800,
+    1200,
+    1600
   ],
   "/pages/collab-partner-can.webp": [
     800,
-    1200
+    1200,
+    1600
+  ],
+  "/pages/collab-prizes.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/pages/collab-talk.webp": [
+    800,
+    1200,
+    1280
   ],
   "/pages/collab-venue.webp": [
     800,
-    1200
+    1200,
+    1600
   ],
   "/pages/community-division-0.webp": [
     800,
-    1200
+    1200,
+    1600
   ],
   "/pages/community-final-table.webp": [
     800,
-    1200
+    1200,
+    1600
   ],
   "/pages/community-team.webp": [
     800,
-    1200
+    1200,
+    1600
+  ],
+  "/pages/competition-4x4.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/pages/competition-division-0.webp": [
+    800,
+    1200,
+    1600
   ],
   "/pages/contact-cheer.webp": [
     800,
-    1200
+    1200,
+    1600
   ],
   "/pages/contact-trophies.webp": [
     800,
-    1200
+    1200,
+    1600
   ],
   "/pages/contact-watching.webp": [
     800,
-    1200
+    1200,
+    1600
   ],
   "/pages/events-day-match.webp": [
     800,
-    1200
+    1200,
+    1600
   ],
   "/pages/events-keeper.webp": [
     800,
-    1200
+    1200,
+    1600
   ],
   "/pages/events-strike.webp": [
     800,
+    1200,
+    1600
+  ],
+  "/pages/menu-collaborate.webp": [
+    800,
+    1200,
+    1920
+  ],
+  "/pages/menu-community.webp": [
+    800,
+    1200,
+    1920
+  ],
+  "/pages/menu-contact.webp": [
+    800,
+    1200,
+    1920
+  ],
+  "/pages/menu-events.webp": [
+    800,
+    1200,
+    1920
+  ],
+  "/pages/menu-gallery.webp": [
+    800,
+    1200,
+    1920
+  ],
+  "/pages/menu-home.webp": [
+    800,
+    1200,
+    1920
+  ],
+  "/pages/menu-who.webp": [
+    800,
+    1200,
+    1920
+  ],
+  "/pages/notfound.webp": [
+    800,
+    1200,
+    1400
+  ],
+  "/pages/offer-custom.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/pages/offer-visibility.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/pages/run-4x4.webp": [
+    800,
     1200
+  ],
+  "/pages/run-division-0.webp": [
+    800,
+    1200
+  ],
+  "/pages/run-ground-zero.webp": [
+    800,
+    1200,
+    1280
+  ],
+  "/pages/run-watch-parties.webp": [
+    800,
+    1200
+  ],
+  "/pages/stage-4x4.webp": [
+    800,
+    1200
+  ],
+  "/pages/stage-division-0.webp": [
+    800,
+    1200
+  ],
+  "/pages/stage-ground-zero.webp": [
+    800,
+    1200
+  ],
+  "/pages/stage-turf-wars.webp": [
+    800,
+    1008
+  ],
+  "/pages/stage-watch-parties.webp": [
+    800,
+    1200
+  ],
+  "/pages/story-4x4-1.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/pages/story-4x4-2.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/pages/story-4x4-3.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/pages/story-division-0-1.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/pages/story-division-0-2.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/pages/story-ground-zero-1.webp": [
+    800,
+    1200,
+    1280
+  ],
+  "/pages/story-ground-zero-2.webp": [
+    800,
+    1200,
+    1280
+  ],
+  "/pages/story-ground-zero-3.webp": [
+    800,
+    1200,
+    1280
+  ],
+  "/pages/story-watch-1.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/pages/story-watch-2.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/pages/story-watch-3.webp": [
+    800,
+    1200,
+    1600
   ],
   "/champions/division-0.webp": [
     800,
     1200,
     1600
   ],
-  "/champions/szn-1.webp": [
+  "/champions/ground-zero.webp": [
     800,
     1200,
     1280
   ],
+  "/champions/szn-1.webp": [
+    800,
+    1200,
+    1600
+  ],
   "/champions/szn-2.webp": [
     800,
     1200,
-    1280
+    1600
   ],
   "/champions/szn-3.webp": [
     800,
@@ -172,6 +362,11 @@
     1600
   ],
   "/champions/szn-6.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/champions/turf-wars.webp": [
     800,
     1200,
     1600
@@ -199,18 +394,31 @@
   "/champions/wa-ucl-final-night.webp": [
     800,
     1200,
-    1280
-  ],
-  "/who/division-0-crowd.webp": [
-    800,
-    1200
+    1600
   ],
   "/who/norway-england-fan.webp": [
     800,
-    1200
+    1200,
+    1600
   ],
-  "/who/szn6-scramble.webp": [
+  "/who/story.webp": [
     800,
-    1200
+    1200,
+    1600
+  ],
+  "/who/strip-1.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/who/strip-2.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/who/szn4-greeting.webp": [
+    800,
+    1200,
+    1800
   ]
 }

@@ -25,7 +25,7 @@ export function PageHero({
   chapter: string;
   eyebrow: string;
   lines: string[];
-  photo: { src: string; alt: string; position?: string };
+  photo: { src: string; alt: string; position?: string; credit?: string };
   children?: ReactNode;
   actions?: ReactNode;
   labels?: [string, string];
@@ -70,6 +70,7 @@ export function PageHero({
         )}
         <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-night via-night/55 to-night/10" />
       </div>
+      {photo.credit ? <p className="micro absolute top-24 right-4 z-10 bg-ink px-3 py-2 text-bone">Photo: {photo.credit}</p> : null}
 
       <div className="frame flex flex-1 flex-col justify-end pb-[clamp(1.5rem,5vh,3.5rem)]">
         <p className="micro mb-4 text-yellow text-[clamp(0.875rem,0.7rem+0.6vw,1.25rem)]">{eyebrow}</p>

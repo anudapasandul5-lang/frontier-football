@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import { marqueePhotos, statementPhoto, type HomePhoto } from "@/lib/home-photos";
+import { marqueePhotos, markerPhotos, statementPhoto, type HomePhoto } from "@/lib/home-photos";
 import { MomentMotion } from "@/components/motion/MomentMotion";
 import { phoneSrcSet } from "@/lib/phone-image";
 
@@ -57,12 +57,12 @@ function Headline() {
 export function Moment() {
   // The pan strip reuses the statement frame first, so the hand-off from the
   // zoomed photo to the strip is the same picture in the same place.
-  const strip = [statementPhoto, marqueePhotos[0], marqueePhotos[2], marqueePhotos[4], marqueePhotos[5]];
+  const strip = [statementPhoto, ...marqueePhotos];
 
   return (
-    <section id="moment" data-tone="bone" aria-labelledby="moment-heading" className="canvas-ink relative overflow-x-clip">
+    <section id="moment" data-tone="bone" aria-labelledby="moment-heading" className="canvas-night relative overflow-x-clip">
       <div className="moment-stage relative h-svh overflow-hidden">
-        {marqueePhotos.map((p, i) => (
+        {markerPhotos.map((p, i) => (
           <Photo
             key={p.id}
             p={p}

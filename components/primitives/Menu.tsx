@@ -7,13 +7,13 @@ import { phoneSrcSet } from "@/lib/phone-image";
 /* A native modal keeps focus in the menu and returns it to the trigger on
    Escape. Seven links since Community (L7). */
 export const menuLinks = [
-  { href: "/", label: "Home", photo: "/champions/szn-6.webp" },
-  { href: "/who-we-are", label: "Who We Are", photo: "/champions/szn-1.webp" },
-  { href: "/events", label: "Events", photo: "/champions/szn-4.webp" },
-  { href: "/gallery", label: "Gallery", photo: "/champions/wa-final-esp-arg.webp" },
-  { href: "/community", label: "Community", photo: "/champions/division-0.webp" },
-  { href: "/collaborate", label: "Collaborate", photo: "/champions/wa-semi-esp-fra.webp" },
-  { href: "/contact", label: "Contact", photo: "/champions/wa-ucl-final-night.webp" },
+  { href: "/", label: "Home", photo: "/pages/menu-home.webp" },
+  { href: "/who-we-are", label: "Who We Are", photo: "/pages/menu-who.webp" },
+  { href: "/events", label: "Events", photo: "/pages/menu-events.webp" },
+  { href: "/gallery", label: "Gallery", photo: "/pages/menu-gallery.webp" },
+  { href: "/community", label: "Community", photo: "/pages/menu-community.webp" },
+  { href: "/collaborate", label: "Collaborate", photo: "/pages/menu-collaborate.webp" },
+  { href: "/contact", label: "Contact", photo: "/pages/menu-contact.webp" },
 ];
 
 export function Menu({ instagram }: { instagram: { url: string; handle: string } | null }) {

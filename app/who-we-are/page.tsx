@@ -44,7 +44,7 @@ export default function WhoWeAre() {
           chapter="Who we are"
           eyebrow="Since Ground Zero"
           lines={["Who we", "are."]}
-          photo={{ src: "/heroes/who.webp", alt: "A long table of supporters with Argentina flags at the World Cup final watch-along", position: "center 40%" }}
+          photo={{ src: "/heroes/who.webp", alt: "Supporters cheer with their hands in the air in front of the big screen at a Road to World Cup watch party", position: "center 40%" }}
         >
           {raw.aboutIntro}
         </PageHero>
@@ -52,9 +52,9 @@ export default function WhoWeAre() {
     >
       <PhotoStrip
         photos={[
-          { src: "/who/szn6-scramble.webp", alt: "Players scrambling for the ball in front of goal at 4 x 4 Series SZN 06" },
-          { src: "/who/division-0-crowd.webp", alt: "Players and friends at the Division 0 console tournament" },
-          { src: "/who/norway-england-fan.webp", alt: "A fan with both arms up at the Norway vs England watch-along" },
+          { src: "/who/strip-1.webp", alt: "Friends smile together at a table, one holding a Spain flag, at a Road to World Cup watch party" },
+          { src: "/who/strip-2.webp", alt: "Players and organisers hold trophies and medals at the 4 x 4 Series SZN 4 awards" },
+          { src: "/who/norway-england-fan.webp", alt: "Players scramble for the ball in daylight at a 4 x 4 Series SZN 6 match" },
         ]}
       />
 
@@ -92,10 +92,10 @@ export default function WhoWeAre() {
           </blockquote>
           <div className="story-duel grid gap-8 md:grid-cols-[45fr_55fr] md:items-center md:gap-[clamp(2rem,5vw,5rem)]">
             <img
-              src="/home/moment-duel.webp"
-              srcSet={phoneSrcSet("/home/moment-duel.webp")}
+              src="/who/story.webp"
+              srcSet={phoneSrcSet("/who/story.webp")}
               sizes="(min-width: 768px) 45vw, 100vw"
-              alt="Two players go shoulder to shoulder for the ball at a Frontier match"
+              alt="Players jump for a high ball at 4 x 4 Series SZN 6"
               width={1200}
               height={900}
               loading="lazy"
