@@ -1,0 +1,1192 @@
+{
+  "rows": [
+    {
+      "section": "Home",
+      "slot": "First section after the video hero",
+      "assets": "WhoWeAre: Drive 1HBvbjQitxALSxMpRR8-1G72A2VWA2zek",
+      "best": "L1542",
+      "backup": "L1567",
+      "reason": "Daylight football, clean colour and visible players. Stronger detail and clearer action than the existing roof/net-heavy night photo.",
+      "crop": "Desktop: broad frame, text over the upper sky with a soft dark gradient. Phone: 62% horizontal focus on the two players and ball. Keep the ball in view; use a separate phone crop. Full-screen movement/zoom still needs a site check.",
+      "status": "Recommended"
+    },
+    {
+      "section": "Home",
+      "slot": "Moment: opening crowd statement",
+      "assets": "/home/moment-crowd.webp",
+      "best": "D3580",
+      "backup": "D3238",
+      "reason": "Both prove the scale of a real watch party. Main venue image is the best contextual match, but distant faces and foreground detail are soft.",
+      "crop": "Keep the complete wide room. No tight face enlargement. At 1200px wide it is a contextual crowd image; it does not meet a strict noise-free full-screen bar.",
+      "status": "Conditional \u2014 full-screen quality gap"
+    },
+    {
+      "section": "Home",
+      "slot": "Moment tile 1: joy",
+      "assets": "/home/moment-celebration.webp",
+      "best": "L1156",
+      "backup": "L1155",
+      "reason": "The SZN4 trophy lift gives the same emotional purpose with cleaner detail than the white-shirt watch-party celebration.",
+      "crop": "3:2 or 4:3; preserve the full trophy and raised hands. Update alt text to SZN4 football celebration.",
+      "status": "Recommended"
+    },
+    {
+      "section": "Home",
+      "slot": "Moment tile 2: duel",
+      "assets": "/home/moment-duel.webp; Who We Are story photo",
+      "best": "D0326",
+      "backup": "D0331",
+      "reason": "Near-camera daylight action. Players and ball read clearly; fabric and facial detail hold up.",
+      "crop": "Use broad 3:2 frame; avoid removing boots or the ball. Preserve the corner marks unless a clean licensed original is supplied.",
+      "status": "Recommended"
+    },
+    {
+      "section": "Home",
+      "slot": "Moment tile 3: striking",
+      "assets": "/home/moment-strike.webp; Collaborate custom activations",
+      "best": "L1501",
+      "backup": "L1514",
+      "reason": "Daylight strike has better focus, colour and complete ball framing than current SZN2 night strike.",
+      "crop": "4:3 centred slightly left; keep keeper, striker and ball. Caption this as SZN4, not SZN2.",
+      "status": "Recommended"
+    },
+    {
+      "section": "Home",
+      "slot": "Moment tile 4: shared experience",
+      "assets": "/home/moment-hands.webp",
+      "best": "L1184",
+      "backup": "L1181",
+      "reason": "Four smiling football friends, sharp and naturally lit. Avoid another back-of-head crowd image.",
+      "crop": "Keep all four faces in 4:3; do not force portrait cover.",
+      "status": "Recommended"
+    },
+    {
+      "section": "Home",
+      "slot": "Moment tile 5: flags",
+      "assets": "/home/moment-flags.webp",
+      "best": "D3207",
+      "backup": "D3143",
+      "reason": "Flags make the World Cup final context unmistakable. Primary has a clearer central group.",
+      "crop": "4:3 centred on the flag and three standing fans; avoid the blurred foreground face. About 600px display width maximum before further export inspection.",
+      "status": "Conditional \u2014 visible source noise"
+    },
+    {
+      "section": "Home",
+      "slot": "Moment tile 6: movement",
+      "assets": "/home/moment-night.webp",
+      "best": "L1574",
+      "backup": "L1567",
+      "reason": "Close daylight challenge is much stronger than the dark SZN1 night frame. Colourful shirts create separation.",
+      "crop": "4:3 at 64% horizontal focus; preserve central players. Update event caption to SZN4.",
+      "status": "Recommended"
+    },
+    {
+      "section": "Home",
+      "slot": "Community teaser",
+      "assets": "/who/szn6-scramble.webp (also Who photo strip)",
+      "best": "L1184",
+      "backup": "L1181",
+      "reason": "Friendly football community is a closer match to the invitation than a scramble seen through the goal net.",
+      "crop": "Desktop 4:5 would cut the outer friends. Prefer 4:3 or a separate wider phone/desktop composition. Do not crop the group to make it fit.",
+      "status": "Recommended"
+    },
+    {
+      "section": "Inner pages",
+      "slot": "Who We Are opening photo",
+      "assets": "/heroes/who.webp",
+      "best": "L1184",
+      "backup": "L1181",
+      "reason": "Clear friendly faces support the platform/community story.",
+      "crop": "Wide 3:2 or 4:3; place headline away from faces. If this opening becomes a video too, use these in its photo strip instead.",
+      "status": "Recommended"
+    },
+    {
+      "section": "Inner pages",
+      "slot": "Events opening photo",
+      "assets": "/heroes/events.webp",
+      "best": "L1542",
+      "backup": "D0326",
+      "reason": "Sharp daytime action communicates football immediately.",
+      "crop": "Wide crop with ball and legs intact. Use a separate phone crop, not the same centre crop.",
+      "status": "Recommended"
+    },
+    {
+      "section": "Inner pages",
+      "slot": "Community opening photo",
+      "assets": "/heroes/community.webp",
+      "best": "L1184",
+      "backup": "L2080",
+      "reason": "Football friends first; a warm UCL embrace offers a fan alternative with more mixed light.",
+      "crop": "Keep all four friends in 4:3; phone portrait needs layout adjustment. Backup suitable for smaller photo strip, not full-screen.",
+      "status": "Recommended \u2014 crop/layout change needed"
+    },
+    {
+      "section": "Inner pages",
+      "slot": "Contact opening photo",
+      "assets": "/heroes/contact.webp",
+      "best": "D3607",
+      "backup": "L1184",
+      "reason": "Current four-friend subject is already a good friendly contact image. Original detail is reasonably sharp but has low-light noise.",
+      "crop": "Use 4:3 and preserve all four faces. Do not use a portrait crop. For a stricter full-screen quality bar choose the daylight backup.",
+      "status": "Conditional \u2014 low-light noise"
+    },
+    {
+      "section": "Inner pages",
+      "slot": "Collaborate opening photo",
+      "assets": "/heroes/collaborate.webp",
+      "best": "L1048",
+      "backup": "L2189",
+      "reason": "Products and prizes show a real brand activation more directly than a rear crowd. Primary has cleaner detail and no added corner badges.",
+      "crop": "Wide 3:2 at 50% focus. Keep partner boxes legible and trophy within frame. Backup is smaller-card only because shadows have noise.",
+      "status": "Recommended"
+    },
+    {
+      "section": "Photo strips",
+      "slot": "Who: gaming crowd",
+      "assets": "/who/division-0-crowd.webp",
+      "best": "D3113",
+      "backup": "D3094",
+      "reason": "Shows consoles and a real crowd, rather than a generic venue. Uneven window light remains.",
+      "crop": "4:3 retain screen and seated player; max roughly 700px display.",
+      "status": "Conditional \u2014 uneven light/noise"
+    },
+    {
+      "section": "Photo strips",
+      "slot": "Who: Norway\u2013England fan",
+      "assets": "/who/norway-england-fan.webp",
+      "best": "D3629",
+      "backup": "D3640",
+      "reason": "Strong joyful expression, glasses in focus and correct event provenance.",
+      "crop": "4:3 keep both raised hands; do not make a tight face enlargement. Small/medium card only.",
+      "status": "Conditional \u2014 visible noise"
+    },
+    {
+      "section": "Photo strips",
+      "slot": "Community: football team",
+      "assets": "/pages/community-team.webp",
+      "best": "L1184",
+      "backup": "L1181",
+      "reason": "Daylight friendship and clean expressions outperform the low-resolution night team.",
+      "crop": "4:3 keep all four faces; describe friends at SZN4, not a named team.",
+      "status": "Recommended"
+    },
+    {
+      "section": "Photo strips",
+      "slot": "Community: final party table",
+      "assets": "/pages/community-final-table.webp",
+      "best": "D3143",
+      "backup": "D3207",
+      "reason": "Real final-party group with flags. Primary shows the social setting.",
+      "crop": "4:3 broad group; about 600px display.",
+      "status": "Conditional \u2014 soft/noisy faces"
+    },
+    {
+      "section": "Photo strips",
+      "slot": "Community: console players",
+      "assets": "/pages/community-division-0.webp",
+      "best": "D3078",
+      "backup": "D3079",
+      "reason": "Controllers visible, main player sharp, clean framing and event context.",
+      "crop": "4:3 at 65% horizontal focus; retain controllers and both main players. Shadows have fine grain; do not enlarge faces.",
+      "status": "Conditional \u2014 medium card only"
+    },
+    {
+      "section": "Photo strips",
+      "slot": "Events: strike",
+      "assets": "/pages/events-strike.webp",
+      "best": "L1501",
+      "backup": "L1514",
+      "reason": "Cleaner SZN4 daylight shot. Current night/low-resolution source is weaker.",
+      "crop": "4:3 preserve whole ball/legs; update SZN06 alt text to SZN4.",
+      "status": "Recommended"
+    },
+    {
+      "section": "Photo strips",
+      "slot": "Events: goalkeeper",
+      "assets": "/pages/events-keeper.webp",
+      "best": "L0717",
+      "backup": "L1514",
+      "reason": "Keeper and ball are visible in a complete composition. Primary is night action and lower contrast; backup is cleaner daylight.",
+      "crop": "4:3 keep keeper and ball; use backup if enforcing a daylight-only premium look. Update event text.",
+      "status": "Conditional \u2014 primary night grain"
+    },
+    {
+      "section": "Photo strips",
+      "slot": "Events: daytime match",
+      "assets": "/pages/events-day-match.webp",
+      "best": "L1574",
+      "backup": "D0326",
+      "reason": "Close action and strong jersey colours; clear main subjects.",
+      "crop": "4:3 at 64% horizontal focus. Update event caption to SZN4.",
+      "status": "Recommended"
+    },
+    {
+      "section": "Photo strips",
+      "slot": "Contact: cheering",
+      "assets": "/pages/contact-cheer.webp",
+      "best": "L1156",
+      "backup": "D3629",
+      "reason": "Clean trophy joy is more polished than the current noisy table cheer.",
+      "crop": "Preserve all raised arms and trophy; fan backup is medium-card only. Update alt text.",
+      "status": "Recommended"
+    },
+    {
+      "section": "Photo strips",
+      "slot": "Contact: trophies",
+      "assets": "/pages/contact-trophies.webp",
+      "best": "L0010",
+      "backup": "D2929",
+      "reason": "Primary is a sharp, uncluttered trophy arrangement; backup adds prizes/product context.",
+      "crop": "3:2 or 4:3 keep complete trophy bases and medals.",
+      "status": "Recommended"
+    },
+    {
+      "section": "Photo strips",
+      "slot": "Contact: watching",
+      "assets": "/pages/contact-watching.webp",
+      "best": "D3732",
+      "backup": "D3311",
+      "reason": "Attentive viewing gives the contact strip variety and correct fan context.",
+      "crop": "4:3 keep faces; small card only.",
+      "status": "Conditional \u2014 high source noise"
+    },
+    {
+      "section": "Photo strips",
+      "slot": "Collaborate: venue",
+      "assets": "/pages/collab-venue.webp",
+      "best": "D3097",
+      "backup": "D3604",
+      "reason": "Entrance identifies the actual venue partner.",
+      "crop": "Portrait original needs a portrait card or generous contain layout. Do not crop out venue name to force 4:3.",
+      "status": "Conditional \u2014 layout fit and night grain"
+    },
+    {
+      "section": "Photo strips",
+      "slot": "Collaborate: venue crowd",
+      "assets": "/pages/collab-bar-crowd.webp; enhanced visibility offer",
+      "best": "D3580",
+      "backup": "D3238",
+      "reason": "Best wide audience/venue evidence.",
+      "crop": "Broad 3:2; use roughly 900\u20131200px, no close face crop.",
+      "status": "Conditional \u2014 crowd detail softness"
+    },
+    {
+      "section": "Photo strips",
+      "slot": "Collaborate: fan celebration",
+      "assets": "/home/moment-celebration.webp (Collaborate strip only)",
+      "best": "L2080",
+      "backup": "D3567",
+      "reason": "UCL embrace shows warm engagement; backup shows smiling fans.",
+      "crop": "4:3 centre embrace, preserve corner credit/marks. About 600\u2013800px card only.",
+      "status": "Conditional \u2014 mixed light/noise"
+    },
+    {
+      "section": "Brand offers",
+      "slot": "Product distribution",
+      "assets": "/pages/contact-trophies.webp (offer only)",
+      "best": "L1048",
+      "backup": "D2929",
+      "reason": "Use the actual product/prize boxes here, rather than trophies alone.",
+      "crop": "4:3 keep partner labels legible.",
+      "status": "Recommended"
+    },
+    {
+      "section": "Brand offers",
+      "slot": "Branding and partner feature",
+      "assets": "/pages/collab-partner-can.webp",
+      "best": "L2189",
+      "backup": "L1048",
+      "reason": "Actual cans alongside Frontier collateral demonstrate the partnership.",
+      "crop": "4:3 preserve both cans and card. Avoid tight zoom: shadow noise visible.",
+      "status": "Conditional \u2014 medium card only"
+    },
+    {
+      "section": "Brand offers",
+      "slot": "Community engagement",
+      "assets": "/home/moment-flags.webp (offer)",
+      "best": "L1184",
+      "backup": "L2080",
+      "reason": "Friendly community portrait fits engagement; fan embrace adds another audience setting.",
+      "crop": "4:3 entire group. Change alt text to actual event; do not describe flags.",
+      "status": "Recommended"
+    },
+    {
+      "section": "Competition / album",
+      "slot": "4 x 4 Series general card",
+      "assets": "competitionPhotos[4 x 4 Series]",
+      "best": "L1574",
+      "backup": "D0326",
+      "reason": "Strong daytime football, rather than a tiny SZN6 thumbnail.",
+      "crop": "Nearly-square desktop: 64% horizontal focus for primary. Phone 4:3. Preserve both central players.",
+      "status": "Recommended"
+    },
+    {
+      "section": "Competition / album",
+      "slot": "Turf Wars cover",
+      "assets": "/champions/turf-wars.webp; Turf competition/event",
+      "best": "L1979",
+      "backup": "L1978",
+      "reason": "Best intact team/trophy frame on disk. The current poster crop is not a photo of the event.",
+      "crop": "Wide group, 3:2 contain if needed. Green cast can be lightly corrected. Do not zoom into the team; detail is soft.",
+      "status": "Conditional \u2014 softer source, full-screen gap"
+    },
+    {
+      "section": "Competition / album",
+      "slot": "Division 0 cover",
+      "assets": "/champions/division-0.webp; competitionPhotos[Division 0]; menu/community/event",
+      "best": "D3078",
+      "backup": "D3079",
+      "reason": "Clear controller pair and readable gaming context.",
+      "crop": "Desktop square at 65% horizontal focus; phone 4:3. Keep hands/controllers.",
+      "status": "Conditional \u2014 medium card only"
+    },
+    {
+      "section": "Competition / album",
+      "slot": "SZN1 action cover",
+      "assets": "/champions/szn-1.webp; /gallery/szn-1-cover.webp; menu/event/album/reel",
+      "best": "D0326",
+      "backup": "D0331",
+      "reason": "Best SZN1 daylight action. No winner claim is implied.",
+      "crop": "3:2 keep boots/ball and source marks. Square crops must be checked for ball clipping.",
+      "status": "Recommended"
+    },
+    {
+      "section": "Competition / album",
+      "slot": "SZN2 cover",
+      "assets": "/champions/szn-2.webp; menu/event/album/reel",
+      "best": "L0119",
+      "backup": "L0089",
+      "reason": "The keeper greeting conveys football camaraderie more sharply than the soft strike. Trophy group is a contextual backup.",
+      "crop": "4:3 keep greeting players; 600\u2013800px card. Result remains unverified: do not call the trophy group champions.",
+      "status": "Conditional \u2014 night grain / result unverified"
+    },
+    {
+      "section": "Competition / album",
+      "slot": "SZN3 champions",
+      "assets": "/champions/szn-3.webp; event/album/reel",
+      "best": "D1558",
+      "backup": "D1564",
+      "reason": "Complete Ramadan FC medal/trophy portrait, all faces visible.",
+      "crop": "3:2 contain whole group; 2048px source, suitable card, no full-screen enlargement. Preserve branding.",
+      "status": "Conditional \u2014 source size"
+    },
+    {
+      "section": "Competition / album",
+      "slot": "SZN4 champions",
+      "assets": "/champions/szn-4.webp; menu/event/album/reel/community",
+      "best": "L1156",
+      "backup": "L1148",
+      "reason": "Clean disk trophy celebration for Pantera FC; backup formal team photo.",
+      "crop": "Primary wide crop keep trophy/hands. Backup keep entire group; square cover would cut outer people.",
+      "status": "Recommended"
+    },
+    {
+      "section": "Competition / album",
+      "slot": "SZN5 photos-only cover",
+      "assets": "/gallery/szn-5-hero.webp; event/album",
+      "best": "P0173",
+      "backup": "P0227",
+      "reason": "Replace the video still with an actual SZN5 trophy-lift photograph from the existing credited ThePapare album.",
+      "crop": "3:2 full group; keep photographer watermark. These are local derivatives, not camera originals.",
+      "status": "Conditional \u2014 credited derivative only"
+    },
+    {
+      "section": "Competition / album",
+      "slot": "SZN6 champions",
+      "assets": "/champions/szn-6.webp; menu/event/album/reel/community",
+      "best": "D2876",
+      "backup": "D2908",
+      "reason": "Trophy joy for Spain; backup formal medal group.",
+      "crop": "Whole group and raised trophy, 4:3/3:2. Small/medium card only; no upscale beyond source.",
+      "status": "Conditional \u2014 lower resolution / softened detail"
+    },
+    {
+      "section": "Competition / album",
+      "slot": "World Cup final cover",
+      "assets": "/champions/wa-final-esp-arg.webp; Watch Parties competition/menu/event/album",
+      "best": "D3207",
+      "backup": "D3143",
+      "reason": "Clear Argentina flags and friendly faces identify the final-party story.",
+      "crop": "4:3 flag and central people; around 600px display.",
+      "status": "Conditional \u2014 noisy/soft"
+    },
+    {
+      "section": "Competition / album",
+      "slot": "England\u2013Argentina semi cover",
+      "assets": "/champions/wa-semi-eng-arg.webp; event/album/community",
+      "best": "D3567",
+      "backup": "D3414",
+      "reason": "Happy faces read better than rear-only crowd; backup retains raised-arm celebration.",
+      "crop": "4:3 smiling table; max ~600px.",
+      "status": "Conditional \u2014 visible noise"
+    },
+    {
+      "section": "Competition / album",
+      "slot": "Spain\u2013France semi cover",
+      "assets": "/champions/wa-semi-esp-fra.webp; menu/event/album",
+      "best": "D3607",
+      "backup": "D3580",
+      "reason": "Friendly four-person portrait is cleaner than the noisy action reactions. Wide crowd backup conveys scale.",
+      "crop": "Whole group 4:3, preserve all faces; around 800px display.",
+      "status": "Conditional \u2014 low-light noise"
+    },
+    {
+      "section": "Competition / album",
+      "slot": "Norway\u2013England cover",
+      "assets": "/champions/wa-norway-england.webp; event/album",
+      "best": "D3629",
+      "backup": "D3640",
+      "reason": "Distinctive joyful fan with eyes in focus, correct event.",
+      "crop": "4:3 preserve hands; ~600px card.",
+      "status": "Conditional \u2014 visible grain"
+    },
+    {
+      "section": "Competition / album",
+      "slot": "UCL final cover",
+      "assets": "/champions/wa-ucl-final-night.webp; menu/event/album/community",
+      "best": "L2080",
+      "backup": "L2125",
+      "reason": "Warm fan embrace, sharp principal expression; clapping fan backup has more noise.",
+      "crop": "4:3 centre embrace, preserve source marks; ~800px display.",
+      "status": "Conditional \u2014 low-light noise"
+    },
+    {
+      "section": "Competition / album",
+      "slot": "Ground Zero cover",
+      "assets": "/albums/frontier-futsal/b36221d4200375031890d20c95f5162c.webp; competition/event/album",
+      "best": "P0090",
+      "backup": "P0078",
+      "reason": "Keep the approved credited action pick. Both have visible ball, closer players and strong pitch colour.",
+      "crop": "4:3 retain ball/boots and ThePapare watermark. Existing 1280px derivatives; no premium full-screen enlargement.",
+      "status": "Conditional \u2014 credited derivative only"
+    },
+    {
+      "section": "Gallery",
+      "slot": "Opening photo reel",
+      "assets": "lib/highlights.ts reel \u2014 lead frame per album",
+      "best": "D0326",
+      "backup": "L1574",
+      "reason": "Use the recommended album lead frames above. Keep event identity aligned, varied human/action/detail images and broad framing.",
+      "crop": "Existing 130\u2013300px-high reel is a suitable restrained display. Do not use the excluded home hero as another photo slot.",
+      "status": "Recommended"
+    }
+  ],
+  "photos": {
+    "D0326": {
+      "key": "D0326",
+      "name": "_DSC4228.png",
+      "w": 6000,
+      "h": 4000,
+      "source": "https://drive.google.com/file/d/19lDPli6MCtqJeC2YjS5xFK4NaFmEfCv5/view",
+      "local_original": "",
+      "path": "C:\\Users\\anuda\\orca\\frontier-football\\docs\\photo-review-2026-10-13\\originals\\D0326.png",
+      "quality": "quality/D0326.jpg",
+      "group": "drive-szn-1"
+    },
+    "D0331": {
+      "key": "D0331",
+      "name": "_DSC4233.png",
+      "w": 6000,
+      "h": 4000,
+      "source": "https://drive.google.com/file/d/1IolPxsXcrMQH5p0t_qGLRFhPXO3K6wua/view",
+      "local_original": "",
+      "path": "C:\\Users\\anuda\\orca\\frontier-football\\docs\\photo-review-2026-10-13\\originals\\D0331.png",
+      "quality": "quality/D0331.jpg",
+      "group": "drive-szn-1"
+    },
+    "D0366": {
+      "key": "D0366",
+      "name": "_DSC4295.png",
+      "w": 6000,
+      "h": 4000,
+      "source": "https://drive.google.com/file/d/1cJdde9irsHzEXpsp1QQmU3QmE7ej6nei/view",
+      "local_original": "",
+      "path": "C:\\Users\\anuda\\orca\\frontier-football\\docs\\photo-review-2026-10-13\\originals\\D0366.png",
+      "quality": "quality/D0366.jpg",
+      "group": "drive-szn-1"
+    },
+    "D1558": {
+      "key": "D1558",
+      "name": "image00001.JPG",
+      "w": 2048,
+      "h": 1368,
+      "source": "https://drive.google.com/file/d/1RI4KcwNYXiBFUoeGAjhotAgE1WTIv0lQ/view",
+      "local_original": "",
+      "path": "C:\\Users\\anuda\\orca\\frontier-football\\docs\\photo-review-2026-10-13\\originals\\D1558.jpg",
+      "quality": "quality/D1558.jpg",
+      "group": "drive-szn-3"
+    },
+    "D1564": {
+      "key": "D1564",
+      "name": "image00013.JPG",
+      "w": 2048,
+      "h": 1368,
+      "source": "https://drive.google.com/file/d/17nETWaqaUNgbDsEqj_sCLYbuqchccsdt/view",
+      "local_original": "",
+      "path": "C:\\Users\\anuda\\orca\\frontier-football\\docs\\photo-review-2026-10-13\\originals\\D1564.jpg",
+      "quality": "quality/D1564.jpg",
+      "group": "drive-szn-3"
+    },
+    "D1601": {
+      "key": "D1601",
+      "name": "DSC_0501.jpg",
+      "w": 3068,
+      "h": 2048,
+      "source": "https://drive.google.com/file/d/1LLAjkTWD3Q_rRepTksX6TYb-4S75NJFx/view",
+      "local_original": "",
+      "path": "C:\\Users\\anuda\\orca\\frontier-football\\docs\\photo-review-2026-10-13\\originals\\D1601.jpg",
+      "quality": "quality/D1601.jpg",
+      "group": "drive-szn-3"
+    },
+    "D1864": {
+      "key": "D1864",
+      "name": "DSC_0575.jpg",
+      "w": 3068,
+      "h": 2048,
+      "source": "https://drive.google.com/file/d/11uFNE2JG-ifZYULojhsABsJJZRNmrg0e/view",
+      "local_original": "",
+      "path": "C:\\Users\\anuda\\orca\\frontier-football\\docs\\photo-review-2026-10-13\\originals\\D1864.jpg",
+      "quality": "quality/D1864.jpg",
+      "group": "drive-szn-3"
+    },
+    "D2876": {
+      "key": "D2876",
+      "name": "DSC_9273.jpg",
+      "w": 2786,
+      "h": 2016,
+      "source": "https://drive.google.com/file/d/1unncBX9MTheK2uULfvdXZZXUsfqfTeql/view",
+      "local_original": "",
+      "path": "C:\\Users\\anuda\\orca\\frontier-football\\docs\\photo-review-2026-10-13\\originals\\D2876.jpg",
+      "quality": "quality/D2876.jpg",
+      "group": "drive-szn-6"
+    },
+    "D2887": {
+      "key": "D2887",
+      "name": "DSC_8092.jpg",
+      "w": 2188,
+      "h": 1951,
+      "source": "https://drive.google.com/file/d/13ijaKtQ-y9OROoJ21FxKCzb-CxTPLMbg/view",
+      "local_original": "",
+      "path": "C:\\Users\\anuda\\orca\\frontier-football\\docs\\photo-review-2026-10-13\\originals\\D2887.jpg",
+      "quality": "quality/D2887.jpg",
+      "group": "drive-szn-6"
+    },
+    "D2908": {
+      "key": "D2908",
+      "name": "DSC_9258.jpg",
+      "w": 2727,
+      "h": 1864,
+      "source": "https://drive.google.com/file/d/1dzVzXA8xQ_bS-kbhu-rOzfG9QaJlpigo/view",
+      "local_original": "",
+      "path": "C:\\Users\\anuda\\orca\\frontier-football\\docs\\photo-review-2026-10-13\\originals\\D2908.jpg",
+      "quality": "quality/D2908.jpg",
+      "group": "drive-szn-6"
+    },
+    "D2929": {
+      "key": "D2929",
+      "name": "DSC_8012.jpg",
+      "w": 2550,
+      "h": 1693,
+      "source": "https://drive.google.com/file/d/1lTJxtsPEHqccUSZGboy2YmV_uY34uB4o/view",
+      "local_original": "",
+      "path": "C:\\Users\\anuda\\orca\\frontier-football\\docs\\photo-review-2026-10-13\\originals\\D2929.jpg",
+      "quality": "quality/D2929.jpg",
+      "group": "drive-szn-6"
+    },
+    "D3078": {
+      "key": "D3078",
+      "name": "DSC_6100.jpg",
+      "w": 6016,
+      "h": 4016,
+      "source": "https://drive.google.com/file/d/18DH5RW2moWP24o04vV-CdALFW0wiIFAB/view",
+      "local_original": "",
+      "path": "C:\\Users\\anuda\\orca\\frontier-football\\docs\\photo-review-2026-10-13\\originals\\D3078.jpg",
+      "quality": "quality/D3078.jpg",
+      "group": "drive-division-0"
+    },
+    "D3079": {
+      "key": "D3079",
+      "name": "DSC_6099.jpg",
+      "w": 6016,
+      "h": 4016,
+      "source": "https://drive.google.com/file/d/1YgUgvq_MgQt7BiONr2-68V4MrtS13UD7/view",
+      "local_original": "",
+      "path": "C:\\Users\\anuda\\orca\\frontier-football\\docs\\photo-review-2026-10-13\\originals\\D3079.jpg",
+      "quality": "quality/D3079.jpg",
+      "group": "drive-division-0"
+    },
+    "D3094": {
+      "key": "D3094",
+      "name": "DSC_6069.jpg",
+      "w": 3936,
+      "h": 2624,
+      "source": "https://drive.google.com/file/d/1Igb9Scwh1M_ZPxJgX-khduK986gNA77D/view",
+      "local_original": "",
+      "path": "C:\\Users\\anuda\\orca\\frontier-football\\docs\\photo-review-2026-10-13\\originals\\D3094.jpg",
+      "quality": "quality/D3094.jpg",
+      "group": "drive-division-0"
+    },
+    "D3097": {
+      "key": "D3097",
+      "name": "DSC_6067.jpg",
+      "w": 2624,
+      "h": 3936,
+      "source": "https://drive.google.com/file/d/1tFbmDB8xFRn6V7PgGSi4_hRm_ordP63s/view",
+      "local_original": "",
+      "path": "C:\\Users\\anuda\\orca\\frontier-football\\docs\\photo-review-2026-10-13\\originals\\D3097.jpg",
+      "quality": "quality/D3097.jpg",
+      "group": "drive-division-0"
+    },
+    "D3113": {
+      "key": "D3113",
+      "name": "DSC_6050.jpg",
+      "w": 3936,
+      "h": 2624,
+      "source": "https://drive.google.com/file/d/1R7oEqDZZyA1xs-6RQHUtHPy9VmHZPBia/view",
+      "local_original": "",
+      "path": "C:\\Users\\anuda\\orca\\frontier-football\\docs\\photo-review-2026-10-13\\originals\\D3113.jpg",
+      "quality": "quality/D3113.jpg",
+      "group": "drive-division-0"
+    },
+    "D3143": {
+      "key": "D3143",
+      "name": "DSC_8461.jpg",
+      "w": 6016,
+      "h": 4016,
+      "source": "https://drive.google.com/file/d/1MOYGeys_SOT0lshvh2G0YrGW_zN2gGNa/view",
+      "local_original": "",
+      "path": "C:\\Users\\anuda\\orca\\frontier-football\\docs\\photo-review-2026-10-13\\originals\\D3143.jpg",
+      "quality": "quality/D3143.jpg",
+      "group": "drive-wa-final-esp-arg"
+    },
+    "D3207": {
+      "key": "D3207",
+      "name": "DSC_8450.jpg",
+      "w": 6016,
+      "h": 4016,
+      "source": "https://drive.google.com/file/d/1XtZTf5d4pXYFEtchRQi8IX5OJWD3STCY/view",
+      "local_original": "",
+      "path": "C:\\Users\\anuda\\orca\\frontier-football\\docs\\photo-review-2026-10-13\\originals\\D3207.jpg",
+      "quality": "quality/D3207.jpg",
+      "group": "drive-wa-final-esp-arg"
+    },
+    "D3238": {
+      "key": "D3238",
+      "name": "DSC_8226.jpg",
+      "w": 6016,
+      "h": 4016,
+      "source": "https://drive.google.com/file/d/1-FYkXDsmjIbNtQw5CvQZaPS2IqxIH1-B/view",
+      "local_original": "",
+      "path": "C:\\Users\\anuda\\orca\\frontier-football\\docs\\photo-review-2026-10-13\\originals\\D3238.jpg",
+      "quality": "quality/D3238.jpg",
+      "group": "drive-wa-final-esp-arg"
+    },
+    "D3311": {
+      "key": "D3311",
+      "name": "DSC_8248.jpg",
+      "w": 6016,
+      "h": 4016,
+      "source": "https://drive.google.com/file/d/1FgxaWjYJAgrvxBzWiEVc3TLPjGZPV4OR/view",
+      "local_original": "",
+      "path": "C:\\Users\\anuda\\orca\\frontier-football\\docs\\photo-review-2026-10-13\\originals\\D3311.jpg",
+      "quality": "quality/D3311.jpg",
+      "group": "drive-wa-final-esp-arg"
+    },
+    "D3414": {
+      "key": "D3414",
+      "name": "DSC_7703.jpg",
+      "w": 6016,
+      "h": 4016,
+      "source": "https://drive.google.com/file/d/1VtttD35lmb9u4_aNZAS5fdUnArbz8mgE/view",
+      "local_original": "",
+      "path": "C:\\Users\\anuda\\orca\\frontier-football\\docs\\photo-review-2026-10-13\\originals\\D3414.jpg",
+      "quality": "quality/D3414.jpg",
+      "group": "drive-wa-semi-eng-arg"
+    },
+    "D3487": {
+      "key": "D3487",
+      "name": "DSC_7603.jpg",
+      "w": 6016,
+      "h": 4016,
+      "source": "https://drive.google.com/file/d/1P2jk_ICwH7smVRjdta5S5rUBS4jmZ6Ij/view",
+      "local_original": "",
+      "path": "C:\\Users\\anuda\\orca\\frontier-football\\docs\\photo-review-2026-10-13\\originals\\D3487.jpg",
+      "quality": "quality/D3487.jpg",
+      "group": "drive-wa-semi-eng-arg"
+    },
+    "D3567": {
+      "key": "D3567",
+      "name": "DSC_7731.jpg",
+      "w": 6016,
+      "h": 4016,
+      "source": "https://drive.google.com/file/d/1QfzsoeAWTNpDKnVDDzpk5RYppZisK_yN/view",
+      "local_original": "",
+      "path": "C:\\Users\\anuda\\orca\\frontier-football\\docs\\photo-review-2026-10-13\\originals\\D3567.jpg",
+      "quality": "quality/D3567.jpg",
+      "group": "drive-wa-semi-eng-arg"
+    },
+    "D3580": {
+      "key": "D3580",
+      "name": "DSC_7265.jpg",
+      "w": 6016,
+      "h": 4016,
+      "source": "https://drive.google.com/file/d/1lzIdThKRPby0xAHllSw-4Jz7Rbb_nw3H/view",
+      "local_original": "",
+      "path": "C:\\Users\\anuda\\orca\\frontier-football\\docs\\photo-review-2026-10-13\\originals\\D3580.jpg",
+      "quality": "quality/D3580.jpg",
+      "group": "drive-wa-semi-esp-fra"
+    },
+    "D3604": {
+      "key": "D3604",
+      "name": "DSC_7496.jpg",
+      "w": 6016,
+      "h": 4016,
+      "source": "https://drive.google.com/file/d/1vdpNeesLjsWCXy19IP2Bj_CI8Su6WSSI/view",
+      "local_original": "",
+      "path": "C:\\Users\\anuda\\orca\\frontier-football\\docs\\photo-review-2026-10-13\\originals\\D3604.jpg",
+      "quality": "quality/D3604.jpg",
+      "group": "drive-wa-semi-esp-fra"
+    },
+    "D3607": {
+      "key": "D3607",
+      "name": "DSC_7395.jpg",
+      "w": 6016,
+      "h": 4016,
+      "source": "https://drive.google.com/file/d/1kc_oK9Qicax9ifwp8e2sZ5OCxoHovKH9/view",
+      "local_original": "",
+      "path": "C:\\Users\\anuda\\orca\\frontier-football\\docs\\photo-review-2026-10-13\\originals\\D3607.jpg",
+      "quality": "quality/D3607.jpg",
+      "group": "drive-wa-semi-esp-fra"
+    },
+    "D3629": {
+      "key": "D3629",
+      "name": "DSC_3037.jpg",
+      "w": 6048,
+      "h": 4024,
+      "source": "https://drive.google.com/file/d/1cnOFQL-OorTTgAnsb6J8DeG-aBKI4EiV/view",
+      "local_original": "",
+      "path": "C:\\Users\\anuda\\orca\\frontier-football\\docs\\photo-review-2026-10-13\\originals\\D3629.jpg",
+      "quality": "quality/D3629.jpg",
+      "group": "drive-wa-norway-england"
+    },
+    "D3640": {
+      "key": "D3640",
+      "name": "DSC_2941.jpg",
+      "w": 6048,
+      "h": 4024,
+      "source": "https://drive.google.com/file/d/1mpfnvWlv8lXf2HbfEM35iDqBE4ekh-Qk/view",
+      "local_original": "",
+      "path": "C:\\Users\\anuda\\orca\\frontier-football\\docs\\photo-review-2026-10-13\\originals\\D3640.jpg",
+      "quality": "quality/D3640.jpg",
+      "group": "drive-wa-norway-england"
+    },
+    "D3732": {
+      "key": "D3732",
+      "name": "DSC_2535.jpg",
+      "w": 6048,
+      "h": 4024,
+      "source": "https://drive.google.com/file/d/1YzHLhMgJYSipWmGT4rKGNMJTVico3-0B/view",
+      "local_original": "",
+      "path": "C:\\Users\\anuda\\orca\\frontier-football\\docs\\photo-review-2026-10-13\\originals\\D3732.jpg",
+      "quality": "quality/D3732.jpg",
+      "group": "drive-wa-norway-england"
+    },
+    "L0010": {
+      "key": "L0010",
+      "name": "DSC_1755.JPG",
+      "w": 5568,
+      "h": 3712,
+      "source": "D:\\Frontier Football\\4 x 4 Series 2026\\Season 2\\Photos\\01 Medals & Trophies\\DSC_1755.JPG",
+      "local_original": "originals/L0010.jpg",
+      "path": "D:\\Frontier Football\\4 x 4 Series 2026\\Season 2\\Photos\\01 Medals & Trophies\\DSC_1755.JPG",
+      "quality": "quality/L0010.jpg",
+      "group": "disk-4-x-4-Series-2026-Season-2"
+    },
+    "L0089": {
+      "key": "L0089",
+      "name": "DSC_1834.JPG",
+      "w": 5568,
+      "h": 3712,
+      "source": "D:\\Frontier Football\\4 x 4 Series 2026\\Season 2\\Photos\\02 Winners\\DSC_1834.JPG",
+      "local_original": "originals/L0089.jpg",
+      "path": "D:\\Frontier Football\\4 x 4 Series 2026\\Season 2\\Photos\\02 Winners\\DSC_1834.JPG",
+      "quality": "quality/L0089.jpg",
+      "group": "disk-4-x-4-Series-2026-Season-2"
+    },
+    "L0119": {
+      "key": "L0119",
+      "name": "DSC_1435.JPG",
+      "w": 5568,
+      "h": 3712,
+      "source": "D:\\Frontier Football\\4 x 4 Series 2026\\Season 2\\Photos\\03 Group Photos\\DSC_1435.JPG",
+      "local_original": "originals/L0119.jpg",
+      "path": "D:\\Frontier Football\\4 x 4 Series 2026\\Season 2\\Photos\\03 Group Photos\\DSC_1435.JPG",
+      "quality": "quality/L0119.jpg",
+      "group": "disk-4-x-4-Series-2026-Season-2"
+    },
+    "L0717": {
+      "key": "L0717",
+      "name": "DSC_1432.JPG",
+      "w": 5568,
+      "h": 3712,
+      "source": "D:\\Frontier Football\\4 x 4 Series 2026\\Season 2\\Photos\\06 Match Action\\DSC_1432.JPG",
+      "local_original": "originals/L0717.jpg",
+      "path": "D:\\Frontier Football\\4 x 4 Series 2026\\Season 2\\Photos\\06 Match Action\\DSC_1432.JPG",
+      "quality": "quality/L0717.jpg",
+      "group": "disk-4-x-4-Series-2026-Season-2"
+    },
+    "L1048": {
+      "key": "L1048",
+      "name": "DSC_1891.JPG",
+      "w": 6016,
+      "h": 4016,
+      "source": "D:\\Frontier Football\\4 x 4 Series 2026\\Season 4\\Photos\\01 Medals & Trophies\\DSC_1891.JPG",
+      "local_original": "originals/L1048.jpg",
+      "path": "D:\\Frontier Football\\4 x 4 Series 2026\\Season 4\\Photos\\01 Medals & Trophies\\DSC_1891.JPG",
+      "quality": "quality/L1048.jpg",
+      "group": "disk-4-x-4-Series-2026-Season-4"
+    },
+    "L1148": {
+      "key": "L1148",
+      "name": "DSC_2761.JPG",
+      "w": 6016,
+      "h": 4016,
+      "source": "D:\\Frontier Football\\4 x 4 Series 2026\\Season 4\\Photos\\02 Winners\\DSC_2761.JPG",
+      "local_original": "originals/L1148.jpg",
+      "path": "D:\\Frontier Football\\4 x 4 Series 2026\\Season 4\\Photos\\02 Winners\\DSC_2761.JPG",
+      "quality": "quality/L1148.jpg",
+      "group": "disk-4-x-4-Series-2026-Season-4"
+    },
+    "L1155": {
+      "key": "L1155",
+      "name": "DSC_2768.JPG",
+      "w": 6016,
+      "h": 4016,
+      "source": "D:\\Frontier Football\\4 x 4 Series 2026\\Season 4\\Photos\\02 Winners\\DSC_2768.JPG",
+      "local_original": "originals/L1155.jpg",
+      "path": "D:\\Frontier Football\\4 x 4 Series 2026\\Season 4\\Photos\\02 Winners\\DSC_2768.JPG",
+      "quality": "quality/L1155.jpg",
+      "group": "disk-4-x-4-Series-2026-Season-4"
+    },
+    "L1156": {
+      "key": "L1156",
+      "name": "DSC_2769.JPG",
+      "w": 6016,
+      "h": 4016,
+      "source": "D:\\Frontier Football\\4 x 4 Series 2026\\Season 4\\Photos\\02 Winners\\DSC_2769.JPG",
+      "local_original": "originals/L1156.jpg",
+      "path": "D:\\Frontier Football\\4 x 4 Series 2026\\Season 4\\Photos\\02 Winners\\DSC_2769.JPG",
+      "quality": "quality/L1156.jpg",
+      "group": "disk-4-x-4-Series-2026-Season-4"
+    },
+    "L1181": {
+      "key": "L1181",
+      "name": "DSC_2182.JPG",
+      "w": 6016,
+      "h": 4016,
+      "source": "D:\\Frontier Football\\4 x 4 Series 2026\\Season 4\\Photos\\03 Group Photos\\DSC_2182.JPG",
+      "local_original": "originals/L1181.jpg",
+      "path": "D:\\Frontier Football\\4 x 4 Series 2026\\Season 4\\Photos\\03 Group Photos\\DSC_2182.JPG",
+      "quality": "quality/L1181.jpg",
+      "group": "disk-4-x-4-Series-2026-Season-4"
+    },
+    "L1184": {
+      "key": "L1184",
+      "name": "DSC_2185.JPG",
+      "w": 6016,
+      "h": 4016,
+      "source": "D:\\Frontier Football\\4 x 4 Series 2026\\Season 4\\Photos\\03 Group Photos\\DSC_2185.JPG",
+      "local_original": "originals/L1184.jpg",
+      "path": "D:\\Frontier Football\\4 x 4 Series 2026\\Season 4\\Photos\\03 Group Photos\\DSC_2185.JPG",
+      "quality": "quality/L1184.jpg",
+      "group": "disk-4-x-4-Series-2026-Season-4"
+    },
+    "L1501": {
+      "key": "L1501",
+      "name": "DSC_2022.JPG",
+      "w": 6016,
+      "h": 4016,
+      "source": "D:\\Frontier Football\\4 x 4 Series 2026\\Season 4\\Photos\\06 Match Action\\DSC_2022.JPG",
+      "local_original": "originals/L1501.jpg",
+      "path": "D:\\Frontier Football\\4 x 4 Series 2026\\Season 4\\Photos\\06 Match Action\\DSC_2022.JPG",
+      "quality": "quality/L1501.jpg",
+      "group": "disk-4-x-4-Series-2026-Season-4"
+    },
+    "L1514": {
+      "key": "L1514",
+      "name": "DSC_2035.JPG",
+      "w": 6016,
+      "h": 4016,
+      "source": "D:\\Frontier Football\\4 x 4 Series 2026\\Season 4\\Photos\\06 Match Action\\DSC_2035.JPG",
+      "local_original": "originals/L1514.jpg",
+      "path": "D:\\Frontier Football\\4 x 4 Series 2026\\Season 4\\Photos\\06 Match Action\\DSC_2035.JPG",
+      "quality": "quality/L1514.jpg",
+      "group": "disk-4-x-4-Series-2026-Season-4"
+    },
+    "L1542": {
+      "key": "L1542",
+      "name": "DSC_2082.JPG",
+      "w": 6016,
+      "h": 4016,
+      "source": "D:\\Frontier Football\\4 x 4 Series 2026\\Season 4\\Photos\\06 Match Action\\DSC_2082.JPG",
+      "local_original": "originals/L1542.jpg",
+      "path": "D:\\Frontier Football\\4 x 4 Series 2026\\Season 4\\Photos\\06 Match Action\\DSC_2082.JPG",
+      "quality": "quality/L1542.jpg",
+      "group": "disk-4-x-4-Series-2026-Season-4"
+    },
+    "L1567": {
+      "key": "L1567",
+      "name": "DSC_2108.JPG",
+      "w": 6016,
+      "h": 4016,
+      "source": "D:\\Frontier Football\\4 x 4 Series 2026\\Season 4\\Photos\\06 Match Action\\DSC_2108.JPG",
+      "local_original": "originals/L1567.jpg",
+      "path": "D:\\Frontier Football\\4 x 4 Series 2026\\Season 4\\Photos\\06 Match Action\\DSC_2108.JPG",
+      "quality": "quality/L1567.jpg",
+      "group": "disk-4-x-4-Series-2026-Season-4"
+    },
+    "L1574": {
+      "key": "L1574",
+      "name": "DSC_2126.JPG",
+      "w": 6016,
+      "h": 4016,
+      "source": "D:\\Frontier Football\\4 x 4 Series 2026\\Season 4\\Photos\\06 Match Action\\DSC_2126.JPG",
+      "local_original": "originals/L1574.jpg",
+      "path": "D:\\Frontier Football\\4 x 4 Series 2026\\Season 4\\Photos\\06 Match Action\\DSC_2126.JPG",
+      "quality": "quality/L1574.jpg",
+      "group": "disk-4-x-4-Series-2026-Season-4"
+    },
+    "L1978": {
+      "key": "L1978",
+      "name": "DSC07374.JPG",
+      "w": 7008,
+      "h": 4672,
+      "source": "D:\\Frontier Football\\Turf Wars\\Event\\Photos\\01 Winners & Trophies\\DSC07374.JPG",
+      "local_original": "originals/L1978.jpg",
+      "path": "D:\\Frontier Football\\Turf Wars\\Event\\Photos\\01 Winners & Trophies\\DSC07374.JPG",
+      "quality": "quality/L1978.jpg",
+      "group": "disk-Turf-Wars"
+    },
+    "L1979": {
+      "key": "L1979",
+      "name": "DSC07375.JPG",
+      "w": 7008,
+      "h": 4672,
+      "source": "D:\\Frontier Football\\Turf Wars\\Event\\Photos\\01 Winners & Trophies\\DSC07375.JPG",
+      "local_original": "originals/L1979.jpg",
+      "path": "D:\\Frontier Football\\Turf Wars\\Event\\Photos\\01 Winners & Trophies\\DSC07375.JPG",
+      "quality": "quality/L1979.jpg",
+      "group": "disk-Turf-Wars"
+    },
+    "L2080": {
+      "key": "L2080",
+      "name": "DSC_3957.jpg",
+      "w": 6016,
+      "h": 4016,
+      "source": "D:\\Frontier Football\\Watch Parties\\UCL Watch Party\\Photos\\03 Group Photos\\DSC_3957.jpg",
+      "local_original": "originals/L2080.jpg",
+      "path": "D:\\Frontier Football\\Watch Parties\\UCL Watch Party\\Photos\\03 Group Photos\\DSC_3957.jpg",
+      "quality": "quality/L2080.jpg",
+      "group": "disk-Watch-Parties"
+    },
+    "L2125": {
+      "key": "L2125",
+      "name": "DSC_4228.jpg",
+      "w": 6016,
+      "h": 4016,
+      "source": "D:\\Frontier Football\\Watch Parties\\UCL Watch Party\\Photos\\04 Close-ups & Portraits\\DSC_4228.jpg",
+      "local_original": "originals/L2125.jpg",
+      "path": "D:\\Frontier Football\\Watch Parties\\UCL Watch Party\\Photos\\04 Close-ups & Portraits\\DSC_4228.jpg",
+      "quality": "quality/L2125.jpg",
+      "group": "disk-Watch-Parties"
+    },
+    "L2189": {
+      "key": "L2189",
+      "name": "DSC_3951.jpg",
+      "w": 6016,
+      "h": 4016,
+      "source": "D:\\Frontier Football\\Watch Parties\\UCL Watch Party\\Photos\\07 Branding & Products\\DSC_3951.jpg",
+      "local_original": "originals/L2189.jpg",
+      "path": "D:\\Frontier Football\\Watch Parties\\UCL Watch Party\\Photos\\07 Branding & Products\\DSC_3951.jpg",
+      "quality": "quality/L2189.jpg",
+      "group": "disk-Watch-Parties"
+    },
+    "P0043": {
+      "key": "P0043",
+      "name": "62c9cbff35b79e2c598b4d2324f6bcb5.webp",
+      "w": 1280,
+      "h": 853,
+      "source": "C:\\Users\\anuda\\orca\\frontier-football\\public\\albums\\frontier-futsal\\62c9cbff35b79e2c598b4d2324f6bcb5.webp",
+      "local_original": "",
+      "path": "C:\\Users\\anuda\\orca\\frontier-football\\public\\albums\\frontier-futsal\\62c9cbff35b79e2c598b4d2324f6bcb5.webp",
+      "quality": "",
+      "group": "frontier-futsal"
+    },
+    "P0078": {
+      "key": "P0078",
+      "name": "9792a16def4ab58717fd323264cf486d.webp",
+      "w": 1280,
+      "h": 853,
+      "source": "C:\\Users\\anuda\\orca\\frontier-football\\public\\albums\\frontier-futsal\\9792a16def4ab58717fd323264cf486d.webp",
+      "local_original": "",
+      "path": "C:\\Users\\anuda\\orca\\frontier-football\\public\\albums\\frontier-futsal\\9792a16def4ab58717fd323264cf486d.webp",
+      "quality": "",
+      "group": "frontier-futsal"
+    },
+    "P0090": {
+      "key": "P0090",
+      "name": "b36221d4200375031890d20c95f5162c.webp",
+      "w": 1280,
+      "h": 853,
+      "source": "C:\\Users\\anuda\\orca\\frontier-football\\public\\albums\\frontier-futsal\\b36221d4200375031890d20c95f5162c.webp",
+      "local_original": "",
+      "path": "C:\\Users\\anuda\\orca\\frontier-football\\public\\albums\\frontier-futsal\\b36221d4200375031890d20c95f5162c.webp",
+      "quality": "",
+      "group": "frontier-futsal"
+    },
+    "P0096": {
+      "key": "P0096",
+      "name": "cab53f8b4f15c716875a4a320124fa1b.webp",
+      "w": 1280,
+      "h": 853,
+      "source": "C:\\Users\\anuda\\orca\\frontier-football\\public\\albums\\frontier-futsal\\cab53f8b4f15c716875a4a320124fa1b.webp",
+      "local_original": "",
+      "path": "C:\\Users\\anuda\\orca\\frontier-football\\public\\albums\\frontier-futsal\\cab53f8b4f15c716875a4a320124fa1b.webp",
+      "quality": "",
+      "group": "frontier-futsal"
+    },
+    "P0173": {
+      "key": "P0173",
+      "name": "7fe5ffa3a85d2b9ecf626350e1b2ae83.webp",
+      "w": 1280,
+      "h": 853,
+      "source": "C:\\Users\\anuda\\orca\\frontier-football\\public\\albums\\szn-5\\7fe5ffa3a85d2b9ecf626350e1b2ae83.webp",
+      "local_original": "",
+      "path": "C:\\Users\\anuda\\orca\\frontier-football\\public\\albums\\szn-5\\7fe5ffa3a85d2b9ecf626350e1b2ae83.webp",
+      "quality": "",
+      "group": "szn-5"
+    },
+    "P0190": {
+      "key": "P0190",
+      "name": "a3602b7cad103edd72d33ee11006bfcf.webp",
+      "w": 1280,
+      "h": 853,
+      "source": "C:\\Users\\anuda\\orca\\frontier-football\\public\\albums\\szn-5\\a3602b7cad103edd72d33ee11006bfcf.webp",
+      "local_original": "",
+      "path": "C:\\Users\\anuda\\orca\\frontier-football\\public\\albums\\szn-5\\a3602b7cad103edd72d33ee11006bfcf.webp",
+      "quality": "",
+      "group": "szn-5"
+    },
+    "P0218": {
+      "key": "P0218",
+      "name": "d14297b56850fc77f8474e06b474353e.webp",
+      "w": 1280,
+      "h": 853,
+      "source": "C:\\Users\\anuda\\orca\\frontier-football\\public\\albums\\szn-5\\d14297b56850fc77f8474e06b474353e.webp",
+      "local_original": "",
+      "path": "C:\\Users\\anuda\\orca\\frontier-football\\public\\albums\\szn-5\\d14297b56850fc77f8474e06b474353e.webp",
+      "quality": "",
+      "group": "szn-5"
+    },
+    "P0227": {
+      "key": "P0227",
+      "name": "e6ccd632929a10a0001976a1436a927d.webp",
+      "w": 1280,
+      "h": 853,
+      "source": "C:\\Users\\anuda\\orca\\frontier-football\\public\\albums\\szn-5\\e6ccd632929a10a0001976a1436a927d.webp",
+      "local_original": "",
+      "path": "C:\\Users\\anuda\\orca\\frontier-football\\public\\albums\\szn-5\\e6ccd632929a10a0001976a1436a927d.webp",
+      "quality": "",
+      "group": "szn-5"
+    }
+  },
+  "highlights": {
+    "szn-1": [
+      "D0326",
+      "D0331",
+      "D0366"
+    ],
+    "szn-2": [
+      "L0119",
+      "L0089",
+      "L0010",
+      "L0717"
+    ],
+    "szn-3": [
+      "D1558",
+      "D1864",
+      "D1601"
+    ],
+    "szn-4": [
+      "L1574",
+      "L1501",
+      "L1156",
+      "L1184",
+      "L1048"
+    ],
+    "szn-5": [
+      "P0173",
+      "P0227",
+      "P0190",
+      "P0218"
+    ],
+    "szn-6": [
+      "D2876",
+      "D2908",
+      "D2887",
+      "D2929"
+    ],
+    "division-0": [
+      "D3078",
+      "D3094",
+      "D3113",
+      "D3097"
+    ],
+    "wa-final-esp-arg": [
+      "D3207",
+      "D3143",
+      "D3238"
+    ],
+    "wa-semi-eng-arg": [
+      "D3567",
+      "D3414",
+      "D3487"
+    ],
+    "wa-semi-esp-fra": [
+      "D3607",
+      "D3580",
+      "D3604"
+    ],
+    "wa-norway-england": [
+      "D3629",
+      "D3640",
+      "D3732"
+    ],
+    "wa-ucl-final-night": [
+      "L2080",
+      "L2125",
+      "L2189"
+    ],
+    "frontier-futsal": [
+      "P0090",
+      "P0078",
+      "P0096",
+      "P0043"
+    ],
+    "turf-wars": [
+      "L1979",
+      "L1978"
+    ]
+  },
+  "summary": "Home hero reserved for video: no photo recommendation or replacement there. Reviewed 4,176 Drive preview entries, 2,181 readable unique disk JPEG/PNG copies, 243 existing credited album derivatives, and 11 embedded RAW previews. Sources overlap; these counts are not unique moments. 76 disk JPEG/PNG copies failed decoding; 135 exact duplicates excluded. 13 RAW files found: two yielded no preview and one preview is visibly damaged. RAWs are organizer portraits, not better match winners. Downloaded 47 Drive originals and verified checksums; inspected 27 disk originals at full detail (74 shortlisted original checks). All 108 current image export entries were skimmed. Not every archive image was inspected at original size.",
+  "gaps": [
+    "No watch-party source inspected meets a literal grain-free, close-up full-screen bar. Use restrained cards, obtain better originals, or replace large placements with the strongest clean football photos where the story permits.",
+    "SZN6 originals are mostly 2\u20133k pixels with softened detail; no larger version found in its Picks folder. Keep event-specific photos at medium size.",
+    "Turf has unreadable and partly corrupted files. The two intact group frames are contextual picks, not pristine close-up hero images.",
+    "SZN5 and Ground Zero have credited ThePapare derivatives on disk/site; source camera originals were not found. Preserve watermarks and credits. SZN5 video still is excluded from the photos-only shortlist.",
+    "Team portraits cannot be forced into narrow portrait crops without removing people. Change the frame ratio or compose a separate phone layout.",
+    "Formal Drive headshots have no verified person-to-role mapping. Team section currently has no live portrait slots; do not assign identities.",
+    "Archive browsing can retain event coverage separately; feature only the curated highlights. This report does not certify every archive photo as pristine. Unused legacy gallery p01\u2013p19/v01\u2013v04 data is not a live placement in the current gallery route.",
+    "Actual website replacement/export/animation checks remain a separate implementation step. This report includes crop guidance and simulations, not final retouched assets or a deployed site."
+  ]
+}
