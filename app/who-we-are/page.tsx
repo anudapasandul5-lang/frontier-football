@@ -53,8 +53,8 @@ export default function WhoWeAre() {
       <PhotoStrip
         photos={[
           { src: "/who/strip-1.webp", alt: "Friends smile together at a table, one holding a Spain flag, at a Road to World Cup watch party" },
-          { src: "/who/strip-2.webp", alt: "Players and organisers hold trophies and medals at the 4 x 4 Series SZN 4 awards" },
-          { src: "/who/norway-england-fan.webp", alt: "Players scramble for the ball in daylight at a 4 x 4 Series SZN 6 match" },
+          { src: "/who/strip-2.webp", alt: "A goalkeeper receives a trophy and prize at a 4 x 4 Series presentation" },
+          { src: "/who/norway-england-fan.webp", alt: "Players contest the ball under floodlights at a 4 x 4 Series match" },
         ]}
       />
 
@@ -106,13 +106,6 @@ export default function WhoWeAre() {
               <p className="max-w-[46ch] text-[clamp(1.125rem,1.5vw,1.375rem)] leading-relaxed">
                 We build the space where players shine, get recognised and grow, in a community that goes well beyond casual play. Through tournaments, collaborations and digital content, football culture and brands meet here.
               </p>
-              <ul aria-label="What we do" className="mt-8 flex flex-wrap gap-2">
-                {["Tournaments", "Collaborations", "Digital content"].map((t) => (
-                  <li key={t} className="story-pill border border-ink px-4 py-2 font-display text-sm uppercase">
-                    {t}
-                  </li>
-                ))}
-              </ul>
             </div>
           </div>
         </div>

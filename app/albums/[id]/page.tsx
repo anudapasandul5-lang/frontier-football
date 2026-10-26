@@ -57,7 +57,7 @@ export default async function AlbumPage({ params }: { params: Promise<{ id: stri
           lines={lines}
           photo={{ src: cover.src, alt: cover.alt, position: "center 35%", credit: albumStory(data, id)?.photoCredit ?? undefined }}
           transition={cover.morph ? `album-cover-${album.id}` : undefined}
-          labels={["Frontier / Gallery", album.champion ? `Champions: ${album.champion}` : "Colombo, Sri Lanka"]}
+          labels={["Frontier / Gallery", album.champion ? `Champion: ${album.champion}` : "Colombo, Sri Lanka"]}
           actions={
             <>
               <a href={picks.length ? "#highlights-heading" : "#album-photos"} className={`${heroButton} bg-yellow text-ink`}>

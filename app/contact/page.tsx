@@ -32,7 +32,7 @@ export default function Contact() {
           chapter="Contact"
           eyebrow="Contact"
           lines={["Get in", "touch."]}
-          photo={{ src: "/heroes/contact.webp", alt: "Friends cheer and celebrate at their table at the Norway v England watch party", position: "center 30%" }}
+          photo={{ src: "/heroes/contact.webp", alt: "Four players smile with their arms around each other at a Frontier event", position: "center 40%" }}
           actions={
             /* Full-width stacked bars, as in the signed-off copy doc (owner,
                2026-10-07); the hero photo stays. */

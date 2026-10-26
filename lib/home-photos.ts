@@ -20,20 +20,20 @@ export const marqueePhotos: HomePhoto[] = [
     "alt": "A player winds up a strike in the evening sun at 4 x 4 Series SZN 6"
   },
   {
-    "id": "e6ccd632929a10a0001976a1436a927d",
-    "src": "/home/moment-trophy.webp",
-    "sourceUrl": "",
-    "w": 1280,
-    "h": 853,
-    "alt": "Winners line up with their medals and the trophy after 4 x 4 Series SZN 5; photograph by ThePapare"
-  },
-  {
     "id": "DSC_9019",
     "src": "/home/moment-night.webp",
     "sourceUrl": "https://drive.google.com/file/d/1On76QkXr8Ve6GfNIC8BHDu24VW3bK-Hq/view",
     "w": 1600,
     "h": 1067,
     "alt": "A defender slides in to block a shot under the floodlights at SZN 6"
+  },
+  {
+    "id": "DSC_8676",
+    "src": "/home/moment-shot.webp",
+    "sourceUrl": "https://drive.google.com/file/d/1AAiZwD2c11mjogAyPLY6FVS9BWmwcUD9/view",
+    "w": 1600,
+    "h": 1067,
+    "alt": "A striker swings through the ball as defenders chase at dusk at 4 x 4 Series SZN 6"
   }
 ];
 /* The small tilted frames that drift round the headline: football and celebrations only. */
@@ -88,28 +88,28 @@ export const markerPhotos: HomePhoto[] = [
   }
 ];
 export const statementPhoto: HomePhoto = {
-  "id": "DSC_8480",
+  "id": "midnight-futsal-under-floodlights",
   "src": "/home/moment-crowd.webp",
-  "sourceUrl": "https://drive.google.com/file/d/1HJWVCiVDlVxTtqTD09iUTvQ2wwbEbGMm/view",
-  "w": 1600,
-  "h": 1067,
-  "alt": "A goalkeeper slides in as a player in orange strikes at 4 x 4 Series SZN 6"
+  "sourceUrl": "C:/Users/anuda/Desktop/Photos/Midnight Futsal Under Floodlights.png",
+  "w": 1536,
+  "h": 1024,
+  "alt": "A player in a blue number 10 shirt faces the goal on a futsal pitch under floodlights"
 };
 export const competitionPhotos = {
   "4 x 4 Series": {
-    "id": "DSC_8084",
+    "id": "DSC_0546",
     "src": "/pages/competition-4x4.webp",
-    "sourceUrl": "https://drive.google.com/file/d/1Wd8_rpH8tNf5elD9px8i1hoS4zgX4TlX/view",
+    "sourceUrl": "C:/Users/anuda/Desktop/Photos/DSC_0546.jpg",
     "w": 1600,
     "h": 1200,
-    "alt": "A goalkeeper in an orange bib plays the ball out at 4 x 4 Series SZN 6"
+    "alt": "Players in green bibs and blue shirts contest the ball near goal at 4 x 4 Series SZN 3"
   },
   "Division 0": {
-    "id": "DSC_6047",
+    "id": "DSC_6031",
     "src": "/pages/competition-division-0.webp",
-    "sourceUrl": "https://drive.google.com/file/d/17kS3j0HWH66mpqER6xsms_-ilFEJ1NVL/view",
+    "sourceUrl": "C:/Users/anuda/Desktop/Photos/DSC_6031.jpg",
     "w": 1600,
     "h": 1200,
-    "alt": "Players and friends gather round a Division 0 console match"
+    "alt": "Two players with controllers face a football video game screen at Division 0"
   }
 };

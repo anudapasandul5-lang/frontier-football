@@ -68,7 +68,7 @@ export default {
     { name: "Division 0", body: "Football without the grass. Controllers in hand, Division 0 gave the game another pitch. The pride was the same, the bragging rights were the same and so was the love of the game.",
     photos: [
       { src: "/pages/story-division-0-1.webp", alt: "Players and friends follow a Division 0 match on screen at Pixels N Pints" },
-      { src: "/pages/story-division-0-2.webp", alt: "A Division 0 player plays in the dark at Pixels N Pints" },
+      { src: "/pages/story-division-0-2.webp", alt: "Friends sit together on sofas, one holding a controller, at Pixels N Pints" },
     ] },
   ],
   aboutIntro: "Frontier Football started in Colombo in 2024 with one night on turf and a simple dream: Sri Lankan football deserves the biggest stage. Two years in, it is a large, growing community.",
@@ -84,7 +84,7 @@ export default {
       albumId: "szn-6",
       // The team that won. This is the main thing on the card. If it is TODO,
       // the card says "Not recorded yet" instead.
-      champion: "Spain",
+      champion: "Ramadan FC",
       // A short line under the champion, for anything unusual about the
       // season. Leave it as "TODO" if there is nothing to say.
       note: "World Cup Edition",
@@ -144,13 +144,13 @@ export default {
       // file in public/albums/, written by `npm run albums:sync`. Leave it as
       // "TODO" and the card still shows, saying the photos are on the way.
       albumId: "szn-4",
-      champion: "Pantera FC",
+      champion: "Panthera FC",
       note: "TODO",
       runnerUp: "TODO",
       goldenBoot: "TODO",
       goldenGlove: "TODO",
       photo: "/champions/szn-4.webp",
-      photoAlt: "Pantera FC players raise the trophy together after 4 x 4 Series SZN 4",
+      photoAlt: "Panthera FC players raise the trophy together after 4 x 4 Series SZN 4",
       date: "TODO",
       venue: "Athlete 360",
       // Link to this season's full photo folder on Google Drive. Paste the
@@ -914,7 +914,7 @@ export default {
         title: "Customizable opportunities",
         body: "Show up your way: on the ground at our events, or through stories we tell together online.",
         photo: "/pages/offer-custom.webp",
-        alt: "A referee and players during a night match at 4 x 4 Series SZN 6",
+        alt: "Players cheer and raise the trophy at a 4 x 4 Series presentation",
       },
       {
         title: "Product distribution",
@@ -926,7 +926,7 @@ export default {
         title: "Branding opportunities",
         body: "Strong on-site branding, event mentions and dedicated social content, so your brand stays visible well past match day.",
         photo: "/pages/collab-partner-can.webp",
-        alt: "A giant Seixed bottle on display at Pixels N Pints during Division 0",
+        alt: "Hype cans beside Frontier and Main Sports Bar cards at the UCL final watch party",
       },
     ],
   },

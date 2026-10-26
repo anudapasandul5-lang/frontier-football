@@ -110,7 +110,7 @@ export const highlights: Record<string, Highlight[]> = {
       "src": "/gallery/highlights/szn-4/866.webp",
       "w": 1600,
       "h": 1068,
-      "alt": "Pantera FC players raise the trophy together after 4 x 4 Series SZN 4"
+      "alt": "Panthera FC players raise the trophy together after 4 x 4 Series SZN 4"
     },
     {
       "n": 295,

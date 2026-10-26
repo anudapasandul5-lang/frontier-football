@@ -143,7 +143,7 @@ function AlbumCards({ albums }: { albums: StoryAlbum[] }) {
                 <h3 className="font-display text-[clamp(2.5rem,4.2vw,4rem)] leading-[0.88] font-bold uppercase [text-wrap:balance]">{album.short ?? album.title}</h3>
                 {album.champion ? (
                   <p className="text-base leading-tight">
-                    Champions <strong>{album.champion}</strong>
+                    Champion <strong>{album.champion}</strong>
                   </p>
                 ) : null}
                 <div className={`flex items-center justify-between gap-4 border-t pt-3 ${pic ? "border-bone/30" : "border-ink/30"}`}>

@@ -94,7 +94,6 @@ export function PageHero({
       <div className="frame">
         <div className="flex items-center justify-between gap-4 border-t border-bone/25 py-4">
           <p className="micro">{labels[0]}</p>
-          <p className="micro max-sm:hidden">Scroll</p>
           <p className="micro">{labels[1]}</p>
         </div>
       </div>

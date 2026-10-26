@@ -37,9 +37,14 @@
   "/home/moment-crowd.webp": [
     800,
     1200,
-    1600
+    1536
   ],
   "/home/moment-night.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/home/moment-shot.webp": [
     800,
     1200,
     1600
@@ -117,7 +122,7 @@
   "/pages/collab-partner-can.webp": [
     800,
     1200,
-    1600
+    1408
   ],
   "/pages/collab-prizes.webp": [
     800,
@@ -202,7 +207,7 @@
   "/pages/menu-contact.webp": [
     800,
     1200,
-    1920
+    2400
   ],
   "/pages/menu-events.webp": [
     800,
@@ -251,6 +256,10 @@
     800,
     1200,
     1280
+  ],
+  "/pages/run-turf-wars.webp": [
+    800,
+    1200
   ],
   "/pages/run-watch-parties.webp": [
     800,
