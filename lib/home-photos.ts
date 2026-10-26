@@ -12,12 +12,12 @@ export const marqueePhotos: HomePhoto[] = [
     "alt": "The SZN 6 champions lift their trophies under the tent after the final"
   },
   {
-    "id": "DSC_0546",
+    "id": "gallery-p06",
     "src": "/home/moment-strike.webp",
-    "sourceUrl": "C:/Users/anuda/Desktop/Photos/DSC_0546.jpg",
+    "sourceUrl": "public/gallery/p06.webp",
     "w": 1600,
     "h": 1066,
-    "alt": "Players tussle for the ball in daylight at 4 x 4 Series SZN 6"
+    "alt": "A striker in a number 30 shirt lines up the ball as defenders close in at 4 x 4 Series"
   },
   {
     "id": "DSC_9019",
