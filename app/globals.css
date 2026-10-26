@@ -615,10 +615,6 @@
   0% { transform: translateY(-100%) scaleY(0.35); }
   100% { transform: translateY(100%) scaleY(0.35); }
 }
-/* Grabbing while the trophy is being dragged. */
-#hero[data-dragging] {
-  cursor: grabbing;
-}
 
 
 /* Floating header (home): fixed, tone-aware, hides on the way down. */
@@ -660,17 +656,6 @@ body:has(#hero)::after {
   60% { transform: translate(-4%, -1%); }
   80% { transform: translate(3%, 3%); }
   100% { transform: translate(0, 0); }
-}
-
-/* Hero weave: the gap between the two caps lines is the photo band's height,
-   which HeroRing scales with the viewport width. */
-.hero-weave {
-  row-gap: 52vw;
-}
-@media (width >= 48rem) {
-  .hero-weave {
-    row-gap: 21vw;
-  }
 }
 
 /* The Community chapter’s league name, sized to its column. */

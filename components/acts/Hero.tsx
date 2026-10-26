@@ -2,9 +2,9 @@ import { Nav } from "@/components/primitives/Nav";
 import { Roll } from "@/components/primitives/Roll";
 import { MicroLabel } from "@/components/primitives/MicroLabel";
 import { HeroMotion } from "@/components/motion/HeroMotion";
-import { HeroRing } from "@/components/motion/HeroRing";
+import { HeroVideo } from "@/components/motion/HeroVideo";
 
-/* Act 1. United's hero: yellow condensed caps straight over the 3D trophy,
+/* Act 1. United's hero: yellow condensed caps over the owner's hero film,
    then the two audience actions: players to WhatsApp, brands to Collaborate.
    History: the owner asked for United's scale with the trophy floating behind
    the copy (2026-09-23) and removed the serif paragraph the same day.
@@ -33,20 +33,28 @@ export function Hero() {
       id="hero"
       data-tone="bone"
       data-chapter="Home"
-      className="canvas-teal relative isolate flex min-h-svh touch-pan-y flex-col overflow-hidden select-none"
+      className="canvas-teal relative isolate flex min-h-svh flex-col overflow-hidden"
     >
+      {/* Owner's hero film (2026-10-26) replaces the photo ring. The poster is
+          the film's first frame, so the swap to video is seamless; HeroVideo
+          starts after load (desktop) or first touch (phone). The scrim keeps
+          bone and yellow caps readable on bright frames, and the bottom fade
+          hands over to Who We Are's night canvas. */}
+      <div aria-hidden="true" className="absolute inset-0 -z-10">
+        <picture>
+          <source media="(max-width: 767px)" srcSet="/hero/video-poster-phone.webp" />
+          <img src="/hero/video-poster.webp" alt="" fetchPriority="high" decoding="async" className="absolute inset-0 size-full object-cover" />
+        </picture>
+        <HeroVideo />
+        <span className="absolute inset-0 bg-ink/50" />
+        <span className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-night to-transparent" />
+      </div>
       <div aria-hidden="true" className="h-20 shrink-0" />
-      <HeroRing />
       <div id="content" className="frame relative flex flex-1 flex-col items-center justify-center pb-4">
-        {/* Teal hero, bone caps, yellow on the closing word of each line (owner,
-            2026-10-07: yellow on bone read as yellow on yellow, 1.45:1; night
-            canvas and off-palette darks rejected). Bone 4.7:1, yellow 3.3:1
-            (large display type).
-            Both lines sit above the photo band (HeroRing, z-2) so no photo
-            covers the words. Ink slabs behind the lines were tried for
-            contrast and rejected by the owner (UX audit T2, 2026-09-24). */}
+        {/* Bone caps, yellow on the closing word of each line (owner,
+            2026-10-07: yellow on bone read as yellow on yellow, 1.45:1). */}
         <MicroLabel className="relative z-[3] mb-5 text-center">Football. Community. Culture.</MicroLabel>
-        <h1 className="pointer-events-none flex w-full flex-col items-center gap-[clamp(8rem,14vh,11rem)] hero-weave text-center font-display text-[clamp(1rem,5.9vw,7rem)] leading-[0.86] font-bold whitespace-nowrap text-bone uppercase max-sm:text-[clamp(1.9rem,10vw,2.75rem)] max-sm:text-balance max-sm:whitespace-normal">
+        <h1 className="pointer-events-none flex w-full flex-col items-center gap-[0.12em] text-center font-display text-[clamp(1rem,5.9vw,7rem)] leading-[0.86] font-bold whitespace-nowrap text-bone uppercase max-sm:text-[clamp(1.9rem,10vw,2.75rem)] max-sm:text-balance max-sm:whitespace-normal">
           <span className="hero-line relative z-[3]">Football, community and <span className="text-yellow">culture.</span></span>
           <span className="hero-line relative z-[3]">Giving Sri Lanka’s football a <span className="text-yellow">platform.</span></span>
         </h1>
