@@ -436,13 +436,6 @@ export const reel: ReelFrame[] = [
     "albumId": "szn-3"
   },
   {
-    "src": "/gallery/reel/wa-ucl-final-night-21.webp",
-    "w": 629,
-    "h": 420,
-    "alt": "Hype cans beside Frontier and Main Sports Bar cards at the UCL final watch party",
-    "albumId": "wa-ucl-final-night"
-  },
-  {
     "src": "/gallery/reel/szn-2-609.webp",
     "w": 630,
     "h": 420,

@@ -29,7 +29,7 @@ describe("highlights", () => {
   });
 
   it("the reel resolves every frame and repeats none", () => {
-    expect(reel.length).toBe(10);
+    expect(reel.length).toBe(9);
     expect(new Set(reel.map((f) => f.src)).size).toBe(reel.length);
     for (const f of reel) expect(onDisk(f.src), f.src).toBe(true);
   });
