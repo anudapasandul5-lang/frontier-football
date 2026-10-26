@@ -658,6 +658,18 @@ body:has(#hero)::after {
   100% { transform: translate(0, 0); }
 }
 
+/* Hero weave: the wide gap between the two caps lines. It was the photo
+   ring's height; the owner kept the spacing when the film replaced the ring
+   (2026-10-26). */
+.hero-weave {
+  row-gap: 52vw;
+}
+@media (width >= 48rem) {
+  .hero-weave {
+    row-gap: 21vw;
+  }
+}
+
 /* The Community chapter’s league name, sized to its column. */
 .community-mark {
   font-size: clamp(4rem, min(10vw, 20svh), 11rem);

@@ -54,7 +54,7 @@ export function Hero() {
         {/* Bone caps, yellow on the closing word of each line (owner,
             2026-10-07: yellow on bone read as yellow on yellow, 1.45:1). */}
         <MicroLabel className="relative z-[3] mb-5 text-center">Football. Community. Culture.</MicroLabel>
-        <h1 className="pointer-events-none flex w-full flex-col items-center gap-[0.12em] text-center font-display text-[clamp(1rem,5.9vw,7rem)] leading-[0.86] font-bold whitespace-nowrap text-bone uppercase max-sm:text-[clamp(1.9rem,10vw,2.75rem)] max-sm:text-balance max-sm:whitespace-normal">
+        <h1 className="pointer-events-none flex w-full flex-col items-center gap-[clamp(8rem,14vh,11rem)] hero-weave text-center font-display text-[clamp(1rem,5.9vw,7rem)] leading-[0.86] font-bold whitespace-nowrap text-bone uppercase max-sm:text-[clamp(1.9rem,10vw,2.75rem)] max-sm:text-balance max-sm:whitespace-normal">
           <span className="hero-line relative z-[3]">Football, community and <span className="text-yellow">culture.</span></span>
           <span className="hero-line relative z-[3]">Giving Sri Lanka’s football a <span className="text-yellow">platform.</span></span>
         </h1>
