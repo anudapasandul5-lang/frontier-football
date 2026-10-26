@@ -12,12 +12,12 @@ export const marqueePhotos: HomePhoto[] = [
     "alt": "The SZN 6 champions lift their trophies under the tent after the final"
   },
   {
-    "id": "DSC_8533",
+    "id": "gallery-p06",
     "src": "/home/moment-strike.webp",
-    "sourceUrl": "https://drive.google.com/file/d/1ra_xs5JnizPY8x1Plu639R2SkszhGQ_O/view",
+    "sourceUrl": "public/gallery/p06.webp",
     "w": 1600,
     "h": 1066,
-    "alt": "A player winds up a strike in the evening sun at 4 x 4 Series SZN 6"
+    "alt": "A striker in a number 30 shirt lines up the ball as defenders close in at 4 x 4 Series"
   },
   {
     "id": "DSC_9019",
@@ -105,11 +105,11 @@ export const competitionPhotos = {
     "alt": "Players in green bibs and blue shirts contest the ball near goal at 4 x 4 Series SZN 3"
   },
   "Division 0": {
-    "id": "DSC_6031",
+    "id": "DSC_6078",
     "src": "/pages/competition-division-0.webp",
-    "sourceUrl": "C:/Users/anuda/Desktop/Photos/DSC_6031.jpg",
+    "sourceUrl": "C:/Users/anuda/Desktop/Photos/DSC_6078.jpg",
     "w": 1600,
     "h": 1200,
-    "alt": "Two players with controllers face a football video game screen at Division 0"
+    "alt": "A player grips a glowing controller in the dark at Division 0"
   }
 };
