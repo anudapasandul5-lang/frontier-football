@@ -60,7 +60,7 @@ export function Hero() {
         </h1>
       </div>
 
-      <div className="frame relative z-[3] flex items-center justify-between gap-4 pb-6 max-sm:flex-col max-sm:gap-3">
+      <div className="frame relative z-[3] flex items-center gap-4 pb-6 max-sm:flex-col max-sm:gap-3 sm:grid sm:grid-cols-[1fr_auto_1fr]">
         <p className="micro text-center sm:hidden">
           Colombo, Sri Lanka
         </p>
@@ -73,7 +73,7 @@ export function Hero() {
             <Roll>Partner with us</Roll>
           </a>
         </div>
-        <p className="micro max-sm:hidden">Colombo, Sri Lanka</p>
+        <p className="micro justify-self-end max-sm:hidden">Colombo, Sri Lanka</p>
       </div>
       <HeroMotion />
     </section>
