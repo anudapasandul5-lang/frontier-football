@@ -54,7 +54,7 @@ export function AboutMotion() {
 
 /* Our story: the pitch markings draw in with the scroll, the quote marks fade
    up and the quote's two lines glide in from either side, the duel photo opens
-   from a slit and the pills follow. Every step is a from-state, so without
+   from a slit. Every step is a from-state, so without
    this the section is already complete. */
 function storyMotion(root: Element) {
   const story = root.querySelector(".story-quote")?.closest("section");
@@ -79,5 +79,4 @@ function storyMotion(root: Element) {
   const photo = story.querySelector(".story-photo");
   if (!duel || !photo) return;
   gsap.fromTo(photo, { clipPath: "inset(48% 0% 48% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.6, ease: "expo.inOut", scrollTrigger: once(duel, "top 80%") });
-  gsap.from(duel.querySelectorAll(".story-pill"), { opacity: 0, y: 10, duration: 0.9, ease: "power2.out", stagger: 0.1, scrollTrigger: once(duel, "top 60%") });
 }

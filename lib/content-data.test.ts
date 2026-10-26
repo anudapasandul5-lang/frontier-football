@@ -22,7 +22,7 @@ describe("parseContent", () => {
       seasons: [
         {
           season: 4,
-          champion: "Pantera FC",
+          champion: "Panthera FC",
           runnerUp: "Some FC",
           goldenBoot: "A Player",
           goldenGlove: "A Keeper",
@@ -35,7 +35,7 @@ describe("parseContent", () => {
 
     expect(seasons[0]).toEqual({
       season: 4,
-      champion: "Pantera FC",
+      champion: "Panthera FC",
       runnerUp: "Some FC",
       goldenBoot: "A Player",
       goldenGlove: "A Keeper",

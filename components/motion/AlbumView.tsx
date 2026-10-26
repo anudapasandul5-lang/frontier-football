@@ -31,7 +31,7 @@ export function AlbumHead({ title, count, credit, story, id }: { title: string; 
           <p className="micro mb-5">Frontier / Gallery</p>
           <h1 className="max-w-[15ch] font-display text-[clamp(3rem,8vw,8.5rem)] leading-[0.88] font-bold uppercase [text-wrap:balance]">{title}</h1>
           {story?.note ? <p className="mt-6 max-w-[38ch] text-xl">{story.note}</p> : null}
-          {story?.champion ? <p className="mt-5 text-xl">Champions: <strong>{story.champion}</strong></p> : null}
+          {story?.champion ? <p className="mt-5 text-xl">Champion: <strong>{story.champion}</strong></p> : null}
           {story?.date || story?.venue ? <p className="micro mt-5">{[story.date, story.venue].filter(Boolean).join(" / ")}</p> : null}
           {story ? <a href="#album-photos" className="micro mt-10 w-fit border-b border-bone pb-1">Explore the photographs ↓</a> : null}
         </div>

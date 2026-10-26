@@ -54,7 +54,7 @@ export default function Collaborate() {
     >
       <PhotoStrip
         photos={[
-          { src: "/pages/collab-venue.webp", alt: "Fans gather inside Pixels N Pints, venue partner for Division 0" },
+          { src: "/pages/collab-venue.webp", alt: "The bar and big screen at a Frontier watch party: Cheers to the forever fans" },
           { src: "/pages/collab-bar-crowd.webp", alt: "A crowd holds its head in its hands at the England v Argentina watch party" },
           { src: "/pages/collab-celebration.webp", alt: "A supporter celebrates in front of the big screen at the England v Argentina watch party" },
         ]}
@@ -160,7 +160,7 @@ export default function Collaborate() {
       {/* id="talk": the hero button lands here, with the headline at the top
           (no scroll margin: the band's own padding clears the crest). */}
       <div id="talk" data-tone="ink" data-chapter="Talk to us" className="overflow-x-clip bg-yellow py-[clamp(4rem,12vh,8rem)] text-ink">
-        <div className="frame grid items-center gap-[clamp(3rem,6vw,5rem)] md:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
+        <div className="frame grid items-center gap-[clamp(3rem,6vw,5rem)] md:grid-cols-2">
           <div>
             <p aria-hidden="true" className="font-display text-[clamp(3.5rem,11vw,10rem)] leading-[0.82] font-bold uppercase">
               Talk
@@ -170,17 +170,17 @@ export default function Collaborate() {
             <p className="mt-6 max-w-[46ch] text-[clamp(1.1rem,0.95rem+0.6vw,1.6rem)] leading-[1.4]">One message is all it takes.</p>
             <ContactRoutes only="partner" heading="Talk to us" />
           </div>
-          <div className="relative mx-auto w-full max-w-[30rem] md:mx-0">
+          <div className="relative mx-auto w-full max-w-[40rem] md:mx-0">
             <img
               src="/pages/collab-talk.webp"
               srcSet={phoneSrcSet("/pages/collab-talk.webp")}
               sizes="(min-width: 768px) 40vw, 90vw"
-              alt="A player controls the ball under the floodlights at a 4 x 4 Series SZN 6 match"
-              width={1600}
-              height={2000}
+              alt="A player winds up to strike the ball while teammates watch at a 4 x 4 Series match; photograph by ThePapare"
+              width={1280}
+              height={960}
               loading="lazy"
               decoding="async"
-              className="block aspect-[4/5] w-full rotate-[2.5deg] border-[6px] border-ink object-cover"
+              className="block aspect-[4/3] w-full rotate-[2.5deg] border-[6px] border-ink object-cover"
             />
           </div>
         </div>

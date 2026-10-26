@@ -110,7 +110,7 @@ export const highlights: Record<string, Highlight[]> = {
       "src": "/gallery/highlights/szn-4/866.webp",
       "w": 1600,
       "h": 1068,
-      "alt": "Pantera FC players raise the trophy together after 4 x 4 Series SZN 4"
+      "alt": "Panthera FC players raise the trophy together after 4 x 4 Series SZN 4"
     },
     {
       "n": 295,
@@ -434,13 +434,6 @@ export const reel: ReelFrame[] = [
     "h": 420,
     "alt": "Players close in on the ball at 4 x 4 Series SZN 3",
     "albumId": "szn-3"
-  },
-  {
-    "src": "/gallery/reel/wa-ucl-final-night-21.webp",
-    "w": 629,
-    "h": 420,
-    "alt": "Hype cans beside Frontier and Main Sports Bar cards at the UCL final watch party",
-    "albumId": "wa-ucl-final-night"
   },
   {
     "src": "/gallery/reel/szn-2-609.webp",

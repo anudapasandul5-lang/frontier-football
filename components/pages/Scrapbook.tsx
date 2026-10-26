@@ -7,14 +7,14 @@ type Photo = { photo: string | null; photoAlt: string | null; photoCredit?: stri
 type Album = { albumId: string | null; driveFolder: string | null };
 const albumHref = (item?: Album) => item?.albumId ? `/albums/${encodeURIComponent(item.albumId)}` : item?.driveFolder;
 
-/* Each pin on the timeline has its own photo, so it never repeats the hall of
-   fame card or an album cover. Ground Zero is cut to the frame's 1.6:1 shape
-   (watermark whole), so its credited photo shows without bars. */
+/* Timeline photos are cropped for the frame's 1.6:1 shape. Ground Zero keeps
+   its watermark whole; Division 0 uses the owner's selected event photo. */
 const runPhotos: Record<string, { photo: string; photoAlt: string }> = {
   "Ground Zero": { photo: "/pages/run-ground-zero.webp", photoAlt: "Two players race for the ball in a women's match at Ground Zero; photograph by ThePapare" },
+  "Turf Wars": { photo: "/pages/run-turf-wars.webp", photoAlt: "Turf Wars players and organisers together with a trophy at Club Fusion" },
   "4 x 4 Series": { photo: "/pages/run-4x4.webp", photoAlt: "SZN 6 runners-up with their medals and the trophy" },
   "Watch Parties": { photo: "/pages/run-watch-parties.webp", photoAlt: "A supporter laughs with her friends at the Norway v England watch party" },
-  "Division 0": { photo: "/pages/run-division-0.webp", photoAlt: "A Division 0 player in a red shirt plays a match from the sofa" },
+  "Division 0": { photo: "/pages/run-division-0.webp", photoAlt: "Two players with controllers face a football video game screen at Division 0" },
 };
 
 export function Scrapbook({ data }: { data: Content }) {

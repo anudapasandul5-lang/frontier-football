@@ -77,9 +77,9 @@ export default function CommunityPage() {
     >
       <PhotoStrip
         photos={[
-          { src: "/pages/community-team.webp", alt: "Teammates hold each other in a huddle at dusk at 4 x 4 Series SZN 6" },
+          { src: "/pages/community-team.webp", alt: "Five teammates stand arm in arm after a 4 x 4 Series match; photograph by ThePapare" },
           { src: "/pages/community-final-table.webp", alt: "Friends with a Spain flag around a table at the World Cup final watch party" },
-          { src: "/pages/community-division-0.webp", alt: "Players join hands in a team huddle before a 4 x 4 Series SZN 6 match" },
+          { src: "/pages/community-division-0.webp", alt: "Two captains shake hands in front of the referee before a 4 x 4 Series match; photograph by ThePapare" },
         ]}
       />
 

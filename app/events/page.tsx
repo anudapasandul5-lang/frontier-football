@@ -61,8 +61,8 @@ export default function EventsPage() {
       <PhotoStrip
         photos={[
           { src: "/pages/events-strike.webp", alt: "A player drives forward with the ball in a daylight 4 x 4 Series SZN 6 match" },
-          { src: "/pages/events-keeper.webp", alt: "A goalkeeper gathers the ball on the edge of his area at SZN 6" },
-          { src: "/pages/events-day-match.webp", alt: "A player stretches to win the ball in a crowded box at 4 x 4 Series SZN 6" },
+          { src: "/pages/events-keeper.webp", alt: "Players celebrate with a high-five under floodlights at a 4 x 4 Series match" },
+          { src: "/pages/events-day-match.webp", alt: "Players race together towards the ball in a daylight 4 x 4 Series match" },
         ]}
       />
 
