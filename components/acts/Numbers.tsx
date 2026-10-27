@@ -15,7 +15,8 @@ import { CourtScene } from "@/components/motion/CourtScene";
    Every figure, label and date is content.js's stats (owner, asOf), in its
    order; the lead is its first row, 3.4M+ social media views today. The bars
    under each figure are the owner's United-style stat bars (2026-09-23), one
-   per brand colour. Copy: Ground Zero came first
+   per brand colour (owner kept them, 2026-10-27, after an all-yellow trial).
+   Copy: Ground Zero came first
    (content.js, owner 2026-09-22); six seasons and the watch-alongs are
    content.js. The signed-off Milestones paragraph mentions Turf Wars;
    its separate section stays removed. */
@@ -44,7 +45,10 @@ export function Numbers() {
       </div>
 
       <div className="relative">
-        <div className="frame flex min-h-[70svh] flex-col justify-center gap-[clamp(2rem,7vh,4rem)] py-[clamp(4rem,12vh,8rem)] max-md:min-h-0">
+        {/* Content height, small top pad: the Moment pin already lets go on
+            a screen of dark, and a centred 70svh block doubled it (UX audit
+            2026-10-27). */}
+        <div className="frame flex flex-col gap-[clamp(2rem,7vh,4rem)] pt-[clamp(2rem,5vh,3rem)] pb-[clamp(4rem,12vh,8rem)]">
           <TickRule />
           {/* One long word ("Milestones.") fills the row on its own, so the
               paragraph sits under it; side by side it ran into the copy. */}
@@ -52,7 +56,7 @@ export function Numbers() {
             <SplitReveal
               id="numbers-heading"
               lines={["Milestones."]}
-              className="font-display text-[clamp(3rem,min(10.5vw,17svh),8.75rem)] leading-[0.86] font-bold uppercase"
+              className="font-display text-display-l leading-[0.86] font-bold uppercase"
             />
             <div className="flex max-w-[44ch] flex-col gap-4">
               {asOf ? <MicroLabel>As of {asOf}</MicroLabel> : null}

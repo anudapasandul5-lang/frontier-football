@@ -127,7 +127,7 @@ function Highlights({ items, title }: { items: Highlight[]; title: string }) {
   return (
     <section aria-labelledby="highlights-heading" className="pt-[clamp(3rem,10vh,6rem)]">
       <div className="frame mb-8 flex items-end justify-between gap-6">
-        <h2 id="highlights-heading" className="font-display text-[clamp(2.5rem,7vw,6rem)] leading-[0.9] font-bold uppercase">
+        <h2 id="highlights-heading" className="font-display text-display-l leading-[0.9] font-bold uppercase">
           Highlights
         </h2>
         <p className="micro">{items.length} picked frames</p>
@@ -234,7 +234,7 @@ export function AlbumView({ id, head = true, highlights = [] }: { id: string | n
       {picks}
       <section ref={grid} id="album-photos" aria-labelledby="all-heading" className="scroll-mt-24 pt-[clamp(4rem,12vh,7rem)]">
         <div className="frame mb-8 flex flex-wrap items-end justify-between gap-x-6 gap-y-3">
-          <h2 id="all-heading" className="font-display text-[clamp(2.5rem,7vw,6rem)] leading-[0.9] font-bold uppercase">
+          <h2 id="all-heading" className="font-display text-display-l leading-[0.9] font-bold uppercase">
             All {items.length.toLocaleString("en")}
           </h2>
           {!head && credit.credit ? (

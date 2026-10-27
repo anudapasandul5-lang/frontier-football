@@ -12,12 +12,11 @@ import { phoneSrcSet } from "@/lib/phone-image";
 
 export const metadata: Metadata = { title: "Community" };
 
-const button = "flex min-h-12 items-center px-6 font-display text-[clamp(1rem,0.9rem+0.4vw,1.25rem)] font-bold uppercase transition-transform duration-150 ease-[var(--ease-out)] active:scale-[0.97]";
+const button = "flex min-h-12 items-center rounded-full px-6 font-display text-button font-bold uppercase transition-transform duration-150 ease-[var(--ease-out)] active:scale-[0.97]";
 
-/* Each event's scrapbook collage (owner reference, 2026-10-07): bone-framed
-   prints on a darker tray, each tipped a fraction of a degree. Kept under 1deg
-   because the owner rejected strongly tilted prints as crooked scans
-   (2026-09-24). Layout runs by story order: one big print on the left, three
+/* Each event's photo collage (owner reference, 2026-10-07). The bone frames,
+   tray and sub-degree tilts were removed for a cleaner page (2026-10-27);
+   the owner had already rejected strong tilts as crooked scans. Layout runs by story order: one big print on the left, three
    in a row, one big print on the right, then a 2 x 2 grid. */
 const layouts = ["lead-left", "row", "lead-right", "grid"] as const;
 type Layout = (typeof layouts)[number] | "pair";
@@ -29,12 +28,11 @@ const grids: Record<Layout, string> = {
   grid: "grid-cols-2 grid-rows-2 h-[clamp(16rem,42vw,30rem)]",
   pair: "grid-cols-2 h-[clamp(11rem,30vw,22rem)]",
 };
-const tilts = ["-rotate-[0.8deg]", "rotate-[0.6deg]", "-rotate-[0.4deg]", "rotate-[0.9deg]"];
 
 function Collage({ photos, layout }: { photos: { src: string; alt: string }[]; layout: Layout }) {
   return (
-    <div className={`photo-frame grid gap-[clamp(0.5rem,1.5vw,1rem)] bg-ink/[0.08] p-[clamp(0.5rem,1.5vw,1rem)] ${grids[layout]}`}>
-      {photos.map((p, i) => (
+    <div className={`photo-frame grid gap-[clamp(0.5rem,1.5vw,1rem)] ${grids[layout]}`}>
+      {photos.map((p) => (
         <img
           key={p.src}
           src={p.src}
@@ -44,7 +42,7 @@ function Collage({ photos, layout }: { photos: { src: string; alt: string }[]; l
           loading="lazy"
           decoding="async"
           referrerPolicy="no-referrer"
-          className={`block size-full min-h-0 border-[clamp(3px,0.6vw,6px)] border-bone object-cover transition-transform duration-500 ease-[var(--ease-out)] hover:rotate-0 ${tilts[i % tilts.length]}`}
+          className="block size-full min-h-0 object-cover"
         />
       ))}
     </div>
@@ -124,15 +122,15 @@ export default function CommunityPage() {
       </section>
 
       <section data-tone="ink" data-chapter="Every event we have done" aria-labelledby="past-heading" className="frame py-[clamp(4rem,12vh,8rem)]">
-        <SplitReveal id="past-heading" lines={["Every event we have done"]} className="mb-10 font-display text-[clamp(2.5rem,8vw,7rem)] leading-[0.88] font-bold uppercase" />
+        <SplitReveal id="past-heading" lines={["Every event we have done"]} className="mb-10 font-display text-display-l leading-[0.88] font-bold uppercase" />
         <ol className="border-t-2 border-ink">
           {raw.communityStories.map((story, i) => (
             <li key={story.name} className="border-b border-ink/20 py-[clamp(2rem,6vh,3.5rem)]">
               <p className="micro mb-2">Event {i + 1}</p>
-              <h3 className="mb-6 font-display text-[clamp(1.75rem,1.2rem+2.4vw,3.75rem)] leading-none font-bold uppercase">{story.name}</h3>
+              <h3 className="mb-6 font-display text-display-m leading-none font-bold uppercase">{story.name}</h3>
               <Collage photos={story.photos} layout={story.photos.length === 2 ? "pair" : story.photos.length >= 4 ? "grid" : layouts[i % 3]} />
               {"credit" in story ? <p className="micro mt-2">{story.credit}</p> : null}
-              <p className="mt-6 max-w-[62ch] text-[clamp(1.125rem,1rem+0.4vw,1.375rem)] leading-relaxed">{story.body}</p>
+              <p className="mt-6 max-w-[48ch] text-[clamp(1.125rem,1rem+0.4vw,1.375rem)] leading-relaxed">{story.body}</p>
             </li>
           ))}
         </ol>

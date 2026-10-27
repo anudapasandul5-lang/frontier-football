@@ -10,7 +10,7 @@ export function registrations(content: Raw) {
   const league = content?.league ?? {};
   return [
     { label: "Register team", message: league.teamMessage },
-    { label: "Join solo player", message: league.freeAgentMessage },
+    { label: "Join as a solo player", message: league.freeAgentMessage },
   ].flatMap(({ label, message }) => {
     // whatsappHref still opens a chat with no text; that is not a registration.
     const href = recorded(message) ? whatsappHref(number, message) : null;
@@ -39,11 +39,11 @@ export function activities(content: Raw) {
   return [
     ...competitions.filter((c) => c.beforeSeries === true).map(competition),
     ...(seasons.length
-      ? [{ name: "4 x 4 Series", note: `SZN ${Math.min(...seasons)} to SZN ${Math.max(...seasons)}`, href: "/gallery", photo: newest ? recorded(newest.photo) : null }]
+      ? [{ name: "4 x 4 Series", note: `SZN ${Math.min(...seasons)} to SZN ${Math.max(...seasons)}`, href: "/gallery#series", photo: newest ? recorded(newest.photo) : null }]
       : []),
     ...competitions.filter((c) => c.beforeSeries !== true).map(competition),
     ...(parties.length
-      ? [{ name: "Watch-alongs", note: `${parties.length} match nights on the big screen`, href: "/gallery", photo: recorded(parties.find((w) => recorded(w.photo))?.photo) }]
+      ? [{ name: "Watch Parties", note: `${parties.length} match nights on the big screen`, href: "/gallery#watch-parties", photo: recorded(parties.find((w) => recorded(w.photo))?.photo) }]
       : []),
   ];
 }

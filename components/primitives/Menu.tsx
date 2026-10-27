@@ -5,15 +5,18 @@ import { usePathname } from "next/navigation";
 import { phoneSrcSet } from "@/lib/phone-image";
 
 /* A native modal keeps focus in the menu and returns it to the trigger on
-   Escape. Seven links since Community (L7). */
+   Escape. Seven links since Community (L7). `focus` is the photo's
+   object-position: on a wide, short window object-cover trims the top and
+   bottom, so each photo keeps its faces (the contact shot keeps its players,
+   who stand low in the frame). */
 export const menuLinks = [
-  { href: "/", label: "Home", photo: "/pages/menu-home.webp" },
-  { href: "/who-we-are", label: "Who We Are", photo: "/pages/menu-who.webp" },
-  { href: "/events", label: "Events", photo: "/pages/menu-events.webp" },
-  { href: "/gallery", label: "Gallery", photo: "/pages/menu-gallery.webp" },
-  { href: "/community", label: "Community", photo: "/pages/menu-community.webp" },
-  { href: "/collaborate", label: "Collaborate", photo: "/pages/menu-collaborate.webp" },
-  { href: "/contact", label: "Contact", photo: "/pages/menu-contact.webp" },
+  { href: "/", label: "Home", photo: "/pages/menu-home.webp", focus: "50% 25%" },
+  { href: "/who-we-are", label: "Who We Are", photo: "/pages/menu-who.webp", focus: "50% 45%" },
+  { href: "/events", label: "Events", photo: "/pages/menu-events.webp", focus: "50% 60%" },
+  { href: "/gallery", label: "Gallery", photo: "/pages/menu-gallery.webp", focus: "50% 40%" },
+  { href: "/community", label: "Community", photo: "/pages/menu-community.webp", focus: "50% 35%" },
+  { href: "/collaborate", label: "Collaborate", photo: "/pages/menu-collaborate.webp", focus: "50% 30%" },
+  { href: "/contact", label: "Contact", photo: "/pages/menu-contact.webp", focus: "50% 80%" },
 ];
 
 export function Menu({ instagram }: { instagram: { url: string; handle: string } | null }) {
@@ -43,7 +46,7 @@ export function Menu({ instagram }: { instagram: { url: string; handle: string }
         // JS off in browsers that support them; onClick covers the rest.
         {...{ commandfor: "site-menu", command: "show-modal" }}
         onClick={() => dialog.current?.showModal()}
-        className="micro flex min-h-11 cursor-pointer items-center px-1 text-current transition-transform duration-150 ease-[var(--ease-out)] active:scale-[0.97]"
+        className="micro uppercase tracking-[0.12em] flex min-h-11 cursor-pointer items-center px-1 text-current transition-transform duration-150 ease-[var(--ease-out)] active:scale-[0.97]"
       >
         Menu
       </button>
@@ -57,7 +60,7 @@ export function Menu({ instagram }: { instagram: { url: string; handle: string }
             autoFocus
             {...{ commandfor: "site-menu", command: "close" }}
             onClick={() => dialog.current?.close()}
-            className="micro flex min-h-11 cursor-pointer items-center px-1 text-bone transition-transform duration-150 ease-[var(--ease-out)] active:scale-[0.97]"
+            className="micro uppercase tracking-[0.12em] flex min-h-11 cursor-pointer items-center px-1 text-bone transition-transform duration-150 ease-[var(--ease-out)] active:scale-[0.97]"
           >
             Close
           </button>
@@ -73,6 +76,7 @@ export function Menu({ instagram }: { instagram: { url: string; handle: string }
                   alt=""
                   loading="lazy"
                   decoding="async"
+                  style={{ objectPosition: link.focus }}
                   className="menu__photo pointer-events-none fixed inset-0 -z-10 size-full object-cover"
                 />
                 <a

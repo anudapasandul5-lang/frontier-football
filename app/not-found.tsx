@@ -4,7 +4,7 @@ import { phoneSrcSet } from "@/lib/phone-image";
 
 export const metadata: Metadata = { title: "Offside", robots: { index: false } };
 
-const button = "flex min-h-12 items-center px-6 font-display text-[clamp(1rem,0.9rem+0.4vw,1.25rem)] font-bold uppercase transition-transform duration-150 ease-[var(--ease-out)] active:scale-[0.97]";
+const button = "flex min-h-12 items-center rounded-full px-6 font-display text-button font-bold uppercase transition-transform duration-150 ease-[var(--ease-out)] active:scale-[0.97]";
 
 /* The branded 404 (plan L6b): night mode, a real photo, a way home and a way
    to the gallery. The static export writes it as 404.html, which the host

@@ -664,9 +664,11 @@ export default {
   // own; nothing was invented. Replace any file in `public/partners/` with a
   // cleaner one from the brand and it drops straight in.
   //
-  // STILL TEXT: @iodexsrilanka and @zone360.lk. No usable logo file exists
-  // online for either (IODEX's site only carries its parent company's mark),
-  // so both show as their name until someone supplies a real file.
+  // STILL TEXT: @iodexsrilanka, @zone360.lk, Seixed and Reignite. Checked again
+  // 2026-10-27: iodex.lk only serves a 97px logo (blurry when scaled), and the
+  // other three have no findable logo online. Each shows as its name until
+  // someone supplies a real file. Red Bull's wordmark (Wikimedia Commons,
+  // public-domain text logo) is in its own red, like the other colour marks.
   //
   // TO ADD A PARTNER: copy a { ... } line and change the name.
   // TO REMOVE ONE: delete its line.
@@ -689,7 +691,7 @@ export default {
     // handles, until someone checks each handle.
     { name: "Seixed", logo: "TODO", url: "TODO" },
     { name: "Reignite", logo: "TODO", url: "TODO" },
-    { name: "Red Bull", logo: "TODO", url: "TODO" },
+    { name: "Red Bull", logo: "/partners/red-bull.svg", url: "TODO" },
   ],
 
   // ==========================================================================
@@ -829,7 +831,7 @@ export default {
     // Supplied by the owner on 2026-09-22, replacing the pre-rebrand
     // frontierfutsal@gmail.com. That old account still owns Frontier's Google
     // Drive; only the address printed on the site changed.
-    email: "Info.frontierfootball@gmail.com",
+    email: "info.frontierfootball@gmail.com",
     partnerMessage: "Hi Frontier, I'd like to talk about partnering.",
     playerMessage: "Hi Frontier, I'd like to join the next season.",
   },

@@ -104,4 +104,4 @@ export function PageHero({
 
 /* The home hero's button, for page heroes and closing bands. */
 export const heroButton =
-  "btn flex min-h-11 items-center px-6 font-display text-[clamp(0.9rem,0.8rem+0.3vw,1.1rem)] font-bold uppercase";
+  "btn flex min-h-11 items-center px-6 font-display text-button font-bold uppercase";

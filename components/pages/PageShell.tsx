@@ -9,8 +9,8 @@ import { Nav } from "@/components/primitives/Nav";
    and v1 was a light page. Nav takes the canvas colour like it does on home.
    `night` puts the whole page on night mode (Events, L6).
    `hero` (opus55): a full-screen PageHero carrying its own floating header,
-   in place of the static nav. Every page gets the home page's cursor, chapter
-   indicator and scroll effects (Interactions). */
+   in place of the static nav. Every page gets the home page's cursor and
+   scroll effects (Interactions). */
 export function PageShell({ children, night = false, hero }: { children: ReactNode; night?: boolean; hero?: ReactNode }) {
   return (
     <>

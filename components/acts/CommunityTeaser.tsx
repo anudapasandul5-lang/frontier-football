@@ -30,7 +30,7 @@ export function CommunityTeaser() {
           <p className="max-w-[34ch] text-[clamp(1.125rem,1rem+0.4vw,1.375rem)] leading-snug">Bring your team, or come alone and find one. Every Sunday, there is a place for you with Frontier.</p>
           <a
             href="/community"
-            className="btn flex min-h-14 items-center bg-ink px-8 font-display text-[clamp(1rem,0.9rem+0.4vw,1.35rem)] font-bold text-bone uppercase hover:bg-bone hover:text-ink"
+            className="btn flex min-h-14 items-center bg-ink px-8 font-display text-button font-bold text-bone uppercase hover:bg-bone hover:text-ink"
           >
             <Roll>See how to join</Roll>
           </a>

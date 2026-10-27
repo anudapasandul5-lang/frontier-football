@@ -73,7 +73,6 @@ export default function MomentMotionRuntime() {
       });
       tl.addLabel("drift")
         .to(markers, { x: (_, el) => away(el, 2.4).x, y: (_, el) => away(el, 2.4).y, duration: 2.2, ease: (t) => 0.08 * t + 0.92 * t ** 4 }, "drift")
-        .to(markers, { rotation: "+=4", duration: 1 }, "drift")
         .to(open, { p: 0.08, duration: 1, onUpdate: render }, "drift")
         .addLabel("zoom", 1)
         .to(markers, { autoAlpha: 0, duration: 1.2 }, "zoom")

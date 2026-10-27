@@ -17,7 +17,7 @@ export function Events({ events }: { events: Event[] }) {
         <TickRule />
         <h2
           id="events-heading"
-          className="font-display text-[clamp(3rem,min(9vw,15svh),7.5rem)] leading-[0.88] font-bold uppercase"
+          className="font-display text-display-l leading-[0.88] font-bold uppercase"
         >
           Our events
         </h2>

@@ -36,7 +36,7 @@ function RouteCell({ route, primary }: { route: Route; primary: boolean }) {
         href={route.href ?? undefined}
         {...external}
         aria-label={copy.aria}
-        className={`group flex min-h-16 items-center justify-between gap-6 px-6 py-5 font-display text-[clamp(1.25rem,1rem+0.9vw,2rem)] font-bold uppercase transition-[background-color,color,transform] duration-200 ease-[var(--ease-out)] active:scale-[0.98] ${
+        className={`group flex min-h-16 items-center justify-between gap-6 rounded-full px-6 py-5 font-display text-[clamp(1.25rem,1rem+0.9vw,2rem)] font-bold uppercase transition-[background-color,color,transform] duration-200 ease-[var(--ease-out)] active:scale-[0.98] ${
           primary ? "bg-ink text-yellow hover:bg-ink/90" : "border-2 border-ink text-ink hover:bg-ink hover:text-yellow"
         }`}
       >

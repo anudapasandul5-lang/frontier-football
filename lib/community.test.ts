@@ -24,7 +24,7 @@ describe("registrations", () => {
       href: `https://wa.me/94763431469?text=${encodeURIComponent(content.league.teamMessage)}`,
     });
     expect(freeAgent).toEqual({
-      label: "Join solo player",
+      label: "Join as a solo player",
       href: `https://wa.me/94763431469?text=${encodeURIComponent(content.league.freeAgentMessage)}`,
     });
     expect(team.href).not.toBe(freeAgent.href);
@@ -48,7 +48,7 @@ describe("activities", () => {
       "Turf Wars",
       "4 x 4 Series",
       "Division 0",
-      "Watch-alongs",
+      "Watch Parties",
     ]);
     for (const activity of past) expect(Object.keys(activity).sort()).toEqual(["href", "name", "note", "photo"]);
   });
@@ -57,7 +57,7 @@ describe("activities", () => {
     const byName = Object.fromEntries(activities(content).map((a) => [a.name, a.href]));
     expect(byName["Frontier Futsal Tournament"]).toBe("/albums/frontier-futsal");
     expect(byName["Turf Wars"]).toBe("/gallery");
-    expect(byName["4 x 4 Series"]).toBe("/gallery");
+    expect(byName["4 x 4 Series"]).toBe("/gallery#series");
     expect(byName["Division 0"]).toBe("/albums/division-0");
   });
 
@@ -72,6 +72,6 @@ describe("activities", () => {
     expect(byName["Division 0"]).toBe("/champions/division-0.webp");
     expect(byName["Turf Wars"]).toBeNull();
     expect(byName["4 x 4 Series"]).toBe("/champions/szn-2.webp");
-    expect(byName["Watch-alongs"]).toBe("/champions/wa-final.webp");
+    expect(byName["Watch Parties"]).toBe("/champions/wa-final.webp");
   });
 });

@@ -70,7 +70,7 @@ export default function WhoWeAre() {
         <div className="frame relative">
           <p className="micro mb-[clamp(2rem,5vh,3.5rem)] text-center text-ink">Our story</p>
           <div className="text-center">
-            <SplitReveal id="who-heading" lines={["A platform."]} className="font-display text-[clamp(3rem,10vw,9rem)] leading-[0.85] font-bold uppercase" />
+            <SplitReveal id="who-heading" lines={["A platform."]} className="font-display text-display-l leading-[0.85] font-bold uppercase" />
             <p className="story-fade mx-auto mt-8 max-w-[46ch] text-balance text-[clamp(1.125rem,1.5vw,1.375rem)] leading-relaxed">
               Frontier Football is a platform for Sri Lanka’s football community. We spotlight talent and bring together everyone who loves the game.
             </p>
@@ -113,7 +113,7 @@ export default function WhoWeAre() {
 
       <section data-tone="ink" data-chapter="The run so far" aria-labelledby="run-heading" className="overflow-x-clip py-[clamp(4rem,12vh,8rem)]">
         <div className="mx-auto max-w-[1320px] px-5 sm:px-12">
-          <SplitReveal id="run-heading" lines={["The run", "so far"]} className="max-w-[850px] scroll-mt-24 font-display text-[clamp(4.5rem,12vw,10.625rem)] leading-[0.86] font-bold uppercase" />
+          <SplitReveal id="run-heading" lines={["The run", "so far"]} className="max-w-[850px] scroll-mt-24 font-display text-display-l leading-[0.86] font-bold uppercase" />
           <Scrapbook data={data} />
         </div>
       </section>

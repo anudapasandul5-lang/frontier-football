@@ -58,7 +58,7 @@ export default function Contact() {
         >
           Playing Sunday League?{" "}
           <a href="/community#sunday-league" className="underline underline-offset-4">
-            Register team or join solo player
+            Register a team or join as a solo player
           </a>
           . Brands, head to{" "}
           <a href="/collaborate" className="underline underline-offset-4">Collaborate</a>.
@@ -70,7 +70,7 @@ export default function Contact() {
           <SplitReveal
             id="details-heading"
             lines={["Say hello."]}
-            className="font-display text-[clamp(3rem,10vw,9rem)] leading-[0.85] font-bold uppercase"
+            className="font-display text-display-l leading-[0.85] font-bold uppercase"
           />
           <dl className="grid gap-10 border-t-2 border-ink pt-8">
             {email ? (

@@ -195,7 +195,7 @@ function ChapterBlock({ chapter }: { chapter: Chapter }) {
   return (
     <section id={chapter.id} data-tone="bone" data-chapter={chapter.label} aria-labelledby={`${chapter.id}-heading`} className="canvas-night scroll-mt-4 pb-2 sm:pb-3">
       <header className="frame flex flex-wrap items-end justify-between gap-x-8 gap-y-2 pt-[clamp(4rem,14vh,8rem)] pb-8">
-        <h2 id={`${chapter.id}-heading`} className="font-display text-[clamp(2.5rem,7vw,6rem)] leading-[0.9] font-bold uppercase">
+        <h2 id={`${chapter.id}-heading`} className="font-display text-display-l leading-[0.9] font-bold uppercase">
           {chapter.label}
         </h2>
         {/* One album: its card already says how many photos. */}
@@ -219,8 +219,7 @@ export default function Gallery() {
 
   return (
     <PageShell hero={<Reel />}>
-      {/* Jump links, not tabs: every album stays on the page, and the chapter
-          indicator (Interactions) shows where the reader is. */}
+      {/* Jump links, not tabs: every album stays on the page. */}
       <nav aria-label="Gallery chapters" className="canvas-night border-y border-bone/15">
         <ul className="frame flex flex-wrap gap-x-8 gap-y-2 py-5">
           {chapters.map((c) => (

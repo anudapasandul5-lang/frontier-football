@@ -1,5 +1,5 @@
 import raw from "@/content.js";
-import { parseContent, partners } from "@/lib/content-data";
+import { parseContent, partners, stats } from "@/lib/content-data";
 import { Marquee } from "@/components/primitives/Marquee";
 
 // Logo and text-fallback share one height band so the strip keeps one rhythm.
@@ -18,15 +18,17 @@ export function Partners() {
   const data = parseContent(raw);
   const names = partners(data);
   if (names.length === 0) return null;
+  // The strip shows ~15 names; the owner's count says how many there are.
+  const count = stats(data).find((s) => s.label === "Partners")?.figure;
 
   return (
     <section aria-labelledby="partners-heading" data-tone="ink" data-chapter="Collaborate" className="canvas-bone flex flex-col gap-[clamp(2.5rem,8vh,5rem)] py-[clamp(4rem,14vh,9rem)]">
       {/* opus55: the count is a beat of its own, the strip runs under it. */}
       <div className="frame flex flex-wrap items-end justify-between gap-6">
         <h2 id="partners-heading" className="flex flex-col gap-3">
-          <span className="micro">Brands that back the game</span>
+          <span className="micro">{count ? `Some of our ${count} partners` : "Brands that back the game"}</span>
         </h2>
-        <a href="/collaborate" className="btn flex min-h-12 items-center border-2 border-ink px-6 font-display text-lg font-bold uppercase hover:bg-ink hover:text-bone">
+        <a href="/collaborate" className="btn flex min-h-12 items-center border-2 border-ink px-6 font-display text-button font-bold uppercase hover:bg-ink hover:text-bone">
           Partner with us
         </a>
       </div>
@@ -35,7 +37,7 @@ export function Partners() {
           const mark = p.logo ? (
             <img src={p.logo} alt={p.name ?? ""} loading="lazy" decoding="async" className="h-full w-auto max-w-[clamp(8rem,13vw,11rem)] object-contain" />
           ) : (
-            <span className={type}>{p.name}</span>
+            <span className={type}>{p.name?.replace(/^@/, "")}</span>
           );
           return p.url ? (
             <a key={p.name} href={p.url} className={`${item} transition-opacity duration-150 hover:opacity-70`}>

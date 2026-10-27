@@ -30,8 +30,9 @@ export function WhoWeAre() {
           style={{ "--wipe-delay": "140ms" } as React.CSSProperties}
           className="wipe__layer absolute inset-0 h-full w-full -scale-x-100 object-cover object-[48%_center] md:object-center"
         />
-        <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-night/80 via-night/30 to-night/20" />
-        <div className="frame absolute inset-x-0 top-0 pt-[clamp(2rem,8vh,5rem)]">
+        <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-night/90 via-night/45 to-night/10" />
+        {/* Clears the 5rem floating header so the label never sits under it. */}
+        <div className="frame absolute inset-x-0 top-0 pt-[calc(5rem+clamp(1.5rem,6vh,4rem))]">
           <p className="micro mb-3 text-yellow">Who we are</p>
           <SplitReveal
             id="who-heading"

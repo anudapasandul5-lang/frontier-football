@@ -95,7 +95,7 @@ export function galleryChapters(raw: Raw, facts: AlbumFacts): Chapter[] {
     { id: "origins", label: "Where it started", kind: "tournament", albums: data.competitions.filter((c) => c.beforeSeries).map(competition).filter(keep) },
     {
       id: "series",
-      label: "4x4 Series",
+      label: "4 x 4 Series",
       kind: "series",
       albums: [...data.seasons]
         .sort((a, b) => Number(a.season) - Number(b.season))

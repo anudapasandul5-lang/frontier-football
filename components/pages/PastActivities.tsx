@@ -17,7 +17,7 @@ export function PastActivities() {
       <SplitReveal
         id="past-heading"
         lines={["What we’ve run"]}
-        className="mb-10 font-display text-[clamp(2.5rem,8vw,7rem)] leading-[0.88] font-bold uppercase"
+        className="mb-10 font-display text-display-l leading-[0.88] font-bold uppercase"
       />
       <ol className="border-t-2 border-ink">
         {past.map((activity, i) => (
@@ -28,7 +28,7 @@ export function PastActivities() {
             >
               <span className="micro tabular-nums group-hover:text-bone/70 group-focus-visible:text-bone/70">{String(i + 1).padStart(2, "0")}</span>
               <span>
-                <span className="block font-display text-[clamp(1.75rem,1.2rem+2.4vw,3.75rem)] leading-none font-bold uppercase transition-transform duration-300 group-hover:translate-x-2">
+                <span className="block font-display text-display-m leading-none font-bold uppercase transition-transform duration-300 group-hover:translate-x-2">
                   {activity.name}
                 </span>
                 {activity.note ? <span className="micro mt-2 block group-hover:text-bone/70">{activity.note}</span> : null}

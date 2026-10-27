@@ -45,7 +45,7 @@ export default async function AlbumPage({ params }: { params: Promise<{ id: stri
   // The banner already shows the lead photo (an album's card and cover), so the
   // highlights below it never show that same picture a second time.
   const picks = (highlights[id] ?? []).filter((h) => h.alt !== cover.alt);
-  const lines = chapter.kind === "series" ? ["4x4 Series", album.title] : [album.title];
+  const lines = chapter.kind === "series" ? ["4 x 4 Series", album.title] : [album.title];
   const facts = [`${album.count.toLocaleString("en")} photos`, album.venue].filter(Boolean).join(" · ");
 
   return (

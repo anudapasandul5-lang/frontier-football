@@ -1,6 +1,5 @@
 import { Nav } from "@/components/primitives/Nav";
 import { Roll } from "@/components/primitives/Roll";
-import { MicroLabel } from "@/components/primitives/MicroLabel";
 import { HeroVideo } from "@/components/motion/HeroVideo";
 
 /* Act 1. United's hero: yellow condensed caps over the owner's hero film,
@@ -22,7 +21,7 @@ import { HeroVideo } from "@/components/motion/HeroVideo";
    section on Community, where the team and free-agent drafts live, and the
    phone shows the offer and place in one line above the actions. */
 
-const button = "btn flex min-h-11 items-center px-6 font-display text-[clamp(0.9rem,0.8rem+0.3vw,1.1rem)] font-bold uppercase";
+const button = "btn flex min-h-11 items-center px-6 font-display text-button font-bold uppercase";
 
 export function Hero() {
   return (
@@ -52,7 +51,8 @@ export function Hero() {
       <div id="content" className="frame relative flex flex-1 flex-col items-center justify-center pb-4">
         {/* Bone caps, yellow on the closing word of each line (owner,
             2026-10-07: yellow on bone read as yellow on yellow, 1.45:1). */}
-        <MicroLabel className="relative z-[3] mb-5 text-center">Football. Community. Culture.</MicroLabel>
+        {/* No eyebrow: "Football. Community. Culture." repeated the headline
+            word for word (owner, 2026-10-27). */}
         <h1 className="pointer-events-none flex w-full flex-col items-center gap-[clamp(8rem,14vh,11rem)] hero-weave text-center font-display text-[clamp(1rem,5.9vw,7rem)] leading-[0.86] font-bold whitespace-nowrap text-bone uppercase max-sm:text-[clamp(1.9rem,10vw,2.75rem)] max-sm:text-balance max-sm:whitespace-normal">
           <span className="relative z-[3]">Football, community and <span className="text-yellow">culture.</span></span>
           <span className="relative z-[3]">Giving Sri Lanka’s football a <span className="text-yellow">platform.</span></span>
@@ -65,8 +65,10 @@ export function Hero() {
         </p>
         <span aria-hidden="true" className="max-sm:hidden" />
         <div className="flex flex-wrap items-center justify-center gap-3">
-          <a href="/events" className={`${button} bg-yellow text-ink`}>
-            <Roll>Explore events</Roll>
+          {/* Sunday League first: it is the one thing a player can do this
+              week (owner, 2026-10-27). Events stay one tap away in the menu. */}
+          <a href="/community#sunday-league" className={`${button} bg-yellow text-ink`}>
+            <Roll>Join Sunday League</Roll>
           </a>
           <a href="/collaborate" className={`${button} border-2 border-bone hover:bg-bone hover:text-ink`}>
             <Roll>Partner with us</Roll>

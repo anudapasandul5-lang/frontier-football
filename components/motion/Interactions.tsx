@@ -1,34 +1,27 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 
 /* The home page's microinteraction layer, wired by attributes so the acts stay
    server components:
 
    - [data-tone="ink"|"bone"] on every canvas: the text colour there. The
-     chapter indicator takes it on, so it reads on every field without a blend mode inventing off-palette colours.
-   - [data-chapter="Label"]: where a menu chapter starts (indicator).
+     floating header takes it on, so it reads on every field without a blend mode inventing off-palette colours.
    - [data-drift="-0.35"]: a row of type that slides with the scroll.
      Add data-drift-flat for a photo row that should slide without leaning.
    - [data-parallax="-0.18"]: drifts against the scroll.
    - [data-zoom="0.18"]: settles from enlarged as its section arrives.
    - .marquee__track: runs faster with scroll speed, and backwards on the way up.
 
-   The indicator is plain scroll position, so it shows regardless of motion
-   preference. All of it is decoration: aria-hidden, pointer-events none,
-   nothing depends on it. */
+   All of it is decoration: aria-hidden, pointer-events none, nothing
+   depends on it. */
 
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
 export function Interactions() {
-  const indicator = useRef<HTMLDivElement>(null);
-  const bar = useRef<HTMLSpanElement>(null);
-  const [chapter, setChapter] = useState<{ n: number; total: number; label: string } | null>(null);
-
   useEffect(() => {
     const motion = window.matchMedia("(prefers-reduced-motion: no-preference)");
 
-    const chapters = [...document.querySelectorAll<HTMLElement>("[data-chapter]")];
     const tones = [...document.querySelectorAll<HTMLElement>("[data-tone]")];
 
     const toneAt = (y: number) => {
@@ -43,8 +36,7 @@ export function Interactions() {
 
     const header = document.querySelector<HTMLElement>("header[data-floating]");
 
-    /* Chapter indicator + page progress: on scroll only. */
-    let lastLabel = "";
+    /* Header tone: on scroll only. */
     let scrollY = window.scrollY;
     let velocity = 0;
     let lastScrollAt = performance.now();
@@ -56,27 +48,7 @@ export function Interactions() {
       lastScrollAt = now;
 
       if (header) {
-        header.dataset.uiTone = toneAt(40);
-        header.dataset.solid = String(scrollY > 40);
-      }
-
-      const mid = window.innerHeight * 0.5;
-      let active = 0;
-      chapters.forEach((el, i) => {
-        if (el.getBoundingClientRect().top <= mid) active = i;
-      });
-      const text = chapters[active]?.dataset.chapter ?? "";
-      if (text !== lastLabel) {
-        lastLabel = text;
-        setChapter({ n: active + 1, total: chapters.length, label: text });
-      }
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      bar.current?.style.setProperty("transform", `scaleX(${max > 0 ? scrollY / max : 0})`);
-      if (indicator.current) {
-        indicator.current.dataset.uiTone = toneAt(window.innerHeight - 28);
-        // The hero frames itself with its own label row; the indicator joins
-        // once the reader is on the way down.
-        indicator.current.dataset.show = scrollY > window.innerHeight * 0.6 ? "true" : "false";
+        header.dataset.uiTone = toneAt(header.offsetHeight + 1);
       }
     };
     onScroll();
@@ -162,25 +134,5 @@ export function Interactions() {
     };
   }, []);
 
-  const pad = (n: number) => String(n).padStart(2, "0");
-
-  return (
-    <>
-      <div ref={indicator} aria-hidden="true" className="chapter-indicator micro" data-ui-tone="bone" data-show="false">
-        {chapter ? (
-          <span key={chapter.label} className="chapter-indicator__text">
-            <span className="flex items-center gap-2 tabular-nums">
-              {pad(chapter.n)}
-              <span className="chapter-indicator__rule" />
-              {pad(chapter.total)}
-            </span>
-            {chapter.label}
-          </span>
-        ) : null}
-        <span className="chapter-indicator__track">
-          <span ref={bar} className="chapter-indicator__bar" />
-        </span>
-      </div>
-    </>
-  );
+  return null;
 }

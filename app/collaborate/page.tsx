@@ -12,6 +12,13 @@ import { PhotoStrip } from "@/components/pages/PhotoStrip";
 import { Marquee } from "@/components/primitives/Marquee";
 import { phoneSrcSet } from "@/lib/phone-image";
 
+// "2026-09-22" as "September 2026", the way the home Milestones prints it.
+// Anything that is not a date prints as written, never "Invalid Date".
+const monthYear = (iso: string) => {
+  const d = new Date(`${iso}T00:00:00Z`);
+  return Number.isNaN(d.getTime()) ? iso : d.toLocaleDateString("en-GB", { month: "long", year: "numeric", timeZone: "UTC" });
+};
+
 // Same rhythm as the home page's partner strip (components/acts/Partners.tsx).
 const item = "mr-[clamp(2rem,5vw,4.5rem)] flex h-[clamp(2.75rem,5vw,4.5rem)] shrink-0 items-center";
 const type = "font-display text-[clamp(1.25rem,2.4vw,2rem)] leading-none font-bold whitespace-nowrap uppercase text-current";
@@ -69,7 +76,7 @@ export default function Collaborate() {
             <SplitReveal
               id="reach-heading"
               lines={["Who sees it."]}
-              className="mb-[clamp(2rem,6vh,4rem)] font-display text-[clamp(3rem,9vw,8rem)] leading-[0.85] font-bold uppercase"
+              className="mb-[clamp(2rem,6vh,4rem)] font-display text-display-l leading-[0.85] font-bold uppercase"
             />
             <dl className="grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-3 xl:grid-cols-5">
               {figures.map((row) => (
@@ -78,7 +85,7 @@ export default function Collaborate() {
                   <dd className="font-display text-[clamp(2.75rem,min(7vw,9svh),6rem)] leading-[0.85] font-bold text-yellow uppercase tabular-nums">
                     <CountUpFigure figure={row.figure} />
                   </dd>
-                  {row.asOf ? <dd className="micro">As of {row.asOf}</dd> : null}
+                  {row.asOf ? <dd className="micro">As of {monthYear(row.asOf)}</dd> : null}
                 </div>
               ))}
             </dl>
@@ -91,7 +98,7 @@ export default function Collaborate() {
           <SplitReveal
             id="offer-heading"
             lines={["What a partner gets"]}
-            className="mb-10 font-display text-[clamp(2.5rem,8vw,7rem)] leading-[0.88] font-bold uppercase"
+            className="mb-10 font-display text-display-l leading-[0.88] font-bold uppercase"
           />
           {/* Zigzag (owner reference, 2026-10-07): card 1 text left and photo
               right, then alternating. On a phone the photo always sits on top. */}
@@ -113,7 +120,7 @@ export default function Collaborate() {
                 ) : null}
                 <div>
                   <span className="micro tabular-nums">{String(i + 1).padStart(2, "0")}</span>
-                  <strong className="mt-3 block font-display text-[clamp(1.75rem,1.2rem+2.2vw,3.5rem)] leading-[0.95] font-bold uppercase">{row.title}</strong>
+                  <strong className="mt-3 block font-display text-display-m leading-[0.95] font-bold uppercase">{row.title}</strong>
                   {row.body ? <p className="mt-4 max-w-[44ch] text-[clamp(1.05rem,0.95rem+0.35vw,1.3rem)] leading-normal">{row.body}</p> : null}
                 </div>
               </li>
@@ -138,7 +145,7 @@ export default function Collaborate() {
                     className="h-[65%] w-auto max-w-[clamp(8rem,13vw,11rem)] object-contain"
                   />
                 ) : (
-                  <span className={type}>{p.name}</span>
+                  <span className={type}>{p.name?.replace(/^@/, "")}</span>
                 );
                 return p.url ? (
                   <a key={p.name} href={p.url} className={`${item} transition-opacity duration-150 hover:opacity-70`}>

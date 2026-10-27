@@ -12,16 +12,15 @@ import { phoneSrcSet } from "@/lib/phone-image";
    (v1 hero, from the 4x4 Series proposal deck). "Built by football. Powered
    by community." is v1's brand tagline. Nothing else is said. */
 
-// Scatter markers: centre of each marker as a fraction of the stage, and a
-// tilt. Laid out like United's frame, round the centre photo, never over the
-// headline's middle band.
+// Scatter markers: centre of each marker as a fraction of the stage. Laid out
+// like United's frame, round the centre photo, never over the headline's
+// middle band. Kept straight (2026-10-27): tilted cards read as messy.
+// Three, not six, and none on phones (UX audit 2026-10-27): six read as clutter
+// and clipped the screen edges. The pan strip still shows every photo.
 const scatter = [
-  { x: 0.2, y: 0.16, r: -7 },
-  { x: 0.83, y: 0.13, r: 6 },
-  { x: 0.1, y: 0.47, r: 5 },
-  { x: 0.9, y: 0.43, r: -6 },
-  { x: 0.29, y: 0.83, r: 8 },
-  { x: 0.74, y: 0.86, r: -5 },
+  { x: 0.2, y: 0.16 },
+  { x: 0.9, y: 0.43 },
+  { x: 0.29, y: 0.83 },
 ];
 
 function Photo({ p, width, className = "", style, eager = false }: { p: HomePhoto; width: number; className?: string; style?: CSSProperties; eager?: boolean }) {
@@ -62,22 +61,21 @@ export function Moment() {
   return (
     <section id="moment" data-tone="bone" aria-labelledby="moment-heading" className="canvas-night relative overflow-x-clip">
       <div className="moment-stage relative h-svh overflow-hidden">
-        {markerPhotos.map((p, i) => (
+        {markerPhotos.slice(0, scatter.length).map((p, i) => (
           <Photo
             key={p.id}
             p={p}
             width={400}
-            className="moment-marker absolute z-10 w-[clamp(64px,10vw,160px)] -translate-x-1/2 -translate-y-1/2 rotate-(--tilt)"
-            style={{ left: `${scatter[i].x * 100}%`, top: `${scatter[i].y * 100}%`, "--tilt": `${scatter[i].r}deg` } as CSSProperties}
+            className="moment-marker absolute z-10 w-[clamp(64px,10vw,160px)] -translate-x-1/2 -translate-y-1/2 max-[899px]:hidden"
+            style={{ left: `${scatter[i].x * 100}%`, top: `${scatter[i].y * 100}%` } as CSSProperties}
           />
         ))}
         <div className="moment-centre absolute top-1/2 left-1/2 w-[min(78vw,640px)] -translate-x-1/2 -translate-y-1/2">
           <Photo p={statementPhoto} width={1600} className="block h-auto w-full" />
           <span aria-hidden="true" className="absolute inset-0 bg-ink/35" />
         </div>
-        {/* The strip only exists once motion is on: every frame in it is
-            already on the page as a marker, so the still page loses
-            nothing without it. */}
+        {/* The strip only exists once motion is on. The still page shows
+            the centre photo and up to three markers, not every frame. */}
         {/* Sized by CSS, not measured: panel one is exactly the stage, the
             rest keep their photo's ratio at full height. */}
         <div aria-hidden="true" className="moment-strip absolute inset-y-0 left-0 z-0 hidden w-full">
