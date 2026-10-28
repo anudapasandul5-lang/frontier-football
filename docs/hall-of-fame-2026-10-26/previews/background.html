@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Frontier Hall of Fame · active background study</title>
+  <style>
+    @font-face{font-family:Bricolage;src:url("../../../out/_next/static/media/8fe4c34884868de9-s.p.1kfyfr_m2hx2x.woff2") format("woff2");font-weight:100 900;font-display:swap}
+    @font-face{font-family:Geist;src:url("../../../out/_next/static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2") format("woff2");font-weight:100 900;font-display:swap}
+    :root{--night:#0b0e13;--bone:#efeae0;--yellow:#faba2a;--muted:#a8a29a;--display:Bricolage,"Arial Narrow",sans-serif;--body:Geist,Arial,sans-serif}
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--night);color:var(--bone)}
+    body{font-family:var(--body)}
+    button{font:inherit}
+    .proposal{padding:22px clamp(20px,5vw,80px);max-width:1600px;margin:auto;display:flex;justify-content:space-between;gap:24px;align-items:center;border-bottom:1px solid #efeae03b}
+    .proposal strong,.proposal span{display:block}
+    .proposal strong{font-size:13px;letter-spacing:.11em;text-transform:uppercase;color:var(--yellow)}
+    .proposal span{font-size:13px;color:var(--muted);margin-top:5px}
+    .motion-control{border:1px solid #efeae08c;background:transparent;color:var(--bone);min-height:44px;padding:0 16px;cursor:pointer;white-space:nowrap;transition:background-color 160ms,color 160ms,transform 160ms}
+    .motion-control:hover{background:var(--bone);color:var(--night)}
+    .motion-control:active{transform:scale(.97)}
+    :focus-visible{outline:3px solid var(--yellow);outline-offset:4px}
+    .hall{position:relative;isolation:isolate;overflow:hidden;padding:clamp(70px,8vw,130px) clamp(20px,5vw,80px) clamp(90px,10vw,150px);background:var(--night)}
+    .hall-inner{max-width:1440px;margin:auto;position:relative;z-index:1}
+    .art{pointer-events:none;position:absolute;inset:0;z-index:0;overflow:hidden}
+    .trophy{position:absolute;width:min(66vw,980px);height:auto;right:-11vw;top:1%;color:var(--yellow);opacity:.48;transform-origin:50% 65%}
+    .trophy-body{fill:none;stroke:currentColor;stroke-width:10;stroke-linejoin:round;stroke-linecap:round}
+    .trophy-inside{fill:none;stroke:currentColor;stroke-width:2.5;stroke-linejoin:round;opacity:.75}
+    .trophy-side{fill:currentColor;opacity:.55}
+    .pitch{position:absolute;top:370px;right:-28%;width:90%;height:1250px;color:var(--bone);opacity:.22;transform:rotate(-16deg)}
+    .pitch path{fill:none;stroke:currentColor;stroke-width:3}
+    .orbit{position:absolute;border:1px solid var(--yellow);border-radius:50%;width:850px;height:850px;right:-350px;top:90px;opacity:.5}
+    .orbit::after{content:"";position:absolute;top:129px;left:72px;width:74px;height:7px;background:var(--yellow);transform:rotate(-35deg)}
+    .beam{position:absolute;left:-10%;right:-10%;height:3px;top:515px;background:var(--yellow);opacity:.8;transform:rotate(-8deg)}
+    .beam::after{content:"";display:block;width:32%;height:100%;background:var(--bone);transform:translateX(0)}
+    .kicker,.micro,.photo-link,.credit{font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+    .kicker{color:var(--yellow);margin:0 0 26px;font-weight:600}
+    h1,.event,.champion{font-family:var(--display);font-variation-settings:"wdth" 75;text-transform:uppercase}
+    h1{font-size:clamp(58px,9vw,142px);line-height:.85;letter-spacing:-.035em;max-width:6ch;margin:0 0 20px;font-weight:800}
+    .intro{font-size:clamp(18px,1.4vw,22px);line-height:1.42;max-width:42ch;margin:0;color:var(--bone)}
+    .intro-block{min-height:355px;padding-bottom:55px;position:relative}
+    .intro-block::after{content:"";position:absolute;left:0;bottom:25px;width:55px;height:5px;background:var(--yellow)}
+    .rows{list-style:none;margin:0;padding:0;border-top:1px solid #efeae07a}
+    .row{position:relative;display:grid;grid-template-columns:minmax(190px,240px) minmax(220px,1fr) minmax(220px,1fr) auto;gap:clamp(22px,3vw,52px);align-items:center;padding:30px 0;border-bottom:1px solid #efeae07a;min-height:250px}
+    .row::before{content:"";position:absolute;top:0;bottom:0;left:-18px;width:3px;background:var(--yellow);transform:scaleY(0);transform-origin:bottom;transition:transform 280ms cubic-bezier(.23,1,.32,1)}
+    .row:hover::before{transform:scaleY(1)}
+    .row>div{width:fit-content;max-width:100%;padding:6px 8px;margin-inline:-8px;background:var(--night)}
+    .row .photo-link{background:var(--night)}
+    .photo{margin:0;min-width:0}
+    .photo img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;border-radius:clamp(12px,1.2vw,20px)}
+    .credit{color:var(--muted);margin-top:7px;font-size:11px;letter-spacing:.05em}
+    .event{font-size:clamp(23px,2.2vw,35px);line-height:.97;font-weight:700;margin:0 0 15px}
+    .micro{color:var(--muted);margin:0;line-height:1.5}
+    .champion{font-size:clamp(39px,4vw,64px);font-weight:800;color:var(--yellow);line-height:.88;letter-spacing:-.025em;margin:6px 0 0;overflow-wrap:anywhere}
+    .photo-link{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 16px;border:1px solid #efeae080;color:var(--bone);white-space:nowrap;text-decoration:none;transition:background-color 160ms,color 160ms,transform 160ms}
+    .photo-link:hover{background:var(--yellow);border-color:var(--yellow);color:var(--night)}
+    .photo-link:active{transform:scale(.97)}
+    .footnote{font-size:12px;line-height:1.45;color:var(--muted);margin:22px 0 0;max-width:65ch}
+    @media(prefers-reduced-motion:no-preference){
+      .trophy{animation:trophy-breathe 3.8s ease-in-out infinite alternate}
+      .orbit{animation:orbit-drift 12s linear infinite}
+      .pitch{animation:pitch-drift 8s ease-in-out infinite alternate}
+      .beam::after{animation:beam-pass 3s linear infinite}
+      .hall.paused .trophy,.hall.paused .orbit,.hall.paused .pitch,.hall.paused .beam::after{animation-play-state:paused}
+    }
+    @keyframes trophy-breathe{to{transform:translateY(-32px) rotate(-2deg);opacity:.65}}
+    @keyframes orbit-drift{to{transform:rotate(360deg)}}
+    @keyframes pitch-drift{to{transform:rotate(-16deg) translateX(-90px)}}
+    @keyframes beam-pass{from{transform:translateX(-110%)}to{transform:translateX(420%)}}
+    @media(max-width:1100px){
+      .row{grid-template-columns:180px minmax(0,1fr) minmax(0,1fr);gap:20px}.row .photo-link{grid-column:3;justify-self:start}.trophy{right:-25vw;width:90vw}.pitch{right:-65%;width:140%}
+    }
+    @media(max-width:600px){
+      .proposal{align-items:flex-start}.proposal span{max-width:23ch}.motion-control{font-size:12px;padding:0 10px}
+      .hall{padding-top:62px}.intro-block{min-height:330px}h1{font-size:clamp(56px,16vw,83px)}.intro{font-size:17px;max-width:25ch}
+      .trophy{width:105vw;right:-48vw;top:75px;opacity:.38}.orbit{width:540px;height:540px;right:-360px;top:140px;opacity:.4}.pitch{top:520px;right:-90%;width:180%;opacity:.18}.beam{top:380px}
+      .row{grid-template-columns:100px minmax(0,1fr);gap:8px 16px;padding:22px 0;min-height:0;align-items:start}.photo{grid-row:span 3}.event{font-size:clamp(21px,6vw,28px);margin-bottom:6px}.champion{font-size:clamp(34px,9vw,50px)}.row .photo-link{grid-column:2;justify-self:start;margin-top:5px}.credit{font-size:10px}
+      .row::before{left:-9px}
+    }
+    @media(prefers-reduced-motion:reduce){.motion-control{display:none}.row::before,.motion-control,.photo-link{transition:none}}
+  </style>
+</head>
+<body>
+  <div class="proposal">
+    <div><strong>D · active background</strong><span>Design study. Existing rows, real winners and photos.</span></div>
+    <button id="motion-control" class="motion-control" type="button" aria-pressed="false" aria-controls="hall-art">Pause background motion</button>
+  </div>
+  <section class="hall" aria-labelledby="hall-heading">
+    <div class="art" id="hall-art" aria-hidden="true">
+      <svg class="trophy" viewBox="0 0 900 900" focusable="false">
+        <path class="trophy-body" d="M252 155h396v162c0 144-84 245-198 245S252 461 252 317V155Zm0 46H115v79c0 110 61 173 151 173m382-252h137v79c0 110-61 173-151 173M450 562v133m-105 0h210m-251 77h292M330 695h240v77H330z"/>
+        <path class="trophy-inside" d="M292 199h316v118c0 123-66 203-158 203s-158-80-158-203V199Zm-116 44v42c0 52 26 84 66 100m482-142v42c0 52-26 84-66 100"/>
+        <path class="trophy-side" d="M395 286h110v13H395zm-24 39h158v8H371z"/>
+      </svg>
+      <svg class="pitch" viewBox="0 0 1200 1250" preserveAspectRatio="none" focusable="false">
+        <path d="M-140 1000C36 509 351 250 735 288s629 381 662 809M-206 1031C-4 459 354 173 758 215s686 427 715 865M-272 1062C-44 411 356 96 781 142s743 473 768 921M-338 1093C-84 362 359 19 804 69s800 519 821 977M-404 1124C-124 314 361-58 827-4s857 565 874 1034"/>
+      </svg>
+      <div class="orbit"></div><div class="beam"></div>
+    </div>
+    <div class="hall-inner">
+      <header class="intro-block">
+        <p class="kicker">Frontier Football / The winners</p>
+        <h1 id="hall-heading">Hall of Fame</h1>
+        <p class="intro">The winners of every Frontier event, and the stats behind them.</p>
+      </header>
+      <ol class="rows">
+        <li class="row">
+          <figure class="photo"><img src="../../../public/champions/szn-6.webp" alt="The 4 x 4 Series SZN 6 champions lined up on the pitch beside the trophy." width="1600" height="1067"></figure>
+          <div><h2 class="event">4 x 4 Series SZN 6</h2><p class="micro">Athlete 360</p></div>
+          <div><p class="micro">Champion</p><p class="champion">Ramadan FC</p></div>
+          <a class="photo-link" href="../../../out/albums/szn-6.html" aria-label="Photos, 4 x 4 Series SZN 6">Photos&nbsp; →</a>
+        </li>
+        <li class="row">
+          <figure class="photo"><img src="../../../public/gallery/szn-5-hero.webp" alt="Players raise the trophy together after 4 x 4 Series SZN 5; photograph by ThePapare" width="1280" height="853"><figcaption class="credit">Photo: ThePapare</figcaption></figure>
+          <div><h2 class="event">4 x 4 Series SZN 5</h2><p class="micro">Athlete 360</p></div>
+          <div><p class="micro">Champion</p><p class="champion">Panadura</p></div>
+          <a class="photo-link" href="../../../out/albums/szn-5.html" aria-label="Photos, 4 x 4 Series SZN 5">Photos&nbsp; →</a>
+        </li>
+      </ol>
+      <p class="footnote">Two representative rows in source order. Background art is decorative and never carries result information.</p>
+    </div>
+  </section>
+  <script>
+    const control = document.getElementById('motion-control');
+    const hall = document.querySelector('.hall');
+    control.addEventListener('click', () => {
+      const paused = hall.classList.toggle('paused');
+      control.setAttribute('aria-pressed', String(paused));
+      control.textContent = paused ? 'Resume background motion' : 'Pause background motion';
+    });
+  </script>
+</body>
+</html>

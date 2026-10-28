@@ -5,7 +5,6 @@ import { registrations } from "@/lib/community";
 import { NextPage } from "@/components/pages/NextPage";
 import { PageHero } from "@/components/pages/PageHero";
 import { PageShell } from "@/components/pages/PageShell";
-import { PhotoStrip } from "@/components/pages/PhotoStrip";
 import { SplitReveal } from "@/components/primitives/SplitReveal";
 import { SundayLeagueMark } from "@/components/primitives/SundayLeagueMark";
 import { phoneSrcSet } from "@/lib/phone-image";
@@ -13,41 +12,6 @@ import { phoneSrcSet } from "@/lib/phone-image";
 export const metadata: Metadata = { title: "Community" };
 
 const button = "flex min-h-12 items-center rounded-full px-6 font-display text-button font-bold uppercase transition-transform duration-150 ease-[var(--ease-out)] active:scale-[0.97]";
-
-/* Each event's photo collage (owner reference, 2026-10-07). The bone frames,
-   tray and sub-degree tilts were removed for a cleaner page (2026-10-27);
-   the owner had already rejected strong tilts as crooked scans. Layout runs by story order: one big print on the left, three
-   in a row, one big print on the right, then a 2 x 2 grid. */
-const layouts = ["lead-left", "row", "lead-right", "grid"] as const;
-type Layout = (typeof layouts)[number] | "pair";
-
-const grids: Record<Layout, string> = {
-  "lead-left": "grid-cols-[3fr_2fr] grid-rows-2 [&>*:first-child]:row-span-2 h-[clamp(16rem,42vw,30rem)]",
-  row: "grid-cols-3 h-[clamp(9rem,26vw,20rem)]",
-  "lead-right": "grid-cols-[2fr_3fr] grid-rows-2 [&>*:last-child]:col-start-2 [&>*:last-child]:row-span-2 [&>*:last-child]:row-start-1 h-[clamp(16rem,42vw,30rem)]",
-  grid: "grid-cols-2 grid-rows-2 h-[clamp(16rem,42vw,30rem)]",
-  pair: "grid-cols-2 h-[clamp(11rem,30vw,22rem)]",
-};
-
-function Collage({ photos, layout }: { photos: { src: string; alt: string }[]; layout: Layout }) {
-  return (
-    <div className={`photo-frame grid gap-[clamp(0.5rem,1.5vw,1rem)] ${grids[layout]}`}>
-      {photos.map((p) => (
-        <img
-          key={p.src}
-          src={p.src}
-          srcSet={phoneSrcSet(p.src)}
-          sizes="(min-width: 640px) 50vw, 100vw"
-          alt={p.alt}
-          loading="lazy"
-          decoding="async"
-          referrerPolicy="no-referrer"
-          className="block size-full min-h-0 object-cover"
-        />
-      ))}
-    </div>
-  );
-}
 
 /* The Community page (plan L7): the Sunday Football League, the one live
    activity, on night mode with its two Registrations and the email; then every
@@ -59,28 +23,20 @@ export default function CommunityPage() {
     .map((row) => ({ label: recorded(row.label), value: recorded(row.value) }))
     .filter((row): row is { label: string; value: string } => Boolean(row.label && row.value));
   const buttons = registrations(raw);
+  const highlights = raw.communityStories.flatMap((story) => story.photos);
 
   return (
     <PageShell
       hero={
         <PageHero
           chapter="Community"
-          eyebrow="Community"
-          lines={["More than", "a game."]}
+          lines={["Sunday Socials"]}
           photo={{ src: "/heroes/community.webp", alt: "Four friends arm in arm at the Spain v France watch party", position: "center 20%" }}
         >
           Your next game starts here. Join the league.
         </PageHero>
       }
     >
-      <PhotoStrip
-        photos={[
-          { src: "/pages/community-team.webp", alt: "Five teammates stand arm in arm after a 4 x 4 Series match; photograph by ThePapare" },
-          { src: "/pages/community-final-table.webp", alt: "Friends with a Spain flag around a table at the World Cup final watch party" },
-          { src: "/pages/community-division-0.webp", alt: "Two captains shake hands in front of the referee before a 4 x 4 Series match; photograph by ThePapare" },
-        ]}
-      />
-
       <section id="sunday-league" data-tone="bone" data-chapter="Sunday League" aria-labelledby="league-heading" className="canvas-night scroll-mt-24">
         <div className="frame grid gap-12 py-[clamp(4rem,12vh,8rem)] lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-end">
           <div className="@container min-w-0">
@@ -115,25 +71,35 @@ export default function CommunityPage() {
                     {item.label}
                   </a>
                 ))}
+                <p className="micro w-full">Opens WhatsApp with the message ready</p>
               </div>
             ) : null}
           </div>
         </div>
       </section>
 
-      <section data-tone="ink" data-chapter="Every event we have done" aria-labelledby="past-heading" className="frame py-[clamp(4rem,12vh,8rem)]">
-        <SplitReveal id="past-heading" lines={["Every event we have done"]} className="mb-10 font-display text-display-l leading-[0.88] font-bold uppercase" />
-        <ol className="border-t-2 border-ink">
-          {raw.communityStories.map((story, i) => (
-            <li key={story.name} className="border-b border-ink/20 py-[clamp(2rem,6vh,3.5rem)]">
-              <p className="micro mb-2">Event {i + 1}</p>
-              <h3 className="mb-6 font-display text-display-m leading-none font-bold uppercase">{story.name}</h3>
-              <Collage photos={story.photos} layout={story.photos.length === 2 ? "pair" : story.photos.length >= 4 ? "grid" : layouts[i % 3]} />
-              {"credit" in story ? <p className="micro mt-2">{story.credit}</p> : null}
-              <p className="mt-6 max-w-[48ch] text-[clamp(1.125rem,1rem+0.4vw,1.375rem)] leading-relaxed">{story.body}</p>
-            </li>
-          ))}
-        </ol>
+      {/* Highlights (plan, 2026-10-28): a no-text collage of the best event
+          photos, shown at their own shape so no face is cut. Drawn from the
+          event stories in content.js; the owner swaps in sharper picks. */}
+      <section data-tone="ink" data-chapter="Highlights" aria-labelledby="highlights-heading" className="py-[clamp(4rem,12vh,8rem)]">
+        <div className="px-[clamp(1rem,2.5vw,3rem)]">
+          <SplitReveal id="highlights-heading" lines={["Highlights"]} className="mb-10 font-display text-display-l leading-[0.88] font-bold uppercase" />
+          <div className="columns-2 gap-3 md:columns-3 [&>img]:mb-3">
+            {highlights.map((p) => (
+              <img
+                key={p.src}
+                src={p.src}
+                srcSet={phoneSrcSet(p.src)}
+                sizes="(min-width: 768px) 33vw, 50vw"
+                alt={p.alt}
+                loading="lazy"
+                decoding="async"
+                referrerPolicy="no-referrer"
+                className="block h-auto w-full break-inside-avoid"
+              />
+            ))}
+          </div>
+        </div>
       </section>
       <NextPage current="/community" />
     </PageShell>

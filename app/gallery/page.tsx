@@ -14,9 +14,6 @@ import { phoneSrcSet } from "@/lib/phone-image";
 
 export const metadata: Metadata = { title: "Gallery" };
 
-const n = (x: number) => x.toLocaleString("en");
-const photos = (x: number) => `${n(x)} photo${x === 1 ? "" : "s"}`;
-
 /* The opening reel is the hero (plan stress test 3: a photo hero plus a reel
    pushed the albums to the third screen). One row, under the heading, slides
    with the scroll (data-drift, no autoplay, so reduced motion is simply
@@ -44,7 +41,7 @@ function ReelRow({ frames, drift, lead = false }: { frames: ReelFrame[]; drift: 
               decoding="async"
               fetchPriority={first ? "high" : "auto"}
               loading={copy ? "lazy" : undefined}
-              className="h-[clamp(130px,25svh,300px)] w-auto object-cover"
+              className="h-[clamp(100px,19svh,225px)] w-auto object-cover"
             />
           );
           const key = `${copy}-${f.src}`;
@@ -69,22 +66,38 @@ function Reel() {
   return (
     <>
     <Nav floating />
-    <section data-tone="bone" data-chapter="Gallery" aria-labelledby="page-heading" className="canvas-night relative isolate flex flex-col gap-[clamp(1rem,3svh,2rem)] overflow-hidden pt-4 pb-10">
+    <section data-tone="bone" data-chapter="Gallery" aria-labelledby="page-heading" className="canvas-night relative isolate flex min-h-svh flex-col gap-[clamp(1rem,3svh,2rem)] overflow-hidden pt-4 pb-6">
+      {/* Hero photo behind the title and reel (owner, 2026-10-28): the phone
+          filming the screen sits right, the title on the blurred left. */}
+      <img
+        src="/heroes/gallery-phone.webp"
+        srcSet={phoneSrcSet("/heroes/gallery-phone.webp")}
+        sizes="100vw"
+        alt="A fan films the big screen on a phone at a Frontier watch party at Main Sports Bar"
+        width={2400}
+        height={1602}
+        fetchPriority="high"
+        decoding="async"
+        className="absolute inset-0 -z-10 size-full object-cover object-[70%_center]"
+      />
+      <span aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-t from-night via-night/40 to-night/20" />
       <div aria-hidden="true" className="h-20 shrink-0" />
-      <div className="frame">
-        <p className="micro mb-4 text-yellow text-[clamp(0.875rem,0.7rem+0.6vw,1.25rem)]">Gallery</p>
+      {/* Title a quarter smaller and nudged in from the edge (owner, 2026-10-28). */}
+      <div className="px-[clamp(1rem,2.5vw,3rem)] md:pl-[6vw]">
         <SplitReveal
           as="h1"
           id="page-heading"
-          lines={["The experience."]}
+          lines={["Gallery"]}
           lineClassName="last:text-yellow"
-          className="font-display text-[min(clamp(3.25rem,13vw,10rem),20svh)] leading-[0.84] font-bold uppercase"
+          className="-ml-[0.045em] font-display text-[min(clamp(3.375rem,18vw,15rem),24svh)] leading-[0.84] font-bold uppercase"
         />
-        <p className="mt-5 max-w-[44ch] text-[clamp(1.05rem,0.95rem+0.45vw,1.35rem)] leading-[1.45] text-bone/85">
-          What it feels like.
-        </p>
+        <p className="mt-5 max-w-[34ch] text-lead-l leading-snug text-bone">The people and the players.</p>
       </div>
-      <ReelRow frames={reel.slice(5)} drift="0.14" lead />
+      {/* Title at the top, reel at the foot (owner, 2026-10-28). Every reel
+          frame once, so no photo repeats on screen. */}
+      <div className="mt-auto">
+        <ReelRow frames={reel} drift="0.14" lead />
+      </div>
     </section>
     </>
   );
@@ -102,8 +115,9 @@ function Cover({ album, className }: { album: StoryAlbum; className: string }) {
   );
 }
 
+/* No photo count or venue on the cards (plan, 2026-10-28). */
 function Meta({ album }: { album: StoryAlbum }) {
-  return <p className="micro !text-current/80">{[album.pending ? "Photos coming soon" : photos(album.count), album.venue].filter(Boolean).join(" · ")}</p>;
+  return album.pending ? <p className="micro !text-current/80">Photos coming soon</p> : <span />;
 }
 
 const open = (
@@ -140,7 +154,7 @@ function AlbumCards({ albums }: { albums: StoryAlbum[] }) {
               ) : null}
               {pic ? <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-night/90 via-night/15 to-transparent" /> : null}
               <div className="relative flex flex-col gap-3 p-5 sm:p-6">
-                <h3 className="font-display text-[clamp(2.5rem,4.2vw,4rem)] leading-[0.88] font-bold uppercase [text-wrap:balance]">{album.short ?? album.title}</h3>
+                <h3 className="font-display text-display-m leading-[0.88] font-bold uppercase [text-wrap:balance]">{album.short ?? album.title}</h3>
                 {album.champion ? (
                   <p className="text-base leading-tight">
                     Champion <strong>{album.champion}</strong>
@@ -148,11 +162,7 @@ function AlbumCards({ albums }: { albums: StoryAlbum[] }) {
                 ) : null}
                 <div className={`flex items-center justify-between gap-4 border-t pt-3 ${pic ? "border-bone/30" : "border-ink/30"}`}>
                   <Meta album={album} />
-                  {album.pending ? null : (
-                    <span aria-hidden="true" className="font-display text-2xl leading-none transition-transform duration-300 group-hover:translate-x-1">
-                      →
-                    </span>
-                  )}
+                  {album.pending ? null : open}
                 </div>
               </div>
             </Card>
@@ -175,7 +185,7 @@ function WatchGrid({ albums }: { albums: StoryAlbum[] }) {
             {album.photo ? <Cover album={album} className="absolute inset-0 size-full object-cover transition-transform duration-700 ease-[var(--ease-out)] group-hover:scale-[1.04]" /> : null}
             <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-night/90 via-night/20 to-transparent" />
             <div className="absolute inset-x-0 bottom-0 flex flex-col gap-3 p-5 sm:p-6">
-              <h3 className="max-w-[16ch] font-display text-[clamp(1.9rem,3.4vw,3.25rem)] leading-[0.9] font-bold uppercase [text-wrap:balance]">{album.title}</h3>
+              <h3 className="max-w-[16ch] font-display text-display-m leading-[0.9] font-bold uppercase [text-wrap:balance]">{album.title}</h3>
               <div className="flex items-center justify-between gap-4 border-t border-bone/30 pt-3">
                 <Meta album={album} />
                 {open}
@@ -189,21 +199,12 @@ function WatchGrid({ albums }: { albums: StoryAlbum[] }) {
 }
 
 function ChapterBlock({ chapter }: { chapter: Chapter }) {
-  const total = chapter.albums.reduce((s, a) => s + a.count, 0);
-  const live = chapter.albums.filter((a) => !a.pending).length;
-  const many = chapter.albums.length > 1;
   return (
     <section id={chapter.id} data-tone="bone" data-chapter={chapter.label} aria-labelledby={`${chapter.id}-heading`} className="canvas-night scroll-mt-4 pb-2 sm:pb-3">
-      <header className="frame flex flex-wrap items-end justify-between gap-x-8 gap-y-2 pt-[clamp(4rem,14vh,8rem)] pb-8">
+      <header className={`frame flex flex-wrap items-end justify-between gap-x-8 gap-y-2 pb-8 ${chapter.id === "origins" ? "pt-[clamp(1.5rem,5vh,3rem)]" : "pt-[clamp(4rem,14vh,8rem)]"}`}>
         <h2 id={`${chapter.id}-heading`} className="font-display text-display-l leading-[0.9] font-bold uppercase">
           {chapter.label}
         </h2>
-        {/* One album: its card already says how many photos. */}
-        {many ? (
-          <p className="micro">
-            {live} {live === 1 ? "album" : "albums"} · {photos(total)}
-          </p>
-        ) : null}
       </header>
       {chapter.kind === "watch" ? (
         <WatchGrid albums={chapter.albums} />
@@ -219,19 +220,6 @@ export default function Gallery() {
 
   return (
     <PageShell hero={<Reel />}>
-      {/* Jump links, not tabs: every album stays on the page. */}
-      <nav aria-label="Gallery chapters" className="canvas-night border-y border-bone/15">
-        <ul className="frame flex flex-wrap gap-x-8 gap-y-2 py-5">
-          {chapters.map((c) => (
-            <li key={c.id}>
-              <a href={`#${c.id}`} className="inline-flex min-h-11 items-center gap-2 font-display text-[clamp(1.1rem,1rem+0.4vw,1.5rem)] uppercase hover:text-yellow">
-                {c.label}
-                <span className="micro">{c.albums.length > 1 ? c.albums.length : ""}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
       {chapters.map((c) => (
         <ChapterBlock key={c.id} chapter={c} />
       ))}

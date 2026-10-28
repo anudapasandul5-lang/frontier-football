@@ -1,4 +1,4 @@
-import type { CSSProperties } from "react";
+import { Fragment, type CSSProperties } from "react";
 import { marqueePhotos, markerPhotos, statementPhoto, type HomePhoto } from "@/lib/home-photos";
 import { MomentMotion } from "@/components/motion/MomentMotion";
 import { phoneSrcSet } from "@/lib/phone-image";
@@ -15,12 +15,16 @@ import { phoneSrcSet } from "@/lib/phone-image";
 // Scatter markers: centre of each marker as a fraction of the stage. Laid out
 // like United's frame, round the centre photo, never over the headline's
 // middle band. Kept straight (2026-10-27): tilted cards read as messy.
-// Three, not six, and none on phones (UX audit 2026-10-27): six read as clutter
-// and clipped the screen edges. The pan strip still shows every photo.
+// None on phones (UX audit 2026-10-27). Owner 2026-10-27: three more, small,
+// placed clear of the screen edges and the headline band. `small` cards are
+// about two-thirds the size of the first three.
 const scatter = [
   { x: 0.2, y: 0.16 },
   { x: 0.9, y: 0.43 },
   { x: 0.29, y: 0.83 },
+  { x: 0.8, y: 0.13, small: true },
+  { x: 0.1, y: 0.64, small: true },
+  { x: 0.77, y: 0.84, small: true },
 ];
 
 function Photo({ p, width, className = "", style, eager = false }: { p: HomePhoto; width: number; className?: string; style?: CSSProperties; eager?: boolean }) {
@@ -41,12 +45,28 @@ function Photo({ p, width, className = "", style, eager = false }: { p: HomePhot
   );
 }
 
+// One span per word: the motion starts every word as a faint ghost over the
+// photo, so the jersey name shows, then fills them in one by one on scroll
+// (owner, 2026-10-28).
+function Ghost({ text }: { text: string }) {
+  return text.split(" ").map((word, i) => (
+    <Fragment key={i}>
+      {i > 0 ? " " : null}
+      <span className="moment-mask">{word}</span>
+    </Fragment>
+  ));
+}
+
 function Headline() {
   return (
     <div className="moment-copy pointer-events-none absolute inset-0 z-20 grid place-content-center px-4 text-center">
-      <p className="micro moment-label mb-4 text-yellow">Built by football. Powered by community.</p>
+      <p className="moment-label mb-5 font-display text-[clamp(1.1rem,2.4vw,2.25rem)] leading-[1] font-bold tracking-[0.04em] text-yellow uppercase">
+        <Ghost text="Built by football. Powered by community." />
+      </p>
       <h2 id="moment-heading" className="font-serif text-[clamp(2.6rem,7vw,6.5rem)] leading-[0.92] text-bone uppercase text-balance">
-        <span className="moment-line block">Talent was never missing.</span>
+        <span className="moment-line block">
+          <Ghost text="Talent was never missing." />
+        </span>
         <span className="moment-line moment-line--last block">The platform was.</span>
       </h2>
     </div>
@@ -66,7 +86,7 @@ export function Moment() {
             key={p.id}
             p={p}
             width={400}
-            className="moment-marker absolute z-10 w-[clamp(64px,10vw,160px)] -translate-x-1/2 -translate-y-1/2 max-[899px]:hidden"
+            className={`moment-marker absolute z-10 ${scatter[i].small ? "w-[clamp(48px,6.5vw,104px)]" : "w-[clamp(64px,10vw,160px)]"} -translate-x-1/2 -translate-y-1/2 max-[899px]:hidden`}
             style={{ left: `${scatter[i].x * 100}%`, top: `${scatter[i].y * 100}%` } as CSSProperties}
           />
         ))}

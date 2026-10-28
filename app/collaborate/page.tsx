@@ -4,24 +4,15 @@ import { parseContent, partners, reach } from "@/lib/content-data";
 import { CountUpFigure } from "@/components/motion/CountUpFigure";
 import { ContactRoutes } from "@/components/pages/ContactRoutes";
 import { NextPage } from "@/components/pages/NextPage";
-import { PageHero, heroButton } from "@/components/pages/PageHero";
+import { PageHero } from "@/components/pages/PageHero";
 import { PageShell } from "@/components/pages/PageShell";
-import { Roll } from "@/components/primitives/Roll";
 import { SplitReveal } from "@/components/primitives/SplitReveal";
-import { PhotoStrip } from "@/components/pages/PhotoStrip";
 import { Marquee } from "@/components/primitives/Marquee";
 import { phoneSrcSet } from "@/lib/phone-image";
 
-// "2026-09-22" as "September 2026", the way the home Milestones prints it.
-// Anything that is not a date prints as written, never "Invalid Date".
-const monthYear = (iso: string) => {
-  const d = new Date(`${iso}T00:00:00Z`);
-  return Number.isNaN(d.getTime()) ? iso : d.toLocaleDateString("en-GB", { month: "long", year: "numeric", timeZone: "UTC" });
-};
-
 // Same rhythm as the home page's partner strip (components/acts/Partners.tsx).
 const item = "mr-[clamp(2rem,5vw,4.5rem)] flex h-[clamp(2.75rem,5vw,4.5rem)] shrink-0 items-center";
-const type = "font-display text-[clamp(1.25rem,2.4vw,2rem)] leading-none font-bold whitespace-nowrap uppercase text-current";
+const type = "font-display text-lead-l leading-none font-bold whitespace-nowrap uppercase text-current";
 
 export const metadata: Metadata = { title: "Collaborate" };
 
@@ -45,28 +36,13 @@ export default function Collaborate() {
            4x4 Series at Athlete 360 Nugegoda, watch-alongs at Main Sports Bar. "Small-sided" = the 4x4 format. */
         <PageHero
           chapter="Collaborate"
-          eyebrow="For brands"
-          lines={["Collaborate", "with us."]}
+          lines={["Partner with us"]}
           photo={{ src: "/heroes/collaborate.webp", alt: "A packed Main Sports Bar during the England v Argentina watch party", position: "center 35%" }}
-          actions={
-            <a href="#talk" className={`${heroButton} group min-h-14 w-full max-w-[36rem] justify-between bg-yellow text-ink`}>
-              <Roll>I want to partner</Roll>
-              <span aria-hidden="true" className="transition-transform duration-200 ease-[var(--ease-out)] group-hover:translate-y-1">&darr;</span>
-            </a>
-          }
         >
-          Frontier brings together football, community and culture in Colombo. See who we reach, how partners can get involved, and who is already with us.
+          Frontier brings together football, community and culture in Colombo.
         </PageHero>
       }
     >
-      <PhotoStrip
-        photos={[
-          { src: "/pages/collab-venue.webp", alt: "The bar and big screen at a Frontier watch party: Cheers to the forever fans" },
-          { src: "/pages/collab-bar-crowd.webp", alt: "A crowd holds its head in its hands at the England v Argentina watch party" },
-          { src: "/pages/collab-celebration.webp", alt: "A supporter celebrates in front of the big screen at the England v Argentina watch party" },
-        ]}
-      />
-
       {/* Every figure is the owner's, dated. Absent while nothing is measured. */}
       {figures.length > 0 ? (
         <section data-reveal data-tone="bone" data-chapter="Reach" aria-labelledby="reach-heading" className="wipe canvas-night relative overflow-hidden py-[clamp(4rem,12vh,8rem)]">
@@ -75,7 +51,7 @@ export default function Collaborate() {
             <p className="micro mb-4 text-yellow">Reach</p>
             <SplitReveal
               id="reach-heading"
-              lines={["Who sees it."]}
+              lines={["Our audience"]}
               className="mb-[clamp(2rem,6vh,4rem)] font-display text-display-l leading-[0.85] font-bold uppercase"
             />
             <dl className="grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-3 xl:grid-cols-5">
@@ -85,7 +61,6 @@ export default function Collaborate() {
                   <dd className="font-display text-[clamp(2.75rem,min(7vw,9svh),6rem)] leading-[0.85] font-bold text-yellow uppercase tabular-nums">
                     <CountUpFigure figure={row.figure} />
                   </dd>
-                  {row.asOf ? <dd className="micro">As of {monthYear(row.asOf)}</dd> : null}
                 </div>
               ))}
             </dl>
@@ -104,7 +79,7 @@ export default function Collaborate() {
               right, then alternating. On a phone the photo always sits on top. */}
           <ol className="border-t-2 border-ink">
             {offer.map((row, i) => (
-              <li key={row.title} className="grid items-center gap-6 border-b border-ink/20 py-[clamp(2rem,6vh,3.5rem)] md:grid-cols-2 md:gap-[clamp(2rem,5vw,5rem)]">
+              <li key={row.title} className="grid items-start gap-6 border-b border-ink/20 py-[clamp(2rem,6vh,3.5rem)] md:grid-cols-2 md:gap-[clamp(2rem,5vw,5rem)]">
                 {row.photo ? (
                   <img
                     src={row.photo}
@@ -121,7 +96,7 @@ export default function Collaborate() {
                 <div>
                   <span className="micro tabular-nums">{String(i + 1).padStart(2, "0")}</span>
                   <strong className="mt-3 block font-display text-display-m leading-[0.95] font-bold uppercase">{row.title}</strong>
-                  {row.body ? <p className="mt-4 max-w-[44ch] text-[clamp(1.05rem,0.95rem+0.35vw,1.3rem)] leading-normal">{row.body}</p> : null}
+                  {row.body ? <p className="mt-4 max-w-[44ch] text-lead leading-normal">{row.body}</p> : null}
                 </div>
               </li>
             ))}
@@ -169,25 +144,23 @@ export default function Collaborate() {
       <div id="talk" data-tone="ink" data-chapter="Talk to us" className="overflow-x-clip bg-yellow py-[clamp(4rem,12vh,8rem)] text-ink">
         <div className="frame grid items-center gap-[clamp(3rem,6vw,5rem)] md:grid-cols-2">
           <div>
-            <p aria-hidden="true" className="font-display text-[clamp(3.5rem,11vw,10rem)] leading-[0.82] font-bold uppercase">
+            <p aria-hidden="true" className="font-display text-display-xl leading-[0.82] font-bold uppercase">
               Talk
               <br />
               to us.
             </p>
-            <p className="mt-6 max-w-[46ch] text-[clamp(1.1rem,0.95rem+0.6vw,1.6rem)] leading-[1.4]">One message is all it takes.</p>
+            <p className="mt-6 max-w-[46ch] text-lead-l leading-[1.4]">We are open to new or interesting opportunities.</p>
             <ContactRoutes only="partner" heading="Talk to us" />
           </div>
           <div className="relative mx-auto w-full max-w-[40rem] md:mx-0">
             <img
-              src="/pages/collab-talk.webp"
-              srcSet={phoneSrcSet("/pages/collab-talk.webp")}
-              sizes="(min-width: 768px) 40vw, 90vw"
-              alt="A player winds up to strike the ball while teammates watch at a 4 x 4 Series match; photograph by ThePapare"
-              width={1280}
-              height={960}
+              src="/crest.webp"
+              alt="Frontier Football crest"
+              width={525}
+              height={640}
               loading="lazy"
               decoding="async"
-              className="block aspect-[4/3] w-full rotate-[2.5deg] border-[6px] border-ink object-cover"
+              className="mx-auto block h-auto w-[min(70%,22rem)] md:mx-0"
             />
           </div>
         </div>

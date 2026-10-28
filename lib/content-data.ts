@@ -170,6 +170,9 @@ export function parseContent(raw: Raw) {
 function parsePartner(raw: Raw) {
   return {
     name: recorded(raw.name),
+    // The brand as people say it, for alt text and the text fallback. The
+    // name stays the handle so a future url can be checked against it.
+    brand: recorded(raw.brand),
     logo: recorded(raw.logo),
     url: recorded(raw.url),
   };

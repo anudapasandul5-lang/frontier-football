@@ -20,13 +20,15 @@ export function registrations(content: Raw) {
 
 function albumHref(albumId: unknown) {
   const id = recorded(albumId);
-  return id ? `/albums/${encodeURIComponent(id)}` : "/gallery";
+  // No album yet: no link, rather than a "Photos" link to "coming soon".
+  return id ? `/albums/${encodeURIComponent(id)}` : null;
 }
 
 /* Every Past activity, in the order Frontier ran them: the competitions that
-   came before the 4x4 Series, the Series itself, the rest, then the
-   watch-alongs. A record of what Frontier has done, so there is no join field
-   on any of them: only the Sunday Football League takes a Registration. */
+   came before the 4x4 Series, the Series itself, the watch-alongs, then the
+   rest. Same order as the home Events act and the Who We Are scrapbook. A
+   record of what Frontier has done, so there is no join field on any of them:
+   only the Sunday Football League takes a Registration. */
 export function activities(content: Raw) {
   const competitions = ((content?.competitions ?? []) as Raw[]).filter((c) => recorded(c.name));
   const seasonRows = ((content?.seasons ?? []) as Raw[]).filter((s) => Number.isFinite(Number(s.season)));
@@ -41,9 +43,9 @@ export function activities(content: Raw) {
     ...(seasons.length
       ? [{ name: "4 x 4 Series", note: `SZN ${Math.min(...seasons)} to SZN ${Math.max(...seasons)}`, href: "/gallery#series", photo: newest ? recorded(newest.photo) : null }]
       : []),
-    ...competitions.filter((c) => c.beforeSeries !== true).map(competition),
     ...(parties.length
       ? [{ name: "Watch Parties", note: `${parties.length} match nights on the big screen`, href: "/gallery#watch-parties", photo: recorded(parties.find((w) => recorded(w.photo))?.photo) }]
       : []),
+    ...competitions.filter((c) => c.beforeSeries !== true).map(competition),
   ];
 }

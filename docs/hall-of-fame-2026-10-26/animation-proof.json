@@ -1,0 +1,34 @@
+{
+  "initialMovingFrame": [
+    {
+      "name": "hall-of-fame-module__hKLisa__arcs",
+      "transform": "matrix(1, 0, 0, 1, -3.52705, 0)"
+    },
+    {
+      "name": "hall-of-fame-module__hKLisa__trophy",
+      "transform": "matrix(0.999931, -0.0117408, 0.0117408, 0.999931, 0, -5.3817)"
+    },
+    {
+      "name": "hall-of-fame-module__hKLisa__sweep",
+      "transform": "matrix(1, 0, 0, 1, 340.577, 0)"
+    }
+  ],
+  "pausedFrame": {
+    "art": [
+      {
+        "state": "paused",
+        "transform": "matrix(1, 0, 0, 1, -27.3835, 0)"
+      },
+      {
+        "state": "paused",
+        "transform": "matrix(0.998675, -0.0514697, 0.0514697, 0.998675, 0, -23.6024)"
+      },
+      {
+        "state": "paused",
+        "transform": "matrix(1, 0, 0, 1, -443.606, 0)"
+      }
+    ],
+    "pressed": "true"
+  },
+  "verified": "Paused matrices remained identical across two reads; all three resumed to running after Play."
+}

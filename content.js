@@ -674,24 +674,28 @@ export default {
   // TO REMOVE ONE: delete its line.
   // ==========================================================================
   partners: [
-    { name: "@main.sportsbar", logo: "/partners/main-sports-bar.png", url: "TODO" },
-    { name: "@address.lk", logo: "/partners/address.png", url: "TODO" },
-    { name: "@iodexsrilanka", logo: "TODO", url: "TODO" },
-    { name: "@nutrimax.iso", logo: "/partners/nutrimax.png", url: "TODO" },
+    { name: "@main.sportsbar", brand: "Main Sports Bar", logo: "/partners/main-sports-bar.png", url: "TODO" },
+    { name: "@address.lk", brand: "Address", logo: "/partners/address.png", url: "TODO" },
+    { name: "@iodexsrilanka", brand: "Iodex Sri Lanka", logo: "/partners/iodex.webp", url: "TODO" },
+    { name: "@nutrimax.iso", brand: "Nutrimax", logo: "/partners/nmx.png", url: "TODO" },
     { name: "Sofascore", logo: "/partners/sofascore.svg", url: "TODO" },
-    { name: "@shirtshack.lk", logo: "/partners/shirt-shack.png", url: "TODO" },
-    { name: "@drinkhypebam", logo: "/partners/hype-bam.png", url: "TODO" },
+    { name: "@shirtshack.lk", brand: "Shirt Shack", logo: "/partners/shirt-shack.png", url: "TODO" },
+    { name: "@drinkhypebam", brand: "Hype Bam", logo: "/partners/hype-bam.png", url: "TODO" },
     { name: "ThePapare", logo: "/partners/thepapare.png", url: "TODO" },
-    { name: "@absystudios", logo: "/partners/absy-studios.png", url: "TODO" },
-    { name: "@zone360.lk", logo: "TODO", url: "TODO" },
-    { name: "@athlete360_sl", logo: "/partners/athlete-360.png", url: "TODO" },
+    { name: "@absystudios", brand: "Absy Studios", logo: "/partners/absy-studios.png", url: "TODO" },
+    { name: "@zone360.lk", brand: "Zone360", logo: "TODO", url: "TODO" },
+    { name: "@athlete360_sl", brand: "Athlete 360", logo: "/partners/athlete-360.png", url: "TODO" },
     // Added 2026-09-22 on the owner's word. Seixed co-presented Division 0 with
     // @address.lk; Reignite ran on-site stands; Red Bull did branding, an
     // activation and drinks at the Alpha Tournament. Names as brands, not
     // handles, until someone checks each handle.
-    { name: "Seixed", logo: "TODO", url: "TODO" },
-    { name: "Reignite", logo: "TODO", url: "TODO" },
+    { name: "Seixed", logo: "/partners/seixed.webp", url: "TODO" },
+    { name: "Reignite", logo: "/partners/reignite.webp", url: "TODO" },
     { name: "Red Bull", logo: "/partners/red-bull.svg", url: "TODO" },
+    // Added 2026-10-28 on the owner's word, logos supplied by the owner.
+    { name: "The Vibe", brand: "The Vibe, styled by Abans", logo: "/partners/the-vibe.webp", url: "TODO" },
+    { name: "Crepe Runner", logo: "/partners/crepe-runner.png", url: "TODO" },
+    { name: "Pixels N Pints", logo: "/partners/pixels-n-pints.webp", url: "TODO" },
   ],
 
   // ==========================================================================

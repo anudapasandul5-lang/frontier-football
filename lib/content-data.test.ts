@@ -255,7 +255,7 @@ describe("partners", () => {
     // address still belongs on the page; it just does not link anywhere.
     const list = partners(parseContent({ partners: [{ name: "ThePapare", url: "TODO" }] }));
 
-    expect(list).toEqual([{ name: "ThePapare", logo: null, url: null }]);
+    expect(list).toEqual([{ name: "ThePapare", brand: null, logo: null, url: null }]);
   });
 
   it("carries a url through once one is pasted in", () => {
@@ -271,7 +271,7 @@ describe("partners", () => {
       parseContent({ partners: [{ name: "@absystudios", logo: "/partners/absy.webp" }] }),
     );
 
-    expect(list[0]).toEqual({ name: "@absystudios", logo: "/partners/absy.webp", url: null });
+    expect(list[0]).toEqual({ name: "@absystudios", brand: null, logo: "/partners/absy.webp", url: null });
   });
 
   it("drops a partner with no name, since a row's content is its name", () => {

@@ -34,10 +34,10 @@ export function Scrapbook({ data }: { data: Content }) {
   return (
     <div className={styles.board}>
       <svg className={`${styles.thread} ${styles.desktopThread}`} viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M75 3 C94 12,14 9,25 22 C12 31,96 28,75 40 C94 49,7 46,25 58 C12 67,96 64,75 77" vectorEffect="non-scaling-stroke" />
+        <path d="M25 2.7 C6 11,86 8,75 19.4 C88 28,4 25,25 36.1 C6 45,93 42,75 52.8 C88 61,4 58,25 69.5" vectorEffect="non-scaling-stroke" />
       </svg>
       <svg className={`${styles.thread} ${styles.mobileThread}`} viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M54 2 C95 9,10 13,45 22 C5 30,95 32,54 41 C95 49,6 51,45 60 C5 68,95 70,54 79" vectorEffect="non-scaling-stroke" />
+        <path d="M45 2 C4 9,89 13,54 22 C94 30,4 32,45 41 C4 49,93 51,54 60 C94 68,4 70,45 79" vectorEffect="non-scaling-stroke" />
       </svg>
       <ol className={styles.pins}>
         {pins.map(({ name, item, href }, index) => {

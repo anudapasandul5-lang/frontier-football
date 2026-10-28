@@ -46,9 +46,13 @@ export function Menu({ instagram }: { instagram: { url: string; handle: string }
         // JS off in browsers that support them; onClick covers the rest.
         {...{ commandfor: "site-menu", command: "show-modal" }}
         onClick={() => dialog.current?.showModal()}
-        className="micro uppercase tracking-[0.12em] flex min-h-11 cursor-pointer items-center px-1 text-current transition-transform duration-150 ease-[var(--ease-out)] active:scale-[0.97]"
+        aria-label="Menu"
+        className="flex size-12 cursor-pointer items-center justify-center border-2 border-ink bg-yellow text-ink transition-transform duration-150 ease-[var(--ease-out)] active:scale-[0.97]"
       >
-        Menu
+        {/* Three lines in a yellow box: bigger and easier to spot than the word (plan, 2026-10-28). */}
+        <svg viewBox="0 0 24 24" aria-hidden="true" className="size-7 fill-none stroke-current [stroke-width:2.4]">
+          <path d="M4 7h16M4 12h16M4 17h16" />
+        </svg>
       </button>
       <dialog ref={dialog} id="site-menu" aria-label="Menu" className="menu" onKeyDown={keepFocusInside}>
         <div className="frame relative z-10 flex h-20 items-center justify-between">

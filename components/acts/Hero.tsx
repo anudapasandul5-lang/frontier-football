@@ -21,7 +21,7 @@ import { HeroVideo } from "@/components/motion/HeroVideo";
    section on Community, where the team and free-agent drafts live, and the
    phone shows the offer and place in one line above the actions. */
 
-const button = "btn flex min-h-11 items-center px-6 font-display text-button font-bold uppercase";
+const button = "btn flex min-h-12 items-center px-6 font-display text-button font-bold uppercase";
 
 export function Hero() {
   return (
@@ -60,21 +60,17 @@ export function Hero() {
       </div>
 
       <div className="frame relative z-[3] flex items-center gap-4 pb-6 max-sm:flex-col max-sm:gap-3 sm:grid sm:grid-cols-[1fr_auto_1fr]">
-        <p className="micro text-center sm:hidden">
-          Colombo, Sri Lanka
-        </p>
         <span aria-hidden="true" className="max-sm:hidden" />
         <div className="flex flex-wrap items-center justify-center gap-3">
           {/* Sunday League first: it is the one thing a player can do this
               week (owner, 2026-10-27). Events stay one tap away in the menu. */}
           <a href="/community#sunday-league" className={`${button} bg-yellow text-ink`}>
-            <Roll>Join Sunday League</Roll>
+            <Roll>Play with us</Roll>
           </a>
           <a href="/collaborate" className={`${button} border-2 border-bone hover:bg-bone hover:text-ink`}>
-            <Roll>Partner with us</Roll>
+            <Roll>Collab</Roll>
           </a>
         </div>
-        <p className="micro justify-self-end max-sm:hidden">Colombo, Sri Lanka</p>
       </div>
     </section>
     </>

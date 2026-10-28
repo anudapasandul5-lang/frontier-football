@@ -53,11 +53,10 @@ export default async function AlbumPage({ params }: { params: Promise<{ id: stri
       hero={
         <PageHero
           chapter={album.short ?? album.title}
-          eyebrow={chapter.kind === "series" ? facts : `${chapter.label} · ${facts}`}
+          eyebrow={chapter.kind === "series" || chapter.label === album.title ? facts : `${chapter.label} · ${facts}`}
           lines={lines}
           photo={{ src: cover.src, alt: cover.alt, position: "center 35%", credit: albumStory(data, id)?.photoCredit ?? undefined }}
           transition={cover.morph ? `album-cover-${album.id}` : undefined}
-          labels={["Frontier / Gallery", album.champion ? `Champion: ${album.champion}` : "Colombo, Sri Lanka"]}
           actions={
             <>
               <a href={picks.length ? "#highlights-heading" : "#album-photos"} className={`${heroButton} bg-yellow text-ink`}>
@@ -78,7 +77,7 @@ export default async function AlbumPage({ params }: { params: Promise<{ id: stri
         <section data-tone="bone" data-chapter="Next album" className="canvas-ink border-t border-bone/15">
           <Link href={`/albums/${next.id}`} className="frame group flex flex-col gap-4 py-[clamp(4rem,14vh,9rem)]">
             <span className="micro text-yellow">Next album · {next.count.toLocaleString("en")} photos</span>
-            <span className="flex items-end justify-between gap-6 font-display text-[clamp(3rem,11vw,10rem)] leading-[0.85] font-bold uppercase">
+            <span className="flex items-end justify-between gap-6 font-display text-display-xl leading-[0.85] font-bold uppercase">
               <Roll>{next.short ?? next.title}</Roll>
               <span aria-hidden="true" className="shrink-0 transition-transform duration-300 group-hover:translate-x-3">
                 →

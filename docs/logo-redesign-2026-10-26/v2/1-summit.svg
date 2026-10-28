@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 280">
+<defs><clipPath id="s-in"><path d="M32 43L120 24 208 43V150C208 200 168 232 120 256 72 232 32 200 32 150Z"/></clipPath></defs>
+<path d="M20 34L120 12 220 34V150C220 208 176 244 120 270 64 244 20 208 20 150Z" fill="#0B0B0B"/>
+<g clip-path="url(#s-in)">
+<rect width="240" height="280" fill="#F2B705"/>
+<text x="120" y="76" text-anchor="middle" font-family="'Big Shoulders Display', Impact, sans-serif" font-weight="900" font-size="38" letter-spacing="1.5" fill="#0B0B0B">FRONTIER</text>
+<circle cx="120" cy="100" r="22" fill="#F1EBDD" stroke="#0B0B0B" stroke-width="5.7"/><path d="M120.0 90.8 L128.8 97.1 L125.4 107.5 L114.6 107.5 L111.2 97.1Z" fill="#0B0B0B"/>
+<path d="M120 118L190 200H50Z" fill="#00664F"/>
+<path d="M70 148L114 200H18Z" fill="#E87A00" stroke="#0B0B0B" stroke-width="4" stroke-linejoin="round"/>
+<path d="M172 152L222 200H126Z" fill="#8A0028" stroke="#0B0B0B" stroke-width="4" stroke-linejoin="round"/>
+<rect y="200" width="240" height="80" fill="#0B0B0B"/>
+<text x="120" y="222" text-anchor="middle" font-family="'Big Shoulders Display', Impact, sans-serif" font-weight="800" font-size="17" letter-spacing="3" fill="#F1EBDD">FOOTBALL</text>
+</g></svg>

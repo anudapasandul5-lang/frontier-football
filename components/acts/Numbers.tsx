@@ -1,4 +1,3 @@
-import type { CSSProperties } from "react";
 import raw from "@/content.js";
 import { parseContent, stats } from "@/lib/content-data";
 import { MicroLabel } from "@/components/primitives/MicroLabel";
@@ -21,7 +20,9 @@ import { CourtScene } from "@/components/motion/CourtScene";
    content.js. The signed-off Milestones paragraph mentions Turf Wars;
    its separate section stays removed. */
 
-const bars = ["bg-yellow", "bg-green", "bg-blue", "bg-red"];
+/* The brand colour each stat bar used to carry now colours the figure itself
+   (owner plan, 2026-10-28: the counters and the bars under the numbers are gone). */
+const figureColours = ["text-yellow", "text-green", "text-blue", "text-red"];
 
 export function Numbers() {
   const data = parseContent(raw);
@@ -48,11 +49,13 @@ export function Numbers() {
         {/* Content height, small top pad: the Moment pin already lets go on
             a screen of dark, and a centred 70svh block doubled it (UX audit
             2026-10-27). */}
-        <div className="frame flex flex-col gap-[clamp(2rem,7vh,4rem)] pt-[clamp(2rem,5vh,3rem)] pb-[clamp(4rem,12vh,8rem)]">
+        <div className="flex flex-col gap-[clamp(2rem,7vh,4rem)] px-[clamp(1rem,2.5vw,3rem)] pt-[clamp(2rem,5vh,3rem)] pb-[clamp(4rem,12vh,8rem)]">
           <TickRule />
           {/* One long word ("Milestones.") fills the row on its own, so the
               paragraph sits under it; side by side it ran into the copy. */}
-          <div className="flex flex-col gap-6 md:gap-10">
+          {/* Indented off the tick rule's edge (owner, 2026-10-28: the M
+              starts about 14% in on a laptop). */}
+          <div className="flex flex-col gap-6 md:gap-10 md:pl-[11.5vw]">
             <SplitReveal
               id="numbers-heading"
               lines={["Milestones."]}
@@ -60,7 +63,7 @@ export function Numbers() {
             />
             <div className="flex max-w-[44ch] flex-col gap-4">
               {asOf ? <MicroLabel>As of {asOf}</MicroLabel> : null}
-              <p className="text-[clamp(1.0625rem,0.95rem+0.3vw,1.25rem)] leading-relaxed text-bone">
+              <p className="text-lead leading-relaxed text-bone">
                 {raw.milestones}
               </p>
             </div>
@@ -73,21 +76,13 @@ export function Numbers() {
               key={s.label}
               className={`frame flex min-h-[48svh] flex-col justify-center gap-4 max-md:min-h-0 max-md:py-10 ${i % 2 ? "md:items-end md:text-right" : ""}`}
             >
-                <dt className={`flex items-center gap-4 font-display text-[clamp(2rem,4.5vw,4.5rem)] leading-[0.9] font-bold uppercase ${i % 2 ? "md:flex-row-reverse" : ""}`}>
-                  <span className="tabular-nums">{String(i + 1).padStart(2, "0")}</span>
-                  <span aria-hidden="true" className="h-[3px] w-12 shrink-0 bg-current" />
+                <dt className="font-display text-[clamp(2rem,4.5vw,4.5rem)] leading-[0.9] font-bold uppercase">
                   {s.label}
                 </dt>
                 <dd className={`flex flex-col gap-5 ${i % 2 ? "md:items-end" : ""}`}>
                   <CountUpFigure
                     figure={s.figure}
-                    className="font-display text-[clamp(4.5rem,min(15vw,21svh),11rem)] leading-[0.8] font-bold tracking-[-0.02em] uppercase"
-                  />
-                  <span
-                    data-reveal
-                    aria-hidden="true"
-                    className={`stat-bar block h-3 w-[min(100%,clamp(10rem,36vw,34rem))] ${bars[i % bars.length]}`}
-                    style={{ "--bar-delay": "200ms" } as CSSProperties}
+                    className={`font-display text-[clamp(4.5rem,min(15vw,21svh),11rem)] leading-[0.8] font-bold tracking-[-0.02em] uppercase ${figureColours[i % figureColours.length]}`}
                   />
                 </dd>
             </div>

@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Frontier Hall of Fame · direction study</title>
+  <style>
+    /* Hallmark · pre-emit critique: P5 H4 E4 S5 R5 V4 */
+    @font-face{font-family:Bricolage;src:url("../../../out/_next/static/media/8fe4c34884868de9-s.p.1kfyfr_m2hx2x.woff2") format("woff2");font-weight:100 900;font-display:swap}
+    @font-face{font-family:Geist;src:url("../../../out/_next/static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2") format("woff2");font-weight:100 900;font-display:swap}
+    :root{--night:#0b0e13;--bone:#efeae0;--yellow:#faba2a;--muted:#a8a29a;--display:Bricolage,Arial Narrow,sans-serif;--body:Geist,Arial,sans-serif}
+    *{box-sizing:border-box}
+    html,body{margin:0;overflow-x:clip;background:var(--night);color:var(--bone)}
+    body{font-family:var(--body)}
+    button{font:inherit}
+    .intro,.concept{padding-inline:clamp(22px,5.2vw,96px);max-width:1920px;margin-inline:auto}
+    .intro{padding-block:32px 45px;border-bottom:1px solid #ffffff35}
+    .kicker,.option-name,.meta,.label,.photo-link,.credit{font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+    .kicker{color:var(--yellow)}
+    .intro h1,.concept h2,.season,.champion{font-family:var(--display);font-variation-settings:"wdth" 75;text-transform:uppercase;letter-spacing:-.01em}
+    .intro h1{font-size:clamp(46px,6vw,100px);line-height:.88;margin:22px 0}
+    .intro p{font-size:clamp(17px,1.6vw,24px);max-width:55ch;line-height:1.4;margin:0}
+    .concept{padding-block:clamp(55px,8vw,112px);border-bottom:1px solid #ffffff35}
+    .concept-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:42px}
+    .option-name{color:var(--yellow);margin:0 0 13px}
+    .concept h2{font-size:clamp(42px,5vw,80px);line-height:.88;margin:0}
+    .concept-head p:last-child{color:var(--muted);max-width:30ch;line-height:1.45;margin:0}
+    .photo{margin:0;min-width:0}
+    .photo img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;border-radius:clamp(12px,1.2vw,20px)}
+    .photo figcaption{color:var(--muted);font-size:12px;margin-top:7px;min-height:1em}
+    .label{color:var(--muted);margin:0}
+    .season{font-size:clamp(22px,2.1vw,34px);line-height:1.04;margin:0}
+    .champion{color:var(--yellow);font-size:clamp(46px,5vw,84px);font-weight:700;line-height:.9;overflow-wrap:anywhere;margin:12px 0 18px}
+    .meta{color:var(--muted);margin:0}
+    .photo-link{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 16px;border:1px solid #efeae080;color:var(--bone);white-space:nowrap}
+    .mock-note{color:var(--muted);font-size:12px;line-height:1.35;margin:12px 0 0}
+    .spread{border-top:1px solid #ffffff45;border-bottom:1px solid #ffffff45;padding-block:30px;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(30px,5vw,90px);align-items:center}
+    .spread+.spread{border-top:0}
+    .spread .photo{align-self:start}
+    .spread .copy{min-width:0}
+    .spread .champion{font-size:clamp(58px,7vw,116px);margin:22px 0 30px}
+    .spread .bottom{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:48px}
+    .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(24px,3vw,52px)}
+    .card{border-top:1px solid #ffffff45;padding-top:22px;display:flex;flex-direction:column;min-width:0}
+    .card .photo{min-height:0}
+    .card .body{padding-block:25px 10px;flex:1;display:flex;flex-direction:column}
+    .card .champion{font-size:clamp(54px,6vw,105px)}
+    .card .foot{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:auto;padding-top:16px}
+    .editorial{border-top:1px solid #ffffff45}
+    .editorial-row{border-bottom:1px solid #ffffff45;display:grid;grid-template-columns:minmax(150px,.45fr) minmax(0,1fr) minmax(240px,.9fr);gap:clamp(20px,3vw,54px);padding-block:28px;align-items:center}
+    .editorial-row .champion{font-size:clamp(50px,6vw,100px);margin:10px 0}
+    .editorial-row .photo{min-height:0}
+    .editorial-row .side{align-self:stretch;display:flex;flex-direction:column;justify-content:space-between;gap:30px}
+    .editorial-row .side .photo-link{align-self:start}
+    .end{padding:35px clamp(22px,5.2vw,96px);color:var(--muted);font-size:13px}
+    @media(max-width:760px){
+      .concept-head{display:block}.concept-head p:last-child{margin-top:18px}
+      .spread,.cards,.editorial-row{display:block}
+      .spread{padding-block:24px}.spread .copy{padding-top:26px}.spread .champion{font-size:clamp(56px,16vw,78px)}.spread .bottom{margin-top:28px}
+      .card{margin-bottom:28px}.card .body{min-height:220px}.card .champion{font-size:clamp(54px,14vw,78px)}
+      .editorial-row{padding-block:26px}.editorial-row .side{display:block}.editorial-row .champion{font-size:clamp(54px,14vw,80px);margin:18px 0}.editorial-row .photo{margin:20px 0}.editorial-row .photo-link{margin-top:20px}
+    }
+  </style>
+</head>
+<body>
+  <header class="intro">
+    <p class="kicker">Frontier Football · direction study · 26 October 2026</p>
+    <h1>Hall of Fame</h1>
+    <p>Three ways to give every champion the same respect. The names, result order, real photos, night palette and current type stay in place.</p>
+    <p class="mock-note">Static proposal only. These are representative first two rows; Photos labels show where existing links remain in the live section.</p>
+    <p style="margin-top:20px"><a href="background.html" style="color:var(--yellow)">View D: the animated Hall of Fame background</a></p>
+  </header>
+
+  <section class="concept" aria-labelledby="option-a">
+    <div class="concept-head"><div><p class="option-name">A · recommended</p><h2 id="option-a">Champion spreads</h2></div><p>Full-size photo and winner share each row. Same treatment for every entry.</p></div>
+    <div class="spread">
+      <figure class="photo"><img src="../../../public/champions/szn-6.webp" alt="The 4 x 4 Series SZN 6 champions lined up on the pitch beside the trophy."><figcaption aria-hidden="true">&nbsp;</figcaption></figure>
+      <div class="copy"><p class="label">4 x 4 Series · SZN 6</p><p class="label">Champion</p><p class="champion">Ramadan FC</p><p class="meta">Athlete 360</p><div class="bottom"><span class="photo-link">Photos →</span></div></div>
+    </div>
+    <div class="spread">
+      <figure class="photo"><img src="../../../public/gallery/szn-5-hero.webp" alt="Players raise the trophy together after 4 x 4 Series SZN 5; photograph by ThePapare"><figcaption>Photo: ThePapare</figcaption></figure>
+      <div class="copy"><p class="label">4 x 4 Series · SZN 5</p><p class="label">Champion</p><p class="champion">Panadura</p><p class="meta">Athlete 360</p><div class="bottom"><span class="photo-link">Photos →</span></div></div>
+    </div>
+  </section>
+
+  <section class="concept" aria-labelledby="option-b">
+    <div class="concept-head"><div><p class="option-name">B · compact</p><h2 id="option-b">Equal trophy cards</h2></div><p>Two equal photo cards in source order. On phone, one card per row.</p></div>
+    <div class="cards">
+      <article class="card"><figure class="photo"><img src="../../../public/champions/szn-6.webp" alt="The 4 x 4 Series SZN 6 champions lined up on the pitch beside the trophy."><figcaption aria-hidden="true">&nbsp;</figcaption></figure><div class="body"><p class="season">4 x 4 Series SZN 6</p><p class="label">Champion</p><p class="champion">Ramadan FC</p><div class="foot"><p class="meta">Athlete 360</p><span class="photo-link">Photos →</span></div></div></article>
+      <article class="card"><figure class="photo"><img src="../../../public/gallery/szn-5-hero.webp" alt="Players raise the trophy together after 4 x 4 Series SZN 5; photograph by ThePapare"><figcaption>Photo: ThePapare</figcaption></figure><div class="body"><p class="season">4 x 4 Series SZN 5</p><p class="label">Champion</p><p class="champion">Panadura</p><div class="foot"><p class="meta">Athlete 360</p><span class="photo-link">Photos →</span></div></div></article>
+    </div>
+  </section>
+
+  <section class="concept" aria-labelledby="option-c">
+    <div class="concept-head"><div><p class="option-name">C · closest to current</p><h2 id="option-c">Editorial result rows</h2></div><p>Big winner statement first, with each real photo at a readable size.</p></div>
+    <div class="editorial">
+      <article class="editorial-row"><div class="side"><div><p class="season">4 x 4 Series<br>SZN 6</p><p class="meta">Athlete 360</p></div><span class="photo-link">Photos →</span></div><div><p class="label">Champion</p><p class="champion">Ramadan FC</p></div><figure class="photo"><img src="../../../public/champions/szn-6.webp" alt="The 4 x 4 Series SZN 6 champions lined up on the pitch beside the trophy."><figcaption aria-hidden="true">&nbsp;</figcaption></figure></article>
+      <article class="editorial-row"><div class="side"><div><p class="season">4 x 4 Series<br>SZN 5</p><p class="meta">Athlete 360</p></div><span class="photo-link">Photos →</span></div><div><p class="label">Champion</p><p class="champion">Panadura</p></div><figure class="photo"><img src="../../../public/gallery/szn-5-hero.webp" alt="Players raise the trophy together after 4 x 4 Series SZN 5; photograph by ThePapare"><figcaption>Photo: ThePapare</figcaption></figure></article>
+    </div>
+  </section>
+  <p class="end">Direction samples only. No result, photo, route or live page has been changed.</p>
+</body>
+</html>

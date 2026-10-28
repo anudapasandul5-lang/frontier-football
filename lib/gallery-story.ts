@@ -13,7 +13,7 @@ export type AlbumFacts = Record<string, { count: number; watermarked?: boolean }
 export type StoryAlbum = {
   id: string;
   title: string;
-  short: string | null; // "SZN 03" for a season, the name does the work otherwise
+  short: string | null; // "SZN 3" for a season, the name does the work otherwise
   count: number;
   champion: string | null;
   venue: string | null;
@@ -99,7 +99,7 @@ export function galleryChapters(raw: Raw, facts: AlbumFacts): Chapter[] {
       kind: "series",
       albums: [...data.seasons]
         .sort((a, b) => Number(a.season) - Number(b.season))
-        .map((s) => album(s, `SZN ${s.season}`, `SZN ${String(s.season).padStart(2, "0")}`, facts))
+        .map((s) => album(s, `SZN ${s.season}`, `SZN ${s.season}`, facts))
         .filter(keep),
     },
     { id: "watch-parties", label: "Watch parties", kind: "watch", albums: data.watchAlongs.filter((w) => w.name).map((w) => album(w, w.name!, null, facts)).filter(keep) },

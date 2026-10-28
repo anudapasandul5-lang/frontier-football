@@ -19,16 +19,14 @@ export function PageHero({
   photo,
   children,
   actions,
-  labels = ["Frontier Football", "Colombo, Sri Lanka"],
   transition,
 }: {
   chapter: string;
-  eyebrow: string;
+  eyebrow?: string;
   lines: string[];
   photo: { src: string; alt: string; position?: string; credit?: string };
   children?: ReactNode;
   actions?: ReactNode;
-  labels?: [string, string];
   /* Shared-element name: an album hero morphs from the gallery band that
      opened it. */
   transition?: string;
@@ -72,30 +70,26 @@ export function PageHero({
       </div>
       {photo.credit ? <p className="micro absolute top-24 right-4 z-10 bg-ink px-3 py-2 text-bone">Photo: {photo.credit}</p> : null}
 
-      <div className="frame flex flex-1 flex-col justify-end pb-[clamp(1.5rem,5vh,3.5rem)]">
-        <p className="micro mb-4 text-yellow text-[clamp(0.875rem,0.7rem+0.6vw,1.25rem)]">{eyebrow}</p>
+      {/* Text sits left and mid-height like the FLOST8 hero (owner, 2026-10-28:
+          "the headlines should sit like this"), not in the centred 1170px frame,
+          which on a wide screen pushed the headline across the photo's faces. */}
+      <div className="flex flex-1 flex-col justify-center px-[clamp(1rem,2.5vw,3rem)] pb-[clamp(1.5rem,5vh,3.5rem)]">
+        {/* Shadow: on a bright photo the yellow label fell to 3.2:1 (critique 2026-10-27). */}
+        {eyebrow ? <p className="micro mb-4 text-yellow text-label [text-shadow:0_1px_10px_rgb(0_0_0/0.75)]">{eyebrow}</p> : null}
         <SplitReveal
           as="h1"
           id="page-heading"
           lines={lines}
           lineClassName="last:text-yellow"
-          className="font-display text-[min(clamp(3.25rem,15.5vw,12rem),24svh)] leading-[0.84] font-bold uppercase"
+          smallStop
+          className="flex flex-wrap gap-x-[0.22em] font-display text-[clamp(2.5rem,calc(7.4vw+36px),9.375rem)] leading-[0.84] font-bold uppercase"
         />
         {children ? (
-          <div className="mt-6 max-w-[46ch] text-[clamp(1.05rem,0.95rem+0.45vw,1.4rem)] leading-[1.45] text-bone/90">
+          <div className="mt-6 max-w-[46ch] text-lead leading-[1.45] text-bone/90">
             {children}
           </div>
         ) : null}
         {actions ? <div className="mt-7 flex flex-wrap gap-3">{actions}</div> : null}
-      </div>
-
-      {/* The rule sits on an inner row so it starts where the text does, not
-          at the frame's padding edge. */}
-      <div className="frame">
-        <div className="flex items-center justify-between gap-4 border-t border-bone/25 py-4">
-          <p className="micro">{labels[0]}</p>
-          <p className="micro">{labels[1]}</p>
-        </div>
       </div>
     </section>
     </>
@@ -104,4 +98,4 @@ export function PageHero({
 
 /* The home hero's button, for page heroes and closing bands. */
 export const heroButton =
-  "btn flex min-h-11 items-center px-6 font-display text-button font-bold uppercase";
+  "btn flex min-h-12 items-center px-6 font-display text-button font-bold uppercase";

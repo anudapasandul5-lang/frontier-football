@@ -8,7 +8,8 @@ import { phoneSrcSet } from "@/lib/phone-image";
 
 export type StripPhoto = { src: string; alt: string };
 
-export function PhotoStrip({ photos }: { photos: StripPhoto[] }) {
+/* `aspect` is for pages whose photos are 3:2 and must not lose their edges. */
+export function PhotoStrip({ photos, aspect = "aspect-[4/3]" }: { photos: StripPhoto[]; aspect?: string }) {
   return (
     <section aria-label="Photographs" className="frame py-[clamp(3rem,10vh,6rem)]">
       {/* Phone: one wide photo over two, so none shrinks to a thumbnail. */}
@@ -24,7 +25,7 @@ export function PhotoStrip({ photos }: { photos: StripPhoto[] }) {
             height={900}
             loading="lazy"
             decoding="async"
-            className={`block aspect-[4/3] w-full object-cover ${i === 0 ? "col-span-2 sm:col-span-1" : ""}`}
+            className={`block ${aspect} w-full object-cover ${i === 0 ? "col-span-2 sm:col-span-1" : ""}`}
           />
         ))}
       </div>

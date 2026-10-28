@@ -12,28 +12,29 @@ export const marqueePhotos: HomePhoto[] = [
     "alt": "The SZN 6 champions lift their trophies under the tent after the final"
   },
   {
-    "id": "gallery-p06",
-    "src": "/home/moment-strike.webp",
-    "sourceUrl": "public/gallery/p06.webp",
+    "id": "dusk-futsal-match",
+    "src": "/home/moment-dusk.webp",
+    "sourceUrl": "C:/Users/anuda/Desktop/Photos/Dusk Futsal Match on Urban Rooftop.png",
     "w": 1600,
-    "h": 1066,
-    "alt": "A striker in a number 30 shirt lines up the ball as defenders close in at 4 x 4 Series"
+    "h": 727,
+    "alt": "Five players chase a boy in a blue shirt dribbling the ball on a futsal pitch at dusk"
+  },
+
+  {
+    "id": "ashan-kick",
+    "src": "/home/moment-kick.webp",
+    "sourceUrl": "C:/Users/anuda/Desktop/frontier web/d05d95133834959444de4fa14c36e37f.jpg",
+    "w": 1280,
+    "h": 853,
+    "alt": "A player in a grey shirt winds up to strike the ball while three players in red and white shirts watch"
   },
   {
-    "id": "DSC_9019",
-    "src": "/home/moment-night.webp",
-    "sourceUrl": "https://drive.google.com/file/d/1On76QkXr8Ve6GfNIC8BHDu24VW3bK-Hq/view",
-    "w": 1600,
-    "h": 1067,
-    "alt": "A defender slides in to block a shot under the floodlights at SZN 6"
-  },
-  {
-    "id": "DSC_8676",
-    "src": "/home/moment-shot.webp",
-    "sourceUrl": "https://drive.google.com/file/d/1AAiZwD2c11mjogAyPLY6FVS9BWmwcUD9/view",
-    "w": 1600,
-    "h": 1067,
-    "alt": "A striker swings through the ball as defenders chase at dusk at 4 x 4 Series SZN 6"
+    "id": "ashan-goal",
+    "src": "/home/moment-goal.webp",
+    "sourceUrl": "C:/Users/anuda/Desktop/Photos/cb8f1f035f1cc9113e334ba87fab0a44.jpg",
+    "w": 1280,
+    "h": 853,
+    "alt": "A goalkeeper in blue stretches across the goal as the ball flies in past a player in orange"
   }
 ];
 /* The small tilted frames that drift round the headline: football and celebrations only. */
@@ -105,11 +106,12 @@ export const competitionPhotos = {
     "alt": "Players in green bibs and blue shirts contest the ball near goal at 4 x 4 Series SZN 3"
   },
   "Division 0": {
-    "id": "DSC_6078",
-    "src": "/pages/competition-division-0.webp",
-    "sourceUrl": "C:/Users/anuda/Desktop/Photos/DSC_6078.jpg",
-    "w": 1600,
-    "h": 1200,
-    "alt": "A player grips a glowing controller in the dark at Division 0"
+    "id": "gaming-lounge-focus",
+    "src": "/pages/division-0-lounge.webp",
+    "sourceUrl": "C:/Users/anuda/Desktop/Photos/Cinematic Gaming Lounge Focus.png",
+    "w": 1024,
+    "h": 1536,
+    "focus": "50% 42%",
+    "alt": "A man in a black shirt grips a glowing white controller as he looks at the screen in a gaming lounge, with a second player behind him"
   }
 };

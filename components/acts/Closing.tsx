@@ -1,58 +1,23 @@
-import raw from "@/content.js";
-import { brandIcons } from "@/lib/brand-icons";
-import { outboundLinks, parseContent } from "@/lib/content-data";
-import { TickRule } from "@/components/primitives/TickRule";
+import { Roll } from "@/components/primitives/Roll";
 
-/* Act 9, United's closing band, in teal. It ends on the one action (plan Q4):
-   following Frontier, as a row of channel logos. The serif line is the
-   site's own description (layout.tsx metadata).
-
-   The big "Follow @handle" headline was removed (owner, 2026-09-23); the
-   heading stays for screen readers. The home page is the only place TikTok
-   shows (owner, 2026-09-08, HOUSE-RULES section 7). */
+/* Act 9. The home page ends like the inner pages: a Next band handing the
+   reader on, then the footer bar with the channel icons (owner, 2026-10-28:
+   the full-screen photo finish is gone). */
 export function Closing() {
-  const links = outboundLinks(parseContent(raw));
-
   return (
-    <section
-      aria-labelledby="closing-heading"
-      data-tone="bone"
-      data-chapter="Contact"
-      className="canvas-teal overflow-hidden py-[clamp(4rem,14vh,9rem)]"
-    >
-      <div className="frame relative flex flex-col gap-[clamp(2rem,6vh,4rem)]">
-        <TickRule />
-        <p className="max-w-[18ch] font-serif text-[clamp(2.25rem,min(6vw,10svh),4.5rem)] leading-[1.02]">
-          Small-sided football and the culture around it, from the heart of Sri Lanka.
-        </p>
-        <h2 id="closing-heading" className="sr-only">
-          Follow Frontier Football
-        </h2>
-        {links.length ? (
-          <ul className="flex flex-wrap items-center gap-3">
-            {links.map((link) => {
-              const icon = link.name ? brandIcons[link.name] : undefined;
-              return (
-                <li key={link.name}>
-                  <a
-                    href={link.url!}
-                    aria-label={icon ? `${link.name} ${link.handle ?? ""}`.trim() : undefined}
-                    className="flex size-14 w-auto min-w-14 items-center justify-center border-2 border-current px-3 transition-colors hover:bg-bone hover:text-teal"
-                  >
-                    {icon ? (
-                      <svg viewBox="0 0 24 24" aria-hidden="true" className="size-6 fill-current">
-                        <path d={icon} />
-                      </svg>
-                    ) : (
-                      <span className="micro">{link.name}</span>
-                    )}
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-        ) : null}
-      </div>
+    <section aria-labelledby="closing-heading" data-tone="bone" data-chapter="Next" className="canvas-ink border-t border-bone/15">
+      <h2 id="closing-heading" className="sr-only">
+        Next: Who We Are
+      </h2>
+      <a href="/who-we-are" className="frame group flex flex-col gap-4 py-[clamp(2.5rem,7vh,4.5rem)]">
+        <span className="micro text-yellow">Next</span>
+        <span className="flex items-end justify-between gap-6 font-display text-title leading-[0.85] font-bold uppercase">
+          <Roll>Who We Are</Roll>
+          <span aria-hidden="true" className="shrink-0 transition-transform duration-300 group-hover:translate-x-3">
+            &rarr;
+          </span>
+        </span>
+      </a>
     </section>
   );
 }

@@ -22,25 +22,39 @@ export function PastActivities() {
       <ol className="border-t-2 border-ink">
         {past.map((activity, i) => (
           <li key={activity.name} className="border-b border-ink/20">
-            <a
-              href={activity.href}
-              className="group grid grid-cols-[3ch_minmax(0,1fr)_auto] items-center gap-x-4 py-6 transition-colors duration-200 hover:bg-ink hover:text-bone focus-visible:bg-ink focus-visible:text-bone sm:gap-x-8 sm:px-4"
-            >
-              <span className="micro tabular-nums group-hover:text-bone/70 group-focus-visible:text-bone/70">{String(i + 1).padStart(2, "0")}</span>
-              <span>
-                <span className="block font-display text-display-m leading-none font-bold uppercase transition-transform duration-300 group-hover:translate-x-2">
-                  {activity.name}
+            {activity.href ? (
+              <a
+                href={activity.href}
+                className="group grid grid-cols-[3ch_minmax(0,1fr)_auto] items-center gap-x-4 py-6 transition-colors duration-200 hover:bg-ink hover:text-bone focus-visible:bg-ink focus-visible:text-bone sm:gap-x-8 sm:px-4"
+              >
+                <Row activity={activity} i={i} />
+                <span className="micro flex min-h-11 items-center group-hover:text-yellow">
+                  Photos <span aria-hidden="true" className="ml-2 text-lg">&rarr;</span>
+                  <span className="sr-only"> of {activity.name}</span>
                 </span>
-                {activity.note ? <span className="micro mt-2 block group-hover:text-bone/70">{activity.note}</span> : null}
-              </span>
-              <span className="micro flex min-h-11 items-center group-hover:text-yellow">
-                Photos <span aria-hidden="true" className="ml-2 text-lg">&rarr;</span>
-                <span className="sr-only">: {activity.name}</span>
-              </span>
-            </a>
+              </a>
+            ) : (
+              <div className="grid grid-cols-[3ch_minmax(0,1fr)_auto] items-center gap-x-4 py-6 sm:gap-x-8 sm:px-4">
+                <Row activity={activity} i={i} />
+              </div>
+            )}
           </li>
         ))}
       </ol>
     </section>
+  );
+}
+
+function Row({ activity, i }: { activity: { name: string; note: string | null }; i: number }) {
+  return (
+    <>
+      <span className="micro tabular-nums group-hover:text-bone/70 group-focus-visible:text-bone/70">{String(i + 1).padStart(2, "0")}</span>
+      <span>
+        <span className="block font-display text-display-m leading-none font-bold uppercase transition-transform duration-300 group-hover:translate-x-2">
+          {activity.name}
+        </span>
+        {activity.note ? <span className="micro mt-2 block group-hover:text-bone/70">{activity.note}</span> : null}
+      </span>
+    </>
   );
 }

@@ -47,16 +47,16 @@ describe("activities", () => {
       "Frontier Futsal Tournament",
       "Turf Wars",
       "4 x 4 Series",
-      "Division 0",
       "Watch Parties",
+      "Division 0",
     ]);
     for (const activity of past) expect(Object.keys(activity).sort()).toEqual(["href", "name", "note", "photo"]);
   });
 
-  it("links a past activity to its album when it has one, otherwise to the gallery", () => {
+  it("links a past activity to its album when it has one, otherwise to nothing", () => {
     const byName = Object.fromEntries(activities(content).map((a) => [a.name, a.href]));
     expect(byName["Frontier Futsal Tournament"]).toBe("/albums/frontier-futsal");
-    expect(byName["Turf Wars"]).toBe("/gallery");
+    expect(byName["Turf Wars"]).toBeNull();
     expect(byName["4 x 4 Series"]).toBe("/gallery#series");
     expect(byName["Division 0"]).toBe("/albums/division-0");
   });

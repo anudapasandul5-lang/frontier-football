@@ -45,7 +45,7 @@ export function ResultsTable({
                 role="cell"
                 key={c.key}
                 className={`font-display leading-tight uppercase sm:py-5 sm:pr-6 sm:last:pr-0 ${
-                  i === 0 ? "text-[clamp(1.125rem,1.8vw,1.5rem)]" : "text-[clamp(0.95rem,1.4vw,1.25rem)]"
+                  i === 0 ? "text-lead" : "text-lead"
                 } ${c.className ?? ""}`}
               >
                 {labelled && i > 0 ? (

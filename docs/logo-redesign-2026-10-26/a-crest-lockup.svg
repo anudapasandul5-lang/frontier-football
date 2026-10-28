@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 256">
+<g>
+<defs><clipPath id="a-in"><path d="M54 42H202V132C202 176 170 200 128 220C86 200 54 176 54 132Z"/></clipPath></defs>
+<path d="M40 28H216V132C216 186 176 214 128 236C80 214 40 186 40 132Z" fill="#0a0a0a"/>
+<path d="M54 42H202V132C202 176 170 200 128 220C86 200 54 176 54 132Z" fill="#efeae0"/>
+<g clip-path="url(#a-in)"><g transform="rotate(-45 145 145)">
+<rect x="-120" y="107" width="530" height="76" fill="#0a0a0a"/>
+<rect x="-120" y="112" width="530" height="20" fill="#00664f"/>
+<rect x="-120" y="135" width="530" height="20" fill="#e87a00"/>
+<rect x="-120" y="158" width="530" height="20" fill="#8a0028"/>
+</g></g>
+<path d="M96 62L124.5 82.7 113.6 116.3H78.4L67.5 82.7Z" fill="#0a0a0a"/>
+</g>
+<text x="290" y="150" font-family="Impact, 'Arial Black', sans-serif" font-size="132" letter-spacing="2" fill="#0a0a0a">FRONTIER</text>
+<text x="294" y="214" font-family="Bahnschrift, 'Arial Narrow', sans-serif" font-weight="700" font-size="50" letter-spacing="21" fill="#0a0a0a">FOOTBALL</text>
+</svg>

@@ -19,15 +19,30 @@
     1200,
     2400
   ],
+  "/heroes/gallery-phone.webp": [
+    800,
+    1200,
+    2400
+  ],
   "/heroes/gallery.webp": [
     800,
     1200,
     2400
   ],
+  "/heroes/who-main.webp": [
+    800,
+    1200,
+    1300
+  ],
   "/heroes/who.webp": [
     800,
     1200,
     2400
+  ],
+  "/home/community-team.webp": [
+    800,
+    1200,
+    1280
   ],
   "/home/moment-celebration.webp": [
     800,
@@ -38,6 +53,21 @@
     800,
     1200,
     1536
+  ],
+  "/home/moment-dusk.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/home/moment-goal.webp": [
+    800,
+    1200,
+    1280
+  ],
+  "/home/moment-kick.webp": [
+    800,
+    1200,
+    1280
   ],
   "/home/moment-night.webp": [
     800,
@@ -98,6 +128,11 @@
   "/home/ring/trophy-lift.webp": [
     800,
     1200
+  ],
+  "/home/who-we-are-night.webp": [
+    800,
+    1200,
+    2326
   ],
   "/home/who-we-are.webp": [
     800,
@@ -178,6 +213,10 @@
     800,
     1200,
     1600
+  ],
+  "/pages/division-0-lounge.webp": [
+    800,
+    1024
   ],
   "/pages/events-day-match.webp": [
     800,
@@ -265,11 +304,19 @@
     800,
     1200
   ],
+  "/pages/stage-4x4-zoom.webp": [
+    800,
+    1200
+  ],
   "/pages/stage-4x4.webp": [
     800,
     1200
   ],
   "/pages/stage-division-0.webp": [
+    800,
+    1200
+  ],
+  "/pages/stage-ground-zero-centred.webp": [
     800,
     1200
   ],
@@ -280,6 +327,10 @@
   "/pages/stage-turf-wars.webp": [
     800,
     1008
+  ],
+  "/pages/stage-watch-parties-flags.webp": [
+    800,
+    1200
   ],
   "/pages/stage-watch-parties.webp": [
     800,
@@ -405,10 +456,29 @@
     1200,
     1600
   ],
+  "/who/crew-hypebam.webp": [
+    800,
+    1200,
+    1280
+  ],
+  "/who/crew-rain.webp": [
+    800,
+    1200,
+    1280
+  ],
+  "/who/crew-trophies.webp": [
+    800,
+    1024
+  ],
   "/who/norway-england-fan.webp": [
     800,
     1200,
     1600
+  ],
+  "/who/story-shirt.webp": [
+    800,
+    1200,
+    1280
   ],
   "/who/story.webp": [
     800,

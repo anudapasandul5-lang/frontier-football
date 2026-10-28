@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 260">
+<defs><path id="c-top" d="M30 130A100 100 0 0 1 230 130"/><path id="c-bot" d="M18 130A112 112 0 0 0 242 130"/></defs>
+<circle cx="130" cy="130" r="125" fill="#0B0B0B"/>
+<circle cx="130" cy="130" r="91" fill="#F1EBDD"/>
+<circle cx="130" cy="130" r="86" fill="#F2B705"/>
+<text font-family="'Big Shoulders Display', Impact, sans-serif" font-weight="900" font-size="25" letter-spacing="3" fill="#F1EBDD"><textPath href="#c-top" startOffset="50%" text-anchor="middle">FRONTIER FOOTBALL</textPath></text>
+<text font-family="'Big Shoulders Display', Impact, sans-serif" font-weight="800" font-size="15" letter-spacing="3" fill="#F2B705"><textPath href="#c-bot" startOffset="50%" text-anchor="middle">COLOMBO · EST. 2024</textPath></text>
+<circle cx="20" cy="130" r="4" fill="#F2B705"/><circle cx="240" cy="130" r="4" fill="#F2B705"/>
+<path d="M162.5 97.5 L130.0 118.0 L130 130Z" fill="#E87A00"/><path d="M162.5 97.5 L142.0 130.0 L130 130Z" fill="#0B0B0B"/><path d="M162.5 162.5 L142.0 130.0 L130 130Z" fill="#E87A00"/><path d="M162.5 162.5 L130.0 142.0 L130 130Z" fill="#0B0B0B"/><path d="M97.5 162.5 L130.0 142.0 L130 130Z" fill="#E87A00"/><path d="M97.5 162.5 L118.0 130.0 L130 130Z" fill="#0B0B0B"/><path d="M97.5 97.5 L118.0 130.0 L130 130Z" fill="#E87A00"/><path d="M97.5 97.5 L130.0 118.0 L130 130Z" fill="#0B0B0B"/><path d="M130.0 52.0 L118.7 118.7 L130 130Z" fill="#00664F"/><path d="M130.0 52.0 L141.3 118.7 L130 130Z" fill="#0B0B0B"/><path d="M130.0 208.0 L141.3 141.3 L130 130Z" fill="#00664F"/><path d="M130.0 208.0 L118.7 141.3 L130 130Z" fill="#0B0B0B"/><path d="M208.0 130.0 L141.3 118.7 L130 130Z" fill="#8A0028"/><path d="M208.0 130.0 L141.3 141.3 L130 130Z" fill="#0B0B0B"/><path d="M52.0 130.0 L118.7 141.3 L130 130Z" fill="#8A0028"/><path d="M52.0 130.0 L118.7 118.7 L130 130Z" fill="#0B0B0B"/>
+<circle cx="130" cy="130" r="22" fill="#F1EBDD" stroke="#0B0B0B" stroke-width="5.7"/><path d="M130.0 120.8 L138.8 127.1 L135.4 137.5 L124.6 137.5 L121.2 127.1Z" fill="#0B0B0B"/>
+</svg>

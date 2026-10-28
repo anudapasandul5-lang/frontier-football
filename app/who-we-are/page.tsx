@@ -12,7 +12,7 @@ import { phoneSrcSet } from "@/lib/phone-image";
 
 export const metadata: Metadata = { title: "Who We Are" };
 
-const h2 = "font-display text-[clamp(2.125rem,5.4vw,5.25rem)] leading-[0.9] font-bold uppercase";
+const h2 = "font-display text-title leading-[0.9] font-bold uppercase";
 
 /* Faint pitch markings behind Our story, so the bone canvas reads as a
    ground, not a blank page (owner, 2026-10-07: "the background is plain").
@@ -42,24 +42,24 @@ export default function WhoWeAre() {
       hero={
         <PageHero
           chapter="Who we are"
-          eyebrow="Since Ground Zero"
           lines={["Who we", "are."]}
-          photo={{ src: "/heroes/who.webp", alt: "Supporters cheer with their hands in the air in front of the big screen at a Road to World Cup watch party", position: "center 40%" }}
+          photo={{ src: "/heroes/who-main.webp", alt: "Three smiling friends pose together at the Main Sports Bar during a Frontier watch party", position: "center 32%" }}
         >
           {raw.aboutIntro}
         </PageHero>
       }
     >
       <PhotoStrip
+        aspect="aspect-[3/2]"
         photos={[
-          { src: "/who/strip-1.webp", alt: "Friends smile together at a table, one holding a Spain flag, at a Road to World Cup watch party" },
-          { src: "/who/strip-2.webp", alt: "A goalkeeper receives a trophy and prize at a 4 x 4 Series presentation" },
-          { src: "/who/norway-england-fan.webp", alt: "Players contest the ball under floodlights at a 4 x 4 Series match" },
+          { src: "/who/crew-rain.webp", alt: "Seven friends sit close and smile on a low wall in the rain, one holding a microphone" },
+          { src: "/who/crew-trophies.webp", alt: "Seven people in Frontier and team shirts pose behind a gold trophy and boot awards on a table" },
+          { src: "/who/crew-hypebam.webp", alt: "Five people in 4 x 4 Series shirts, one wearing a medal, pose under an orange Hype Bam tent" },
         ]}
       />
 
       {/* Signed-off story copy, on the page's bone background. */}
-      <section data-tone="ink" data-chapter="Our story" aria-labelledby="who-heading" className="canvas-bone relative isolate overflow-clip py-[clamp(4rem,14vh,9rem)]">
+      <section data-tone="ink" data-chapter="Our story" aria-labelledby="who-heading" className="canvas-bone relative isolate overflow-clip py-[clamp(3rem,8vh,5rem)]">
         <span aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 -z-[5] h-[15%] bg-[linear-gradient(var(--canvas),transparent)]" />
         <span aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 -z-[5] h-[25%] bg-[linear-gradient(transparent,var(--canvas))]" />
         {/* Label, headline, intro and quote share the pitch's centre line, so
@@ -68,14 +68,13 @@ export default function WhoWeAre() {
             serif lines and yellow marks ("I like how the words in the commas
             looked before"); the block is centred, the stagger inside it kept. */}
         <div className="frame relative">
-          <p className="micro mb-[clamp(2rem,5vh,3.5rem)] text-center text-ink">Our story</p>
           <div className="text-center">
-            <SplitReveal id="who-heading" lines={["A platform."]} className="font-display text-display-l leading-[0.85] font-bold uppercase" />
-            <p className="story-fade mx-auto mt-8 max-w-[46ch] text-balance text-[clamp(1.125rem,1.5vw,1.375rem)] leading-relaxed">
+            <SplitReveal id="who-heading" lines={["Our story"]} className="font-display text-display-l leading-[0.85] font-bold uppercase" />
+            <p className="story-fade mx-auto mt-8 max-w-[46ch] text-balance text-lead leading-relaxed">
               Frontier Football is a platform for Sri Lanka’s football community. We spotlight talent and bring together everyone who loves the game.
             </p>
           </div>
-          <blockquote className="story-quote relative mx-auto my-[clamp(3rem,10vh,6rem)] w-fit py-[clamp(2rem,6vh,4rem)]">
+          <blockquote className="story-quote relative mx-auto my-[clamp(1.5rem,5vh,3rem)] w-fit py-[clamp(1.5rem,4vh,2.5rem)]">
             <PitchLines />
             <span aria-hidden="true" className="story-mark pointer-events-none absolute -top-[0.38em] left-0 font-serif text-[clamp(6rem,14vw,12rem)] leading-none text-yellow select-none">
               &ldquo;
@@ -92,19 +91,20 @@ export default function WhoWeAre() {
           </blockquote>
           <div className="story-duel grid gap-8 md:grid-cols-[45fr_55fr] md:items-center md:gap-[clamp(2rem,5vw,5rem)]">
             <img
-              src="/who/story.webp"
-              srcSet={phoneSrcSet("/who/story.webp")}
+              src="/who/story-shirt.webp"
+              srcSet={phoneSrcSet("/who/story-shirt.webp")}
               sizes="(min-width: 768px) 45vw, 100vw"
-              alt="Players jump for a high ball at 4 x 4 Series SZN 6"
-              width={1200}
-              height={900}
+              alt="A man in a cap, seen from behind, wears a Frontier Futsal crest shirt and holds a microphone under the floodlights"
+              width={1280}
+              height={1920}
               loading="lazy"
               decoding="async"
-              className="story-photo block aspect-[4/3] w-full object-cover"
+              className="story-photo block aspect-[4/5] w-full object-cover object-[center_40%] md:-ml-[3vw] md:w-[calc(100%+3vw)] md:max-w-none"
             />
             <div>
-              <p className="max-w-[46ch] text-[clamp(1.125rem,1.5vw,1.375rem)] leading-relaxed">
-                We build the space where players shine, get recognised and grow, in a community that goes well beyond casual play. Through tournaments, collaborations and digital content, football culture and brands meet here.
+              {/* Last two sentences are from the owner's Sunday Socials proposal PDF (2026-10-28). */}
+              <p className="max-w-[46ch] text-lead leading-relaxed">
+                We build the space where players shine, get recognised and grow, in a community that goes well beyond casual play. Through tournaments, collaborations and digital content, football culture and brands meet here. What we build is never just a single event or a standard watch party, it is a deeply connected ecosystem for people who live and breathe the sport.
               </p>
             </div>
           </div>
@@ -113,7 +113,7 @@ export default function WhoWeAre() {
 
       <section data-tone="ink" data-chapter="The run so far" aria-labelledby="run-heading" className="overflow-x-clip py-[clamp(4rem,12vh,8rem)]">
         <div className="mx-auto max-w-[1320px] px-5 sm:px-12">
-          <SplitReveal id="run-heading" lines={["The run", "so far"]} className="max-w-[850px] scroll-mt-24 font-display text-display-l leading-[0.86] font-bold uppercase" />
+          <SplitReveal id="run-heading" lines={["The run so far"]} className="scroll-mt-24 font-display text-display-l leading-[0.86] font-bold uppercase" />
           <Scrapbook data={data} />
         </div>
       </section>
@@ -141,7 +141,7 @@ export default function WhoWeAre() {
                     />
                   </figure>
                 ) : null}
-                <p className="font-display text-[clamp(1.375rem,1.2rem+0.7vw,1.875rem)] uppercase">{person.name}</p>
+                <p className="font-display text-lead-l uppercase">{person.name}</p>
                 {person.role ? <p className="micro">{person.role}</p> : null}
               </li>
             ))}

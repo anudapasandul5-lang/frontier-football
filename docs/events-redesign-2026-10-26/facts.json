@@ -1,0 +1,131 @@
+{
+  "hero": {
+    "title": "Join the action.",
+    "intro": "Frontier runs every week, and something bigger is usually on the way. Here is when we play and what is coming up.",
+    "photo": "/heroes/events.webp"
+  },
+  "sessionLine": "Every Sunday, 7 pm to 10 pm, at Club Fusion, Borella. Community sessions, open to everyone.",
+  "sessions": [
+    {
+      "day": "Sunday",
+      "name": null,
+      "time": "7 pm to 10 pm",
+      "venue": "Club Fusion, Borella",
+      "format": null,
+      "price": null,
+      "note": null
+    }
+  ],
+  "upcoming": [],
+  "results": [
+    {
+      "id": "szn-6",
+      "name": "4 x 4 Series SZN 6",
+      "date": null,
+      "venue": "Athlete 360",
+      "champion": "Ramadan FC",
+      "runnerUp": null,
+      "photos": "/albums/szn-6",
+      "photo": "/champions/szn-6.webp",
+      "photoAlt": "The 4 x 4 Series SZN 6 champions lined up on the pitch beside the trophy.",
+      "photoCredit": null
+    },
+    {
+      "id": "szn-5",
+      "name": "4 x 4 Series SZN 5",
+      "date": null,
+      "venue": "Athlete 360",
+      "champion": "Panadura",
+      "runnerUp": null,
+      "photos": "/albums/szn-5",
+      "photo": "/gallery/szn-5-hero.webp",
+      "photoAlt": "Players raise the trophy together after 4 x 4 Series SZN 5; photograph by ThePapare",
+      "photoCredit": "ThePapare"
+    },
+    {
+      "id": "szn-4",
+      "name": "4 x 4 Series SZN 4",
+      "date": null,
+      "venue": "Athlete 360",
+      "champion": "Panthera FC",
+      "runnerUp": null,
+      "photos": "/albums/szn-4",
+      "photo": "/champions/szn-4.webp",
+      "photoAlt": "Panthera FC players raise the trophy together after 4 x 4 Series SZN 4",
+      "photoCredit": null
+    },
+    {
+      "id": "szn-3",
+      "name": "4 x 4 Series SZN 3",
+      "date": null,
+      "venue": "Athlete 360",
+      "champion": "Ramadan FC",
+      "runnerUp": null,
+      "photos": "/albums/szn-3",
+      "photo": "/champions/szn-3.webp",
+      "photoAlt": "Ramadan FC with medals and the 4 x 4 Series SZN 3 trophy",
+      "photoCredit": null
+    },
+    {
+      "id": "szn-2",
+      "name": "4 x 4 Series SZN 2",
+      "date": null,
+      "venue": "Athlete 360",
+      "champion": "Ramadan FC",
+      "runnerUp": null,
+      "photos": "/albums/szn-2",
+      "photo": "/champions/szn-2.webp",
+      "photoAlt": "Players pose with the 4 x 4 Series Champions trophy at SZN 2",
+      "photoCredit": null
+    },
+    {
+      "id": "szn-1",
+      "name": "4 x 4 Series SZN 1",
+      "date": null,
+      "venue": "Athlete 360",
+      "champion": "Ramadan FC",
+      "runnerUp": null,
+      "photos": "/albums/szn-1",
+      "photo": "/champions/szn-1.webp",
+      "photoAlt": "Players challenge for the ball in the afternoon sun at 4 x 4 Series SZN 1",
+      "photoCredit": null
+    },
+    {
+      "id": "ground-zero",
+      "name": "Ground Zero",
+      "date": null,
+      "venue": null,
+      "champion": "Clowns FC",
+      "runnerUp": null,
+      "photos": "/albums/frontier-futsal",
+      "photo": "/champions/ground-zero.webp",
+      "photoAlt": "The women's winners receive the trophy at Ground Zero; photograph by ThePapare",
+      "photoCredit": "Milinda Deshan / ThePapare"
+    },
+    {
+      "id": "turf-wars",
+      "name": "Turf Wars",
+      "date": "26 July 2025",
+      "venue": "Club Fusion",
+      "champion": "Panthera FC",
+      "runnerUp": null,
+      "photos": null,
+      "photo": "/champions/turf-wars.webp",
+      "photoAlt": "Turf Wars players and organisers together with a trophy at Club Fusion",
+      "photoCredit": null
+    },
+    {
+      "id": "division-0",
+      "name": "Division 0",
+      "date": null,
+      "venue": "Pixels N Pints",
+      "champion": "Yashen Caldera",
+      "runnerUp": null,
+      "photos": "/albums/division-0",
+      "photo": "/champions/division-0.webp",
+      "photoAlt": "The Division 0 winner holds the trophy beside a Frontier screen at Pixels N Pints",
+      "photoCredit": null
+    }
+  ],
+  "askHref": "https://wa.me/94763431469?text=Hi%20Frontier%2C%20I'd%20like%20to%20ask%20about%20this%20Sunday's%20football%20session%20and%20venue."
+}

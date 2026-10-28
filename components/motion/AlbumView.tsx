@@ -29,7 +29,7 @@ export function AlbumHead({ title, count, credit, story, id }: { title: string; 
       <div className={`md:min-h-[min(75svh,760px)] ${story?.photo ? "grid md:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)]" : "flex flex-col justify-end"}`}>
         <div className="frame flex flex-col justify-end py-10 md:py-20">
           <p className="micro mb-5">Frontier / Gallery</p>
-          <h1 className="max-w-[15ch] font-display text-[clamp(3rem,8vw,8.5rem)] leading-[0.88] font-bold uppercase [text-wrap:balance]">{title}</h1>
+          <h1 className="max-w-[15ch] font-display text-display-xl leading-[0.88] font-bold uppercase [text-wrap:balance]">{title}</h1>
           {story?.note ? <p className="mt-6 max-w-[38ch] text-xl">{story.note}</p> : null}
           {story?.champion ? <p className="mt-5 text-xl">Champion: <strong>{story.champion}</strong></p> : null}
           {story?.date || story?.venue ? <p className="micro mt-5">{[story.date, story.venue].filter(Boolean).join(" / ")}</p> : null}
@@ -46,7 +46,7 @@ export function AlbumHead({ title, count, credit, story, id }: { title: string; 
       </div>
       <div className="frame border-t border-bone/30 py-5">
       {count > 0 ? (
-        <p className="text-[clamp(1.125rem,1rem+0.5vw,1.5rem)] leading-[1.35]">
+        <p className="text-lead leading-[1.35]">
           {count.toLocaleString("en")} photographs.
         </p>
       ) : null}
@@ -130,7 +130,7 @@ function Highlights({ items, title }: { items: Highlight[]; title: string }) {
         <h2 id="highlights-heading" className="font-display text-display-l leading-[0.9] font-bold uppercase">
           Highlights
         </h2>
-        <p className="micro">{items.length} picked frames</p>
+        <p className="micro">{items.length} picked {items.length === 1 ? "frame" : "frames"}</p>
       </div>
       <Lightbox items={slides}>
         {(open) => (

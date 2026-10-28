@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Frontier Football: website changes at a glance</title>
+<style>
+  @page { size: A4; margin: 13mm 13mm; }
+  :root { --ink:#0C2037; --paper:#FFF8DB; --yellow:#FABA2A; --green:#305552; --red:#87292D; --blue:#2F5D8A; --line:#d9d2b4; }
+  * { box-sizing: border-box; }
+  body { font: 10pt/1.4 "Segoe UI", Arial, sans-serif; color: var(--ink); margin: 0; }
+  .pb { break-before: page; }
+  h1 { font-size: 26pt; line-height: 1; margin: 0 0 3pt; text-transform: uppercase; letter-spacing: -.01em; }
+  h2 { font-size: 12pt; text-transform: uppercase; margin: 0 0 8pt; }
+  .sub { color: #4a5a6c; margin: 0 0 10pt; }
+
+  /* badges */
+  .b { display: inline-block; min-width: 50pt; text-align: center; font-size: 7pt; font-weight: 800; letter-spacing: .06em; padding: 2pt 5pt; margin-right: 5pt; color: #fff; text-transform: uppercase; vertical-align: 1pt; }
+  .add { background: var(--green); } .rem { background: var(--red); } .chg { background: var(--yellow); color: var(--ink); } .mov { background: var(--blue); } .keep { background: #8a93a0; }
+  .legend { display: flex; gap: 12pt; align-items: center; font-size: 8.5pt; margin-bottom: 10pt; }
+  .legend .b { min-width: 0; margin-right: 3pt; }
+
+  /* site map */
+  .map { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5pt; position: relative; padding-top: 22pt; }
+  .map::before { content: ""; position: absolute; left: 50%; top: 0; height: 11pt; border-left: 2pt solid var(--ink); margin-left: -1pt; }
+  .map::after { content: ""; position: absolute; top: 11pt; left: calc((100% - 30pt) / 14); right: calc((100% - 30pt) / 14); border-top: 2pt solid var(--ink); margin-top: -1pt; }
+  .node b { white-space: nowrap; }
+  .root { background: var(--ink); color: var(--paper); text-align: center; font-weight: 800; text-transform: uppercase; padding: 8pt; letter-spacing: .06em; }
+  .stem { height: 11pt; border-left: 2pt solid var(--ink); width: 0; margin: 0 auto; }
+  .bar { border-top: 2pt solid var(--ink); margin: 0 7%; }
+  .node { border: 2pt solid var(--ink); background: var(--paper); padding: 6pt 4pt; text-align: center; position: relative; }
+  .node::before { content: ""; position: absolute; left: 50%; top: -11pt; height: 11pt; border-left: 2pt solid var(--ink); }
+  .node b { display: block; font-size: 8.8pt; text-transform: uppercase; }
+  .node span { display: block; font-size: 7.5pt; margin-top: 3pt; color: #3d4c5e; }
+  .node.home { background: var(--yellow); }
+  .every { display: grid; grid-template-columns: 1fr 1fr; gap: 8pt; }
+  .ev { display: grid; grid-template-columns: 104px 1fr; gap: 10pt; align-items: center; border: 2pt solid var(--ink); padding: 8pt 10pt; break-inside: avoid; }
+  .ev .art { display: grid; place-items: center; }
+  .ev h3 { margin: 0 0 4pt; font-size: 10pt; text-transform: uppercase; }
+  .ev p { margin: 0; font-size: 9pt; }
+  .everywhere { margin-top: 12pt; border: 2pt dashed var(--ink); padding: 8pt 10pt; display: grid; grid-template-columns: 1fr 1fr 1fr 130pt; gap: 10pt; align-items: center; }
+  .everywhere h3 { margin: 0 0 3pt; font-size: 9pt; text-transform: uppercase; }
+  .everywhere p { margin: 0; font-size: 8.5pt; }
+
+  /* home journey */
+  .journey { border-left: 3pt solid var(--yellow); margin-left: 10pt; }
+  .step { display: grid; grid-template-columns: 24pt 112pt 1fr; gap: 8pt; padding: 7pt 0 7pt 0; border-bottom: 1px solid var(--line); break-inside: avoid; align-items: start; }
+  .dot { width: 24pt; height: 24pt; margin-left: -13.5pt; border-radius: 50%; background: var(--ink); color: var(--paper); font-weight: 800; display: grid; place-items: center; font-size: 10pt; }
+  .step h3 { margin: 3pt 0 0; font-size: 10pt; text-transform: uppercase; }
+  .step ul { list-style: none; margin: 0; padding: 0; }
+  .step li { margin: 0 0 3pt; }
+
+  /* page cards */
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 9pt; }
+  .card { border: 2pt solid var(--ink); break-inside: avoid; }
+  .card header { background: var(--ink); color: var(--paper); padding: 5pt 9pt; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; }
+  .card ul { list-style: none; margin: 0; padding: 7pt 9pt; }
+  .card li { margin-bottom: 4pt; }
+  .card.wide { grid-column: 1 / -1; }
+
+  /* photo rule diagram */
+  svg { display: block; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: overview -->
+<h1>Website changes</h1>
+<p class="sub">Frontier Football · 28 October 2026 · what is coming, at a glance</p>
+
+<div class="legend">
+  <span><span class="b add">Add</span>new</span>
+  <span><span class="b rem">Remove</span>goes away</span>
+  <span><span class="b chg">Change</span>different</span>
+  <span><span class="b mov">Move</span>new position</span>
+  <span><span class="b keep">Keep</span>stays</span>
+</div>
+
+<div class="root">Frontier Football website</div>
+<div class="map">
+  <div class="node home"><b>Home</b><span>8 sections<br>start here</span></div>
+  <div class="node"><b>Who we are</b><span>story, photos,<br>less empty space</span></div>
+  <div class="node"><b>Events</b><span>shorter top,<br>Hall of Fame stays</span></div>
+  <div class="node"><b>Gallery</b><span>bigger title,<br>no tabs</span></div>
+  <div class="node"><b>Community</b><span>Sunday Socials,<br>photo collage</span></div>
+  <div class="node"><b>Collaborate</b><span>Partner with us,<br>logo ending</span></div>
+  <div class="node"><b>Contact</b><span>words on the left,<br>no buttons</span></div>
+</div>
+
+<h2 style="margin-top:16pt">On every page</h2>
+<div class="every">
+  <div class="ev"><div class="art">
+    <svg width="96" height="64" viewBox="0 0 96 64"><rect x="1" y="1" width="94" height="62" fill="#FFF8DB" stroke="#0C2037" stroke-width="2"/><g fill="#0C2037"><rect x="9" y="12" width="34" height="6"/><rect x="9" y="24" width="28" height="3"/><rect x="9" y="31" width="30" height="3"/><rect x="9" y="38" width="22" height="3"/></g><circle cx="72" cy="30" r="12" fill="#FABA2A" stroke="#0C2037" stroke-width="2"/></svg></div>
+    <div><h3>Text position</h3><p><span class="b mov">Move</span>Words sit a little to the left, FLOST8 style. Faces stay clear.</p></div></div>
+
+  <div class="ev"><div class="art">
+    <svg width="64" height="64" viewBox="0 0 26 26"><rect x="1.5" y="1.5" width="23" height="23" fill="#FABA2A" stroke="#0C2037" stroke-width="2"/><path d="M6 8.5h14M6 13h14M6 17.5h14" stroke="#0C2037" stroke-width="2.2"/></svg></div>
+    <div><h3>Menu icon</h3><p><span class="b chg">Change</span>Three lines in a box. Bigger and easier to spot, on every page.</p></div></div>
+
+  <div class="ev"><div class="art">
+    <svg width="96" height="40" viewBox="0 0 96 40"><g fill="#0C2037"><circle cx="12" cy="20" r="11"/><circle cx="38" cy="20" r="11"/><circle cx="64" cy="20" r="11"/><circle cx="90" cy="20" r="0"/></g><g fill="#FFF8DB"><circle cx="12" cy="20" r="4"/><circle cx="38" cy="20" r="4"/><circle cx="64" cy="20" r="4"/></g></svg></div>
+    <div><h3>Footer</h3><p><span class="b chg">Change</span>Just the platform icons, FLOST8 style. No text links.</p></div></div>
+
+  <div class="ev"><div class="art">
+    <svg width="96" height="64" viewBox="0 0 130 86"><rect x="1" y="1" width="128" height="84" fill="#FFF8DB" stroke="#0C2037" stroke-width="2"/><g stroke="#0C2037" stroke-width="1" opacity=".55"><line x1="43.5" y1="1" x2="43.5" y2="85"/><line x1="86.5" y1="1" x2="86.5" y2="85"/><line x1="1" y1="29" x2="129" y2="29"/><line x1="1" y1="57" x2="129" y2="57"/></g><circle cx="65" cy="43" r="14" fill="#FABA2A" stroke="#0C2037" stroke-width="2"/><circle cx="60" cy="40" r="1.8" fill="#0C2037"/><circle cx="70" cy="40" r="1.8" fill="#0C2037"/><path d="M59 48q6 5 12 0" stroke="#0C2037" stroke-width="1.6" fill="none"/><path d="M36 85q29-22 58 0" fill="#0C2037"/></svg></div>
+    <div><h3>Photos</h3><p><span class="b chg">Change</span>Sharp only, no blank space, face in the centre, nothing cut. See page 4.</p></div></div>
+</div>
+
+<h2 style="margin-top:16pt">Order of work</h2>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6pt;font-size:8.5pt">
+  <div style="background:var(--yellow);padding:7pt 8pt"><b>1 · Home</b><br>most seen page</div>
+  <div style="background:var(--paper);border:1.5pt solid var(--ink);padding:7pt 8pt"><b>2 · Who we are, Events, Contact</b></div>
+  <div style="background:var(--paper);border:1.5pt solid var(--ink);padding:7pt 8pt"><b>3 · Gallery, Community, Collaborate</b><br>plus photo picking</div>
+  <div style="background:var(--ink);color:var(--paper);padding:7pt 8pt"><b>4 · Check</b><br>laptop and phone before going live</div>
+</div>
+
+<!-- PAGE 2: home -->
+<div class="pb"></div>
+<h1>Home page</h1>
+<div class="journey">
+
+<div class="step"><div class="dot">1</div><h3>Hero</h3><ul>
+  <li><span class="b chg">Change</span>Buttons: <b>Play with us</b> and <b>Collab</b></li>
+  <li><span class="b keep">Keep</span>Headline stays as it is</li></ul></div>
+
+<div class="step"><div class="dot">2</div><h3>Who We Are strip</h3><ul>
+  <li><span class="b chg">Change</span>Better photo</li>
+  <li><span class="b mov">Move</span>Heading and paragraph a little left, so no face is covered</li>
+  <li><span class="b chg">Change</span>“Sri Lanka’s” always stays together on one line</li></ul></div>
+
+<div class="step"><div class="dot">3</div><h3>“Talent was never missing”</h3><ul>
+  <li><span class="b add">Add</span>Big letters fade away so the full photo and jersey numbers show, then return as you scroll</li>
+  <li><span class="b chg">Change</span>Sharper photos</li>
+  <li><span class="b chg">Change</span>“Built by football. Powered by community.” gets bigger</li></ul></div>
+
+<div class="step"><div class="dot">4</div><h3>Milestones</h3><ul>
+  <li><span class="b rem">Remove</span>The 01, 02, 03 counters and the line under each number</li>
+  <li><span class="b chg">Change</span>The line’s colour goes onto the number itself</li>
+  <li><span class="b mov">Move</span>Paragraph a little left. Heading size stays</li>
+  <li><span class="b keep">Keep</span>Social media views · Partners · In the community · Events</li></ul></div>
+
+<div class="step"><div class="dot">5</div><h3>Events</h3><ul>
+  <li><span class="b chg">Change</span>Ground Zero photo cropped so the people sit in the middle</li>
+  <li><span class="b chg">Change</span>New photos for Watch Parties and 4 x 4 Series</li></ul></div>
+
+<div class="step"><div class="dot">6</div><h3>Join the community</h3><ul>
+  <li><span class="b rem">Remove</span>The green box</li>
+  <li><span class="b add">Add</span>One big landscape photo, with the words and button on top, clear of faces</li></ul></div>
+
+<div class="step"><div class="dot">7</div><h3>Partners</h3><ul>
+  <li><span class="b rem">Remove</span>Some of the partner logos</li>
+  <li><span class="b chg">Change</span>Title is just <b>Partners</b></li>
+  <li><span class="b mov">Move</span><b>Partner with us</b> button to the bottom</li></ul></div>
+
+<div class="step"><div class="dot">8</div><h3>Page ending</h3><ul>
+  <li><span class="b rem">Remove</span>The big teal box and its sentence</li>
+  <li><span class="b keep">Keep</span>Social icons, FLOST8 style</li>
+  <li><span class="b add">Add</span>A full-screen photo finish, like Who We Are, with the icons on it</li></ul></div>
+
+</div>
+
+<!-- PAGE 3: other pages -->
+<div class="pb"></div>
+<h1>Other pages</h1>
+<div class="cards">
+
+<div class="card"><header>Who we are</header><ul>
+  <li><span class="b add">Add</span>Team photos. Futsal group photos from Divya’s PDF go first</li>
+  <li><span class="b rem">Remove</span>“A platform.” heading. It becomes just <b>Our story</b></li>
+  <li><span class="b rem">Remove</span>Most of the empty space between Our story and the pictures</li>
+  <li><span class="b chg">Change</span>Photo beside “We build the space…”: landscape, further left</li>
+  <li><span class="b chg">Change</span>The run so far: one-sentence intro, photos 1-2-3 flipped, no white gaps</li></ul></div>
+
+<div class="card"><header>Events</header><ul>
+  <li><span class="b rem">Remove</span>“Join us” section</li>
+  <li><span class="b rem">Remove</span>“Join Sunday League” button</li>
+  <li><span class="b add">Add</span>One short paragraph about the events, using the pitch deck wording</li>
+  <li><span class="b keep">Keep</span>Hall of Fame with champions and results</li></ul></div>
+
+<div class="card"><header>Gallery</header><ul>
+  <li><span class="b chg">Change</span>“Gallery” title much bigger</li>
+  <li><span class="b rem">Remove</span>“The experience.” and “What it feels like.”</li>
+  <li><span class="b rem">Remove</span>The tabs row (4 x 4, Watch Parties, Division 0…)</li>
+  <li><span class="b rem">Remove</span>“123 photos” and the venue name on album cards</li>
+  <li><span class="b chg">Change</span>Film roll: sharper photos</li>
+  <li><span class="b keep">Keep</span>Champion line</li></ul></div>
+
+<div class="card"><header>Community</header><ul>
+  <li><span class="b chg">Change</span>Headline becomes <b>Sunday Socials</b></li>
+  <li><span class="b rem">Remove</span>The photo strip</li>
+  <li><span class="b add">Add</span><b>Highlights</b>: a no-text collage of the best event photos. Sharp, no face cut</li>
+  <li><span class="b rem">Remove</span>The “Stories from our events” list</li></ul></div>
+
+<div class="card"><header>Collaborate</header><ul>
+  <li><span class="b chg">Change</span>Title becomes <b>Partner with us</b>, with a short paragraph</li>
+  <li><span class="b rem">Remove</span>“I want to partner” button and the pictures</li>
+  <li><span class="b chg">Change</span>“Who sees it.” becomes <b>Our audience</b></li>
+  <li><span class="b rem">Remove</span>“As of 2026”</li>
+  <li><span class="b mov">Move</span>Text lines up with the top of each picture. Better pictures</li>
+  <li><span class="b chg">Change</span>Ending: player photo becomes the Frontier logo. Wording: <b>We are open to new or interesting opportunities.</b></li></ul></div>
+
+<div class="card"><header>Contact</header><ul>
+  <li><span class="b mov">Move</span>Words to the left side</li>
+  <li><span class="b rem">Remove</span>The two hero buttons</li>
+  <li><span class="b keep">Keep</span>“Say hello” with info.frontierfootball@gmail.com and the share links</li>
+  <li><span class="b keep">Keep</span>“The run so far” at the bottom</li></ul></div>
+
+</div>
+
+
+<!-- PAGE 4: photo rules -->
+<div class="pb"></div>
+<svg width="0" height="0" style="position:absolute"><defs>
+<symbol id="p" viewBox="0 0 40 60"><circle cx="20" cy="13" r="10" fill="#FABA2A" stroke="#0C2037" stroke-width="2"/><path d="M2 60Q2 30 20 28Q38 30 38 60Z" fill="#0C2037"/></symbol>
+<filter id="bl"><feGaussianBlur stdDeviation="3.2"/></filter></defs></svg>
+<h1>Photo rules</h1>
+<p class="sub">The thin lines are the camera grid you see when taking a photo. The red dot is the dead centre: the main face goes right on it. Same rules for every photo on the site.</p>
+<div class="cards">
+<div class="card"><header>1 · Sharp only</header><div style="padding:8pt 9pt"><div style="display:grid;grid-template-columns:1fr 1fr;gap:6pt;justify-items:center"><div style="text-align:center"><svg width="150" height="101" viewBox="0 0 160 108" style="border:2pt solid #305552;background:#FFF8DB;overflow:hidden"><rect width="160" height="108" fill="#e9e1b8"/><use href="#p" x="60" y="41" width="40" height="60.0"/><use href="#p" x="15" y="44" width="30" height="45.0"/><use href="#p" x="115" y="44" width="30" height="45.0"/><g stroke="#0C2037" stroke-width=".8" opacity=".45"><line x1="53.3" y1="0" x2="53.3" y2="108"/><line x1="106.7" y1="0" x2="106.7" y2="108"/><line x1="0" y1="36" x2="160" y2="36"/><line x1="0" y1="72" x2="160" y2="72"/></g><circle cx="80" cy="54" r="2.2" fill="#87292D"/></svg>
+<div style="font-size:8pt;font-weight:700;margin-top:3pt;color:#305552">✓ Sharp, in focus</div></div><div style="text-align:center"><svg width="150" height="101" viewBox="0 0 160 108" style="border:2pt solid #87292D;background:#FFF8DB;overflow:hidden"><rect width="160" height="108" fill="#e9e1b8"/><g filter="url(#bl)"><use href="#p" x="60" y="41" width="40" height="60.0"/><use href="#p" x="15" y="44" width="30" height="45.0"/><use href="#p" x="115" y="44" width="30" height="45.0"/></g><g stroke="#0C2037" stroke-width=".8" opacity=".45"><line x1="53.3" y1="0" x2="53.3" y2="108"/><line x1="106.7" y1="0" x2="106.7" y2="108"/><line x1="0" y1="36" x2="160" y2="36"/><line x1="0" y1="72" x2="160" y2="72"/></g></svg>
+<div style="font-size:8pt;font-weight:700;margin-top:3pt;color:#87292D">✗ Blurry or soft</div></div></div><p style="margin:7pt 0 0;font-size:9pt">Only in-focus photos. If a better, sharper photo of the same moment exists, we use that one.</p></div></div>
+<div class="card"><header>2 · No empty space</header><div style="padding:8pt 9pt"><div style="display:grid;grid-template-columns:1fr 1fr;gap:6pt;justify-items:center"><div style="text-align:center"><svg width="150" height="101" viewBox="0 0 160 108" style="border:2pt solid #305552;background:#FFF8DB;overflow:hidden"><rect width="160" height="108" fill="#e9e1b8"/><use href="#p" x="60" y="41" width="40" height="60.0"/><use href="#p" x="15" y="44" width="30" height="45.0"/><use href="#p" x="115" y="44" width="30" height="45.0"/><g stroke="#0C2037" stroke-width=".8" opacity=".45"><line x1="53.3" y1="0" x2="53.3" y2="108"/><line x1="106.7" y1="0" x2="106.7" y2="108"/><line x1="0" y1="36" x2="160" y2="36"/><line x1="0" y1="72" x2="160" y2="72"/></g><circle cx="80" cy="54" r="2.2" fill="#87292D"/></svg>
+<div style="font-size:8pt;font-weight:700;margin-top:3pt;color:#305552">✓ Cropped tight, people fill it</div></div><div style="text-align:center"><svg width="150" height="101" viewBox="0 0 160 108" style="border:2pt solid #87292D;background:#FFF8DB;overflow:hidden"><rect width="160" height="108" fill="#e9e1b8"/><use href="#p" x="104" y="58" width="26" height="39.0"/><use href="#p" x="128" y="64" width="22" height="33.0"/><g stroke="#0C2037" stroke-width=".8" opacity=".45"><line x1="53.3" y1="0" x2="53.3" y2="108"/><line x1="106.7" y1="0" x2="106.7" y2="108"/><line x1="0" y1="36" x2="160" y2="36"/><line x1="0" y1="72" x2="160" y2="72"/></g></svg>
+<div style="font-size:8pt;font-weight:700;margin-top:3pt;color:#87292D">✗ Big empty space left in</div></div></div><p style="margin:7pt 0 0;font-size:9pt">Crop out blank space around the people, so the photo is about them and not the floor, wall or sky.</p></div></div>
+<div class="card"><header>3 · Centre the faces</header><div style="padding:8pt 9pt"><div style="display:grid;grid-template-columns:1fr 1fr;gap:6pt;justify-items:center"><div style="text-align:center"><svg width="150" height="101" viewBox="0 0 160 108" style="border:2pt solid #305552;background:#FFF8DB;overflow:hidden"><rect width="160" height="108" fill="#e9e1b8"/><use href="#p" x="60" y="41" width="40" height="60.0"/><g stroke="#0C2037" stroke-width=".8" opacity=".45"><line x1="53.3" y1="0" x2="53.3" y2="108"/><line x1="106.7" y1="0" x2="106.7" y2="108"/><line x1="0" y1="36" x2="160" y2="36"/><line x1="0" y1="72" x2="160" y2="72"/></g><circle cx="80" cy="54" r="2.2" fill="#87292D"/></svg>
+<div style="font-size:8pt;font-weight:700;margin-top:3pt;color:#305552">✓ Main face in the dead centre</div></div><div style="text-align:center"><svg width="150" height="101" viewBox="0 0 160 108" style="border:2pt solid #87292D;background:#FFF8DB;overflow:hidden"><rect width="160" height="108" fill="#e9e1b8"/><use href="#p" x="8" y="41" width="40" height="60.0"/><g stroke="#0C2037" stroke-width=".8" opacity=".45"><line x1="53.3" y1="0" x2="53.3" y2="108"/><line x1="106.7" y1="0" x2="106.7" y2="108"/><line x1="0" y1="36" x2="160" y2="36"/><line x1="0" y1="72" x2="160" y2="72"/></g></svg>
+<div style="font-size:8pt;font-weight:700;margin-top:3pt;color:#87292D">✗ Face pushed to the side</div></div></div><p style="margin:7pt 0 0;font-size:9pt">The main face sits on the centre of the grid. Today some photos, like Ground Zero, sit off to one side.</p></div></div>
+<div class="card"><header>4 · Nothing cut off</header><div style="padding:8pt 9pt"><div style="display:grid;grid-template-columns:1fr 1fr;gap:6pt;justify-items:center"><div style="text-align:center"><svg width="150" height="101" viewBox="0 0 160 108" style="border:2pt solid #305552;background:#FFF8DB;overflow:hidden"><rect width="160" height="108" fill="#e9e1b8"/><use href="#p" x="60" y="41" width="40" height="60.0"/><use href="#p" x="15" y="44" width="30" height="45.0"/><use href="#p" x="115" y="44" width="30" height="45.0"/><g stroke="#0C2037" stroke-width=".8" opacity=".45"><line x1="53.3" y1="0" x2="53.3" y2="108"/><line x1="106.7" y1="0" x2="106.7" y2="108"/><line x1="0" y1="36" x2="160" y2="36"/><line x1="0" y1="72" x2="160" y2="72"/></g><circle cx="80" cy="54" r="2.2" fill="#87292D"/></svg>
+<div style="font-size:8pt;font-weight:700;margin-top:3pt;color:#305552">✓ Every head fully inside</div></div><div style="text-align:center"><svg width="150" height="101" viewBox="0 0 160 108" style="border:2pt solid #87292D;background:#FFF8DB;overflow:hidden"><rect width="160" height="108" fill="#e9e1b8"/><use href="#p" x="60" y="-8" width="40" height="60.0"/><use href="#p" x="-12" y="44" width="30" height="45.0"/><use href="#p" x="142" y="44" width="30" height="45.0"/><g stroke="#0C2037" stroke-width=".8" opacity=".45"><line x1="53.3" y1="0" x2="53.3" y2="108"/><line x1="106.7" y1="0" x2="106.7" y2="108"/><line x1="0" y1="36" x2="160" y2="36"/><line x1="0" y1="72" x2="160" y2="72"/></g></svg>
+<div style="font-size:8pt;font-weight:700;margin-top:3pt;color:#87292D">✗ Head or body cut off</div></div></div><p style="margin:7pt 0 0;font-size:9pt">Every head and face stays fully inside the lines. We never crop through a person.</p></div></div>
+<div class="card wide"><header>Where these rules apply</header><ul style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2pt 12pt">
+<li>Home: Who We Are strip</li><li>Home: Talent was never missing</li><li>Home: Events</li>
+<li>Home: Join the community</li><li>Who We Are page photos</li><li>Gallery film roll and albums</li>
+<li>Community Highlights collage</li><li>Collaborate pictures</li><li>Contact page photos</li></ul></div>
+</div>
+
+</body>
+</html>

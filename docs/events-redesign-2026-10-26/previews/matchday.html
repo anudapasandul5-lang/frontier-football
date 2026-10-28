@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0b0e13">
+  <title>Events — Frontier Football / Matchday Broadcast</title>
+  <style>
+    @font-face{font-family:Bricolage;src:url("../../../out/_next/static/media/8fe4c34884868de9-s.p.1kfyfr_m2hx2x.woff2") format("woff2");font-weight:100 900;font-display:swap}
+    @font-face{font-family:Geist;src:url("../../../out/_next/static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2") format("woff2");font-weight:100 900;font-display:swap}
+    :root{--night:#0b0e13;--ink:#0a0a0a;--bone:#efeae0;--yellow:#faba2a;--muted:#a8a29a;--teal:#0c727e;--display:Bricolage,"Arial Narrow",sans-serif;--body:Geist,system-ui,sans-serif}
+    *{box-sizing:border-box}
+    html,body{margin:0;overflow-x:clip}
+    html{scroll-behavior:smooth}
+    body{background:var(--night);color:var(--bone);font-family:var(--body)}
+    button,a{touch-action:manipulation}
+    a{color:inherit}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    :focus-visible{outline:3px solid var(--yellow);outline-offset:4px}
+    img{display:block;max-width:100%;height:auto;border-radius:clamp(12px,1.2vw,20px)}
+    .skip{position:absolute;z-index:100;left:1rem;top:-5rem;padding:1rem;background:var(--yellow);color:var(--ink)}
+    .skip:focus{top:1rem}
+    .wrap{width:min(100% - 64px,1440px);margin-inline:auto}
+    .display{font-family:var(--display);font-variation-settings:"wdth" 75;font-weight:800;text-transform:uppercase;letter-spacing:-.045em}
+    .micro{font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700}
+    .topbar{position:relative;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:90px;border-bottom:1px solid rgba(239,234,224,.3)}
+    .brand{display:flex;align-items:center;gap:1rem;font-family:var(--display);font-variation-settings:"wdth" 75;font-weight:800;font-size:clamp(1rem,2vw,1.35rem);line-height:.9;text-transform:uppercase;text-decoration:none}
+    .brand img{height:56px;width:auto;border-radius:0}
+    .toplinks{display:flex;align-items:center;gap:clamp(1rem,2.2vw,2rem)}
+    .toplinks a{min-height:44px;display:inline-flex;align-items:center;text-decoration:none;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+    .toplinks a:hover,.footer a:hover{text-decoration:underline;text-underline-offset:5px}
+    .toplinks .live-link{color:var(--yellow)}
+    .motion-toggle{position:relative;z-index:5;background:transparent;border:1px solid currentColor;color:var(--bone);font:700 11px var(--body);text-transform:uppercase;letter-spacing:.12em;min-height:44px;padding:0 14px;cursor:pointer}
+    .motion-toggle:hover{background:var(--bone);color:var(--ink)}
+    .motion-toggle:active,.button:active{transform:scale(.97)}
+    .hero{position:relative;min-height:min(900px,100svh);display:flex;flex-direction:column;overflow:hidden;isolation:isolate}
+    .hero-image{position:absolute;z-index:-2;inset:0 0 0 39%;overflow:hidden}
+    .hero-image img{width:100%;height:100%;object-fit:cover;object-position:center 40%;border-radius:0;filter:brightness(.62)}
+    .hero-grid{position:absolute;z-index:-1;inset:0 0 0 39%;border-left:1px solid var(--yellow);opacity:.55;pointer-events:none}
+    .hero-grid:before,.hero-grid:after{content:"";position:absolute;border:1px solid var(--yellow);opacity:.9;left:48%;top:50%;transform:translate(-50%,-50%);width:clamp(150px,22vw,350px);aspect-ratio:1;border-radius:50%}
+    .hero-grid:after{width:clamp(290px,44vw,700px);opacity:.45}
+    .hero-main{flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding-block:clamp(6rem,18vh,12rem) clamp(2rem,5vh,4rem)}
+    .hero-kicker{display:flex;align-items:center;gap:14px;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase}
+    .signal{position:relative;width:10px;height:10px;background:var(--yellow);border-radius:50%}
+    .signal:after{content:"";position:absolute;inset:-7px;border:1px solid var(--yellow);border-radius:50%}
+    h1,h2,h3,p{margin:0}
+    .hero h1{max-width:10ch;font-size:clamp(5rem,min(14vw,20vh),13.5rem);line-height:.78;color:var(--yellow);margin:28px 0 25px;overflow-wrap:anywhere}
+    .hero h1 span{display:block}
+    .hero-bottom{display:flex;align-items:end;justify-content:space-between;gap:2rem}
+    .hero-bottom p{font-size:clamp(1rem,1.4vw,1.25rem);line-height:1.5;max-width:39ch}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:10px}
+    .button{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 22px;gap:18px;background:var(--yellow);color:var(--ink);font-size:12px;font-weight:800;letter-spacing:.08em;text-decoration:none;text-transform:uppercase;white-space:nowrap;transition:transform .2s ease-out}
+    .button.secondary{background:var(--night);border:1px solid var(--bone);color:var(--bone)}
+    .button:hover{transform:translateY(-3px)}
+    .ticker{overflow:hidden;border-block:1px solid var(--yellow);background:var(--yellow);color:var(--ink);height:44px;display:flex;align-items:center}
+    .ticker-track{display:flex;width:max-content;white-space:nowrap;gap:2.5rem;font-family:var(--display);font-variation-settings:"wdth" 75;font-weight:800;text-transform:uppercase;letter-spacing:.06em;font-size:15px}
+    .ticker-track span:after{content:"✦";margin-left:2.5rem}
+    .session{position:relative;background:var(--bone);color:var(--ink);padding-block:clamp(5rem,11vw,11rem) clamp(5rem,9vw,9rem);overflow:hidden}
+    .session:before{content:"";position:absolute;inset:0 0 auto;height:6px;background:var(--yellow)}
+    .session-head{display:flex;justify-content:space-between;align-items:start;border-bottom:1px solid var(--ink);padding-bottom:12px}
+    .session-head span:last-child{max-width:20ch;text-align:right}
+    .session-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:clamp(2rem,7vw,7rem);padding-top:clamp(2.5rem,5vw,5rem);align-items:end}
+    .session h2{font-size:clamp(5.5rem,13.5vw,13rem);line-height:.78;overflow-wrap:anywhere}
+    .session h2 span{display:block}
+    .session-copy{padding-bottom:8px}
+    .session-copy .micro{display:block;margin-bottom:20px}
+    .session-line{font-size:clamp(1.4rem,2.3vw,2.5rem);font-weight:600;line-height:1.25;max-width:26ch}
+    .session-copy .button{margin-top:32px;background:var(--ink);color:var(--bone)}
+    .session-copy small{display:block;margin-top:14px;max-width:46ch;line-height:1.5}
+    .photo-run{background:var(--bone);display:grid;grid-template-columns:1.14fr .84fr 1fr;gap:12px;padding:0 12px 12px}
+    .photo-run figure{margin:0;min-width:0;position:relative;overflow:hidden;background:var(--night);border-radius:clamp(12px,1.2vw,20px)}
+    .photo-run img{width:100%;height:clamp(220px,34vw,500px);object-fit:cover}
+    .photo-run figure:nth-child(2) img{object-position:60% center}
+    .photo-run figcaption{position:absolute;bottom:0;left:0;padding:16px;color:white;background:var(--night);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+    .archive{padding-block:clamp(5rem,10vw,10rem) clamp(5rem,10vw,10rem)}
+    .archive-lead{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.42fr);gap:3rem;align-items:end;padding-bottom:clamp(4rem,7vw,7rem)}
+    .archive-title{min-width:0}
+    .archive-title>.micro{display:block;margin-bottom:24px;color:var(--yellow)}
+    .archive h2{font-size:clamp(5.3rem,12vw,12.5rem);line-height:.79;overflow-wrap:anywhere}
+    .archive h2 span{display:block}
+    .archive h2 span:last-child{color:var(--yellow)}
+    .archive-lead p{font-size:clamp(1rem,1.5vw,1.25rem);line-height:1.5;max-width:29ch}
+    .results{list-style:none;padding:0;margin:0}
+    .result{position:relative;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:clamp(2rem,5vw,6rem);align-items:center;padding-block:clamp(3.5rem,7vw,7rem);border-top:1px solid rgba(239,234,224,.25)}
+    .result:nth-child(even) figure{order:2}
+    .result:nth-child(even) .result-copy{order:1}
+    .result:first-child{padding-top:0;border-top:0}
+    .result figure{margin:0;min-width:0;position:relative}
+    .result img{width:100%;height:auto;max-height:min(70vh,670px);object-fit:contain;object-position:left center;background:#14191e}
+    .result:nth-child(even) img{object-position:right center}
+    .result figcaption{font-size:11px;line-height:1.4;color:var(--muted);margin-top:9px}
+    .result-copy{min-width:0;position:relative;padding-block:25px}
+    .result-copy:before{content:"";display:block;width:72px;height:7px;background:var(--yellow);margin-bottom:clamp(2rem,4vw,4rem);transform-origin:left}
+    .result-index{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(239,234,224,.35);padding-bottom:12px}
+    .result h3{font-size:clamp(1.5rem,2.3vw,2.75rem);line-height:1;letter-spacing:-.02em;margin-top:clamp(2.2rem,4vw,4rem)}
+    .champion-label{display:block;margin-top:clamp(2rem,4vw,4rem);color:var(--muted)}
+    .champion{font-size:clamp(3.2rem,6.4vw,7.4rem);line-height:.84;color:var(--yellow);margin:14px 0 25px;overflow-wrap:anywhere}
+    .result-meta{font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:20px}
+    .result a{display:inline-flex;align-items:center;min-height:44px;gap:16px;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;text-decoration:none;border-bottom:1px solid var(--yellow)}
+    .result a:hover{color:var(--yellow)}
+    .result a:after{content:"↗";font-size:18px}
+    .next{display:block;background:var(--ink);border-top:1px solid rgba(239,234,224,.25);padding-block:clamp(3rem,7vw,6rem);text-decoration:none}
+    .next>div{display:flex;justify-content:space-between;align-items:end;gap:2rem}
+    .next .display{font-size:clamp(3rem,7vw,8rem);line-height:.85}
+    .next:hover .arrow{transform:translateX(12px)}
+    .arrow{font-size:clamp(3rem,7vw,7rem);line-height:.75;transition:transform .25s ease-out}
+    .footer{background:var(--teal);padding-block:3rem;color:white}
+    .footer .wrap{display:flex;justify-content:space-between;align-items:start;gap:2rem}
+    .footer nav{display:flex;flex-wrap:wrap;gap:0 1.5rem}
+    .footer a{min-height:44px;display:inline-flex;align-items:center;font-size:12px;text-decoration:none}
+    .footer-right{display:flex;flex-wrap:wrap;gap:0 1.5rem;align-items:center}
+    .footer-right span{font-size:12px}
+    @media(prefers-reduced-motion:no-preference){
+      body:not(.motion-paused) .hero-grid{animation:field-shift 9s ease-in-out infinite alternate}
+      body:not(.motion-paused) .hero-grid:before{animation:ring-pulse 5s ease-in-out infinite alternate}
+      body:not(.motion-paused) .hero-grid:after{animation:ring-pulse 5s ease-in-out -2.5s infinite alternate}
+      body:not(.motion-paused) .signal:after{animation:signal 1.25s ease-in-out infinite alternate}
+      body:not(.motion-paused) .ticker-track{animation:ticker 19s linear infinite}
+      body:not(.motion-paused) .hero h1{animation:hero-enter .85s cubic-bezier(.23,1,.32,1) both}
+      body:not(.motion-paused) .result.is-visible .result-copy:before{animation:line-in .8s cubic-bezier(.23,1,.32,1) both}
+      body:not(.motion-paused) .result.is-visible img{animation:photo-in .8s cubic-bezier(.23,1,.32,1) both}
+    }
+    @keyframes field-shift{from{transform:translateX(-2%)}to{transform:translateX(2%)}}
+    @keyframes ring-pulse{from{opacity:.25;scale:.88}to{opacity:1;scale:1.16}}
+    @keyframes signal{from{opacity:.25;transform:scale(.7)}to{opacity:1;transform:scale(1.45)}}
+    @keyframes ticker{to{transform:translateX(-50%)}}
+    @keyframes hero-enter{from{opacity:.25;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes line-in{from{transform:scaleX(.2)}to{transform:scaleX(1)}}
+    @keyframes photo-in{from{transform:translateX(-18px)}to{transform:translateX(0)}}
+    @media(max-width:900px){
+      .wrap{width:min(100% - 40px,1440px)}
+      .toplinks>a:not(.live-link){display:none}
+      .hero{min-height:820px}
+      .hero-image{inset:0 0 23% 15%}
+      .hero-grid{inset:70px 0 22% 0;border-left:0;border-bottom:1px solid var(--yellow)}
+      .hero-main{padding-top:16rem}
+      .hero h1{font-size:clamp(5rem,16vw,9rem)}
+      .session-grid{grid-template-columns:1fr;gap:3rem}
+      .session h2{font-size:clamp(5.5rem,17vw,12rem)}
+      .archive-lead{grid-template-columns:1fr;gap:2rem}
+      .archive h2{font-size:clamp(5rem,16vw,9rem)}
+    }
+    @media(max-width:600px){
+      .wrap{width:calc(100% - 32px)}
+      .topbar{min-height:72px}
+      .brand img{height:46px}
+      .brand span{display:none}
+      .toplinks{gap:8px}
+      .toplinks .live-link{font-size:11px}
+      .motion-toggle{padding:0 9px}
+      .hero{min-height:760px;min-height:100svh}
+      .hero-image{inset:70px 0 22% 0}
+      .hero-main{padding-top:20rem}
+      .hero h1{font-size:clamp(4.4rem,17.5vw,7rem);max-width:100%;margin-top:20px}
+      .hero-bottom{align-items:start;flex-direction:column;gap:1.5rem}
+      .hero-bottom p{font-size:15px}
+      .session{padding-block:5rem}
+      .session-head span:last-child{display:none}
+      .session h2{font-size:clamp(4.4rem,20vw,7rem)}
+      .session-line{font-size:1.65rem}
+      .photo-run{grid-template-columns:1fr 1fr;gap:8px;padding:0 8px 8px}
+      .photo-run figure:first-child{grid-column:1/-1}
+      .photo-run img{height:190px}
+      .photo-run figure:first-child img{height:265px}
+      .photo-run figcaption{font-size:9px;padding:8px}
+      .archive{padding-block:5rem}
+      .archive h2{font-size:clamp(4.6rem,18vw,7rem)}
+      .archive-lead{padding-bottom:4rem}
+      .result{grid-template-columns:1fr;gap:1.5rem;padding-block:3.5rem}
+      .result:nth-child(even) figure,.result:nth-child(even) .result-copy{order:initial}
+      .result img{max-height:none}
+      .result-copy{padding:0}
+      .result-copy:before{height:5px;width:54px;margin-bottom:1.5rem}
+      .result h3{font-size:1.55rem;margin-top:1.75rem}
+      .champion-label{margin-top:1.8rem}
+      .champion{font-size:clamp(3.4rem,15vw,5.4rem)}
+      .footer .wrap{flex-direction:column}
+    }
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
+    body.motion-paused *,body.motion-paused *:before,body.motion-paused *:after{animation-play-state:paused!important;scroll-behavior:auto!important}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <main id="content">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-image"><img src="../../../public/heroes/events.webp" alt="Players close in on the ball under the floodlights at 4 x 4 Series SZN 6" fetchpriority="high"></div>
+      <div class="hero-grid" aria-hidden="true"></div>
+      <header class="topbar wrap">
+        <a class="brand" href="../../../out/index.html" aria-label="Frontier Football, home"><img src="../../../public/crest-sm.webp" alt=""><span>Frontier<br>Football</span></a>
+        <nav class="toplinks" aria-label="Page links"><a href="../../../out/events.html">Events</a><a href="../../../out/gallery.html">Gallery</a><a class="live-link" href="#join">Play this Sunday ↗</a><button class="motion-toggle" type="button" aria-pressed="false">Pause motion</button></nav>
+      </header>
+      <div class="hero-main wrap">
+        <div class="hero-kicker"><span class="signal" aria-hidden="true"></span><span>Frontier / Events</span></div>
+        <h1 class="display" id="hero-title"><span>Join the</span><span>action.</span></h1>
+        <div class="hero-bottom"><p>Frontier runs every week, and something bigger is usually on the way. Here is when we play and what is coming up.</p><div class="hero-actions"><a class="button" href="#join">Join us <span aria-hidden="true">↘</span></a><a class="button secondary" href="#hall-of-fame">Hall of Fame <span aria-hidden="true">↘</span></a></div></div>
+      </div>
+    </section>
+    <div class="ticker" aria-hidden="true"><div class="ticker-track"><span>Every Sunday</span><span>Club Fusion, Borella</span><span>7 pm to 10 pm</span><span>Every Sunday</span><span>Club Fusion, Borella</span><span>7 pm to 10 pm</span></div></div>
+    <section class="session" id="join" aria-labelledby="session-heading">
+      <div class="wrap">
+        <div class="session-head micro"><span>Weekly play</span><span>Open to everyone</span></div>
+        <div class="session-grid"><h2 class="display" id="session-heading"><span>See you</span><span>Sunday.</span></h2><div class="session-copy"><span class="micro">The weekly session</span><p class="session-line">Every Sunday, 7 pm to 10 pm, at Club Fusion, Borella. Community sessions, open to everyone.</p><a class="button" href="https://wa.me/94763431469?text=Hi%20Frontier%2C%20I'd%20like%20to%20ask%20about%20this%20Sunday's%20football%20session%20and%20venue." target="_blank" rel="noopener noreferrer" aria-label="Ask about this Sunday on WhatsApp (opens in a new tab)">Ask about this Sunday <span aria-hidden="true">↗</span></a><small>Ask about the session and venue on WhatsApp.</small></div></div>
+      </div>
+    </section>
+    <div class="photo-run" aria-label="Frontier football moments">
+      <figure><img src="../../../public/pages/events-strike.webp" alt="A player drives forward with the ball in a daylight 4 x 4 Series SZN 6 match" loading="lazy"><figcaption>Play the game</figcaption></figure>
+      <figure><img src="../../../public/pages/events-keeper.webp" alt="Players celebrate with a high-five under floodlights at a 4 x 4 Series match" loading="lazy"><figcaption>Find your people</figcaption></figure>
+      <figure><img src="../../../public/pages/events-day-match.webp" alt="Players race together towards the ball in a daylight 4 x 4 Series match" loading="lazy"><figcaption>Make the moment</figcaption></figure>
+    </div>
+    <section class="archive wrap" id="hall-of-fame" aria-labelledby="archive-heading">
+      <div class="archive-lead"><div class="archive-title"><span class="micro">Hall of Fame</span><h2 class="display" id="archive-heading"><span>The</span><span>winners.</span></h2></div><p>Frontier's champions, from the 4 x 4 Series to Turf Wars and Division 0.</p></div>
+      <ul class="results">
+        <li class="result" id="szn-6">
+          <figure><img src="../../../public/champions/szn-6.webp" alt="The 4 x 4 Series SZN 6 champions lined up on the pitch beside the trophy." loading="lazy"></figure>
+          <div class="result-copy"><div class="result-index micro"><span>Hall of Fame</span></div><h3 class="display">4 x 4 Series SZN 6</h3><span class="champion-label micro">Champion</span><p class="champion display">Ramadan FC</p><p class="result-meta">Athlete 360</p><a href="../../../out/albums/szn-6.html">See photos<span class="sr-only"> of 4 x 4 Series SZN 6</span></a></div>
+        </li>
+        <li class="result" id="szn-5">
+          <figure><img src="../../../public/gallery/szn-5-hero.webp" alt="Players raise the trophy together after 4 x 4 Series SZN 5; photograph by ThePapare" loading="lazy"><figcaption>Photo: ThePapare</figcaption></figure>
+          <div class="result-copy"><div class="result-index micro"><span>Hall of Fame</span></div><h3 class="display">4 x 4 Series SZN 5</h3><span class="champion-label micro">Champion</span><p class="champion display">Panadura</p><p class="result-meta">Athlete 360</p><a href="../../../out/albums/szn-5.html">See photos<span class="sr-only"> of 4 x 4 Series SZN 5</span></a></div>
+        </li>
+        <li class="result" id="szn-4">
+          <figure><img src="../../../public/champions/szn-4.webp" alt="Panthera FC players raise the trophy together after 4 x 4 Series SZN 4" loading="lazy"></figure>
+          <div class="result-copy"><div class="result-index micro"><span>Hall of Fame</span></div><h3 class="display">4 x 4 Series SZN 4</h3><span class="champion-label micro">Champion</span><p class="champion display">Panthera FC</p><p class="result-meta">Athlete 360</p><a href="../../../out/albums/szn-4.html">See photos<span class="sr-only"> of 4 x 4 Series SZN 4</span></a></div>
+        </li>
+        <li class="result" id="szn-3">
+          <figure><img src="../../../public/champions/szn-3.webp" alt="Ramadan FC with medals and the 4 x 4 Series SZN 3 trophy" loading="lazy"></figure>
+          <div class="result-copy"><div class="result-index micro"><span>Hall of Fame</span></div><h3 class="display">4 x 4 Series SZN 3</h3><span class="champion-label micro">Champion</span><p class="champion display">Ramadan FC</p><p class="result-meta">Athlete 360</p><a href="../../../out/albums/szn-3.html">See photos<span class="sr-only"> of 4 x 4 Series SZN 3</span></a></div>
+        </li>
+        <li class="result" id="szn-2">
+          <figure><img src="../../../public/champions/szn-2.webp" alt="Players pose with the 4 x 4 Series Champions trophy at SZN 2" loading="lazy"></figure>
+          <div class="result-copy"><div class="result-index micro"><span>Hall of Fame</span></div><h3 class="display">4 x 4 Series SZN 2</h3><span class="champion-label micro">Champion</span><p class="champion display">Ramadan FC</p><p class="result-meta">Athlete 360</p><a href="../../../out/albums/szn-2.html">See photos<span class="sr-only"> of 4 x 4 Series SZN 2</span></a></div>
+        </li>
+        <li class="result" id="szn-1">
+          <figure><img src="../../../public/champions/szn-1.webp" alt="Players challenge for the ball in the afternoon sun at 4 x 4 Series SZN 1" loading="lazy"></figure>
+          <div class="result-copy"><div class="result-index micro"><span>Hall of Fame</span></div><h3 class="display">4 x 4 Series SZN 1</h3><span class="champion-label micro">Champion</span><p class="champion display">Ramadan FC</p><p class="result-meta">Athlete 360</p><a href="../../../out/albums/szn-1.html">See photos<span class="sr-only"> of 4 x 4 Series SZN 1</span></a></div>
+        </li>
+        <li class="result" id="ground-zero">
+          <figure><img src="../../../public/champions/ground-zero.webp" alt="The women's winners receive the trophy at Ground Zero; photograph by ThePapare" loading="lazy"><figcaption>Photo: Milinda Deshan / ThePapare</figcaption></figure>
+          <div class="result-copy"><div class="result-index micro"><span>Hall of Fame</span></div><h3 class="display">Ground Zero</h3><span class="champion-label micro">Champion</span><p class="champion display">Clowns FC</p><a href="../../../out/albums/frontier-futsal.html">See photos<span class="sr-only"> of Ground Zero</span></a></div>
+        </li>
+        <li class="result" id="turf-wars">
+          <figure><img src="../../../public/champions/turf-wars.webp" alt="Turf Wars players and organisers together with a trophy at Club Fusion" loading="lazy"></figure>
+          <div class="result-copy"><div class="result-index micro"><span>Hall of Fame</span></div><h3 class="display">Turf Wars</h3><span class="champion-label micro">Champion</span><p class="champion display">Panthera FC</p><p class="result-meta">Club Fusion · 26 July 2025</p></div>
+        </li>
+        <li class="result" id="division-0">
+          <figure><img src="../../../public/champions/division-0.webp" alt="The Division 0 winner holds the trophy beside a Frontier screen at Pixels N Pints" loading="lazy"></figure>
+          <div class="result-copy"><div class="result-index micro"><span>Hall of Fame</span></div><h3 class="display">Division 0</h3><span class="champion-label micro">Champion</span><p class="champion display">Yashen Caldera</p><p class="result-meta">Pixels N Pints</p><a href="../../../out/albums/division-0.html">See photos<span class="sr-only"> of Division 0</span></a></div>
+        </li>
+      </ul>
+    </section>
+    <a class="next" href="../../../out/gallery.html"><div class="wrap"><div><span class="micro">Next</span><div class="display">Gallery</div></div><span class="arrow" aria-hidden="true">→</span></div></a>
+  </main>
+  <footer class="footer"><div class="wrap"><nav aria-label="Footer"><a href="../../../out/index.html">Home</a><a href="../../../out/who-we-are.html">Who We Are</a><a href="../../../out/events.html">Events</a><a href="../../../out/gallery.html">Gallery</a><a href="../../../out/community.html">Community</a><a href="../../../out/collaborate.html">Collaborate</a><a href="../../../out/contact.html">Contact</a></nav><div class="footer-right"><a href="https://www.instagram.com/frontierfootballl/" target="_blank" rel="noopener noreferrer">Instagram</a><a href="https://www.tiktok.com/@frontierfootball" target="_blank" rel="noopener noreferrer">TikTok</a><span>© 2026 Frontier Football</span></div></div></footer>
+  <script>
+    const toggle = document.querySelector(".motion-toggle");
+    console.assert(toggle && document.querySelectorAll(".result").length === 9, "Matchday sample: toggle and nine source results must exist");
+    toggle.addEventListener("click", () => {
+      const paused = document.body.classList.toggle("motion-paused");
+      toggle.setAttribute("aria-pressed", String(paused));
+      toggle.textContent = paused ? "Resume motion" : "Pause motion";
+    });
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        for (const entry of entries) if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      }, { threshold: 0.18 });
+      document.querySelectorAll(".result").forEach((row) => observer.observe(row));
+    }
+  </script>
+</body>
+</html>

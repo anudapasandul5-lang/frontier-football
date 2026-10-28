@@ -32,7 +32,7 @@ describe("galleryChapters", () => {
   });
 
   it("orders seasons oldest first and gives each a short number", () => {
-    expect(chapters[1].albums.map((a) => a.short)).toEqual(["SZN 01", "SZN 02", "SZN 05"]);
+    expect(chapters[1].albums.map((a) => a.short)).toEqual(["SZN 1", "SZN 2", "SZN 5"]);
   });
 
   it("drops a watch party without photos", () => {

@@ -30,6 +30,7 @@ export default function MomentMotionRuntime() {
       const centre = q(".moment-centre")[0] as HTMLElement;
       const picture = centre.querySelector("img")!;
       const strip = q(".moment-strip")[0] as HTMLElement;
+      const masks = q(".moment-mask");
       const markers = q(".moment-marker") as HTMLElement[];
 
       const away = (el: HTMLElement, k: number) => {
@@ -60,8 +61,11 @@ export default function MomentMotionRuntime() {
       gsap.set(markers, { x: 0, y: 0, xPercent: -50, yPercent: -50 });
       gsap.set(strip, { display: "flex", autoAlpha: 0 });
       gsap.set(last, { autoAlpha: 0, y: 24 });
+      // Every word of the label and first line starts as a faint, crisp ghost
+      // so the jersey name shows through (owner, 2026-10-28).
+      gsap.set(masks, { opacity: 0.22 });
       const strikeAt = () => {
-        const panel = [...strip.children].find((c) => c.querySelector('img[src*="moment-strike"]')) as HTMLElement | undefined;
+        const panel = [...strip.children].find((c) => c.querySelector('img[src*="moment-dusk"]')) as HTMLElement | undefined;
         const travel = strip.scrollWidth - stage.clientWidth;
         if (!panel || travel <= 0) return 0.4;
         return gsap.utils.clamp(0, 1, (panel.offsetLeft + panel.offsetWidth / 2 - stage.clientWidth / 2) / travel);
@@ -72,6 +76,9 @@ export default function MomentMotionRuntime() {
         scrollTrigger: { trigger: stage, start: "top top", end: narrow ? "+=140%" : "+=500%", pin: true, scrub: 0.6, invalidateOnRefresh: true },
       });
       tl.addLabel("drift")
+        // The ghosts fill in word by word, reading order, as the photo opens
+        // to full screen, and stay (owner, 2026-10-28).
+        .to(masks, { opacity: 1, duration: 0.4, ease: "power2.out", stagger: { amount: 0.6 } }, 1.2)
         .to(markers, { x: (_, el) => away(el, 2.4).x, y: (_, el) => away(el, 2.4).y, duration: 2.2, ease: (t) => 0.08 * t + 0.92 * t ** 4 }, "drift")
         .to(open, { p: 0.08, duration: 1, onUpdate: render }, "drift")
         .addLabel("zoom", 1)
@@ -81,10 +88,10 @@ export default function MomentMotionRuntime() {
         .set(strip, { autoAlpha: 1 })
         .set(centre, { autoAlpha: 0 })
         .addLabel("pan")
-        // "The platform was." lands as the futsal photo (moment-strike) slides
+        // "The platform was." lands as the futsal photo (moment-dusk) slides
         // to the centre of the screen (owner, 2026-10-07). The pan is linear,
         // so its share of the pan is where that panel's centre meets mid-screen.
-        .to(last, { autoAlpha: 1, y: 0, duration: 0.4, ease: "power2.out" }, `pan+=${strikeAt() * 2.4 - 0.3}`)
+        .to(last, { autoAlpha: 1, y: 0, duration: 0.5, ease: "power2.out" }, `pan+=${strikeAt() * 2.4 - 0.3}`)
         .to(strip, { x: () => -(strip.scrollWidth - stage.clientWidth), duration: 2.4 }, "pan")
         .addLabel("exit")
         // The way out (owner, 2026-10-20: the pin used to let go while the last

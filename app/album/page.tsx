@@ -17,7 +17,7 @@ export default function Album() {
             <>
               <AlbumHead title="Album" count={0} />
               <noscript>
-                <p className="frame max-w-[46ch] text-[clamp(1.125rem,1rem+0.5vw,1.5rem)] leading-[1.35]">
+                <p className="frame max-w-[46ch] text-lead leading-[1.35]">
                   The photographs in this album load with JavaScript. Turn it on to see them.
                 </p>
               </noscript>

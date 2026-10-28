@@ -19,7 +19,7 @@ export default function NotFound() {
           <h1 className="mt-5 font-display text-[clamp(4rem,18vw,12rem)] leading-[0.84] font-bold uppercase">
             Offside<span className="text-yellow">.</span>
           </h1>
-          <p className="mt-6 max-w-[34ch] text-[clamp(1.125rem,1rem+0.5vw,1.5rem)] leading-snug">
+          <p className="mt-6 max-w-[34ch] text-lead leading-snug">
             That page was never in play. It may have moved, or the link is off.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
@@ -39,6 +39,8 @@ export default function NotFound() {
             alt="Players chase the ball beside the palm trees at 4 x 4 Series SZN 6"
             width={1200}
             height={1000}
+            // Lazy: React otherwise preloads this image into every page's head.
+            loading="lazy"
             className="absolute inset-0 size-full object-cover object-[65%_center]"
           />
         </figure>

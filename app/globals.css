@@ -10,7 +10,16 @@
      photo-card titles and the big statement lines keep their own sizes. */
   --text-display-l: clamp(3rem, min(9vw, 15svh), 7.5rem);
   --text-display-m: clamp(1.75rem, 1.2rem + 2.4vw, 3.75rem);
+  /* Page-title H1s on inner pages, and the in-between title size used by list
+     rows and statement heads (were 8 separate clamps). */
+  --text-display-xl: clamp(3rem, 10vw, 9rem);
+  --text-title: clamp(2.25rem, 5.6vw, 5.5rem);
   --text-button: clamp(0.9rem, 0.8rem + 0.3vw, 1.1rem);
+  /* Second pass (critique 2026-10-27 #2): body text came in ~15 near-identical
+     sizes. Three steps now: lead paragraphs, the larger lead, and labels. */
+  --text-lead: clamp(1.125rem, 1rem + 0.4vw, 1.375rem);
+  --text-lead-l: clamp(1.25rem, 1rem + 0.9vw, 2rem);
+  --text-label: clamp(0.875rem, 0.7rem + 0.6vw, 1.25rem);
   --color-bone: #efeae0;
   --color-ink: #0a0a0a;
   --color-yellow: #faba2a; /* Frontier's, not United's #F4C518 (plan Q9) */
@@ -493,8 +502,10 @@
 .split__w {
   display: inline-block;
   overflow: hidden;
-  padding-bottom: 0.12em;
-  margin-bottom: -0.12em;
+  /* Extra room right and below so a full stop at a line's end (yellow dot after
+     "are.") is never clipped by the word's own mask; margins cancel the padding. */
+  padding: 0 0.08em 0.2em 0;
+  margin: 0 -0.08em -0.2em 0;
   vertical-align: top;
 }
 .split__i {
@@ -603,8 +614,13 @@
 
 /* The Community chapter’s league name, sized to its column. */
 .community-mark {
-  font-size: clamp(4rem, min(10vw, 20svh), 11rem);
+  /* Owner 2026-10-27: smaller, well clear of the photo (was min(10vw, 20svh),
+     which ran past its column). */
+  font-size: clamp(3.5rem, min(7vw, 15svh), 8.5rem);
   letter-spacing: -0.02em;
+  /* Optical edge: the C's built-in side space set the big lines a few px in
+     from the paragraph and button below. */
+  margin-left: -0.03em;
 }
 
 /* Competitions index: the stage shows the first photo until a row is hovered

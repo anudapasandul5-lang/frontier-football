@@ -12,6 +12,7 @@ export function SplitReveal({
   className = "",
   lineClassName = "",
   step = 55,
+  smallStop = false,
 }: {
   as?: ElementType;
   lines: string[];
@@ -19,6 +20,8 @@ export function SplitReveal({
   className?: string;
   lineClassName?: string;
   step?: number;
+  /* Draw a headline's closing full stop smaller than the letters. */
+  smallStop?: boolean;
 }) {
   let i = 0;
   return (
@@ -33,7 +36,9 @@ export function SplitReveal({
             <Fragment key={w}>
               <span className="split__w">
                 <span className="split__i" style={{ "--d": `${i++ * step}ms` } as CSSProperties}>
-                  {word}
+                  {smallStop && l === lines.length - 1 && w === words.length - 1 && word.endsWith(".") ? (
+                    <>{word.slice(0, -1)}<span className="text-[0.6em]">.</span></>
+                  ) : word}
                 </span>
               </span>
               {w < words.length - 1 ? " " : null}

@@ -19,7 +19,7 @@ import { SplitReveal } from "@/components/primitives/SplitReveal";
    Plain server markup, CSS-only swap. No section heading (owner), only
    the micro-label. A competition deleted from content.js leaves the act. */
 type Tone = "blue" | "teal" | "green" | "red" | "yellow";
-type Shot = { src: string; alt: string; credit?: string };
+type Shot = { src: string; alt: string; credit?: string; focus?: string };
 type Row = { tone: Tone; name: string; line: string; photo: Shot | null };
 
 /* The desktop stage is near-square (about 527 x 558), so wide photos lost
@@ -27,11 +27,10 @@ type Row = { tone: Tone; name: string; line: string; photo: Shot | null };
    same event (docs/photo-refresh-2026-10-20); phones keep the wide photo in
    their 4:3 frame. A row without a stage crop falls back to its photo. */
 const stageCrop: Partial<Record<Tone, string>> = {
-  blue: "/pages/stage-ground-zero.webp",
+  blue: "/pages/stage-ground-zero-centred.webp",
   teal: "/pages/stage-turf-wars.webp",
-  green: "/pages/stage-4x4.webp",
-  red: "/pages/stage-division-0.webp",
-  yellow: "/pages/stage-watch-parties.webp",
+  green: "/pages/stage-4x4-zoom.webp",
+  yellow: "/pages/stage-watch-parties-flags.webp",
 };
 
 // Literal class names, so Tailwind emits them and the --color-* they read.
@@ -74,14 +73,6 @@ export function Competitions() {
     line: "Six seasons. One venue. A new standard.",
     photo: competitionPhotos["4 x 4 Series"],
   });
-  if (divisionZero)
-    rows.push({
-      tone: "red",
-      name: "Division 0",
-      line: "Played on the virtual pitch.",
-      photo: competitionPhotos["Division 0"],
-    });
-
   const party = data.watchAlongs.find((event) => event.photo?.startsWith("/champions/wa-"));
   if (party)
     rows.push({
@@ -89,6 +80,14 @@ export function Competitions() {
       name: "Watch Parties",
       line: "The big games, watched together.",
       photo: { src: party.photo!, alt: party.photoAlt ?? "" },
+    });
+
+  if (divisionZero)
+    rows.push({
+      tone: "red",
+      name: "Division 0",
+      line: "Played on the virtual pitch.",
+      photo: competitionPhotos["Division 0"],
     });
 
   const shot = (r: Row, sizes: string, className: string, stage = false) => {
@@ -103,6 +102,7 @@ export function Competitions() {
         loading="lazy"
         decoding="async"
         referrerPolicy="no-referrer"
+        style={r.photo.focus ? { objectPosition: r.photo.focus } : undefined}
         className={`${className} object-cover ${r.photo.credit && src === r.photo.src ? "object-right" : ""}`}
       />
     );
@@ -113,7 +113,7 @@ export function Competitions() {
   return (
     <section id="competitions" data-tone="ink" data-chapter="Events" aria-labelledby="competitions-label" className="canvas-bone py-[clamp(4rem,14vh,9rem)]">
       <div className="frame">
-        <MicroLabel as="h2" id="competitions-label" className="text-(--tone-muted) text-[clamp(0.875rem,0.7rem+0.6vw,1.25rem)]">
+        <MicroLabel as="h2" id="competitions-label" className="text-(--tone-muted) text-label">
           Events
         </MicroLabel>
         {/* Index: the names are the interface. On a pointer screen, hovering
@@ -134,7 +134,7 @@ export function Competitions() {
                   <SplitReveal
                     as="h3"
                     lines={[r.name]}
-                    className="font-display text-[clamp(2.25rem,5.6vw,5.5rem)] leading-[0.86] font-bold text-balance uppercase"
+                    className="font-display text-title leading-[0.86] font-bold text-balance uppercase"
                   />
                 </div>
                 <figure className="photo-frame relative aspect-[4/3] overflow-hidden bg-ink md:hidden">

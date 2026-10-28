@@ -3,11 +3,10 @@ import raw from "@/content.js";
 import { brandIcons } from "@/lib/brand-icons";
 import { outboundLinks, parseContent, whatsappHref } from "@/lib/content-data";
 import { NextPage } from "@/components/pages/NextPage";
-import { PageHero, heroButton } from "@/components/pages/PageHero";
+import { PageHero } from "@/components/pages/PageHero";
 import { PageShell } from "@/components/pages/PageShell";
 import { PhotoStrip } from "@/components/pages/PhotoStrip";
 import { PastActivities } from "@/components/pages/PastActivities";
-import { Roll } from "@/components/primitives/Roll";
 import { SplitReveal } from "@/components/primitives/SplitReveal";
 
 export const metadata: Metadata = { title: "Contact" };
@@ -23,38 +22,15 @@ export default function Contact() {
   // Lowercase: an address set in caps reads as shouting and breaks badly.
   // It wraps only at its dots and @ (the <wbr>s below), never mid-word.
   // min-h-11: a 44px tap target on phones, where one line is only 24px tall.
-  const big = "block min-h-11 font-display text-[clamp(1.6rem,4.6vw,4.25rem)] leading-[0.95] font-bold underline-offset-[0.12em] hover:underline";
+  const big = "block min-h-11 font-display text-display-m leading-[0.95] font-bold underline-offset-[0.12em] hover:underline";
 
   return (
     <PageShell
       hero={
         <PageHero
           chapter="Contact"
-          eyebrow="Contact"
           lines={["Get in", "touch."]}
           photo={{ src: "/heroes/contact.webp", alt: "Four players smile with their arms around each other at a Frontier event", position: "center 40%" }}
-          actions={
-            /* Full-width stacked bars, as in the signed-off copy doc (owner,
-               2026-10-07); the hero photo stays. */
-            <div className="grid w-full max-w-[36rem] gap-3">
-              {playerLink ? (
-                <a
-                  href={playerLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Message Frontier on WhatsApp (opens in a new tab)"
-                  className={`${heroButton} group min-h-14 w-full justify-between bg-yellow text-ink`}
-                >
-                  <Roll>WhatsApp us</Roll>
-                  <span aria-hidden="true" className="transition-transform duration-200 ease-[var(--ease-out)] group-hover:translate-x-1">&rarr;</span>
-                </a>
-              ) : null}
-              <a href="/collaborate" className={`${heroButton} group min-h-14 w-full justify-between border-2 border-bone hover:bg-bone hover:text-ink`}>
-                <Roll>For brands</Roll>
-                <span aria-hidden="true" className="transition-transform duration-200 ease-[var(--ease-out)] group-hover:translate-x-1">&rarr;</span>
-              </a>
-            </div>
-          }
         >
           Playing Sunday League?{" "}
           <a href="/community#sunday-league" className="underline underline-offset-4">
