@@ -219,11 +219,10 @@ export default {
       runnerUp: "TODO",
       goldenBoot: "TODO",
       goldenGlove: "TODO",
-      // A match-action frame from the SZN 1 Drive folder, badge-cropped per
-      // docs/HOUSE-RULES.md section 6 (17% off the bottom clears the Frontier
-      // crest and the REIGNITE wordmark).
+      // _DSC4404 (owner, 2026-10-28), cropped to the header and the ball,
+      // clear of the Frontier crest and the REIGNITE wordmark (HOUSE-RULES s6).
       photo: "/champions/szn-1.webp",
-      photoAlt: "Players challenge for the ball in the afternoon sun at 4 x 4 Series SZN 1",
+      photoAlt: "Gaurav, number 8, and a player in white go up for a header at 4 x 4 Series SZN 1",
       date: "TODO",
       venue: "Athlete 360",
       // Link to this season's full photo folder on Google Drive. Paste the
@@ -258,10 +257,10 @@ export default {
       champion: "Clowns FC",
       runnerUp: "TODO",
       // Owner-approved 2026-09-23: a ThePapare photograph, with its Milinda
-      // Deshan/ThePapare watermark and credit kept. Refreshed 2026-10-20 from
-      // the owner's photo folder: the women's winners receiving the trophy.
+      // Deshan/ThePapare watermark and credit kept. Refreshed 2026-10-28 from
+      // the owner's photo folder: the champions with the trophy.
       photo: "/champions/ground-zero.webp",
-      photoAlt: "The women's winners receive the trophy at Ground Zero; photograph by ThePapare",
+      photoAlt: "The Ground Zero champions hold the trophy at Club Fusion; photograph by ThePapare",
       photoCredit: "Milinda Deshan / ThePapare",
       date: "TODO",
       // Club Fusion signage is visible in ThePapare's photos. Confirm before
@@ -279,7 +278,8 @@ export default {
       // "turf-wars" and paste the share link into driveFolder.
       albumId: "TODO",
       note: "TODO",
-      champion: "Panthera FC",
+      // Owner, 2026-10-28 (was Panthera FC).
+      champion: "Galacticos FC",
       runnerUp: "TODO",
       // The winners' photo from before the removal (restored from git).
       // Swap for a pick from the Drive folder once it arrives.
@@ -664,9 +664,9 @@ export default {
   // own; nothing was invented. Replace any file in `public/partners/` with a
   // cleaner one from the brand and it drops straight in.
   //
-  // STILL TEXT: @iodexsrilanka, @zone360.lk, Seixed and Reignite. Checked again
+  // STILL TEXT: @iodexsrilanka, Seixed and Reignite. Checked again
   // 2026-10-27: iodex.lk only serves a 97px logo (blurry when scaled), and the
-  // other three have no findable logo online. Each shows as its name until
+  // other two have no findable logo online. Each shows as its name until
   // someone supplies a real file. Red Bull's wordmark (Wikimedia Commons,
   // public-domain text logo) is in its own red, like the other colour marks.
   //
@@ -674,28 +674,26 @@ export default {
   // TO REMOVE ONE: delete its line.
   // ==========================================================================
   partners: [
-    { name: "@main.sportsbar", brand: "Main Sports Bar", logo: "/partners/main-sports-bar.png", url: "TODO" },
-    { name: "@address.lk", brand: "Address", logo: "/partners/address.png", url: "TODO" },
-    { name: "@iodexsrilanka", brand: "Iodex Sri Lanka", logo: "/partners/iodex.webp", url: "TODO" },
+    { name: "@main.sportsbar", brand: "Main Sports Bar", logo: "/partners/main-sports-bar-cutout.png", url: "TODO" },
+    { name: "@address.lk", brand: "Address", logo: "/partners/address-cutout.png", url: "TODO" },
+    { name: "@iodexsrilanka", brand: "Iodex Sri Lanka", logo: "/partners/iodex-cutout.png", url: "TODO" },
     { name: "@nutrimax.iso", brand: "Nutrimax", logo: "/partners/nmx.png", url: "TODO" },
     { name: "Sofascore", logo: "/partners/sofascore.svg", url: "TODO" },
     { name: "@shirtshack.lk", brand: "Shirt Shack", logo: "/partners/shirt-shack.png", url: "TODO" },
-    { name: "@drinkhypebam", brand: "Hype Bam", logo: "/partners/hype-bam.png", url: "TODO" },
+    { name: "@drinkhypebam", brand: "Hype Bam", logo: "/partners/hype-bam-cutout.png", url: "TODO" },
     { name: "ThePapare", logo: "/partners/thepapare.png", url: "TODO" },
-    { name: "@absystudios", brand: "Absy Studios", logo: "/partners/absy-studios.png", url: "TODO" },
-    { name: "@zone360.lk", brand: "Zone360", logo: "TODO", url: "TODO" },
     { name: "@athlete360_sl", brand: "Athlete 360", logo: "/partners/athlete-360.png", url: "TODO" },
     // Added 2026-09-22 on the owner's word. Seixed co-presented Division 0 with
     // @address.lk; Reignite ran on-site stands; Red Bull did branding, an
     // activation and drinks at the Alpha Tournament. Names as brands, not
     // handles, until someone checks each handle.
-    { name: "Seixed", logo: "/partners/seixed.webp", url: "TODO" },
-    { name: "Reignite", logo: "/partners/reignite.webp", url: "TODO" },
+    { name: "Seixed", logo: "/partners/seixed-cutout.png", url: "TODO" },
+    { name: "Reignite", logo: "/partners/reignite-cutout.png", url: "TODO" },
     { name: "Red Bull", logo: "/partners/red-bull.svg", url: "TODO" },
     // Added 2026-10-28 on the owner's word, logos supplied by the owner.
-    { name: "The Vibe", brand: "The Vibe, styled by Abans", logo: "/partners/the-vibe.webp", url: "TODO" },
+    { name: "The Vibe", brand: "The Vibe, styled by Abans", logo: "/partners/the-vibe-cutout.png", url: "TODO" },
     { name: "Crepe Runner", logo: "/partners/crepe-runner.png", url: "TODO" },
-    { name: "Pixels N Pints", logo: "/partners/pixels-n-pints.webp", url: "TODO" },
+    { name: "Pixels N Pints", logo: "/partners/pixels-n-pints-cutout.png", url: "TODO" },
   ],
 
   // ==========================================================================
@@ -907,8 +905,8 @@ export default {
       {
         title: "Enhanced visibility",
         body: "Put your brand in front of a focused football audience, live at our events and every day through our content.",
-        photo: "/pages/offer-visibility.webp",
-        alt: "A packed bar of supporters at the World Cup final watch party",
+        photo: "/pages/offer-visibility-can.webp",
+        alt: "A fan drinks a Hype Bam energy drink at a Frontier watch party at Main Sports Bar",
       },
       {
         title: "Community engagement",
@@ -920,7 +918,7 @@ export default {
         title: "Customizable opportunities",
         body: "Show up your way: on the ground at our events, or through stories we tell together online.",
         photo: "/pages/offer-custom.webp",
-        alt: "Players cheer and raise the trophy at a 4 x 4 Series presentation",
+        alt: "A hand holds up an Iodex spray under the pitch floodlights",
       },
       {
         title: "Product distribution",

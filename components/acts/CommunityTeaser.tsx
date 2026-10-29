@@ -36,7 +36,7 @@ export function CommunityTeaser() {
           step={80}
           className="community-mark font-display leading-[0.8] font-bold uppercase"
         />
-        <p className="max-w-[34ch] text-lead leading-snug">Bring your team, or come alone and find one. Every Sunday, there is a place for you with Frontier.</p>
+        <p className="max-w-[34ch] text-lead leading-snug lg:translate-x-[2px] lg:-translate-y-[2px]">Bring your team, or come alone and find one. Every Sunday, there is a place for you with Frontier.</p>
         <a
           href="/community#sunday-league"
           className="btn flex min-h-12 items-center bg-yellow px-8 font-display text-button font-bold text-ink uppercase hover:bg-bone"

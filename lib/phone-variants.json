@@ -1,5 +1,25 @@
 {
+  "/heroes/album-szn-1.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/heroes/collaborate-crowd.webp": [
+    800,
+    1200,
+    1537
+  ],
   "/heroes/collaborate.webp": [
+    800,
+    1200,
+    2400
+  ],
+  "/heroes/community-friends.webp": [
+    800,
+    1200,
+    1535
+  ],
+  "/heroes/community-pitch.webp": [
     800,
     1200,
     2400
@@ -57,7 +77,7 @@
   "/home/moment-dusk.webp": [
     800,
     1200,
-    1600
+    1280
   ],
   "/home/moment-goal.webp": [
     800,
@@ -132,7 +152,7 @@
   "/home/who-we-are-night.webp": [
     800,
     1200,
-    2326
+    1535
   ],
   "/home/who-we-are.webp": [
     800,
@@ -233,6 +253,25 @@
     1200,
     1600
   ],
+  "/pages/gallery-szn-1.webp": [
+    800,
+    1178
+  ],
+  "/pages/gallery-szn-2.webp": [
+    800,
+    1200,
+    1232
+  ],
+  "/pages/gallery-szn-3.webp": [
+    800,
+    1200,
+    1216
+  ],
+  "/pages/gallery-szn-4.webp": [
+    800,
+    1200,
+    1232
+  ],
   "/pages/menu-collaborate.webp": [
     800,
     1200,
@@ -275,8 +314,12 @@
   ],
   "/pages/offer-custom.webp": [
     800,
+    1200
+  ],
+  "/pages/offer-visibility-can.webp": [
+    800,
     1200,
-    1600
+    2000
   ],
   "/pages/offer-visibility.webp": [
     800,
@@ -424,7 +467,7 @@
   "/champions/szn-6.webp": [
     800,
     1200,
-    1600
+    2400
   ],
   "/champions/turf-wars.webp": [
     800,
@@ -499,5 +542,135 @@
     800,
     1200,
     1800
+  ],
+  "/community/wp-01.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/community/wp-02.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/community/wp-03.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/community/wp-04.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/community/wp-05.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/community/wp-07.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/community/wp-08.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/community/wp-09.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/community/wp-10.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/community/wp-11.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/community/wp-12.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/community/wp-13.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/community/wp-14.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/community/wp-15.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/community/wp-16.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/community/wp-17.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/community/wp-18.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/community/wp-19.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/community/wp-20.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/community/wp-21.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/community/wp-22.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/community/wp-23.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/community/wp-25.webp": [
+    800,
+    1200,
+    1535
+  ],
+  "/community/wp-26.webp": [
+    800,
+    1200,
+    1448
+  ],
+  "/community/wp-27.webp": [
+    800,
+    1200,
+    1600
+  ],
+  "/community/wp-28.webp": [
+    800,
+    1200,
+    1280
   ]
 }

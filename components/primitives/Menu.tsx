@@ -10,13 +10,13 @@ import { phoneSrcSet } from "@/lib/phone-image";
    bottom, so each photo keeps its faces (the contact shot keeps its players,
    who stand low in the frame). */
 export const menuLinks = [
-  { href: "/", label: "Home", photo: "/pages/menu-home.webp", focus: "50% 25%" },
-  { href: "/who-we-are", label: "Who We Are", photo: "/pages/menu-who.webp", focus: "50% 45%" },
-  { href: "/events", label: "Events", photo: "/pages/menu-events.webp", focus: "50% 60%" },
-  { href: "/gallery", label: "Gallery", photo: "/pages/menu-gallery.webp", focus: "50% 40%" },
-  { href: "/community", label: "Community", photo: "/pages/menu-community.webp", focus: "50% 35%" },
-  { href: "/collaborate", label: "Collaborate", photo: "/pages/menu-collaborate.webp", focus: "50% 30%" },
-  { href: "/contact", label: "Contact", photo: "/pages/menu-contact.webp", focus: "50% 80%" },
+  { href: "/", label: "Home", photo: "/hero/video-poster.webp", focus: "center" },
+  { href: "/who-we-are", label: "Who We Are", photo: "/heroes/who-main.webp", focus: "center 55%" },
+  { href: "/events", label: "Events", photo: "/heroes/events.webp", focus: "center 40%" },
+  { href: "/gallery", label: "Gallery", photo: "/heroes/gallery-phone.webp", focus: "70% 35%" },
+  { href: "/community", label: "Community", photo: "/heroes/community-pitch.webp", focus: "center top" },
+  { href: "/collaborate", label: "Collaborate", photo: "/heroes/collaborate-crowd.webp", focus: "center" },
+  { href: "/contact", label: "Contact", photo: "/heroes/contact.webp", focus: "center 40%" },
 ];
 
 export function Menu({ instagram }: { instagram: { url: string; handle: string } | null }) {
@@ -47,15 +47,15 @@ export function Menu({ instagram }: { instagram: { url: string; handle: string }
         {...{ commandfor: "site-menu", command: "show-modal" }}
         onClick={() => dialog.current?.showModal()}
         aria-label="Menu"
-        className="flex size-12 cursor-pointer items-center justify-center border-2 border-ink bg-yellow text-ink transition-transform duration-150 ease-[var(--ease-out)] active:scale-[0.97]"
+        className="btn flex size-12 cursor-pointer items-center justify-center bg-bone text-ink transition-transform duration-150 ease-[var(--ease-out)] active:scale-[0.97]"
       >
-        {/* Three lines in a yellow box: bigger and easier to spot than the word (plan, 2026-10-28). */}
+        {/* Three lines in a cream button: bigger and easier to spot than the word (plan, 2026-10-28). */}
         <svg viewBox="0 0 24 24" aria-hidden="true" className="size-7 fill-none stroke-current [stroke-width:2.4]">
           <path d="M4 7h16M4 12h16M4 17h16" />
         </svg>
       </button>
       <dialog ref={dialog} id="site-menu" aria-label="Menu" className="menu" onKeyDown={keepFocusInside}>
-        <div className="frame relative z-10 flex h-20 items-center justify-between">
+        <div className="relative z-10 mx-auto flex h-20 w-full max-w-[1450px] items-center justify-between px-4 md:px-8">
           <a href="/" aria-label="Frontier Football, home" onClick={() => dialog.current?.close()}>
             <img src="/crest-sm.webp" alt="" width={295} height={360} className="h-14 w-auto" />
           </a>

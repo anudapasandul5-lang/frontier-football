@@ -9,8 +9,7 @@ import { coverFor, reel, type ReelFrame } from "@/lib/highlights";
 import { NextPage } from "@/components/pages/NextPage";
 import { PageShell } from "@/components/pages/PageShell";
 import { Nav } from "@/components/primitives/Nav";
-import { SplitReveal } from "@/components/primitives/SplitReveal";
-import { phoneSrcSet } from "@/lib/phone-image";
+import { SplitReveal } from "@/components/primitives/SplitReveal";import { phoneSrcSet } from "@/lib/phone-image";
 
 export const metadata: Metadata = { title: "Gallery" };
 
@@ -78,12 +77,14 @@ function Reel() {
         height={1602}
         fetchPriority="high"
         decoding="async"
-        className="absolute inset-0 -z-10 size-full object-cover object-[70%_center]"
+        className="absolute inset-0 -z-10 size-full object-cover object-[70%_35%]"
       />
       <span aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-t from-night via-night/40 to-night/20" />
       <div aria-hidden="true" className="h-20 shrink-0" />
-      {/* Title a quarter smaller and nudged in from the edge (owner, 2026-10-28). */}
-      <div className="px-[clamp(1rem,2.5vw,3rem)] md:pl-[6vw]">
+      {/* Title a quarter smaller (owner, 2026-10-28).
+          Title and paragraph sit mid-height like the other page heroes
+          (PageHero); the paragraph replaced "The moments." (owner, 2026-10-29). */}
+      <div className="flex flex-1 flex-col justify-center px-[clamp(1rem,2.5vw,3rem)]">
         <SplitReveal
           as="h1"
           id="page-heading"
@@ -91,11 +92,16 @@ function Reel() {
           lineClassName="last:text-yellow"
           className="-ml-[0.045em] font-display text-[min(clamp(3.375rem,18vw,15rem),24svh)] leading-[0.84] font-bold uppercase"
         />
-        <p className="mt-5 max-w-[34ch] text-lead-l leading-snug text-bone">The people and the players.</p>
+        <p className="mt-6 ml-[calc(clamp(1rem,6.5vw,5rem)-clamp(1rem,2.5vw,3rem))] max-w-[46ch] text-lead leading-[1.45] text-bone/90 lg:translate-y-[4px] [text-shadow:0_1px_10px_rgb(0_0_0/0.75)]">
+          {/* Facts from content.js: SZN 1-6, Ground Zero, Division 0, the watch
+              parties, and aboutIntro's "two years in". */}
+          Six seasons of the 4 x 4 Series, Ground Zero, Division 0 and every watch party in between. Two years of Frontier nights, one album at a time. Look closely. You might be in one.
+        </p>
       </div>
-      {/* Title at the top, reel at the foot (owner, 2026-10-28). Every reel
-          frame once, so no photo repeats on screen. */}
-      <div className="mt-auto">
+      {/* Full-screen hero, reel along its foot (owner, 2026-10-28, later the
+          same night: "full bleed the gallery hero"). Every reel frame once, so
+          no photo repeats on screen. */}
+      <div className="pt-[clamp(1rem,3svh,2rem)]">
         <ReelRow frames={reel} drift="0.14" lead />
       </div>
     </section>
@@ -137,7 +143,9 @@ function AlbumCards({ albums }: { albums: StoryAlbum[] }) {
       {albums.map((album) => {
         // Watermarked albums have no clean cover; the inset (a clean Frontier
         // frame) stands in, never morphing, and with neither it is a yellow card.
-        const cover = album.treatment === "photo" ? coverFor(album) : null;
+        // An owner-picked card cover wins even on a watermarked album (SZN 5).
+        const picked = coverFor(album);
+        const cover = album.treatment === "photo" || picked?.src.startsWith("/pages/gallery-") ? picked : null;
         const pic = cover?.src ?? album.inset;
         // A pending album has no page yet: same card, not a link.
         const Card = album.pending ? "div" : Link;
@@ -145,14 +153,15 @@ function AlbumCards({ albums }: { albums: StoryAlbum[] }) {
           <li key={album.id}>
             <Card
               href={album.pending ? undefined! : `/albums/${album.id}`}
-              className={`photo-frame group relative flex aspect-[4/3] flex-col justify-end overflow-hidden sm:aspect-[4/5] ${pic ? "text-bone" : "bg-yellow text-ink"}`}
+              // Text at the foot (owner, 2026-10-29); crops keep the ball above it.
+              className={`photo-frame group relative flex aspect-[4/5] flex-col justify-end overflow-hidden ${pic ? "text-bone" : "bg-yellow text-ink"}`}
             >
               {cover ? (
                 <Cover album={album} className="absolute inset-0 size-full object-cover object-[center_30%] transition-transform duration-700 ease-[var(--ease-out)] group-hover:scale-[1.04]" />
               ) : pic ? (
                 <img src={pic} srcSet={phoneSrcSet(pic)} sizes="(min-width: 768px) 33vw, 100vw" alt={album.photoAlt ?? ""} width={720} height={900} loading="lazy" decoding="async" className="absolute inset-0 size-full object-cover transition-transform duration-700 ease-[var(--ease-out)] group-hover:scale-[1.04]" />
               ) : null}
-              {pic ? <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-night/90 via-night/15 to-transparent" /> : null}
+              {pic ? <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-night/90 via-night/15 via-40% to-transparent to-60%" /> : null}
               <div className="relative flex flex-col gap-3 p-5 sm:p-6">
                 <h3 className="font-display text-display-m leading-[0.88] font-bold uppercase [text-wrap:balance]">{album.short ?? album.title}</h3>
                 {album.champion ? (

@@ -20,6 +20,7 @@ export function PageHero({
   children,
   actions,
   transition,
+  paragraphClassName = "",
 }: {
   chapter: string;
   eyebrow?: string;
@@ -30,12 +31,15 @@ export function PageHero({
   /* Shared-element name: an album hero morphs from the gallery band that
      opened it. */
   transition?: string;
+  /* Per-page desktop nudge for the paragraph (owner's Figma file, 2026-10-29). */
+  paragraphClassName?: string;
 }) {
   const image = (
     <img
       src={photo.src}
       srcSet={phoneSrcSet(photo.src)}
-      sizes="100vw"
+      // A full-height photo on a tall phone is cropped from a much wider frame.
+      sizes="(max-width: 767px) 150svh, 100vw"
       alt={photo.alt}
       width={2000}
       height={1335}
@@ -85,7 +89,7 @@ export function PageHero({
           className="flex flex-wrap gap-x-[0.22em] font-display text-[clamp(2.5rem,calc(7.4vw+36px),9.375rem)] leading-[0.84] font-bold uppercase"
         />
         {children ? (
-          <div className="mt-6 max-w-[46ch] text-lead leading-[1.45] text-bone/90">
+          <div className={`mt-6 ml-[calc(clamp(1rem,6.5vw,5rem)-clamp(1rem,2.5vw,3rem))] max-w-[46ch] text-lead leading-[1.45] text-bone/90 ${paragraphClassName}`}>
             {children}
           </div>
         ) : null}

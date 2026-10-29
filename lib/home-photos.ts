@@ -12,14 +12,22 @@ export const marqueePhotos: HomePhoto[] = [
     "alt": "The SZN 6 champions lift their trophies under the tent after the final"
   },
   {
-    "id": "dusk-futsal-match",
+    "id": "b622f2e49f1c4e3b7d6804f1fd28fc0b",
     "src": "/home/moment-dusk.webp",
-    "sourceUrl": "C:/Users/anuda/Desktop/Photos/Dusk Futsal Match on Urban Rooftop.png",
-    "w": 1600,
-    "h": 727,
-    "alt": "Five players chase a boy in a blue shirt dribbling the ball on a futsal pitch at dusk"
+    "sourceUrl": "C:/Users/anuda/Desktop/Photos/b622f2e49f1c4e3b7d6804f1fd28fc0b.jpg",
+    "w": 1280,
+    "h": 853,
+    "alt": "A player in a grey shirt dribbles the ball past players in red and black kits as the referee watches"
   },
 
+  {
+    "id": "fcc31e87c59d4c3e2bc18b197272b756",
+    "src": "/home/moment-goal.webp",
+    "sourceUrl": "C:/Users/anuda/Desktop/Photos/fcc31e87c59d4c3e2bc18b197272b756.jpg",
+    "w": 1280,
+    "h": 853,
+    "alt": "A player in blue shoots at goal as the goalkeeper in orange crouches to save"
+  },
   {
     "id": "ashan-kick",
     "src": "/home/moment-kick.webp",
@@ -27,14 +35,6 @@ export const marqueePhotos: HomePhoto[] = [
     "w": 1280,
     "h": 853,
     "alt": "A player in a grey shirt winds up to strike the ball while three players in red and white shirts watch"
-  },
-  {
-    "id": "ashan-goal",
-    "src": "/home/moment-goal.webp",
-    "sourceUrl": "C:/Users/anuda/Desktop/Photos/cb8f1f035f1cc9113e334ba87fab0a44.jpg",
-    "w": 1280,
-    "h": 853,
-    "alt": "A goalkeeper in blue stretches across the goal as the ball flies in past a player in orange"
   }
 ];
 /* The small tilted frames that drift round the headline: football and celebrations only. */
@@ -98,12 +98,12 @@ export const statementPhoto: HomePhoto = {
 };
 export const competitionPhotos = {
   "4 x 4 Series": {
-    "id": "DSC_0546",
+    "id": "_DSC4182",
     "src": "/pages/competition-4x4.webp",
-    "sourceUrl": "C:/Users/anuda/Desktop/Photos/DSC_0546.jpg",
+    "sourceUrl": "C:/Users/anuda/Desktop/Photos/_DSC4182.png",
     "w": 1600,
     "h": 1200,
-    "alt": "Players in green bibs and blue shirts contest the ball near goal at 4 x 4 Series SZN 3"
+    "alt": "Jake, number 10 in black, winds up to shoot as a defender in a yellow bib closes in at the 4 x 4 Series"
   },
   "Division 0": {
     "id": "gaming-lounge-focus",

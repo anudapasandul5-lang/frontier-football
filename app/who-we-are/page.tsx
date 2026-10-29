@@ -43,7 +43,8 @@ export default function WhoWeAre() {
         <PageHero
           chapter="Who we are"
           lines={["Who we", "are."]}
-          photo={{ src: "/heroes/who-main.webp", alt: "Three smiling friends pose together at the Main Sports Bar during a Frontier watch party", position: "center 32%" }}
+          photo={{ src: "/heroes/who-main.webp", alt: "Three smiling friends pose together at the Main Sports Bar during a Frontier watch party", position: "center 55%" }}
+          paragraphClassName="lg:translate-y-[1px]"
         >
           {raw.aboutIntro}
         </PageHero>
@@ -59,7 +60,7 @@ export default function WhoWeAre() {
       />
 
       {/* Signed-off story copy, on the page's bone background. */}
-      <section data-tone="ink" data-chapter="Our story" aria-labelledby="who-heading" className="canvas-bone relative isolate overflow-clip py-[clamp(3rem,8vh,5rem)]">
+      <section data-tone="ink" data-chapter="Our story" aria-labelledby="who-heading" className="canvas-bone relative isolate overflow-clip pt-[clamp(1rem,3vh,2rem)] pb-[clamp(3rem,8vh,5rem)]">
         <span aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 -z-[5] h-[15%] bg-[linear-gradient(var(--canvas),transparent)]" />
         <span aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 -z-[5] h-[25%] bg-[linear-gradient(transparent,var(--canvas))]" />
         {/* Label, headline, intro and quote share the pitch's centre line, so

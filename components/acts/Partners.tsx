@@ -6,6 +6,7 @@ import { Marquee } from "@/components/primitives/Marquee";
 const item = "mr-[clamp(2.5rem,6vw,6rem)] flex h-[clamp(3.5rem,7vw,6.5rem)] shrink-0 items-center";
 const type = "font-display text-display-m leading-none font-bold whitespace-nowrap uppercase";
 
+
 /* Act 8, United's micro-label over a text marquee, on bone. The label is the
    owner's count ("50+ Partners", content.js stats); the strip is only the
    names somebody recorded. Both are true and neither is derived from the other
@@ -18,8 +19,7 @@ export function Partners() {
   const data = parseContent(raw);
   // Logos only (plan, 2026-10-28: some partners come off the home strip): names
   // with no logo file yet stay in content.js and on the Collaborate page.
-  // Absy Studios is off the home strip too (owner, 2026-10-28).
-  const names = partners(data).filter((p) => p.logo && p.name !== "@absystudios");
+  const names = partners(data).filter((p) => p.logo);
   if (names.length === 0) return null;
 
   return (

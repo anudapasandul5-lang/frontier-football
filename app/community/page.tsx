@@ -23,7 +23,28 @@ export default function CommunityPage() {
     .map((row) => ({ label: recorded(row.label), value: recorded(row.value) }))
     .filter((row): row is { label: string; value: string } => Boolean(row.label && row.value));
   const buttons = registrations(raw);
-  const highlights = raw.communityStories.flatMap((story) => story.photos);
+  // Crowd reactions from the five watch-party albums (owner, 2026-10-28:
+  // "crowd reaction, crowd cheering"), mixed so no two nights sit together.
+  // UCL Final Night frames have the bottom cut to clear the bar's badges.
+  const night: Record<string, string> = {
+    ucl: "the UCL Final Night",
+    final: "the Spain v Argentina final",
+    eng: "the England v Argentina semi-final",
+    nor: "the Norway v England match",
+    fra: "the Spain v France semi-final",
+  };
+  const order = ["ucl", "final", "eng", "nor", "fra", "final", "ucl", "eng", "nor", "fra", "final", "ucl", "eng", "nor", "fra", "final", "ucl", "eng", "nor", "fra", "final", "ucl", "nor"];
+  const files: Record<string, number[]> = { ucl: [25, 2, 3, 26, 5], final: [28, 7, 8, 9, 27], eng: [11, 12, 13, 14], nor: [15, 16, 17, 18, 19], fra: [20, 21, 22, 23] };
+  // wp-25 is the owner's group photo (2026-10-29). wp-05, 27 and 28 are crops of DSC_2865 and
+  // DSC_2906, night not recorded, so their alt text names no match.
+  const swapped = [5, 14, 25, 26, 27, 28]; // wp-14 and wp-26: owner's DSC_7853 and an edited DSC_8650 (2026-10-29), night not recorded
+  const highlights = order.map((key) => {
+    const n = files[key].shift()!;
+    const where = swapped.includes(n) ? "a" : `${night[key]}`;
+    // wp-28 is a match-day photo by Ashan Senevirathne for ThePapare, not a watch party (owner, 2026-10-29).
+    const alt = n === 28 ? "Two fans pose together at a Frontier match day; photograph by ThePapare" : `Fans react together at ${where} watch party`;
+    return { src: `/community/wp-${String(n).padStart(2, "0")}.webp`, alt };
+  });
 
   return (
     <PageShell
@@ -31,7 +52,7 @@ export default function CommunityPage() {
         <PageHero
           chapter="Community"
           lines={["Sunday Socials"]}
-          photo={{ src: "/heroes/community.webp", alt: "Four friends arm in arm at the Spain v France watch party", position: "center 20%" }}
+          photo={{ src: "/heroes/community-pitch.webp", alt: "Players shake hands on the pitch after a game", position: "center top" }}
         >
           Your next game starts here. Join the league.
         </PageHero>
@@ -71,7 +92,6 @@ export default function CommunityPage() {
                     {item.label}
                   </a>
                 ))}
-                <p className="micro w-full">Opens WhatsApp with the message ready</p>
               </div>
             ) : null}
           </div>

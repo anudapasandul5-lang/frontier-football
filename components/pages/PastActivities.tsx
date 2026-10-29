@@ -13,7 +13,6 @@ export function PastActivities() {
   if (past.length === 0) return null;
   return (
     <section data-tone="ink" data-chapter="What we've run" aria-labelledby="past-heading" className="frame py-[clamp(4rem,12vh,8rem)]">
-      <p className="micro mb-4">The record</p>
       <SplitReveal
         id="past-heading"
         lines={["What we’ve run"]}

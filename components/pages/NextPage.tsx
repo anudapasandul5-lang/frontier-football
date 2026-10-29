@@ -17,7 +17,8 @@ export function NextPage({ current }: { current: string }) {
   return (
     <section data-tone="bone" data-chapter="Next" className="canvas-ink border-t border-bone/15">
       <a href={next.href} className="frame group flex flex-col gap-4 py-[clamp(2.5rem,7vh,4.5rem)]">
-        <span className="micro text-yellow">Next</span>
+        {/* Label hidden on screen, kept for screen readers (owner, 2026-10-28). */}
+        <span className="sr-only">Next:</span>
         <span className="flex items-end justify-between gap-6 font-display text-title leading-[0.85] font-bold uppercase">
           <Roll>{next.label}</Roll>
           <span aria-hidden="true" className="shrink-0 transition-transform duration-300 group-hover:translate-x-3">

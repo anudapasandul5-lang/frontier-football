@@ -6,7 +6,7 @@ import variants from "./phone-variants.json";
    to every photo wider than 900px in these folders, and records the widths in
    phone-variants.json. A 390px phone at DPR 3 wants ~1200px, DPR 2 ~800px;
    desktop still gets the original. */
-export const PHONE_DIRS = ["heroes", "home", "pages", "champions", "who"] as const;
+export const PHONE_DIRS = ["heroes", "home", "pages", "champions", "who", "community"] as const;
 
 const widths = variants as Record<string, number[]>;
 

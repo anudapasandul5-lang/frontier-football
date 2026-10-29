@@ -28,9 +28,9 @@ export function Nav({ crestPriority = false, floating = false }: { crestPriority
     <>
     <header
       data-floating={floating || undefined}
-      className={floating ? "site-header" : "frame relative z-10 flex h-20 items-center justify-between"}
+      className={floating ? "site-header" : "relative z-10 mx-auto flex h-20 w-full max-w-[1450px] items-center justify-between px-4 md:px-8"}
     >
-      <div className={floating ? "frame flex h-20 items-center justify-between" : "contents"}>
+      <div className={floating ? "mx-auto flex h-20 w-full max-w-[1450px] items-center justify-between px-4 md:px-8" : "contents"}>
       <a href="/" className="block" aria-label="Frontier Football, home">
         <img
           src="/crest-sm.webp"

@@ -458,11 +458,41 @@ export const reel: ReelFrame[] = [
    at most ~400px wide, and the full 1600px frame cost the gallery its mobile
    LCP. "full" is for the album's full-screen hero. */
 export function coverFor(album: { id: string; champion: string | null; photo: string | null; photoAlt: string | null }, size: "card" | "full" = "card") {
+  const own = ownerCovers[album.id];
+  if (own && size === "card") return own;
   const lead = highlights[album.id]?.[0];
   if (album.photo && (album.champion || !lead)) return { src: album.photo, alt: album.photoAlt ?? "" };
   if (!lead) return null;
   return { src: size === "card" ? `/gallery/cover/${album.id}.webp` : lead.src, alt: lead.alt };
 }
+
+/* Covers the owner picked for the gallery card only; the album hero and Events
+   keep the season's winners photo from content.js (owner, 2026-10-28:
+   DSC_1124 for the SZN 2 card). The two pictures differ, so no card morph. */
+const ownerCovers: Record<string, { src: string; alt: string }> = {
+  // Its own file, so the Events champions photo can change without it.
+  "szn-1": { src: "/pages/gallery-szn-1.webp", alt: "Gaurav, number 8, and a player in white go up for a header at 4 x 4 Series SZN 1" },
+  // Portrait frames from each album, cropped 4:5 to clear the badges
+  // (owner, 2026-10-28: "find vertical thumbnails").
+  // Owner, 2026-10-29: DSC_0910, cropped above the corner logo.
+  "szn-2": { src: "/pages/gallery-szn-2.webp", alt: "A player in black dribbles between two players in orange bibs at 4 x 4 Series SZN 2" },
+  // Owner, 2026-10-29: DSC_0851, cropped to the player and ball, 15% brighter.
+  "szn-3": { src: "/pages/gallery-szn-3.webp", alt: "A player in black runs onto the ball under the floodlights at 4 x 4 Series SZN 3" },
+  // Owner, 2026-10-29: DSC_2022, full height so the ball and keeper stay whole.
+  "szn-4": { src: "/pages/gallery-szn-4.webp", alt: "A player in red shoots at the goalkeeper at 4 x 4 Series SZN 4" },
+  // Owner, 2026-10-29: ThePapare frame (2fccf70b), full height on the player with
+  // the ball; credit watermark stays in.
+  "szn-5": { src: "/pages/gallery-szn-5.webp", alt: "A player in an orange bib controls the ball at 4 x 4 Series SZN 5; photograph by Ashan Senevirathne for ThePapare" },
+  // Owner, 2026-10-29: DSC_8533, zoomed on the keeper and the ball.
+  "szn-6": { src: "/pages/gallery-szn-6.webp", alt: "The goalkeeper winds up to kick the ball at 4 x 4 Series SZN 6" },
+};
+
+/* Album page heroes the owner picked, separate from the card and from the
+   Events champions photo (owner, 2026-10-28: _DSC4295 for SZN 1, which has
+   no winners photo). */
+const ownerHeroes: Record<string, { src: string; alt: string }> = {
+  "szn-1": { src: "/heroes/album-szn-1.webp", alt: "A player in white heads the ball between players in red and black at 4 x 4 Series SZN 1" },
+};
 
 /* Lead with the album cover, then its owner-picked inset. SZN5 now uses a
    credited photograph, shown whole, rather than its previous video still. */
@@ -475,8 +505,10 @@ export function albumHero(album: {
   treatment: "photo" | "type";
   inset: string | null;
 }) {
+  const own = ownerHeroes[album.id];
+  if (own) return { ...own, morph: false };
   const clean = album.treatment === "photo" ? coverFor(album, "full") : null;
-  if (clean) return { src: clean.src, alt: clean.alt || album.title, morph: true };
+  if (clean) return { src: clean.src, alt: clean.alt || album.title, morph: !ownerCovers[album.id] };
   if (album.inset && !album.inset.startsWith("/albums/")) return { src: album.inset, alt: album.photoAlt || album.title, morph: false };
   const lead = highlights[album.id]?.[0];
   if (lead) return { src: lead.src, alt: lead.alt, morph: false };

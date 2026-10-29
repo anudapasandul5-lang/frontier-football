@@ -95,9 +95,13 @@ function Justified({ tiles, rowHeight, onOpen, labelFor }: { tiles: Tile[]; rowH
   return (
     <ul className="frame flex flex-wrap gap-2 after:grow-[999] after:content-['']" style={{ "--row-h": rowHeight } as CSSProperties}>
       {tiles.map((t, i) => {
+        // Tall frames get half as much room again, so a row of them holds 4 or 5
+        // instead of 7 (owner, 2026-10-28). shortcut: in a row mixing tall and
+        // wide frames the tall ones stand taller; balance per row if that shows.
         const ratio = t.width / t.height;
+        const weight = ratio < 1 ? ratio * 1.5 : ratio;
         return (
-          <li key={t.key} style={{ flexGrow: ratio, flexBasis: `calc(${ratio} * var(--row-h))` }}>
+          <li key={t.key} style={{ flexGrow: weight, flexBasis: `calc(${weight} * var(--row-h))` }}>
             <button type="button" aria-label={labelFor(i)} onClick={(e) => onOpen(i, e.currentTarget)} className="group block w-full cursor-pointer overflow-hidden bg-bone/5">
               <img
                 src={t.src}

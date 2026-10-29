@@ -1,4 +1,4 @@
-import fs from "node:fs";
+﻿import fs from "node:fs";
 import path from "node:path";
 import { describe, it, expect } from "vitest";
 import { albumHero, coverFor, highlights, reel } from "./highlights";
@@ -37,15 +37,20 @@ describe("highlights", () => {
 
 describe("coverFor", () => {
   it("keeps the winners photo when a champion is recorded", () => {
-    expect(coverFor({ id: "szn-3", champion: "Ramadan FC", photo: "/champions/szn-3.webp", photoAlt: "x" })?.src).toBe("/champions/szn-3.webp");
+    expect(coverFor({ id: "division-0", champion: "Yashen Caldera", photo: "/champions/division-0.webp", photoAlt: "x" })?.src).toBe("/champions/division-0.webp");
   });
   it("uses the lead highlight when no champion is recorded", () => {
-    const album = { id: "szn-1", champion: null, photo: "/champions/szn-1.webp", photoAlt: "x" };
-    expect(coverFor(album, "full")?.src).toBe(highlights["szn-1"][0].src);
-    expect(coverFor(album)?.src).toBe("/gallery/cover/szn-1.webp");
+    const album = { id: "wa-final-esp-arg", champion: null, photo: "/champions/wa-final-esp-arg.webp", photoAlt: "x" };
+    expect(coverFor(album, "full")?.src).toBe(highlights["wa-final-esp-arg"][0].src);
+    expect(coverFor(album)?.src).toBe("/gallery/cover/wa-final-esp-arg.webp");
+  });
+  it("gives an owner-picked card cover to the card only, never the hero", () => {
+    const album = { id: "szn-1", champion: "Ramadan FC", photo: "/champions/szn-1.webp", photoAlt: "x" };
+    expect(coverFor(album)?.src).toBe("/pages/gallery-szn-1.webp");
+    expect(coverFor(album, "full")?.src).toBe("/champions/szn-1.webp");
   });
   it("falls back to the stored photo when an album has no highlights, else null", () => {
-    expect(coverFor({ id: "szn-5", champion: null, photo: "/gallery/szn-5-hero.webp", photoAlt: "x" })?.src).toBe("/gallery/szn-5-hero.webp");
+    expect(coverFor({ id: "no-highlights", champion: null, photo: "/gallery/szn-5-hero.webp", photoAlt: "x" })?.src).toBe("/gallery/szn-5-hero.webp");
     expect(coverFor({ id: "none", champion: null, photo: null, photoAlt: null })).toBeNull();
   });
 });
@@ -61,11 +66,15 @@ describe("albumHero", () => {
     expect(albumHero(futsal).src).toBe("/heroes/gallery.webp");
   });
   it("keeps the clean cover, with the card morph, for a photo album", () => {
-    const szn3 = { ...base, id: "szn-3", treatment: "photo" as const, inset: null, champion: "Ramadan FC", photo: "/champions/szn-3.webp", photoAlt: "x" };
-    expect(albumHero(szn3)).toEqual({ src: "/champions/szn-3.webp", alt: "x", morph: true });
+    const d0 = { ...base, id: "division-0", treatment: "photo" as const, inset: null, champion: "Yashen Caldera", photo: "/champions/division-0.webp", photoAlt: "x" };
+    expect(albumHero(d0)).toEqual({ src: "/champions/division-0.webp", alt: "x", morph: true });
   });
   it("uses the lead highlight when there is no clean frame", () => {
-    const wa = { ...base, id: "szn-1", treatment: "type" as const, inset: null };
-    expect(albumHero(wa).src).toBe(highlights["szn-1"][0].src);
+    const wa = { ...base, id: "szn-3", treatment: "type" as const, inset: null };
+    expect(albumHero(wa).src).toBe(highlights["szn-3"][0].src);
+  });
+  it("leads with an owner-picked album hero before anything else", () => {
+    const szn1 = { ...base, id: "szn-1", treatment: "photo" as const, inset: null, champion: "Ramadan FC", photo: "/champions/szn-1.webp", photoAlt: "x" };
+    expect(albumHero(szn1)).toMatchObject({ src: "/heroes/album-szn-1.webp", morph: false });
   });
 });

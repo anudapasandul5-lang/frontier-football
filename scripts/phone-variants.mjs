@@ -19,7 +19,7 @@ import sharp from "sharp";
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const PUBLIC = join(ROOT, "public");
 // Keep in step with PHONE_DIRS in lib/phone-image.ts.
-const DIRS = ["heroes", "home", "pages", "champions", "who"];
+const DIRS = ["heroes", "home", "pages", "champions", "who", "community"];
 const SIZES = [800, 1200];
 const MIN_WIDTH = 900;
 const QUALITY = 72;

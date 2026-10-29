@@ -5,7 +5,7 @@ import { parseContent } from "@/lib/content-data";
 import { albumIds, albumStory } from "@/lib/album-data";
 import { albumFacts } from "@/lib/album-facts";
 import { galleryChapters, nextAlbum } from "@/lib/gallery-story";
-import { albumHero, highlights } from "@/lib/highlights";
+import { albumHero } from "@/lib/highlights";
 import { AlbumView } from "@/components/motion/AlbumView";
 import { PageHero, heroButton } from "@/components/pages/PageHero";
 import { PageShell } from "@/components/pages/PageShell";
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   return { title: albumStory(data, id)?.title ?? "Album" };
 }
 
-/* An album is a full-screen hero, the picked highlights, then every frame, and
+/* An album is a full-screen hero, then every frame, and
    it always hands on to the next album in the gallery's story order. */
 export default async function AlbumPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -42,24 +42,20 @@ export default async function AlbumPage({ params }: { params: Promise<{ id: stri
   }
 
   const cover = albumHero(album);
-  // The banner already shows the lead photo (an album's card and cover), so the
-  // highlights below it never show that same picture a second time.
-  const picks = (highlights[id] ?? []).filter((h) => h.alt !== cover.alt);
   const lines = chapter.kind === "series" ? ["4 x 4 Series", album.title] : [album.title];
-  const facts = [`${album.count.toLocaleString("en")} photos`, album.venue].filter(Boolean).join(" · ");
 
   return (
     <PageShell
       hero={
         <PageHero
           chapter={album.short ?? album.title}
-          eyebrow={chapter.kind === "series" || chapter.label === album.title ? facts : `${chapter.label} · ${facts}`}
           lines={lines}
-          photo={{ src: cover.src, alt: cover.alt, position: "center 35%", credit: albumStory(data, id)?.photoCredit ?? undefined }}
+          photo={{ src: cover.src, alt: cover.alt, // SZN 2's team photo has little room above the heads (owner, 2026-10-28).
+            position: id === "szn-2" ? "center top" : "center 35%", credit: albumStory(data, id)?.photoCredit ?? undefined }}
           transition={cover.morph ? `album-cover-${album.id}` : undefined}
           actions={
             <>
-              <a href={picks.length ? "#highlights-heading" : "#album-photos"} className={`${heroButton} bg-yellow text-ink`}>
+              <a href="#album-photos" className={`${heroButton} bg-yellow text-ink`}>
                 See the photos
               </a>
               <Link href="/gallery" className={`${heroButton} border border-bone/50`}>
@@ -71,7 +67,8 @@ export default async function AlbumPage({ params }: { params: Promise<{ id: stri
       }
     >
       <section data-tone="bone" data-chapter="Photos" className="canvas-night pb-[clamp(4rem,12vh,8rem)]">
-        <AlbumView id={id} head={false} highlights={picks} />
+        {/* Every frame only, no Highlights block (owner, 2026-10-28). */}
+        <AlbumView id={id} head={false} />
       </section>
       {next ? (
         <section data-tone="bone" data-chapter="Next album" className="canvas-ink border-t border-bone/15">

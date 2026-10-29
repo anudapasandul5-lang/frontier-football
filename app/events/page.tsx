@@ -3,9 +3,8 @@ import raw from "@/content.js";
 import { parseContent, resultRows, upcomingEvents } from "@/lib/content-data";
 import { Events as Upcoming } from "@/components/acts/Events";
 import { NextPage } from "@/components/pages/NextPage";
-import { PageHero, heroButton } from "@/components/pages/PageHero";
+import { PageHero } from "@/components/pages/PageHero";
 import { PageShell } from "@/components/pages/PageShell";
-import { Roll } from "@/components/primitives/Roll";
 import { SplitReveal } from "@/components/primitives/SplitReveal";
 import { phoneSrcSet } from "@/lib/phone-image";
 import { PhotoStrip } from "@/components/pages/PhotoStrip";
@@ -30,14 +29,8 @@ export default function EventsPage() {
         <PageHero
           chapter="Events"
           lines={["Join the", "action."]}
-          photo={{ src: "/heroes/events.webp", alt: "Players close in on the ball under the floodlights at 4 x 4 Series SZN 6", position: "center 40%" }}
-          actions={
-            results.length > 0 ? (
-              <a href="#hall-of-fame" className={`${heroButton} border-2 border-bone hover:bg-bone hover:text-ink`}>
-                <Roll>Hall of Fame</Roll>
-              </a>
-            ) : null
-          }
+          photo={{ src: "/heroes/events.webp", alt: "A player strikes the ball towards goal as others chase on a sunlit futsal pitch", position: "center 26%" }}
+          paragraphClassName="lg:-translate-y-[3px]"
         >
           {/* One short paragraph, worded from the Sunday Socials proposal deck
               until the owner's own events deck arrives (plan, 2026-10-28). */}
@@ -47,9 +40,9 @@ export default function EventsPage() {
     >
       <PhotoStrip
         photos={[
-          { src: "/pages/events-strike.webp", alt: "A player drives forward with the ball in a daylight 4 x 4 Series SZN 6 match" },
+          { src: "/pages/events-strike.webp", alt: "A player in white strikes the ball along the fence as players in bibs close in" },
           { src: "/pages/events-keeper.webp", alt: "Players celebrate with a high-five under floodlights at a 4 x 4 Series match" },
-          { src: "/pages/events-day-match.webp", alt: "Players race together towards the ball in a daylight 4 x 4 Series match" },
+          { src: "/pages/events-day-match.webp", alt: "Muusa, number 1, winds up to shoot as the goalkeeper crouches and the referee watches" },
         ]}
       />
 
@@ -136,7 +129,13 @@ export default function EventsPage() {
                       Photos <span aria-hidden="true" className="transition-transform duration-200 ease-[var(--ease-out)] group-hover/btn:translate-x-1">&rarr;</span>
                       <span className="sr-only">, {row.name}</span>
                     </a>
-                  ) : null}
+                  ) : (
+                    // Holds the button's width so the Champion column lines up
+                    // with the rows that have one (owner, 2026-10-28).
+                    <span aria-hidden="true" className="invisible inline-flex min-h-11 items-center gap-2 border px-4 font-display text-sm uppercase max-md:hidden md:col-start-4">
+                      Photos <span>&rarr;</span>
+                    </span>
+                  )}
                 </li>
               );
             })}

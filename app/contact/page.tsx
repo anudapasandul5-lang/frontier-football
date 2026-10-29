@@ -2,10 +2,8 @@ import type { Metadata } from "next";
 import raw from "@/content.js";
 import { brandIcons } from "@/lib/brand-icons";
 import { outboundLinks, parseContent, whatsappHref } from "@/lib/content-data";
-import { NextPage } from "@/components/pages/NextPage";
 import { PageHero } from "@/components/pages/PageHero";
 import { PageShell } from "@/components/pages/PageShell";
-import { PhotoStrip } from "@/components/pages/PhotoStrip";
 import { PastActivities } from "@/components/pages/PastActivities";
 import { SplitReveal } from "@/components/primitives/SplitReveal";
 
@@ -31,6 +29,7 @@ export default function Contact() {
           chapter="Contact"
           lines={["Get in", "touch."]}
           photo={{ src: "/heroes/contact.webp", alt: "Four players smile with their arms around each other at a Frontier event", position: "center 40%" }}
+          paragraphClassName="lg:-translate-y-[2px]"
         >
           Playing Sunday League?{" "}
           <a href="/community#sunday-league" className="underline underline-offset-4">
@@ -113,15 +112,7 @@ export default function Contact() {
         </div>
       </section>
 
-      <PhotoStrip
-        photos={[
-          { src: "/pages/contact-cheer.webp", alt: "Supporters cheer with their arms up at the Norway v England watch party" },
-          { src: "/pages/contact-trophies.webp", alt: "SZN 6 winners with their medals, prizes and trophy at the presentation" },
-          { src: "/pages/contact-watching.webp", alt: "A full room watching England v Argentina at Main Sports Bar" },
-        ]}
-      />
       <PastActivities />
-      <NextPage current="/contact" />
     </PageShell>
   );
 }

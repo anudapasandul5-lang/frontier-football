@@ -11,8 +11,9 @@ import { Marquee } from "@/components/primitives/Marquee";
 import { phoneSrcSet } from "@/lib/phone-image";
 
 // Same rhythm as the home page's partner strip (components/acts/Partners.tsx).
-const item = "mr-[clamp(2rem,5vw,4.5rem)] flex h-[clamp(2.75rem,5vw,4.5rem)] shrink-0 items-center";
-const type = "font-display text-lead-l leading-none font-bold whitespace-nowrap uppercase text-current";
+// Same logo band as the home Partners strip.
+const item = "mr-[clamp(2.5rem,6vw,6rem)] flex h-[clamp(3.5rem,7vw,6.5rem)] shrink-0 items-center";
+const type = "font-display text-display-m leading-none font-bold whitespace-nowrap uppercase text-current";
 
 export const metadata: Metadata = { title: "Collaborate" };
 
@@ -22,7 +23,7 @@ export const metadata: Metadata = { title: "Collaborate" };
    the owner's reach figures, what a partner gets, and who is already here: the
    partners on cream chips in their real colours. PARTNER, never sponsor
    (CONTEXT.md). L6 restyle: the reach and partner sections go to night mode and
-   enter with the hard wipe; every word is unchanged. */
+   no entrance wipe (owner, 2026-10-29); every word is unchanged. */
 export default function Collaborate() {
   const data = parseContent(raw);
   const figures = reach(data);
@@ -37,7 +38,7 @@ export default function Collaborate() {
         <PageHero
           chapter="Collaborate"
           lines={["Partner with us"]}
-          photo={{ src: "/heroes/collaborate.webp", alt: "A packed Main Sports Bar during the England v Argentina watch party", position: "center 35%" }}
+          photo={{ src: "/heroes/collaborate-crowd.webp", alt: "Football fans react to a match together in a packed sports bar", position: "center" }}
         >
           Frontier brings together football, community and culture in Colombo.
         </PageHero>
@@ -45,10 +46,8 @@ export default function Collaborate() {
     >
       {/* Every figure is the owner's, dated. Absent while nothing is measured. */}
       {figures.length > 0 ? (
-        <section data-reveal data-tone="bone" data-chapter="Reach" aria-labelledby="reach-heading" className="wipe canvas-night relative overflow-hidden py-[clamp(4rem,12vh,8rem)]">
-          <span aria-hidden="true" className="wipe__layer wipe__flash absolute inset-0 bg-yellow" />
-          <div className="wipe__layer frame relative" style={{ "--wipe-delay": "140ms" } as React.CSSProperties}>
-            <p className="micro mb-4 text-yellow">Reach</p>
+        <section data-tone="bone" data-chapter="Reach" aria-labelledby="reach-heading" className="canvas-night relative overflow-hidden py-[clamp(4rem,12vh,8rem)]">
+          <div className="frame relative">
             <SplitReveal
               id="reach-heading"
               lines={["Our audience"]}
@@ -105,10 +104,10 @@ export default function Collaborate() {
       ) : null}
 
       {names.length > 0 ? (
-        <section data-reveal data-tone="ink" data-chapter="Partners" aria-labelledby="partners-heading" className="wipe canvas-bone relative overflow-hidden py-15 md:py-20">
-          <span aria-hidden="true" className="wipe__layer wipe__flash absolute inset-0 bg-yellow" />
-          <div className="wipe__layer frame relative" style={{ "--wipe-delay": "140ms" } as React.CSSProperties}>
-            <h2 id="partners-heading" className="micro mb-4">Already alongside us</h2>
+        <section data-tone="ink" data-chapter="Partners" aria-labelledby="partners-heading" className="canvas-bone relative overflow-hidden py-15 md:py-20">
+          {/* Full-width strip at the home page's logo size, no visible label (owner, 2026-10-28). */}
+          <div className="relative">
+            <h2 id="partners-heading" className="sr-only">Already alongside us</h2>
             <Marquee label="Frontier partners" seconds={45}>
               {names.map((p) => {
                 const mark = p.logo ? (
@@ -117,7 +116,7 @@ export default function Collaborate() {
                     alt={p.name ?? ""}
                     loading="lazy"
                     decoding="async"
-                    className="h-[65%] w-auto max-w-[clamp(8rem,13vw,11rem)] object-contain"
+                    className="h-full w-auto max-w-[clamp(8rem,13vw,11rem)] object-contain"
                   />
                 ) : (
                   <span className={type}>{p.name?.replace(/^@/, "")}</span>
@@ -160,7 +159,7 @@ export default function Collaborate() {
               height={640}
               loading="lazy"
               decoding="async"
-              className="mx-auto block h-auto w-[min(70%,22rem)] md:mx-0"
+              className="mx-auto block h-auto w-[min(70%,22rem)] md:mr-0"
             />
           </div>
         </div>
