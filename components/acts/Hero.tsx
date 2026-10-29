@@ -68,7 +68,7 @@ export function Hero() {
             <Roll>Play with us</Roll>
           </a>
           <a href="/collaborate" className={`${button} border-2 border-bone hover:bg-bone hover:text-ink`}>
-            <Roll>Collab</Roll>
+            <Roll>Collaborate</Roll>
           </a>
         </div>
       </div>
