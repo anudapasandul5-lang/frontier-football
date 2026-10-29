@@ -480,8 +480,8 @@ const ownerCovers: Record<string, { src: string; alt: string }> = {
   "szn-3": { src: "/pages/gallery-szn-3.webp", alt: "A player in black runs onto the ball under the floodlights at 4 x 4 Series SZN 3" },
   // Owner, 2026-10-29: DSC_2022, full height so the ball and keeper stay whole.
   "szn-4": { src: "/pages/gallery-szn-4.webp", alt: "A player in red shoots at the goalkeeper at 4 x 4 Series SZN 4" },
-  // Owner, 2026-10-29: ThePapare frame (2fccf70b), full height on the player with
-  // the ball; credit watermark stays in.
+  // Owner, 2026-10-29: ThePapare frame (2fccf70b). The top 136px repeats the
+  // photo's own fence rows (no blur) so the head lines up with SZN 4 and 6.
   "szn-5": { src: "/pages/gallery-szn-5.webp", alt: "A player in an orange bib controls the ball at 4 x 4 Series SZN 5; photograph by Ashan Senevirathne for ThePapare" },
   // Owner, 2026-10-29: DSC_8533, zoomed on the keeper and the ball.
   "szn-6": { src: "/pages/gallery-szn-6.webp", alt: "The goalkeeper winds up to kick the ball at 4 x 4 Series SZN 6" },

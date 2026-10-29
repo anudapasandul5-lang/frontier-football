@@ -7,11 +7,11 @@ import { SplitReveal } from "@/components/primitives/SplitReveal";
 
    Copy is the owner's, from the 4x4 Series proposal deck (2026-09-10), cut
    down; the Moment act already says "Talent was never missing", so it is not
-   repeated here. Still: the owner's wider edit of "Nighttime Futsal Showdown"
-   (2026-10-29), full bleed, no blur or fade; the Frontier badge is patched with
-   turf from the same rows. On a very wide window the frame trims a little hair
-   and the bottom of the ball. */
-const STILL = { src: "/home/who-we-are-night.webp", w: 1535, h: 845 };
+   repeated here. Still: "Nighttime Futsal Showdown" (owner, 2026-10-29), badges
+   cropped off. From md the whole photo sits right at full height and its own
+   shape, so both players and the ball stay whole, and its left edge fades into
+   the night under the headline (owner chose this fade back, 2026-10-29). */
+const STILL = { src: "/home/who-we-are-night.webp", w: 1336, h: 935 };
 
 export function WhoWeAre() {
   return (
@@ -23,7 +23,7 @@ export function WhoWeAre() {
         <img
           src={STILL.src}
           srcSet={phoneSrcSet(STILL.src)}
-          sizes="(max-width: 767px) 150svh, 100vw"
+          sizes="(max-width: 767px) 150svh, 90vw"
           alt="Two players battle for the ball under the floodlights at night"
           width={STILL.w}
           height={STILL.h}
@@ -31,7 +31,7 @@ export function WhoWeAre() {
           decoding="async"
           referrerPolicy="no-referrer"
           style={{ "--wipe-delay": "140ms" } as React.CSSProperties}
-          className="wipe__layer absolute inset-0 h-full w-full object-cover object-[69%_center] md:object-[30%_74%]"
+          className="wipe__layer absolute inset-0 h-full w-full object-cover object-[57%_center] md:left-auto md:w-auto md:max-w-none md:[mask-image:linear-gradient(to_right,transparent,#000_30%)]"
         />
         <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-night/90 via-night/45 to-night/10 md:from-night/45 md:via-night/10 md:to-transparent" />
         {/* Text starts about a third down, level with the pitch (owner,
